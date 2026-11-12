@@ -42,7 +42,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 
-public abstract class PipeBlockBase extends BaseEntityBlock implements SimpleWaterloggedBlock {
+public abstract class PipeBlockBase extends BaseEntityBlock implements SimpleWaterloggedBlock, com.rekindled.embers.util.LegacyRemoveBlock {
 	@Override
 	public com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BaseEntityBlock> codec() {
 		return com.mojang.serialization.MapCodec.unit(null);
@@ -291,7 +291,14 @@ public abstract class PipeBlockBase extends BaseEntityBlock implements SimpleWat
 	public abstract boolean connected(Direction direction, BlockState state);
 
 	@Override
-	public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+	protected void affectNeighborsAfterRemoval(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, boolean movedByPiston) {
+		if (!state.hasBlockEntity())
+			onRemoveLegacy(state, level, pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), movedByPiston);
+		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+	}
+
+	@Override
+	public void onRemoveLegacy(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
 		if (!pState.is(pNewState.getBlock())) {
 			BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
 			if (blockEntity != null) {
@@ -301,7 +308,6 @@ public abstract class PipeBlockBase extends BaseEntityBlock implements SimpleWat
 					pLevel.updateNeighbourForOutputSignal(pPos, this);
 				}
 			}
-			super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
 		}
 	}
 

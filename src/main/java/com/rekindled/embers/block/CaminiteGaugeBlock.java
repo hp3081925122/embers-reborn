@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
-public class CaminiteGaugeBlock extends Block implements SimpleWaterloggedBlock {
+public class CaminiteGaugeBlock extends Block implements SimpleWaterloggedBlock, com.rekindled.embers.util.LegacyRemoveBlock {
 
 	public CaminiteGaugeBlock(Properties pProperties) {
 		super(pProperties);
@@ -37,7 +37,14 @@ public class CaminiteGaugeBlock extends Block implements SimpleWaterloggedBlock 
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+	protected void affectNeighborsAfterRemoval(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, boolean movedByPiston) {
+		if (!state.hasBlockEntity())
+			onRemoveLegacy(state, level, pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), movedByPiston);
+		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+	}
+
+	@Override
+	public void onRemoveLegacy(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			for (MechEdge edge : MechEdge.values()) {
 				BlockPos cornerPos = pos.subtract(edge.centerPos);
@@ -45,7 +52,6 @@ public class CaminiteGaugeBlock extends Block implements SimpleWaterloggedBlock 
 					level.destroyBlock(cornerPos, false);
 				}
 			}
-			super.onRemove(state, level, pos, newState, isMoving);
 		}
 	}
 

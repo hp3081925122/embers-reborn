@@ -28,7 +28,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public abstract class MechEdgeBlockBase extends Block implements SimpleWaterloggedBlock {
+public abstract class MechEdgeBlockBase extends Block implements SimpleWaterloggedBlock, com.rekindled.embers.util.LegacyRemoveBlock {
 
 	public static final EnumProperty<MechEdge> EDGE = EnumProperty.create("edge", MechEdge.class);
 
@@ -54,14 +54,20 @@ public abstract class MechEdgeBlockBase extends Block implements SimpleWaterlogg
 	protected abstract com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.Block> codec();
 
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+	protected void affectNeighborsAfterRemoval(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, boolean movedByPiston) {
+		if (!state.hasBlockEntity())
+			onRemoveLegacy(state, level, pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), movedByPiston);
+		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+	}
+
+	@Override
+	public void onRemoveLegacy(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			BlockPos centerPos = pos.offset(state.getValue(EDGE).centerPos);
 			if (level.getBlockState(centerPos).getBlock() == getCenterBlock()) {
 				//the center block takes care of removing the remaining edges
 				level.destroyBlock(centerPos, false);
 			}
-			super.onRemove(state, level, pos, newState, isMoving);
 		}
 	}
 

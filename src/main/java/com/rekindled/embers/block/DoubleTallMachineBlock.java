@@ -28,7 +28,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 
-public abstract class DoubleTallMachineBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+public abstract class DoubleTallMachineBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, com.rekindled.embers.util.LegacyRemoveBlock {
 	@Override
 	public com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BaseEntityBlock> codec() {
 		return com.mojang.serialization.MapCodec.unit(null);
@@ -49,7 +49,14 @@ public abstract class DoubleTallMachineBlock extends BaseEntityBlock implements 
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+	protected void affectNeighborsAfterRemoval(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, boolean movedByPiston) {
+		if (!state.hasBlockEntity())
+			onRemoveLegacy(state, level, pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), movedByPiston);
+		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+	}
+
+	@Override
+	public void onRemoveLegacy(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			if (state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER) {
 				BlockState above = level.getBlockState(pos.above());
@@ -68,7 +75,6 @@ public abstract class DoubleTallMachineBlock extends BaseEntityBlock implements 
 					level.updateNeighbourForOutputSignal(pos, this);
 				}
 			}
-			super.onRemove(state, level, pos, newState, isMoving);
 		}
 	}
 

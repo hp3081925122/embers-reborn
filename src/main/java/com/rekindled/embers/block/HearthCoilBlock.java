@@ -29,7 +29,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 
-public class HearthCoilBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+public class HearthCoilBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, com.rekindled.embers.util.LegacyRemoveBlock {
 	@Override
 	public com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BaseEntityBlock> codec() {
 		return simpleCodec(HearthCoilBlock::new);
@@ -47,7 +47,14 @@ public class HearthCoilBlock extends BaseEntityBlock implements SimpleWaterlogge
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+	protected void affectNeighborsAfterRemoval(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, boolean movedByPiston) {
+		if (!state.hasBlockEntity())
+			onRemoveLegacy(state, level, pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), movedByPiston);
+		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+	}
+
+	@Override
+	public void onRemoveLegacy(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			for (MechEdge edge : MechEdge.values()) {
 				BlockPos cornerPos = pos.subtract(edge.centerPos);
@@ -63,7 +70,6 @@ public class HearthCoilBlock extends BaseEntityBlock implements SimpleWaterlogge
 					level.updateNeighbourForOutputSignal(pos, this);
 				}
 			}
-			super.onRemove(state, level, pos, newState, isMoving);
 		}
 	}
 

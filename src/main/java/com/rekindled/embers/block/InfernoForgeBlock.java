@@ -93,7 +93,7 @@ public class InfernoForgeBlock extends DoubleTallMachineBlock implements SimpleW
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemoveLegacy(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			for (MechEdge edge : MechEdge.values()) {
 				BlockPos cornerPos = pos.subtract(edge.centerPos);
@@ -109,7 +109,7 @@ public class InfernoForgeBlock extends DoubleTallMachineBlock implements SimpleW
 					level.updateNeighbourForOutputSignal(pos, this);
 				}
 			}
-			super.onRemove(state, level, pos, newState, isMoving);
+			super.onRemoveLegacy(state, level, pos, newState, isMoving);
 		}
 	}
 

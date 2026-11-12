@@ -47,3 +47,6 @@ type="optional"
 versionRange="[9,)"
 ordering="NONE"
 side="BOTH"
+
+[[mixins]]
+config="embers_reborn.mixins.json"

@@ -29,7 +29,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CrystalCellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+public class CrystalCellBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, com.rekindled.embers.util.LegacyRemoveBlock {
 	@Override
 	public com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BaseEntityBlock> codec() {
 		return simpleCodec(CrystalCellBlock::new);
@@ -59,7 +59,14 @@ public class CrystalCellBlock extends BaseEntityBlock implements SimpleWaterlogg
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+	protected void affectNeighborsAfterRemoval(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, boolean movedByPiston) {
+		if (!state.hasBlockEntity())
+			onRemoveLegacy(state, level, pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), movedByPiston);
+		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+	}
+
+	@Override
+	public void onRemoveLegacy(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			for (MechEdge edge : MechEdge.values()) {
 				BlockPos cornerPos = pos.subtract(edge.centerPos);
@@ -67,7 +74,6 @@ public class CrystalCellBlock extends BaseEntityBlock implements SimpleWaterlogg
 					level.destroyBlock(cornerPos, false);
 				}
 			}
-			super.onRemove(state, level, pos, newState, isMoving);
 		}
 	}
 

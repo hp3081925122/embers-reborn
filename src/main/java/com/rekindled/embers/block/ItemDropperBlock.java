@@ -35,7 +35,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 
-public class ItemDropperBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, IPipeConnection {
+public class ItemDropperBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, IPipeConnection, com.rekindled.embers.util.LegacyRemoveBlock {
 	@Override
 	public com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BaseEntityBlock> codec() {
 		return simpleCodec(ItemDropperBlock::new);
@@ -50,7 +50,14 @@ public class ItemDropperBlock extends BaseEntityBlock implements SimpleWaterlogg
 	}
 
 	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+	protected void affectNeighborsAfterRemoval(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, boolean movedByPiston) {
+		if (!state.hasBlockEntity())
+			onRemoveLegacy(state, level, pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), movedByPiston);
+		super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+	}
+
+	@Override
+	public void onRemoveLegacy(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity != null) {
@@ -60,7 +67,6 @@ public class ItemDropperBlock extends BaseEntityBlock implements SimpleWaterlogg
 					level.updateNeighbourForOutputSignal(pos, this);
 				}
 			}
-			super.onRemove(state, level, pos, newState, isMoving);
 		}
 	}
 
