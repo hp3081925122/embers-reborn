@@ -5,16 +5,16 @@ import com.rekindled.embers.render.EmbersRenderTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GlowParticle extends TextureSheetParticle {
+public class GlowParticle extends SingleQuadParticle {
 
-	public GlowParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, GlowParticleOptions pOptions) {
-		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
+	public GlowParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, GlowParticleOptions pOptions, net.minecraft.client.renderer.texture.TextureAtlasSprite sprite) {
+		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, sprite);
 		this.friction = 0.96F;
 		this.speedUpWhenYMotionIsBlocked = true;
 		this.hasPhysics = false;
@@ -58,19 +58,26 @@ public class GlowParticle extends TextureSheetParticle {
 	}
 
 	@Override
-	protected int getLightColor(float partialTicks) {
+	public int getLightCoords(float partialTicks) {
 		return 0xF000F0;
 	}
 
 	@Override
-	public ParticleRenderType getRenderType() {
-		return EmbersRenderTypes.PARTICLE_SHEET_EMBER_ROUGH;
+	public SingleQuadParticle.Layer getLayer() {
+		return com.rekindled.embers.render.EmbersParticleLayers.EMBER_ROUGH;
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class Provider implements ParticleProvider.Sprite<GlowParticleOptions> {
-		public TextureSheetParticle createParticle(GlowParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-			return new GlowParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType);
+	public static class Provider implements net.minecraft.client.particle.ParticleProvider<GlowParticleOptions> {
+		private final net.minecraft.client.particle.SpriteSet sprites;
+
+		public Provider(net.minecraft.client.particle.SpriteSet sprites) {
+			this.sprites = sprites;
+		}
+
+		@Override
+		public net.minecraft.client.particle.Particle createParticle(GlowParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, net.minecraft.util.RandomSource random) {
+			return new GlowParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType, sprites.get(random));
 		}
 	}
 }

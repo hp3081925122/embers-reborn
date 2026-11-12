@@ -5,17 +5,17 @@ import com.rekindled.embers.render.EmbersRenderTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class SmokeParticle extends TextureSheetParticle {
+public class SmokeParticle extends SingleQuadParticle {
 
 	public float rotScale = random.nextFloat() * 0.1f + 0.05f;
 
-	public SmokeParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, SmokeParticleOptions pOptions) {
-		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
+	public SmokeParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, SmokeParticleOptions pOptions, net.minecraft.client.renderer.texture.TextureAtlasSprite sprite) {
+		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, sprite);
 		this.friction = 1.0F;
 		this.speedUpWhenYMotionIsBlocked = true;
 		this.xd *= (double)0.1F;
@@ -44,14 +44,21 @@ public class SmokeParticle extends TextureSheetParticle {
 	}
 
 	@Override
-	public ParticleRenderType getRenderType() {
-		return EmbersRenderTypes.PARTICLE_SHEET_TRANSLUCENT_NODEPTH;
+	public SingleQuadParticle.Layer getLayer() {
+		return com.rekindled.embers.render.EmbersParticleLayers.TRANSLUCENT_NODEPTH;
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class Provider implements ParticleProvider.Sprite<SmokeParticleOptions> {
-		public TextureSheetParticle createParticle(SmokeParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-			return new SmokeParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType);
+	public static class Provider implements net.minecraft.client.particle.ParticleProvider<SmokeParticleOptions> {
+		private final net.minecraft.client.particle.SpriteSet sprites;
+
+		public Provider(net.minecraft.client.particle.SpriteSet sprites) {
+			this.sprites = sprites;
+		}
+
+		@Override
+		public net.minecraft.client.particle.Particle createParticle(SmokeParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, net.minecraft.util.RandomSource random) {
+			return new SmokeParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType, sprites.get(random));
 		}
 	}
 }

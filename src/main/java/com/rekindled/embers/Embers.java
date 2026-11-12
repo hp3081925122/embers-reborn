@@ -547,14 +547,14 @@ public class Embers {
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void addParticleProvider(RegisterParticleProvidersEvent event) {
-			event.registerSprite(RegistryManager.GLOW_PARTICLE.get(), new GlowParticle.Provider());
-			event.registerSprite(RegistryManager.STAR_PARTICLE.get(), new StarParticle.Provider());
-			event.registerSprite(RegistryManager.SPARK_PARTICLE.get(), new SparkParticle.Provider());
-			event.registerSprite(RegistryManager.SMOKE_PARTICLE.get(), new SmokeParticle.Provider());
-			event.registerSprite(RegistryManager.VAPOR_PARTICLE.get(), new VaporParticle.Provider());
-			event.registerSprite(RegistryManager.ALCHEMY_CIRCLE_PARTICLE.get(), new AlchemyCircleParticle.Provider());
-			event.registerSprite(RegistryManager.TYRFING_PARTICLE.get(), new TyrfingParticle.Provider());
-			event.registerSprite(RegistryManager.XRAY_GLOW_PARTICLE.get(), new XRayGlowParticle.Provider());
+			event.registerSpriteSet(RegistryManager.GLOW_PARTICLE.get(), GlowParticle.Provider::new);
+			event.registerSpriteSet(RegistryManager.STAR_PARTICLE.get(), StarParticle.Provider::new);
+			event.registerSpriteSet(RegistryManager.SPARK_PARTICLE.get(), SparkParticle.Provider::new);
+			event.registerSpriteSet(RegistryManager.SMOKE_PARTICLE.get(), SmokeParticle.Provider::new);
+			event.registerSpriteSet(RegistryManager.VAPOR_PARTICLE.get(), VaporParticle.Provider::new);
+			event.registerSpriteSet(RegistryManager.ALCHEMY_CIRCLE_PARTICLE.get(), AlchemyCircleParticle.Provider::new);
+			event.registerSpriteSet(RegistryManager.TYRFING_PARTICLE.get(), TyrfingParticle.Provider::new);
+			event.registerSpriteSet(RegistryManager.XRAY_GLOW_PARTICLE.get(), XRayGlowParticle.Provider::new);
 		}
 
 		@OnlyIn(Dist.CLIENT)

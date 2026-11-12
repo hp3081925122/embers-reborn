@@ -5,20 +5,20 @@ import com.rekindled.embers.render.EmbersRenderTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class XRayGlowParticle extends TextureSheetParticle {
+public class XRayGlowParticle extends SingleQuadParticle {
 
 	public float rBase = 1.0F;
 	public float gBase = 1.0F;
 	public float bBase = 1.0F;
 
-	public XRayGlowParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, XRayGlowParticleOptions pOptions) {
-		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
+	public XRayGlowParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, XRayGlowParticleOptions pOptions, net.minecraft.client.renderer.texture.TextureAtlasSprite sprite) {
+		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, sprite);
 		this.friction = 0.96F;
 		this.speedUpWhenYMotionIsBlocked = true;
 		this.hasPhysics = false;
@@ -68,19 +68,26 @@ public class XRayGlowParticle extends TextureSheetParticle {
 	}
 
 	@Override
-	protected int getLightColor(float partialTicks) {
+	public int getLightCoords(float partialTicks) {
 		return 0xF000F0;
 	}
 
 	@Override
-	public ParticleRenderType getRenderType() {
-		return EmbersRenderTypes.PARTICLE_SHEET_ADDITIVE_XRAY;
+	public SingleQuadParticle.Layer getLayer() {
+		return com.rekindled.embers.render.EmbersParticleLayers.ADDITIVE_XRAY;
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class Provider implements ParticleProvider.Sprite<XRayGlowParticleOptions> {
-		public TextureSheetParticle createParticle(XRayGlowParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-			return new XRayGlowParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType);
+	public static class Provider implements net.minecraft.client.particle.ParticleProvider<XRayGlowParticleOptions> {
+		private final net.minecraft.client.particle.SpriteSet sprites;
+
+		public Provider(net.minecraft.client.particle.SpriteSet sprites) {
+			this.sprites = sprites;
+		}
+
+		@Override
+		public net.minecraft.client.particle.Particle createParticle(XRayGlowParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, net.minecraft.util.RandomSource random) {
+			return new XRayGlowParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType, sprites.get(random));
 		}
 	}
 }

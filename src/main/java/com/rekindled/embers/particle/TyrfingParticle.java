@@ -7,18 +7,18 @@ import com.rekindled.embers.util.Misc;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class TyrfingParticle extends TextureSheetParticle {
+public class TyrfingParticle extends SingleQuadParticle {
 
 	public int phase = Misc.random.nextInt(360);
 
-	public TyrfingParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, TyrfingParticleOptions pOptions) {
-		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
+	public TyrfingParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, TyrfingParticleOptions pOptions, net.minecraft.client.renderer.texture.TextureAtlasSprite sprite) {
+		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, sprite);
 		this.friction = 1.0F;
 		this.speedUpWhenYMotionIsBlocked = true;
 		this.hasPhysics = true;
@@ -66,19 +66,26 @@ public class TyrfingParticle extends TextureSheetParticle {
 	}
 
 	@Override
-	protected int getLightColor(float partialTicks) {
+	public int getLightCoords(float partialTicks) {
 		return 0xF000F0;
 	}
 
 	@Override
-	public ParticleRenderType getRenderType() {
-		return EmbersRenderTypes.PARTICLE_SHEET_TRANSLUCENT_NODEPTH;
+	public SingleQuadParticle.Layer getLayer() {
+		return com.rekindled.embers.render.EmbersParticleLayers.TRANSLUCENT_NODEPTH;
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class Provider implements ParticleProvider.Sprite<TyrfingParticleOptions> {
-		public TextureSheetParticle createParticle(TyrfingParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-			return new TyrfingParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType);
+	public static class Provider implements net.minecraft.client.particle.ParticleProvider<TyrfingParticleOptions> {
+		private final net.minecraft.client.particle.SpriteSet sprites;
+
+		public Provider(net.minecraft.client.particle.SpriteSet sprites) {
+			this.sprites = sprites;
+		}
+
+		@Override
+		public net.minecraft.client.particle.Particle createParticle(TyrfingParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, net.minecraft.util.RandomSource random) {
+			return new TyrfingParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType, sprites.get(random));
 		}
 	}
 }

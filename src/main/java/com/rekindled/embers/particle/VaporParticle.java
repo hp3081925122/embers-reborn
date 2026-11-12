@@ -5,19 +5,19 @@ import com.rekindled.embers.render.EmbersRenderTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class VaporParticle extends TextureSheetParticle {
+public class VaporParticle extends SingleQuadParticle {
 
 	public float minScale = 0.5f;
 	public float maxScale = 2.0f;
 
-	public VaporParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, VaporParticleOptions pOptions) {
-		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
+	public VaporParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, VaporParticleOptions pOptions, net.minecraft.client.renderer.texture.TextureAtlasSprite sprite) {
+		super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, sprite);
 		this.friction = 0.93f;
 		this.hasPhysics = false;
 		this.gravity = 0.0f;
@@ -48,19 +48,26 @@ public class VaporParticle extends TextureSheetParticle {
 	}
 
 	@Override
-	protected int getLightColor(float partialTicks) {
+	public int getLightCoords(float partialTicks) {
 		return 0xF000F0;
 	}
 
 	@Override
-	public ParticleRenderType getRenderType() {
-		return EmbersRenderTypes.PARTICLE_SHEET_ADDITIVE;
+	public SingleQuadParticle.Layer getLayer() {
+		return com.rekindled.embers.render.EmbersParticleLayers.ADDITIVE;
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class Provider implements ParticleProvider.Sprite<VaporParticleOptions> {
-		public TextureSheetParticle createParticle(VaporParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-			return new VaporParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType);
+	public static class Provider implements net.minecraft.client.particle.ParticleProvider<VaporParticleOptions> {
+		private final net.minecraft.client.particle.SpriteSet sprites;
+
+		public Provider(net.minecraft.client.particle.SpriteSet sprites) {
+			this.sprites = sprites;
+		}
+
+		@Override
+		public net.minecraft.client.particle.Particle createParticle(VaporParticleOptions pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, net.minecraft.util.RandomSource random) {
+			return new VaporParticle(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed, pType, sprites.get(random));
 		}
 	}
 }
