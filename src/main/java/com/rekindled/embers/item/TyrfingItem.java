@@ -22,10 +22,10 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
-public class TyrfingItem extends SwordItem implements ITyrfingWeapon {
+public class TyrfingItem extends Item implements ITyrfingWeapon {
 
-	public TyrfingItem(Tier tier, Properties prop) {
-		super(tier, prop);
+	public TyrfingItem(Properties prop) {
+		super(prop);
 	}
 
 	@Override

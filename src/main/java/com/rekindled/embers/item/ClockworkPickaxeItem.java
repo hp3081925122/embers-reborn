@@ -10,7 +10,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 public class ClockworkPickaxeItem extends ClockworkToolItem {
 
 	public ClockworkPickaxeItem(Properties properties) {
-		super(EmbersTiers.CLOCKWORK_PICK, EmbersBlockTags.MINABLE_WITH_PICKAXE_SHOVEL, properties.attributes(DiggerItem.createAttributes(EmbersTiers.CLOCKWORK_PICK, 1.0F, -2.8F)));
+		super(EmbersTiers.CLOCKWORK_PICK, EmbersBlockTags.MINABLE_WITH_PICKAXE_SHOVEL, 1.0F, -2.8F, properties);
 	}
 
 	@Override

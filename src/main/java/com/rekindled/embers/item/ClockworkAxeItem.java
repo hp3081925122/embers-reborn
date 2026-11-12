@@ -42,7 +42,7 @@ public class ClockworkAxeItem extends ClockworkToolItem {
 
 
 	public ClockworkAxeItem(Properties properties) {
-		super(EmbersTiers.CLOCKWORK_AXE, BlockTags.MINEABLE_WITH_AXE, properties.attributes(DiggerItem.createAttributes(EmbersTiers.CLOCKWORK_AXE, 2.0F, -3.0F)));
+		super(EmbersTiers.CLOCKWORK_AXE, BlockTags.MINEABLE_WITH_AXE, 2.0F, -3.0F, properties);
 	}
 
 	public InteractionResult useOn(UseOnContext pContext) {

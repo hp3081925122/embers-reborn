@@ -21,7 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
+public class ClockworkToolItem extends Item implements IEmberChargedTool {
 	// ---- DataComponents 辅助方法 (1.21.1 迁移) ----
 	private static net.minecraft.nbt.CompoundTag _getTag(net.minecraft.world.item.ItemStack s) {
 		net.minecraft.world.item.component.CustomData cd = s.get(net.minecraft.core.component.DataComponents.CUSTOM_DATA);
@@ -42,9 +42,9 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 
 
 
-	public ClockworkToolItem(Tier tier, TagKey<Block> blocks, Properties properties) {
+	public ClockworkToolItem(net.minecraft.world.item.ToolMaterial tier, TagKey<Block> blocks, float attackDamage, float attackSpeed, Properties properties) {
 		// 等级耐久是 -1，表示不损坏。1.21 会把它写成最大耐久 -1，第一下就会碎
-		super(tier, blocks, properties.component(DataComponents.UNBREAKABLE, new Unbreakable(false)));
+		super(properties.tool(tier, blocks, attackDamage, attackSpeed, 0.0F).component(DataComponents.UNBREAKABLE, new Unbreakable(false)));
 	}
 
 	@Override

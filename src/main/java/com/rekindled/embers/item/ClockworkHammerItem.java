@@ -11,7 +11,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 public class ClockworkHammerItem extends ClockworkToolItem {
 
 	public ClockworkHammerItem(Properties properties) {
-		super(EmbersTiers.CLOCKWORK_HAMMER, EmbersBlockTags.MINABLE_WITH_HAMMER, properties.attributes(DiggerItem.createAttributes(EmbersTiers.CLOCKWORK_HAMMER, 3.0F, -3.2F)));
+		super(EmbersTiers.CLOCKWORK_HAMMER, EmbersBlockTags.MINABLE_WITH_HAMMER, 3.0F, -3.2F, properties);
 	}
 
 	@Override
