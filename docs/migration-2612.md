@@ -28,6 +28,26 @@
 - `ParticleProvider.createParticle` 多一个 `RandomSource` 参数；带贴图的 Provider 构造时拿 `SpriteSet`，创建时用 `sprite.get(random)`。
 - 难点：`EmbersRenderTypes` 里 6 种粒子渲染类型用的是自定义着色器 `EMBER_PARTICLE_SHADER` / `EMBER_PARTICLE_FAB_SHADER`，带自定义 uniform（`applyParticleUniforms`），混合方式是 `SRC_ALPHA, ONE`（即 `BlendFunction.LIGHTNING`），部分关闭深度测试。26.1 改成 `RenderPipeline` + uniform buffer，需要按 `RenderPipelines.PARTICLE_SNIPPET` 新建管线并重写着色器的 uniform 声明。先做法：管线用 `BlendFunction.LIGHTNING`、关深度写入；着色器 uniform 的移植放到批次 7 渲染一起做。
 
+## 当前进度（第 21 轮）
+
+已完成（均未编译验证，最后一次编译 3058 个错误，之后的批次因内存不足没编译）：
+- 批次 1-2：构建脚本、机械改名
+- 批次 3：能力（ResourceHandler 适配器）、方块实体存读档（NbtBridge）、NBT getter、INBTSerializable、研究/移鳞附加数据
+- 批次 4：InteractionResult、updateShape、EnumProperty、onRemove（LegacyRemoveBlock + mixin）
+- 批次 5：ToolMaterial、灰烬护甲 ArmorMaterial 和装备资源
+- 批次 6：粒子（SingleQuadParticle、Layer、管线注册）
+- 注册：RegCtx + Properties mixin 给物品和方块写入注册 ID
+
+剩余大块（都要手工改写）：
+- 30 个方块实体渲染器（约 2000 行）：26.1 改成 createRenderState / extractRenderState / submit 三段式
+- 14 个自定义着色器：改成 RenderPipeline + uniform buffer 的新 GLSL 写法
+- 古代典籍 GuiCodex：GuiGraphics 改成 GuiGraphicsExtractor
+- datagen（EmbersBlockStates / EmbersItemModels / 标签 / 配方，约 1000 处错误）：改成 ModelProvider 新数据生成 API
+- 管道动态模型 PipeModel / BakedPipeModel：BakedModel 体系改了
+- 灰烬护甲自定义模型、appendHoverText 新签名、inventoryTick 新签名
+
 ## 在 1.21.1 上同步修复的迁移 bug
+
+- 工具等级（master 165b2b8）：SimpleTier 第一个参数是"挖不了的方块"标签，旧移植传成了本模组空的 needs_*_tool 标签，铅/银/黎明石/Tyrfing 工具什么都能挖出掉落。已按 1.20.1 改回铁级、发条镐斧钻石级、发条锤石级，2612 同步。
 
 （发现一条记一条，两边都改）
