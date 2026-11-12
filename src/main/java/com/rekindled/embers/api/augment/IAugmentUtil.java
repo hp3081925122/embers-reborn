@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.rekindled.embers.Embers;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -15,7 +15,7 @@ public interface IAugmentUtil {
 
 	Collection<IAugment> getAllAugments();
 
-	IAugment getAugment(ResourceLocation name);
+	IAugment getAugment(Identifier name);
 
 	List<IAugment> getAugments(ItemStack stack);
 

@@ -152,7 +152,7 @@ public class InfernoForgeBlock extends DoubleTallMachineBlock implements SimpleW
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
 		if (pState.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER)
-			return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.INFERNO_FORGE_BOTTOM_ENTITY.get(), InfernoForgeBottomBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.INFERNO_FORGE_BOTTOM_ENTITY.get(), InfernoForgeBottomBlockEntity::serverTick);
+			return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.INFERNO_FORGE_BOTTOM_ENTITY.get(), InfernoForgeBottomBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.INFERNO_FORGE_BOTTOM_ENTITY.get(), InfernoForgeBottomBlockEntity::serverTick);
 		return null;
 	}
 

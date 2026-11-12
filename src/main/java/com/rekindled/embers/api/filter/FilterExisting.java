@@ -4,16 +4,16 @@ import com.rekindled.embers.Embers;
 
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 public class FilterExisting implements IFilter {
-	public static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "existing");
+	public static final Identifier RESOURCE_LOCATION = Identifier.fromNamespaceAndPath(Embers.MODID, "existing");
 
 	@Override
-	public ResourceLocation getType() {
+	public Identifier getType() {
 		return RESOURCE_LOCATION;
 	}
 

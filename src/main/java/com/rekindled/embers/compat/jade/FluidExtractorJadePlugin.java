@@ -8,7 +8,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
@@ -20,7 +20,7 @@ import snownee.jade.api.config.IPluginConfig;
 @WailaPlugin(Embers.MODID)
 public class FluidExtractorJadePlugin implements IWailaPlugin, IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
 
-	private static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "fluid_extractor_stuck");
+	private static final Identifier UID = Identifier.fromNamespaceAndPath(Embers.MODID, "fluid_extractor_stuck");
 	private static final String STUCK = "Stuck";
 
 	@Override
@@ -34,7 +34,7 @@ public class FluidExtractorJadePlugin implements IWailaPlugin, IBlockComponentPr
 	}
 
 	@Override
-	public ResourceLocation getUid() {
+	public Identifier getUid() {
 		return UID;
 	}
 

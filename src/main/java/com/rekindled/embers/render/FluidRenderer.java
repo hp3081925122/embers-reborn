@@ -14,7 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -27,7 +27,7 @@ public class FluidRenderer {
 	 * @param sprite  Sprite name
 	 * @return  Sprite location
 	 */
-	public static TextureAtlasSprite getBlockSprite(ResourceLocation sprite) {
+	public static TextureAtlasSprite getBlockSprite(Identifier sprite) {
 		return Minecraft.getInstance().getModelManager().getAtlas(InventoryMenu.BLOCK_ATLAS).getSprite(sprite);
 	}
 

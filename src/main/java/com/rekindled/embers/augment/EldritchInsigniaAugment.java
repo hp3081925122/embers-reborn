@@ -2,7 +2,7 @@ package com.rekindled.embers.augment;
 
 import com.rekindled.embers.api.augment.AugmentUtil;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
@@ -10,7 +10,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 public class EldritchInsigniaAugment extends AugmentBase {
 
-	public EldritchInsigniaAugment(ResourceLocation id) {
+	public EldritchInsigniaAugment(Identifier id) {
 		super(id, 0.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

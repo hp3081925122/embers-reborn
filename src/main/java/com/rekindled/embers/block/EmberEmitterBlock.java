@@ -267,7 +267,7 @@ public class EmberEmitterBlock extends BaseEntityBlock implements SimpleWaterlog
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, RegistryManager.EMBER_EMITTER_ENTITY.get(), EmberEmitterBlockEntity::serverTick);
+		return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, RegistryManager.EMBER_EMITTER_ENTITY.get(), EmberEmitterBlockEntity::serverTick);
 	}
 
 	@Override

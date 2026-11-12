@@ -28,7 +28,7 @@ import com.rekindled.embers.research.subtypes.ResearchSwitchCategory;
 import com.rekindled.embers.util.Vec2i;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -43,8 +43,8 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ResearchManager {
-	public static final ResourceLocation PLAYER_RESEARCH = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "research");
-	public static final ResourceLocation PAGE_ICONS = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_pageicons.png");
+	public static final Identifier PLAYER_RESEARCH = Identifier.fromNamespaceAndPath(Embers.MODID, "research");
+	public static final Identifier PAGE_ICONS = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_pageicons.png");
 	public static final double PAGE_ICON_SIZE = 48;
 	public static List<ResearchCategory> researches = new ArrayList<ResearchCategory>();
 	public static HashMap<Item, ResearchBase> researchByItem = new HashMap<Item, ResearchBase>();
@@ -111,7 +111,7 @@ public class ResearchManager {
 
 	public static boolean researchSynced = false;
 
-	public static void receiveResearchData(Map<ResourceLocation, Boolean> checkmarks) {
+	public static void receiveResearchData(Map<Identifier, Boolean> checkmarks) {
 		researchSynced = true;
 		for (ResearchBase research : getAllResearch()) {
 			Boolean checked = checkmarks.get(research.id);
@@ -538,11 +538,11 @@ public class ResearchManager {
 		//researches.add(categoryCore);
 	}
 
-	static ResourceLocation loc(String name) {
-		return ResourceLocation.fromNamespaceAndPath(Embers.MODID, name);
+	static Identifier loc(String name) {
+		return Identifier.fromNamespaceAndPath(Embers.MODID, name);
 	}
 
 	public static ResearchSwitchCategory makeCategorySwitch(ResearchCategory targetCategory, int x, int y, ItemStack icon, int u, int v) {
-		return (ResearchSwitchCategory) new ResearchSwitchCategory(ResourceLocation.fromNamespaceAndPath(targetCategory.id.getNamespace(), targetCategory.id.getPath() + "_category"), icon, x, y).setTargetCategory(targetCategory).setIconBackground(PAGE_ICONS, PAGE_ICON_SIZE * u, PAGE_ICON_SIZE * v);
+		return (ResearchSwitchCategory) new ResearchSwitchCategory(Identifier.fromNamespaceAndPath(targetCategory.id.getNamespace(), targetCategory.id.getPath() + "_category"), icon, x, y).setTargetCategory(targetCategory).setIconBackground(PAGE_ICONS, PAGE_ICON_SIZE * u, PAGE_ICON_SIZE * v);
 	}
 }

@@ -8,7 +8,7 @@ import com.rekindled.embers.compat.curios.CuriosCompat;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -44,18 +44,18 @@ public class EmbersItemModels extends ItemModelProvider {
 		layeredItem(CuriosCompat.EMBER_BULB, "item/generated", "ember_bulb_glass", "ember_bulb_glass_shine", "ember_bulb");
 		itemWithTexture(RegistryManager.MUSIC_DISC_7F_PATTERNS, "music_disc_ember");
 		basicItem(RegistryManager.ALCHEMICAL_WASTE.get());
-		withExistingParent(RegistryManager.ALCHEMICAL_NOTE.getId().getPath(), ResourceLocation.fromNamespaceAndPath("neoforge", "item/default")).customLoader(SeparateTransformsModelBuilder::begin)
-		.base(basicItem(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "alchemical_note_item")))
-		.perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("builtin/entity"))))
-		.perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("builtin/entity"))))
-		.perspective(ItemDisplayContext.GUI, nested().parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("builtin/entity"))))
-		.perspective(ItemDisplayContext.FIXED, nested().parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("builtin/entity"))));
+		withExistingParent(RegistryManager.ALCHEMICAL_NOTE.getId().getPath(), Identifier.fromNamespaceAndPath("neoforge", "item/default")).customLoader(SeparateTransformsModelBuilder::begin)
+		.base(basicItem(Identifier.fromNamespaceAndPath(Embers.MODID, "alchemical_note_item")))
+		.perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(new UncheckedModelFile(Identifier.withDefaultNamespace("builtin/entity"))))
+		.perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(new UncheckedModelFile(Identifier.withDefaultNamespace("builtin/entity"))))
+		.perspective(ItemDisplayContext.GUI, nested().parent(new UncheckedModelFile(Identifier.withDefaultNamespace("builtin/entity"))))
+		.perspective(ItemDisplayContext.FIXED, nested().parent(new UncheckedModelFile(Identifier.withDefaultNamespace("builtin/entity"))));
 		basicItem(RegistryManager.CODEBREAKING_SLATE.get());
 		layeredItem(RegistryManager.TYRFING, "item/handheld", "tyrfing", "tyrfing_gem");
-		withExistingParent(RegistryManager.INFLICTOR_GEM.getId().getPath(), ResourceLocation.withDefaultNamespace("item/generated"))
-		.texture("layer0", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item/inflictor_gem"))
-		.override().predicate(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "charged"), 1)
-		.model(singleTexture("inflictor_gem_charged", ResourceLocation.withDefaultNamespace("item/generated"), "layer0", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item/inflictor_gem_charged")));
+		withExistingParent(RegistryManager.INFLICTOR_GEM.getId().getPath(), Identifier.withDefaultNamespace("item/generated"))
+		.texture("layer0", Identifier.fromNamespaceAndPath(Embers.MODID, "item/inflictor_gem"))
+		.override().predicate(Identifier.fromNamespaceAndPath(Embers.MODID, "charged"), 1)
+		.model(singleTexture("inflictor_gem_charged", Identifier.withDefaultNamespace("item/generated"), "layer0", Identifier.fromNamespaceAndPath(Embers.MODID, "item/inflictor_gem_charged")));
 		basicItem(RegistryManager.ASHEN_GOGGLES.get());
 		basicItem(RegistryManager.ASHEN_CLOAK.get());
 		basicItem(RegistryManager.ASHEN_LEGGINGS.get());
@@ -146,13 +146,13 @@ public class EmbersItemModels extends ItemModelProvider {
 		basicItem(CuriosCompat.EXPLOSION_CHARM.get());
 
 		spawnEgg(RegistryManager.ANCIENT_GOLEM_SPAWN_EGG);
-		buttonInventory(RegistryManager.CAMINITE_BUTTON_ITEM.getId().getPath(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/caminite_button"));
+		buttonInventory(RegistryManager.CAMINITE_BUTTON_ITEM.getId().getPath(), Identifier.fromNamespaceAndPath(Embers.MODID, "block/caminite_button"));
 	}
 
 	public void itemWithModel(DeferredHolder<? extends Item, ? extends Item> registryObject, String model) {
-		ResourceLocation id = registryObject.getId();
-		ResourceLocation textureLocation = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "item/" + id.getPath());
-		singleTexture(id.getPath(), ResourceLocation.parse(model), "layer0", textureLocation);
+		Identifier id = registryObject.getId();
+		Identifier textureLocation = Identifier.fromNamespaceAndPath(id.getNamespace(), "item/" + id.getPath());
+		singleTexture(id.getPath(), Identifier.parse(model), "layer0", textureLocation);
 	}
 
 	public void spawnEgg(DeferredHolder<? extends Item, ? extends Item> registryObject) {
@@ -164,22 +164,22 @@ public class EmbersItemModels extends ItemModelProvider {
 	}
 
 	public void itemWithTexture(DeferredHolder<? extends Item, ? extends Item> registryObject, String model, String texture) {
-		ResourceLocation id = registryObject.getId();
-		ResourceLocation textureLocation = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "item/" + texture);
-		singleTexture(id.getPath(), ResourceLocation.parse(model), "layer0", textureLocation);
+		Identifier id = registryObject.getId();
+		Identifier textureLocation = Identifier.fromNamespaceAndPath(id.getNamespace(), "item/" + texture);
+		singleTexture(id.getPath(), Identifier.parse(model), "layer0", textureLocation);
 	}
 
 	public void layeredItem(DeferredHolder<? extends Item, ? extends Item> registryObject, String model, String... textures) {
-		ResourceLocation id = registryObject.getId();
+		Identifier id = registryObject.getId();
 
-		ModelBuilder<?> builder = withExistingParent(id.getPath(), ResourceLocation.parse(model));
+		ModelBuilder<?> builder = withExistingParent(id.getPath(), Identifier.parse(model));
 		for (int i = 0; i < textures.length; i ++) {
-			builder.texture("layer" + i, ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "item/" + textures[i]));
+			builder.texture("layer" + i, Identifier.fromNamespaceAndPath(id.getNamespace(), "item/" + textures[i]));
 		}
 	}
 
 	public void bucketModel(net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.item.Item, ? extends net.minecraft.world.item.BucketItem> registryObject, net.minecraft.world.level.material.Fluid fluid) {
-		ModelBuilder<ItemModelBuilder> builder = withExistingParent(registryObject.getId().getPath(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item/bucket_fluid"));
+		ModelBuilder<ItemModelBuilder> builder = withExistingParent(registryObject.getId().getPath(), Identifier.fromNamespaceAndPath(Embers.MODID, "item/bucket_fluid"));
 		builder.customLoader(DynamicFluidContainerModelBuilder::begin).fluid(fluid).coverIsMask(false).flipGas(true).end();
 	}
 

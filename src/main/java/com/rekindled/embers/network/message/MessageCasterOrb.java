@@ -19,7 +19,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -36,7 +36,7 @@ public class MessageCasterOrb implements CustomPacketPayload {
 	double lookZ = 0;
 
 	public static final CustomPacketPayload.Type<MessageCasterOrb> TYPE =
-		new CustomPacketPayload.Type<>(ResourceLocation.parse("embers_reborn:caster_orb"));
+		new CustomPacketPayload.Type<>(Identifier.parse("embers_reborn:caster_orb"));
 
 	public static final StreamCodec<FriendlyByteBuf, MessageCasterOrb> STREAM_CODEC =
 		StreamCodec.ofMember(MessageCasterOrb::write, MessageCasterOrb::read);

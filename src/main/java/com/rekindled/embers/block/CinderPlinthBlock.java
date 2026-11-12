@@ -94,7 +94,7 @@ public class CinderPlinthBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.CINDER_PLINTH_ENTITY.get(), CinderPlinthBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.CINDER_PLINTH_ENTITY.get(), CinderPlinthBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.CINDER_PLINTH_ENTITY.get(), CinderPlinthBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.CINDER_PLINTH_ENTITY.get(), CinderPlinthBlockEntity::serverTick);
 	}
 
 	@Nullable

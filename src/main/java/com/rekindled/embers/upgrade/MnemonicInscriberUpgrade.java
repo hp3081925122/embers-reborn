@@ -15,7 +15,7 @@ import com.rekindled.embers.datagen.EmbersSounds;
 import com.rekindled.embers.particle.GlowParticleOptions;
 import com.rekindled.embers.util.EmbersColors;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +27,7 @@ import net.minecraft.world.phys.Vec3;
 public class MnemonicInscriberUpgrade extends DefaultUpgradeProvider {
 
 	public MnemonicInscriberUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mnemonic_inscriber"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "mnemonic_inscriber"), tile);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.phys.Vec3;
 
@@ -24,7 +24,7 @@ public class XRayGlowParticleOptions implements ParticleOptions {
 
 	public static final float MIN_SCALE = 0.01F;
 	public static final float MAX_SCALE = 4.0F;
-	protected final ResourceLocation colorId;
+	protected final Identifier colorId;
 	protected final Vector3f color;
 	protected final Vec3 motion;
 	protected final float scale;
@@ -34,7 +34,7 @@ public class XRayGlowParticleOptions implements ParticleOptions {
 	public static final XRayGlowParticleOptions EMBER_BIG_NOMOTION = new XRayGlowParticleOptions(EmbersColors.EMBER_ID, new Vec3(0.0, 0.000001, 0.0), 6.0F, 200);
 
 	public static final Codec<XRayGlowParticleOptions> CODEC = RecordCodecBuilder.create((p_175793_) -> {
-		return p_175793_.group(ResourceLocation.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
+		return p_175793_.group(Identifier.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
 			return p_175797_.colorId;
 		}), ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((p_175797_) -> {
 			return p_175797_.color;
@@ -47,7 +47,7 @@ public class XRayGlowParticleOptions implements ParticleOptions {
 		})).apply(p_175793_, XRayGlowParticleOptions::new);
 	});
 
-	public XRayGlowParticleOptions(ResourceLocation pColorId, Vector3f pColor, Vec3 pMotion, float pScale, int plifetime) {
+	public XRayGlowParticleOptions(Identifier pColorId, Vector3f pColor, Vec3 pMotion, float pScale, int plifetime) {
 		this.colorId = pColorId;
 		this.color = pColor;
 		this.motion = pMotion;
@@ -59,7 +59,7 @@ public class XRayGlowParticleOptions implements ParticleOptions {
 		this(EmbersColors.CUSTOM_ID, pColor, pMotion, pScale, plifetime);
 	}
 
-	public XRayGlowParticleOptions(ResourceLocation pColorId, Vec3 pMotion, float pScale, int plifetime) {
+	public XRayGlowParticleOptions(Identifier pColorId, Vec3 pMotion, float pScale, int plifetime) {
 		this(pColorId, EmbersColors.EMBER, pMotion, pScale, plifetime);
 	}
 
@@ -75,15 +75,15 @@ public class XRayGlowParticleOptions implements ParticleOptions {
 		this(pColor, Vec3.ZERO, pScale);
 	}
 
-	public XRayGlowParticleOptions(ResourceLocation pColorId, Vec3 pMotion, float pScale) {
+	public XRayGlowParticleOptions(Identifier pColorId, Vec3 pMotion, float pScale) {
 		this(pColorId, pMotion, pScale, -1);
 	}
 
-	public XRayGlowParticleOptions(ResourceLocation pColorId, float pScale, int plifetime) {
+	public XRayGlowParticleOptions(Identifier pColorId, float pScale, int plifetime) {
 		this(pColorId, Vec3.ZERO, pScale, plifetime);
 	}
 
-	public XRayGlowParticleOptions(ResourceLocation pColorId, float pScale) {
+	public XRayGlowParticleOptions(Identifier pColorId, float pScale) {
 		this(pColorId, Vec3.ZERO, pScale);
 	}
 
@@ -116,7 +116,7 @@ public class XRayGlowParticleOptions implements ParticleOptions {
 	}
 
 	public void writeToNetwork(FriendlyByteBuf pBuffer) {
-		pBuffer.writeResourceLocation(this.colorId);
+		pBuffer.writeIdentifier(this.colorId);
 		pBuffer.writeFloat(this.color.x());
 		pBuffer.writeFloat(this.color.y());
 		pBuffer.writeFloat(this.color.z());

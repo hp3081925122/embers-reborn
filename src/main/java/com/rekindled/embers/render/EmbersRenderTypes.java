@@ -26,7 +26,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.InventoryMenu;
 
 public class EmbersRenderTypes extends RenderType {
@@ -250,7 +250,7 @@ public class EmbersRenderTypes extends RenderType {
 			DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, true, false,
 			RenderType.CompositeState.builder()
 			.setShaderState(ADDITIVE_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(ResourceLocation.parse(Embers.MODID + ":textures/block/crystal_material.png"), false, false))
+			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/block/crystal_material.png"), false, false))
 			.setTransparencyState(LIGHTNING_TRANSPARENCY)
 			.setCullState(NO_CULL)
 			//.setOutputState(TRANSLUCENT_TARGET)
@@ -262,7 +262,7 @@ public class EmbersRenderTypes extends RenderType {
 			DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, true, false,
 			RenderType.CompositeState.builder()
 			.setShaderState(PTC_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(ResourceLocation.parse(Embers.MODID + ":textures/block/crystal_material.png"), false, false))
+			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/block/crystal_material.png"), false, false))
 			.setTransparencyState(LIGHTNING_TRANSPARENCY)
 			.setCullState(NO_CULL)
 			//.setOutputState(TRANSLUCENT_TARGET)
@@ -276,7 +276,7 @@ public class EmbersRenderTypes extends RenderType {
 			DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, false, true,
 			RenderType.CompositeState.builder()
 			.setShaderState(ADDITIVE_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(ResourceLocation.parse(Embers.MODID + ":textures/block/field_square.png"), false, false))
+			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/block/field_square.png"), false, false))
 			.setTransparencyState(LIGHTNING_TRANSPARENCY)
 			.setCullState(NO_CULL)
 			//.setOutputState(TRANSLUCENT_TARGET)
@@ -286,15 +286,15 @@ public class EmbersRenderTypes extends RenderType {
 			DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, false, true,
 			RenderType.CompositeState.builder()
 			.setShaderState(PTC_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(ResourceLocation.parse(Embers.MODID + ":textures/block/field_square.png"), false, false))
+			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/block/field_square.png"), false, false))
 			.setTransparencyState(LIGHTNING_TRANSPARENCY)
 			.setCullState(NO_CULL)
 			//.setOutputState(TRANSLUCENT_TARGET)
 			.createCompositeState(false));
 
 	//unused render type for the crystal seeds
-	public static Function<ResourceLocation, RenderType> CRYSTAL_SEED = Util.memoize(EmbersRenderTypes::getSeed);
-	private static RenderType getSeed(ResourceLocation texture) {
+	public static Function<Identifier, RenderType> CRYSTAL_SEED = Util.memoize(EmbersRenderTypes::getSeed);
+	private static RenderType getSeed(Identifier texture) {
 		return create(
 				Embers.MODID + ":crystal_seed_render_type",
 				DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.TRIANGLES, 256, true, false,
@@ -312,7 +312,7 @@ public class EmbersRenderTypes extends RenderType {
 			DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR, VertexFormat.Mode.QUADS, 256, false, true,
 			RenderType.CompositeState.builder()
 			.setShaderState(PTLC_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(ResourceLocation.parse(Embers.MODID + ":textures/entity/alchemy_circle.png"), false, false))
+			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/entity/alchemy_circle.png"), false, false))
 			.setTransparencyState(LIGHTNING_TRANSPARENCY)
 			.setCullState(NO_CULL)
 			//.setDepthTestState(NO_DEPTH_TEST)
@@ -352,7 +352,7 @@ public class EmbersRenderTypes extends RenderType {
 			DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.QUADS, 256, false, false,
 			RenderType.CompositeState.builder()
 			.setShaderState(POSITION_TEX_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/heat_bar.png"), false, false))
+			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/heat_bar.png"), false, false))
 			.setTransparencyState(NO_TRANSPARENCY)
 			.setDepthTestState(LEQUAL_DEPTH_TEST)
 			.createCompositeState(false));
@@ -370,9 +370,9 @@ public class EmbersRenderTypes extends RenderType {
 	}
 
 	//render types used for alchemical note
-	public static final RenderType NOTE_BACKGROUND = getNote(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/alchemical_note.png"));
-	public static final RenderType NOTE_PEDESTAL = getNote(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/alchemical_note_pedestal.png"));
-	public static RenderType getNote(ResourceLocation location) {
+	public static final RenderType NOTE_BACKGROUND = getNote(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/alchemical_note.png"));
+	public static final RenderType NOTE_PEDESTAL = getNote(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/alchemical_note_pedestal.png"));
+	public static RenderType getNote(Identifier location) {
 		RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
 				.setShaderState(RENDERTYPE_ENTITY_TRANSLUCENT_CULL_SHADER)
 				.setTextureState(new RenderStateShard.TextureStateShard(location, false, false))
@@ -385,7 +385,7 @@ public class EmbersRenderTypes extends RenderType {
 	}
 
 	//render type used for mithril
-	public static ResourceLocation MITHRIL_REFLECTION = ResourceLocation.parse(Embers.MODID + ":textures/misc/mithril_reflection.png");
+	public static Identifier MITHRIL_REFLECTION = Identifier.parse(Embers.MODID + ":textures/misc/mithril_reflection.png");
 	@SuppressWarnings("resource")
 	public static RenderType MITHRIL = create(
 			Embers.MODID + ":mithril_render_type",

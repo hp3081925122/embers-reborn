@@ -19,7 +19,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.entity.MobCategory;
@@ -47,13 +47,13 @@ import net.neoforged.neoforge.registries.holdersets.OrHolderSet;
 
 public class EmbersStructures {
 
-	public static final ResourceKey<StructureProcessorList> RUIN_PROCESSORS = ResourceKey.create(Registries.PROCESSOR_LIST, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "small_ruin"));
+	public static final ResourceKey<StructureProcessorList> RUIN_PROCESSORS = ResourceKey.create(Registries.PROCESSOR_LIST, Identifier.fromNamespaceAndPath(Embers.MODID, "small_ruin"));
 
 	public static void generateProcessors(BootstrapContext<StructureProcessorList> bootstrap) {
 		bootstrap.register(RUIN_PROCESSORS, new StructureProcessorList(Lists.newArrayList(new CrystalSeedStructureProcessor(210000, 5050000, 900), EntityMobilizerStructureProcessor.INSTANCE)));
 	}
 
-	public static final ResourceKey<StructureTemplatePool> SMALL_RUIN_POOL = ResourceKey.create(Registries.TEMPLATE_POOL, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "small_ruin"));
+	public static final ResourceKey<StructureTemplatePool> SMALL_RUIN_POOL = ResourceKey.create(Registries.TEMPLATE_POOL, Identifier.fromNamespaceAndPath(Embers.MODID, "small_ruin"));
 
 	public static void generatePools(BootstrapContext<StructureTemplatePool> bootstrap) {
 		HolderGetter<StructureTemplatePool> templatePool = bootstrap.lookup(Registries.TEMPLATE_POOL);
@@ -70,7 +70,7 @@ public class EmbersStructures {
 				StructureTemplatePool.Projection.RIGID));
 	}
 
-	public static final ResourceKey<Structure> SMALL_RUIN = ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "small_ruin"));
+	public static final ResourceKey<Structure> SMALL_RUIN = ResourceKey.create(Registries.STRUCTURE, Identifier.fromNamespaceAndPath(Embers.MODID, "small_ruin"));
 
 	public static void generateStructures(BootstrapContext<Structure> bootstrap) {
 		HolderGetter<StructureTemplatePool> templatePool = bootstrap.lookup(Registries.TEMPLATE_POOL);
@@ -85,7 +85,7 @@ public class EmbersStructures {
 				templatePool.getOrThrow(SMALL_RUIN_POOL), 2, ConstantHeight.of(VerticalAnchor.absolute(-10)), ConstantHeight.of(VerticalAnchor.aboveBottom(128)), false, Heightmap.Types.OCEAN_FLOOR_WG));
 	}
 
-	public static final ResourceKey<StructureSet> SMALL_RUIN_SET = ResourceKey.create(Registries.STRUCTURE_SET, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "small_ruin"));
+	public static final ResourceKey<StructureSet> SMALL_RUIN_SET = ResourceKey.create(Registries.STRUCTURE_SET, Identifier.fromNamespaceAndPath(Embers.MODID, "small_ruin"));
 
 	public static void generateSets(BootstrapContext<StructureSet> bootstrap) {
 		HolderGetter<Structure> structure = bootstrap.lookup(Registries.STRUCTURE);

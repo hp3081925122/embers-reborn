@@ -70,7 +70,7 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 
 	@Override
 	public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			double charge = (Math.min(ConfigManager.CINDER_STAFF_MAX_CHARGE.get(), getUseDuration(stack, (net.minecraft.world.entity.LivingEntity) null) - timeLeft)) / (double) ConfigManager.CINDER_STAFF_MAX_CHARGE.get();
 			Vec3 launchPos = getLaunchPos(entity);
 			float damage = (float) Math.max(charge * ConfigManager.CINDER_STAFF_DAMAGE.get(), 0.5f);

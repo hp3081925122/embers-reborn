@@ -55,7 +55,7 @@ public class AlchemyTabletBlock extends BaseEntityBlock implements SimpleWaterlo
 	public net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (!heldItem.isEmpty() && level.getBlockEntity(pos) instanceof AlchemyTabletBlockEntity tabletEntity) {
 			if (Misc.useItemOnInventory(tabletEntity.inventory, level, player, hand) == InteractionResult.SUCCESS)
-				return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+				return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
 		}
 		return net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
@@ -104,7 +104,7 @@ public class AlchemyTabletBlock extends BaseEntityBlock implements SimpleWaterlo
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.ALCHEMY_TABLET_ENTITY.get(), AlchemyTabletBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.ALCHEMY_TABLET_ENTITY.get(), AlchemyTabletBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.ALCHEMY_TABLET_ENTITY.get(), AlchemyTabletBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.ALCHEMY_TABLET_ENTITY.get(), AlchemyTabletBlockEntity::serverTick);
 	}
 
 	@Nullable

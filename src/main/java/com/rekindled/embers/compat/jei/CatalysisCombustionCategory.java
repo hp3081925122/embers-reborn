@@ -20,7 +20,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class CatalysisCombustionCategory implements IRecipeCategory<ICatalysisCombustionRecipe> {
@@ -28,7 +28,7 @@ public class CatalysisCombustionCategory implements IRecipeCategory<ICatalysisCo
 	private final IDrawable background;
 	private final IDrawable icon;
 	public static Component title = Component.translatable(Embers.MODID + ".jei.recipe.catalysis_combustion");
-	public static ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_catalysis_combustion.png");
+	public static Identifier texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_catalysis_combustion.png");
 
 	public CatalysisCombustionCategory(IGuiHelper helper) {
 		background = helper.createDrawable(texture, 0, 0, 126, 46);

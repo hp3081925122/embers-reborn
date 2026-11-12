@@ -6,7 +6,7 @@ import com.rekindled.embers.entity.EmberProjectileEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -22,7 +22,7 @@ public class EmberProjectileRenderer extends EntityRenderer<EmberProjectileEntit
 	public void render(EmberProjectileEntity pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {}
 
 	@Override
-	public ResourceLocation getTextureLocation(EmberProjectileEntity pEntity) {
+	public Identifier getTextureLocation(EmberProjectileEntity pEntity) {
 		return InventoryMenu.BLOCK_ATLAS;
 	}
 }

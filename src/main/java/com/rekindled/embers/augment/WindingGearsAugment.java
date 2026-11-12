@@ -14,7 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -58,7 +58,7 @@ public class WindingGearsAugment extends AugmentBase {
 
 
 
-	public static final ResourceLocation TEXTURE_HUD = ResourceLocation.fromNamespaceAndPath(com.rekindled.embers.Embers.MODID, "textures/gui/icons.png");
+	public static final Identifier TEXTURE_HUD = Identifier.fromNamespaceAndPath(com.rekindled.embers.Embers.MODID, "textures/gui/icons.png");
 	public static final int BAR_U = 0;
 	public static final int BAR_V = 32;
 	public static final int BAR_WIDTH = 180;
@@ -75,7 +75,7 @@ public class WindingGearsAugment extends AugmentBase {
 	static int spool, spoolLast;
 	static ThreadLocal<Map<Entity, Double>> bounceLocal = ThreadLocal.withInitial(WeakHashMap::new);
 
-	public WindingGearsAugment(ResourceLocation id) {
+	public WindingGearsAugment(Identifier id) {
 		super(id, 0.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

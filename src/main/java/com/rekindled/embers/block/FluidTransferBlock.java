@@ -135,7 +135,7 @@ public class FluidTransferBlock extends BaseEntityBlock implements SimpleWaterlo
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, RegistryManager.FLUID_TRANSFER_ENTITY.get(), FluidTransferBlockEntity::serverTick);
+		return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, RegistryManager.FLUID_TRANSFER_ENTITY.get(), FluidTransferBlockEntity::serverTick);
 	}
 
 	@Override

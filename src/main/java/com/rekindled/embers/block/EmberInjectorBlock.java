@@ -112,7 +112,7 @@ public class EmberInjectorBlock extends BaseEntityBlock implements SimpleWaterlo
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.EMBER_INJECTOR_ENTITY.get(), EmberInjectorBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.EMBER_INJECTOR_ENTITY.get(), EmberInjectorBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.EMBER_INJECTOR_ENTITY.get(), EmberInjectorBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.EMBER_INJECTOR_ENTITY.get(), EmberInjectorBlockEntity::serverTick);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import com.rekindled.embers.RegistryManager;
 
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +20,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class AlchemyRecipeBuilder {
 
-	public ResourceLocation id;
+	public Identifier id;
 	public ItemStack output;
 	public ItemStack failure = new ItemStack(RegistryManager.ALCHEMICAL_WASTE.get());
 	public Ingredient tablet;
@@ -39,18 +39,18 @@ public class AlchemyRecipeBuilder {
 		return create(new ItemStack(item));
 	}
 
-	public AlchemyRecipeBuilder id(ResourceLocation id) {
+	public AlchemyRecipeBuilder id(Identifier id) {
 		this.id = id;
 		return this;
 	}
 
 	public AlchemyRecipeBuilder domain(String domain) {
-		this.id = ResourceLocation.fromNamespaceAndPath(domain, this.id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(domain, this.id.getPath());
 		return this;
 	}
 
 	public AlchemyRecipeBuilder folder(String folder) {
-		this.id = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
 		return this;
 	}
 

@@ -8,13 +8,13 @@ import com.rekindled.embers.api.event.UpgradeEvent;
 import com.rekindled.embers.api.upgrades.UpgradeContext;
 import com.rekindled.embers.blockentity.MiniBoilerBlockEntity;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class MiniBoilerUpgrade extends DefaultUpgradeProvider {
 
 	public MiniBoilerUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mini_boiler"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "mini_boiler"), tile);
 	}
 
 	@Override

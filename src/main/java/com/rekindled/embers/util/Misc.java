@@ -33,7 +33,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -90,7 +90,7 @@ public class Misc {
 	public static final List<Function<ItemStack, Double>> GET_EMBER_RESONANCE = new ArrayList<Function<ItemStack, Double>>();
 
 	public static void spawnInventoryInWorld(Level world, double x, double y, double z, IItemHandler inventory) {
-		if (inventory != null && !world.isClientSide) {
+		if (inventory != null && !world.isClientSide()) {
 			for (int i = 0; i < inventory.getSlots(); i++) {
 				if (!inventory.getStackInSlot(i).isEmpty()) {
 					world.addFreshEntity(new ItemEntity(world, x, y, z, inventory.getStackInSlot(i)));
@@ -149,7 +149,7 @@ public class Misc {
 
 	public static FluidStack deserializeFluidStack(JsonObject json) {
 		String fluidName = GsonHelper.getAsString(json, "fluid");
-		Fluid fluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(fluidName));
+		Fluid fluid = BuiltInRegistries.FLUID.get(Identifier.parse(fluidName));
 		if (fluid == null || fluid == Fluids.EMPTY) {
 			throw new JsonSyntaxException("Unknown fluid " + fluidName);
 		}
@@ -159,7 +159,7 @@ public class Misc {
 
 	public static JsonObject serializeFluidStack(FluidStack stack) {
 		JsonObject json = new JsonObject();
-		json.addProperty("fluid", Objects.requireNonNull(BuiltInRegistries.FLUID.getResourceKey(stack.getFluid()).get().location()).toString());
+		json.addProperty("fluid", Objects.requireNonNull(BuiltInRegistries.FLUID.getResourceKey(stack.getFluid()).get().identifier()).toString());
 		json.addProperty("amount", stack.getAmount());
 		return json;
 	}
@@ -244,12 +244,12 @@ public class Misc {
 		return recipe;
 	}
 
-	public static ConcurrentHashMap<ResourceLocation, Item> tagItems = new ConcurrentHashMap<ResourceLocation, Item>();
-	public static ConcurrentHashMap<ResourceLocation, Fluid> tagFluids = new ConcurrentHashMap<ResourceLocation, Fluid>();
+	public static ConcurrentHashMap<Identifier, Item> tagItems = new ConcurrentHashMap<Identifier, Item>();
+	public static ConcurrentHashMap<Identifier, Fluid> tagFluids = new ConcurrentHashMap<Identifier, Fluid>();
 
 	public static Item getTaggedItem(TagKey<Item> tag) {
-		if (tagItems.containsKey(tag.location()))
-			return tagItems.get(tag.location());
+		if (tagItems.containsKey(tag.identifier()))
+			return tagItems.get(tag.identifier());
 
 		Item output = Items.AIR;
 		int index = Integer.MAX_VALUE;
@@ -265,13 +265,13 @@ public class Misc {
 				output = holder.value();
 		}
 		if (output != Items.AIR)
-			tagItems.put(tag.location(), output);
+			tagItems.put(tag.identifier(), output);
 		return output;
 	}
 
 	public static Fluid getTaggedFluid(TagKey<Fluid> tag) {
-		if (tagFluids.containsKey(tag.location()))
-			return tagFluids.get(tag.location());
+		if (tagFluids.containsKey(tag.identifier()))
+			return tagFluids.get(tag.identifier());
 
 		Fluid output = Fluids.EMPTY;
 		int index = Integer.MAX_VALUE;
@@ -287,7 +287,7 @@ public class Misc {
 				output = holder.value();
 		}
 		if (output != Fluids.EMPTY)
-			tagFluids.put(tag.location(), output);
+			tagFluids.put(tag.identifier(), output);
 		return output;
 	}
 
@@ -297,7 +297,7 @@ public class Misc {
 		List<? extends String> itemPreferences = ConfigManager.ITEM_PREFERENCES.get();
 		List<? extends String> preferences = ConfigManager.TAG_PREFERENCES.get();
 		for (ItemStack item : items) {
-			ResourceLocation key = BuiltInRegistries.ITEM.getKey(item.getItem());
+			Identifier key = BuiltInRegistries.ITEM.getKey(item.getItem());
 			for (int i = 0; i < itemPreferences.size(); i ++) {
 				if (key.toString().equals(itemPreferences.get(i)))
 					return item;
@@ -504,7 +504,7 @@ public class Misc {
 				Ingredient ingredient = armor.getMaterial().value().repairIngredient().get();
 				if (ingredient != null)
 					return ingredient;
-				Embers.LOGGER.error("Item: \"" + BuiltInRegistries.ITEM.getKey(item) + "\" of material: \"" + armor.getMaterial().unwrapKey().map(k -> k.location().toString()).orElse("unknown") + "\" has no proper repair ingredient, this is a bug and should be reported to " + BuiltInRegistries.ITEM.getKey(item).getNamespace());
+				Embers.LOGGER.error("Item: \"" + BuiltInRegistries.ITEM.getKey(item) + "\" of material: \"" + armor.getMaterial().unwrapKey().map(k -> k.identifier().toString()).orElse("unknown") + "\" has no proper repair ingredient, this is a bug and should be reported to " + BuiltInRegistries.ITEM.getKey(item).getNamespace());
 			} catch (Exception e) {
 				Embers.LOGGER.error("Item: \"" + BuiltInRegistries.ITEM.getKey(item) + "\" has no proper armor material, this is a bug and should be reported to " + BuiltInRegistries.ITEM.getKey(item).getNamespace(), e);
 			}
@@ -522,7 +522,7 @@ public class Misc {
 			}
 		}
 		if (!inventory.getStackInSlot(0).isEmpty()) {
-			if (!level.isClientSide) {
+			if (!level.isClientSide()) {
 				giveItemToPlayer(inventory.getStackInSlot(0), player, player.getInventory().selected);
 				inventory.setStackInSlot(0, ItemStack.EMPTY);
 			}

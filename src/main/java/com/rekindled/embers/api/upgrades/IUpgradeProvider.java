@@ -4,14 +4,14 @@ import java.util.List;
 
 import com.rekindled.embers.api.event.UpgradeEvent;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 public interface IUpgradeProvider {
 	//The upgrade id
-	ResourceLocation getUpgradeId();
+	Identifier getUpgradeId();
 
 	//Determines the order in which upgrades apply
 	default int getPriority() {

@@ -54,7 +54,7 @@ public class MixerCentrifugeBlock extends DoubleTallMachineBlock {
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
 		if (pState.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER)
-			return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.MIXER_CENTRIFUGE_BOTTOM_ENTITY.get(), MixerCentrifugeBottomBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MIXER_CENTRIFUGE_BOTTOM_ENTITY.get(), MixerCentrifugeBottomBlockEntity::serverTick);
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.MIXER_CENTRIFUGE_TOP_ENTITY.get(), MixerCentrifugeTopBlockEntity::clientTick) : null;
+			return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.MIXER_CENTRIFUGE_BOTTOM_ENTITY.get(), MixerCentrifugeBottomBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MIXER_CENTRIFUGE_BOTTOM_ENTITY.get(), MixerCentrifugeBottomBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.MIXER_CENTRIFUGE_TOP_ENTITY.get(), MixerCentrifugeTopBlockEntity::clientTick) : null;
 	}
 }

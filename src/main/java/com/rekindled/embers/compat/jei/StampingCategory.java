@@ -14,7 +14,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
 
@@ -23,7 +23,7 @@ public class StampingCategory implements IRecipeCategory<IStampingRecipe> {
 	private final IDrawable background;
 	private final IDrawable icon;
 	public static Component title = Component.translatable(Embers.MODID + ".jei.recipe.stamping");
-	public static ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_stamp.png");
+	public static Identifier texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_stamp.png");
 	double scale = 1.0 / 16.0;
 
 	public StampingCategory(IGuiHelper helper) {

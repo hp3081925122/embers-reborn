@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import com.rekindled.embers.Embers;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.model.generators.CustomLoaderBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -22,7 +22,7 @@ public class PipeModelBuilder<T extends ModelBuilder<T>> extends CustomLoaderBui
 	}
 
 	protected PipeModelBuilder(T parent, ExistingFileHelper existingFileHelper) {
-		super(ResourceLocation.parse(Embers.MODID + ":pipe"), parent, existingFileHelper, false);
+		super(Identifier.parse(Embers.MODID + ":pipe"), parent, existingFileHelper, false);
 	}
 
 	public PipeModelBuilder<T> parts(T center, T connection, T connection2, T end, T end2) {

@@ -109,7 +109,7 @@ public class EmberBoreBlock extends BaseEntityBlock implements SimpleWaterlogged
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.EMBER_BORE_ENTITY.get(), EmberBoreBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.EMBER_BORE_ENTITY.get(), EmberBoreBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.EMBER_BORE_ENTITY.get(), EmberBoreBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.EMBER_BORE_ENTITY.get(), EmberBoreBlockEntity::serverTick);
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
@@ -30,12 +30,12 @@ import net.neoforged.neoforge.registries.holdersets.OrHolderSet;
 
 public class EmbersBiomeModifiers {
 
-	public static final ResourceKey<BiomeModifier> ORE_LEAD_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "add_lead_ore"));
-	public static final ResourceKey<BiomeModifier> ORE_SILVER_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "add_silver_ore"));
+	public static final ResourceKey<BiomeModifier> ORE_LEAD_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(Embers.MODID, "add_lead_ore"));
+	public static final ResourceKey<BiomeModifier> ORE_SILVER_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(Embers.MODID, "add_silver_ore"));
 
-	public static final ResourceKey<BiomeModifier> GOLEM_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "add_golem_spawn"));
+	public static final ResourceKey<BiomeModifier> GOLEM_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Identifier.fromNamespaceAndPath(Embers.MODID, "add_golem_spawn"));
 
-	public static final TagKey<Biome> NO_MONSTERS = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("c", "no_default_monsters"));
+	public static final TagKey<Biome> NO_MONSTERS = TagKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath("c", "no_default_monsters"));
 
 	public static void generate(BootstrapContext<BiomeModifier> bootstrap) {
 		HolderGetter<PlacedFeature> placed = bootstrap.lookup(Registries.PLACED_FEATURE);

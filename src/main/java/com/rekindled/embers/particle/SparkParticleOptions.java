@@ -16,20 +16,20 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 
 public class SparkParticleOptions implements ParticleOptions {
 
 	public static final float MIN_SCALE = 0.01F;
 	public static final float MAX_SCALE = 4.0F;
-	protected final ResourceLocation colorId;
+	protected final Identifier colorId;
 	protected final Vector3f color;
 	protected final float scale;
 	public static final SparkParticleOptions EMBER = new SparkParticleOptions(EmbersColors.EMBER_ID, 2.0F);
 
 	public static final Codec<SparkParticleOptions> CODEC = RecordCodecBuilder.create((p_175793_) -> {
-		return p_175793_.group(ResourceLocation.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
+		return p_175793_.group(Identifier.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
 			return p_175797_.colorId;
 		}), ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((p_175797_) -> {
 			return p_175797_.color;
@@ -38,7 +38,7 @@ public class SparkParticleOptions implements ParticleOptions {
 		})).apply(p_175793_, SparkParticleOptions::new);
 	});
 
-	public SparkParticleOptions(ResourceLocation pColorId, Vector3f pColor, float pScale) {
+	public SparkParticleOptions(Identifier pColorId, Vector3f pColor, float pScale) {
 		this.colorId = pColorId;
 		this.color = pColor;
 		this.scale = pScale;
@@ -48,7 +48,7 @@ public class SparkParticleOptions implements ParticleOptions {
 		this(EmbersColors.CUSTOM_ID, pColor, pScale);
 	}
 
-	public SparkParticleOptions(ResourceLocation pColorId, float pScale) {
+	public SparkParticleOptions(Identifier pColorId, float pScale) {
 		this(pColorId, EmbersColors.EMBER, pScale);
 	}
 
@@ -67,7 +67,7 @@ public class SparkParticleOptions implements ParticleOptions {
 	}
 
 	public void writeToNetwork(FriendlyByteBuf pBuffer) {
-		pBuffer.writeResourceLocation(this.colorId);
+		pBuffer.writeIdentifier(this.colorId);
 		pBuffer.writeFloat(this.color.x());
 		pBuffer.writeFloat(this.color.y());
 		pBuffer.writeFloat(this.color.z());

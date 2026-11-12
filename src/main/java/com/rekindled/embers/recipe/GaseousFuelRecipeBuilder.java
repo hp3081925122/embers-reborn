@@ -7,7 +7,7 @@ import com.rekindled.embers.RegistryManager;
 
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.material.Fluid;
@@ -16,12 +16,12 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class GaseousFuelRecipeBuilder {
 
-	public ResourceLocation id;
+	public Identifier id;
 	public FluidIngredient input;
 	public int burnTime;
 	public double powerMultiplier;
 
-	public static GaseousFuelRecipeBuilder create(ResourceLocation id) {
+	public static GaseousFuelRecipeBuilder create(Identifier id) {
 		GaseousFuelRecipeBuilder builder = new GaseousFuelRecipeBuilder();
 		builder.id = id;
 		return builder;
@@ -37,18 +37,18 @@ public class GaseousFuelRecipeBuilder {
 		return create(new FluidStack(fluid, amount));
 	}
 
-	public GaseousFuelRecipeBuilder id(ResourceLocation id) {
+	public GaseousFuelRecipeBuilder id(Identifier id) {
 		this.id = id;
 		return this;
 	}
 
 	public GaseousFuelRecipeBuilder domain(String domain) {
-		this.id = ResourceLocation.fromNamespaceAndPath(domain, this.id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(domain, this.id.getPath());
 		return this;
 	}
 
 	public GaseousFuelRecipeBuilder folder(String folder) {
-		this.id = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
 		return this;
 	}
 

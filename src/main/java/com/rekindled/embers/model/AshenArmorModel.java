@@ -17,7 +17,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,10 +26,10 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 public class AshenArmorModel extends HumanoidModel<LivingEntity> {
 
-	public static final ModelLayerLocation ASHEN_ARMOR_HEAD = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "head");
-	public static final ModelLayerLocation ASHEN_ARMOR_CHEST = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "chest");
-	public static final ModelLayerLocation ASHEN_ARMOR_LEGS = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "legs");
-	public static final ModelLayerLocation ASHEN_ARMOR_FEET = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "feet");
+	public static final ModelLayerLocation ASHEN_ARMOR_HEAD = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "head");
+	public static final ModelLayerLocation ASHEN_ARMOR_CHEST = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "chest");
+	public static final ModelLayerLocation ASHEN_ARMOR_LEGS = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "legs");
+	public static final ModelLayerLocation ASHEN_ARMOR_FEET = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "feet");
 
 	public static final Map<EquipmentSlot, AshenArmorModel> ARMOR_MODELS = new EnumMap<>(EquipmentSlot.class);
 	public static final IClientItemExtensions ARMOR_MODEL_GETTER = new IClientItemExtensions() {

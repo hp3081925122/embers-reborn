@@ -10,7 +10,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -53,12 +53,12 @@ public class ViscousFluidType extends EmbersFluidType {
 	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
 		consumer.accept(new IClientFluidTypeExtensions() {
 			@Override
-			public ResourceLocation getStillTexture() {
+			public Identifier getStillTexture() {
 				return TEXTURE_STILL;
 			}
 
 			@Override
-			public ResourceLocation getFlowingTexture() {
+			public Identifier getFlowingTexture() {
 				return TEXTURE_FLOW;
 			}
 

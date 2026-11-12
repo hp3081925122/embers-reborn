@@ -154,7 +154,7 @@ public class ItemTransferBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, RegistryManager.ITEM_TRANSFER_ENTITY.get(), ItemTransferBlockEntity::serverTick);
+		return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, RegistryManager.ITEM_TRANSFER_ENTITY.get(), ItemTransferBlockEntity::serverTick);
 	}
 
 	@Override

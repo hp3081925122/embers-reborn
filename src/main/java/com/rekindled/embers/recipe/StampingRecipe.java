@@ -7,7 +7,7 @@ import com.mojang.datafixers.util.Either;
 import com.rekindled.embers.util.Misc;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -23,7 +23,7 @@ public class StampingRecipe implements IStampingRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer();
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public final Ingredient stamp;
 	public final Ingredient input;
@@ -31,15 +31,15 @@ public class StampingRecipe implements IStampingRecipe {
 
 	public final Either<ItemStack, TagAmount> output;
 
-	public StampingRecipe(ResourceLocation id, Ingredient stamp, Ingredient input, FluidIngredient fluid, TagAmount output) {
+	public StampingRecipe(Identifier id, Ingredient stamp, Ingredient input, FluidIngredient fluid, TagAmount output) {
 		this(id, stamp, input, fluid, Either.right(output));
 	}
 
-	public StampingRecipe(ResourceLocation id, Ingredient stamp, Ingredient input, FluidIngredient fluid, ItemStack output) {
+	public StampingRecipe(Identifier id, Ingredient stamp, Ingredient input, FluidIngredient fluid, ItemStack output) {
 		this(id, stamp, input, fluid, Either.left(output));
 	}
 
-	public StampingRecipe(ResourceLocation id, Ingredient stamp, Ingredient input, FluidIngredient fluid, Either<ItemStack, TagAmount> output) {
+	public StampingRecipe(Identifier id, Ingredient stamp, Ingredient input, FluidIngredient fluid, Either<ItemStack, TagAmount> output) {
 		this.id = id;
 		this.stamp = stamp;
 		this.input = input;
@@ -83,7 +83,7 @@ public class StampingRecipe implements IStampingRecipe {
 		return this.getOutput(context);
 	}
 
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -129,7 +129,7 @@ public class StampingRecipe implements IStampingRecipe {
 		com.mojang.serialization.Codec.either(
 			net.minecraft.world.item.ItemStack.CODEC,
 			com.mojang.serialization.codecs.RecordCodecBuilder.<TagAmount>create(inst -> inst.group(
-				net.minecraft.resources.ResourceLocation.CODEC.fieldOf("tag").forGetter(ta -> ta.tag.location()),
+				net.minecraft.resources.Identifier.CODEC.fieldOf("tag").forGetter(ta -> ta.tag.identifier()),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("count", 1).forGetter(ta -> ta.amount)
 			).apply(inst, (tag, count) -> new TagAmount(ItemTags.create(tag), count))));
 
@@ -137,13 +137,13 @@ public class StampingRecipe implements IStampingRecipe {
 		net.minecraft.network.codec.ByteBufCodecs.<net.minecraft.network.RegistryFriendlyByteBuf, ItemStack, TagAmount>either(
 			net.minecraft.world.item.ItemStack.OPTIONAL_STREAM_CODEC,
 			net.minecraft.network.codec.StreamCodec.composite(
-				net.minecraft.network.codec.ByteBufCodecs.fromCodec(net.minecraft.resources.ResourceLocation.CODEC), ta -> ta.tag.location(),
+				net.minecraft.network.codec.ByteBufCodecs.fromCodec(net.minecraft.resources.Identifier.CODEC), ta -> ta.tag.identifier(),
 				net.minecraft.network.codec.ByteBufCodecs.VAR_INT, ta -> ta.amount,
 				(tag, count) -> new TagAmount(ItemTags.create(tag), count)));
 
 	public static class Serializer implements RecipeSerializer<StampingRecipe> {
-		public StampingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable StampingRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public StampingRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable StampingRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, StampingRecipe recipe) {}
 
 		@Override

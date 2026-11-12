@@ -13,7 +13,7 @@ import com.rekindled.embers.api.projectile.ProjectileFireball;
 import com.rekindled.embers.api.projectile.ProjectileRay;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
@@ -21,7 +21,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 public class DiffractionBarrelAugment extends AugmentBase {
 
-	public DiffractionBarrelAugment(ResourceLocation id) {
+	public DiffractionBarrelAugment(Identifier id) {
 		super(id, 2.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

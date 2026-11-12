@@ -48,7 +48,7 @@ public class InflictorGemItem extends Item implements IInflictorGem {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (!level.isClientSide && player.isSecondaryUseActive() && _getOrCreateTag(stack).contains("type")) {
+		if (!level.isClientSide() && player.isSecondaryUseActive() && _getOrCreateTag(stack).contains("type")) {
 			net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
 			tag.remove("type");
 			_setTag(stack, tag);

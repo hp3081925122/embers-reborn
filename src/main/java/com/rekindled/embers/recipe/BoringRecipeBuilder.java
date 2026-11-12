@@ -10,7 +10,7 @@ import com.rekindled.embers.util.WeightedItemStack;
 
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,13 +20,13 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class BoringRecipeBuilder {
 
-	public ResourceLocation id;
+	public Identifier id;
 	public ItemStack result;
 	public int weight = 20;
 	public int minHeight = Integer.MIN_VALUE;
 	public int maxHeight = Integer.MAX_VALUE;
-	public HashSet<ResourceLocation> dimensions = new HashSet<>();
-	public HashSet<ResourceLocation> biomes = new HashSet<>();
+	public HashSet<Identifier> dimensions = new HashSet<>();
+	public HashSet<Identifier> biomes = new HashSet<>();
 	public TagKey<Block> requiredBlock = null;
 	public int amountRequired = 0;
 	public double chance = -1.0;
@@ -43,18 +43,18 @@ public class BoringRecipeBuilder {
 		return create(new ItemStack(item));
 	}
 
-	public BoringRecipeBuilder id(ResourceLocation id) {
+	public BoringRecipeBuilder id(Identifier id) {
 		this.id = id;
 		return this;
 	}
 
 	public BoringRecipeBuilder domain(String domain) {
-		this.id = ResourceLocation.fromNamespaceAndPath(domain, this.id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(domain, this.id.getPath());
 		return this;
 	}
 
 	public BoringRecipeBuilder folder(String folder) {
-		this.id = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
 		return this;
 	}
 
@@ -78,26 +78,26 @@ public class BoringRecipeBuilder {
 		return this;
 	}
 
-	public BoringRecipeBuilder dimensions(HashSet<ResourceLocation> dimensions) {
+	public BoringRecipeBuilder dimensions(HashSet<Identifier> dimensions) {
 		this.dimensions = dimensions;
 		return this;
 	}
 
-	public BoringRecipeBuilder biomes(HashSet<ResourceLocation> biomes) {
+	public BoringRecipeBuilder biomes(HashSet<Identifier> biomes) {
 		this.biomes = biomes;
 		return this;
 	}
 
-	public BoringRecipeBuilder dimension(ResourceLocation... dimensions) {
-		for (ResourceLocation dimension : dimensions) {
+	public BoringRecipeBuilder dimension(Identifier... dimensions) {
+		for (Identifier dimension : dimensions) {
 			if (this.dimensions == null) this.dimensions = new java.util.HashSet<>();
 			this.dimensions.add(dimension);
 		}
 		return this;
 	}
 
-	public BoringRecipeBuilder biome(ResourceLocation... biomes) {
-		for (ResourceLocation biome : biomes)
+	public BoringRecipeBuilder biome(Identifier... biomes) {
+		for (Identifier biome : biomes)
 			this.biomes.add(biome);
 		return this;
 	}

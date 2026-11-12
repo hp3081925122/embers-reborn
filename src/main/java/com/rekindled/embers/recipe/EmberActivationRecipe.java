@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import com.google.gson.JsonObject;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -15,12 +15,12 @@ public class EmberActivationRecipe implements IEmberActivationRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer(); 
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public final Ingredient ingredient;
 	public final int ember;
 
-	public EmberActivationRecipe(ResourceLocation id, Ingredient ingredient, int ember) {
+	public EmberActivationRecipe(Identifier id, Ingredient ingredient, int ember) {
 		this.id = id;
 		this.ingredient = ingredient;
 		this.ember = ember;
@@ -50,7 +50,7 @@ public class EmberActivationRecipe implements IEmberActivationRecipe {
 		}
 		return ember;
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -70,8 +70,8 @@ public class EmberActivationRecipe implements IEmberActivationRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<EmberActivationRecipe> {
-		public EmberActivationRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable EmberActivationRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public EmberActivationRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable EmberActivationRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, EmberActivationRecipe recipe) {}
 	
 		@Override

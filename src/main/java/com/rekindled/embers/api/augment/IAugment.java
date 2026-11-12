@@ -1,11 +1,11 @@
 package com.rekindled.embers.api.augment;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public interface IAugment {
 
-	public ResourceLocation getName();
+	public Identifier getName();
 
 	public double getCost();
 

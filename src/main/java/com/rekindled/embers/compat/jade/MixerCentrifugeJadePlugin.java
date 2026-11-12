@@ -5,7 +5,7 @@ import com.rekindled.embers.block.MixerCentrifugeBlock;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import snownee.jade.api.BlockAccessor;
@@ -20,7 +20,7 @@ import snownee.jade.api.config.IPluginConfig;
 @WailaPlugin(Embers.MODID)
 public class MixerCentrifugeJadePlugin implements IWailaPlugin, IBlockComponentProvider {
 
-	private static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mixer_fluid_dial_hint");
+	private static final Identifier UID = Identifier.fromNamespaceAndPath(Embers.MODID, "mixer_fluid_dial_hint");
 
 	@Override
 	public void registerClient(IWailaClientRegistration registration) {
@@ -28,7 +28,7 @@ public class MixerCentrifugeJadePlugin implements IWailaPlugin, IBlockComponentP
 	}
 
 	@Override
-	public ResourceLocation getUid() {
+	public Identifier getUid() {
 		return UID;
 	}
 

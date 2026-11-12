@@ -9,7 +9,7 @@ import com.rekindled.embers.api.augment.AugmentUtil;
 import com.rekindled.embers.api.augment.IAugment;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -18,9 +18,9 @@ public class AnvilAugmentRemoveRecipe implements IDawnstoneAnvilRecipe, IVisuall
 
 	public static final Serializer SERIALIZER = new Serializer(); 
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
-	public AnvilAugmentRemoveRecipe(ResourceLocation id) {
+	public AnvilAugmentRemoveRecipe(Identifier id) {
 		this.id = id;
 	}
 
@@ -62,7 +62,7 @@ public class AnvilAugmentRemoveRecipe implements IDawnstoneAnvilRecipe, IVisuall
 	public List<ItemStack> getDisplayOutput() {
 		return List.of();
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -72,8 +72,8 @@ public class AnvilAugmentRemoveRecipe implements IDawnstoneAnvilRecipe, IVisuall
 	}
 
 	public static class Serializer implements RecipeSerializer<AnvilAugmentRemoveRecipe> {
-		public AnvilAugmentRemoveRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable AnvilAugmentRemoveRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public AnvilAugmentRemoveRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable AnvilAugmentRemoveRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, AnvilAugmentRemoveRecipe recipe) {}
 	
 		@Override

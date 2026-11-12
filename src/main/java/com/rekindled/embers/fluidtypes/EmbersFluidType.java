@@ -13,26 +13,26 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidType;
 
 public class EmbersFluidType extends FluidType {
 
-	public final ResourceLocation RENDER_OVERLAY;
-	public final ResourceLocation TEXTURE_STILL;
-	public final ResourceLocation TEXTURE_FLOW;
-	public final ResourceLocation TEXTURE_OVERLAY;
+	public final Identifier RENDER_OVERLAY;
+	public final Identifier TEXTURE_STILL;
+	public final Identifier TEXTURE_FLOW;
+	public final Identifier TEXTURE_OVERLAY;
 	public final Vector3f FOG_COLOR;
 	public final float fogStart;
 	public final float fogEnd;
 
 	public EmbersFluidType(Properties properties, FluidInfo info) {
 		super(properties);
-		RENDER_OVERLAY = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/overlay/" + info.name + ".png");
-		TEXTURE_STILL = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid/" + info.name + "_still");
-		TEXTURE_FLOW = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid/" + info.name + "_flow");
-		TEXTURE_OVERLAY = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid/" + info.name + "_overlay");
+		RENDER_OVERLAY = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/overlay/" + info.name + ".png");
+		TEXTURE_STILL = Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid/" + info.name + "_still");
+		TEXTURE_FLOW = Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid/" + info.name + "_flow");
+		TEXTURE_OVERLAY = Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid/" + info.name + "_overlay");
 		Color colorObject = new Color(info.color);
 		FOG_COLOR = new Vector3f(colorObject.getRed()/255F, colorObject.getGreen()/255F, colorObject.getBlue()/255F);
 		fogStart = info.fogStart;
@@ -42,22 +42,22 @@ public class EmbersFluidType extends FluidType {
 	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
 		consumer.accept(new IClientFluidTypeExtensions() {
 			@Override
-			public ResourceLocation getStillTexture() {
+			public Identifier getStillTexture() {
 				return TEXTURE_STILL;
 			}
 
 			@Override
-			public ResourceLocation getFlowingTexture() {
+			public Identifier getFlowingTexture() {
 				return TEXTURE_FLOW;
 			}
 
 			@Override
-			public ResourceLocation getOverlayTexture() {
+			public Identifier getOverlayTexture() {
 				return TEXTURE_OVERLAY;
 			}
 
 			@Override
-			public ResourceLocation getRenderOverlayTexture(Minecraft mc) {
+			public Identifier getRenderOverlayTexture(Minecraft mc) {
 				return RENDER_OVERLAY;
 			}
 

@@ -15,7 +15,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidType;
 
@@ -24,7 +24,7 @@ public class MixingCategory implements IRecipeCategory<IMixingRecipe> {
 	private final IDrawable background;
 	private final IDrawable icon;
 	public static Component title = Component.translatable(Embers.MODID + ".jei.recipe.mixing");
-	public static ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_mixer.png");
+	public static Identifier texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_mixer.png");
 	double scale = 1.0 / 1000.0;
 
 	public MixingCategory(IGuiHelper helper) {

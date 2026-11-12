@@ -16,7 +16,7 @@ import com.rekindled.embers.util.DecimalFormats;
 import com.rekindled.embers.util.Misc;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -30,7 +30,7 @@ public class CatalyticPlugUpgrade extends DefaultUpgradeProvider {
 	}
 
 	public CatalyticPlugUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "catalytic_plug"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "catalytic_plug"), tile);
 	}
 
 	public static double getMultiplier(double multiplier, int distance, int count) {

@@ -8,7 +8,7 @@ import com.rekindled.embers.blockentity.CrystalSeedBlockEntity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -43,7 +43,7 @@ public class CrystalSeedStructureProcessor extends StructureProcessor {
 	public StructureTemplate.StructureBlockInfo processBlock(LevelReader level, BlockPos offset, BlockPos pos, StructureTemplate.StructureBlockInfo blockInfo, StructureTemplate.StructureBlockInfo relativeBlockInfo, StructurePlaceSettings settings) {
 		CompoundTag nbt = relativeBlockInfo.nbt();
 		if (nbt != null && nbt.contains("id")) {
-			ResourceLocation id = ResourceLocation.parse(nbt.getString("id"));
+			Identifier id = Identifier.parse(nbt.getString("id"));
 			if (id.getNamespace().equals(Embers.MODID) && id.getPath().contains("crystal_seed")) {
 				nbt = nbt.copy();
 				int xp = getXp(settings.getRandom(relativeBlockInfo.pos()));

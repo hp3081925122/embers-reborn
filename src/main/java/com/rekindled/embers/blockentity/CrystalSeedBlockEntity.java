@@ -20,7 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
@@ -36,7 +36,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class CrystalSeedBlockEntity extends BlockEntity implements IEmberInjectable, ISoundController, IExtraCapabilityInformation {
 
 	public String type;
-	public ResourceLocation texture;
+	public Identifier texture;
 	public TagKey<Item> tag;
 	public boolean[] willSpawn;
 	public int size = 0;
@@ -58,8 +58,8 @@ public class CrystalSeedBlockEntity extends BlockEntity implements IEmberInjecta
 		super(entityType, pos, blockState);
 		willSpawn = getSpawns(xp);
 		this.type = type;
-		this.texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/block/material_" + type + ".png");
-		this.tag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/" + type));
+		this.texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/block/material_" + type + ".png");
+		this.tag = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/" + type));
 	}
 
 	public static boolean[] getSpawns(int xp) {

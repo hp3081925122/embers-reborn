@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.rekindled.embers.util.FluidOutput;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -17,12 +17,12 @@ public class BoilingRecipe implements IBoilingRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer(); 
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public final FluidIngredient input;
 	public final FluidOutput output;
 
-	public BoilingRecipe(ResourceLocation id, FluidIngredient input, FluidOutput output) {
+	public BoilingRecipe(Identifier id, FluidIngredient input, FluidOutput output) {
 		this.id = id;
 		this.input = input;
 		this.output = output;
@@ -55,7 +55,7 @@ public class BoilingRecipe implements IBoilingRecipe {
 		}
 		return new net.neoforged.neoforge.fluids.FluidStack(output.getStack().getFluid(), output.getStack().getAmount() * trueAmount);
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -75,8 +75,8 @@ public class BoilingRecipe implements IBoilingRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<BoilingRecipe> {
-		public BoilingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable BoilingRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public BoilingRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable BoilingRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, BoilingRecipe recipe) {}
 	
 		@Override

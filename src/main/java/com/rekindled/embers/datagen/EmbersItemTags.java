@@ -11,7 +11,7 @@ import com.rekindled.embers.compat.curios.CuriosCompat;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -22,132 +22,132 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class EmbersItemTags extends ItemTagsProvider {
 
-	public static final TagKey<Item> PIPE_UNCLOGGER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_uncloggers"));
-	public static final TagKey<Item> MATERIA_BLACKLIST = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "materia_repair_blacklist"));
-	public static final TagKey<Item> BREAKDOWN_BLACKLIST = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "anvil_breakdown_blacklist"));
-	public static final TagKey<Item> REPAIR_BLACKLIST = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "anvil_repair_blacklist"));
+	public static final TagKey<Item> PIPE_UNCLOGGER = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_uncloggers"));
+	public static final TagKey<Item> MATERIA_BLACKLIST = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "materia_repair_blacklist"));
+	public static final TagKey<Item> BREAKDOWN_BLACKLIST = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "anvil_breakdown_blacklist"));
+	public static final TagKey<Item> REPAIR_BLACKLIST = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "anvil_repair_blacklist"));
 
 	//this tag is only for recipes
-	public static final TagKey<Item> TINKER_HAMMER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "tinker_hammer"));
+	public static final TagKey<Item> TINKER_HAMMER = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "tinker_hammer"));
 
-	public static final TagKey<Item> INSCRIBABLE_PAPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "inscribable_paper"));
+	public static final TagKey<Item> INSCRIBABLE_PAPER = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "inscribable_paper"));
 
-	public static final TagKey<Item> TOOLS_HAMMERS = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "tools/hammers"));
+	public static final TagKey<Item> TOOLS_HAMMERS = ItemTags.create(Identifier.fromNamespaceAndPath("c", "tools/hammers"));
 
-	public static final TagKey<Item> NORMAL_WALK_SPEED_TOOL = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "normal_walk_speed_tool"));
+	public static final TagKey<Item> NORMAL_WALK_SPEED_TOOL = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "normal_walk_speed_tool"));
 
-	public static final TagKey<Item> GAUGE_OVERLAY = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gauge_overlay"));
+	public static final TagKey<Item> GAUGE_OVERLAY = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "gauge_overlay"));
 
-	public static final TagKey<Item> CINDER_PLINTH_BLACKLIST = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "cinder_plinth_blacklist"));
+	public static final TagKey<Item> CINDER_PLINTH_BLACKLIST = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "cinder_plinth_blacklist"));
 
-	public static final TagKey<Item> AUGMENTABLE = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables"));
-	public static final TagKey<Item> AUGMENTABLE_TOOLS_AND_ARMORS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/tools_armors"));
-	public static final TagKey<Item> AUGMENTABLE_TOOLS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/tools"));
-	public static final TagKey<Item> AUGMENTABLE_PROJECTILE_WEAPONS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/projectiles"));
-	public static final TagKey<Item> AUGMENTABLE_ARMORS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/armors"));
-	public static final TagKey<Item> AUGMENTABLE_HELMETS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/helmets"));
-	public static final TagKey<Item> AUGMENTABLE_CHESTPLATES = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/chestplates"));
-	public static final TagKey<Item> AUGMENTABLE_LEGGINGS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/leggings"));
-	public static final TagKey<Item> AUGMENTABLE_BOOTS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/boots"));
+	public static final TagKey<Item> AUGMENTABLE = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "augmentables"));
+	public static final TagKey<Item> AUGMENTABLE_TOOLS_AND_ARMORS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "augmentables/tools_armors"));
+	public static final TagKey<Item> AUGMENTABLE_TOOLS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "augmentables/tools"));
+	public static final TagKey<Item> AUGMENTABLE_PROJECTILE_WEAPONS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "augmentables/projectiles"));
+	public static final TagKey<Item> AUGMENTABLE_ARMORS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "augmentables/armors"));
+	public static final TagKey<Item> AUGMENTABLE_HELMETS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/helmets"));
+	public static final TagKey<Item> AUGMENTABLE_CHESTPLATES = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/chestplates"));
+	public static final TagKey<Item> AUGMENTABLE_LEGGINGS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/leggings"));
+	public static final TagKey<Item> AUGMENTABLE_BOOTS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/boots"));
 
-	public static final TagKey<Item> TINKER_LENS_HELMETS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "tinker_lens_helmets"));
+	public static final TagKey<Item> TINKER_LENS_HELMETS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "tinker_lens_helmets"));
 
-	public static final TagKey<Item> ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus"));
-	public static final TagKey<Item> IRON_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/iron"));
-	public static final TagKey<Item> COPPER_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/copper"));
-	public static final TagKey<Item> LEAD_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/lead"));
-	public static final TagKey<Item> SILVER_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/silver"));
-	public static final TagKey<Item> DAWNSTONE_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/dawnstone"));
-	public static final TagKey<Item> MITHRIL_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/dwarven_mithril"));
+	public static final TagKey<Item> ASPECTUS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "aspectus"));
+	public static final TagKey<Item> IRON_ASPECTUS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "aspectus/iron"));
+	public static final TagKey<Item> COPPER_ASPECTUS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "aspectus/copper"));
+	public static final TagKey<Item> LEAD_ASPECTUS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "aspectus/lead"));
+	public static final TagKey<Item> SILVER_ASPECTUS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "aspectus/silver"));
+	public static final TagKey<Item> DAWNSTONE_ASPECTUS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "aspectus/dawnstone"));
+	public static final TagKey<Item> MITHRIL_ASPECTUS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "aspectus/dwarven_mithril"));
 
-	public static final TagKey<Item> ASHEN_STONE = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_stone"));
+	public static final TagKey<Item> ASHEN_STONE = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "ashen_stone"));
 
-	public static final TagKey<Item> PLATES = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates"));
-	public static final TagKey<Item> IRON_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/iron"));
-	//public static final TagKey<Item> GOLD_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/gold"));
-	public static final TagKey<Item> COPPER_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/copper"));
+	public static final TagKey<Item> PLATES = ItemTags.create(Identifier.fromNamespaceAndPath("c", "plates"));
+	public static final TagKey<Item> IRON_PLATE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "plates/iron"));
+	//public static final TagKey<Item> GOLD_PLATE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "plates/gold"));
+	public static final TagKey<Item> COPPER_PLATE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "plates/copper"));
 
-	public static final TagKey<Item> COPPER_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/copper"));
+	public static final TagKey<Item> COPPER_NUGGET = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/copper"));
 
-	public static final TagKey<Item> LEAD_ORE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ores/lead"));
-	public static final TagKey<Item> RAW_LEAD_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/raw_lead"));
-	public static final TagKey<Item> LEAD_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/lead"));
+	public static final TagKey<Item> LEAD_ORE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ores/lead"));
+	public static final TagKey<Item> RAW_LEAD_BLOCK = ItemTags.create(Identifier.fromNamespaceAndPath("c", "storage_blocks/raw_lead"));
+	public static final TagKey<Item> LEAD_BLOCK = ItemTags.create(Identifier.fromNamespaceAndPath("c", "storage_blocks/lead"));
 
-	public static final TagKey<Item> RAW_LEAD = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "raw_materials/lead"));
-	public static final TagKey<Item> LEAD_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/lead"));
-	public static final TagKey<Item> LEAD_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/lead"));
-	public static final TagKey<Item> LEAD_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/lead"));
+	public static final TagKey<Item> RAW_LEAD = ItemTags.create(Identifier.fromNamespaceAndPath("c", "raw_materials/lead"));
+	public static final TagKey<Item> LEAD_INGOT = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/lead"));
+	public static final TagKey<Item> LEAD_NUGGET = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/lead"));
+	public static final TagKey<Item> LEAD_PLATE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "plates/lead"));
 
-	public static final TagKey<Item> SILVER_ORE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ores/silver"));
-	public static final TagKey<Item> RAW_SILVER_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/raw_silver"));
-	public static final TagKey<Item> SILVER_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/silver"));
+	public static final TagKey<Item> SILVER_ORE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ores/silver"));
+	public static final TagKey<Item> RAW_SILVER_BLOCK = ItemTags.create(Identifier.fromNamespaceAndPath("c", "storage_blocks/raw_silver"));
+	public static final TagKey<Item> SILVER_BLOCK = ItemTags.create(Identifier.fromNamespaceAndPath("c", "storage_blocks/silver"));
 
-	public static final TagKey<Item> RAW_SILVER = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "raw_materials/silver"));
-	public static final TagKey<Item> SILVER_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/silver"));
-	public static final TagKey<Item> SILVER_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/silver"));
-	public static final TagKey<Item> SILVER_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/silver"));
+	public static final TagKey<Item> RAW_SILVER = ItemTags.create(Identifier.fromNamespaceAndPath("c", "raw_materials/silver"));
+	public static final TagKey<Item> SILVER_INGOT = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/silver"));
+	public static final TagKey<Item> SILVER_NUGGET = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/silver"));
+	public static final TagKey<Item> SILVER_PLATE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "plates/silver"));
 
-	public static final TagKey<Item> DAWNSTONE_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/dawnstone"));
-	public static final TagKey<Item> DAWNSTONE_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/dawnstone"));
-	public static final TagKey<Item> DAWNSTONE_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/dawnstone"));
-	public static final TagKey<Item> DAWNSTONE_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/dawnstone"));
+	public static final TagKey<Item> DAWNSTONE_BLOCK = ItemTags.create(Identifier.fromNamespaceAndPath("c", "storage_blocks/dawnstone"));
+	public static final TagKey<Item> DAWNSTONE_INGOT = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/dawnstone"));
+	public static final TagKey<Item> DAWNSTONE_NUGGET = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/dawnstone"));
+	public static final TagKey<Item> DAWNSTONE_PLATE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "plates/dawnstone"));
 
-	public static final TagKey<Item> MITHRIL_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/dwarven_mithril"));
-	public static final TagKey<Item> MITHRIL_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/dwarven_mithril"));
-	public static final TagKey<Item> MITHRIL_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/dwarven_mithril"));
-	public static final TagKey<Item> MITHRIL_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/dwarven_mithril"));
+	public static final TagKey<Item> MITHRIL_BLOCK = ItemTags.create(Identifier.fromNamespaceAndPath("c", "storage_blocks/dwarven_mithril"));
+	public static final TagKey<Item> MITHRIL_INGOT = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/dwarven_mithril"));
+	public static final TagKey<Item> MITHRIL_NUGGET = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/dwarven_mithril"));
+	public static final TagKey<Item> MITHRIL_PLATE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "plates/dwarven_mithril"));
 
-	public static final TagKey<Item> NICKEL_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/nickel"));
-	public static final TagKey<Item> TIN_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/tin"));
-	public static final TagKey<Item> ALUMINUM_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/aluminum"));
-	public static final TagKey<Item> ZINC_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/zinc"));
+	public static final TagKey<Item> NICKEL_INGOT = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/nickel"));
+	public static final TagKey<Item> TIN_INGOT = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/tin"));
+	public static final TagKey<Item> ALUMINUM_INGOT = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/aluminum"));
+	public static final TagKey<Item> ZINC_INGOT = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/zinc"));
 
-	public static final TagKey<Item> NICKEL_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/nickel"));
-	public static final TagKey<Item> TIN_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/tin"));
-	public static final TagKey<Item> ALUMINUM_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/aluminum"));
-	public static final TagKey<Item> ZINC_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/zinc"));
+	public static final TagKey<Item> NICKEL_NUGGET = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/nickel"));
+	public static final TagKey<Item> TIN_NUGGET = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/tin"));
+	public static final TagKey<Item> ALUMINUM_NUGGET = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/aluminum"));
+	public static final TagKey<Item> ZINC_NUGGET = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/zinc"));
 
-	public static final TagKey<Item> CAMINITE_BRICK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/caminite_brick"));
-	public static final TagKey<Item> ARCHAIC_BRICK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/archaic_brick"));
-	public static final TagKey<Item> ASH_DUST = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "dusts/ash"));
+	public static final TagKey<Item> CAMINITE_BRICK = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/caminite_brick"));
+	public static final TagKey<Item> ARCHAIC_BRICK = ItemTags.create(Identifier.fromNamespaceAndPath("c", "ingots/archaic_brick"));
+	public static final TagKey<Item> ASH_DUST = ItemTags.create(Identifier.fromNamespaceAndPath("c", "dusts/ash"));
 
-	public static final TagKey<Item> ANCIENT_CODEX = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ancient_codex"));
-	public static final TagKey<Item> STAMPS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "stamps"));
-	public static final TagKey<Item> DIALS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "dials"));
+	public static final TagKey<Item> ANCIENT_CODEX = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "ancient_codex"));
+	public static final TagKey<Item> STAMPS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "stamps"));
+	public static final TagKey<Item> DIALS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "dials"));
 
-	public static final TagKey<Item> WORLD_BOTTOM = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "world_bottom"));
-	public static final TagKey<Item> SNOW = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "snow"));
+	public static final TagKey<Item> WORLD_BOTTOM = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "world_bottom"));
+	public static final TagKey<Item> SNOW = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "snow"));
 
-	public static final TagKey<Item> PRISTINE_COPPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pristine_copper"));
-	public static final TagKey<Item> EXPOSED_COPPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "exposed_copper"));
-	public static final TagKey<Item> WEATHERED_COPPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "weathered_copper"));
-	public static final TagKey<Item> OXIDIZED_COPPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "oxidized_copper"));
+	public static final TagKey<Item> PRISTINE_COPPER = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "pristine_copper"));
+	public static final TagKey<Item> EXPOSED_COPPER = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "exposed_copper"));
+	public static final TagKey<Item> WEATHERED_COPPER = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "weathered_copper"));
+	public static final TagKey<Item> OXIDIZED_COPPER = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "oxidized_copper"));
 
-	public static final TagKey<Item> CRYSTAL_SEEDS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds"));
-	public static final TagKey<Item> COPPER_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/copper"));
-	public static final TagKey<Item> IRON_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/iron"));
-	public static final TagKey<Item> GOLD_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/gold"));
-	public static final TagKey<Item> LEAD_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/lead"));
-	public static final TagKey<Item> SILVER_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/silver"));
-	public static final TagKey<Item> NICKEL_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/nickel"));
-	public static final TagKey<Item> TIN_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/tin"));
-	public static final TagKey<Item> ALUMINUM_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/aluminum"));
-	public static final TagKey<Item> ZINC_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/zinc"));
-	public static final TagKey<Item> PLATINUM_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/platinum"));
-	public static final TagKey<Item> URANIUM_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/uranium"));
-	public static final TagKey<Item> DAWNSTONE_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/dawnstone"));
-	public static final TagKey<Item> MITHRIL_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/dwarven_mithril"));
+	public static final TagKey<Item> CRYSTAL_SEEDS = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds"));
+	public static final TagKey<Item> COPPER_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/copper"));
+	public static final TagKey<Item> IRON_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/iron"));
+	public static final TagKey<Item> GOLD_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/gold"));
+	public static final TagKey<Item> LEAD_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/lead"));
+	public static final TagKey<Item> SILVER_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/silver"));
+	public static final TagKey<Item> NICKEL_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/nickel"));
+	public static final TagKey<Item> TIN_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/tin"));
+	public static final TagKey<Item> ALUMINUM_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/aluminum"));
+	public static final TagKey<Item> ZINC_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/zinc"));
+	public static final TagKey<Item> PLATINUM_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/platinum"));
+	public static final TagKey<Item> URANIUM_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/uranium"));
+	public static final TagKey<Item> DAWNSTONE_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/dawnstone"));
+	public static final TagKey<Item> MITHRIL_SEED = ItemTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/dwarven_mithril"));
 
 	//curios
-	public static final TagKey<Item> ANY_CURIO = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "curio"));
-	public static final TagKey<Item> RING_CURIO = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"));
-	public static final TagKey<Item> BELT_CURIO = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "belt"));
-	public static final TagKey<Item> AMULET_CURIO = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "necklace"));
-	public static final TagKey<Item> BODY_CURIO = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "body"));
-	public static final TagKey<Item> CHARM_CURIO = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "charm"));
+	public static final TagKey<Item> ANY_CURIO = ItemTags.create(Identifier.fromNamespaceAndPath("curios", "curio"));
+	public static final TagKey<Item> RING_CURIO = ItemTags.create(Identifier.fromNamespaceAndPath("curios", "ring"));
+	public static final TagKey<Item> BELT_CURIO = ItemTags.create(Identifier.fromNamespaceAndPath("curios", "belt"));
+	public static final TagKey<Item> AMULET_CURIO = ItemTags.create(Identifier.fromNamespaceAndPath("curios", "necklace"));
+	public static final TagKey<Item> BODY_CURIO = ItemTags.create(Identifier.fromNamespaceAndPath("curios", "body"));
+	public static final TagKey<Item> CHARM_CURIO = ItemTags.create(Identifier.fromNamespaceAndPath("curios", "charm"));
 
 	//other compat
-	public static final TagKey<Item> ANVIL_METAL = ItemTags.create(ResourceLocation.fromNamespaceAndPath("tconstruct", "anvil_metal"));
+	public static final TagKey<Item> ANVIL_METAL = ItemTags.create(Identifier.fromNamespaceAndPath("tconstruct", "anvil_metal"));
 
 	public EmbersItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, ExistingFileHelper existingFileHelper) {
 		super(output, lookupProvider, blockTagProvider, Embers.MODID, existingFileHelper);
@@ -290,38 +290,38 @@ public class EmbersItemTags extends ItemTagsProvider {
 
 		//compat stuff
 		tag(AUGMENTABLE_TOOLS)
-		.addOptional(ResourceLocation.fromNamespaceAndPath("weaponmaster", "wm_broadsword"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("weaponmaster", "wm_rapier"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("weaponmaster", "wm_broadswordlarge"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("weaponmaster", "wm_rapierlarge"));
+		.addOptional(Identifier.fromNamespaceAndPath("weaponmaster", "wm_broadsword"))
+		.addOptional(Identifier.fromNamespaceAndPath("weaponmaster", "wm_rapier"))
+		.addOptional(Identifier.fromNamespaceAndPath("weaponmaster", "wm_broadswordlarge"))
+		.addOptional(Identifier.fromNamespaceAndPath("weaponmaster", "wm_rapierlarge"));
 
 		tag(AUGMENTABLE_TOOLS)
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_sword"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_katana"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_naginata"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_greatsword"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_dagger"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_spear"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_throwing_knife"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_rapier"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_longsword"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_trident"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_scythe"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_sickle"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_shovel"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_pickaxe"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_axe"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_hoe"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_mattock"));
-		tag(AUGMENTABLE_HELMETS).addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_helmet"));
-		tag(AUGMENTABLE_CHESTPLATES).addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_chestplate")).addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_elytra"));
-		tag(AUGMENTABLE_LEGGINGS).addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_leggings"));
-		tag(AUGMENTABLE_BOOTS).addOptional(ResourceLocation.fromNamespaceAndPath("miapi", "modular_boots"));
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_sword"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_katana"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_naginata"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_greatsword"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_dagger"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_spear"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_throwing_knife"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_rapier"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_longsword"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_trident"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_scythe"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_sickle"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_shovel"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_pickaxe"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_axe"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_hoe"))
+		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_mattock"));
+		tag(AUGMENTABLE_HELMETS).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_helmet"));
+		tag(AUGMENTABLE_CHESTPLATES).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_chestplate")).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_elytra"));
+		tag(AUGMENTABLE_LEGGINGS).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_leggings"));
+		tag(AUGMENTABLE_BOOTS).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_boots"));
 
 		tag(AUGMENTABLE_TOOLS)
-		.addOptional(ResourceLocation.fromNamespaceAndPath("tetra", "modular_single"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("tetra", "modular_double"))
-		.addOptional(ResourceLocation.fromNamespaceAndPath("tetra", "modular_sword"));
+		.addOptional(Identifier.fromNamespaceAndPath("tetra", "modular_single"))
+		.addOptional(Identifier.fromNamespaceAndPath("tetra", "modular_double"))
+		.addOptional(Identifier.fromNamespaceAndPath("tetra", "modular_sword"));
 
 		tag(ANY_CURIO).addOptional(CuriosCompat.EMBER_BULB.getId());
 		tag(RING_CURIO).addOptional(CuriosCompat.EMBER_RING.getId());

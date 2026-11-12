@@ -9,7 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -28,7 +28,7 @@ public class MessageItemSound implements CustomPacketPayload {
 	private final float pitch;
 
 	public static final CustomPacketPayload.Type<MessageItemSound> TYPE =
-		new CustomPacketPayload.Type<>(ResourceLocation.parse("embers_reborn:item_sound"));
+		new CustomPacketPayload.Type<>(Identifier.parse("embers_reborn:item_sound"));
 
 	public static final StreamCodec<FriendlyByteBuf, MessageItemSound> STREAM_CODEC =
 		StreamCodec.ofMember(MessageItemSound::write, MessageItemSound::read);
@@ -50,8 +50,8 @@ public class MessageItemSound implements CustomPacketPayload {
 
 	public void write(FriendlyByteBuf buf) {
 		buf.writeVarInt(id);
-		buf.writeResourceLocation(BuiltInRegistries.ITEM.getKey(item));
-		buf.writeResourceLocation(BuiltInRegistries.SOUND_EVENT.getKey(sound));
+		buf.writeIdentifier(BuiltInRegistries.ITEM.getKey(item));
+		buf.writeIdentifier(BuiltInRegistries.SOUND_EVENT.getKey(sound));
 		buf.writeEnum(source);
 		buf.writeBoolean(repeat);
 		buf.writeFloat(volume);
@@ -60,8 +60,8 @@ public class MessageItemSound implements CustomPacketPayload {
 
 	public static MessageItemSound read(FriendlyByteBuf buf) {
 		int id = buf.readVarInt();
-		Item item = BuiltInRegistries.ITEM.get(buf.readResourceLocation());
-		SoundEvent sound = BuiltInRegistries.SOUND_EVENT.get(buf.readResourceLocation());
+		Item item = BuiltInRegistries.ITEM.get(buf.readIdentifier());
+		SoundEvent sound = BuiltInRegistries.SOUND_EVENT.get(buf.readIdentifier());
 		SoundSource source = buf.readEnum(SoundSource.class);
 		boolean repeat = buf.readBoolean();
 		float volume = buf.readFloat();

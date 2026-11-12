@@ -2,12 +2,12 @@ package com.rekindled.embers.augment;
 
 import com.rekindled.embers.Embers;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class CoreAugment extends AugmentBase {
 
 	public CoreAugment() {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "core"), 0.0);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "core"), 0.0);
 	}
 
 	@Override

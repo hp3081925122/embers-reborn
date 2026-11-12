@@ -17,7 +17,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class DawnstoneAnvilCategory implements IRecipeCategory<IDawnstoneAnvilRecipe> {
@@ -25,7 +25,7 @@ public class DawnstoneAnvilCategory implements IRecipeCategory<IDawnstoneAnvilRe
 	private final IDrawable background;
 	private final IDrawable icon;
 	public static Component title = Component.translatable(Embers.MODID + ".jei.recipe.dawnstone_anvil");
-	public static ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_dawnstone_anvil.png");
+	public static Identifier texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_dawnstone_anvil.png");
 
 	public DawnstoneAnvilCategory(IGuiHelper helper) {
 		background = helper.createDrawable(texture, 0, 0, 110, 58);

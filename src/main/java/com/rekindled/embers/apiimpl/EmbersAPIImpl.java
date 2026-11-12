@@ -24,7 +24,7 @@ import com.rekindled.embers.util.Misc;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
@@ -92,7 +92,7 @@ public class EmbersAPIImpl implements IEmbersAPI {
 			}
 			if (stack.getItem() == item && _hasTag(stack)) {	
 				CompoundTag nbt = _getTag(stack);
-				if (_hasTag(stack) && nbt.contains("targetWorld") && player.level().dimension().location().toString().equals(nbt.getString("targetWorld"))) {
+				if (_hasTag(stack) && nbt.contains("targetWorld") && player.level().dimension().identifier().toString().equals(nbt.getString("targetWorld"))) {
 					return new HammerTarget(new BlockPos(nbt.getInt("targetX"), nbt.getInt("targetY"), nbt.getInt("targetZ")), Direction.byName(nbt.getString("targetFace")));
 				}
 			}
@@ -191,19 +191,19 @@ public class EmbersAPIImpl implements IEmbersAPI {
 	}
 
 	@Override
-	public void registerColor(ResourceLocation id, Vector3f color) {
+	public void registerColor(Identifier id, Vector3f color) {
 		EmbersColors.colors.put(id, color);
 	}
 
 	@Override
-	public Vector3f getColor(ResourceLocation id, Vector3f color) {
+	public Vector3f getColor(Identifier id, Vector3f color) {
 		if (id.equals(EmbersColors.CUSTOM_ID))
 			return color;
 		return EmbersColors.colors.get(id);
 	}
 
 	@Override
-	public Vector3f getColor(ResourceLocation id) {
+	public Vector3f getColor(Identifier id) {
 		return EmbersColors.colors.get(id);
 	}
 }

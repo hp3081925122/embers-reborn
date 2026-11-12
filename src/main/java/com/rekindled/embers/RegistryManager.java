@@ -276,7 +276,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -380,7 +380,7 @@ public class RegistryManager {
 	public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES = DeferredRegister.create(Registries.STRUCTURE_TYPE, Embers.MODID);
 	public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSOR_TYPES = DeferredRegister.create(Registries.STRUCTURE_PROCESSOR, Embers.MODID);
 
-	public static Map<ResourceLocation, IAugment> augmentRegistry = new HashMap<ResourceLocation, IAugment>();
+	public static Map<Identifier, IAugment> augmentRegistry = new HashMap<Identifier, IAugment>();
 
 	public static List<FluidStuff> fluidList = new ArrayList<FluidStuff>();
 
@@ -1036,20 +1036,20 @@ public class RegistryManager {
 
 	//augments
 	public static final IAugment CORE_AUGMENT = AugmentUtil.registerAugment(new CoreAugment());
-	public static final IAugment TINKER_LENS_AUGMENT = AugmentUtil.registerAugment(new TinkerLensAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "tinker_lens"), false));
-	public static final IAugment SMOKY_LENS_AUGMENT = AugmentUtil.registerAugment(new TinkerLensAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "smoky_tinker_lens"), true));
-	public static final IAugment SUPERHEATER_AUGMENT = AugmentUtil.registerAugment(new SuperheaterAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "superheater")));
-	public static final IAugment CINDER_JET_AUGMENT = AugmentUtil.registerAugment(new CinderJetAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "cinder_jet")));
-	public static final IAugment BLASTING_CORE_AUGMENT = AugmentUtil.registerAugment(new BlastingCoreAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "blasting_core")));
-	public static final IAugment CASTER_ORB_AUGMENT = AugmentUtil.registerAugment(new CasterOrbAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caster_orb")));
-	public static final IAugment RESONATING_BELL_AUGMENT = AugmentUtil.registerAugment(new ResonatingBellAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "resonating_bell")));
-	public static final IAugment FLAME_BARRIER_AUGMENT = AugmentUtil.registerAugment(new FlameBarrierAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "flame_barrier")));
-	public static final IAugment ELDRITCH_INSIGNIA_AUGMENT = AugmentUtil.registerAugment(new EldritchInsigniaAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "eldritch_insignia")));
-	public static final IAugment INTELLIGENT_APPARATUS_AUGMENT = AugmentUtil.registerAugment(new IntelligentApparatusAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "intelligent_apparatus")));
-	public static final IAugment DIFFRACTION_BARREL_AUGMENT = AugmentUtil.registerAugment(new DiffractionBarrelAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "diffraction_barrel")));
-	public static final IAugment FOCAL_LENS_AUGMENT = AugmentUtil.registerAugment(new FocalLensAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "focal_lens")));
-	public static final IAugment SHIFTING_SCALES_AUGMENT = AugmentUtil.registerAugment(new ShiftingScalesAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "shifting_scales")));
-	public static final IAugment WINDING_GEARS_AUGMENT = AugmentUtil.registerAugment(new WindingGearsAugment(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "winding_gears")));
+	public static final IAugment TINKER_LENS_AUGMENT = AugmentUtil.registerAugment(new TinkerLensAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "tinker_lens"), false));
+	public static final IAugment SMOKY_LENS_AUGMENT = AugmentUtil.registerAugment(new TinkerLensAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "smoky_tinker_lens"), true));
+	public static final IAugment SUPERHEATER_AUGMENT = AugmentUtil.registerAugment(new SuperheaterAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "superheater")));
+	public static final IAugment CINDER_JET_AUGMENT = AugmentUtil.registerAugment(new CinderJetAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "cinder_jet")));
+	public static final IAugment BLASTING_CORE_AUGMENT = AugmentUtil.registerAugment(new BlastingCoreAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "blasting_core")));
+	public static final IAugment CASTER_ORB_AUGMENT = AugmentUtil.registerAugment(new CasterOrbAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "caster_orb")));
+	public static final IAugment RESONATING_BELL_AUGMENT = AugmentUtil.registerAugment(new ResonatingBellAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "resonating_bell")));
+	public static final IAugment FLAME_BARRIER_AUGMENT = AugmentUtil.registerAugment(new FlameBarrierAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "flame_barrier")));
+	public static final IAugment ELDRITCH_INSIGNIA_AUGMENT = AugmentUtil.registerAugment(new EldritchInsigniaAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "eldritch_insignia")));
+	public static final IAugment INTELLIGENT_APPARATUS_AUGMENT = AugmentUtil.registerAugment(new IntelligentApparatusAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "intelligent_apparatus")));
+	public static final IAugment DIFFRACTION_BARREL_AUGMENT = AugmentUtil.registerAugment(new DiffractionBarrelAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "diffraction_barrel")));
+	public static final IAugment FOCAL_LENS_AUGMENT = AugmentUtil.registerAugment(new FocalLensAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "focal_lens")));
+	public static final IAugment SHIFTING_SCALES_AUGMENT = AugmentUtil.registerAugment(new ShiftingScalesAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "shifting_scales")));
+	public static final IAugment WINDING_GEARS_AUGMENT = AugmentUtil.registerAugment(new WindingGearsAugment(Identifier.fromNamespaceAndPath(Embers.MODID, "winding_gears")));
 
 	//particle types
 	public static final DeferredHolder<ParticleType<GlowParticleOptions>, ParticleType<GlowParticleOptions>> GLOW_PARTICLE = registerParticle("glow", false, GlowParticleOptions.CODEC, net.minecraft.network.codec.ByteBufCodecs.fromCodec(GlowParticleOptions.CODEC));

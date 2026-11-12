@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.rekindled.embers.util.FluidOutput;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,20 +17,20 @@ public class MeltingRecipe implements IMeltingRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer(); 
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public final Ingredient ingredient;
 	public final FluidOutput output;
 	public final FluidOutput bonus;
 
-	public MeltingRecipe(ResourceLocation id, Ingredient ingredient, FluidOutput output, FluidOutput bonus) {
+	public MeltingRecipe(Identifier id, Ingredient ingredient, FluidOutput output, FluidOutput bonus) {
 		this.id = id;
 		this.ingredient = ingredient;
 		this.output = output;
 		this.bonus = bonus;
 	}
 
-	public MeltingRecipe(ResourceLocation id, Ingredient ingredient, FluidOutput output) {
+	public MeltingRecipe(Identifier id, Ingredient ingredient, FluidOutput output) {
 		this(id, ingredient, output, FluidOutput.EMPTY);
 	}
 
@@ -63,7 +63,7 @@ public class MeltingRecipe implements IMeltingRecipe {
 		}
 		return output.getStack();
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -83,8 +83,8 @@ public class MeltingRecipe implements IMeltingRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<MeltingRecipe> {
-		public MeltingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable MeltingRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public MeltingRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable MeltingRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, MeltingRecipe recipe) {}
 	
 		@Override

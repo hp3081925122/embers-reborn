@@ -10,7 +10,7 @@ import com.rekindled.embers.blockentity.WildfireStirlingBlockEntity;
 import com.rekindled.embers.recipe.FluidHandlerContext;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class WildfireStirlingUpgrade extends DefaultUpgradeProvider {
@@ -22,7 +22,7 @@ public class WildfireStirlingUpgrade extends DefaultUpgradeProvider {
 	}
 
 	public WildfireStirlingUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "wildfire_stirling"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "wildfire_stirling"), tile);
 	}
 
 	public static double getMultiplier(double multiplier, int distance, int count) {

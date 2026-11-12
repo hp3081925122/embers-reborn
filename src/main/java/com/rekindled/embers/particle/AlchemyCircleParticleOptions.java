@@ -16,19 +16,19 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 
 public class AlchemyCircleParticleOptions implements ParticleOptions {
 
 	protected final Vector3f color;
-	protected final ResourceLocation colorId;
+	protected final Identifier colorId;
 	protected final float scale;
 	protected final int lifetime;
 	public static final AlchemyCircleParticleOptions DEFAULT = new AlchemyCircleParticleOptions(EmbersColors.EMBER, 1.0F, 420);
 
 	public static final Codec<AlchemyCircleParticleOptions> CODEC = RecordCodecBuilder.create((p_175793_) -> {
-		return p_175793_.group(ResourceLocation.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
+		return p_175793_.group(Identifier.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
 			return p_175797_.colorId;
 		}), ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((p_175797_) -> {
 			return p_175797_.color;
@@ -39,7 +39,7 @@ public class AlchemyCircleParticleOptions implements ParticleOptions {
 		})).apply(p_175793_, AlchemyCircleParticleOptions::new);
 	});
 
-	public AlchemyCircleParticleOptions(ResourceLocation pColorId, Vector3f pColor, float pScale, int lifetime) {
+	public AlchemyCircleParticleOptions(Identifier pColorId, Vector3f pColor, float pScale, int lifetime) {
 		this.colorId = pColorId;
 		this.color = pColor;
 		this.scale = pScale;
@@ -50,7 +50,7 @@ public class AlchemyCircleParticleOptions implements ParticleOptions {
 		this(EmbersColors.CUSTOM_ID, pColor, pScale, lifetime);
 	}
 
-	public AlchemyCircleParticleOptions(ResourceLocation pColorId, float pScale, int lifetime) {
+	public AlchemyCircleParticleOptions(Identifier pColorId, float pScale, int lifetime) {
 		this(pColorId, EmbersColors.EMBER, pScale, lifetime);
 	}
 
@@ -69,7 +69,7 @@ public class AlchemyCircleParticleOptions implements ParticleOptions {
 	}
 
 	public void writeToNetwork(FriendlyByteBuf pBuffer) {
-		pBuffer.writeResourceLocation(this.colorId);
+		pBuffer.writeIdentifier(this.colorId);
 		pBuffer.writeFloat(this.color.x());
 		pBuffer.writeFloat(this.color.y());
 		pBuffer.writeFloat(this.color.z());

@@ -55,7 +55,7 @@ public class CrystalSeedBlock extends BaseEntityBlock implements SimpleWaterlogg
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.MetalCrystalSeed.seeds.get(type).BLOCKENTITY.get(), CrystalSeedBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MetalCrystalSeed.seeds.get(type).BLOCKENTITY.get(), CrystalSeedBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.MetalCrystalSeed.seeds.get(type).BLOCKENTITY.get(), CrystalSeedBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MetalCrystalSeed.seeds.get(type).BLOCKENTITY.get(), CrystalSeedBlockEntity::serverTick);
 	}
 
 	@Nullable

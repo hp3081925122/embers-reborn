@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
 import com.rekindled.embers.RegistryManager;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -21,7 +21,7 @@ public class AlchemyRecipe extends AlchemyRecipeBase {
 
 	public static final Serializer SERIALIZER = new Serializer();
 
-	public AlchemyRecipe(ResourceLocation id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
+	public AlchemyRecipe(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
 		super(id, tablet, aspects, inputs, output, failure);
 	}
 
@@ -31,8 +31,8 @@ public class AlchemyRecipe extends AlchemyRecipeBase {
 	}
 
 	public static class Serializer implements RecipeSerializer<AlchemyRecipe> {
-		public AlchemyRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable AlchemyRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public AlchemyRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable AlchemyRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, AlchemyRecipe recipe) {}
 	
 		@Override

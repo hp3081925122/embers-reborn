@@ -7,11 +7,11 @@ import com.rekindled.embers.Embers;
 import com.rekindled.embers.util.FilterUtil;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class FilterSieve implements IFilter {
-	public static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "sieve");
+	public static final Identifier RESOURCE_LOCATION = Identifier.fromNamespaceAndPath(Embers.MODID, "sieve");
 
 	private ItemStack stack1;
 	private ItemStack stack2;
@@ -43,7 +43,7 @@ public class FilterSieve implements IFilter {
 	}
 
 	@Override
-	public ResourceLocation getType() {
+	public Identifier getType() {
 		return RESOURCE_LOCATION;
 	}
 

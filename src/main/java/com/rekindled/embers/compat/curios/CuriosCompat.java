@@ -24,7 +24,7 @@ import com.rekindled.embers.research.ResearchManager;
 import com.rekindled.embers.research.subtypes.ResearchShowItem;
 
 import net.minecraft.client.color.item.ItemColor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -153,7 +153,7 @@ public class CuriosCompat {
 		ResearchManager.subCategoryBaubles.addResearch(ResearchManager.explosion_pedestal);
 	}
 
-	static ResourceLocation loc(String name) {
-		return ResourceLocation.fromNamespaceAndPath(Embers.MODID, name);
+	static Identifier loc(String name) {
+		return Identifier.fromNamespaceAndPath(Embers.MODID, name);
 	}
 }

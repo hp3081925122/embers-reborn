@@ -11,7 +11,7 @@ import com.rekindled.embers.particle.SmokeParticleOptions;
 import com.rekindled.embers.util.EmberInventoryUtil;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,7 +23,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 public class CinderJetAugment extends AugmentBase {
 
-	public CinderJetAugment(ResourceLocation id) {
+	public CinderJetAugment(Identifier id) {
 		super(id, 2.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

@@ -11,42 +11,42 @@ import com.mojang.blaze3d.platform.NativeImage;
 import com.rekindled.embers.Embers;
 import com.rekindled.embers.api.EmbersAPI;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 
 public class EmbersColors implements ResourceManagerReloadListener {
 
-	public static ResourceLocation CUSTOM_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "custom");
+	public static Identifier CUSTOM_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "custom");
 
-	public static ResourceLocation EMBER_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember");
+	public static Identifier EMBER_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "ember");
 	public static int EMBER_ABGR = 0xFF1040FF;
 	public static Vector3f EMBER = new Vector3f(255.0F / 255.0F, 64.0F / 255.0F, 16.0F / 255.0F);
-	public static ResourceLocation EMBER_INVERTED_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_inverted");
+	public static Identifier EMBER_INVERTED_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "ember_inverted");
 	public static Vector3f EMBER_INVERTED = new Vector3f(EMBER.z, EMBER.y, EMBER.x);
-	public static ResourceLocation OVERHEAT_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "hearth_coil_overheat");
+	public static Identifier OVERHEAT_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "hearth_coil_overheat");
 	public static int OVERHEAT_ABGR = 0xFF40C0FF;
 	public static Vector3f OVERHEAT = new Vector3f(255.0F / 255.0F, 192.0F / 255.0F, 64.0F / 255.0F);
-	public static ResourceLocation SMOKE_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "smoke");
+	public static Identifier SMOKE_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "smoke");
 	public static int SMOKE_ABGR = 0xFF404040;
 	public static Vector3f SMOKE = new Vector3f(64.0F / 255.0F, 64.0F / 255.0F, 64.0F / 255.0F);
-	public static ResourceLocation VAPOR_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "vapor");
+	public static Identifier VAPOR_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "vapor");
 	public static int VAPOR_ABGR = 0xFF404040;
 	public static Vector3f VAPOR = new Vector3f(64.0F / 255.0F, 64.0F / 255.0F, 64.0F / 255.0F);
-	public static ResourceLocation GLIMMER_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "glimmer");
+	public static Identifier GLIMMER_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "glimmer");
 	public static int GLIMMER_ABGR = 0xFF10FFFF;
 	public static Vector3f GLIMMER = new Vector3f(255.0F / 255.0F, 255.0F / 255.0F, 16.0F / 255.0F);
-	public static ResourceLocation GLIMMER_PROJECTILE_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "glimmer_projectile");
+	public static Identifier GLIMMER_PROJECTILE_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "glimmer_projectile");
 	public static int GLIMMER_PROJECTILE_ABGR = 0xFF1080FF;
 	public static Vector3f GLIMMER_PROJECTILE = new Vector3f(255.0F / 255.0F, 128.0F / 255.0F, 16.0F / 255.0F);
-	public static ResourceLocation PIPE_CLOGGED_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_clogged");
+	public static Identifier PIPE_CLOGGED_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_clogged");
 	public static int PIPE_CLOGGED_ABGR = 0xFF1010FF;
 	public static Vector3f PIPE_CLOGGED = new Vector3f(255.0F / 255.0F, 16.0F / 255.0F, 16.0F / 255.0F);
-	public static ResourceLocation PIPE_FLOWING_ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_flowing");
+	public static Identifier PIPE_FLOWING_ID = Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_flowing");
 	public static int PIPE_FLOWING_ABGR = 0xFF10FF10;
 	public static Vector3f PIPE_FLOWING = new Vector3f(16.0F / 255.0F, 255.0F / 255.0F, 16.0F / 255.0F);
 
-	public static HashMap<ResourceLocation, Vector3f> colors = new HashMap<ResourceLocation, Vector3f>();
+	public static HashMap<Identifier, Vector3f> colors = new HashMap<Identifier, Vector3f>();
 
 	static {
 		EmbersAPI.registerColor(EMBER_ID, EMBER);
@@ -89,12 +89,12 @@ public class EmbersColors implements ResourceManagerReloadListener {
 	}
 
 	public static int getColorFromTexture(ResourceManager manager, String name) throws FileNotFoundException, IOException {
-		NativeImage image = NativeImage.read(manager.getResource(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/colors/" + name + ".png")).orElseThrow(FileNotFoundException::new).open());
+		NativeImage image = NativeImage.read(manager.getResource(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/colors/" + name + ".png")).orElseThrow(FileNotFoundException::new).open());
 		int color = image.getPixelRGBA(0, 0); //yeah so this is actually ABGR :)
 		image.close();
 
 		//maybe I'll bother with this later
-		/*Optional<Resource> meta = manager.getResource(ResourceLocation.parse(Embers.MODID + ":textures/colors/" + name + ".png.mcmeta"));
+		/*Optional<Resource> meta = manager.getResource(Identifier.parse(Embers.MODID + ":textures/colors/" + name + ".png.mcmeta"));
 		if (meta.isPresent()) {
 			JsonObject metaJson = GsonHelper.parse(meta.orElseThrow(FileNotFoundException::new).openAsReader());
 		}*/

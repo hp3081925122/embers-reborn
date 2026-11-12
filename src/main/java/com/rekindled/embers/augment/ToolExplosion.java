@@ -91,7 +91,7 @@ public class ToolExplosion extends Explosion {
 	 */
 	@Override
 	public void finalizeExplosion(boolean pSpawnParticles) {
-		if (myLevel.isClientSide) {
+		if (myLevel.isClientSide()) {
 			myLevel.playLocalSound(myX, myY, myZ, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 4.0F, (1.0F + (myLevel.random.nextFloat() - myLevel.random.nextFloat()) * 0.2F) * 0.7F, false);
 		}
 

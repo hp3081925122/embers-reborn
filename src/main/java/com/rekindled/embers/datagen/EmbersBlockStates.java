@@ -23,7 +23,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.data.PackOutput;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -101,11 +101,11 @@ public class EmbersBlockStates extends BlockStateProvider {
 		pillarBlockWithItem((net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.level.block.RotatedPillarBlock, net.minecraft.world.level.block.RotatedPillarBlock>)(net.neoforged.neoforge.registries.DeferredHolder<?,?>)RegistryManager.SEALED_WOOD_KEG, "reinforced_sealed_planks", "sealed_keg_top");
 		blockWithItem(RegistryManager.SOLIDIFIED_METAL);
 		columnBlockWithItem(RegistryManager.METAL_PLATFORM, "metal_platform_side", "metal_platform");
-		slabBlock(RegistryManager.METAL_PLATFORM_DECO.slab.get(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "metal_platform"), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/metal_platform_side"), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/metal_platform"), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/metal_platform"));
-		simpleBlockItem(RegistryManager.METAL_PLATFORM_DECO.slab.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "metal_platform_slab")));
+		slabBlock(RegistryManager.METAL_PLATFORM_DECO.slab.get(), Identifier.fromNamespaceAndPath(Embers.MODID, "metal_platform"), Identifier.fromNamespaceAndPath(Embers.MODID, "block/metal_platform_side"), Identifier.fromNamespaceAndPath(Embers.MODID, "block/metal_platform"), Identifier.fromNamespaceAndPath(Embers.MODID, "block/metal_platform"));
+		simpleBlockItem(RegistryManager.METAL_PLATFORM_DECO.slab.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "metal_platform_slab")));
 
-		ExistingModelFile emberLanternModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_lantern"));
-		ExistingModelFile emberLanternCeilingModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_lantern_ceiling"));
+		ExistingModelFile emberLanternModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_lantern"));
+		ExistingModelFile emberLanternCeilingModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_lantern_ceiling"));
 		getVariantBuilder(RegistryManager.EMBER_LANTERN.get()).forAllStates(state -> {
 			return ConfiguredModel.builder()
 					.modelFile(state.getValue(BlockStateProperties.HANGING) ? emberLanternCeilingModel : emberLanternModel)
@@ -122,23 +122,23 @@ public class EmbersBlockStates extends BlockStateProvider {
 		dial(RegistryManager.ATMOSPHERIC_GAUGE, "atmospheric_gauge");
 		dial(RegistryManager.CLOCKWORK_ATTENUATOR, "clockwork_attenuator");
 
-		ModelFile fluidPipeCenterModel = models().withExistingParent("fluid_pipe_center", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_center"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
-		ModelFile fluidPipeEndModel = models().withExistingParent("fluid_pipe_end", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_end"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
-		ModelFile fluidPipeConnectionModel = models().withExistingParent("fluid_pipe_connection", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_connection"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
-		ModelFile fluidPipeEndModel2 = models().withExistingParent("fluid_pipe_end_2", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_end_2"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
-		ModelFile fluidPipeConnectionModel2 = models().withExistingParent("fluid_pipe_connection_2", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_connection_2"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
+		ModelFile fluidPipeCenterModel = models().withExistingParent("fluid_pipe_center", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_center"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
+		ModelFile fluidPipeEndModel = models().withExistingParent("fluid_pipe_end", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_end"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
+		ModelFile fluidPipeConnectionModel = models().withExistingParent("fluid_pipe_connection", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_connection"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
+		ModelFile fluidPipeEndModel2 = models().withExistingParent("fluid_pipe_end_2", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_end_2"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
+		ModelFile fluidPipeConnectionModel2 = models().withExistingParent("fluid_pipe_connection_2", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_connection_2"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
 
-		ExistingModelFile emitterModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_emitter"));
+		ExistingModelFile emitterModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_emitter"));
 		simpleBlockItem(RegistryManager.EMBER_EMITTER.get(), emitterModel);
 
 		MultiPartBlockStateBuilder emitterBuilder = getMultipartBuilder(RegistryManager.EMBER_EMITTER.get())
@@ -156,34 +156,34 @@ public class EmbersBlockStates extends BlockStateProvider {
 				.condition(BlockStateProperties.FACING, Direction.WEST).end();
 		addEmitterConnections(emitterBuilder, fluidPipeEndModel, fluidPipeEndModel2);
 
-		ExistingModelFile receiverModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_receiver"));
+		ExistingModelFile receiverModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_receiver"));
 		directionalBlock(RegistryManager.EMBER_RECEIVER.get(), receiverModel);
 		simpleBlockItem(RegistryManager.EMBER_RECEIVER.get(), receiverModel);
 
-		ExistingModelFile leverModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_lever"));
-		leverBlock(RegistryManager.CAMINITE_LEVER.get(), leverModel, models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_lever_on")));
+		ExistingModelFile leverModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_lever"));
+		leverBlock(RegistryManager.CAMINITE_LEVER.get(), leverModel, models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_lever_on")));
 		simpleBlockItem(RegistryManager.CAMINITE_LEVER.get(), leverModel);
 
-		buttonBlock(RegistryManager.CAMINITE_BUTTON.get(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/caminite_button"));
+		buttonBlock(RegistryManager.CAMINITE_BUTTON.get(), Identifier.fromNamespaceAndPath(Embers.MODID, "block/caminite_button"));
 
-		ModelFile itemPipeCenterModel = models().withExistingParent("item_pipe_center", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_center"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
-		ModelFile itemPipeEndModel = models().withExistingParent("item_pipe_end", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_end"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
-		ModelFile itemPipeConnectionModel = models().withExistingParent("item_pipe_connection", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_connection"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
-		ModelFile itemPipeEndModel2 = models().withExistingParent("item_pipe_end_2", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_end_2"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
-		ModelFile itemPipeConnectionModel2 = models().withExistingParent("item_pipe_connection_2", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_connection_2"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
+		ModelFile itemPipeCenterModel = models().withExistingParent("item_pipe_center", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_center"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
+		ModelFile itemPipeEndModel = models().withExistingParent("item_pipe_end", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_end"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
+		ModelFile itemPipeConnectionModel = models().withExistingParent("item_pipe_connection", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_connection"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
+		ModelFile itemPipeEndModel2 = models().withExistingParent("item_pipe_end_2", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_end_2"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
+		ModelFile itemPipeConnectionModel2 = models().withExistingParent("item_pipe_connection_2", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_connection_2"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
 
-		simpleBlockItem(RegistryManager.ITEM_PIPE.get(), models().withExistingParent("item_pipe_inventory", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_inventory"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex")));
+		simpleBlockItem(RegistryManager.ITEM_PIPE.get(), models().withExistingParent("item_pipe_inventory", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_inventory"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex")));
 
 		ModelFile itemPipeModel = models().withExistingParent("item_pipe", "block")
 				.customLoader(PipeModelBuilder::begin)
@@ -195,9 +195,9 @@ public class EmbersBlockStates extends BlockStateProvider {
 
 		simpleBlock(RegistryManager.ITEM_PIPE.get(), itemPipeModel);
 
-		ModelFile itemExtractorCenterModel = models().withExistingParent("item_extractor_center", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "extractor_center"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
+		ModelFile itemExtractorCenterModel = models().withExistingParent("item_extractor_center", Identifier.fromNamespaceAndPath(Embers.MODID, "extractor_center"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/item_pipe_tex"));
 		ModelFile itemExtractorModel = models().withExistingParent("item_extractor", "block")
 				.customLoader(PipeModelBuilder::begin)
 				.parts(models().nested().parent(itemExtractorCenterModel),
@@ -209,7 +209,7 @@ public class EmbersBlockStates extends BlockStateProvider {
 		simpleBlockItem(RegistryManager.ITEM_EXTRACTOR.get(), itemExtractorCenterModel);
 		simpleBlock(RegistryManager.ITEM_EXTRACTOR.get(), itemExtractorModel);
 
-		ExistingModelFile emberBoreModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_bore_center"));
+		ExistingModelFile emberBoreModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_bore_center"));
 		getVariantBuilder(RegistryManager.EMBER_BORE.get()).forAllStates(state -> {
 			Axis axis = state.getValue(BlockStateProperties.HORIZONTAL_AXIS);
 
@@ -219,11 +219,11 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.uvLock(false)
 					.build();
 		});
-		simpleBlockItem(RegistryManager.EMBER_BORE.get(), models().cubeAll("ember_bore", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/crate_bore")));
+		simpleBlockItem(RegistryManager.EMBER_BORE.get(), models().cubeAll("ember_bore", Identifier.fromNamespaceAndPath(Embers.MODID, "block/crate_bore")));
 
-		ExistingModelFile mechEdgeModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mech_edge_straight"));
-		ExistingModelFile boreEdgeModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_bore_edge"));
-		ExistingModelFile mechCornerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mech_edge_corner"));
+		ExistingModelFile mechEdgeModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mech_edge_straight"));
+		ExistingModelFile boreEdgeModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_bore_edge"));
+		ExistingModelFile mechCornerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mech_edge_corner"));
 		getVariantBuilder(RegistryManager.EMBER_BORE_EDGE.get()).forAllStates(state -> {
 			MechEdge edge = state.getValue(MechEdgeBlockBase.EDGE);
 			Axis axis = state.getValue(BlockStateProperties.HORIZONTAL_AXIS);
@@ -235,30 +235,30 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		ExistingModelFile mechCoreModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mech_core"));
+		ExistingModelFile mechCoreModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mech_core"));
 		betterDirectionalBlock(RegistryManager.MECHANICAL_CORE.get(), $ -> mechCoreModel, 0);
 		simpleBlockItem(RegistryManager.MECHANICAL_CORE.get(), mechCoreModel);
 
-		ExistingModelFile activatorTopModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "activator_top"));
+		ExistingModelFile activatorTopModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "activator_top"));
 		simpleBlockItem(RegistryManager.EMBER_ACTIVATOR.get(), activatorTopModel);
 		getVariantBuilder(RegistryManager.EMBER_ACTIVATOR.get()).forAllStates(state -> {
 			return ConfiguredModel.builder()
-					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "activator_bottom")) : activatorTopModel)
+					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "activator_bottom")) : activatorTopModel)
 					.uvLock(false)
 					.build();
 		});
 
-		ExistingModelFile melterBottomModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "melter_bottom"));
+		ExistingModelFile melterBottomModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "melter_bottom"));
 		simpleBlockItem(RegistryManager.MELTER.get(), melterBottomModel);
 		getVariantBuilder(RegistryManager.MELTER.get()).forAllStates(state -> {
 			return ConfiguredModel.builder()
-					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? melterBottomModel : models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "melter_top")))
+					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? melterBottomModel : models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "melter_top")))
 					.uvLock(false)
 					.build();
 		});
 
-		simpleBlockItem(RegistryManager.FLUID_PIPE.get(), models().withExistingParent("fluid_pipe_inventory", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_inventory"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex")));
+		simpleBlockItem(RegistryManager.FLUID_PIPE.get(), models().withExistingParent("fluid_pipe_inventory", Identifier.fromNamespaceAndPath(Embers.MODID, "pipe_inventory"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex")));
 
 		ModelFile fluidPipeModel = models().withExistingParent("fluid_pipe", "block")
 				.customLoader(PipeModelBuilder::begin)
@@ -270,9 +270,9 @@ public class EmbersBlockStates extends BlockStateProvider {
 
 		simpleBlock(RegistryManager.FLUID_PIPE.get(), fluidPipeModel);
 
-		ModelFile fluidExtractorCenterModel = models().withExistingParent("fluid_extractor_center", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "extractor_center"))
-				.texture("pipe", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
+		ModelFile fluidExtractorCenterModel = models().withExistingParent("fluid_extractor_center", Identifier.fromNamespaceAndPath(Embers.MODID, "extractor_center"))
+				.texture("pipe", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_pipe_tex"));
 		ModelFile fluidExtractorModel = models().withExistingParent("fluid_extractor", "block")
 				.customLoader(PipeModelBuilder::begin)
 				.parts(models().nested().parent(fluidExtractorCenterModel),
@@ -286,7 +286,7 @@ public class EmbersBlockStates extends BlockStateProvider {
 
 		blockWithItem(RegistryManager.FLUID_VESSEL, "fluid_vessel");
 
-		ExistingModelFile stamperModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "stamper"));
+		ExistingModelFile stamperModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "stamper"));
 		simpleBlock(RegistryManager.STAMPER.get(), stamperModel);
 		simpleBlockItem(RegistryManager.STAMPER.get(), stamperModel);
 
@@ -294,31 +294,31 @@ public class EmbersBlockStates extends BlockStateProvider {
 
 		blockWithItem(RegistryManager.BIN, "bin");
 
-		ExistingModelFile mixerBottomModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mixer_bottom"));
+		ExistingModelFile mixerBottomModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mixer_bottom"));
 		simpleBlockItem(RegistryManager.MIXER_CENTRIFUGE.get(), mixerBottomModel);
 		getVariantBuilder(RegistryManager.MIXER_CENTRIFUGE.get()).forAllStates(state -> {
 			return ConfiguredModel.builder()
-					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? mixerBottomModel : models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mixer_top")))
+					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? mixerBottomModel : models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mixer_top")))
 					.uvLock(false)
 					.build();
 		});
 
-		ModelFile dropperModel = models().withExistingParent(RegistryManager.ITEM_DROPPER.getId().toString(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "dropper"))
-				.texture("dropper", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/plates_lead"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/plates_lead"));
+		ModelFile dropperModel = models().withExistingParent(RegistryManager.ITEM_DROPPER.getId().toString(), Identifier.fromNamespaceAndPath(Embers.MODID, "dropper"))
+				.texture("dropper", Identifier.fromNamespaceAndPath(Embers.MODID, "block/plates_lead"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/plates_lead"));
 		simpleBlock(RegistryManager.ITEM_DROPPER.get(), dropperModel);
 		simpleBlockItem(RegistryManager.ITEM_DROPPER.get(), dropperModel);
 
-		ExistingModelFile refineryBottomModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "refinery_bottom"));
+		ExistingModelFile refineryBottomModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "refinery_bottom"));
 		simpleBlockItem(RegistryManager.PRESSURE_REFINERY.get(), refineryBottomModel);
 		getVariantBuilder(RegistryManager.PRESSURE_REFINERY.get()).forAllStates(state -> {
 			return ConfiguredModel.builder()
-					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? refineryBottomModel : models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "refinery_top")))
+					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? refineryBottomModel : models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "refinery_top")))
 					.uvLock(false)
 					.build();
 		});
 
-		ExistingModelFile ejectorModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_ejector"));
+		ExistingModelFile ejectorModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_ejector"));
 		simpleBlockItem(RegistryManager.EMBER_EJECTOR.get(), ejectorModel);
 
 		MultiPartBlockStateBuilder ejectorBuilder = getMultipartBuilder(RegistryManager.EMBER_EJECTOR.get())
@@ -336,20 +336,20 @@ public class EmbersBlockStates extends BlockStateProvider {
 				.condition(BlockStateProperties.FACING, Direction.WEST).end();
 		addEmitterConnections(ejectorBuilder, fluidPipeEndModel, fluidPipeEndModel2);
 
-		ExistingModelFile funnelModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_funnel"));
+		ExistingModelFile funnelModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_funnel"));
 		directionalBlock(RegistryManager.EMBER_FUNNEL.get(), funnelModel);
 		simpleBlockItem(RegistryManager.EMBER_FUNNEL.get(), funnelModel);
 
-		ExistingModelFile relayModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_relay"));
+		ExistingModelFile relayModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_relay"));
 		directionalBlock(RegistryManager.EMBER_RELAY.get(), relayModel);
 		simpleBlockItem(RegistryManager.EMBER_RELAY.get(), relayModel);
 
-		ExistingModelFile mirrorModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mirror_relay"));
+		ExistingModelFile mirrorModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mirror_relay"));
 		directionalBlock(RegistryManager.MIRROR_RELAY.get(), mirrorModel);
 		simpleBlockItem(RegistryManager.MIRROR_RELAY.get(), mirrorModel);
 
-		ExistingModelFile splitterModelX = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "beam_splitter_x"));
-		ExistingModelFile splitterModelZ = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "beam_splitter_z"));
+		ExistingModelFile splitterModelX = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "beam_splitter_x"));
+		ExistingModelFile splitterModelZ = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "beam_splitter_z"));
 		simpleBlockItem(RegistryManager.BEAM_SPLITTER.get(), splitterModelZ);
 		getVariantBuilder(RegistryManager.BEAM_SPLITTER.get()).forAllStates(state -> {
 			Direction face = state.getValue(BlockStateProperties.FACING);
@@ -362,16 +362,16 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		ExistingModelFile vacuumModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item_vacuum"));
+		ExistingModelFile vacuumModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "item_vacuum"));
 		directionalBlock(RegistryManager.ITEM_VACUUM.get(), vacuumModel);
 		simpleBlockItem(RegistryManager.ITEM_VACUUM.get(), vacuumModel);
 
-		simpleBlock(RegistryManager.HEARTH_COIL.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "hearth_coil_center")));
-		simpleBlockItem(RegistryManager.HEARTH_COIL.get(), models().cubeAll("hearth_coil", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/crate_coil")));
+		simpleBlock(RegistryManager.HEARTH_COIL.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "hearth_coil_center")));
+		simpleBlockItem(RegistryManager.HEARTH_COIL.get(), models().cubeAll("hearth_coil", Identifier.fromNamespaceAndPath(Embers.MODID, "block/crate_coil")));
 
-		ExistingModelFile coilEdgeModelX = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "hearth_coil_edge_x"));
-		ExistingModelFile coilEdgeModelZ = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "hearth_coil_edge_z"));
-		ExistingModelFile coilCornerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "hearth_coil_corner"));
+		ExistingModelFile coilEdgeModelX = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "hearth_coil_edge_x"));
+		ExistingModelFile coilEdgeModelZ = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "hearth_coil_edge_z"));
+		ExistingModelFile coilCornerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "hearth_coil_corner"));
 		getVariantBuilder(RegistryManager.HEARTH_COIL_EDGE.get()).forAllStates(state -> {
 			MechEdge edge = state.getValue(MechEdgeBlockBase.EDGE);
 
@@ -382,8 +382,8 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		simpleBlock(RegistryManager.RESERVOIR.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "reservoir_center")));
-		simpleBlockItem(RegistryManager.RESERVOIR.get(), models().cubeAll("reservoir", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/crate_tank")));
+		simpleBlock(RegistryManager.RESERVOIR.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "reservoir_center")));
+		simpleBlockItem(RegistryManager.RESERVOIR.get(), models().cubeAll("reservoir", Identifier.fromNamespaceAndPath(Embers.MODID, "block/crate_tank")));
 
 		getVariantBuilder(RegistryManager.RESERVOIR_EDGE.get()).forAllStates(state -> {
 			MechEdge edge = state.getValue(MechEdgeBlockBase.EDGE);
@@ -395,11 +395,11 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		simpleBlock(RegistryManager.CAMINITE_RING.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_ring_center")));
+		simpleBlock(RegistryManager.CAMINITE_RING.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_ring_center")));
 		flatItem(RegistryManager.CAMINITE_RING, "caminite_ring");
 
-		ExistingModelFile ringEdgeModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_ring_edge"));
-		ExistingModelFile ringCornerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_ring_corner"));
+		ExistingModelFile ringEdgeModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_ring_edge"));
+		ExistingModelFile ringCornerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_ring_corner"));
 		getVariantBuilder(RegistryManager.CAMINITE_RING_EDGE.get()).forAllStates(state -> {
 			MechEdge edge = state.getValue(MechEdgeBlockBase.EDGE);
 
@@ -410,12 +410,12 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		simpleBlock(RegistryManager.CAMINITE_GAUGE.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_ring_center")));
+		simpleBlock(RegistryManager.CAMINITE_GAUGE.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_ring_center")));
 		flatItem(RegistryManager.CAMINITE_GAUGE, "caminite_gauge");
 
-		ModelFile gaugeEdgeModel = models().withExistingParent("caminite_gauge_edge", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_gauge_edge_base")).customLoader(CompositeModelBuilder::begin)
-				.child("base", models().nested().parent(models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_gauge_edge_base"))))
-				.child("glass", models().nested().parent(models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_gauge_edge_glass")))).end();
+		ModelFile gaugeEdgeModel = models().withExistingParent("caminite_gauge_edge", Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_gauge_edge_base")).customLoader(CompositeModelBuilder::begin)
+				.child("base", models().nested().parent(models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_gauge_edge_base"))))
+				.child("glass", models().nested().parent(models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_gauge_edge_glass")))).end();
 		getVariantBuilder(RegistryManager.CAMINITE_GAUGE_EDGE.get()).forAllStates(state -> {
 			MechEdge edge = state.getValue(MechEdgeBlockBase.EDGE);
 
@@ -426,10 +426,10 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		simpleBlock(RegistryManager.CAMINITE_VALVE.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_ring_center")));
+		simpleBlock(RegistryManager.CAMINITE_VALVE.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_ring_center")));
 		flatItem(RegistryManager.CAMINITE_VALVE, "caminite_valve");
 
-		ExistingModelFile valveEdgeModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "caminite_valve_edge"));
+		ExistingModelFile valveEdgeModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "caminite_valve_edge"));
 		getVariantBuilder(RegistryManager.CAMINITE_VALVE_EDGE.get()).forAllStates(state -> {
 			MechEdge edge = state.getValue(MechEdgeBlockBase.EDGE);
 
@@ -440,11 +440,11 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		simpleBlock(RegistryManager.CRYSTAL_CELL.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_cell_center")));
-		simpleBlockItem(RegistryManager.CRYSTAL_CELL.get(), models().cubeAll("crystal_cell", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/crate_crystal")));
+		simpleBlock(RegistryManager.CRYSTAL_CELL.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_cell_center")));
+		simpleBlockItem(RegistryManager.CRYSTAL_CELL.get(), models().cubeAll("crystal_cell", Identifier.fromNamespaceAndPath(Embers.MODID, "block/crate_crystal")));
 
-		ExistingModelFile cellEdgeModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_cell_edge"));
-		ExistingModelFile cellCornerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_cell_corner"));
+		ExistingModelFile cellEdgeModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_cell_edge"));
+		ExistingModelFile cellCornerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "crystal_cell_corner"));
 		getVariantBuilder(RegistryManager.CRYSTAL_CELL_EDGE.get()).forAllStates(state -> {
 			MechEdge edge = state.getValue(MechEdgeBlockBase.EDGE);
 
@@ -455,52 +455,52 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		ExistingModelFile separatorModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "geologic_separator"));
+		ExistingModelFile separatorModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "geologic_separator"));
 		horizontalBlock(RegistryManager.GEOLOGIC_SEPARATOR.get(), separatorModel);
 		simpleBlockItem(RegistryManager.GEOLOGIC_SEPARATOR.get(), separatorModel);
 
-		ExistingModelFile chargerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "copper_charger"));
+		ExistingModelFile chargerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "copper_charger"));
 		horizontalBlock(RegistryManager.COPPER_CHARGER.get(), chargerModel);
 		simpleBlockItem(RegistryManager.COPPER_CHARGER.get(), chargerModel);
 
-		ExistingModelFile siphonModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_siphon"));
+		ExistingModelFile siphonModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_siphon"));
 		simpleBlock(RegistryManager.EMBER_SIPHON.get(), siphonModel);
 		simpleBlockItem(RegistryManager.EMBER_SIPHON.get(), siphonModel);
 
-		ExistingModelFile itemTransferModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item_transfer"));
-		ExistingModelFile itemTransferFilterModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item_transfer_filtered"));
+		ExistingModelFile itemTransferModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "item_transfer"));
+		ExistingModelFile itemTransferFilterModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "item_transfer_filtered"));
 		directionalBlock(RegistryManager.ITEM_TRANSFER.get(), state -> state.getValue(ItemTransferBlock.FILTER) ? itemTransferFilterModel : itemTransferModel, 180);
 		simpleBlockItem(RegistryManager.ITEM_TRANSFER.get(), itemTransferModel);
 
-		ModelFile fluidTransferModel = models().withExistingParent("fluid_transfer", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item_transfer"))
-				.texture("top", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_top"))
-				.texture("side", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_side"))
-				.texture("bottom", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_bottom"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_side"));
-		ModelFile fluidTransferFilterModel = models().withExistingParent("fluid_transfer_filtered", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item_transfer_filtered"))
-				.texture("top", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_top"))
-				.texture("side", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_side"))
-				.texture("bottom", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_bottom"))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_side"));
+		ModelFile fluidTransferModel = models().withExistingParent("fluid_transfer", Identifier.fromNamespaceAndPath(Embers.MODID, "item_transfer"))
+				.texture("top", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_top"))
+				.texture("side", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_side"))
+				.texture("bottom", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_bottom"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_side"));
+		ModelFile fluidTransferFilterModel = models().withExistingParent("fluid_transfer_filtered", Identifier.fromNamespaceAndPath(Embers.MODID, "item_transfer_filtered"))
+				.texture("top", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_top"))
+				.texture("side", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_side"))
+				.texture("bottom", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_bottom"))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/fluid_transfer_side"));
 		directionalBlock(RegistryManager.FLUID_TRANSFER.get(), state -> state.getValue(com.rekindled.embers.block.FluidTransferBlock.FILTER) ? fluidTransferFilterModel : fluidTransferModel, 180);
 		simpleBlockItem(RegistryManager.FLUID_TRANSFER.get(), fluidTransferModel);
 
 		getVariantBuilder(RegistryManager.ALCHEMY_PEDESTAL.get()).forAllStates(state -> {
 			return ConfiguredModel.builder()
-					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "alchemy_pedestal_bottom")) : models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "alchemy_pedestal_top")))
+					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "alchemy_pedestal_bottom")) : models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "alchemy_pedestal_top")))
 					.uvLock(false)
 					.build();
 		});
 		getVariantBuilder(CuriosCompat.EXPLOSION_PEDESTAL.get()).forAllStates(state -> {
 			return ConfiguredModel.builder()
-					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "alchemy_pedestal_bottom")) : models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "explosion_pedestal_top")))
+					.modelFile(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER ? models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "alchemy_pedestal_bottom")) : models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "explosion_pedestal_top")))
 					.uvLock(false)
 					.build();
 		});
 
 		blockWithItem(RegistryManager.ALCHEMY_TABLET, "alchemy_tablet");
 
-		ExistingModelFile cannonModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "beam_cannon"));
+		ExistingModelFile cannonModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "beam_cannon"));
 		simpleBlockItem(RegistryManager.BEAM_CANNON.get(), cannonModel);
 
 		MultiPartBlockStateBuilder cannonBuilder = getMultipartBuilder(RegistryManager.BEAM_CANNON.get())
@@ -518,8 +518,8 @@ public class EmbersBlockStates extends BlockStateProvider {
 				.condition(BlockStateProperties.FACING, Direction.WEST).end();
 		addEmitterConnections(cannonBuilder, fluidPipeEndModel, fluidPipeEndModel2);
 
-		ExistingModelFile pumpBottomModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mechanical_pump_bottom"));
-		ExistingModelFile pumpTopModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mechanical_pump_top"));
+		ExistingModelFile pumpBottomModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mechanical_pump_bottom"));
+		ExistingModelFile pumpTopModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mechanical_pump_top"));
 		getVariantBuilder(RegistryManager.MECHANICAL_PUMP.get()).forAllStates(state -> {
 			Axis axis = state.getValue(BlockStateProperties.HORIZONTAL_AXIS);
 
@@ -531,7 +531,7 @@ public class EmbersBlockStates extends BlockStateProvider {
 		});
 		simpleBlockItem(RegistryManager.MECHANICAL_PUMP.get(), pumpBottomModel);
 
-		ExistingModelFile boilerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mini_boiler"));
+		ExistingModelFile boilerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mini_boiler"));
 		ModelFile boilerPipeModel = models().withExistingParent("mini_boiler_pipes", "block")
 				.customLoader(PipeModelBuilder::begin)
 				.parts(models().nested().parent(boilerModel),
@@ -543,18 +543,18 @@ public class EmbersBlockStates extends BlockStateProvider {
 		horizontalBlock(RegistryManager.MINI_BOILER.get(), boilerPipeModel);
 		simpleBlockItem(RegistryManager.MINI_BOILER.get(), boilerModel);
 
-		ModelFile catalyticPlugModel = models().withExistingParent("catalytic_plug", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "catalytic_plug_base")).customLoader(CompositeModelBuilder::begin)
-				.child("base", models().nested().parent(models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "catalytic_plug_base"))))
-				.child("glass", models().nested().parent(models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "catalytic_plug_glass")))).end();
+		ModelFile catalyticPlugModel = models().withExistingParent("catalytic_plug", Identifier.fromNamespaceAndPath(Embers.MODID, "catalytic_plug_base")).customLoader(CompositeModelBuilder::begin)
+				.child("base", models().nested().parent(models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "catalytic_plug_base"))))
+				.child("glass", models().nested().parent(models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "catalytic_plug_glass")))).end();
 
 		directionalBlock(RegistryManager.CATALYTIC_PLUG.get(), catalyticPlugModel);
 		simpleBlockItem(RegistryManager.CATALYTIC_PLUG.get(), catalyticPlugModel);
 
-		ExistingModelFile stirlingModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "wildfire_stirling"));
+		ExistingModelFile stirlingModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "wildfire_stirling"));
 		directionalBlock(RegistryManager.WILDFIRE_STIRLING.get(), stirlingModel);
 		simpleBlockItem(RegistryManager.WILDFIRE_STIRLING.get(), stirlingModel);
 
-		ExistingModelFile injectorModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_injector"));
+		ExistingModelFile injectorModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_injector"));
 		directionalBlock(RegistryManager.EMBER_INJECTOR.get(), injectorModel);
 		simpleBlockItem(RegistryManager.EMBER_INJECTOR.get(), injectorModel);
 
@@ -572,17 +572,17 @@ public class EmbersBlockStates extends BlockStateProvider {
 		metalSeed(RegistryManager.DAWNSTONE_CRYSTAL_SEED);
 		metalSeed(RegistryManager.MITHRIL_CRYSTAL_SEED);
 
-		ExistingModelFile chartModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "field_chart_center"));
-		ExistingModelFile invertedChartModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "field_chart_center_inverted"));
+		ExistingModelFile chartModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "field_chart_center"));
+		ExistingModelFile invertedChartModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "field_chart_center_inverted"));
 		getVariantBuilder(RegistryManager.FIELD_CHART.get()).forAllStates(state -> {
 			return ConfiguredModel.builder()
 					.modelFile(state.getValue(FieldChartBlock.INVERTED) ? invertedChartModel : chartModel)
 					.build();
 		});
-		simpleBlockItem(RegistryManager.FIELD_CHART.get(), models().cubeAll("field_chart", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/crate_chart")));
+		simpleBlockItem(RegistryManager.FIELD_CHART.get(), models().cubeAll("field_chart", Identifier.fromNamespaceAndPath(Embers.MODID, "block/crate_chart")));
 
-		ExistingModelFile chartEdgeModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "field_chart_edge"));
-		ExistingModelFile chartCornerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "field_chart_corner"));
+		ExistingModelFile chartEdgeModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "field_chart_edge"));
+		ExistingModelFile chartCornerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "field_chart_corner"));
 		getVariantBuilder(RegistryManager.FIELD_CHART_EDGE.get()).forAllStates(state -> {
 			MechEdge edge = state.getValue(MechEdgeBlockBase.EDGE);
 
@@ -595,10 +595,10 @@ public class EmbersBlockStates extends BlockStateProvider {
 
 		blockWithItem(RegistryManager.IGNEM_REACTOR, "ignem_reactor");
 
-		ExistingModelFile chamberModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "chamber_top"));
-		ExistingModelFile chamberConnectionModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "chamber_top_connection"));
+		ExistingModelFile chamberModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "chamber_top"));
+		ExistingModelFile chamberConnectionModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "chamber_top_connection"));
 
-		ExistingModelFile catalysisChamberModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "catalysis_chamber"));
+		ExistingModelFile catalysisChamberModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "catalysis_chamber"));
 		simpleBlockItem(RegistryManager.CATALYSIS_CHAMBER.get(), catalysisChamberModel);
 		getVariantBuilder(RegistryManager.CATALYSIS_CHAMBER.get()).forAllStates(state -> {
 			ChamberConnection connection = state.getValue(ChamberBlockBase.CONNECTION);
@@ -609,7 +609,7 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		ExistingModelFile combustionChamberModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "combustion_chamber"));
+		ExistingModelFile combustionChamberModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "combustion_chamber"));
 		simpleBlockItem(RegistryManager.COMBUSTION_CHAMBER.get(), combustionChamberModel);
 		getVariantBuilder(RegistryManager.COMBUSTION_CHAMBER.get()).forAllStates(state -> {
 			ChamberConnection connection = state.getValue(ChamberBlockBase.CONNECTION);
@@ -620,21 +620,21 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.build();
 		});
 
-		ExistingModelFile emptyModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "empty"));
+		ExistingModelFile emptyModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "empty"));
 		simpleBlock(RegistryManager.GLIMMER.get(), emptyModel);
 
 		blockWithItem(RegistryManager.CINDER_PLINTH, "cinder_plinth");
 
-		ExistingModelFile anvilModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "dawnstone_anvil"));
+		ExistingModelFile anvilModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "dawnstone_anvil"));
 		horizontalBlock(RegistryManager.DAWNSTONE_ANVIL.get(), anvilModel, 90);
 		simpleBlockItem(RegistryManager.DAWNSTONE_ANVIL.get(), anvilModel);
 
-		ExistingModelFile hammerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "automatic_hammer"));
-		ExistingModelFile hammerItemModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "automatic_hammer_item"));
+		ExistingModelFile hammerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "automatic_hammer"));
+		ExistingModelFile hammerItemModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "automatic_hammer_item"));
 		horizontalBlock(RegistryManager.AUTOMATIC_HAMMER.get(), hammerModel);
 		simpleBlockItem(RegistryManager.AUTOMATIC_HAMMER.get(), hammerItemModel);
 
-		ExistingModelFile infernoForgeModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "inferno_forge"));
+		ExistingModelFile infernoForgeModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "inferno_forge"));
 		getVariantBuilder(RegistryManager.INFERNO_FORGE.get()).forAllStates(state -> {
 			DoubleBlockHalf half = state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF);
 
@@ -642,12 +642,12 @@ public class EmbersBlockStates extends BlockStateProvider {
 					.modelFile(half == DoubleBlockHalf.LOWER ? infernoForgeModel : emptyModel)
 					.build();
 		});
-		simpleBlockItem(RegistryManager.INFERNO_FORGE.get(), models().cubeAll("crate_inferno_forge", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/crate_inferno_forge")));
+		simpleBlockItem(RegistryManager.INFERNO_FORGE.get(), models().cubeAll("crate_inferno_forge", Identifier.fromNamespaceAndPath(Embers.MODID, "block/crate_inferno_forge")));
 
-		ExistingModelFile forgeEdgeModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "inferno_forge_edge_bottom"));
-		ExistingModelFile forgeTopEdgeModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "inferno_forge_edge_top"));
-		ExistingModelFile forgeCornerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "inferno_forge_corner_bottom"));
-		ExistingModelFile forgeTopCornerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "inferno_forge_corner_top"));
+		ExistingModelFile forgeEdgeModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "inferno_forge_edge_bottom"));
+		ExistingModelFile forgeTopEdgeModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "inferno_forge_edge_top"));
+		ExistingModelFile forgeCornerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "inferno_forge_corner_bottom"));
+		ExistingModelFile forgeTopCornerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "inferno_forge_corner_top"));
 		getVariantBuilder(RegistryManager.INFERNO_FORGE_EDGE.get()).forAllStates(state -> {
 			MechEdge edge = state.getValue(MechEdgeBlockBase.EDGE);
 			Builder<?> builder = ConfiguredModel.builder().rotationY(edge.rotation);
@@ -657,9 +657,9 @@ public class EmbersBlockStates extends BlockStateProvider {
 			return builder.modelFile(edge.corner ? forgeTopCornerModel : forgeTopEdgeModel).build();
 		});
 
-		ExistingModelFile inscriberModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mnemonic_inscriber"));
-		ModelFile inscriberActiveModel = models().withExistingParent(Embers.MODID + ":mnemonic_inscriber_active", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mnemonic_inscriber"))
-				.texture("4", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/mnemonic_on"));
+		ExistingModelFile inscriberModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "mnemonic_inscriber"));
+		ModelFile inscriberActiveModel = models().withExistingParent(Embers.MODID + ":mnemonic_inscriber_active", Identifier.fromNamespaceAndPath(Embers.MODID, "mnemonic_inscriber"))
+				.texture("4", Identifier.fromNamespaceAndPath(Embers.MODID, "block/mnemonic_on"));
 		getVariantBuilder(RegistryManager.MNEMONIC_INSCRIBER.get()).forAllStates(state -> {
 			Direction dir = state.getValue(BlockStateProperties.FACING);
 			return ConfiguredModel.builder()
@@ -670,26 +670,26 @@ public class EmbersBlockStates extends BlockStateProvider {
 		});
 		simpleBlockItem(RegistryManager.MNEMONIC_INSCRIBER.get(), inscriberModel);
 
-		ExistingModelFile instillerModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "char_instiller"));
+		ExistingModelFile instillerModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "char_instiller"));
 		horizontalBlock(RegistryManager.CHAR_INSTILLER.get(), instillerModel);
 		simpleBlockItem(RegistryManager.CHAR_INSTILLER.get(), instillerModel);
 
-		horizontalBlock(RegistryManager.ATMOSPHERIC_BELLOWS.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "atmospheric_bellows_bottom")));
-		simpleBlockItem(RegistryManager.ATMOSPHERIC_BELLOWS.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "atmospheric_bellows")));
+		horizontalBlock(RegistryManager.ATMOSPHERIC_BELLOWS.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "atmospheric_bellows_bottom")));
+		simpleBlockItem(RegistryManager.ATMOSPHERIC_BELLOWS.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "atmospheric_bellows")));
 
-		directionalBlock(RegistryManager.ENTROPIC_ENUMERATOR.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "entropic_enumerator_base")));
-		simpleBlockItem(RegistryManager.ENTROPIC_ENUMERATOR.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "entropic_enumerator")));
+		directionalBlock(RegistryManager.ENTROPIC_ENUMERATOR.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "entropic_enumerator_base")));
+		simpleBlockItem(RegistryManager.ENTROPIC_ENUMERATOR.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "entropic_enumerator")));
 
-		ExistingModelFile exchangererModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "heat_exchanger"));
+		ExistingModelFile exchangererModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "heat_exchanger"));
 		horizontalBlock(RegistryManager.HEAT_EXCHANGER.get(), exchangererModel);
 		simpleBlockItem(RegistryManager.HEAT_EXCHANGER.get(), exchangererModel);
 
-		ExistingModelFile insulationModel = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "heat_insulation"));
+		ExistingModelFile insulationModel = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "heat_insulation"));
 		directionalBlock(RegistryManager.HEAT_INSULATION.get(), insulationModel);
 		simpleBlockItem(RegistryManager.HEAT_INSULATION.get(), insulationModel);
 
-		directionalBlock(RegistryManager.EXCAVATION_BUCKETS.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "excavation_buckets")));
-		simpleBlockItem(RegistryManager.EXCAVATION_BUCKETS.get(), models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "excavation_buckets_inventory")));
+		directionalBlock(RegistryManager.EXCAVATION_BUCKETS.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "excavation_buckets")));
+		simpleBlockItem(RegistryManager.EXCAVATION_BUCKETS.get(), models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, "excavation_buckets_inventory")));
 	}
 
 	public void blockWithItem(DeferredHolder<? extends Block, ? extends Block> registryObject) {
@@ -700,9 +700,9 @@ public class EmbersBlockStates extends BlockStateProvider {
 	}
 
 	public ModelFile columnBlockWithItem(DeferredHolder<? extends Block, ? extends Block> registryObject, String sideTex, String topTex) {
-		ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + sideTex);
-		//ResourceLocation side_overlay = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + sideTex + "_overlay");
-		ResourceLocation end = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + topTex);
+		Identifier side = Identifier.fromNamespaceAndPath(Embers.MODID, "block/" + sideTex);
+		//Identifier side_overlay = Identifier.fromNamespaceAndPath(Embers.MODID, "block/" + sideTex + "_overlay");
+		Identifier end = Identifier.fromNamespaceAndPath(Embers.MODID, "block/" + topTex);
 
 		ModelFile model = models().cubeColumn(registryObject.getId().getPath(), side, end)/*.texture("overlay", side_overlay).renderType("cutout").element()
 				.from(0, 0, 0)
@@ -725,8 +725,8 @@ public class EmbersBlockStates extends BlockStateProvider {
 	}
 
 	public ModelFile pillarBlockWithItem(DeferredHolder<? extends RotatedPillarBlock, ? extends RotatedPillarBlock> registryObject, String sideTex, String topTex) {
-		ResourceLocation side = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + sideTex);
-		ResourceLocation end = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + topTex);
+		Identifier side = Identifier.fromNamespaceAndPath(Embers.MODID, "block/" + sideTex);
+		Identifier end = Identifier.fromNamespaceAndPath(Embers.MODID, "block/" + topTex);
 
 		ModelFile model = models().cubeColumn(registryObject.getId().getPath(), side, end);
 		//block model
@@ -737,7 +737,7 @@ public class EmbersBlockStates extends BlockStateProvider {
 	}
 
 	public void blockWithItem(DeferredHolder<? extends Block, ? extends Block> registryObject, String model) {
-		ExistingModelFile modelFile = models().getExistingFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, model));
+		ExistingModelFile modelFile = models().getExistingFile(Identifier.fromNamespaceAndPath(Embers.MODID, model));
 		//block model
 		simpleBlock(registryObject.get(), modelFile);
 		//itemblock model
@@ -745,7 +745,7 @@ public class EmbersBlockStates extends BlockStateProvider {
 	}
 
 	public void blockWithItemTexture(DeferredHolder<? extends Block, ? extends Block> registryObject, String texture) {
-		ModelFile modelFile = models().cubeAll(BuiltInRegistries.BLOCK.getKey(registryObject.get()).getPath(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + texture));
+		ModelFile modelFile = models().cubeAll(BuiltInRegistries.BLOCK.getKey(registryObject.get()).getPath(), Identifier.fromNamespaceAndPath(Embers.MODID, "block/" + texture));
 		//block model
 		simpleBlock(registryObject.get(), modelFile);
 		//itemblock model
@@ -754,10 +754,10 @@ public class EmbersBlockStates extends BlockStateProvider {
 
 	public void dial(DeferredHolder<? extends Block, ? extends Block> registryObject, String texture) {
 		//block model
-		ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(registryObject.get());
-		ModelFile model = models().withExistingParent(loc.toString(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "dial"))
-				.texture("dial", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + texture))
-				.texture("particle", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + texture));
+		Identifier loc = BuiltInRegistries.BLOCK.getKey(registryObject.get());
+		ModelFile model = models().withExistingParent(loc.toString(), Identifier.fromNamespaceAndPath(Embers.MODID, "dial"))
+				.texture("dial", Identifier.fromNamespaceAndPath(Embers.MODID, "block/" + texture))
+				.texture("particle", Identifier.fromNamespaceAndPath(Embers.MODID, "block/" + texture));
 		directionalBlock(registryObject.get(), model);
 
 		//item model
@@ -765,10 +765,10 @@ public class EmbersBlockStates extends BlockStateProvider {
 	}
 
 	public void flatItem(DeferredHolder<? extends Block, ? extends Block> registryObject, String texture) {
-		ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(registryObject.get());
+		Identifier loc = BuiltInRegistries.BLOCK.getKey(registryObject.get());
 		itemModels().getBuilder(loc.toString())
 		.parent(new ModelFile.UncheckedModelFile("item/generated"))
-		.texture("layer0", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), "item/" + texture));
+		.texture("layer0", Identifier.fromNamespaceAndPath(loc.getNamespace(), "item/" + texture));
 	}
 
 	public void betterDirectionalBlock(Block block, Function<BlockState, ModelFile> modelFunc, int angleOffset) {
@@ -799,11 +799,11 @@ public class EmbersBlockStates extends BlockStateProvider {
 	}
 
 	public void fluid(DeferredHolder<? extends Block, ? extends Block> fluid, String name) {
-		simpleBlock(fluid.get(), models().cubeAll(name, ResourceLocation.fromNamespaceAndPath(Embers.MODID, ModelProvider.BLOCK_FOLDER + "/fluid/" + name + "_still")));
+		simpleBlock(fluid.get(), models().cubeAll(name, Identifier.fromNamespaceAndPath(Embers.MODID, ModelProvider.BLOCK_FOLDER + "/fluid/" + name + "_still")));
 	}
 
 	public void decoBlocks(StoneDecoBlocks deco) {
-		ResourceLocation resourceLocation = this.blockTexture(deco.block.get());
+		Identifier resourceLocation = this.blockTexture(deco.block.get());
 
 		if (deco.stairs != null) {
 			this.stairsBlock(deco.stairs.get(), resourceLocation);
@@ -820,7 +820,7 @@ public class EmbersBlockStates extends BlockStateProvider {
 	}
 
 	public void metalSeed(MetalCrystalSeed seed) {
-		simpleBlock(seed.BLOCK.get(), models().cubeAll(seed.name, ResourceLocation.fromNamespaceAndPath(Embers.MODID, ModelProvider.BLOCK_FOLDER + "/material_" + seed.name)));
+		simpleBlock(seed.BLOCK.get(), models().cubeAll(seed.name, Identifier.fromNamespaceAndPath(Embers.MODID, ModelProvider.BLOCK_FOLDER + "/material_" + seed.name)));
 		flatItem(seed.BLOCK, "seed_" + seed.name);
 	}
 

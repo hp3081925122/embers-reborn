@@ -95,7 +95,7 @@ public class AutomaticHammerBlock extends BaseEntityBlock implements SimpleWater
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.AUTOMATIC_HAMMER_ENTITY.get(), AutomaticHammerBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.AUTOMATIC_HAMMER_ENTITY.get(), AutomaticHammerBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.AUTOMATIC_HAMMER_ENTITY.get(), AutomaticHammerBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.AUTOMATIC_HAMMER_ENTITY.get(), AutomaticHammerBlockEntity::serverTick);
 	}
 
 	@Nullable

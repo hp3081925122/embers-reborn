@@ -9,7 +9,7 @@ import com.rekindled.embers.api.projectile.IProjectilePreset;
 import com.rekindled.embers.api.projectile.ProjectileFireball;
 import com.rekindled.embers.api.projectile.ProjectileRay;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
@@ -22,7 +22,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 public class FocalLensAugment extends AugmentBase {
 
-	public FocalLensAugment(ResourceLocation id) {
+	public FocalLensAugment(Identifier id) {
 		super(id, 10.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

@@ -17,7 +17,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.material.Fluid;
@@ -103,7 +103,7 @@ public abstract class FluidIngredient {
 		Collection<FluidStack> fluids = getAllFluids();
 		buffer.writeInt(fluids.size());
 		for (FluidStack stack : fluids) {
-			buffer.writeResourceLocation(BuiltInRegistries.FLUID.getResourceKey(stack.getFluid()).get().location());
+			buffer.writeIdentifier(BuiltInRegistries.FLUID.getResourceKey(stack.getFluid()).get().identifier());
 			buffer.writeVarInt(stack.getAmount());
 		}
 	}
@@ -232,7 +232,7 @@ public abstract class FluidIngredient {
 		int count = buffer.readInt();
 		FluidIngredient[] ingredients = new FluidIngredient[count];
 		for (int i = 0; i < count; i++) {
-			Fluid fluid = BuiltInRegistries.FLUID.get(buffer.readResourceLocation());
+			Fluid fluid = BuiltInRegistries.FLUID.get(buffer.readIdentifier());
 			if (fluid == null) {
 				fluid = Fluids.EMPTY;
 			}
@@ -309,7 +309,7 @@ public abstract class FluidIngredient {
 		@Override
 		public JsonElement serialize() {
 			JsonObject object = new JsonObject();
-			object.addProperty("fluid", Objects.requireNonNull(BuiltInRegistries.FLUID.getResourceKey(fluid).get().location()).toString());
+			object.addProperty("fluid", Objects.requireNonNull(BuiltInRegistries.FLUID.getResourceKey(fluid).get().identifier()).toString());
 			object.addProperty("amount", amount);
 			return object;
 		}
@@ -319,7 +319,7 @@ public abstract class FluidIngredient {
 			// count
 			buffer.writeInt(1);
 			// single fluid
-			buffer.writeResourceLocation(BuiltInRegistries.FLUID.getResourceKey(fluid).get().location());
+			buffer.writeIdentifier(BuiltInRegistries.FLUID.getResourceKey(fluid).get().identifier());
 			buffer.writeVarInt(amount);
 		}
 
@@ -330,7 +330,7 @@ public abstract class FluidIngredient {
 		 */
 		private static FluidMatch deserialize(JsonObject json) {
 			String fluidName = GsonHelper.getAsString(json, "fluid", GsonHelper.getAsString(json, "name", ""));
-			Fluid fluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(fluidName));
+			Fluid fluid = BuiltInRegistries.FLUID.get(Identifier.parse(fluidName));
 			if (fluid == null || fluid == Fluids.EMPTY) {
 				throw new JsonSyntaxException("Unknown fluid '" + fluidName + "'");
 			}
@@ -372,7 +372,7 @@ public abstract class FluidIngredient {
 		@Override
 		public JsonElement serialize() {
 			JsonObject object = new JsonObject();
-			object.addProperty("tag", this.tag.location().toString());
+			object.addProperty("tag", this.tag.identifier().toString());
 			object.addProperty("amount", amount);
 			return object;
 		}
@@ -383,7 +383,7 @@ public abstract class FluidIngredient {
 		 * @return Fluid ingredient instance
 		 */
 		private static TagMatch deserialize(JsonObject json) {
-			TagKey<Fluid> tag = TagKey.create(Registries.FLUID, ResourceLocation.tryParse(GsonHelper.getAsString(json, "tag")));
+			TagKey<Fluid> tag = TagKey.create(Registries.FLUID, Identifier.tryParse(GsonHelper.getAsString(json, "tag")));
 			int amount = GsonHelper.getAsInt(json, "amount");
 			return new TagMatch(tag, amount);
 		}

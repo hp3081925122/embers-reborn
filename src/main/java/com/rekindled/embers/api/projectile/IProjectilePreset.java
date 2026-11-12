@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import org.joml.Vector3f;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -18,7 +18,7 @@ public interface IProjectilePreset {
 
 	Vector3f getColor();
 
-	ResourceLocation getColorId();
+	Identifier getColorId();
 
 	IProjectileEffect getEffect();
 
@@ -37,7 +37,7 @@ public interface IProjectilePreset {
 
 	void setColor(Vector3f color);
 
-	void setColor(ResourceLocation color);
+	void setColor(Identifier color);
 
 	void setEffect(IProjectileEffect effect);
 

@@ -9,7 +9,7 @@ import com.rekindled.embers.api.item.IInflictorGemHolder;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
@@ -22,11 +22,11 @@ public class GemSocketRecipe implements CraftingRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer();
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public final Ingredient ingredient;
 
-	public GemSocketRecipe(ResourceLocation id, Ingredient ingredient) {
+	public GemSocketRecipe(Identifier id, Ingredient ingredient) {
 		this.id = id;
 		this.ingredient = ingredient;
 	}
@@ -101,7 +101,7 @@ public class GemSocketRecipe implements CraftingRecipe {
 	public boolean showNotification() {
 		return false;
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -116,8 +116,8 @@ public class GemSocketRecipe implements CraftingRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<GemSocketRecipe> {
-		public GemSocketRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable GemSocketRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public GemSocketRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable GemSocketRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, GemSocketRecipe recipe) {}
 	
 		@Override

@@ -43,7 +43,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
@@ -88,8 +88,8 @@ public class GuiCodex extends Screen {
 	public int searchDelay;
 	public ArrayList<ResearchBase> searchResult = new ArrayList<>();
 
-	public static ResourceLocation INDEX = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_index.png");
-	public static ResourceLocation PARTS = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_parts.png");
+	public static Identifier INDEX = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_index.png");
+	public static Identifier PARTS = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_parts.png");
 
 	public static int codexWidth = 192;
 	public static int codexHeight = 240;
@@ -320,7 +320,7 @@ public class GuiCodex extends Screen {
 		graphics.drawString(font, s, x, y, Misc.intColor(1.0f, Misc.multColor(EmbersColors.EMBER, 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f))), false);
 	}
 
-	public void drawModalRectGlowing(GuiGraphics graphics, ResourceLocation texture, int x, int y, int textureX, int textureY, int width, int height) {
+	public void drawModalRectGlowing(GuiGraphics graphics, Identifier texture, int x, int y, int textureX, int textureY, int width, int height) {
 		RenderSystem.setShaderColor(0,0,0,64f/255);
 		graphics.blit(texture, x-1, y,textureX,textureY,width,height);
 		graphics.blit(texture, x+1, y,textureX,textureY,width,height);

@@ -49,7 +49,7 @@ public class CatalysisChamberBlock extends ChamberBlockBase {
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
 		if (pState.getValue(CONNECTION) == ChamberConnection.BOTTOM)
-			return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, RegistryManager.CATALYSIS_CHAMBER_ENTITY.get(), CatalysisChamberBlockEntity::serverTick);
+			return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, RegistryManager.CATALYSIS_CHAMBER_ENTITY.get(), CatalysisChamberBlockEntity::serverTick);
 		return null;
 	}
 }

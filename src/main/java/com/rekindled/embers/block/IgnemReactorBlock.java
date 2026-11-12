@@ -82,7 +82,7 @@ public class IgnemReactorBlock extends BaseEntityBlock implements SimpleWaterlog
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.IGNEM_REACTOR_ENTITY.get(), IgnemReactorBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.IGNEM_REACTOR_ENTITY.get(), IgnemReactorBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.IGNEM_REACTOR_ENTITY.get(), IgnemReactorBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.IGNEM_REACTOR_ENTITY.get(), IgnemReactorBlockEntity::serverTick);
 	}
 
 	@Nullable

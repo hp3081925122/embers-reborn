@@ -83,7 +83,7 @@ public class MechanicalPumpBlock extends DoubleTallMachineBlock {
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
 		if (pState.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER)
-			return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.MECHANICAL_PUMP_BOTTOM_ENTITY.get(), MechanicalPumpBottomBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MECHANICAL_PUMP_BOTTOM_ENTITY.get(), MechanicalPumpBottomBlockEntity::serverTick);
+			return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.MECHANICAL_PUMP_BOTTOM_ENTITY.get(), MechanicalPumpBottomBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MECHANICAL_PUMP_BOTTOM_ENTITY.get(), MechanicalPumpBottomBlockEntity::serverTick);
 		return null;
 	}
 	@Override

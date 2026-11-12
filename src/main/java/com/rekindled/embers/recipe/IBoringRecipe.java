@@ -7,7 +7,7 @@ import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.util.WeightedItemStack;
 
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -30,9 +30,9 @@ public interface IBoringRecipe extends Recipe<BoringContext> {
 
 	public int getMaxHeight();
 
-	public Collection<ResourceLocation> getDimensions();
+	public Collection<Identifier> getDimensions();
 
-	public Collection<ResourceLocation> getBiomes();
+	public Collection<Identifier> getBiomes();
 
 	public double getChance();
 

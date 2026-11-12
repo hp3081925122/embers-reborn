@@ -94,7 +94,7 @@ public class BinBlock extends BaseEntityBlock implements SimpleWaterloggedBlock 
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, RegistryManager.BIN_ENTITY.get(), BinBlockEntity::serverTick);
+		return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, RegistryManager.BIN_ENTITY.get(), BinBlockEntity::serverTick);
 	}
 
 	@Nullable

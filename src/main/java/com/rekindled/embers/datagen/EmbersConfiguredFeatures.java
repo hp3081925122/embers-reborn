@@ -9,7 +9,7 @@ import com.rekindled.embers.RegistryManager;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -25,13 +25,13 @@ public class EmbersConfiguredFeatures {
 	public static final Supplier<List<OreConfiguration.TargetBlockState>> ORE_LEAD_TARGET_LIST = () -> List.of(
 			OreConfiguration.target(STONE_ORE_REPLACEABLES, RegistryManager.LEAD_ORE.get().defaultBlockState()),
 			OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, RegistryManager.DEEPSLATE_LEAD_ORE.get().defaultBlockState()));
-	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_LEAD_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ore_lead"));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_LEAD_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, Identifier.fromNamespaceAndPath(Embers.MODID, "ore_lead"));
 	public static final ConfiguredFeature<OreConfiguration, ?> ORE_LEAD = new ConfiguredFeature<OreConfiguration, Feature<OreConfiguration>>(Feature.ORE, new OreConfiguration(ORE_LEAD_TARGET_LIST.get(), 8));
 
 	public static final Supplier<List<OreConfiguration.TargetBlockState>> ORE_SILVER_TARGET_LIST = () -> List.of(
 			OreConfiguration.target(STONE_ORE_REPLACEABLES, RegistryManager.SILVER_ORE.get().defaultBlockState()),
 			OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, RegistryManager.DEEPSLATE_SILVER_ORE.get().defaultBlockState()));
-	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SILVER_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ore_silver"));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SILVER_KEY = ResourceKey.create(Registries.CONFIGURED_FEATURE, Identifier.fromNamespaceAndPath(Embers.MODID, "ore_silver"));
 	public static final ConfiguredFeature<OreConfiguration, ?> ORE_SILVER = new ConfiguredFeature<OreConfiguration, Feature<OreConfiguration>>(Feature.ORE, new OreConfiguration(ORE_SILVER_TARGET_LIST.get(), 6, 0.25F));
 
 	public static void generate(BootstrapContext<ConfiguredFeature<?, ?>> bootstrap) {

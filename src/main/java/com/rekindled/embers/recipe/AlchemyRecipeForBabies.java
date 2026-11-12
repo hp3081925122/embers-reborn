@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
 import com.rekindled.embers.RegistryManager;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -21,7 +21,7 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 
 	public static final Serializer SERIALIZER = new Serializer();
 
-	public AlchemyRecipeForBabies(ResourceLocation id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
+	public AlchemyRecipeForBabies(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
 		super(id, tablet, aspects, inputs, output, failure);
 	}
 
@@ -71,7 +71,7 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 			return net.minecraft.network.codec.StreamCodec.of((buf, r) -> toNetwork(buf, r), buf -> fromNetwork(null, buf));
 		}
 
-				public AlchemyRecipeForBabies fromJson(ResourceLocation recipeId, JsonObject json) {
+				public AlchemyRecipeForBabies fromJson(Identifier recipeId, JsonObject json) {
 			Ingredient tablet = Ingredient.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, json.get("tablet")).result().orElse(Ingredient.EMPTY);
 
 			ArrayList<Ingredient> inputs = new ArrayList<>();
@@ -98,7 +98,7 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 			return new AlchemyRecipeForBabies(recipeId, tablet, aspects, inputs, output, failure);
 		}
 
-				public @Nullable AlchemyRecipeForBabies fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {
+				public @Nullable AlchemyRecipeForBabies fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {
 			Ingredient tablet = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
 			ArrayList<Ingredient> aspects = buffer.readCollection((i) -> new ArrayList<>(), (buf) -> Ingredient.CONTENTS_STREAM_CODEC.decode((net.minecraft.network.RegistryFriendlyByteBuf) buf));
 			ArrayList<Ingredient> inputs = buffer.readCollection((i) -> new ArrayList<>(), (buf) -> Ingredient.CONTENTS_STREAM_CODEC.decode((net.minecraft.network.RegistryFriendlyByteBuf) buf));

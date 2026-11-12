@@ -44,7 +44,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -101,12 +101,12 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 	@Override
 	public void buildRecipes(RecipeOutput consumer) {
 		//boring
-		BoringRecipeBuilder.create(RegistryManager.EMBER_CRYSTAL.get()).folder(boringFolder).dimension(Level.OVERWORLD.location()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(20).maxHeight(-57).save(consumer);
-		BoringRecipeBuilder.create(RegistryManager.EMBER_SHARD.get()).folder(boringFolder).dimension(Level.OVERWORLD.location()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(60).maxHeight(-57).save(consumer);
-		BoringRecipeBuilder.create(RegistryManager.EMBER_GRIT.get()).folder(boringFolder).dimension(Level.OVERWORLD.location()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(20).maxHeight(-57).save(consumer);
-		BoringRecipeBuilder.create(RegistryManager.EMBER_CRYSTAL.get()).folder(boringFolder + "/nether").dimension(Level.NETHER.location()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(20).maxHeight(7).save(consumer);
-		BoringRecipeBuilder.create(RegistryManager.EMBER_SHARD.get()).folder(boringFolder + "/nether").dimension(Level.NETHER.location()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(60).maxHeight(7).save(consumer);
-		BoringRecipeBuilder.create(RegistryManager.EMBER_GRIT.get()).folder(boringFolder + "/nether").dimension(Level.NETHER.location()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(20).maxHeight(7).save(consumer);
+		BoringRecipeBuilder.create(RegistryManager.EMBER_CRYSTAL.get()).folder(boringFolder).dimension(Level.OVERWORLD.identifier()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(20).maxHeight(-57).save(consumer);
+		BoringRecipeBuilder.create(RegistryManager.EMBER_SHARD.get()).folder(boringFolder).dimension(Level.OVERWORLD.identifier()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(60).maxHeight(-57).save(consumer);
+		BoringRecipeBuilder.create(RegistryManager.EMBER_GRIT.get()).folder(boringFolder).dimension(Level.OVERWORLD.identifier()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(20).maxHeight(-57).save(consumer);
+		BoringRecipeBuilder.create(RegistryManager.EMBER_CRYSTAL.get()).folder(boringFolder + "/nether").dimension(Level.NETHER.identifier()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(20).maxHeight(7).save(consumer);
+		BoringRecipeBuilder.create(RegistryManager.EMBER_SHARD.get()).folder(boringFolder + "/nether").dimension(Level.NETHER.identifier()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(60).maxHeight(7).save(consumer);
+		BoringRecipeBuilder.create(RegistryManager.EMBER_GRIT.get()).folder(boringFolder + "/nether").dimension(Level.NETHER.identifier()).require(EmbersBlockTags.WORLD_BOTTOM, 3).weight(20).maxHeight(7).save(consumer);
 		//excavation
 		BoringRecipeBuilder.create(Items.GRAVEL).folder(boringFolder).require(Tags.Blocks.GRAVELS, 5).chance(0.9).weight(50).type(RegistryManager.EXCAVATION_SERIALIZER.get()).save(consumer);
 		BoringRecipeBuilder.create(Items.FLINT).folder(boringFolder).require(Tags.Blocks.GRAVELS, 5).chance(1.0).weight(5).type(RegistryManager.EXCAVATION_SERIALIZER.get()).save(consumer);
@@ -160,8 +160,8 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		fullMeltingStampingRecipes("brass", RegistryManager.MOLTEN_BRASS.FLUID.get(), consumer);
 		fullMeltingStampingRecipes("constantan", RegistryManager.MOLTEN_CONSTANTAN.FLUID.get(), consumer);
 		fullMeltingStampingRecipes("invar", RegistryManager.MOLTEN_INVAR.FLUID.get(), consumer);
-		MeltingRecipeBuilder.create(Ingredient.of(Items.SOUL_SAND, Items.SOUL_SOIL)).id(ResourceLocation.fromNamespaceAndPath(Embers.MODID, meltingFolder + "/soul_crude")).output(RegistryManager.SOUL_CRUDE.FLUID.get(), 100).save(consumer);
-		MeltingRecipeBuilder.create(Items.SNOWBALL).id(ResourceLocation.fromNamespaceAndPath(Embers.MODID, meltingFolder + "/snow_melting")).output(Fluids.WATER, 250).save(consumer);
+		MeltingRecipeBuilder.create(Ingredient.of(Items.SOUL_SAND, Items.SOUL_SOIL)).id(Identifier.fromNamespaceAndPath(Embers.MODID, meltingFolder + "/soul_crude")).output(RegistryManager.SOUL_CRUDE.FLUID.get(), 100).save(consumer);
+		MeltingRecipeBuilder.create(Items.SNOWBALL).id(Identifier.fromNamespaceAndPath(Embers.MODID, meltingFolder + "/snow_melting")).output(Fluids.WATER, 250).save(consumer);
 
 		//stamper crushing
 		StampingRecipeBuilder.create(RegistryManager.EMBER_GRIT.get()).domain(Embers.MODID).folder(stampingFolder).stamp(RegistryManager.FLAT_STAMP.get()).input(RegistryManager.EMBER_SHARD.get()).save(ConsumerWrapperBuilder.wrap().build(consumer)); //today is the day
@@ -185,8 +185,8 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		MixingRecipeBuilder.create(EmbersFluidTags.MOLTEN_BRASS, 4).domain(Embers.MODID).folder(mixingFolder).input(EmbersFluidTags.MOLTEN_COPPER, 2).input(EmbersFluidTags.MOLTEN_ZINC, 2).save(ConsumerWrapperBuilder.wrap().addCondition(tagReal(itemTag("c", "ingots/brass"))).build(consumer));
 		MixingRecipeBuilder.create(EmbersFluidTags.MOLTEN_CONSTANTAN, 4).domain(Embers.MODID).folder(mixingFolder).input(EmbersFluidTags.MOLTEN_COPPER, 2).input(EmbersFluidTags.MOLTEN_NICKEL, 2).save(ConsumerWrapperBuilder.wrap().addCondition(tagReal(itemTag("c", "ingots/constantan"))).build(consumer));
 		MixingRecipeBuilder.create(EmbersFluidTags.MOLTEN_INVAR, 3).domain(Embers.MODID).folder(mixingFolder).input(EmbersFluidTags.MOLTEN_IRON, 2).input(EmbersFluidTags.MOLTEN_NICKEL, 1).save(ConsumerWrapperBuilder.wrap().addCondition(tagReal(itemTag("c", "ingots/invar"))).build(consumer));
-		MixingRecipeBuilder.create(RegistryManager.DWARVEN_OIL.FLUID.get(), 10).id(ResourceLocation.fromNamespaceAndPath(Embers.MODID, mixingFolder + "/dwarven_oil_steam")).input(RegistryManager.SOUL_CRUDE.FLUID.get(), 5).input(EmbersFluidTags.STEAM, 20).save(consumer);
-		MixingRecipeBuilder.create(RegistryManager.DWARVEN_OIL.FLUID.get(), 30).id(ResourceLocation.fromNamespaceAndPath(Embers.MODID, mixingFolder + "/dwarven_oil")).input(RegistryManager.SOUL_CRUDE.FLUID.get(), 10).input(RegistryManager.DWARVEN_GAS.FLUID.get(), 5).save(consumer);
+		MixingRecipeBuilder.create(RegistryManager.DWARVEN_OIL.FLUID.get(), 10).id(Identifier.fromNamespaceAndPath(Embers.MODID, mixingFolder + "/dwarven_oil_steam")).input(RegistryManager.SOUL_CRUDE.FLUID.get(), 5).input(EmbersFluidTags.STEAM, 20).save(consumer);
+		MixingRecipeBuilder.create(RegistryManager.DWARVEN_OIL.FLUID.get(), 30).id(Identifier.fromNamespaceAndPath(Embers.MODID, mixingFolder + "/dwarven_oil")).input(RegistryManager.SOUL_CRUDE.FLUID.get(), 10).input(RegistryManager.DWARVEN_GAS.FLUID.get(), 5).save(consumer);
 
 		//metal coefficient
 		MetalCoefficientRecipeBuilder.create(EmbersBlockTags.DAWNSTONE_BLOCK).domain(Embers.MODID).folder(coefficientFolder).coefficient(1.5).save(consumer);
@@ -240,7 +240,7 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		.inputs(Tags.Items.STORAGE_BLOCKS_COAL, Tags.Items.OBSIDIANS, EmbersItemTags.LEAD_INGOT, EmbersItemTags.LEAD_INGOT)
 		.aspects(EmbersItemTags.LEAD_ASPECTUS, EmbersItemTags.SILVER_ASPECTUS).save(consumer);
 		AlchemyRecipeBuilder.create(new ItemStack(RegistryManager.ISOLATED_MATERIA.get(), 4)).tablet(Tags.Items.INGOTS_IRON).folder(alchemyFolder)
-		.inputs(Ingredient.of(net.minecraft.tags.ItemTags.create(net.minecraft.resources.ResourceLocation.parse("c:gems/quartz"))), Ingredient.of(Items.CLAY_BALL), Ingredient.of(Tags.Items.GEMS_LAPIS))
+		.inputs(Ingredient.of(net.minecraft.tags.ItemTags.create(net.minecraft.resources.Identifier.parse("c:gems/quartz"))), Ingredient.of(Items.CLAY_BALL), Ingredient.of(Tags.Items.GEMS_LAPIS))
 		.aspects(EmbersItemTags.COPPER_ASPECTUS, EmbersItemTags.IRON_ASPECTUS, EmbersItemTags.LEAD_ASPECTUS, EmbersItemTags.SILVER_ASPECTUS).save(consumer);
 		AlchemyRecipeBuilder.create(RegistryManager.CATALYTIC_PLUG.get()).tablet(EmbersItemTags.SILVER_INGOT).folder(alchemyFolder)
 		.inputs(Ingredient.of(RegistryManager.FLUID_PIPE.get()), Ingredient.of(Tags.Items.GLASS_BLOCKS_COLORLESS), Ingredient.of(RegistryManager.FLUID_PIPE.get()))
@@ -278,7 +278,7 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		AlchemyRecipeBuilder.create(new ItemStack(RegistryManager.ADHESIVE.get(), 6)).tablet(Items.CLAY_BALL).folder(alchemyFolder)
 		.inputs(Items.BONE_MEAL, Items.BONE_MEAL)
 		.aspects(EmbersItemTags.IRON_ASPECTUS, EmbersItemTags.LEAD_ASPECTUS).save(consumer);
-		AlchemyRecipeBuilder.create(RegistryManager.GLIMMER_CRYSTAL.get()).tablet(net.minecraft.tags.ItemTags.create(net.minecraft.resources.ResourceLocation.parse("c:gems/quartz"))).folder(alchemyFolder)
+		AlchemyRecipeBuilder.create(RegistryManager.GLIMMER_CRYSTAL.get()).tablet(net.minecraft.tags.ItemTags.create(net.minecraft.resources.Identifier.parse("c:gems/quartz"))).folder(alchemyFolder)
 		.inputs(Ingredient.of(Tags.Items.GUNPOWDERS), Ingredient.of(Tags.Items.GUNPOWDERS), Ingredient.of(RegistryManager.EMBER_SHARD.get()), Ingredient.of(RegistryManager.EMBER_SHARD.get()))
 		.aspects(EmbersItemTags.COPPER_ASPECTUS, EmbersItemTags.DAWNSTONE_ASPECTUS).save(consumer);
 		AlchemyRecipeBuilder.create(RegistryManager.ENTROPIC_ENUMERATOR.get()).tablet(RegistryManager.ASHEN_TILE.get()).folder(alchemyFolder)
@@ -322,7 +322,7 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		BoilingRecipeBuilder.create(RegistryManager.DWARVEN_GAS.FLUID.get(), 1).folder(boilingFolder).input(RegistryManager.DWARVEN_OIL.FLUID.get(), 1).save(consumer);
 
 		//gaseous fuel
-		GaseousFuelRecipeBuilder.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "steam")).input(EmbersFluidTags.STEAM, 1).folder(gaseousFuelFolder).burnTime(1).powerMultiplier(2.0).save(consumer);
+		GaseousFuelRecipeBuilder.create(Identifier.fromNamespaceAndPath(Embers.MODID, "steam")).input(EmbersFluidTags.STEAM, 1).folder(gaseousFuelFolder).burnTime(1).powerMultiplier(2.0).save(consumer);
 		GaseousFuelRecipeBuilder.create(RegistryManager.DWARVEN_GAS.FLUID.get(), 1).folder(gaseousFuelFolder).burnTime(5).powerMultiplier(2.5).save(consumer);
 
 		//catalysis and combustion
@@ -335,10 +335,10 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		CatalysisCombustionRecipeBuilder.create(Items.BLAZE_POWDER).combustion().domain(Embers.MODID).folder(combustionFolder).multiplier(4.0).burnTime(400).save(consumer);
 
 		//dawnstone anvil
-		GenericRecipeBuilder.create(new AnvilRepairRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_repair"))).save(consumer);
-		GenericRecipeBuilder.create(new AnvilRepairMateriaRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_materia_repair"))).save(consumer);
-		GenericRecipeBuilder.create(new AnvilBreakdownRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_breakdown"))).save(consumer);
-		GenericRecipeBuilder.create(new AnvilAugmentRemoveRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_augment_remove"))).save(consumer);
+		GenericRecipeBuilder.create(new AnvilRepairRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_repair"))).save(consumer);
+		GenericRecipeBuilder.create(new AnvilRepairMateriaRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_materia_repair"))).save(consumer);
+		GenericRecipeBuilder.create(new AnvilBreakdownRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_breakdown"))).save(consumer);
+		GenericRecipeBuilder.create(new AnvilAugmentRemoveRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_augment_remove"))).save(consumer);
 
 		AnvilAugmentRecipeBuilder.create(RegistryManager.CORE_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE), true).toVanilla()).input(RegistryManager.ANCIENT_MOTIVE_CORE.get()).save(consumer);
 		AnvilAugmentRecipeBuilder.create(RegistryManager.TINKER_LENS_AUGMENT).folder(anvilFolder).tool(AugmentIngredient.of(DifferenceIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_HELMETS), Ingredient.of(EmbersItemTags.TINKER_LENS_HELMETS)), RegistryManager.TINKER_LENS_AUGMENT, true).toVanilla()).input(RegistryManager.TINKER_LENS.get()).save(consumer);
@@ -358,8 +358,8 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		AnvilAugmentRecipeBuilder.create(RegistryManager.WINDING_GEARS_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(net.neoforged.neoforge.common.crafting.CompoundIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_TOOLS), Ingredient.of(EmbersItemTags.AUGMENTABLE_BOOTS))).toVanilla()).input(RegistryManager.WINDING_GEARS.get()).save(consumer);
 
 		//special recipes
-		GemSocketRecipeBuilder.create(Tags.Items.STRINGS).id(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gem_socketing")).save(consumer);
-		GenericRecipeBuilder.create(new GemUnsocketRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gem_unsocketing"))).save(consumer);
+		GemSocketRecipeBuilder.create(Tags.Items.STRINGS).id(Identifier.fromNamespaceAndPath(Embers.MODID, "gem_socketing")).save(consumer);
+		GenericRecipeBuilder.create(new GemUnsocketRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, "gem_unsocketing"))).save(consumer);
 
 		//crafting
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, RegistryManager.EMBER_CRYSTAL.get())
@@ -1632,7 +1632,7 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 	public void bonusRecipe(BiConsumer<ICondition, MeltingBonus> recipe, ICondition baseCondition, MeltingBonus... bonusses) {
 		ArrayList<ICondition> conditions = new ArrayList<ICondition>();
 		for (MeltingBonus bonus : bonusses) {
-			ICondition condition = new TagEmptyCondition(itemTag("c", "ingots/" + bonus.name).location());
+			ICondition condition = new TagEmptyCondition(itemTag("c", "ingots/" + bonus.name).identifier());
 
 			ArrayList<ICondition> recipeConditions = new ArrayList<ICondition>();
 
@@ -1824,18 +1824,18 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 	}
 
 	public TagKey<Item> itemTag(String modId, String name) {
-		return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(modId, name));
+		return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(modId, name));
 	}
 
 	public TagKey<Fluid> fluidTag(String modId, String name) {
-		return TagKey.create(Registries.FLUID, ResourceLocation.fromNamespaceAndPath(modId, name));
+		return TagKey.create(Registries.FLUID, Identifier.fromNamespaceAndPath(modId, name));
 	}
 
 	public ICondition tagReal(TagKey<?> tag) {
-		return new NotCondition(new TagEmptyCondition(tag.location()));
+		return new NotCondition(new TagEmptyCondition(tag.identifier()));
 	}
 
-	public static ResourceLocation getResource(String name) {
-		return ResourceLocation.fromNamespaceAndPath(Embers.MODID, name);
+	public static Identifier getResource(String name) {
+		return Identifier.fromNamespaceAndPath(Embers.MODID, name);
 	}
 }

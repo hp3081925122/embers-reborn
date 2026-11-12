@@ -12,7 +12,7 @@ import com.rekindled.embers.entity.EmberProjectileEntity;
 import com.rekindled.embers.util.EmbersColors;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -25,7 +25,7 @@ public class ProjectileFireball implements IProjectilePreset {
 	int lifetime;
 	Entity shooter;
 	EmberProjectileEntity entity;
-	ResourceLocation colorId = EmbersColors.EMBER_ID;
+	Identifier colorId = EmbersColors.EMBER_ID;
 	Vector3f color = EmbersColors.EMBER;
 	double gravity;
 
@@ -85,7 +85,7 @@ public class ProjectileFireball implements IProjectilePreset {
 	}
 
 	@Override
-	public ResourceLocation getColorId() {
+	public Identifier getColorId() {
 		return this.colorId;
 	}
 
@@ -96,7 +96,7 @@ public class ProjectileFireball implements IProjectilePreset {
 	}
 
 	@Override
-	public void setColor(ResourceLocation color) {
+	public void setColor(Identifier color) {
 		this.colorId = color;
 	}
 

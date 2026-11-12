@@ -17,7 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,7 +31,7 @@ public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
 	public static BakedModel buckets;
 
 	public ExcavationBucketsUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "excavation_buckets"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "excavation_buckets"), tile);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
 			List<IBoringRecipe> recipes = (List<IBoringRecipe>) recipeEvent.getRecipe();
 
 			ResourceKey<Biome> biome = tile.getLevel().getBiome(tile.getBlockPos()).unwrapKey().get();
-			BoringContext context = new BoringContext(tile.getLevel().dimension().location(), biome.location(), tile.getBlockPos().getY(), tile.getLevel().getBlockStatesIfLoaded(bore.getBladeBoundingBox()).collect(java.util.stream.Collectors.toList()));
+			BoringContext context = new BoringContext(tile.getLevel().dimension().identifier(), biome.identifier(), tile.getBlockPos().getY(), tile.getLevel().getBlockStatesIfLoaded(bore.getBladeBoundingBox()).collect(java.util.stream.Collectors.toList()));
 			List<IBoringRecipe> newRecipes = tile.getLevel().getRecipeManager().getRecipesFor(RegistryManager.EXCAVATION.get(), context, tile.getLevel()).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
 
 			recipes.addAll(newRecipes);

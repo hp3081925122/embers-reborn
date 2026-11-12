@@ -12,18 +12,18 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 
 public class ResearchShowItem extends ResearchBase {
 	LinkedList<DisplayItem> displayItems = new LinkedList<>();
 
-	public ResearchShowItem(ResourceLocation location, ItemStack icon, double x, double y) {
+	public ResearchShowItem(Identifier location, ItemStack icon, double x, double y) {
 		super(location, icon, x, y);
 	}
 
-	public ResearchShowItem(ResourceLocation location, ItemStack icon, Vec2i pos) {
+	public ResearchShowItem(Identifier location, ItemStack icon, Vec2i pos) {
 		this(location, icon, pos.x, pos.y);
 	}
 
@@ -89,13 +89,13 @@ public class ResearchShowItem extends ResearchBase {
 
 	public static class DisplayItem {
 		public ItemStack[] stacks;
-		public ResourceLocation sideText;
+		public Identifier sideText;
 
 		public DisplayItem(ItemStack... stacks) {
 			this.stacks = stacks;
 		}
 
-		public DisplayItem(ResourceLocation sideText, ItemStack... stacks) {
+		public DisplayItem(Identifier sideText, ItemStack... stacks) {
 			this.stacks = stacks;
 			this.sideText = sideText;
 		}

@@ -7,7 +7,7 @@ import com.rekindled.embers.RegistryManager;
 
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +17,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class EmberActivationRecipeBuilder {
 
-	public ResourceLocation id;
+	public Identifier id;
 	public Ingredient ingredient;
 	public int ember;
 
@@ -29,7 +29,7 @@ public class EmberActivationRecipeBuilder {
 
 	public static EmberActivationRecipeBuilder create(TagKey<Item> tag) {
 		EmberActivationRecipeBuilder builder = create(Ingredient.of(tag));
-		builder.id = tag.location();
+		builder.id = tag.identifier();
 		return builder;
 	}
 
@@ -43,18 +43,18 @@ public class EmberActivationRecipeBuilder {
 		return create(new ItemStack(item));
 	}
 
-	public EmberActivationRecipeBuilder id(ResourceLocation id) {
+	public EmberActivationRecipeBuilder id(Identifier id) {
 		this.id = id;
 		return this;
 	}
 
 	public EmberActivationRecipeBuilder domain(String domain) {
-		this.id = ResourceLocation.fromNamespaceAndPath(domain, this.id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(domain, this.id.getPath());
 		return this;
 	}
 
 	public EmberActivationRecipeBuilder folder(String folder) {
-		this.id = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
 		return this;
 	}
 

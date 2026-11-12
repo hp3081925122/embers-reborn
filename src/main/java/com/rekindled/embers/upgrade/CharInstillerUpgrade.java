@@ -10,7 +10,7 @@ import com.rekindled.embers.api.upgrades.UpgradeContext;
 import com.rekindled.embers.blockentity.HearthCoilBlockEntity;
 import com.rekindled.embers.particle.SmokeParticleOptions;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
@@ -20,7 +20,7 @@ public class CharInstillerUpgrade extends DefaultUpgradeProvider {
 	protected static Random random = new Random();
 
 	public CharInstillerUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "char_instiller"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "char_instiller"), tile);
 	}
 
 	@Override

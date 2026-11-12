@@ -10,7 +10,7 @@ import com.rekindled.embers.blockentity.EmberBoreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,8 +35,8 @@ import snownee.jade.api.view.ViewGroup;
 @WailaPlugin
 public class EmberBoreJadePlugin implements IWailaPlugin {
 
-	private static final ResourceLocation ITEMS = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "bore_items");
-	private static final ResourceLocation PROGRESS = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "bore_progress");
+	private static final Identifier ITEMS = Identifier.fromNamespaceAndPath(Embers.MODID, "bore_items");
+	private static final Identifier PROGRESS = Identifier.fromNamespaceAndPath(Embers.MODID, "bore_progress");
 
 	@Override
 	public void register(IWailaCommonRegistration registration) {
@@ -67,7 +67,7 @@ public class EmberBoreJadePlugin implements IWailaPlugin {
 		INSTANCE;
 
 		@Override
-		public ResourceLocation getUid() {
+		public Identifier getUid() {
 			return ITEMS;
 		}
 
@@ -89,7 +89,7 @@ public class EmberBoreJadePlugin implements IWailaPlugin {
 		INSTANCE;
 
 		@Override
-		public ResourceLocation getUid() {
+		public Identifier getUid() {
 			return PROGRESS;
 		}
 

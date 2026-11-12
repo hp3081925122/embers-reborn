@@ -57,21 +57,21 @@ public class DawnstoneAnvilBlock extends BaseEntityBlock implements SimpleWaterl
 		if (level.getBlockEntity(pos) instanceof DawnstoneAnvilBlockEntity anvilEntity && !heldItem.isEmpty()) {
 			if (heldItem.getItem() == RegistryManager.TINKER_HAMMER.get()) {
 				if (anvilEntity.onHit())
-					return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+					return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
 				return net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 			}
 			for (int i = 0; i < anvilEntity.inventory.getSlots(); i++) {
 				ItemStack leftover = anvilEntity.inventory.insertItem(i, heldItem, false);
 				if (!leftover.equals(heldItem)) {
 					player.setItemInHand(hand, leftover);
-					return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+					return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
 				}
 			}
 			for (int i = anvilEntity.inventory.getSlots() - 1; i >= 0; i--) {
 				if (!anvilEntity.inventory.getStackInSlot(i).isEmpty()) {
 					level.addFreshEntity(new ItemEntity(level, player.position().x, player.position().y, player.position().z, anvilEntity.inventory.getStackInSlot(i)));
 					anvilEntity.inventory.setStackInSlot(i, ItemStack.EMPTY);
-					return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+					return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
 				}
 			}
 		}

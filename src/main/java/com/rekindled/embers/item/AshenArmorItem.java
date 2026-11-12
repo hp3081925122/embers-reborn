@@ -10,7 +10,7 @@ import com.rekindled.embers.model.AshenArmorModel;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,8 +30,8 @@ public class AshenArmorItem extends ArmorItem {
 	}
 
 	@Override
-	public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
-		return ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/models/armor/robe.png");
+	public Identifier getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+		return Identifier.fromNamespaceAndPath(Embers.MODID, "textures/models/armor/robe.png");
 	}
 
 	public void setDamage(ItemStack stack, int damage) {

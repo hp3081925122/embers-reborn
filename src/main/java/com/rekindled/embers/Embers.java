@@ -109,7 +109,7 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;
@@ -480,7 +480,7 @@ public class Embers {
 
 		}
 		if (event.getRegistryKey().equals(Registries.LOOT_CONDITION_TYPE)) {
-			event.register(Registries.LOOT_CONDITION_TYPE, ResourceLocation.fromNamespaceAndPath(MODID, "match_curio"), () -> MatchCurioLootCondition.LOOT_CONDITION_TYPE);
+			event.register(Registries.LOOT_CONDITION_TYPE, Identifier.fromNamespaceAndPath(MODID, "match_curio"), () -> MatchCurioLootCondition.LOOT_CONDITION_TYPE);
 		}
 	}
 
@@ -504,7 +504,7 @@ public class Embers {
 			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_OIL.FLUID_FLOW.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_GAS.FLUID.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_GAS.FLUID_FLOW.get(), RenderType.translucent());
-			event.enqueueWork(() -> ItemProperties.register(RegistryManager.INFLICTOR_GEM.get(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "charged"), (stack, level, entity, seed) -> {
+			event.enqueueWork(() -> ItemProperties.register(RegistryManager.INFLICTOR_GEM.get(), Identifier.fromNamespaceAndPath(Embers.MODID, "charged"), (stack, level, entity, seed) -> {
 				return _getOrCreateTag(stack).contains("type") ? 1.0F : 0.0F;
 			}));
 		}
@@ -518,20 +518,20 @@ public class Embers {
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		public static void overlayRegister(RegisterGuiLayersEvent event) {
-			event.registerAboveAll(ResourceLocation.parse(Embers.MODID + ":embers_ingame_overlay"), EmbersClientEvents.INGAME_OVERLAY);
-			event.registerAboveAll(ResourceLocation.parse(Embers.MODID + ":shifting_scales_particles"), (graphics, deltaTracker) -> {
+			event.registerAboveAll(Identifier.parse(Embers.MODID + ":embers_ingame_overlay"), EmbersClientEvents.INGAME_OVERLAY);
+			event.registerAboveAll(Identifier.parse(Embers.MODID + ":shifting_scales_particles"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
 				com.rekindled.embers.augment.ShiftingScalesAugment.renderIngameOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
-			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.PLAYER_HEALTH, ResourceLocation.parse(Embers.MODID + ":shifting_scales_hearts"), (graphics, deltaTracker) -> {
+			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.PLAYER_HEALTH, Identifier.parse(Embers.MODID + ":shifting_scales_hearts"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
 				com.rekindled.embers.augment.ShiftingScalesAugment.renderHeartsOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
-			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.JUMP_METER, ResourceLocation.parse(Embers.MODID + ":winding_gears_spring_bottom"), (graphics, deltaTracker) -> {
+			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.JUMP_METER, Identifier.parse(Embers.MODID + ":winding_gears_spring_bottom"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
 				com.rekindled.embers.augment.WindingGearsAugment.renderSpringUnderlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
-			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.EXPERIENCE_BAR, ResourceLocation.parse(Embers.MODID + ":winding_gears_spring_top"), (graphics, deltaTracker) -> {
+			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.EXPERIENCE_BAR, Identifier.parse(Embers.MODID + ":winding_gears_spring_top"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
 				com.rekindled.embers.augment.WindingGearsAugment.renderSpringOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
@@ -637,7 +637,7 @@ public class Embers {
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
-			event.register(ResourceLocation.parse(Embers.MODID + ":pipe"), PipeModel.Loader.INSTANCE);
+			event.register(Identifier.parse(Embers.MODID + ":pipe"), PipeModel.Loader.INSTANCE);
 		}
 
 		@OnlyIn(Dist.CLIENT)
@@ -650,19 +650,19 @@ public class Embers {
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(MODID, "position_tex_color_additive"), DefaultVertexFormat.POSITION_TEX_COLOR), shaderInstance -> {
+			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "position_tex_color_additive"), DefaultVertexFormat.POSITION_TEX_COLOR), shaderInstance -> {
 				EmbersRenderTypes.additiveShader = shaderInstance;
 			});
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(MODID, "particle_ember"), DefaultVertexFormat.PARTICLE), shaderInstance -> {
+			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "particle_ember"), DefaultVertexFormat.PARTICLE), shaderInstance -> {
 				EmbersRenderTypes.emberParticleShader = shaderInstance;
 			});
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(MODID, "particle_ember_fab"), DefaultVertexFormat.PARTICLE), shaderInstance -> {
+			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "particle_ember_fab"), DefaultVertexFormat.PARTICLE), shaderInstance -> {
 				EmbersRenderTypes.emberParticleFabShader = shaderInstance;
 			});
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(MODID, "particle_translucent"), DefaultVertexFormat.PARTICLE), shaderInstance -> {
+			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "particle_translucent"), DefaultVertexFormat.PARTICLE), shaderInstance -> {
 				EmbersRenderTypes.translucentParticleShader = shaderInstance;
 			});
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(MODID, "rendertype_entity_solid_mithril"), DefaultVertexFormat.NEW_ENTITY), shaderInstance -> {
+			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "rendertype_entity_solid_mithril"), DefaultVertexFormat.NEW_ENTITY), shaderInstance -> {
 				EmbersRenderTypes.mithrilShader = shaderInstance;
 			});
 		}
@@ -670,7 +670,7 @@ public class Embers {
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		public static void renderTypeRegistry(RegisterNamedRenderTypesEvent event) {
-			event.register(ResourceLocation.parse(Embers.MODID + ":mithril"), RenderType.solid(), EmbersRenderTypes.MITHRIL);
+			event.register(Identifier.parse(Embers.MODID + ":mithril"), RenderType.solid(), EmbersRenderTypes.MITHRIL);
 		}
 	}
 }

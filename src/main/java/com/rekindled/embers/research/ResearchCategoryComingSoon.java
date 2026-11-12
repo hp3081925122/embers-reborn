@@ -6,21 +6,21 @@ import java.util.List;
 import com.rekindled.embers.Embers;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 public class ResearchCategoryComingSoon extends ResearchCategory {
 
-	public ResearchCategoryComingSoon(ResourceLocation name, double v) {
+	public ResearchCategoryComingSoon(Identifier name, double v) {
 		super(name, v);
 	}
 
-	public ResearchCategoryComingSoon(ResourceLocation name, double u, double v) {
+	public ResearchCategoryComingSoon(Identifier name, double u, double v) {
 		super(name, u, v);
 	}
 
-	public ResearchCategoryComingSoon(ResourceLocation name, ResourceLocation loc, double u, double v) {
+	public ResearchCategoryComingSoon(Identifier name, Identifier loc, double u, double v) {
 		super(name, loc, u, v);
 	}
 

@@ -11,14 +11,14 @@ import com.rekindled.embers.blockentity.HearthCoilBlockEntity;
 import com.rekindled.embers.util.EmbersColors;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class HeatInsulationUpgrade extends DefaultUpgradeProvider {
 
 	public HeatInsulationUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "heat_insulation"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "heat_insulation"), tile);
 	}
 
 	@Override

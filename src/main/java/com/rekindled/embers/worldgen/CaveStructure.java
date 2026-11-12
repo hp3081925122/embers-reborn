@@ -17,7 +17,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -49,7 +49,7 @@ public class CaveStructure extends Structure {
 	public static final com.mojang.serialization.MapCodec<CaveStructure> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
 		return instance.group(Structure.settingsCodec(instance), StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter((structure) -> {
 			return structure.startPool;
-		}), ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter((structure) -> {
+		}), Identifier.CODEC.optionalFieldOf("start_jigsaw_name").forGetter((structure) -> {
 			return structure.startJigsawName;
 		}), Codec.intRange(0, 7).fieldOf("size").forGetter((structure) -> {
 			return structure.maxDepth;
@@ -66,7 +66,7 @@ public class CaveStructure extends Structure {
 		})).apply(instance, CaveStructure::new);
 	});
 	private final Holder<StructureTemplatePool> startPool;
-	private final Optional<ResourceLocation> startJigsawName;
+	private final Optional<Identifier> startJigsawName;
 	private final int maxDepth;
 	private final HeightProvider startHeight;
 	private final HeightProvider maxHeight;
@@ -95,7 +95,7 @@ public class CaveStructure extends Structure {
 		}) : DataResult.success(structure);
 	}
 
-	protected CaveStructure(Structure.StructureSettings settings, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int maxDepth, HeightProvider startHeight, HeightProvider maxHeight, boolean useExpansionHack, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter) {
+	protected CaveStructure(Structure.StructureSettings settings, Holder<StructureTemplatePool> startPool, Optional<Identifier> startJigsawName, int maxDepth, HeightProvider startHeight, HeightProvider maxHeight, boolean useExpansionHack, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter) {
 		super(settings);
 		this.startPool = startPool;
 		this.startJigsawName = startJigsawName;
@@ -129,7 +129,7 @@ public class CaveStructure extends Structure {
 
 	static final Logger LOGGER = LogUtils.getLogger();
 
-	public static Optional<Structure.GenerationStub> addPieces(Structure.GenerationContext pContext, Holder<StructureTemplatePool> pStartPool, Optional<ResourceLocation> pStartJigsawName, int pMaxDepth, BlockPos pPos, int maxHeight, boolean pUseExpansionHack, Optional<Heightmap.Types> pProjectStartToHeightmap, int pMaxDistanceFromCenter) {
+	public static Optional<Structure.GenerationStub> addPieces(Structure.GenerationContext pContext, Holder<StructureTemplatePool> pStartPool, Optional<Identifier> pStartJigsawName, int pMaxDepth, BlockPos pPos, int maxHeight, boolean pUseExpansionHack, Optional<Heightmap.Types> pProjectStartToHeightmap, int pMaxDistanceFromCenter) {
 		net.minecraft.core.HolderLookup.Provider registryaccess = pContext.registryAccess();
 		ChunkGenerator chunkgenerator = pContext.chunkGenerator();
 		StructureTemplateManager structuretemplatemanager = pContext.structureTemplateManager();
@@ -143,11 +143,11 @@ public class CaveStructure extends Structure {
 		} else {
 			BlockPos blockpos;
 			if (pStartJigsawName.isPresent()) {
-				ResourceLocation resourcelocation = pStartJigsawName.get();
+				Identifier resourcelocation = pStartJigsawName.get();
 				Optional<BlockPos> optional = JigsawPlacement.getRandomNamedJigsaw(structurepoolelement, resourcelocation, pPos, rotation, structuretemplatemanager, worldgenrandom);
 				if (optional.isEmpty()) {
 					LOGGER.error("No starting jigsaw {} found in start pool {}", resourcelocation, pStartPool.unwrapKey().map((p_248484_) -> {
-						return p_248484_.location().toString();
+						return p_248484_.identifier().toString();
 					}));
 					return Optional.empty();
 				}

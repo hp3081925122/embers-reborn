@@ -10,7 +10,7 @@ import com.rekindled.embers.util.FluidOutput;
 
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.material.Fluid;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class MixingRecipeBuilder {
 
-	public ResourceLocation id;
+	public Identifier id;
 	public ArrayList<FluidIngredient> inputs = new ArrayList<>();
 	public FluidOutput output;
 
@@ -37,22 +37,22 @@ public class MixingRecipeBuilder {
 	public static MixingRecipeBuilder create(TagKey<Fluid> tag, int amount) {
 		MixingRecipeBuilder builder = new MixingRecipeBuilder();
 		builder.output = new FluidOutput(tag, amount);
-		builder.id = tag.location();
+		builder.id = tag.identifier();
 		return builder;
 	}
 
-	public MixingRecipeBuilder id(ResourceLocation id) {
+	public MixingRecipeBuilder id(Identifier id) {
 		this.id = id;
 		return this;
 	}
 
 	public MixingRecipeBuilder domain(String domain) {
-		this.id = ResourceLocation.fromNamespaceAndPath(domain, this.id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(domain, this.id.getPath());
 		return this;
 	}
 
 	public MixingRecipeBuilder folder(String folder) {
-		this.id = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
 		return this;
 	}
 

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import com.google.gson.JsonObject;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -16,13 +16,13 @@ public class GaseousFuelRecipe implements IGaseousFuelRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer(); 
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public final FluidIngredient input;
 	public final int burnTime;
 	public final double powerMultiplier;
 
-	public GaseousFuelRecipe(ResourceLocation id, FluidIngredient input, int burnTime, double powerMultiplier) {
+	public GaseousFuelRecipe(Identifier id, FluidIngredient input, int burnTime, double powerMultiplier) {
 		this.id = id;
 		this.input = input;
 		this.burnTime = burnTime;
@@ -61,7 +61,7 @@ public class GaseousFuelRecipe implements IGaseousFuelRecipe {
 		}
 		return burnTime * trueAmount;
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -86,8 +86,8 @@ public class GaseousFuelRecipe implements IGaseousFuelRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<GaseousFuelRecipe> {
-		public GaseousFuelRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable GaseousFuelRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public GaseousFuelRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable GaseousFuelRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, GaseousFuelRecipe recipe) {}
 	
 		@Override

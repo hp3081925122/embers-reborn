@@ -5,7 +5,7 @@ import com.rekindled.embers.util.EmberGenUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class MessageEmberGenOffset implements CustomPacketPayload {
@@ -14,7 +14,7 @@ public class MessageEmberGenOffset implements CustomPacketPayload {
 	public int offZ = 0;
 
 	public static final CustomPacketPayload.Type<MessageEmberGenOffset> TYPE =
-		new CustomPacketPayload.Type<>(ResourceLocation.parse("embers_reborn:ember_gen_offset"));
+		new CustomPacketPayload.Type<>(Identifier.parse("embers_reborn:ember_gen_offset"));
 
 	public static final StreamCodec<FriendlyByteBuf, MessageEmberGenOffset> STREAM_CODEC =
 		StreamCodec.ofMember(MessageEmberGenOffset::write, MessageEmberGenOffset::read);

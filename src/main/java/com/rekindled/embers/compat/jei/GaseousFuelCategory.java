@@ -21,7 +21,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class GaseousFuelCategory implements IRecipeCategory<IGaseousFuelRecipe> {
@@ -29,7 +29,7 @@ public class GaseousFuelCategory implements IRecipeCategory<IGaseousFuelRecipe> 
 	private final IDrawable background;
 	private final IDrawable icon;
 	public static Component title = Component.translatable(Embers.MODID + ".jei.recipe.gaseous_fuel");
-	public static ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_gaseous_fuel.png");
+	public static Identifier texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_gaseous_fuel.png");
 
 	public GaseousFuelCategory(IGuiHelper helper) {
 		background = helper.createDrawable(texture, 0, 0, 126, 31);

@@ -112,7 +112,7 @@ public class GeologicSeparatorBlock extends BaseEntityBlock implements SimpleWat
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.GEOLOGIC_SEPARATOR_ENTITY.get(), GeologicSeparatorBlockEntity::clientTick) : null;
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.GEOLOGIC_SEPARATOR_ENTITY.get(), GeologicSeparatorBlockEntity::clientTick) : null;
 	}
 
 	@Nullable

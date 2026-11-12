@@ -135,7 +135,7 @@ public class CrystalCellBlockEntity extends BlockEntity implements ISoundControl
 		UpgradeUtil.verifyUpgrades(blockEntity, blockEntity.upgrades);
 		if (UpgradeUtil.doTick(blockEntity, blockEntity.upgrades))
 			return;
-		if (level.isClientSide)
+		if (level.isClientSide())
 			blockEntity.handleSound();
 		blockEntity.ticksExisted++;
 		blockEntity.renderCapacityLast = blockEntity.renderCapacity;
@@ -150,7 +150,7 @@ public class CrystalCellBlockEntity extends BlockEntity implements ISoundControl
 				blockEntity.cachedRecipe = Misc.getRecipe(blockEntity.cachedRecipe, RegistryManager.EMBER_ACTIVATION.get(), wrapper, level);
 				if (blockEntity.cachedRecipe != null) {
 					double emberValue = blockEntity.cachedRecipe.process(wrapper);
-					if (!level.isClientSide) {
+					if (!level.isClientSide()) {
 						blockEntity.inventory.extractItem(0, 1, false);
 						int maxCapacity = UpgradeUtil.getOtherParameter(blockEntity, "max_capacity", MAX_CAPACITY, blockEntity.upgrades);
 						if (blockEntity.capability.getEmberCapacity() < maxCapacity) {
@@ -163,7 +163,7 @@ public class CrystalCellBlockEntity extends BlockEntity implements ISoundControl
 			}
 		}
 		float numLayers = 2 + (float) Math.floor(blockEntity.capability.getEmberCapacity() / 120000.0f);
-		if (level.isClientSide) {
+		if (level.isClientSide()) {
 			for (int i = 0; i < numLayers / 2; i++) {
 				float layerHeight = 0.25f;
 				float height = layerHeight * numLayers;

@@ -8,7 +8,7 @@ import org.joml.Vector3f;
 
 import com.rekindled.embers.api.misc.HammerTarget;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -101,15 +101,15 @@ public class EmbersAPI {
 		IMPL.setScales(entity,scales);
 	}
 
-	public static void registerColor(ResourceLocation id, Vector3f color) {
+	public static void registerColor(Identifier id, Vector3f color) {
 		IMPL.registerColor(id, color);
 	}
 
-	public static Vector3f getColor(ResourceLocation id, Vector3f color) {
+	public static Vector3f getColor(Identifier id, Vector3f color) {
 		return IMPL.getColor(id, color);
 	}
 
-	public static Vector3f getColor(ResourceLocation id) {
+	public static Vector3f getColor(Identifier id) {
 		return IMPL.getColor(id);
 	}
 }

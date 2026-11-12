@@ -13,7 +13,7 @@ import com.rekindled.embers.util.Misc;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -25,12 +25,12 @@ public class AnvilBreakdownRecipe implements IDawnstoneAnvilRecipe, IVisuallySpl
 
 	public static final Serializer SERIALIZER = new Serializer(); 
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public static List<IDawnstoneAnvilRecipe> visualRecipes = new ArrayList<IDawnstoneAnvilRecipe>();
 	Ingredient blacklist = Ingredient.of(EmbersItemTags.BREAKDOWN_BLACKLIST);
 
-	public AnvilBreakdownRecipe(ResourceLocation id) {
+	public AnvilBreakdownRecipe(Identifier id) {
 		this.id = id;
 	}
 
@@ -77,7 +77,7 @@ public class AnvilBreakdownRecipe implements IDawnstoneAnvilRecipe, IVisuallySpl
 	public List<ItemStack> getDisplayOutput() {
 		return List.of();
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -87,8 +87,8 @@ public class AnvilBreakdownRecipe implements IDawnstoneAnvilRecipe, IVisuallySpl
 	}
 
 	public static class Serializer implements RecipeSerializer<AnvilBreakdownRecipe> {
-		public AnvilBreakdownRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable AnvilBreakdownRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public AnvilBreakdownRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable AnvilBreakdownRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, AnvilBreakdownRecipe recipe) {}
 	
 		@Override

@@ -3,7 +3,7 @@ package com.rekindled.embers.augment;
 import com.rekindled.embers.api.augment.AugmentUtil;
 import com.rekindled.embers.util.EmberInventoryUtil;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
@@ -11,7 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 public class IntelligentApparatusAugment extends AugmentBase {
 
-	public IntelligentApparatusAugment(ResourceLocation id) {
+	public IntelligentApparatusAugment(Identifier id) {
 		super(id, 4.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

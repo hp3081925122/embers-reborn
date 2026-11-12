@@ -6,7 +6,7 @@ import com.rekindled.embers.Embers;
 import com.rekindled.embers.datagen.EmbersBlockTags;
 import com.rekindled.embers.datagen.EmbersItemTags;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;

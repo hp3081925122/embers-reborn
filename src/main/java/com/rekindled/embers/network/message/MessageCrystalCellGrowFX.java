@@ -10,7 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
@@ -24,7 +24,7 @@ public class MessageCrystalCellGrowFX implements CustomPacketPayload {
 	double capacity = 0;
 
 	public static final CustomPacketPayload.Type<MessageCrystalCellGrowFX> TYPE =
-		new CustomPacketPayload.Type<>(ResourceLocation.parse("embers_reborn:crystal_cell_grow_fx"));
+		new CustomPacketPayload.Type<>(Identifier.parse("embers_reborn:crystal_cell_grow_fx"));
 
 	public static final StreamCodec<FriendlyByteBuf, MessageCrystalCellGrowFX> STREAM_CODEC =
 		StreamCodec.ofMember(MessageCrystalCellGrowFX::write, MessageCrystalCellGrowFX::read);

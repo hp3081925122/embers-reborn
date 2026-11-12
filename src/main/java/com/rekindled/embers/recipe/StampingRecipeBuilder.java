@@ -9,7 +9,7 @@ import com.rekindled.embers.recipe.StampingRecipe.TagAmount;
 
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +22,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class StampingRecipeBuilder {
 
-	public ResourceLocation id;
+	public Identifier id;
 	public Ingredient stamp;
 	public Ingredient input = Ingredient.EMPTY;
 	public FluidIngredient fluid = FluidIngredient.EMPTY;
@@ -42,7 +42,7 @@ public class StampingRecipeBuilder {
 	public static StampingRecipeBuilder create(TagKey<Item> tag, int amount) {
 		StampingRecipeBuilder builder = new StampingRecipeBuilder();
 		builder.output = Either.right(new TagAmount(tag, amount));
-		builder.id = tag.location();
+		builder.id = tag.identifier();
 		return builder;
 	}
 
@@ -50,18 +50,18 @@ public class StampingRecipeBuilder {
 		return create(tag, 1);
 	}
 
-	public StampingRecipeBuilder id(ResourceLocation id) {
+	public StampingRecipeBuilder id(Identifier id) {
 		this.id = id;
 		return this;
 	}
 
 	public StampingRecipeBuilder domain(String domain) {
-		this.id = ResourceLocation.fromNamespaceAndPath(domain, this.id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(domain, this.id.getPath());
 		return this;
 	}
 
 	public StampingRecipeBuilder folder(String folder) {
-		this.id = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
 		return this;
 	}
 

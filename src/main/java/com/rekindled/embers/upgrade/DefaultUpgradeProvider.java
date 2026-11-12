@@ -9,23 +9,23 @@ import com.rekindled.embers.api.capabilities.EmbersCapabilities;
 import com.rekindled.embers.api.upgrades.IUpgradeProvider;
 
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class DefaultUpgradeProvider implements IUpgradeProvider {
 
-	protected final ResourceLocation id;
+	protected final Identifier id;
 	protected final BlockEntity tile;
 	// holder field removed (LazyOptional not used in NeoForge 1.21.1)
 
-	public DefaultUpgradeProvider(ResourceLocation id, BlockEntity tile) {
+	public DefaultUpgradeProvider(Identifier id, BlockEntity tile) {
 		this.id = id;
 		this.tile = tile;
 		// holder init removed
 	}
 
 	@Override
-	public ResourceLocation getUpgradeId() {
+	public Identifier getUpgradeId() {
 		return id;
 	}
 

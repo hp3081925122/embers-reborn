@@ -3,13 +3,13 @@ package com.rekindled.embers.upgrade;
 import com.rekindled.embers.Embers;
 import com.rekindled.embers.blockentity.CopperChargerBlockEntity;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class EmberSiphonUpgrade extends DefaultUpgradeProvider {
 
 	public EmberSiphonUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_siphon"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "ember_siphon"), tile);
 	}
 
 	@Override

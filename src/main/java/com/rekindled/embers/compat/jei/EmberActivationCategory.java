@@ -17,7 +17,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class EmberActivationCategory implements IRecipeCategory<IEmberActivationRecipe> {
@@ -25,7 +25,7 @@ public class EmberActivationCategory implements IRecipeCategory<IEmberActivation
 	private final IDrawable background;
 	private final IDrawable icon;
 	public static Component title = Component.translatable(Embers.MODID + ".jei.recipe.ember_activation");
-	public static ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_item_text.png");
+	public static Identifier texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_item_text.png");
 
 	public EmberActivationCategory(IGuiHelper helper) {
 		background = helper.createDrawable(texture, 0, 0, 126, 28);

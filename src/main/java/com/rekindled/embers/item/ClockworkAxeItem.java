@@ -84,7 +84,7 @@ public class ClockworkAxeItem extends ClockworkToolItem {
 			net.minecraft.nbt.CompoundTag useTag = _getOrCreateTag(itemstack);
 			useTag.putBoolean("didUse", true);
 			_setTag(itemstack, useTag);
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.sidedSuccess(level.isClientSide());
 		} else {
 			return InteractionResult.PASS;
 		}

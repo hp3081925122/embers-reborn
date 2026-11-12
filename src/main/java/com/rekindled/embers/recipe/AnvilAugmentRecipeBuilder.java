@@ -8,7 +8,7 @@ import com.rekindled.embers.api.augment.IAugment;
 
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.ItemLike;
 
 public class AnvilAugmentRecipeBuilder {
 
-	public ResourceLocation id;
+	public Identifier id;
 	public Ingredient tool;
 	public Ingredient input;
 	public IAugment augment;
@@ -29,18 +29,18 @@ public class AnvilAugmentRecipeBuilder {
 		return builder;
 	}
 
-	public AnvilAugmentRecipeBuilder id(ResourceLocation id) {
+	public AnvilAugmentRecipeBuilder id(Identifier id) {
 		this.id = id;
 		return this;
 	}
 
 	public AnvilAugmentRecipeBuilder domain(String domain) {
-		this.id = ResourceLocation.fromNamespaceAndPath(domain, this.id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(domain, this.id.getPath());
 		return this;
 	}
 
 	public AnvilAugmentRecipeBuilder folder(String folder) {
-		this.id = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
 		return this;
 	}
 

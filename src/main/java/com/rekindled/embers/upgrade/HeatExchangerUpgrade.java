@@ -9,7 +9,7 @@ import com.rekindled.embers.api.upgrades.UpgradeContext;
 import com.rekindled.embers.particle.GlowParticleOptions;
 import com.rekindled.embers.util.EmbersColors;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
@@ -20,7 +20,7 @@ public class HeatExchangerUpgrade extends DefaultUpgradeProvider {
 	public static double bonus = 300.0;
 
 	public HeatExchangerUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "heat_exchanger"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "heat_exchanger"), tile);
 	}
 
 	@Override

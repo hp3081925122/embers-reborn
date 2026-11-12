@@ -13,13 +13,13 @@ import com.rekindled.embers.blockentity.AlchemyTabletBlockEntity;
 import com.rekindled.embers.blockentity.EntropicEnumeratorBlockEntity;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class EntropicEnumeratorUpgrade extends DefaultUpgradeProvider {
 
 	public EntropicEnumeratorUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "entropic_enumerator"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "entropic_enumerator"), tile);
 	}
 
 	@Override

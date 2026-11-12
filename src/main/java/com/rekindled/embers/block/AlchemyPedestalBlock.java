@@ -46,7 +46,7 @@ public class AlchemyPedestalBlock extends DoubleTallMachineBlock {
 	public net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (!heldItem.isEmpty() && level.getBlockEntity(pos) instanceof AlchemyPedestalBlockEntity pedestalEntity) {
 			if (Misc.useItemOnInventory(pedestalEntity.inventory, level, player, hand) == InteractionResult.SUCCESS)
-				return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+				return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
 		}
 		return net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
@@ -78,6 +78,6 @@ public class AlchemyPedestalBlock extends DoubleTallMachineBlock {
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide && pState.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER ? createTickerHelper(pBlockEntityType, RegistryManager.ALCHEMY_PEDESTAL_TOP_ENTITY.get(), AlchemyPedestalTopBlockEntity::clientTick) : null;
+		return pLevel.isClientSide() && pState.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER ? createTickerHelper(pBlockEntityType, RegistryManager.ALCHEMY_PEDESTAL_TOP_ENTITY.get(), AlchemyPedestalTopBlockEntity::clientTick) : null;
 	}
 }

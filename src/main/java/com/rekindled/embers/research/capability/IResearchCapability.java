@@ -3,13 +3,13 @@ package com.rekindled.embers.research.capability;
 import java.util.Map;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public interface IResearchCapability {
-	void setCheckmark(ResourceLocation research, boolean checked);
-	boolean isChecked(ResourceLocation research);
-	boolean hasCheckmark(ResourceLocation research);
-	Map<ResourceLocation, Boolean> getCheckmarks();
+	void setCheckmark(Identifier research, boolean checked);
+	boolean isChecked(Identifier research);
+	boolean hasCheckmark(Identifier research);
+	Map<Identifier, Boolean> getCheckmarks();
 	void writeToNBT(CompoundTag tag);
 	void readFromNBT(CompoundTag tag);
 }

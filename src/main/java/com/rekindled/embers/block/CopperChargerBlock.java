@@ -109,7 +109,7 @@ public class CopperChargerBlock extends BaseEntityBlock implements SimpleWaterlo
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.COPPER_CHARGER_ENTITY.get(), CopperChargerBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.COPPER_CHARGER_ENTITY.get(), CopperChargerBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.COPPER_CHARGER_ENTITY.get(), CopperChargerBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.COPPER_CHARGER_ENTITY.get(), CopperChargerBlockEntity::serverTick);
 	}
 
 	@Nullable

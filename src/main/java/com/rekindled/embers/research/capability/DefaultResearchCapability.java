@@ -6,35 +6,35 @@ import java.util.Map;
 import com.rekindled.embers.Embers;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class DefaultResearchCapability implements IResearchCapability, net.neoforged.neoforge.common.util.INBTSerializable<CompoundTag> {
-	Map<ResourceLocation, Boolean> checkmarks = new HashMap<>();
+	Map<Identifier, Boolean> checkmarks = new HashMap<>();
 
 	@Override
-	public void setCheckmark(ResourceLocation research, boolean checked) {
+	public void setCheckmark(Identifier research, boolean checked) {
 		checkmarks.put(research,checked);
 	}
 
 	@Override
-	public boolean isChecked(ResourceLocation research) {
+	public boolean isChecked(Identifier research) {
 		return checkmarks.getOrDefault(research,false);
 	}
 
 	@Override
-	public boolean hasCheckmark(ResourceLocation research) {
+	public boolean hasCheckmark(Identifier research) {
 		return checkmarks.containsKey(research);
 	}
 
 	@Override
-	public Map<ResourceLocation, Boolean> getCheckmarks() {
+	public Map<Identifier, Boolean> getCheckmarks() {
 		return checkmarks;
 	}
 
 	@Override
 	public void writeToNBT(CompoundTag tag) {
 		CompoundTag checkmarksTag = new CompoundTag();
-		for (Map.Entry<ResourceLocation, Boolean> entry : checkmarks.entrySet()) {
+		for (Map.Entry<Identifier, Boolean> entry : checkmarks.entrySet()) {
 			checkmarksTag.putBoolean(entry.getKey().toString(), entry.getValue());
 		}
 		tag.put("checkmarks", checkmarksTag);
@@ -46,9 +46,9 @@ public class DefaultResearchCapability implements IResearchCapability, net.neofo
 		checkmarks.clear();
 		for (String key : checkmarksTag.getAllKeys()) {
 			if (key.contains(":")) {
-				checkmarks.put(ResourceLocation.parse(key), checkmarksTag.getBoolean(key));
+				checkmarks.put(Identifier.parse(key), checkmarksTag.getBoolean(key));
 			} else {
-				checkmarks.put(ResourceLocation.fromNamespaceAndPath(Embers.MODID, key), checkmarksTag.getBoolean(key));
+				checkmarks.put(Identifier.fromNamespaceAndPath(Embers.MODID, key), checkmarksTag.getBoolean(key));
 			}
 		}
 	}

@@ -3,13 +3,13 @@ package com.rekindled.embers.augment;
 import com.rekindled.embers.api.EmbersAPI;
 import com.rekindled.embers.api.augment.AugmentUtil;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class TinkerLensAugment extends AugmentBase {
 
 	boolean inverted;
 
-	public TinkerLensAugment(ResourceLocation name, boolean inverted) {
+	public TinkerLensAugment(Identifier name, boolean inverted) {
 		super(name, 0.0);
 		//NeoForge.EVENT_BUS.register(this);
 		this.inverted = inverted;

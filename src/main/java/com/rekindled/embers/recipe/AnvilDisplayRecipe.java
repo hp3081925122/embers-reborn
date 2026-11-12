@@ -2,7 +2,7 @@ package com.rekindled.embers.recipe;
 
 import java.util.List;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -10,13 +10,13 @@ import net.minecraft.world.level.Level;
 
 public class AnvilDisplayRecipe implements IDawnstoneAnvilRecipe {
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public List<ItemStack> outputs;
 	public List<ItemStack> inputs;
 	public Ingredient ingredient;
 
-	public AnvilDisplayRecipe(ResourceLocation id, List<ItemStack> outputs, List<ItemStack> inputs, Ingredient ingredient) {
+	public AnvilDisplayRecipe(Identifier id, List<ItemStack> outputs, List<ItemStack> inputs, Ingredient ingredient) {
 		this.id = id;
 		this.outputs = outputs;
 		this.inputs = inputs;
@@ -47,7 +47,7 @@ public class AnvilDisplayRecipe implements IDawnstoneAnvilRecipe {
 	public List<ItemStack> getDisplayOutput() {
 		return outputs;
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 

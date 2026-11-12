@@ -8,7 +8,7 @@ import com.rekindled.embers.item.AlchemyHintItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -17,8 +17,8 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class SlateScreen extends AbstractContainerScreen<SlateMenu> {
 
-	ResourceLocation inventory = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/inventory_gui.png");
-	ResourceLocation slate = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/codebreaking_slate_gui.png");
+	Identifier inventory = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/inventory_gui.png");
+	Identifier slate = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/codebreaking_slate_gui.png");
 
 	public static int slotOffset = SlateMenu.slotIndent + 3;
 

@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.rekindled.embers.RegistryManager;
 
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -14,34 +14,34 @@ import net.minecraft.world.level.block.Block;
 
 public class MetalCoefficientRecipeBuilder {
 
-	public ResourceLocation id;
-	public ResourceLocation blockTag;
+	public Identifier id;
+	public Identifier blockTag;
 	public double coefficient;
 
-	public static MetalCoefficientRecipeBuilder create(ResourceLocation tag) {
+	public static MetalCoefficientRecipeBuilder create(Identifier tag) {
 		MetalCoefficientRecipeBuilder builder = new MetalCoefficientRecipeBuilder();
 		builder.blockTag = tag;
 		return builder;
 	}
 
 	public static MetalCoefficientRecipeBuilder create(TagKey<Block> tag) {
-		MetalCoefficientRecipeBuilder builder = create(tag.location());
-		builder.id = tag.location();
+		MetalCoefficientRecipeBuilder builder = create(tag.identifier());
+		builder.id = tag.identifier();
 		return builder;
 	}
 
-	public MetalCoefficientRecipeBuilder id(ResourceLocation id) {
+	public MetalCoefficientRecipeBuilder id(Identifier id) {
 		this.id = id;
 		return this;
 	}
 
 	public MetalCoefficientRecipeBuilder domain(String domain) {
-		this.id = ResourceLocation.fromNamespaceAndPath(domain, this.id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(domain, this.id.getPath());
 		return this;
 	}
 
 	public MetalCoefficientRecipeBuilder folder(String folder) {
-		this.id = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
+		this.id = Identifier.fromNamespaceAndPath(id.getNamespace(), folder + "/" + id.getPath());
 		return this;
 	}
 

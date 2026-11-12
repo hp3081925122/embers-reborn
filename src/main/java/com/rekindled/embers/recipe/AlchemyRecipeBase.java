@@ -8,14 +8,14 @@ import com.rekindled.embers.api.misc.AlchemyResult;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 
 public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 
-	public ResourceLocation id;
+	public Identifier id;
 
 	public final Ingredient tablet;
 	public final ArrayList<Ingredient> aspects;
@@ -27,7 +27,7 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 	public Long cachedSeed = null;
 	public ArrayList<Ingredient> code = new ArrayList<Ingredient>();
 
-	public AlchemyRecipeBase(ResourceLocation id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
+	public AlchemyRecipeBase(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
 		this.id = id;
 		this.tablet = tablet;
 		this.aspects = aspects;
@@ -36,7 +36,7 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 		this.failure = failure;
 	}
 
-	public void bindId(ResourceLocation id) {
+	public void bindId(Identifier id) {
 		if (this.id == null)
 			this.id = id;
 	}
@@ -199,7 +199,7 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 		return result;
 	}
 
-		public ResourceLocation getId() {
+		public Identifier getId() {
 		return id;
 	}
 

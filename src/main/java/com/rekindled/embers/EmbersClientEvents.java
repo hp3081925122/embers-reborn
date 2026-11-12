@@ -68,7 +68,7 @@ import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -103,8 +103,8 @@ public class EmbersClientEvents {
 	public static long seed = 0;
 	public static BlockPos lastTarget = null;
 	public static BlockPos lastEmitter = null;
-	public static ResourceLocation GAUGE = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/ember_meter_overlay.png"); 
-	public static ResourceLocation GAUGE_POINTER = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/ember_meter_pointer.png"); 
+	public static Identifier GAUGE = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/ember_meter_overlay.png"); 
+	public static Identifier GAUGE_POINTER = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/ember_meter_pointer.png"); 
 
 	public static void onLevelLoad(LevelEvent.Load event) {
 		ticks = 0;
@@ -498,7 +498,7 @@ public class EmbersClientEvents {
 	public static BakedModel getModel(ModelBakery bakery, String name) {
 		if (bakedModels == null) return null;
 		return bakedModels.get(ModelResourceLocation.standalone(
-				ResourceLocation.fromNamespaceAndPath(Embers.MODID, name)));
+				Identifier.fromNamespaceAndPath(Embers.MODID, name)));
 	}
 
 	public static ItemStack lastHoveredItem = ItemStack.EMPTY;

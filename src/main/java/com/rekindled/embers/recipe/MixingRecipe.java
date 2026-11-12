@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 import com.rekindled.embers.util.FluidOutput;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -22,12 +22,12 @@ public class MixingRecipe implements IMixingRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer(); 
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public final ArrayList<FluidIngredient> inputs;
 	public final FluidOutput output;
 
-	public MixingRecipe(ResourceLocation id, ArrayList<FluidIngredient> inputs, FluidOutput output) {
+	public MixingRecipe(Identifier id, ArrayList<FluidIngredient> inputs, FluidOutput output) {
 		this.id = id;
 		this.inputs = inputs;
 		this.output = output;
@@ -83,7 +83,7 @@ public class MixingRecipe implements IMixingRecipe {
 		}
 		return output.getStack();
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -103,8 +103,8 @@ public class MixingRecipe implements IMixingRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<MixingRecipe> {
-		public MixingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable MixingRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public MixingRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable MixingRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, MixingRecipe recipe) {}
 	
 		@Override

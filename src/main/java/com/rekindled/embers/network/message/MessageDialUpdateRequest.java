@@ -8,7 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -19,7 +19,7 @@ public class MessageDialUpdateRequest implements CustomPacketPayload {
 	public int maxLines;
 
 	public static final CustomPacketPayload.Type<MessageDialUpdateRequest> TYPE =
-		new CustomPacketPayload.Type<>(ResourceLocation.parse("embers_reborn:dial_update_request"));
+		new CustomPacketPayload.Type<>(Identifier.parse("embers_reborn:dial_update_request"));
 
 	public static final StreamCodec<FriendlyByteBuf, MessageDialUpdateRequest> STREAM_CODEC =
 		StreamCodec.ofMember(MessageDialUpdateRequest::write, MessageDialUpdateRequest::read);

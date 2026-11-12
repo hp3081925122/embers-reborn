@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class AlchemyTabletBlockEntityRenderer implements BlockEntityRenderer<AlchemyTabletBlockEntity> {
 
-	//public ResourceLocation texture = ResourceLocation.parse(Embers.MODID + ":textures/entity/alchemy_circle.png");
+	//public Identifier texture = Identifier.parse(Embers.MODID + ":textures/entity/alchemy_circle.png");
 	private final ItemRenderer itemRenderer;
 
 	public AlchemyTabletBlockEntityRenderer(BlockEntityRendererProvider.Context pContext) {

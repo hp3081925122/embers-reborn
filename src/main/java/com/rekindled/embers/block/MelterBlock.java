@@ -73,7 +73,7 @@ public class MelterBlock extends DoubleTallMachineBlock {
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
 		if (pState.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.LOWER)
-			return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.MELTER_BOTTOM_ENTITY.get(), MelterBottomBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MELTER_BOTTOM_ENTITY.get(), MelterBottomBlockEntity::serverTick);
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.MELTER_TOP_ENTITY.get(), MelterTopBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MELTER_TOP_ENTITY.get(), MelterTopBlockEntity::serverTick);
+			return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.MELTER_BOTTOM_ENTITY.get(), MelterBottomBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MELTER_BOTTOM_ENTITY.get(), MelterBottomBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.MELTER_TOP_ENTITY.get(), MelterTopBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.MELTER_TOP_ENTITY.get(), MelterTopBlockEntity::serverTick);
 	}
 }

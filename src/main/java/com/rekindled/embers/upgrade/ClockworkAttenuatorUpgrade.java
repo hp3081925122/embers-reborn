@@ -6,14 +6,14 @@ import com.rekindled.embers.Embers;
 import com.rekindled.embers.api.upgrades.UpgradeContext;
 import com.rekindled.embers.blockentity.ClockworkAttenuatorBlockEntity;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 
 public class ClockworkAttenuatorUpgrade extends DefaultUpgradeProvider {
 
 	public ClockworkAttenuatorUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "clockwork_attenuator"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "clockwork_attenuator"), tile);
 	}
 
 	@Override

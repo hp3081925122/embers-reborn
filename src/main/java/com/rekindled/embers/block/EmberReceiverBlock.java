@@ -145,7 +145,7 @@ public class EmberReceiverBlock extends BaseEntityBlock implements SimpleWaterlo
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, RegistryManager.EMBER_RECEIVER_ENTITY.get(), EmberReceiverBlockEntity::serverTick);
+		return pLevel.isClientSide() ? null : createTickerHelper(pBlockEntityType, RegistryManager.EMBER_RECEIVER_ENTITY.get(), EmberReceiverBlockEntity::serverTick);
 	}
 
 	@Override

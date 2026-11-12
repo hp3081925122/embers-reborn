@@ -19,13 +19,13 @@ import com.rekindled.embers.api.filter.IFilterComparator;
 
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class FilterUtil {
 	static List<IFilterComparator> comparators = new ArrayList<>();
 	static Map<String, IFilterComparator> comparatorMap = new HashMap<>();
-	static Map<ResourceLocation, Function<CompoundTag, IFilter>> filterRegistry = new LinkedHashMap<>();
+	static Map<Identifier, Function<CompoundTag, IFilter>> filterRegistry = new LinkedHashMap<>();
 
 	public static IFilterComparator ANY = new ComparatorMatch("any",999999) {
 		@Override
@@ -49,7 +49,7 @@ public class FilterUtil {
 		comparators.sort(Comparator.comparingInt(IFilterComparator::getPriority).reversed());
 	}
 
-	public static void registerFilter(ResourceLocation resLoc, Function<CompoundTag, IFilter> generator) {
+	public static void registerFilter(Identifier resLoc, Function<CompoundTag, IFilter> generator) {
 		filterRegistry.put(resLoc, generator);
 	}
 
@@ -58,7 +58,7 @@ public class FilterUtil {
 	}
 
 	public static IFilter deserializeFilter(CompoundTag tag) {
-		ResourceLocation resLoc = ResourceLocation.parse(tag.getString("type"));
+		Identifier resLoc = Identifier.parse(tag.getString("type"));
 		Function<CompoundTag, IFilter> generator = filterRegistry.get(resLoc);
 		if(generator != null)
 			return generator.apply(tag);

@@ -9,7 +9,7 @@ import com.rekindled.embers.api.upgrades.UpgradeContext;
 import com.rekindled.embers.blockentity.GeologicSeparatorBlockEntity;
 import com.rekindled.embers.recipe.MeltingRecipe;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 public class GeologicSeparatorUpgrade extends DefaultUpgradeProvider {
 
 	public GeologicSeparatorUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "geologic_separator"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "geologic_separator"), tile);
 	}
 
 	@Override

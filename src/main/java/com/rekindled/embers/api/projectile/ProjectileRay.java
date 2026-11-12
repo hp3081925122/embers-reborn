@@ -12,7 +12,7 @@ import com.rekindled.embers.network.message.MessageEmberRayFX;
 import com.rekindled.embers.util.EmbersColors;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.level.ClipContext;
@@ -31,7 +31,7 @@ public class ProjectileRay implements IProjectilePreset {
 	IProjectileEffect effect;
 	Entity shooter;
 	boolean pierceEntities;
-	ResourceLocation colorId = EmbersColors.EMBER_ID;
+	Identifier colorId = EmbersColors.EMBER_ID;
 	Vector3f color = EmbersColors.EMBER;
 
 	public ProjectileRay(Entity shooter, Vec3 start, Vec3 end, boolean pierceEntities, IProjectileEffect effect) {
@@ -68,7 +68,7 @@ public class ProjectileRay implements IProjectilePreset {
 	}
 
 	@Override
-	public ResourceLocation getColorId() {
+	public Identifier getColorId() {
 		return this.colorId;
 	}
 
@@ -79,7 +79,7 @@ public class ProjectileRay implements IProjectilePreset {
 	}
 
 	@Override
-	public void setColor(ResourceLocation color) {
+	public void setColor(Identifier color) {
 		this.colorId = color;
 	}
 
@@ -157,7 +157,7 @@ public class ProjectileRay implements IProjectilePreset {
 			impactDist = getPos().distanceTo(newPosVector);
 		}
 
-		if (!world.isClientSide) {
+		if (!world.isClientSide()) {
 			net.neoforged.neoforge.network.PacketDistributor.sendToPlayersTrackingEntityAndSelf(shooter, new MessageEmberRayFX(startX,startY,startZ,dX,dY,dZ,impactDist,com.rekindled.embers.util.Misc.intColor(color),this.colorId));
 		}
 	}

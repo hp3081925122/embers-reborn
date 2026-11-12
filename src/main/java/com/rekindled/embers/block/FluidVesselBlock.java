@@ -70,7 +70,7 @@ public class FluidVesselBlock extends AbstractCauldronBlock implements EntityBlo
 		if (level.getBlockEntity(pos) instanceof FluidVesselBlockEntity vesselEntity && !heldItem.isEmpty()) {
 			IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, vesselEntity.getBlockPos(), hit.getDirection());
 			if (cap != null && FluidUtil.interactWithFluidHandler(player, hand, cap)) {
-				return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+				return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
 			}
 			//prevent buckets from placing their fluid in the world when clicking on the vessel
 			if (FluidUtil.getFluidHandler(heldItem).isPresent()) {
@@ -142,7 +142,7 @@ public class FluidVesselBlock extends AbstractCauldronBlock implements EntityBlo
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		if (!pLevel.isClientSide || pBlockEntityType != RegistryManager.FLUID_VESSEL_ENTITY.get()) return null;
+		if (!pLevel.isClientSide() || pBlockEntityType != RegistryManager.FLUID_VESSEL_ENTITY.get()) return null;
 		@SuppressWarnings("unchecked") BlockEntityTicker<T> _t = (BlockEntityTicker<T>) (BlockEntityTicker<net.minecraft.world.level.block.entity.BlockEntity>) (level, pos, state, be) -> FluidVesselBlockEntity.clientTick(level, pos, state, (FluidVesselBlockEntity) be); return _t;
 	}
 

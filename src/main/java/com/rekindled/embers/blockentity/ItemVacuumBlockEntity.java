@@ -57,7 +57,7 @@ public class ItemVacuumBlockEntity extends BlockEntity implements IExtraCapabili
 						item.setDeltaMovement(-v.x + item.getDeltaMovement().x / factor, -v.y + item.getDeltaMovement().y / factor, -v.z + item.getDeltaMovement().z / factor);
 					}
 				}
-				if (!level.isClientSide) {
+				if (!level.isClientSide()) {
 					List<ItemEntity> nearestItems = level.getEntitiesOfClass(ItemEntity.class, new AABB(pos.getX() + 0.24 + vec.getX() * 0.25, pos.getY() + 0.24 + vec.getY() * 0.25, pos.getZ() + 0.24 + vec.getZ() * 0.25, pos.getX() + 0.76 + vec.getX() * 0.25, pos.getY() + 0.76 + vec.getY() * 0.25, pos.getZ() + 0.76 + vec.getZ() * 0.25));
 					if (nearestItems.size() > 0) {
 						for (ItemEntity item : nearestItems) {

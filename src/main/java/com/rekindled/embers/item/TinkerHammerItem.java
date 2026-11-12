@@ -74,7 +74,7 @@ public class TinkerHammerItem extends Item {
 		BlockPos pos = context.getClickedPos();
 		Level world = context.getLevel();
 		BlockEntity tile = world.getBlockEntity(pos);
-		if (world != null && nbt.contains("targetWorld") && world.dimension().location().toString().equals(nbt.getString("targetWorld"))) {
+		if (world != null && nbt.contains("targetWorld") && world.dimension().identifier().toString().equals(nbt.getString("targetWorld"))) {
 			BlockPos targetPos = new BlockPos(nbt.getInt("targetX"), nbt.getInt("targetY"), nbt.getInt("targetZ"));
 			BlockEntity targetTile = world.getBlockEntity(targetPos);
 			if (targetTile instanceof ITargetable) {
@@ -120,14 +120,14 @@ public class TinkerHammerItem extends Item {
 			Vec3 emitDirection = ((IEmberPacketProducer) tile).getEmittingDirection(face);
 			if (emitDirection == null)
 				return InteractionResult.PASS;
-			nbt.putString("targetWorld", world.dimension().location().toString());
+			nbt.putString("targetWorld", world.dimension().identifier().toString());
 			nbt.putString("targetFace", face.getName());
 			nbt.putInt("targetX", pos.getX());
 			nbt.putInt("targetY", pos.getY());
 			nbt.putInt("targetZ", pos.getZ());
 			_setTag(stack, nbt);
 			world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ANVIL_LAND, SoundSource.BLOCKS, 0.5f, 1.95f + world.random.nextFloat() * 0.2f, false);
-			if (world.isClientSide)
+			if (world.isClientSide())
 				EmbersClientEvents.lastTarget = null;
 			return InteractionResult.SUCCESS;
 		}
@@ -140,7 +140,7 @@ public class TinkerHammerItem extends Item {
 			CompoundTag nbt = _getTag(stack);
 			if (nbt.contains("targetWorld")) {
 				String dimension = nbt.getString("targetWorld");
-				net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance(); if (mc.level != null && mc.level.dimension().location().toString().equals(dimension)) {
+				net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance(); if (mc.level != null && mc.level.dimension().identifier().toString().equals(dimension)) {
 					BlockPos pos = new BlockPos(nbt.getInt("targetX"), nbt.getInt("targetY"), nbt.getInt("targetZ"));
 					BlockState blockState = mc.level.getBlockState(pos);
 					tooltip.add(Component.translatable(Embers.MODID + ".tooltip.aiming_block", blockState.getBlock().getName()).withStyle(ChatFormatting.GRAY));

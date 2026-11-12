@@ -482,9 +482,9 @@ public class EmbersLang extends LanguageProvider {
 		add(Embers.MODID + ".jei.recipe.dawnstone_anvil.second", "Place this second");
 		add(Embers.MODID + ".jei.recipe.dawnstone_anvil.output_first", "Place %s first");
 		add(Embers.MODID + ".jei.recipe.dawnstone_anvil.output_second", "Then place %s");
-		add("dimension." + Level.OVERWORLD.location().toLanguageKey(), "Overworld");
-		add("dimension." + Level.NETHER.location().toLanguageKey(), "The Nether");
-		add("dimension." + Level.END.location().toLanguageKey(), "The End");
+		add("dimension." + Level.OVERWORLD.identifier().toLanguageKey(), "Overworld");
+		add("dimension." + Level.NETHER.identifier().toLanguageKey(), "The Nether");
+		add("dimension." + Level.END.identifier().toLanguageKey(), "The End");
 
 
 		//ancient codex

@@ -13,7 +13,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -70,7 +70,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	}
 
 	@Override
-	public IAugment getAugment(ResourceLocation name) {
+	public IAugment getAugment(Identifier name) {
 		return RegistryManager.augmentRegistry.get(name);
 	}
 
@@ -84,7 +84,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 				List<IAugment> results = new ArrayList<>();
 				for (int i = 0; i < tagAugments.size(); i++) {
 					CompoundTag tagAugment = tagAugments.getCompound(i);
-					IAugment augment = getAugment(ResourceLocation.parse(tagAugment.getString("name")));
+					IAugment augment = getAugment(Identifier.parse(tagAugment.getString("name")));
 					if (augment != null)
 						results.add(augment);
 				}
@@ -103,7 +103,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 			ListTag list = root.getCompound(HEAT_TAG).getList("augments", Tag.TAG_COMPOUND);
 			for (int i = 0; i < list.size(); i++) {
 				CompoundTag compound = list.getCompound(i);
-				IAugment augment = getAugment(ResourceLocation.parse(compound.getString("name")));
+				IAugment augment = getAugment(Identifier.parse(compound.getString("name")));
 				if (augment != null && augment.countTowardsTotalLevel()) {
 					total += compound.getInt("level");
 				}
@@ -179,7 +179,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 				List<IAugment> removedAugments = new ArrayList<>();
 				for (int i = 0; i < tagAugments.size(); i++) {
 					CompoundTag tagAugment = tagAugments.getCompound(i);
-					IAugment augment = getAugment(ResourceLocation.parse(tagAugment.getString("name")));
+					IAugment augment = getAugment(Identifier.parse(tagAugment.getString("name")));
 					if (augment != null) {
 						if (augment.canRemove()) {
 							for (int j = 0; j < tagAugment.getInt("level"); j++) {

@@ -23,7 +23,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class BoringCategory implements IRecipeCategory<IBoringRecipe> {
@@ -31,7 +31,7 @@ public class BoringCategory implements IRecipeCategory<IBoringRecipe> {
 	private final IDrawable background;
 	public IDrawable icon;
 	public static Component title = Component.translatable(Embers.MODID + ".jei.recipe.boring");
-	public static ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_boring.png");
+	public static Identifier texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_boring.png");
 
 	public BoringCategory(IGuiHelper helper) {
 		background = helper.createDrawable(texture, 0, 0, 126, 98);
@@ -75,7 +75,7 @@ public class BoringCategory implements IRecipeCategory<IBoringRecipe> {
 			height += 11;
 		if (!recipe.getDimensions().isEmpty()) {
 			if (mouseY > height && mouseY < height + 11 && mouseX > 7 && mouseX < 119) {
-				for (ResourceLocation dimension : recipe.getDimensions()) {
+				for (Identifier dimension : recipe.getDimensions()) {
 					text.add(Component.translatableWithFallback("dimension." + dimension.toLanguageKey(), WordUtils.capitalize(dimension.getPath().replace("_", " "))));
 				}
 			}
@@ -83,7 +83,7 @@ public class BoringCategory implements IRecipeCategory<IBoringRecipe> {
 		}
 		if (!recipe.getBiomes().isEmpty()) {
 			if (mouseY > height && mouseY < height + 11 && mouseX > 7 && mouseX < 119) {
-				for (ResourceLocation biome : recipe.getBiomes()) {
+				for (Identifier biome : recipe.getBiomes()) {
 					text.add(Component.literal(biome.toString()));
 				}
 			}
@@ -106,13 +106,13 @@ public class BoringCategory implements IRecipeCategory<IBoringRecipe> {
 			text.add(Component.translatable(Embers.MODID + ".jei.recipe.boring.max_height", recipe.getMaxHeight()));
 		if (!recipe.getDimensions().isEmpty()) {
 			text.add(Component.translatable(Embers.MODID + ".jei.recipe.boring.dimensions").withStyle(style -> style.withColor(0xFFB54D)));
-			//for (ResourceLocation dimension : recipe.dimensions) {
+			//for (Identifier dimension : recipe.dimensions) {
 			//text.add(Component.literal(dimension.toString()));
 			//}
 		}
 		if (!recipe.getBiomes().isEmpty()) {
 			text.add(Component.translatable(Embers.MODID + ".jei.recipe.boring.biomes").withStyle(style -> style.withColor(0xFFB54D)));
-			//for (ResourceLocation biome : recipe.biomes) {
+			//for (Identifier biome : recipe.biomes) {
 			//text.add(Component.translatable(biome.toString()));
 			//}
 		}

@@ -11,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -221,7 +221,7 @@ public class EmbersSounds extends SoundDefinitionsProvider {
 	}
 
 	public static DeferredHolder<SoundEvent, SoundEvent> registerSound(String name) {
-		return RegistryManager.SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Embers.MODID, name)));
+		return RegistryManager.SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath(Embers.MODID, name)));
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -654,7 +654,7 @@ public class EmbersSounds extends SoundDefinitionsProvider {
 		add(soundEvent, definition.subtitle("subtitles." + Embers.MODID + "." + soundEvent.getId().getPath()));
 	}
 
-	public ResourceLocation resource(String path) {
-		return ResourceLocation.fromNamespaceAndPath(Embers.MODID, path);
+	public Identifier resource(String path) {
+		return Identifier.fromNamespaceAndPath(Embers.MODID, path);
 	}
 }

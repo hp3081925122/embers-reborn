@@ -10,7 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -23,10 +23,10 @@ public class MessageEmberRayFX implements CustomPacketPayload {
 	double dX = 0, dY = 0, dZ = 0;
 	double hitDistance = Double.POSITIVE_INFINITY;
 	int packedColor;
-	ResourceLocation colorId;
+	Identifier colorId;
 
 	public static final CustomPacketPayload.Type<MessageEmberRayFX> TYPE =
-		new CustomPacketPayload.Type<>(ResourceLocation.parse("embers_reborn:ember_ray_fx"));
+		new CustomPacketPayload.Type<>(Identifier.parse("embers_reborn:ember_ray_fx"));
 
 	public static final StreamCodec<FriendlyByteBuf, MessageEmberRayFX> STREAM_CODEC =
 		StreamCodec.ofMember(MessageEmberRayFX::write, MessageEmberRayFX::read);
@@ -34,7 +34,7 @@ public class MessageEmberRayFX implements CustomPacketPayload {
 	public MessageEmberRayFX() {
 	}
 
-	public MessageEmberRayFX(double x, double y, double z, double dX, double dY, double dZ, double hitDistance, int packedColor, ResourceLocation colorId) {
+	public MessageEmberRayFX(double x, double y, double z, double dX, double dY, double dZ, double hitDistance, int packedColor, Identifier colorId) {
 		this.posX = x;
 		this.posY = y;
 		this.posZ = z;
@@ -55,11 +55,11 @@ public class MessageEmberRayFX implements CustomPacketPayload {
 		buf.writeDouble(dZ);
 		buf.writeDouble(hitDistance);
 		buf.writeInt(packedColor);
-		buf.writeResourceLocation(colorId);
+		buf.writeIdentifier(colorId);
 	}
 
 	public static MessageEmberRayFX read(FriendlyByteBuf buf) {
-		return new MessageEmberRayFX(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readInt(), buf.readResourceLocation());
+		return new MessageEmberRayFX(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readInt(), buf.readIdentifier());
 	}
 
 	public static void handle(MessageEmberRayFX msg, IPayloadContext ctx) {

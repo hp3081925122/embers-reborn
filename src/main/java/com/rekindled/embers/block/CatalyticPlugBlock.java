@@ -94,7 +94,7 @@ public class CatalyticPlugBlock extends BaseEntityBlock implements SimpleWaterlo
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.CATALYTIC_PLUG_ENTITY.get(), CatalyticPlugBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.CATALYTIC_PLUG_ENTITY.get(), CatalyticPlugBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.CATALYTIC_PLUG_ENTITY.get(), CatalyticPlugBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.CATALYTIC_PLUG_ENTITY.get(), CatalyticPlugBlockEntity::serverTick);
 	}
 
 	@Override

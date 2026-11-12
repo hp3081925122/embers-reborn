@@ -125,7 +125,7 @@ public class ReservoirBlock extends BaseEntityBlock implements SimpleWaterlogged
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.RESERVOIR_ENTITY.get(), ReservoirBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.RESERVOIR_ENTITY.get(), ReservoirBlockEntity::commonTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.RESERVOIR_ENTITY.get(), ReservoirBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.RESERVOIR_ENTITY.get(), ReservoirBlockEntity::commonTick);
 	}
 
 	@Override

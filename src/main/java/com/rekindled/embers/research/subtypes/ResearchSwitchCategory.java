@@ -8,14 +8,14 @@ import com.rekindled.embers.gui.GuiCodex;
 import com.rekindled.embers.research.ResearchBase;
 import com.rekindled.embers.research.ResearchCategory;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class ResearchSwitchCategory extends ResearchBase {
 	public ResearchCategory targetCategory;
 	int minEntries;
 
-	public ResearchSwitchCategory(ResourceLocation location, ItemStack icon, double x, double y) {
+	public ResearchSwitchCategory(Identifier location, ItemStack icon, double x, double y) {
 		super(location, icon, x, y);
 	}
 

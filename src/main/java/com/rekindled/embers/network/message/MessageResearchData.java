@@ -8,16 +8,16 @@ import com.rekindled.embers.research.ResearchManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class MessageResearchData implements CustomPacketPayload {
 
 	public static final int NAME_MAX_LENGTH = 64;
-	Map<ResourceLocation, Boolean> ticks;
+	Map<Identifier, Boolean> ticks;
 
 	public static final CustomPacketPayload.Type<MessageResearchData> TYPE =
-		new CustomPacketPayload.Type<>(ResourceLocation.parse("embers_reborn:research_data"));
+		new CustomPacketPayload.Type<>(Identifier.parse("embers_reborn:research_data"));
 
 	public static final StreamCodec<FriendlyByteBuf, MessageResearchData> STREAM_CODEC =
 		StreamCodec.ofMember(MessageResearchData::write, MessageResearchData::read);
@@ -26,23 +26,23 @@ public class MessageResearchData implements CustomPacketPayload {
 		this.ticks = new HashMap<>();
 	}
 
-	public MessageResearchData(Map<ResourceLocation, Boolean> ticks) {
+	public MessageResearchData(Map<Identifier, Boolean> ticks) {
 		this.ticks = new HashMap<>(ticks);
 	}
 
 	public void write(FriendlyByteBuf buf) {
 		buf.writeInt(ticks.size());
-		for (Map.Entry<ResourceLocation, Boolean> entry : ticks.entrySet()) {
-			buf.writeResourceLocation(entry.getKey());
+		for (Map.Entry<Identifier, Boolean> entry : ticks.entrySet()) {
+			buf.writeIdentifier(entry.getKey());
 			buf.writeBoolean(entry.getValue());
 		}
 	}
 
 	public static MessageResearchData read(FriendlyByteBuf buf) {
-		Map<ResourceLocation, Boolean> ticks = new HashMap<>();
+		Map<Identifier, Boolean> ticks = new HashMap<>();
 		int entries = buf.readInt();
 		for (int i = 0; i < entries; i++) {
-			ResourceLocation key = buf.readResourceLocation();
+			Identifier key = buf.readIdentifier();
 			boolean value = buf.readBoolean();
 			ticks.put(key, value);
 		}

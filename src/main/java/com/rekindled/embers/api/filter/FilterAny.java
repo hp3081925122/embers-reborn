@@ -4,14 +4,14 @@ import com.rekindled.embers.Embers;
 
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class FilterAny implements IFilter {
-	public static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "any");
+	public static final Identifier RESOURCE_LOCATION = Identifier.fromNamespaceAndPath(Embers.MODID, "any");
 
 	@Override
-	public ResourceLocation getType() {
+	public Identifier getType() {
 		return RESOURCE_LOCATION;
 	}
 

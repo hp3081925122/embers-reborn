@@ -6,7 +6,7 @@ import com.rekindled.embers.augment.ShiftingScalesAugment.IScalesCapability;
 import com.rekindled.embers.research.capability.IResearchCapability;
 
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.EntityCapability;
 import net.neoforged.neoforge.capabilities.ItemCapability;
@@ -25,21 +25,21 @@ public final class EmbersCapabilities {
 
     // Block/BlockEntity capabilities (sided — context = Direction)
     public static final BlockCapability<IEmberCapability, Direction> EMBER_CAPABILITY =
-            BlockCapability.createSided(ResourceLocation.fromNamespaceAndPath("embers_reborn", "ember"), IEmberCapability.class);
+            BlockCapability.createSided(Identifier.fromNamespaceAndPath("embers_reborn", "ember"), IEmberCapability.class);
 
     public static final BlockCapability<IUpgradeProvider, Direction> UPGRADE_PROVIDER_CAPABILITY =
-            BlockCapability.createSided(ResourceLocation.fromNamespaceAndPath("embers_reborn", "upgrade_provider"), IUpgradeProvider.class);
+            BlockCapability.createSided(Identifier.fromNamespaceAndPath("embers_reborn", "upgrade_provider"), IUpgradeProvider.class);
 
     // Entity capabilities (no context — use createVoid)
     public static final EntityCapability<IResearchCapability, Void> RESEARCH_CAPABILITY =
-            EntityCapability.createVoid(ResourceLocation.fromNamespaceAndPath("embers_reborn", "research"), IResearchCapability.class);
+            EntityCapability.createVoid(Identifier.fromNamespaceAndPath("embers_reborn", "research"), IResearchCapability.class);
 
     public static final EntityCapability<IScalesCapability, Void> SCALES_CAPABILITY =
-            EntityCapability.createVoid(ResourceLocation.fromNamespaceAndPath("embers_reborn", "scales"), IScalesCapability.class);
+            EntityCapability.createVoid(Identifier.fromNamespaceAndPath("embers_reborn", "scales"), IScalesCapability.class);
 
     // Item capabilities (no context — use createVoid)
     public static final ItemCapability<IEmberCapability, Void> EMBER_ITEM_CAPABILITY =
-            ItemCapability.createVoid(ResourceLocation.fromNamespaceAndPath("embers_reborn", "ember_item"), IEmberCapability.class);
+            ItemCapability.createVoid(Identifier.fromNamespaceAndPath("embers_reborn", "ember_item"), IEmberCapability.class);
 
     private EmbersCapabilities() {}
 }

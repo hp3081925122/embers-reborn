@@ -10,7 +10,7 @@ import com.rekindled.embers.api.event.UpgradeEvent;
 import com.rekindled.embers.api.upgrades.UpgradeContext;
 import com.rekindled.embers.blockentity.HearthCoilBlockEntity;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public class AtmosphericBellowsUpgrade extends DefaultUpgradeProvider {
 
 	public AtmosphericBellowsUpgrade(BlockEntity tile) {
-		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "atmospheric_bellows"), tile);
+		super(Identifier.fromNamespaceAndPath(Embers.MODID, "atmospheric_bellows"), tile);
 	}
 
 	@Override

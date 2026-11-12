@@ -4,7 +4,7 @@ import com.rekindled.embers.Embers;
 import com.rekindled.embers.blockentity.MachineProgress;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IServerDataProvider;
@@ -22,7 +22,7 @@ import snownee.jade.api.ui.MessageType;
 public class EmbersJadePlugin implements IWailaPlugin {
 
 	private static final String KEY = "embers_progress";
-	private static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "machine_progress");
+	private static final Identifier UID = Identifier.fromNamespaceAndPath(Embers.MODID, "machine_progress");
 
 	@Override
 	public void register(IWailaCommonRegistration registration) {
@@ -35,7 +35,7 @@ public class EmbersJadePlugin implements IWailaPlugin {
 			}
 
 			@Override
-			public ResourceLocation getUid() {
+			public Identifier getUid() {
 				return UID;
 			}
 		}, BlockEntity.class);

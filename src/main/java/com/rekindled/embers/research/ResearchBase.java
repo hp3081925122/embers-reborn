@@ -15,7 +15,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +24,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 public class ResearchBase {
-	public ResourceLocation id;
+	public Identifier id;
 	public double u = 0.0;
 	public double v = 0.0;
 	public ItemStack icon = ItemStack.EMPTY;
@@ -33,8 +33,8 @@ public class ResearchBase {
 	public int y = 0;
 	public List<ResearchBase> ancestors = new ArrayList<>();
 	public ResearchBase subCategory = null;
-	public ResourceLocation iconBackground = ResearchManager.PAGE_ICONS;
-	public ResourceLocation background = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_normal.png");
+	public Identifier iconBackground = ResearchManager.PAGE_ICONS;
+	public Identifier background = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_normal.png");
 
 	public ResearchBase firstPage;
 	public int pageNumber;
@@ -49,7 +49,7 @@ public class ResearchBase {
 	public boolean checked;
 	public boolean checkmarkSet;
 
-	public ResearchBase(ResourceLocation location, ItemStack icon, double x, double y) {
+	public ResearchBase(Identifier location, ItemStack icon, double x, double y) {
 		this.id = location;
 		this.icon = icon;
 		this.lookupIngredient = Ingredient.of(icon);
@@ -57,13 +57,13 @@ public class ResearchBase {
 		this.y = 48+(int)(y*24);
 	}
 
-	public ResearchBase(ResourceLocation location, ItemStack icon, Vec2i pos) {
+	public ResearchBase(Identifier location, ItemStack icon, Vec2i pos) {
 		this(location, icon, pos.x, pos.y);
 	}
 
 	@Deprecated
 	public ResearchBase(String location, ItemStack icon, double x, double y) {
-		this(ResourceLocation.fromNamespaceAndPath(Embers.MODID, location), icon, x, y);
+		this(Identifier.fromNamespaceAndPath(Embers.MODID, location), icon, x, y);
 	}
 
 	@Deprecated
@@ -147,14 +147,14 @@ public class ResearchBase {
 		return this;
 	}
 
-	public ResearchBase setIconBackground(ResourceLocation resourceLocation, double u, double v) {
+	public ResearchBase setIconBackground(Identifier resourceLocation, double u, double v) {
 		this.iconBackground = resourceLocation;
 		this.u = u;
 		this.v = v;
 		return this;
 	}
 
-	public ResearchBase setBackground(ResourceLocation resourceLocation) {
+	public ResearchBase setBackground(Identifier resourceLocation) {
 		this.background = resourceLocation;
 		return this;
 	}
@@ -236,11 +236,11 @@ public class ResearchBase {
 		return fontRenderer.split(s, width);
 	}
 
-	public ResourceLocation getBackground() {
+	public Identifier getBackground() {
 		return background;
 	}
 
-	public ResourceLocation getIconBackground() {
+	public Identifier getIconBackground() {
 		return iconBackground;
 	}
 

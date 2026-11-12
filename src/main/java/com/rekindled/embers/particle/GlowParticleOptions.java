@@ -16,7 +16,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.phys.Vec3;
 
@@ -24,7 +24,7 @@ public class GlowParticleOptions implements ParticleOptions {
 
 	public static final float MIN_SCALE = 0.01F;
 	public static final float MAX_SCALE = 4.0F;
-	protected final ResourceLocation colorId;
+	protected final Identifier colorId;
 	protected final Vector3f color;
 	protected final Vec3 motion;
 	protected final float scale;
@@ -35,7 +35,7 @@ public class GlowParticleOptions implements ParticleOptions {
 	public static GlowParticleOptions EMBER_NOMOTION = new GlowParticleOptions(EmbersColors.EMBER_ID, new Vec3(0.0, 0.000001, 0.0), 2.0F);
 
 	public static final Codec<GlowParticleOptions> CODEC = RecordCodecBuilder.create((p_175793_) -> {
-		return p_175793_.group(ResourceLocation.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
+		return p_175793_.group(Identifier.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
 			return p_175797_.colorId;
 		}), ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((p_175797_) -> {
 			return p_175797_.color;
@@ -48,7 +48,7 @@ public class GlowParticleOptions implements ParticleOptions {
 		})).apply(p_175793_, GlowParticleOptions::new);
 	});
 
-	public GlowParticleOptions(ResourceLocation pColorId, Vector3f pColor, Vec3 pMotion, float pScale, int plifetime) {
+	public GlowParticleOptions(Identifier pColorId, Vector3f pColor, Vec3 pMotion, float pScale, int plifetime) {
 		this.colorId = pColorId;
 		this.color = pColor;
 		this.motion = pMotion;
@@ -60,7 +60,7 @@ public class GlowParticleOptions implements ParticleOptions {
 		this(EmbersColors.CUSTOM_ID, pColor, pMotion, pScale, plifetime);
 	}
 
-	public GlowParticleOptions(ResourceLocation pColorId, Vec3 pMotion, float pScale, int plifetime) {
+	public GlowParticleOptions(Identifier pColorId, Vec3 pMotion, float pScale, int plifetime) {
 		this(pColorId, EmbersColors.EMBER, pMotion, pScale, plifetime);
 	}
 
@@ -76,15 +76,15 @@ public class GlowParticleOptions implements ParticleOptions {
 		this(pColor, Vec3.ZERO, pScale);
 	}
 
-	public GlowParticleOptions(ResourceLocation pColorId, Vec3 pMotion, float pScale) {
+	public GlowParticleOptions(Identifier pColorId, Vec3 pMotion, float pScale) {
 		this(pColorId, pMotion, pScale, -1);
 	}
 
-	public GlowParticleOptions(ResourceLocation pColorId, float pScale, int plifetime) {
+	public GlowParticleOptions(Identifier pColorId, float pScale, int plifetime) {
 		this(pColorId, Vec3.ZERO, pScale, plifetime);
 	}
 
-	public GlowParticleOptions(ResourceLocation pColorId, float pScale) {
+	public GlowParticleOptions(Identifier pColorId, float pScale) {
 		this(pColorId, Vec3.ZERO, pScale);
 	}
 
@@ -117,7 +117,7 @@ public class GlowParticleOptions implements ParticleOptions {
 	}
 
 	public void writeToNetwork(FriendlyByteBuf pBuffer) {
-		pBuffer.writeResourceLocation(this.colorId);
+		pBuffer.writeIdentifier(this.colorId);
 		pBuffer.writeFloat(this.color.x());
 		pBuffer.writeFloat(this.color.y());
 		pBuffer.writeFloat(this.color.z());

@@ -83,7 +83,7 @@ public class GlimmerCrystalItem extends Item {
 				level.addParticle(GlimmerBlock.GLIMMER, blockpos.getX()+0.5f, blockpos.getY()+0.5f, blockpos.getZ()+0.5f, 0, 0, 0);
 				level.addParticle(GlimmerBlock.EMBER, blockpos.getX()+0.5f, blockpos.getY()+0.5f, blockpos.getZ()+0.5f, 0, 0.001, 0);
 
-				return InteractionResult.sidedSuccess(level.isClientSide);
+				return InteractionResult.sidedSuccess(level.isClientSide());
 			}
 		}
 	}

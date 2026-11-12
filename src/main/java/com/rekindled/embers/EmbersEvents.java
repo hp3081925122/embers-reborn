@@ -26,7 +26,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -196,19 +196,19 @@ public class EmbersEvents {
 		}
 	}
 
-	public static HashMap<ResourceLocation, ExplosionCharmWorldInfo> explosionCharmData = new HashMap<>();
+	public static HashMap<Identifier, ExplosionCharmWorldInfo> explosionCharmData = new HashMap<>();
 
 	public static void putExplosionCharm(Level world, BlockPos pos) {
-		if (!explosionCharmData.containsKey(world.dimension().location()))
-			explosionCharmData.put(world.dimension().location(), new ExplosionCharmWorldInfo());
-		ExplosionCharmWorldInfo data = explosionCharmData.get(world.dimension().location());
+		if (!explosionCharmData.containsKey(world.dimension().identifier()))
+			explosionCharmData.put(world.dimension().identifier(), new ExplosionCharmWorldInfo());
+		ExplosionCharmWorldInfo data = explosionCharmData.get(world.dimension().identifier());
 		data.put(pos);
 	}
 
 	public static void onExplosion(ExplosionEvent.Start event) {
 		Level world = event.getLevel();
 		Explosion explosion = event.getExplosion();
-		ExplosionCharmWorldInfo data = explosionCharmData.get(world.dimension().location());
+		ExplosionCharmWorldInfo data = explosionCharmData.get(world.dimension().identifier());
 		if (data == null)
 			return;
 		BlockPos charmPos = data.getClosestExplosionCharm(world, BlockPos.containing(explosion.center()), 8);

@@ -16,7 +16,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
@@ -31,18 +31,18 @@ public class BoringRecipe implements IBoringRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer();
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public final WeightedItemStack result;
 	public final int minHeight;
 	public final int maxHeight;
-	public final HashSet<ResourceLocation> dimensions;
-	public final HashSet<ResourceLocation> biomes;
+	public final HashSet<Identifier> dimensions;
+	public final HashSet<Identifier> biomes;
 	public final TagKey<Block> requiredBlock;
 	public final int amountRequired;
 	public final double chance;
 
-	public BoringRecipe(ResourceLocation id, WeightedItemStack result, int minHeight, int maxHeight, HashSet<ResourceLocation> dimensions, HashSet<ResourceLocation> biomes, TagKey<Block> requiredBlock, int amountRequired, double chance) {
+	public BoringRecipe(Identifier id, WeightedItemStack result, int minHeight, int maxHeight, HashSet<Identifier> dimensions, HashSet<Identifier> biomes, TagKey<Block> requiredBlock, int amountRequired, double chance) {
 		this.id = id;
 		this.result = result;
 		this.maxHeight = maxHeight;
@@ -83,7 +83,7 @@ public class BoringRecipe implements IBoringRecipe {
 	public ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider registry) {
 		return result.getStack();
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -103,12 +103,12 @@ public class BoringRecipe implements IBoringRecipe {
 	}
 
 	@Override
-	public Collection<ResourceLocation> getDimensions() {
+	public Collection<Identifier> getDimensions() {
 		return dimensions;
 	}
 
 	@Override
-	public Collection<ResourceLocation> getBiomes() {
+	public Collection<Identifier> getBiomes() {
 		return biomes;
 	}
 
@@ -131,8 +131,8 @@ public class BoringRecipe implements IBoringRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<BoringRecipe> {
-		public BoringRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable BoringRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public BoringRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable BoringRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, BoringRecipe recipe) {}
 	
 		@Override
@@ -142,9 +142,9 @@ public class BoringRecipe implements IBoringRecipe {
 				com.mojang.serialization.Codec.INT.fieldOf("weight").forGetter((BoringRecipe r) -> r.result.getWeight().asInt()),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("min_height", Integer.MIN_VALUE).forGetter((BoringRecipe r) -> r.minHeight),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("max_height", Integer.MAX_VALUE).forGetter((BoringRecipe r) -> r.maxHeight),
-				net.minecraft.resources.ResourceLocation.CODEC.listOf().xmap(java.util.HashSet::new, java.util.ArrayList::new).optionalFieldOf("dimensions", new java.util.HashSet<>()).forGetter((BoringRecipe r) -> r.dimensions),
-				net.minecraft.resources.ResourceLocation.CODEC.listOf().xmap(java.util.HashSet::new, java.util.ArrayList::new).optionalFieldOf("biomes", new java.util.HashSet<>()).forGetter((BoringRecipe r) -> r.biomes),
-				net.minecraft.resources.ResourceLocation.CODEC.optionalFieldOf("block_tag", net.minecraft.resources.ResourceLocation.parse("minecraft:air")).forGetter((BoringRecipe r) -> r.requiredBlock != null ? r.requiredBlock.location() : net.minecraft.resources.ResourceLocation.parse("minecraft:air")),
+				net.minecraft.resources.Identifier.CODEC.listOf().xmap(java.util.HashSet::new, java.util.ArrayList::new).optionalFieldOf("dimensions", new java.util.HashSet<>()).forGetter((BoringRecipe r) -> r.dimensions),
+				net.minecraft.resources.Identifier.CODEC.listOf().xmap(java.util.HashSet::new, java.util.ArrayList::new).optionalFieldOf("biomes", new java.util.HashSet<>()).forGetter((BoringRecipe r) -> r.biomes),
+				net.minecraft.resources.Identifier.CODEC.optionalFieldOf("block_tag", net.minecraft.resources.Identifier.parse("minecraft:air")).forGetter((BoringRecipe r) -> r.requiredBlock != null ? r.requiredBlock.identifier() : net.minecraft.resources.Identifier.parse("minecraft:air")),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("amount_required", 0).forGetter((BoringRecipe r) -> r.amountRequired),
 				com.mojang.serialization.Codec.DOUBLE.optionalFieldOf("chance", -1.0).forGetter((BoringRecipe r) -> r.chance)
 			).apply(inst, (stack, weight, minH, maxH, dims, biomes2, blockTag, amt, chance2) ->
@@ -160,7 +160,7 @@ public class BoringRecipe implements IBoringRecipe {
 					buf.writeVarInt(r.maxHeight);
 					buf.writeCollection(r.dimensions, net.minecraft.network.FriendlyByteBuf::writeResourceLocation);
 					buf.writeCollection(r.biomes, net.minecraft.network.FriendlyByteBuf::writeResourceLocation);
-					buf.writeResourceLocation(r.requiredBlock != null ? r.requiredBlock.location() : net.minecraft.resources.ResourceLocation.parse("minecraft:air"));
+					buf.writeIdentifier(r.requiredBlock != null ? r.requiredBlock.identifier() : net.minecraft.resources.Identifier.parse("minecraft:air"));
 					buf.writeVarInt(r.amountRequired);
 					buf.writeDouble(r.chance);
 				},
@@ -169,9 +169,9 @@ public class BoringRecipe implements IBoringRecipe {
 					int weight = buf.readVarInt();
 					int minH = buf.readVarInt();
 					int maxH = buf.readVarInt();
-					java.util.HashSet<net.minecraft.resources.ResourceLocation> dims = buf.readCollection(i -> new java.util.HashSet<>(), net.minecraft.network.FriendlyByteBuf::readResourceLocation);
-					java.util.HashSet<net.minecraft.resources.ResourceLocation> biomes = buf.readCollection(i -> new java.util.HashSet<>(), net.minecraft.network.FriendlyByteBuf::readResourceLocation);
-					net.minecraft.resources.ResourceLocation blockTag = buf.readResourceLocation();
+					java.util.HashSet<net.minecraft.resources.Identifier> dims = buf.readCollection(i -> new java.util.HashSet<>(), net.minecraft.network.FriendlyByteBuf::readResourceLocation);
+					java.util.HashSet<net.minecraft.resources.Identifier> biomes = buf.readCollection(i -> new java.util.HashSet<>(), net.minecraft.network.FriendlyByteBuf::readResourceLocation);
+					net.minecraft.resources.Identifier blockTag = buf.readIdentifier();
 					int amt = buf.readVarInt();
 					double chance = buf.readDouble();
 					return new BoringRecipe(null, new com.rekindled.embers.util.WeightedItemStack(stack, weight), minH, maxH, dims, biomes, net.minecraft.tags.BlockTags.create(blockTag), amt, chance);

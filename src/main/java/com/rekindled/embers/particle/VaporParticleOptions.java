@@ -16,7 +16,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.phys.Vec3;
 
@@ -24,14 +24,14 @@ public class VaporParticleOptions implements ParticleOptions {
 
 	public static final float MIN_SCALE = 0.01F;
 	public static final float MAX_SCALE = 4.0F;
-	protected final ResourceLocation colorId;
+	protected final Identifier colorId;
 	protected final Vector3f color;
 	protected final Vec3 motion;
 	protected final float scale;
 	public static final VaporParticleOptions VAPOR = new VaporParticleOptions(EmbersColors.VAPOR_ID, 1.0F);
 
 	public static final Codec<VaporParticleOptions> CODEC = RecordCodecBuilder.create((p_175793_) -> {
-		return p_175793_.group(ResourceLocation.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
+		return p_175793_.group(Identifier.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
 			return p_175797_.colorId;
 		}), ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((p_175797_) -> {
 			return p_175797_.color;
@@ -42,7 +42,7 @@ public class VaporParticleOptions implements ParticleOptions {
 		})).apply(p_175793_, VaporParticleOptions::new);
 	});
 
-	public VaporParticleOptions(ResourceLocation pColorId, Vector3f pColor, Vec3 pMotion, float pScale) {
+	public VaporParticleOptions(Identifier pColorId, Vector3f pColor, Vec3 pMotion, float pScale) {
 		this.colorId = pColorId;
 		this.color = pColor;
 		this.motion = pMotion;
@@ -53,11 +53,11 @@ public class VaporParticleOptions implements ParticleOptions {
 		this(EmbersColors.CUSTOM_ID, pColor, pMotion, pScale);
 	}
 
-	public VaporParticleOptions(ResourceLocation pColorId, Vec3 pMotion, float pScale) {
+	public VaporParticleOptions(Identifier pColorId, Vec3 pMotion, float pScale) {
 		this(pColorId, EmbersColors.SMOKE, pMotion, pScale);
 	}
 
-	public VaporParticleOptions(ResourceLocation pColorId, float pScale) {
+	public VaporParticleOptions(Identifier pColorId, float pScale) {
 		this(pColorId, Vec3.ZERO, pScale);
 	}
 
@@ -94,7 +94,7 @@ public class VaporParticleOptions implements ParticleOptions {
 	}
 
 	public void writeToNetwork(FriendlyByteBuf pBuffer) {
-		pBuffer.writeResourceLocation(this.colorId);
+		pBuffer.writeIdentifier(this.colorId);
 		pBuffer.writeFloat(this.color.x());
 		pBuffer.writeFloat(this.color.y());
 		pBuffer.writeFloat(this.color.z());

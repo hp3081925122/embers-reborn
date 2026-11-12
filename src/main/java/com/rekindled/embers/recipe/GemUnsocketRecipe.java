@@ -9,7 +9,7 @@ import com.rekindled.embers.api.item.IInflictorGemHolder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
@@ -21,9 +21,9 @@ public class GemUnsocketRecipe implements CraftingRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer();
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
-	public GemUnsocketRecipe(ResourceLocation id) {
+	public GemUnsocketRecipe(Identifier id) {
 		this.id = id;
 	}
 
@@ -100,7 +100,7 @@ public class GemUnsocketRecipe implements CraftingRecipe {
 	public boolean showNotification() {
 		return false;
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -115,8 +115,8 @@ public class GemUnsocketRecipe implements CraftingRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<GemUnsocketRecipe> {
-		public GemUnsocketRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable GemUnsocketRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public GemUnsocketRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable GemUnsocketRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, GemUnsocketRecipe recipe) {}
 	
 		@Override

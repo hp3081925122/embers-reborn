@@ -14,7 +14,7 @@ import com.rekindled.embers.util.Vec2i;
 
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -22,31 +22,31 @@ public class ResearchCategory {
 
 	public static final ArrayList<ResearchBase> NO_PREREQUISITES = Lists.newArrayList();
 
-	public ResourceLocation id;
+	public Identifier id;
 	@Deprecated
 	public String name;
 	public double u = 192.0;
 	public double v = 0;
-	public ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_index.png");
-	public ResourceLocation background = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_category.png");
+	public Identifier texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_index.png");
+	public Identifier background = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_category.png");
 	public ArrayList<ResearchBase> researches = new ArrayList<>();
 	public ArrayList<ResearchBase> prerequisites = new ArrayList<>();
 	public LinkedList<Vec2i> goodLocations = new LinkedList<>();
 
-	public ResearchCategory(ResourceLocation id, double v) {
+	public ResearchCategory(Identifier id, double v) {
 		this.id = id;
 		this.name = id.getPath();
 		this.v = v;
 	}
 
-	public ResearchCategory(ResourceLocation id, double u, double v) {
+	public ResearchCategory(Identifier id, double u, double v) {
 		this.id = id;
 		this.name = id.getPath();
 		this.u = u;
 		this.v = v;
 	}
 
-	public ResearchCategory(ResourceLocation id, ResourceLocation texture, double u, double v) {
+	public ResearchCategory(Identifier id, Identifier texture, double u, double v) {
 		this.id = id;
 		this.name = id.getPath();
 		this.v = v;
@@ -56,17 +56,17 @@ public class ResearchCategory {
 
 	@Deprecated
 	public ResearchCategory(String name, double v) {
-		this(ResourceLocation.fromNamespaceAndPath(Embers.MODID, name), v);
+		this(Identifier.fromNamespaceAndPath(Embers.MODID, name), v);
 	}
 
 	@Deprecated
 	public ResearchCategory(String name, double u, double v) {
-		this(ResourceLocation.fromNamespaceAndPath(Embers.MODID, name), u, v);
+		this(Identifier.fromNamespaceAndPath(Embers.MODID, name), u, v);
 	}
 
 	@Deprecated
-	public ResearchCategory(String name, ResourceLocation texture, double u, double v) {
-		this(ResourceLocation.fromNamespaceAndPath(Embers.MODID, name), texture, u, v);
+	public ResearchCategory(String name, Identifier texture, double u, double v) {
+		this(Identifier.fromNamespaceAndPath(Embers.MODID, name), texture, u, v);
 	}
 
 	public ResearchCategory addResearch(ResearchBase base) {
@@ -139,11 +139,11 @@ public class ResearchCategory {
 		return v;
 	}
 
-	public ResourceLocation getBackgroundTexture() {
+	public Identifier getBackgroundTexture() {
 		return background;
 	}
 
-	public ResourceLocation getIndexTexture() {
+	public Identifier getIndexTexture() {
 		return texture;
 	}
 

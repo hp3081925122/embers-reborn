@@ -3,7 +3,7 @@ package com.rekindled.embers.api.augment;
 import java.util.Collection;
 import java.util.List;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -16,7 +16,7 @@ public class AugmentUtil {
 		return IMPL.getAllAugments();
 	}
 
-	public static IAugment getAugment(ResourceLocation name) {
+	public static IAugment getAugment(Identifier name) {
 		return IMPL.getAugment(name);
 	}
 

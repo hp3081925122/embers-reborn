@@ -90,7 +90,7 @@ public class HearthCoilBlock extends BaseEntityBlock implements SimpleWaterlogge
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.HEARTH_COIL_ENTITY.get(), HearthCoilBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.HEARTH_COIL_ENTITY.get(), HearthCoilBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.HEARTH_COIL_ENTITY.get(), HearthCoilBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.HEARTH_COIL_ENTITY.get(), HearthCoilBlockEntity::serverTick);
 	}
 
 	@Override

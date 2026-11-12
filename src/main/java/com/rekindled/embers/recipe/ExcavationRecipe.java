@@ -9,7 +9,7 @@ import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.util.WeightedItemStack;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -23,7 +23,7 @@ public class ExcavationRecipe extends BoringRecipe {
 		super(recipe.id, recipe.result, recipe.minHeight, recipe.maxHeight, recipe.dimensions, recipe.biomes, recipe.requiredBlock, recipe.amountRequired, recipe.chance);
 	}
 
-	public ExcavationRecipe(ResourceLocation id, WeightedItemStack result, int minHeight, int maxHeight, HashSet<ResourceLocation> dimensions, HashSet<ResourceLocation> biomes, TagKey<Block> requiredBlock, int amountRequired, double chance) {
+	public ExcavationRecipe(Identifier id, WeightedItemStack result, int minHeight, int maxHeight, HashSet<Identifier> dimensions, HashSet<Identifier> biomes, TagKey<Block> requiredBlock, int amountRequired, double chance) {
 		super(id, result, minHeight, maxHeight, dimensions, biomes, requiredBlock, amountRequired, chance);
 	}
 
@@ -38,8 +38,8 @@ public class ExcavationRecipe extends BoringRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<ExcavationRecipe> {
-		public ExcavationRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable ExcavationRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public ExcavationRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable ExcavationRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, ExcavationRecipe recipe) {}
 	
 		@Override

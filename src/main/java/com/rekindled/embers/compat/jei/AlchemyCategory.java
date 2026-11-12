@@ -13,7 +13,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.phys.Vec3;
@@ -25,8 +25,8 @@ public class AlchemyCategory implements IRecipeCategory<IAlchemyRecipe> {
 	private final IDrawable pillar;
 	private final IDrawable icon;
 	public static Component title = Component.translatable(Embers.MODID + ".jei.recipe.alchemy");
-	public static ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_alchemy.png");
-	public static ResourceLocation pillarTexture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_alchemy.png");
+	public static Identifier texture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_alchemy.png");
+	public static Identifier pillarTexture = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/jei_alchemy.png");
 
 	public AlchemyCategory(IGuiHelper helper) {
 		background = helper.createDrawable(texture, 0, 0, 126, 108);

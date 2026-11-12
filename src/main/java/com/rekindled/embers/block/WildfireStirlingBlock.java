@@ -103,7 +103,7 @@ public class WildfireStirlingBlock extends BaseEntityBlock implements SimpleWate
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.WILDFIRE_STIRLING_ENTITY.get(), WildfireStirlingBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.WILDFIRE_STIRLING_ENTITY.get(), WildfireStirlingBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.WILDFIRE_STIRLING_ENTITY.get(), WildfireStirlingBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.WILDFIRE_STIRLING_ENTITY.get(), WildfireStirlingBlockEntity::serverTick);
 	}
 
 	@Override

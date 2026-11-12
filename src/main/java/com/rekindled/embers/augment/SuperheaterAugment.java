@@ -5,7 +5,7 @@ import com.rekindled.embers.particle.GlowParticleOptions;
 import com.rekindled.embers.util.EmberInventoryUtil;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,7 +15,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 public class SuperheaterAugment extends AugmentBase {
 
-	public SuperheaterAugment(ResourceLocation id) {
+	public SuperheaterAugment(Identifier id) {
 		super(id, 2.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

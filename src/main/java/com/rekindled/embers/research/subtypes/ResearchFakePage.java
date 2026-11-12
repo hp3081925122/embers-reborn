@@ -5,7 +5,7 @@ import com.rekindled.embers.gui.GuiCodex;
 import com.rekindled.embers.research.ResearchBase;
 import com.rekindled.embers.util.Vec2i;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class ResearchFakePage extends ResearchBase {
@@ -36,7 +36,7 @@ public class ResearchFakePage extends ResearchBase {
     }
 
     @Override
-    public ResourceLocation getIconBackground() {
+    public Identifier getIconBackground() {
         return targetPage.getIconBackground();
     }
 

@@ -20,7 +20,7 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -94,7 +94,7 @@ public class EmberProjectileEntity extends Projectile {
 		setColor(Misc.intColor(colour));
 	}
 
-	public void setColor(ResourceLocation color) {
+	public void setColor(Identifier color) {
 		getEntityData().set(colorId, color.toString());
 	}
 
@@ -175,7 +175,7 @@ public class EmberProjectileEntity extends Projectile {
 				double deltaY = getY() - currPosVec.y;
 				double deltaZ = getZ() - currPosVec.z;
 				double dist = Math.ceil(Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) * 10);
-				GlowParticleOptions options = new GlowParticleOptions(EmbersAPI.getColor(ResourceLocation.parse(getEntityData().get(colorId)), Misc.colorFromInt(getEntityData().get(color))), getEntityData().get(value) / 1.75f, 24);
+				GlowParticleOptions options = new GlowParticleOptions(EmbersAPI.getColor(Identifier.parse(getEntityData().get(colorId)), Misc.colorFromInt(getEntityData().get(color))), getEntityData().get(value) / 1.75f, 24);
 				for (double i = 0; i < dist; i++) {
 					double coeff = i / dist;
 					level().addAlwaysVisibleParticle(options, true, currPosVec.x + deltaX * coeff, currPosVec.y + deltaY * coeff, currPosVec.z + deltaZ * coeff, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f));
@@ -226,7 +226,7 @@ public class EmberProjectileEntity extends Projectile {
 	public void onHit(HitResult raytraceresult) {
 		super.onHit(raytraceresult);
 		if (level().isClientSide()) {
-			GlowParticleOptions options = new GlowParticleOptions(EmbersAPI.getColor(ResourceLocation.parse(getEntityData().get(colorId)), Misc.colorFromInt(getEntityData().get(color))), getEntityData().get(value), 24);
+			GlowParticleOptions options = new GlowParticleOptions(EmbersAPI.getColor(Identifier.parse(getEntityData().get(colorId)), Misc.colorFromInt(getEntityData().get(color))), getEntityData().get(value), 24);
 			float dist = getEntityData().get(value) * 0.25f;
 			for (double i = 0; i < 40; i++) {
 				level().addAlwaysVisibleParticle(options, true, getX(), getY(), getZ(), dist*(random.nextFloat()-0.5f), dist*(random.nextFloat()-0.5f), dist*(random.nextFloat()-0.5f));

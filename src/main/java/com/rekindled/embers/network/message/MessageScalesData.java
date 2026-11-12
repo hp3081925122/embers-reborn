@@ -5,7 +5,7 @@ import com.rekindled.embers.augment.ShiftingScalesAugment;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class MessageScalesData implements CustomPacketPayload {
@@ -13,7 +13,7 @@ public class MessageScalesData implements CustomPacketPayload {
 	public int scales;
 
 	public static final CustomPacketPayload.Type<MessageScalesData> TYPE =
-		new CustomPacketPayload.Type<>(ResourceLocation.parse("embers_reborn:scales_data"));
+		new CustomPacketPayload.Type<>(Identifier.parse("embers_reborn:scales_data"));
 
 	public static final StreamCodec<FriendlyByteBuf, MessageScalesData> STREAM_CODEC =
 		StreamCodec.ofMember(MessageScalesData::write, MessageScalesData::read);

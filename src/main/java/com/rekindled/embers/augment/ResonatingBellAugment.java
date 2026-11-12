@@ -13,7 +13,7 @@ import com.rekindled.embers.particle.XRayGlowParticleOptions;
 import com.rekindled.embers.util.EmberInventoryUtil;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -28,7 +28,7 @@ public class ResonatingBellAugment extends AugmentBase {
 
 	public static HashMap<UUID, Float> cooldownTicksServer = new HashMap<>();
 
-	public ResonatingBellAugment(ResourceLocation id) {
+	public ResonatingBellAugment(Identifier id) {
 		super(id, 5.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

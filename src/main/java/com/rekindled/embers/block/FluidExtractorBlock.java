@@ -35,7 +35,7 @@ public class FluidExtractorBlock extends ExtractorBlockBase {
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.FLUID_EXTRACTOR_ENTITY.get(), FluidExtractorBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.FLUID_EXTRACTOR_ENTITY.get(), FluidExtractorBlockEntity::serverTick);
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.FLUID_EXTRACTOR_ENTITY.get(), FluidExtractorBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.FLUID_EXTRACTOR_ENTITY.get(), FluidExtractorBlockEntity::serverTick);
 	}
 
 	@Override

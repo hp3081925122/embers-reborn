@@ -8,15 +8,15 @@ import com.rekindled.embers.model.AshenArmorModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class AncientGolemRenderer extends MobRenderer<AncientGolemEntity, AncientGolemModel<AncientGolemEntity>> {
 
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ancient_golem"), "main");
-	public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/entity/golem.png");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Embers.MODID, "ancient_golem"), "main");
+	public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/entity/golem.png");
 
 	public AncientGolemRenderer(EntityRendererProvider.Context context) {
 		super(context, new AncientGolemModel<AncientGolemEntity>(context.bakeLayer(LAYER_LOCATION)), 0.5f);
@@ -26,7 +26,7 @@ public class AncientGolemRenderer extends MobRenderer<AncientGolemEntity, Ancien
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(AncientGolemEntity pEntity) {
+	public Identifier getTextureLocation(AncientGolemEntity pEntity) {
 		return TEXTURE;
 	}
 }

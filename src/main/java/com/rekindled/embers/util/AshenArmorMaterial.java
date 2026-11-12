@@ -11,7 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * In 1.21.1 ArmorMaterial is a record (cannot be extended).
@@ -37,7 +37,7 @@ public class AshenArmorMaterial {
 		18, // enchantmentValue
 		SoundEvents.ARMOR_EQUIP_GENERIC, // Holder<SoundEvent> in 1.21.1
 		() -> Ingredient.of(RegistryManager.ASHEN_FABRIC.get()),
-		List.of(new ArmorMaterial.Layer(ResourceLocation.parse(Embers.MODID + ":empty"))),
+		List.of(new ArmorMaterial.Layer(Identifier.parse(Embers.MODID + ":empty"))),
 		1.0f, // toughness
 		0.0f  // knockbackResistance
 	);

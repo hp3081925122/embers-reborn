@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import com.google.gson.JsonObject;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -15,14 +15,14 @@ public class CatalysisCombustionRecipe implements ICatalysisCombustionRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer(); 
 
-	public final ResourceLocation id;
+	public final Identifier id;
 
 	public final Ingredient ingredient;
 	public final Ingredient machine;
 	public final int burnTime;
 	public final double multiplier;
 
-	public CatalysisCombustionRecipe(ResourceLocation id, Ingredient ingredient, Ingredient machine, int burnTime, double multiplier) {
+	public CatalysisCombustionRecipe(Identifier id, Ingredient ingredient, Ingredient machine, int burnTime, double multiplier) {
 		this.id = id;
 		this.ingredient = ingredient;
 		this.machine = machine;
@@ -61,7 +61,7 @@ public class CatalysisCombustionRecipe implements ICatalysisCombustionRecipe {
 		}
 		return burnTime;
 	}
-	public ResourceLocation getId() {
+	public Identifier getId() {
 		return id;
 	}
 
@@ -91,8 +91,8 @@ public class CatalysisCombustionRecipe implements ICatalysisCombustionRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<CatalysisCombustionRecipe> {
-		public CatalysisCombustionRecipe fromJson(ResourceLocation recipeId, JsonObject json) {return null; }
-		public @Nullable CatalysisCombustionRecipe fromNetwork(ResourceLocation recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
+		public CatalysisCombustionRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
+		public @Nullable CatalysisCombustionRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, CatalysisCombustionRecipe recipe) {}
 	
 		@Override

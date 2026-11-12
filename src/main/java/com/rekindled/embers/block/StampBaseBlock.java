@@ -104,7 +104,7 @@ public class StampBaseBlock extends BaseEntityBlock implements SimpleWaterlogged
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.STAMP_BASE_ENTITY.get(), StampBaseBlockEntity::clientTick) : null;
+		return pLevel.isClientSide() ? createTickerHelper(pBlockEntityType, RegistryManager.STAMP_BASE_ENTITY.get(), StampBaseBlockEntity::clientTick) : null;
 	}
 
 	@Nullable

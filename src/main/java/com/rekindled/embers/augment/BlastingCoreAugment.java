@@ -12,7 +12,7 @@ import com.rekindled.embers.util.Misc;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ClientboundExplodePacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -33,7 +33,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 public class BlastingCoreAugment extends AugmentBase {
 
-	public BlastingCoreAugment(ResourceLocation id) {
+	public BlastingCoreAugment(Identifier id) {
 		super(id, 2.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

@@ -8,7 +8,7 @@ import com.rekindled.embers.particle.GlowParticleOptions;
 import com.rekindled.embers.util.EmberInventoryUtil;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -20,7 +20,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 public class FlameBarrierAugment extends AugmentBase {
 
-	public FlameBarrierAugment(ResourceLocation id) {
+	public FlameBarrierAugment(Identifier id) {
 		super(id, 2.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

@@ -11,7 +11,7 @@ import com.rekindled.embers.network.message.MessageCasterOrb;
 import com.rekindled.embers.util.EmberInventoryUtil;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,7 +27,7 @@ public class CasterOrbAugment extends AugmentBase {
 	public static float cooldownTicks = 0;
 	public static HashMap<UUID,Float> cooldownTicksServer = new HashMap<>();
 
-	public CasterOrbAugment(ResourceLocation id) {
+	public CasterOrbAugment(Identifier id) {
 		super(id, 2.0);
 		NeoForge.EVENT_BUS.register(this);
 	}

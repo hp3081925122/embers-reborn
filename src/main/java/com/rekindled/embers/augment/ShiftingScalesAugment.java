@@ -28,7 +28,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -48,8 +48,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ShiftingScalesAugment extends AugmentBase {
 
-	public static final ResourceLocation TEXTURE_HUD = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/icons.png");
-	public static final ResourceLocation SCALES = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "scales");
+	public static final Identifier TEXTURE_HUD = Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/icons.png");
+	public static final Identifier SCALES = Identifier.fromNamespaceAndPath(Embers.MODID, "scales");
 
 	//Server
 	public static final int COOLDOWN = 33;
@@ -64,7 +64,7 @@ public class ShiftingScalesAugment extends AugmentBase {
 	public static int scales = 0;
 	public static int scalesLast = 0;
 
-	public ShiftingScalesAugment(ResourceLocation id) {
+	public ShiftingScalesAugment(Identifier id) {
 		super(id, 0.0);
 		NeoForge.EVENT_BUS.register(this);
 			}

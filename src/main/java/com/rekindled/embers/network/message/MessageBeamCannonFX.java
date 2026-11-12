@@ -10,7 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -23,7 +23,7 @@ public class MessageBeamCannonFX implements CustomPacketPayload {
 	double dX = 0, dY = 0, dZ = 0;
 
 	public static final CustomPacketPayload.Type<MessageBeamCannonFX> TYPE =
-		new CustomPacketPayload.Type<>(ResourceLocation.parse("embers_reborn:beam_cannon_fx"));
+		new CustomPacketPayload.Type<>(Identifier.parse("embers_reborn:beam_cannon_fx"));
 
 	public static final StreamCodec<FriendlyByteBuf, MessageBeamCannonFX> STREAM_CODEC =
 		StreamCodec.ofMember(MessageBeamCannonFX::write, MessageBeamCannonFX::read);

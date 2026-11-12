@@ -6,7 +6,7 @@ import com.rekindled.embers.Embers;
 import com.rekindled.embers.api.augment.AugmentUtil;
 import com.rekindled.embers.api.augment.IAugment;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 
@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
  */
 public class AugmentPredicate implements java.util.function.Predicate<ItemStack> {
 
-	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augment");
+	public static final Identifier ID = Identifier.fromNamespaceAndPath(Embers.MODID, "augment");
 
 	protected final IAugment augment;
 	protected final int level;
@@ -43,7 +43,7 @@ public class AugmentPredicate implements java.util.function.Predicate<ItemStack>
 	}
 
 	public static AugmentPredicate deserialize(JsonObject json) {
-		IAugment augment = AugmentUtil.getAugment(ResourceLocation.parse(GsonHelper.getAsString(json, "augment")));
+		IAugment augment = AugmentUtil.getAugment(Identifier.parse(GsonHelper.getAsString(json, "augment")));
 		int level = 1;
 		if (json.has("level"))
 			level = GsonHelper.getAsInt(json, "level");
