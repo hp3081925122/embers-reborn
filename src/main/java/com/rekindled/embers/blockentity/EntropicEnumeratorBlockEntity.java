@@ -80,26 +80,26 @@ public class EntropicEnumeratorBlockEntity extends BlockEntity implements IExtra
 				for (int z = 0; z < 2; z++) {
 					String key = "cubie_" + x + "_" + y + "_" + z;
 					if (nbt.contains(key)) {
-						CompoundTag cubieTag = nbt.getCompound(key);
-						cube[x][y][z] = new Cubie(cube[x][y][z].basePosition, cube[x][y][z].baseColors, new Quaterniond(cubieTag.getDouble("qx"), cubieTag.getDouble("qy"), cubieTag.getDouble("qz"), cubieTag.getDouble("qw")));
+						CompoundTag cubieTag = nbt.getCompoundOrEmpty(key);
+						cube[x][y][z] = new Cubie(cube[x][y][z].basePosition, cube[x][y][z].baseColors, new Quaterniond(cubieTag.getDoubleOr("qx", 0.0D), cubieTag.getDoubleOr("qy", 0.0D), cubieTag.getDoubleOr("qz", 0.0D), cubieTag.getDoubleOr("qw", 0.0D)));
 					}
 				}
 			}
 		}
 		if (nbt.contains("nextMoveTime"))
-			nextMoveTime = nbt.getLong("nextMoveTime");
+			nextMoveTime = nbt.getLongOr("nextMoveTime", 0L);
 		if (nbt.contains("queue")) {
-			ListTag queue = nbt.getList("queue", Tag.TAG_COMPOUND);
+			ListTag queue = nbt.getListOrEmpty("queue");
 			moveQueue = new Move[queue.size()];
 			offsetQueue = new int[queue.size()];
 			for (int i = 0; i < queue.size(); i++) {
-				moveQueue[i] = Move.valueOf(queue.getCompound(i).getString("move"));
-				offsetQueue[i] = queue.getCompound(i).getInt("offset");
+				moveQueue[i] = Move.valueOf(queue.getCompoundOrEmpty(i).getStringOr("move", ""));
+				offsetQueue[i] = queue.getCompoundOrEmpty(i).getIntOr("offset", 0);
 			}
 		}
-		moveOffset = nbt.getInt("moveOffset");
-		solving = nbt.getBoolean("solving");
-		willFail = nbt.getBoolean("willFail");
+		moveOffset = nbt.getIntOr("moveOffset", 0);
+		solving = nbt.getBooleanOr("solving", false);
+		willFail = nbt.getBooleanOr("willFail", false);
 		previousMove = -10;
 	}
 

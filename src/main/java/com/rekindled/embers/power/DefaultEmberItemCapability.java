@@ -41,7 +41,7 @@ public class DefaultEmberItemCapability implements IEmberCapability {
 	public double getEmber() {
 		if (stack.isEmpty())
 			return 0;
-		return _getOrCreateCustomTag(stack, "ForgeCaps").getDouble(EMBER);
+		return _getOrCreateCustomTag(stack, "ForgeCaps").getDoubleOr(EMBER, 0.0D);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class DefaultEmberItemCapability implements IEmberCapability {
 		if (stack.isEmpty())
 			return 0;
 		CompoundTag tag = _getOrCreateCustomTag(stack, "ForgeCaps");
-		return tag.contains(EMBER_CAPACITY) ? tag.getDouble(EMBER_CAPACITY) : capacity;
+		return tag.contains(EMBER_CAPACITY) ? tag.getDoubleOr(EMBER_CAPACITY, 0.0D) : capacity;
 	}
 
 	@Override
@@ -109,9 +109,9 @@ public class DefaultEmberItemCapability implements IEmberCapability {
 	@Override
 	public void deserializeNBT(net.minecraft.core.HolderLookup.Provider provider, CompoundTag nbt) {
 		if (nbt.contains(EMBER))
-			ember = nbt.getDouble(EMBER);
+			ember = nbt.getDoubleOr(EMBER, 0.0D);
 		if (nbt.contains(EMBER_CAPACITY))
-			capacity = nbt.getDouble(EMBER_CAPACITY);
+			capacity = nbt.getDoubleOr(EMBER_CAPACITY, 0.0D);
 	}
 
 	@Override
@@ -124,21 +124,21 @@ public class DefaultEmberItemCapability implements IEmberCapability {
 		CustomData cd = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 		CompoundTag root = cd.copyTag();
 		if (!root.contains(key)) root.put(key, new CompoundTag());
-		return root.getCompound(key);
+		return root.getCompoundOrEmpty(key);
 	}
 	private static void _putCustomTag(ItemStack stack, String key, String field, double value) {
 		CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> {
 			if (!tag.contains(key)) tag.put(key, new CompoundTag());
-			tag.getCompound(key).putDouble(field, value);
+			tag.getCompoundOrEmpty(key).putDouble(field, value);
 		});
 	}
 	private static boolean _hasCustomField(ItemStack stack, String key, String field) {
 		CompoundTag root = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-		return root.contains(key) && root.getCompound(key).contains(field);
+		return root.contains(key) && root.getCompoundOrEmpty(key).contains(field);
 	}
 	private static CompoundTag _getCustomSubTag(ItemStack stack, String key) {
 		CustomData cd = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 		CompoundTag root = cd.copyTag();
-		return root.contains(key) ? root.getCompound(key) : null;
+		return root.contains(key) ? root.getCompoundOrEmpty(key) : null;
 	}
 }

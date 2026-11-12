@@ -79,7 +79,7 @@ public class ItemTransferBlockEntity extends ItemPipeBlockEntityBase {
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("filter")) {
-			filterItem = ItemStack.parse(provider, nbt.getCompound("filter")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+			filterItem = ItemStack.parse(provider, nbt.getCompoundOrEmpty("filter")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
 		}
 		setupFilter();
 	}

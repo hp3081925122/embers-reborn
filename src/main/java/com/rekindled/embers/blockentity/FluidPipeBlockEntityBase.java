@@ -141,7 +141,7 @@ public abstract class FluidPipeBlockEntityBase extends PipeBlockEntityBase imple
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("tank"))
-			tank.readFromNBT(provider, nbt.getCompound("tank"));
+			tank.readFromNBT(provider, nbt.getCompoundOrEmpty("tank"));
 	}
 
 	@Override

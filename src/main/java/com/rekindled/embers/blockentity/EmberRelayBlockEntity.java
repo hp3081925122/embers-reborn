@@ -44,9 +44,9 @@ public class EmberRelayBlockEntity extends BlockEntity implements IEmberPacketPr
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains("targetX")) {
-			target = new BlockPos(nbt.getInt("targetX"), nbt.getInt("targetY"), nbt.getInt("targetZ"));
+			target = new BlockPos(nbt.getIntOr("targetX", 0), nbt.getIntOr("targetY", 0), nbt.getIntOr("targetZ", 0));
 		}
-		incomingDirection = new Vec3(nbt.getDouble("incomingX"), nbt.getDouble("incomingY"), nbt.getDouble("incomingZ"));
+		incomingDirection = new Vec3(nbt.getDoubleOr("incomingX", 0.0D), nbt.getDoubleOr("incomingY", 0.0D), nbt.getDoubleOr("incomingZ", 0.0D));
 	}
 
 	@Override

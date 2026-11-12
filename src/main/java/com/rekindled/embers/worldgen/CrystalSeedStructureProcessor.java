@@ -43,7 +43,7 @@ public class CrystalSeedStructureProcessor extends StructureProcessor {
 	public StructureTemplate.StructureBlockInfo processBlock(LevelReader level, BlockPos offset, BlockPos pos, StructureTemplate.StructureBlockInfo blockInfo, StructureTemplate.StructureBlockInfo relativeBlockInfo, StructurePlaceSettings settings) {
 		CompoundTag nbt = relativeBlockInfo.nbt();
 		if (nbt != null && nbt.contains("id")) {
-			Identifier id = Identifier.parse(nbt.getString("id"));
+			Identifier id = Identifier.parse(nbt.getStringOr("id", ""));
 			if (id.getNamespace().equals(Embers.MODID) && id.getPath().contains("crystal_seed")) {
 				nbt = nbt.copy();
 				int xp = getXp(settings.getRandom(relativeBlockInfo.pos()));

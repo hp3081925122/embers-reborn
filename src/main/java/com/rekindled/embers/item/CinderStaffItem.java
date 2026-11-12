@@ -107,7 +107,7 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 
 	@Override
 	public void onUseTick(Level level, LivingEntity player, ItemStack stack, int count) {
-		if (_hasTag(stack) && _getTag(stack).getLong("lastUse") + ConfigManager.CINDER_STAFF_COOLDOWN.get() > level.getGameTime() && !(player instanceof Player && ((Player) player).isCreative()))
+		if (_hasTag(stack) && _getTag(stack).getLongOr("lastUse", 0L) + ConfigManager.CINDER_STAFF_COOLDOWN.get() > level.getGameTime() && !(player instanceof Player && ((Player) player).isCreative()))
 			player.stopUsingItem();
 		double charge = (Math.min(ConfigManager.CINDER_STAFF_MAX_CHARGE.get(), getUseDuration(stack, (net.minecraft.world.entity.LivingEntity) null) - count)) / (double) ConfigManager.CINDER_STAFF_MAX_CHARGE.get();
 		boolean fullCharge = charge >= 1.0;
@@ -169,7 +169,7 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (!_hasTag(stack) || _getTag(stack).getLong("lastUse") + ConfigManager.CINDER_STAFF_COOLDOWN.get() <= level.getGameTime() || player.isCreative()) {
+		if (!_hasTag(stack) || _getTag(stack).getLongOr("lastUse", 0L) + ConfigManager.CINDER_STAFF_COOLDOWN.get() <= level.getGameTime() || player.isCreative()) {
 			if (EmberInventoryUtil.getEmberTotal(player) >= ConfigManager.CINDER_STAFF_COST.get() || player.isCreative()) {
 				EmberInventoryUtil.removeEmber(player, ConfigManager.CINDER_STAFF_COST.get());
 				player.startUsingItem(hand);

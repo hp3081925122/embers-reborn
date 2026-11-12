@@ -38,20 +38,20 @@ public class FluidDialBlockEntity extends BlockEntity implements IDialEntity {
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		ListTag tanks = nbt.getList("tanks", Tag.TAG_COMPOUND);
+		ListTag tanks = nbt.getListOrEmpty("tanks");
 		fluids = new FluidStack[tanks.size()];
 		capacities = new int[tanks.size()];
 		if (tanks.size() > 0) {
 			for (int i = 0; i < tanks.size(); i++) {
-				CompoundTag tank = tanks.getCompound(i);
+				CompoundTag tank = tanks.getCompoundOrEmpty(i);
 				fluids[i] = FluidStack.parseOptional(provider, tank);
-				capacities[i] = tank.getInt("capacity");
+				capacities[i] = tank.getIntOr("capacity", 0);
 			}
 		}
 		if (nbt.contains("more_lines"))
-			extraLines = nbt.getInt("more_lines");
+			extraLines = nbt.getIntOr("more_lines", 0);
 		if (nbt.contains("display"))
-			display = nbt.getBoolean("display");
+			display = nbt.getBooleanOr("display", false);
 	}
 
 	@Override

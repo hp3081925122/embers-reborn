@@ -76,10 +76,10 @@ public class MelterBottomBlockEntity extends BlockEntity implements ISoundContro
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		if (nbt.contains("progress"))
-			progress = nbt.getInt("progress");
-		isWorking = nbt.getBoolean("working");
+			progress = nbt.getIntOr("progress", 0);
+		isWorking = nbt.getBooleanOr("working", false);
 	}
 
 	@Override

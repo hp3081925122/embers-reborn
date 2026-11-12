@@ -45,7 +45,7 @@ public class EmbersJadePlugin implements IWailaPlugin {
 	public void registerClient(IWailaClientRegistration registration) {
 		registration.addTooltipCollectedCallback((box, accessor) -> {
 			if (accessor instanceof BlockAccessor blockAccessor && blockAccessor.getServerData().contains(KEY))
-				box.setBoxProgress(MessageType.SUCCESS, blockAccessor.getServerData().getFloat(KEY));
+				box.setBoxProgress(MessageType.SUCCESS, blockAccessor.getServerData().getFloatOr(KEY, 0.0F));
 		});
 	}
 }

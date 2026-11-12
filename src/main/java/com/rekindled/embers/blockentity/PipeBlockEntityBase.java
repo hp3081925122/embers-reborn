@@ -201,14 +201,14 @@ public class PipeBlockEntityBase extends BlockEntity {
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains("clogged"))
-			clogged = nbt.getBoolean("clogged");
+			clogged = nbt.getBooleanOr("clogged", false);
 		if (nbt.contains("lastTransfer"))
-			lastTransfer = Misc.readNullableFacing(nbt.getInt("lastTransfer"));
+			lastTransfer = Misc.readNullableFacing(nbt.getIntOr("lastTransfer", 0));
 		for (Direction facing : Direction.values())
 			if (nbt.contains("from" + facing.get3DDataValue()))
 				from[facing.get3DDataValue()] = nbt.getBoolean("from" + facing.get3DDataValue());
 		if (nbt.contains("lastRobin"))
-			lastRobin = nbt.getInt("lastRobin");
+			lastRobin = nbt.getIntOr("lastRobin", 0);
 		loadConnections(nbt);
 		loaded = true;
 	}

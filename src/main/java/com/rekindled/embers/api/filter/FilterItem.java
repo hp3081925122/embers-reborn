@@ -44,7 +44,7 @@ public class FilterItem implements IFilter {
 
 	@Override
 	public void readFromNBT(CompoundTag tag) {
-		filterItem = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, tag.getCompound("filterStack")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+		filterItem = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, tag.getCompoundOrEmpty("filterStack")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
 	}
 
 	@Override

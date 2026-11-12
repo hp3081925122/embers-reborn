@@ -36,7 +36,7 @@ public class ItemDropperBlockEntity extends BlockEntity implements IItemPipePrio
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+		inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
 	}
 
 	@Override

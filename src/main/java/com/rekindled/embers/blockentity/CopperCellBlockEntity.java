@@ -35,7 +35,7 @@ public class CopperCellBlockEntity extends BlockEntity {
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		if (capability.getEmberCapacity() == 0)
 			capability.setEmberCapacity(24000);
 	}

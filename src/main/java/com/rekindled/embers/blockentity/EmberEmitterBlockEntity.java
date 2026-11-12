@@ -74,9 +74,9 @@ public class EmberEmitterBlockEntity extends BlockEntity implements IEmberPacket
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains("targetX")){
-			target = new BlockPos(nbt.getInt("targetX"), nbt.getInt("targetY"), nbt.getInt("targetZ"));
+			target = new BlockPos(nbt.getIntOr("targetX", 0), nbt.getIntOr("targetY", 0), nbt.getIntOr("targetZ", 0));
 		}
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 	}
 
 	@Override

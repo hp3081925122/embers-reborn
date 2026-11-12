@@ -79,12 +79,12 @@ public class AugmentUtilImpl implements IAugmentUtil {
 		if (hasHeat(stack)) {
 			CompoundTag root = getItemTag(stack);
 			if (root == null) return Lists.newArrayList();
-			ListTag tagAugments = root.getCompound(IAugmentUtil.HEAT_TAG).getList("augments", Tag.TAG_COMPOUND);
+			ListTag tagAugments = root.getCompoundOrEmpty(IAugmentUtil.HEAT_TAG).getListOrEmpty("augments");
 			if (tagAugments.size() > 0) {
 				List<IAugment> results = new ArrayList<>();
 				for (int i = 0; i < tagAugments.size(); i++) {
-					CompoundTag tagAugment = tagAugments.getCompound(i);
-					IAugment augment = getAugment(Identifier.parse(tagAugment.getString("name")));
+					CompoundTag tagAugment = tagAugments.getCompoundOrEmpty(i);
+					IAugment augment = getAugment(Identifier.parse(tagAugment.getStringOr("name", "")));
 					if (augment != null)
 						results.add(augment);
 				}
@@ -100,12 +100,12 @@ public class AugmentUtilImpl implements IAugmentUtil {
 		if (hasHeat(stack)) {
 			CompoundTag root = getItemTag(stack);
 			if (root == null) return 0;
-			ListTag list = root.getCompound(HEAT_TAG).getList("augments", Tag.TAG_COMPOUND);
+			ListTag list = root.getCompoundOrEmpty(HEAT_TAG).getListOrEmpty("augments");
 			for (int i = 0; i < list.size(); i++) {
-				CompoundTag compound = list.getCompound(i);
-				IAugment augment = getAugment(Identifier.parse(compound.getString("name")));
+				CompoundTag compound = list.getCompoundOrEmpty(i);
+				IAugment augment = getAugment(Identifier.parse(compound.getStringOr("name", "")));
 				if (augment != null && augment.countTowardsTotalLevel()) {
-					total += compound.getInt("level");
+					total += compound.getIntOr("level", 0);
 				}
 			}
 		}
@@ -117,11 +117,11 @@ public class AugmentUtilImpl implements IAugmentUtil {
 		if (hasHeat(stack)) {
 			CompoundTag root = getItemTag(stack);
 			if (root == null) return false;
-			ListTag list = root.getCompound(HEAT_TAG).getList("augments", Tag.TAG_COMPOUND);
+			ListTag list = root.getCompoundOrEmpty(HEAT_TAG).getListOrEmpty("augments");
 			for (int i = 0; i < list.size(); i++) {
-				CompoundTag compound = list.getCompound(i);
+				CompoundTag compound = list.getCompoundOrEmpty(i);
 				if (compound.contains("name")) {
-					if (compound.getString("name").equals(augment.getName().toString())) {
+					if (compound.getStringOr("name", "").equals(augment.getName().toString())) {
 						return true;
 					}
 				}
@@ -134,8 +134,8 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	public void addAugment(ItemStack stack, ItemStack augmentStack, IAugment augment) {
 		checkForTag(stack);
 		CompoundTag root = getOrCreateItemTag(stack);
-		CompoundTag heatTag = root.getCompound(HEAT_TAG);
-		ListTag list = heatTag.getList("augments", Tag.TAG_COMPOUND);
+		CompoundTag heatTag = root.getCompoundOrEmpty(HEAT_TAG);
+		ListTag list = heatTag.getListOrEmpty("augments");
 		int level = getAugmentLevel(stack, augment);
 		if (level == 0) {
 			CompoundTag augmentCompound = new CompoundTag();
@@ -149,10 +149,10 @@ public class AugmentUtilImpl implements IAugmentUtil {
 			list.add(augmentCompound);
 		} else {
 			for (int i = 0; i < list.size(); i++) {
-				CompoundTag augmentCompound = list.getCompound(i);
+				CompoundTag augmentCompound = list.getCompoundOrEmpty(i);
 				if (augmentCompound.contains("name")) {
-					if (augmentCompound.getString("name").equals(augment.getName().toString())) {
-						ListTag items = augmentCompound.getList("items", Tag.TAG_COMPOUND);
+					if (augmentCompound.getStringOr("name", "").equals(augment.getName().toString())) {
+						ListTag items = augmentCompound.getListOrEmpty("items");
 						if (!augmentStack.isEmpty()) {
 							items.add(augmentStack.save(net.minecraft.core.RegistryAccess.EMPTY));
 						}
@@ -171,24 +171,24 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	public List<ItemStack> removeAllAugments(ItemStack stack) {
 		if (hasHeat(stack)) {
 			CompoundTag root = getOrCreateItemTag(stack);
-			CompoundTag heatCompound = root.getCompound(IAugmentUtil.HEAT_TAG);
-			ListTag tagAugments = heatCompound.getList("augments", Tag.TAG_COMPOUND);
+			CompoundTag heatCompound = root.getCompoundOrEmpty(IAugmentUtil.HEAT_TAG);
+			ListTag tagAugments = heatCompound.getListOrEmpty("augments");
 			if (tagAugments.size() > 0) {
 				List<ItemStack> results = new ArrayList<>();
 				ListTag remainingAugments = new ListTag();
 				List<IAugment> removedAugments = new ArrayList<>();
 				for (int i = 0; i < tagAugments.size(); i++) {
-					CompoundTag tagAugment = tagAugments.getCompound(i);
-					IAugment augment = getAugment(Identifier.parse(tagAugment.getString("name")));
+					CompoundTag tagAugment = tagAugments.getCompoundOrEmpty(i);
+					IAugment augment = getAugment(Identifier.parse(tagAugment.getStringOr("name", "")));
 					if (augment != null) {
 						if (augment.canRemove()) {
-							for (int j = 0; j < tagAugment.getInt("level"); j++) {
+							for (int j = 0; j < tagAugment.getIntOr("level", 0); j++) {
 								removedAugments.add(augment);
 							}
 							if (tagAugment.contains("items")) {
-								ListTag items = tagAugment.getList("items", Tag.TAG_COMPOUND);
+								ListTag items = tagAugment.getListOrEmpty("items");
 								for (int j = 0; j < items.size(); j++) {
-									ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, items.getCompound(j))
+									ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, items.getCompoundOrEmpty(j))
 											.ifPresent(results::add);
 								}
 							}
@@ -218,12 +218,12 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	public void setAugmentLevel(ItemStack stack, IAugment augment, int level) {
 		checkForTag(stack);
 		CompoundTag root = getOrCreateItemTag(stack);
-		CompoundTag heatTag = root.getCompound(IAugmentUtil.HEAT_TAG);
-		ListTag list = heatTag.getList("augments", Tag.TAG_COMPOUND);
+		CompoundTag heatTag = root.getCompoundOrEmpty(IAugmentUtil.HEAT_TAG);
+		ListTag list = heatTag.getListOrEmpty("augments");
 		for (int i = 0; i < list.size(); i++) {
-			CompoundTag compound = list.getCompound(i);
+			CompoundTag compound = list.getCompoundOrEmpty(i);
 			if (compound.contains("name")) {
-				if (compound.getString("name").equals(augment.getName().toString())) {
+				if (compound.getStringOr("name", "").equals(augment.getName().toString())) {
 					compound.putInt("level", level);
 				}
 			}
@@ -238,12 +238,12 @@ public class AugmentUtilImpl implements IAugmentUtil {
 		if (hasHeat(stack)) {
 			CompoundTag root = getItemTag(stack);
 			if (root == null) return 0;
-			ListTag list = root.getCompound(IAugmentUtil.HEAT_TAG).getList("augments", Tag.TAG_COMPOUND);
+			ListTag list = root.getCompoundOrEmpty(IAugmentUtil.HEAT_TAG).getListOrEmpty("augments");
 			for (int i = 0; i < list.size(); i++) {
-				CompoundTag compound = list.getCompound(i);
+				CompoundTag compound = list.getCompoundOrEmpty(i);
 				if (compound.contains("name")) {
-					if (compound.getString("name").equals(augment.getName().toString())) {
-						return compound.getInt("level");
+					if (compound.getStringOr("name", "").equals(augment.getName().toString())) {
+						return compound.getIntOr("level", 0);
 					}
 				}
 			}
@@ -264,7 +264,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	public void addHeat(ItemStack stack, float heat) {
 		checkForTag(stack);
 		CompoundTag root = getOrCreateItemTag(stack);
-		CompoundTag heatTag = root.getCompound(HEAT_TAG);
+		CompoundTag heatTag = root.getCompoundOrEmpty(HEAT_TAG);
 		heatTag.putFloat("heat", Math.min(getMaxHeat(stack), getHeat(stack) + heat));
 		root.put(HEAT_TAG, heatTag);
 		setItemTag(stack, root);
@@ -274,7 +274,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	public void setHeat(ItemStack stack, float heat) {
 		checkForTag(stack);
 		CompoundTag root = getOrCreateItemTag(stack);
-		CompoundTag heatTag = root.getCompound(HEAT_TAG);
+		CompoundTag heatTag = root.getCompoundOrEmpty(HEAT_TAG);
 		heatTag.putFloat("heat", heat);
 		root.put(HEAT_TAG, heatTag);
 		setItemTag(stack, root);
@@ -284,7 +284,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	public float getHeat(ItemStack stack) {
 		if (hasHeat(stack)) {
 			CompoundTag root = getItemTag(stack);
-			if (root != null) return root.getCompound(HEAT_TAG).getFloat("heat");
+			if (root != null) return root.getCompoundOrEmpty(HEAT_TAG).getFloatOr("heat", 0.0F);
 		}
 		return 0.0f;
 	}
@@ -293,7 +293,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	public float getMaxHeat(ItemStack stack) {
 		if (hasHeat(stack)) {
 			CompoundTag root = getItemTag(stack);
-			if (root != null) return 500f + 250f * root.getCompound(HEAT_TAG).getFloat("heat_level");
+			if (root != null) return 500f + 250f * root.getCompoundOrEmpty(HEAT_TAG).getFloatOr("heat_level", 0.0F);
 		}
 		return 0.0f;
 	}
@@ -302,7 +302,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	public int getLevel(ItemStack stack) {
 		if (hasHeat(stack)) {
 			CompoundTag root = getItemTag(stack);
-			if (root != null) return root.getCompound(HEAT_TAG).getInt("heat_level");
+			if (root != null) return root.getCompoundOrEmpty(HEAT_TAG).getIntOr("heat_level", 0);
 		}
 		return 0;
 	}
@@ -311,7 +311,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 	public void setLevel(ItemStack stack, int level) {
 		checkForTag(stack);
 		CompoundTag root = getOrCreateItemTag(stack);
-		CompoundTag heatTag = root.getCompound(HEAT_TAG);
+		CompoundTag heatTag = root.getCompoundOrEmpty(HEAT_TAG);
 		heatTag.putInt("heat_level", level);
 		root.put(HEAT_TAG, heatTag);
 		setItemTag(stack, root);

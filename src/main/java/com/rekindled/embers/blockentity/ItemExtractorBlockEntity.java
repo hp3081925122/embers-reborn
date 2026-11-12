@@ -98,7 +98,7 @@ public class ItemExtractorBlockEntity extends ItemPipeBlockEntityBase implements
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("orders")) {
-			ListTag tagOrders = nbt.getList("orders",10);
+			ListTag tagOrders = nbt.getListOrEmpty("orders");
 			orders.clear();
 			for (Tag tagOrder : tagOrders) {
 				orders.add(new OrderStack((CompoundTag) tagOrder));

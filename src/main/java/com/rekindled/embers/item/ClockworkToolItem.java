@@ -113,7 +113,7 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
 		if (_hasTag(oldStack) && _hasTag(newStack)) {
-			return slotChanged || _getTag(oldStack).getBoolean("poweredOn") != _getTag(newStack).getBoolean("poweredOn") || newStack.getItem() != oldStack.getItem();
+			return slotChanged || _getTag(oldStack).getBooleanOr("poweredOn", false) != _getTag(newStack).getBooleanOr("poweredOn", false) || newStack.getItem() != oldStack.getItem();
 		}
 		return slotChanged || newStack.getItem() != oldStack.getItem();
 	}
@@ -121,7 +121,7 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 	@Override
 	public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
 		if (_hasTag(oldStack) && _hasTag(newStack)) {
-			return _getTag(oldStack).getBoolean("poweredOn") != _getTag(newStack).getBoolean("poweredOn");
+			return _getTag(oldStack).getBooleanOr("poweredOn", false) != _getTag(newStack).getBooleanOr("poweredOn", false);
 		}
 		return false;
 	}
@@ -151,12 +151,12 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 			boolean changed = false;
 			if (world.getGameTime() % 5 == 0) {
 				boolean powered = EmberInventoryUtil.getEmberTotal(player) > 5.0;
-				if (tag.getBoolean("poweredOn") != powered) {
+				if (tag.getBooleanOr("poweredOn", false) != powered) {
 					tag.putBoolean("poweredOn", powered);
 					changed = true;
 				}
 			}
-			if (tag.getBoolean("didUse")) {
+			if (tag.getBooleanOr("didUse", false)) {
 				tag.putBoolean("didUse", false);
 				changed = true;
 				EmberInventoryUtil.removeEmber(player, 5.0);
@@ -170,6 +170,6 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 
 	@Override
 	public boolean hasEmber(ItemStack stack) {
-		return _hasTag(stack) && _getTag(stack).getBoolean("poweredOn");
+		return _hasTag(stack) && _getTag(stack).getBooleanOr("poweredOn", false);
 	}
 }

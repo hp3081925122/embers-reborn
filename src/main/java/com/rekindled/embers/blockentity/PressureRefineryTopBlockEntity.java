@@ -57,7 +57,7 @@ public class PressureRefineryTopBlockEntity extends BlockEntity implements ISoun
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 	}
 
 	@Override

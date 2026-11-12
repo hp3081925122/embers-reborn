@@ -48,14 +48,14 @@ public class AlchemyHintItem extends Item {
 
 	public static int getBlackPins(ItemStack stack) {
 		if (_hasTag(stack)) {
-			return _getTag(stack).getInt("blackPins");
+			return _getTag(stack).getIntOr("blackPins", 0);
 		}
 		return 0;
 	}
 
 	public static int getWhitePins(ItemStack stack) {
 		if (_hasTag(stack)) {
-			return _getTag(stack).getInt("whitePins");
+			return _getTag(stack).getIntOr("whitePins", 0);
 		}
 		return 0;
 	}
@@ -63,7 +63,7 @@ public class AlchemyHintItem extends Item {
 	public static ArrayList<ItemStack> getAspects(ItemStack stack) {
 		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 		if (_hasTag(stack) && _getTag(stack).contains("aspects")) {
-			ListTag list = _getTag(stack).getList("aspects", Tag.TAG_COMPOUND);
+			ListTag list = _getTag(stack).getListOrEmpty("aspects");
 			for (Tag nbt : list) {
 				ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, (CompoundTag) nbt).ifPresent(items::add);
 			}
@@ -74,7 +74,7 @@ public class AlchemyHintItem extends Item {
 	public static ArrayList<ItemStack> getInputs(ItemStack stack) {
 		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 		if (_hasTag(stack) && _getTag(stack).contains("inputs")) {
-			ListTag list = _getTag(stack).getList("inputs", Tag.TAG_COMPOUND);
+			ListTag list = _getTag(stack).getListOrEmpty("inputs");
 			for (Tag nbt : list) {
 				ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, (CompoundTag) nbt).ifPresent(items::add);
 			}
@@ -85,13 +85,13 @@ public class AlchemyHintItem extends Item {
 	/** @return per-slot correctness recorded on the note, or null for notes made with slot hints disabled */
 	public static byte[] getCorrect(ItemStack stack) {
 		if (_hasTag(stack) && _getTag(stack).contains("correct"))
-			return _getTag(stack).getByteArray("correct");
+			return _getTag(stack).getByteArray("correct").orElse(new byte[0]);
 		return null;
 	}
 
 	public static ItemStack getResult(ItemStack stack) {
 		if (_hasTag(stack) && _getTag(stack).contains("result")) {
-			return ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, _getTag(stack).getCompound("result")).orElse(ItemStack.EMPTY);
+			return ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, _getTag(stack).getCompoundOrEmpty("result")).orElse(ItemStack.EMPTY);
 		}
 		return ItemStack.EMPTY;
 	}

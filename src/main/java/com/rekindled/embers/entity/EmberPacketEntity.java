@@ -57,10 +57,10 @@ public class EmberPacketEntity extends Entity {
 	@Override
 	protected void readAdditionalSaveData(CompoundTag nbt) {
 		if (nbt.contains("destX")){
-			dest = new BlockPos(nbt.getInt("destX"), nbt.getInt("destY"), nbt.getInt("destZ"));
+			dest = new BlockPos(nbt.getIntOr("destX", 0), nbt.getIntOr("destY", 0), nbt.getIntOr("destZ", 0));
 		}
-		value = nbt.getDouble("value");
-		getEntityData().set(lifetime, nbt.getInt("lifetime"));
+		value = nbt.getDoubleOr("value", 0.0D);
+		getEntityData().set(lifetime, nbt.getIntOr("lifetime", 0));
 	}
 
 	@Override

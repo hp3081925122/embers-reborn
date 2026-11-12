@@ -108,9 +108,9 @@ public class CrystalSeedBlockEntity extends BlockEntity implements IEmberInjecta
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		loadSpawnsFromString(nbt.getString("spawns"));
-		size = nbt.getInt("size");
-		xp = nbt.getInt("xp");
+		loadSpawnsFromString(nbt.getStringOr("spawns", ""));
+		size = nbt.getIntOr("size", 0);
+		xp = nbt.getIntOr("xp", 0);
 	}
 
 	@Override

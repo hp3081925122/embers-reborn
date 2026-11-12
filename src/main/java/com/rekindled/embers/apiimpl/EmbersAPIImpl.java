@@ -92,8 +92,8 @@ public class EmbersAPIImpl implements IEmbersAPI {
 			}
 			if (stack.getItem() == item && _hasTag(stack)) {	
 				CompoundTag nbt = _getTag(stack);
-				if (_hasTag(stack) && nbt.contains("targetWorld") && player.level().dimension().identifier().toString().equals(nbt.getString("targetWorld"))) {
-					return new HammerTarget(new BlockPos(nbt.getInt("targetX"), nbt.getInt("targetY"), nbt.getInt("targetZ")), Direction.byName(nbt.getString("targetFace")));
+				if (_hasTag(stack) && nbt.contains("targetWorld") && player.level().dimension().identifier().toString().equals(nbt.getStringOr("targetWorld", ""))) {
+					return new HammerTarget(new BlockPos(nbt.getIntOr("targetX", 0), nbt.getIntOr("targetY", 0), nbt.getIntOr("targetZ", 0)), Direction.byName(nbt.getStringOr("targetFace", "")));
 				}
 			}
 			return null;

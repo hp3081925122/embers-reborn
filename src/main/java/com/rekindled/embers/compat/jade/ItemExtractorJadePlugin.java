@@ -47,7 +47,7 @@ public class ItemExtractorJadePlugin implements IWailaPlugin, IBlockComponentPro
 
 	@Override
 	public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
-		if (accessor.getServerData().getBoolean(STUCK))
+		if (accessor.getServerData().getBooleanOr(STUCK, false))
 			tooltip.add(Component.translatable(Embers.MODID + ".tooltip.item_extractor.stuck").withStyle(ChatFormatting.GRAY));
 	}
 

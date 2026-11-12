@@ -23,7 +23,7 @@ public class AtmosphericGaugeBlockEntity extends BlockEntity {
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		power = nbt.getInt("power");
+		power = nbt.getIntOr("power", 0);
 	}
 
 	@Override

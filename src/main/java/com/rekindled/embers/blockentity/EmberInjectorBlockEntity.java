@@ -72,9 +72,9 @@ public class EmberInjectorBlockEntity extends BlockEntity implements ISoundContr
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
-		isWorking = nbt.getBoolean("isWorking");
-		distance = nbt.getInt("distance");
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
+		isWorking = nbt.getBooleanOr("isWorking", false);
+		distance = nbt.getIntOr("distance", 0);
 	}
 
 	@Override

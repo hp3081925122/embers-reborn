@@ -85,10 +85,10 @@ public class DefaultEmberCapability implements IEmberCapability {
 	@Override
 	public void deserializeNBT(net.minecraft.core.HolderLookup.Provider provider, CompoundTag nbt) {
 		if (nbt.contains(EMBER)){
-			ember = nbt.getDouble(EMBER);
+			ember = nbt.getDoubleOr(EMBER, 0.0D);
 		}
 		if (nbt.contains(EMBER_CAPACITY)){
-			capacity = nbt.getDouble(EMBER_CAPACITY);
+			capacity = nbt.getDoubleOr(EMBER_CAPACITY, 0.0D);
 		}
 	}
 

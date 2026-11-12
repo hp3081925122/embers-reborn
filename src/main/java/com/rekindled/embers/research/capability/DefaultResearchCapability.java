@@ -42,13 +42,13 @@ public class DefaultResearchCapability implements IResearchCapability, net.neofo
 
 	@Override
 	public void readFromNBT(CompoundTag tag) {
-		CompoundTag checkmarksTag = tag.getCompound("checkmarks");
+		CompoundTag checkmarksTag = tag.getCompoundOrEmpty("checkmarks");
 		checkmarks.clear();
 		for (String key : checkmarksTag.getAllKeys()) {
 			if (key.contains(":")) {
-				checkmarks.put(Identifier.parse(key), checkmarksTag.getBoolean(key));
+				checkmarks.put(Identifier.parse(key), checkmarksTag.getBooleanOr(key, false));
 			} else {
-				checkmarks.put(Identifier.fromNamespaceAndPath(Embers.MODID, key), checkmarksTag.getBoolean(key));
+				checkmarks.put(Identifier.fromNamespaceAndPath(Embers.MODID, key), checkmarksTag.getBooleanOr(key, false));
 			}
 		}
 	}

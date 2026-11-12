@@ -46,10 +46,10 @@ public class BeamSplitterBlockEntity extends BlockEntity implements IEmberPacket
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains("target1X")){
-			target1 = new BlockPos(nbt.getInt("target1X"), nbt.getInt("target1Y"), nbt.getInt("target1Z"));
+			target1 = new BlockPos(nbt.getIntOr("target1X", 0), nbt.getIntOr("target1Y", 0), nbt.getIntOr("target1Z", 0));
 		}
 		if (nbt.contains("target2X")){
-			target2 = new BlockPos(nbt.getInt("target2X"), nbt.getInt("target2Y"), nbt.getInt("target2Z"));
+			target2 = new BlockPos(nbt.getIntOr("target2X", 0), nbt.getIntOr("target2Y", 0), nbt.getIntOr("target2Z", 0));
 		}
 	}
 

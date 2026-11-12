@@ -98,10 +98,10 @@ public class CinderPlinthBlockEntity extends BlockEntity implements ISoundContro
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		if (nbt.contains("progress"))
-			progress = nbt.getInt("progress");
-		inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+			progress = nbt.getIntOr("progress", 0);
+		inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
 	}
 
 	@Override

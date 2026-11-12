@@ -55,10 +55,10 @@ public class CombustionChamberBlockEntity extends BlockEntity implements IExtraC
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains("inventory"))
-			inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+			inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
 		if (nbt.contains("progress"))
-			progress = nbt.getInt("progress");
-		multiplier = nbt.getDouble("multiplier");
+			progress = nbt.getIntOr("progress", 0);
+		multiplier = nbt.getDoubleOr("multiplier", 0.0D);
 	}
 
 	@Override

@@ -71,10 +71,10 @@ public class OrderStack {
     }
 
     public void readFromNBT(CompoundTag tag) {
-        pos = new BlockPos(tag.getInt("x"),tag.getInt("y"),tag.getInt("z"));
+        pos = new BlockPos(tag.getIntOr("x", 0),tag.getIntOr("y", 0),tag.getIntOr("z", 0));
         //TODO: I'll do this later or something
-        //filter = FilterUtil.deserializeFilter(tag.getCompound("filter"));
-        size = tag.getInt("size");
+        //filter = FilterUtil.deserializeFilter(tag.getCompoundOrEmpty("filter"));
+        size = tag.getIntOr("size", 0);
     }
 
     public void reset(IFilter filter, int size) {

@@ -73,13 +73,13 @@ public class FilterSieve implements IFilter {
 
 	@Override
 	public void readFromNBT(CompoundTag tag) {
-		stack1 = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, tag.getCompound("stack1")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
-		stack2 = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, tag.getCompound("stack2")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
-		offset = tag.getInt("offset");
-		setting = EnumFilterSetting.values()[tag.getInt("setting")];
-		inverted = tag.getBoolean("invert");
+		stack1 = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, tag.getCompoundOrEmpty("stack1")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+		stack2 = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, tag.getCompoundOrEmpty("stack2")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+		offset = tag.getIntOr("offset", 0);
+		setting = EnumFilterSetting.values()[tag.getIntOr("setting", 0)];
+		inverted = tag.getBooleanOr("invert", false);
 		if(tag.contains("comparator"))
-			comparator = FilterUtil.getComparator(tag.getString("comparator"));
+			comparator = FilterUtil.getComparator(tag.getStringOr("comparator", ""));
 		else
 			findComparator();
 	}

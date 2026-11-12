@@ -84,7 +84,7 @@ public class FluidTransferBlockEntity extends FluidPipeBlockEntityBase {
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("filter")) {
-			filterFluid = FluidStack.parseOptional(provider, nbt.getCompound("filter"));
+			filterFluid = FluidStack.parseOptional(provider, nbt.getCompoundOrEmpty("filter"));
 		}
 	}
 

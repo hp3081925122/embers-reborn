@@ -48,7 +48,7 @@ public class BinBlockEntity extends BlockEntity implements IBin {
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+		inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
 	}
 
 	@Override

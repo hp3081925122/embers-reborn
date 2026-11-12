@@ -58,7 +58,7 @@ public class FilterUtil {
 	}
 
 	public static IFilter deserializeFilter(CompoundTag tag) {
-		Identifier resLoc = Identifier.parse(tag.getString("type"));
+		Identifier resLoc = Identifier.parse(tag.getStringOr("type", ""));
 		Function<CompoundTag, IFilter> generator = filterRegistry.get(resLoc);
 		if(generator != null)
 			return generator.apply(tag);

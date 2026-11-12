@@ -109,10 +109,10 @@ public class CrystalCellBlockEntity extends BlockEntity implements ISoundControl
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		seed = nbt.getLong("seed");
+		seed = nbt.getLongOr("seed", 0L);
 		if (nbt.contains("inventory"))
-			inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+			inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 	}
 
 	@Override

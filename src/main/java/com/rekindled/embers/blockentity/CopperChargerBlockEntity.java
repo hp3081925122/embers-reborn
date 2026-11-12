@@ -101,11 +101,11 @@ public class CopperChargerBlockEntity extends BlockEntity implements ISoundContr
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		if (nbt.contains("inventory"))
-			inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
-		isWorking = nbt.getBoolean("working");
-		reverse = nbt.getBoolean("reverse");
+			inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+		isWorking = nbt.getBooleanOr("working", false);
+		reverse = nbt.getBooleanOr("reverse", false);
 	}
 
 	@Override

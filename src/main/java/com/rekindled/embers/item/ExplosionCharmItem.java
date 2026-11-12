@@ -59,7 +59,7 @@ public class ExplosionCharmItem extends Item implements IEmbersCurioItem {
 		if (_hasTag(stack)) {
 			CompoundTag nbt = _getTag(stack);
 			if (nbt.contains(ITEM_COOLDOWN_KEY)) {
-				return (nbt.getLong(ITEM_COOLDOWN_KEY) + cooldown) < time;
+				return (nbt.getLongOr(ITEM_COOLDOWN_KEY, 0L) + cooldown) < time;
 			}
 		}
 		return true;
@@ -69,7 +69,7 @@ public class ExplosionCharmItem extends Item implements IEmbersCurioItem {
 		if (_hasTag(stack)) {
 			CompoundTag nbt = _getTag(stack);
 			if (nbt.contains(ITEM_COOLDOWN_KEY)) {
-				return (nbt.getLong(ITEM_COOLDOWN_KEY) + mercy) > time;
+				return (nbt.getLongOr(ITEM_COOLDOWN_KEY, 0L) + mercy) > time;
 			}
 		}
 		return true;

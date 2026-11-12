@@ -326,7 +326,7 @@ public class ShiftingScalesAugment extends AugmentBase {
 
 		@Override
 		public void readFromNBT(CompoundTag tag) {
-			scales = tag.getDouble("scales");
+			scales = tag.getDoubleOr("scales", 0.0D);
 		}
 
 		@Override

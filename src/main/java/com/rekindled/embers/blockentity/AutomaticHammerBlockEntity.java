@@ -65,9 +65,9 @@ public class AutomaticHammerBlockEntity extends BlockEntity implements IMechanic
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
-		startTime = nbt.getLong("startTime");
-		processTime = nbt.getInt("processTime");
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
+		startTime = nbt.getLongOr("startTime", 0L);
+		processTime = nbt.getIntOr("processTime", 0);
 	}
 
 	@Override

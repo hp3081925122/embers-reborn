@@ -120,9 +120,9 @@ public class EmberProjectileEntity extends Projectile {
 
 	@Override
 	protected void readAdditionalSaveData(CompoundTag nbt) {
-		getEntityData().set(value, nbt.getFloat("value"));
-		getEntityData().set(color, nbt.getInt("color"));
-		getEntityData().set(colorId, nbt.getString("colorId"));
+		getEntityData().set(value, nbt.getFloatOr("value", 0.0F));
+		getEntityData().set(color, nbt.getIntOr("color", 0));
+		getEntityData().set(colorId, nbt.getStringOr("colorId", ""));
 	}
 
 	@Override

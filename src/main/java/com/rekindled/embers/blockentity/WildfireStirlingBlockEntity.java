@@ -71,9 +71,9 @@ public class WildfireStirlingBlockEntity extends BlockEntity implements ISoundCo
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		tank.readFromNBT(provider, nbt.getCompound("tank"));
-		activeTicks = nbt.getInt("active");
-		burnTime = nbt.getInt("burnTime");
+		tank.readFromNBT(provider, nbt.getCompoundOrEmpty("tank"));
+		activeTicks = nbt.getIntOr("active", 0);
+		burnTime = nbt.getIntOr("burnTime", 0);
 	}
 
 	@Override

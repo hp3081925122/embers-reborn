@@ -62,7 +62,7 @@ public class InflictorGemItem extends Item implements IInflictorGem {
 	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		super.appendHoverText(stack, context, tooltip, isAdvanced);
 		if (_getOrCreateTag(stack).contains("type")) {
-			tooltip.add(Component.translatable(Embers.MODID + ".tooltip.inflictor", _getOrCreateTag(stack).getString("type")).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable(Embers.MODID + ".tooltip.inflictor", _getOrCreateTag(stack).getStringOr("type", "")).withStyle(ChatFormatting.GRAY));
 		} else {
 			tooltip.add(Component.translatable(Embers.MODID + ".tooltip.inflictor.none").withStyle(ChatFormatting.GRAY));
 		}
@@ -83,7 +83,7 @@ public class InflictorGemItem extends Item implements IInflictorGem {
 	@Override
 	public String getAttunedSource(ItemStack stack) {
 		if (!stack.isEmpty() && _getOrCreateTag(stack).contains("type"))
-			return _getOrCreateTag(stack).getString("type");
+			return _getOrCreateTag(stack).getStringOr("type", "");
 		return null;
 	}
 	@Override

@@ -74,11 +74,11 @@ public class TinkerHammerItem extends Item {
 		BlockPos pos = context.getClickedPos();
 		Level world = context.getLevel();
 		BlockEntity tile = world.getBlockEntity(pos);
-		if (world != null && nbt.contains("targetWorld") && world.dimension().identifier().toString().equals(nbt.getString("targetWorld"))) {
-			BlockPos targetPos = new BlockPos(nbt.getInt("targetX"), nbt.getInt("targetY"), nbt.getInt("targetZ"));
+		if (world != null && nbt.contains("targetWorld") && world.dimension().identifier().toString().equals(nbt.getStringOr("targetWorld", ""))) {
+			BlockPos targetPos = new BlockPos(nbt.getIntOr("targetX", 0), nbt.getIntOr("targetY", 0), nbt.getIntOr("targetZ", 0));
 			BlockEntity targetTile = world.getBlockEntity(targetPos);
 			if (targetTile instanceof ITargetable) {
-				Direction face = Direction.byName(nbt.getString("targetFace"));
+				Direction face = Direction.byName(nbt.getStringOr("targetFace", ""));
 				Vec3 motion = ((IEmberPacketProducer) targetTile).getEmittingDirection(face);
 				if (tile instanceof IEmberPacketReceiver && motion != null) {
 					((ITargetable) targetTile).setTargetPosition(pos, face);
@@ -139,9 +139,9 @@ public class TinkerHammerItem extends Item {
 		if (_hasTag(stack)) {
 			CompoundTag nbt = _getTag(stack);
 			if (nbt.contains("targetWorld")) {
-				String dimension = nbt.getString("targetWorld");
+				String dimension = nbt.getStringOr("targetWorld", "");
 				net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance(); if (mc.level != null && mc.level.dimension().identifier().toString().equals(dimension)) {
-					BlockPos pos = new BlockPos(nbt.getInt("targetX"), nbt.getInt("targetY"), nbt.getInt("targetZ"));
+					BlockPos pos = new BlockPos(nbt.getIntOr("targetX", 0), nbt.getIntOr("targetY", 0), nbt.getIntOr("targetZ", 0));
 					BlockState blockState = mc.level.getBlockState(pos);
 					tooltip.add(Component.translatable(Embers.MODID + ".tooltip.aiming_block", blockState.getBlock().getName()).withStyle(ChatFormatting.GRAY));
 					tooltip.add(Component.translatable(" X=" + pos.getX()).withStyle(ChatFormatting.GRAY));

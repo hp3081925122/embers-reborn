@@ -11,8 +11,8 @@ public class EmberWorldData extends SavedData {
 	private static final String NAME = Embers.MODID + "_data";
 
 	public EmberWorldData(CompoundTag nbt) {
-		EmberGenUtil.offX = nbt.getInt("offX");
-		EmberGenUtil.offZ = nbt.getInt("offZ");
+		EmberGenUtil.offX = nbt.getIntOr("offX", 0);
+		EmberGenUtil.offZ = nbt.getIntOr("offZ", 0);
 	}
 
 	public static EmberWorldData get(ServerLevel world) {

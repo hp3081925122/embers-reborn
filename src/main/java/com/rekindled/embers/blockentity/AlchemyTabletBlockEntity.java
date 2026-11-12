@@ -133,9 +133,9 @@ public class AlchemyTabletBlockEntity extends BlockEntity implements ISparkable,
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains("outputMode"))
-			outputMode = nbt.getBoolean("outputMode");
-		progress = nbt.getInt("progress");
-		inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+			outputMode = nbt.getBooleanOr("outputMode", false);
+		progress = nbt.getIntOr("progress", 0);
+		inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
 	}
 
 	@Override

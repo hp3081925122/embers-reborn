@@ -27,8 +27,8 @@ public class InfernoForgeTopBlockEntity extends BlockEntity {
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		lastToggle = nbt.getLong("lastToggle");
-		open = nbt.getBoolean("open");
+		lastToggle = nbt.getLongOr("lastToggle", 0L);
+		open = nbt.getBooleanOr("open", false);
 	}
 
 	@Override

@@ -82,11 +82,11 @@ public class MixerCentrifugeBottomBlockEntity extends BlockEntity implements IMe
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		north.readFromNBT(provider, nbt.getCompound("northTank"));
-		south.readFromNBT(provider, nbt.getCompound("southTank"));
-		east.readFromNBT(provider, nbt.getCompound("eastTank"));
-		west.readFromNBT(provider, nbt.getCompound("westTank"));
-		isWorking = nbt.getBoolean("working");
+		north.readFromNBT(provider, nbt.getCompoundOrEmpty("northTank"));
+		south.readFromNBT(provider, nbt.getCompoundOrEmpty("southTank"));
+		east.readFromNBT(provider, nbt.getCompoundOrEmpty("eastTank"));
+		west.readFromNBT(provider, nbt.getCompoundOrEmpty("westTank"));
+		isWorking = nbt.getBooleanOr("working", false);
 	}
 
 	@Override

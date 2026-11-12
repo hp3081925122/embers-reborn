@@ -70,10 +70,10 @@ public class MechanicalPumpBottomBlockEntity extends BlockEntity implements IMec
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		if (nbt.contains("progress"))
-			progress = nbt.getInt("progress");
-		totalProgress = nbt.getInt("totalProgress");
+			progress = nbt.getIntOr("progress", 0);
+		totalProgress = nbt.getIntOr("totalProgress", 0);
 	}
 
 	@Override

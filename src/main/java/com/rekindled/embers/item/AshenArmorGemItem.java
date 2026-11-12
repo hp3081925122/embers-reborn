@@ -129,7 +129,7 @@ public class AshenArmorGemItem extends AshenArmorItem implements IInflictorGemHo
 		for (ItemStack stacks : attached) {
 			if (!stacks.isEmpty()) {
 				if (_getOrCreateTag(stacks).contains("type")) {
-					tooltip.add(Component.translatable(Embers.MODID + ".tooltip.inflictor", _getOrCreateTag(stacks).getString("type")).withStyle(ChatFormatting.GRAY));
+					tooltip.add(Component.translatable(Embers.MODID + ".tooltip.inflictor", _getOrCreateTag(stacks).getStringOr("type", "")).withStyle(ChatFormatting.GRAY));
 				} else {
 					tooltip.add(Component.translatable(Embers.MODID + ".tooltip.inflictor.none").withStyle(ChatFormatting.GRAY));
 				}

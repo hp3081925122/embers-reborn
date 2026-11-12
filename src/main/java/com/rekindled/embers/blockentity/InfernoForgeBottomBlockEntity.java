@@ -83,8 +83,8 @@ public class InfernoForgeBottomBlockEntity extends BlockEntity implements IExtra
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
-		progress = nbt.getInt("progress");
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
+		progress = nbt.getIntOr("progress", 0);
 	}
 
 	@Override

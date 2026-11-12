@@ -46,8 +46,8 @@ public abstract class OpenTankBlockEntity extends net.minecraft.world.level.bloc
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		tank.readFromNBT(provider, nbt);
 		if (nbt.contains("lastEscaped")) {
-			lastEscaped = FluidStack.parseOptional(provider, nbt.getCompound("lastEscaped"));
-			lastEscapedTickServer = nbt.getLong("lastEscapedTick");
+			lastEscaped = FluidStack.parseOptional(provider, nbt.getCompoundOrEmpty("lastEscaped"));
+			lastEscapedTickServer = nbt.getLongOr("lastEscapedTick", 0L);
 		}
 	}
 

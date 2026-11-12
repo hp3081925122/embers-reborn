@@ -113,14 +113,14 @@ public class WindingGearsAugment extends AugmentBase {
 	public static double getCharge(Level world, ItemStack stack) {
 		if (_hasTag(stack)) {
 			long dTime = getTimeSinceLastCharge(world, stack);
-			return Math.max(0, _getTag(stack).getDouble(TAG_CHARGE) - Math.max(0, dTime - CHARGE_DECAY_DELAY) * getChargeDecay(world,stack));
+			return Math.max(0, _getTag(stack).getDoubleOr(TAG_CHARGE, 0.0D) - Math.max(0, dTime - CHARGE_DECAY_DELAY) * getChargeDecay(world,stack));
 		}
 		return 0;
 	}
 
 	private static long getTimeSinceLastCharge(Level world, ItemStack stack) {
 		if (_hasTag(stack)) {
-			long lastTime = _getTag(stack).getLong(TAG_CHARGE_TIME);
+			long lastTime = _getTag(stack).getLongOr(TAG_CHARGE_TIME, 0L);
 			long currentTime = world.getGameTime();
 			if (lastTime > currentTime)
 				return 0;

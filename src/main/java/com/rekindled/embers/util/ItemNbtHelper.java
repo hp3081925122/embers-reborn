@@ -40,13 +40,13 @@ public class ItemNbtHelper {
     }
 
     public static CompoundTag getTagElement(ItemStack stack, String key) {
-        return getTag(stack).getCompound(key);
+        return getTag(stack).getCompoundOrEmpty(key);
     }
 
     public static CompoundTag getOrCreateTagElement(ItemStack stack, String key) {
         CompoundTag tag = getOrCreateTag(stack);
         if (!tag.contains(key)) tag.put(key, new CompoundTag());
-        return tag.getCompound(key);
+        return tag.getCompoundOrEmpty(key);
     }
 
     public static void setTagElement(ItemStack stack, String key, CompoundTag value) {
@@ -57,7 +57,7 @@ public class ItemNbtHelper {
 
     public static void updateTagElement(ItemStack stack, String key, java.util.function.Consumer<CompoundTag> updater) {
         CompoundTag tag = getOrCreateTag(stack);
-        CompoundTag sub = tag.contains(key) ? tag.getCompound(key) : new CompoundTag();
+        CompoundTag sub = tag.contains(key) ? tag.getCompoundOrEmpty(key) : new CompoundTag();
         updater.accept(sub);
         tag.put(key, sub);
         setTag(stack, tag);

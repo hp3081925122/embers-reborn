@@ -106,12 +106,12 @@ public class HearthCoilBlockEntity extends BlockEntity implements ISoundControll
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		if (nbt.contains("inventory"))
-			inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+			inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
 		if (nbt.contains("progress"))
-			progress = nbt.getInt("progress");
-		heat = nbt.getDouble("heat");
+			progress = nbt.getIntOr("progress", 0);
+		heat = nbt.getDoubleOr("heat", 0.0D);
 	}
 
 	@Override

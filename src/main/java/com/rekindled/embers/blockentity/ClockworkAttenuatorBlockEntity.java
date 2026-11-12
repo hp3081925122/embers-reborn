@@ -35,8 +35,8 @@ public class ClockworkAttenuatorBlockEntity extends BlockEntity {
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		activeSpeed = nbt.getDouble("active_speed");
-		inactiveSpeed = nbt.getDouble("inactive_speed");
+		activeSpeed = nbt.getDoubleOr("active_speed", 0.0D);
+		inactiveSpeed = nbt.getDoubleOr("inactive_speed", 0.0D);
 	}
 
 	@Override

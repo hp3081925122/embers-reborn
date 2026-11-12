@@ -113,12 +113,12 @@ public class IgnemReactorBlockEntity extends BlockEntity implements ISoundContro
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains("inventory"))
-			inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+			inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		if (nbt.contains("progress"))
-			progress = nbt.getInt("progress");
-		catalyzerMult = nbt.getDouble("catalyzer");
-		combustorMult = nbt.getDouble("combustor");
+			progress = nbt.getIntOr("progress", 0);
+		catalyzerMult = nbt.getDoubleOr("catalyzer", 0.0D);
+		combustorMult = nbt.getDoubleOr("combustor", 0.0D);
 	}
 
 	@Override

@@ -74,8 +74,8 @@ public class EmberActivatorBottomBlockEntity extends BlockEntity implements IExt
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
-		progress = nbt.getInt("progress");
+		inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+		progress = nbt.getIntOr("progress", 0);
 	}
 
 	@Override

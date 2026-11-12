@@ -83,8 +83,8 @@ public class BeamCannonBlockEntity extends BlockEntity implements IUpgradeable, 
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		lastPowered = nbt.getBoolean("lastPowered");
-		capability.deserializeNBT(provider, nbt.getCompound("ember"));
+		lastPowered = nbt.getBooleanOr("lastPowered", false);
+		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 	}
 
 	@Override
