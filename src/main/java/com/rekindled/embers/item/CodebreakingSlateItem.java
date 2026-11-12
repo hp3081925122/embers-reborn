@@ -8,7 +8,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +43,7 @@ public class CodebreakingSlateItem extends Item implements MenuProvider {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		if (!level.isClientSide()) {
 			ItemStack slate = player.getItemInHand(hand);
 			((ServerPlayer) player).openMenu(this);
@@ -65,7 +64,7 @@ public class CodebreakingSlateItem extends Item implements MenuProvider {
 				inventory.setStackInSlot(6, ItemStack.EMPTY);
 			}
 		}
-		return InteractionResultHolder.success(player.getItemInHand(hand));
+		return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(hand));
 	}
 
 	@Override

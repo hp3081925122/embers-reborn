@@ -10,7 +10,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -43,11 +42,11 @@ public class AncientCodexItem extends Item {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		if (level.isClientSide()) {
 			Minecraft.getInstance().setScreen(GuiCodex.instance);
 			level.playSound(player, player, EmbersSounds.CODEX_OPEN.get(), SoundSource.MASTER, 0.75f, 1.0f);
 		}
-		return InteractionResultHolder.success(player.getItemInHand(hand));
+		return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(hand));
 	}
 }

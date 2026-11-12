@@ -30,7 +30,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -249,9 +249,9 @@ public abstract class PipeBlockBase extends BaseEntityBlock implements SimpleWat
 	}
 
 	@Override
-	public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+	protected BlockState updateShape(BlockState pState, net.minecraft.world.level.LevelReader pLevel, net.minecraft.world.level.ScheduledTickAccess ticks, BlockPos pCurrentPos, Direction pFacing, BlockPos pFacingPos, BlockState pFacingState, net.minecraft.util.RandomSource random) {
 		if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-			pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+			ticks.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
 		}
 
 		BlockEntity BE = pLevel.getBlockEntity(pCurrentPos);
@@ -281,10 +281,10 @@ public abstract class PipeBlockBase extends BaseEntityBlock implements SimpleWat
 				}
 			}
 		}
-		return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+		return super.updateShape(pState, pLevel, ticks, pCurrentPos, pFacing, pFacingPos, pFacingState, random);
 	}
 
-	public static boolean facingConnected(Direction facing, BlockState state, DirectionProperty property) {
+	public static boolean facingConnected(Direction facing, BlockState state, EnumProperty<Direction> property) {
 		return !state.hasProperty(property) || state.getValue(property) == facing;
 	}
 

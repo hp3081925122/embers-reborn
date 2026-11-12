@@ -16,7 +16,6 @@ import com.rekindled.embers.util.EmberInventoryUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
@@ -104,18 +103,18 @@ public class BlazingRayItem extends Item implements IProjectileWeapon {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!_hasTag(stack) || _getTag(stack).getLongOr("lastUse", 0L) + ConfigManager.BLAZING_RAY_COOLDOWN.get() <= level.getGameTime() || player.isCreative()) {
 			if (EmberInventoryUtil.getEmberTotal(player) >= ConfigManager.BLAZING_RAY_COST.get() || player.isCreative()) {
 				EmberInventoryUtil.removeEmber(player, ConfigManager.BLAZING_RAY_COST.get());
 				player.startUsingItem(hand);
-				return InteractionResultHolder.consume(stack);
+				return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 			} else {
 				level.playSound(null, player, EmbersSounds.BLAZING_RAY_EMPTY.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
-				return InteractionResultHolder.fail(stack);
+				return InteractionResult.FAIL;
 			}
 		}
-		return InteractionResultHolder.pass(stack); //OFFHAND FIRE ENABLED BOYS
+		return InteractionResult.PASS; //OFFHAND FIRE ENABLED BOYS
 	}
 }

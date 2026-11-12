@@ -108,9 +108,9 @@ public abstract class ChamberBlockBase extends BaseEntityBlock implements Simple
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+	protected BlockState updateShape(BlockState state, net.minecraft.world.level.LevelReader level, net.minecraft.world.level.ScheduledTickAccess ticks, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, net.minecraft.util.RandomSource random) {
 		if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			ticks.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
 		if (state.getValue(CONNECTION) != ChamberConnection.BOTTOM && facing.getAxis() != Direction.Axis.Y) {
 			if (state.getValue(CONNECTION).direction == facing && !facingState.is(EmbersBlockTags.CHAMBER_CONNECTION)) {
@@ -120,7 +120,7 @@ public abstract class ChamberBlockBase extends BaseEntityBlock implements Simple
 				return state.setValue(CONNECTION, ChamberConnection.getConnection(facing));
 			}
 		}
-		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+		return super.updateShape(state, level, ticks, currentPos, facing, facingPos, facingState, random);
 	}
 
 	@Override

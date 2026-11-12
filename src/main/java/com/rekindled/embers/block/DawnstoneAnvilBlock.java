@@ -55,29 +55,29 @@ public class DawnstoneAnvilBlock extends BaseEntityBlock implements SimpleWaterl
 	}
 
 	@Override
-	public net.minecraft.world.ItemInteractionResult useItemOn(ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	public net.minecraft.world.InteractionResult useItemOn(ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (level.getBlockEntity(pos) instanceof DawnstoneAnvilBlockEntity anvilEntity && !heldItem.isEmpty()) {
 			if (heldItem.getItem() == RegistryManager.TINKER_HAMMER.get()) {
 				if (anvilEntity.onHit())
-					return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
-				return net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+					return net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide());
+				return net.minecraft.world.InteractionResult.TRY_WITH_EMPTY_HAND;
 			}
 			for (int i = 0; i < anvilEntity.inventory.getSlots(); i++) {
 				ItemStack leftover = anvilEntity.inventory.insertItem(i, heldItem, false);
 				if (!leftover.equals(heldItem)) {
 					player.setItemInHand(hand, leftover);
-					return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
+					return net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide());
 				}
 			}
 			for (int i = anvilEntity.inventory.getSlots() - 1; i >= 0; i--) {
 				if (!anvilEntity.inventory.getStackInSlot(i).isEmpty()) {
 					level.addFreshEntity(new ItemEntity(level, player.position().x, player.position().y, player.position().z, anvilEntity.inventory.getStackInSlot(i)));
 					anvilEntity.inventory.setStackInSlot(i, ItemStack.EMPTY);
-					return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
+					return net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide());
 				}
 			}
 		}
-		return net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		return net.minecraft.world.InteractionResult.TRY_WITH_EMPTY_HAND;
 	}
 
 	@Override
@@ -139,11 +139,11 @@ public class DawnstoneAnvilBlock extends BaseEntityBlock implements SimpleWaterl
 	}
 
 	@Override
-	public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+	protected BlockState updateShape(BlockState pState, net.minecraft.world.level.LevelReader pLevel, net.minecraft.world.level.ScheduledTickAccess ticks, BlockPos pCurrentPos, Direction pFacing, BlockPos pFacingPos, BlockState pFacingState, net.minecraft.util.RandomSource random) {
 		if (pState.getValue(BlockStateProperties.WATERLOGGED)) {
-			pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+			ticks.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
 		}
-		return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+		return super.updateShape(pState, pLevel, ticks, pCurrentPos, pFacing, pFacingPos, pFacingState, random);
 	}
 
 	@Override

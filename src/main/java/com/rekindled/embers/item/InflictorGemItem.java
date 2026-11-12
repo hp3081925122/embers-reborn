@@ -11,7 +11,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -46,7 +45,7 @@ public class InflictorGemItem extends Item implements IInflictorGem {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!level.isClientSide() && player.isSecondaryUseActive() && _getOrCreateTag(stack).contains("type")) {
 			net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
@@ -55,7 +54,7 @@ public class InflictorGemItem extends Item implements IInflictorGem {
 			if (player.getHealth() > 1f)
 				player.setHealth(Math.max(player.getHealth() - 10.0f, 1f));
 		}
-		return player.isSecondaryUseActive() ? InteractionResultHolder.consume(stack) : InteractionResultHolder.pass(stack);
+		return player.isSecondaryUseActive() ? InteractionResult.CONSUME.heldItemTransformedTo(stack) : InteractionResult.PASS;
 	}
 
 	@Override

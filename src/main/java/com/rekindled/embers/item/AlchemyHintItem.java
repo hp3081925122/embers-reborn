@@ -14,7 +14,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -109,10 +108,10 @@ public class AlchemyHintItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!level.isClientSide())
-			return InteractionResultHolder.consume(stack);
+			return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 		int blackPins = getBlackPins(stack);
 		int whitePins = getWhitePins(stack);
 		String black = blackPins == 1 ? I18n.get(Embers.MODID + ".alchemy_hint.black.one") : I18n.get(Embers.MODID + ".alchemy_hint.black", blackPins);
@@ -120,16 +119,16 @@ public class AlchemyHintItem extends Item {
 		if (blackPins != 0) {
 			if (whitePins != 0) {
 				player.displayClientMessage(Component.translatable(Embers.MODID + ".alchemy_hint", I18n.get(Embers.MODID + ".alchemy_hint.and", black, white)), false);
-				return InteractionResultHolder.consume(stack);
+				return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 			}
 			player.displayClientMessage(Component.translatable(Embers.MODID + ".alchemy_hint", black), false);
-			return InteractionResultHolder.consume(stack);
+			return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 		}
 		if (whitePins != 0) {
 			player.displayClientMessage(Component.translatable(Embers.MODID + ".alchemy_hint", white), false);
-			return InteractionResultHolder.consume(stack);
+			return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 		}
 		player.displayClientMessage(Component.translatable(Embers.MODID + ".alchemy_hint", I18n.get(Embers.MODID + ".alchemy_hint.none")), false);
-		return InteractionResultHolder.consume(stack);
+		return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 	}
 }

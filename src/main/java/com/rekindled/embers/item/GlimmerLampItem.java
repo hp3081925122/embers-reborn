@@ -4,7 +4,6 @@ import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.entity.GlimmerProjectileEntity;
 
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +31,7 @@ public class GlimmerLampItem extends Item {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!level.isClientSide()) {
 			GlimmerProjectileEntity light = RegistryManager.GLIMMER_PROJECTILE.get().create(level);
@@ -47,7 +46,7 @@ public class GlimmerLampItem extends Item {
 			level.addFreshEntity(light);
 		}
 		stack.hurtAndBreak(10, player, net.minecraft.world.entity.EquipmentSlot.MAINHAND);
-		return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+		return InteractionResult.SUCCESS.heldItemTransformedTo(stack);
 	}
 
 	@Override

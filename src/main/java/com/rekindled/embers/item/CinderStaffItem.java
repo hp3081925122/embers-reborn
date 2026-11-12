@@ -25,7 +25,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
@@ -167,7 +166,7 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!_hasTag(stack) || _getTag(stack).getLongOr("lastUse", 0L) + ConfigManager.CINDER_STAFF_COOLDOWN.get() <= level.getGameTime() || player.isCreative()) {
 			if (EmberInventoryUtil.getEmberTotal(player) >= ConfigManager.CINDER_STAFF_COST.get() || player.isCreative()) {
@@ -177,11 +176,11 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 					EmbersSounds.playItemSoundClient(player, this, EmbersSounds.CINDER_STAFF_CHARGE.get(), SoundSource.PLAYERS, false, 1.0f, 1.0f);
 				else
 					EmbersSounds.playItemSound(player, this, EmbersSounds.CINDER_STAFF_CHARGE.get(), SoundSource.PLAYERS, false, 1.0f, 1.0f);
-				return InteractionResultHolder.consume(stack);
+				return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 			} else {
-				return InteractionResultHolder.fail(stack);
+				return InteractionResult.FAIL;
 			}
 		}
-		return InteractionResultHolder.pass(stack); //OFFHAND FIRE ENABLED BOYS
+		return InteractionResult.PASS; //OFFHAND FIRE ENABLED BOYS
 	}
 }
