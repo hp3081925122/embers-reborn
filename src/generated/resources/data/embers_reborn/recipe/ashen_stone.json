@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "A": {
-      "tag": "forge:dusts/ash"
+      "tag": "c:dusts/ash"
     },
     "S": {
       "tag": "c:stones"

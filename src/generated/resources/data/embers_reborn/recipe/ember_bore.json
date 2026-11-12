@@ -6,10 +6,10 @@
       "item": "embers_reborn:mechanical_core"
     },
     "C": {
-      "tag": "forge:ingots/copper"
+      "tag": "c:ingots/copper"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "Y": {
       "item": "embers_reborn:caminite_bricks"

@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/tin"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:nuggets/tin"
+    "tag": "c:nuggets/tin"
   },
   "output": {
     "amount": 10,
-    "tag": "forge:molten_tin"
+    "tag": "c:molten_tin"
   }
 }

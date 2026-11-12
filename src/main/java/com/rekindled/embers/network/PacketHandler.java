@@ -8,6 +8,7 @@ import com.rekindled.embers.network.message.MessageEmberGenOffset;
 import com.rekindled.embers.network.message.MessageEmberRayFX;
 import com.rekindled.embers.network.message.MessageItemSound;
 import com.rekindled.embers.network.message.MessageResearchData;
+import com.rekindled.embers.network.message.MessageResearchOpen;
 import com.rekindled.embers.network.message.MessageResearchTick;
 import com.rekindled.embers.network.message.MessageScalesData;
 import com.rekindled.embers.network.message.MessageWorldSeed;
@@ -45,6 +46,7 @@ public class PacketHandler {
 		registrar.playToServer(MessageCasterOrb.TYPE, MessageCasterOrb.STREAM_CODEC, MessageCasterOrb::handle);
 		registrar.playToServer(MessageDialUpdateRequest.TYPE, MessageDialUpdateRequest.STREAM_CODEC, MessageDialUpdateRequest::handle);
 		registrar.playToServer(MessageResearchTick.TYPE, MessageResearchTick.STREAM_CODEC, MessageResearchTick::handle);
+		registrar.playToServer(MessageResearchOpen.TYPE, MessageResearchOpen.STREAM_CODEC, MessageResearchOpen::handle);
 	}
 
 	/** Send a payload to the server from client side. */

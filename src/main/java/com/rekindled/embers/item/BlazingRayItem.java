@@ -82,7 +82,9 @@ public class BlazingRayItem extends Item implements IProjectileWeapon {
 			}
 
 			level.playSound(null, entity, EmbersSounds.BLAZING_RAY_FIRE.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
-			_getOrCreateTag(stack).putLong("lastUse", level.getGameTime());
+			net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
+			tag.putLong("lastUse", level.getGameTime());
+			_setTag(stack, tag);
 		}
 	}
 

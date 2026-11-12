@@ -535,7 +535,7 @@ public class EmbersClientEvents {
 					GuiCodex.instance.previousScreen = mc.screen;
 					GuiCodex.instance.researchPage = research;
 					mc.setScreen(GuiCodex.instance);
-					ResearchManager.sendCheckmark(research, true);
+					ResearchManager.markCheckedOnOpen(research);
 					mc.level.playSound(mc.player, mc.player, EmbersSounds.CODEX_PAGE_OPEN.get(), SoundSource.MASTER, 0.75f, 1.0f);
 				}
 			}

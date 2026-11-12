@@ -3,13 +3,13 @@
   "category": "equipment",
   "key": {
     "C": {
-      "tag": "forge:ingots/copper"
+      "tag": "c:ingots/copper"
     },
     "G": {
       "tag": "c:glass_blocks/colorless"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "S": {
       "item": "embers_reborn:ember_crystal"

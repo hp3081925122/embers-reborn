@@ -6,10 +6,10 @@
       "item": "embers_reborn:caminite_bricks"
     },
     "I": {
-      "tag": "forge:ingots/dawnstone"
+      "tag": "c:ingots/dawnstone"
     },
     "P": {
-      "tag": "forge:plates/copper"
+      "tag": "c:plates/copper"
     },
     "S": {
       "item": "embers_reborn:ember_crystal"

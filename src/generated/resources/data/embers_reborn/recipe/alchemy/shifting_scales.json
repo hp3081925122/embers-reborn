@@ -17,19 +17,19 @@
   },
   "inputs": [
     {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     },
     {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     },
     {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     },
     {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     },
     {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     }
   ],
   "output": {

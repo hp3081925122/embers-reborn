@@ -227,6 +227,17 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 		}
 	}
 
+	/** Fraction of the current dig cycle, or -1 when the bore is idle. */
+	public float digProgress() {
+		if (!isRunning)
+			return -1f;
+		double speed = speedMod > 0 ? speedMod : 1;
+		int boreTime = (int) Math.ceil(ConfigManager.EMBER_BORE_TIME.get() / (speed * ConfigManager.EMBER_BORE_SPEED_MOD.get()));
+		if (boreTime <= 0)
+			return -1f;
+		return (ticksExisted % boreTime) / (float) boreTime;
+	}
+
 	public static void clientTick(Level level, BlockPos pos, BlockState state, EmberBoreBlockEntity blockEntity) {
 		commonTick(level, pos, state, blockEntity);
 		blockEntity.handleSound();

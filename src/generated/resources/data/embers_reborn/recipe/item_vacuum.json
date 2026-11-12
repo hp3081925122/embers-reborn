@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "I": {
-      "tag": "forge:ingots/lead"
+      "tag": "c:ingots/lead"
     },
     "P": {
       "item": "embers_reborn:item_pipe"

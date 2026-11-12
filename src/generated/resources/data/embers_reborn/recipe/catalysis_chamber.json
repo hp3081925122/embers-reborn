@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "C": {
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     },
     "E": {
       "item": "embers_reborn:ember_crystal_cluster"
@@ -12,7 +12,7 @@
       "item": "embers_reborn:mechanical_core"
     },
     "P": {
-      "tag": "forge:plates/silver"
+      "tag": "c:plates/silver"
     }
   },
   "pattern": [

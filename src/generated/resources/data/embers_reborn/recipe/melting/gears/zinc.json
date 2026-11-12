@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/zinc"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:gears/zinc"
+    "tag": "c:gears/zinc"
   },
   "output": {
     "amount": 180,
-    "tag": "forge:molten_zinc"
+    "tag": "c:molten_zinc"
   }
 }

@@ -66,7 +66,8 @@ public class FluidDialBlockEntity extends BlockEntity implements IDialEntity {
 					for (int i = 0; i < cap.getTanks() && (i + extraLines) < maxLines; i++) {
 						FluidStack contents = cap.getFluidInTank(i);
 						CompoundTag tank = new CompoundTag();
-						contents.save(provider, tank);
+						if (!contents.isEmpty())
+							contents.save(provider, tank);
 						tank.putInt("capacity", cap.getTankCapacity(i));
 
 						tanks.add(tank);

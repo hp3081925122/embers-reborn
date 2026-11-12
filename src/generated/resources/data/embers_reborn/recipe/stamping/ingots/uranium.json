@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/uranium"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_uranium\",\"amount\":90}",
+  "fluid": "{\"tag\":\"c:molten_uranium\",\"amount\":90}",
   "output": {
-    "tag": "forge:ingots/uranium"
+    "tag": "c:ingots/uranium"
   },
   "stamp": {
     "item": "embers_reborn:ingot_stamp"

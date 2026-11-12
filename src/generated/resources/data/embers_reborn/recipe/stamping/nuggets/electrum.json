@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/electrum"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_electrum\",\"amount\":10}",
+  "fluid": "{\"tag\":\"c:molten_electrum\",\"amount\":10}",
   "output": {
-    "tag": "forge:nuggets/electrum"
+    "tag": "c:nuggets/electrum"
   },
   "stamp": {
     "item": "embers_reborn:nugget_stamp"

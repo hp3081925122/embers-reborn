@@ -102,19 +102,20 @@ public class FluidTransferBlockEntity extends FluidPipeBlockEntityBase {
 	@Override
 	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.saveAdditional(nbt, provider);
-		writeFilter(nbt);
+		writeFilter(nbt, provider);
 	}
 
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
 		if (syncFilter)
-			writeFilter(nbt);
+			writeFilter(nbt, provider);
 		return nbt;
 	}
 
-	private void writeFilter(CompoundTag nbt) {
-		nbt.put("filter", filterFluid.save(net.minecraft.core.RegistryAccess.EMPTY, new net.minecraft.nbt.CompoundTag()));
+	private void writeFilter(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		// FluidStack.save throws on an empty stack (no filter set); saveOptional writes an empty tag instead
+		nbt.put("filter", filterFluid.saveOptional(provider));
 	}
 
 	public static void serverTick(Level level, BlockPos pos, BlockState state, FluidTransferBlockEntity blockEntity) {

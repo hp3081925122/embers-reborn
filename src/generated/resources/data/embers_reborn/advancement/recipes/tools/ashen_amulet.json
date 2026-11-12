@@ -1,11 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "curios"
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_ash": {
       "conditions": {
         "items": [
           {
-            "items": "#forge:dusts/ash"
+            "items": "#c:dusts/ash"
           }
         ]
       },

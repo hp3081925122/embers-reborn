@@ -1,8 +1,17 @@
-// 1.21.1	2026-11-12T09:42:51.0708912	Tags for minecraft:block mod id embers_reborn
-2c08ee1d722b1ec7cf9f0435dccc5811ef0d4a33 data/c/tags/block/ores.json
+// 1.21.1	2026-11-12T18:36:11.1993019	Tags for minecraft:block mod id embers_reborn
+6d0e8a41a39e23f6da58fa1d1652f7c47225aa2e data/c/tags/block/ores.json
+32daacb7cd4c38105d0b5ae688e0b523e3cd013a data/c/tags/block/ores/lead.json
+f96fb9b233b6819dc5ba366329ea3e052bc18207 data/c/tags/block/ores/silver.json
 e88986920ebca98a8a17881038562cb1722b3cef data/c/tags/block/ores_in_ground/deepslate.json
 eefbc9d31f0715ebd339389917d6903294699ac5 data/c/tags/block/ores_in_ground/stone.json
-14b4d6a175a6b1661c17ed16cd6b16671cd48e45 data/c/tags/block/storage_blocks.json
+b070f981c249699252f814ef647e6e2d08858443 data/c/tags/block/relocation_not_supported.json
+7c1cfacbfc84af725bc699f44f0a8d3a0b3fba92 data/c/tags/block/storage_blocks.json
+885899c2762533f584154092726bb6fe4f2ae55a data/c/tags/block/storage_blocks/dawnstone.json
+4c08eb3c6443804daa1862094177f1aa5f32c2f7 data/c/tags/block/storage_blocks/dwarven_mithril.json
+56a8cf3fd8e1fac1cbc0de9ef8f33af067e66ded data/c/tags/block/storage_blocks/lead.json
+c9810bbc3c35e1d49d1f983c05aea47d017d663d data/c/tags/block/storage_blocks/raw_lead.json
+a2a3af5520f12c8caaec21f3a7028e0153e32805 data/c/tags/block/storage_blocks/raw_silver.json
+f83f9fa0e440dfdbe1790e28e2463cbc2f21c3ea data/c/tags/block/storage_blocks/silver.json
 c06d8e8439e2e7036bd1eb3f1e34988fff67f40f data/embers_reborn/tags/block/chamber_connection.json
 6aa6e9930438e571ca4da9acaead35b8e75abc64 data/embers_reborn/tags/block/crystal_seeds.json
 349cbcf4206b8c223b951df3fcd27d5036de0a59 data/embers_reborn/tags/block/crystal_seeds/aluminum.json
@@ -56,15 +65,6 @@ f2a457ed07cd4271089c3bdae2ecb86c6b2c6175 data/embers_reborn/tags/block/upgradeab
 ca623d39f7464ee0afa9ee1fd4e6d23eb13fc241 data/embers_reborn/tags/block/weathered_copper.json
 cfab2ab481bf476a645d326b87627918009b9e50 data/embers_reborn/tags/block/world_bottom.json
 7eef502d1b239a8498c69427d8661950b709d289 data/embers_reborn/tags/block/wrong_input_hinter.json
-32daacb7cd4c38105d0b5ae688e0b523e3cd013a data/forge/tags/block/ores/lead.json
-f96fb9b233b6819dc5ba366329ea3e052bc18207 data/forge/tags/block/ores/silver.json
-b070f981c249699252f814ef647e6e2d08858443 data/forge/tags/block/relocation_not_supported.json
-885899c2762533f584154092726bb6fe4f2ae55a data/forge/tags/block/storage_blocks/dawnstone.json
-4c08eb3c6443804daa1862094177f1aa5f32c2f7 data/forge/tags/block/storage_blocks/dwarven_mithril.json
-56a8cf3fd8e1fac1cbc0de9ef8f33af067e66ded data/forge/tags/block/storage_blocks/lead.json
-c9810bbc3c35e1d49d1f983c05aea47d017d663d data/forge/tags/block/storage_blocks/raw_lead.json
-a2a3af5520f12c8caaec21f3a7028e0153e32805 data/forge/tags/block/storage_blocks/raw_silver.json
-f83f9fa0e440dfdbe1790e28e2463cbc2f21c3ea data/forge/tags/block/storage_blocks/silver.json
 e020aa8ebacd00ad7e9d932155bdb6ab3c8caa94 data/minecraft/tags/block/buttons.json
 0ae5e5d8864e59d73c258230c7491828c1701dda data/minecraft/tags/block/mineable/axe.json
 3ea0a79b4b9c43c0cd20657b0eedb97cb6598f18 data/minecraft/tags/block/mineable/pickaxe.json
@@ -74,4 +74,4 @@ cf3c71483065883cd5e8b9cd01901daf277e9d99 data/minecraft/tags/block/needs_iron_to
 6d15802a2adb440b4ccbc464a24a6d076dbe8438 data/minecraft/tags/block/slabs.json
 1662214fba00bc4e1ccb232e4d6f5b2895a65b2f data/minecraft/tags/block/stairs.json
 6cd72a8deb8e04647d1579bb22f2521faaab5f13 data/minecraft/tags/block/walls.json
-13324c6617326220c4cb0cbaee184ead78c0a221 data/tconstruct/tags/block/anvil_metal.json
+c30af95f2e130ec72a1b8379d6127d75d50d8c97 data/tconstruct/tags/block/anvil_metal.json

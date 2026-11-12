@@ -1,77 +1,65 @@
-# Embers Reborn — Unofficial 1.21.1 NeoForge Port
+# Embers Reborn
 
-**Embers Reborn** is an unofficial port of [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled) to Minecraft 1.21.1 NeoForge.
+**Embers Reborn** is an unofficial port of [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled) by RCXcrafter and the Embers team to Minecraft 1.21.1 NeoForge. It is not an official release of Embers Rekindled.
 
-This project is **not affiliated with or endorsed by** the original Embers Rekindled authors.
-
----
+The mod ID is `embers_reborn`, so it can be installed alongside the original.
 
 ## What is Embers?
 
-Embers is a dwarven-themed magic mod built around ember — the life force of the earth. Kindle the dying embers deep underground, and harness their power to forge a mighty magical empire. Build machines that pump ember from the ground, store it in great crystalline cells, and direct it through a network of pipes to power all manner of arcane wonders.
+Embers is a dwarven magitech mod. Its core resource is Ember, a limited form of power you extract from the world's core near bedrock and send to your machines.
 
-Features include:
-- **Ember extraction** from the earth via activators and pumps
-- **Crystal cell storage** for large ember reserves
-- **Pipe networks** to distribute ember between machines
-- **Alchemical crafting** via the Stamper, Melter, and Mixer
-- **Dwarven weapons and tools** — axes, pickaxes, hammers, swords, and more
-- **Augments** to enhance your equipment with special abilities
-- **Research tree** to unlock advanced technologies
-- **Custom structures** hidden underground to discover
+- **Ember power**: bores, activators, emitters and receptors, copper cells and crystal cells
+- **Metalworking**: melter, stamper, mixer centrifuge, pressure refinery and geologic separator, including ore doubling
+- **Transport**: item and fluid pipes, extractors and transfers
+- **Alchemy**: the alchemy tablet and pedestals with aspects
+- **Equipment**: clockwork tools, ashen armor, and augments applied at the dawnstone anvil
+- **Ancient Codex**: an in-game research book that guides your progress
 
-## This Port
+## Changes in this port
 
-Ported from Embers Rekindled 1.20.1 (Forge) to Minecraft 1.21.1 NeoForge, with all core gameplay preserved.
-
-**Status: Beta** — Core systems (machines, pipes, items, world gen) are functional. Some advanced features (particle shaders, custom render effects) are stubs pending further work.
-
-## License & Source
-
-- Original Embers Rekindled: MIT License — [GitHub](https://github.com/RCXcrafter/EmbersRekindled)
-- This port is released under the same **MIT License**
-- Port source code: [GitHub](https://github.com/YOUR_REPO/EmbersReborn)
+- Full migration to 1.21.1: data components, data-driven recipes and tags under the `c` namespace
+- Item and fluid capabilities rewritten for NeoForge, so pipes and hoppers connect to machines
+- Optional [Jade](https://www.curseforge.com/minecraft/mc-mods/jade) support: machine progress shown on the tooltip border, plus hints when an extractor is stuck
 
 ## Credits
 
-Huge thanks to the original Embers Rekindled team: **RCXcrafter, BordListian, Elucent, TechnoMysterio, KomradeSpectre**. This port would not exist without their work. Please support the original mod!
+Thanks to the original Embers Rekindled authors **RCXcrafter, BordListian, Elucent, TechnoMysterio and KomradeSpectre**. The content, textures, models and most of the code come from their [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled). Please support the original mod.
+
+## License & Source
+
+- Released under the **MIT License**, the same as the original.
+- Original source: [EmbersRekindled on GitHub](https://github.com/RCXcrafter/EmbersRekindled)
 
 ---
 
-# 余烬重生 — 非官方 1.21.1 NeoForge 移植版
+# 余烬重生（Embers Reborn）
 
-**余烬重生** 是 [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled) 到 Minecraft 1.21.1 NeoForge 的非官方移植版本。
+**余烬重生**是 RCXcrafter 及 Embers 团队的 [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled) 在 Minecraft 1.21.1 NeoForge 上的非官方移植，不是 Embers Rekindled 的官方版本。
 
-本项目**与原版 Embers Rekindled 作者无关，也未获得其认可**。
-
----
+模组 ID 为 `embers_reborn`，可以和原版同时安装。
 
 ## Embers 是什么？
 
-Embers 是一个以矮人文明为主题的魔法模组，围绕"余烬"——大地的生命力——展开。点燃地底深处的余烬，驾驭其力量，打造辉煌的魔法帝国。建造机器从地下抽取余烬，储存在巨大的水晶单元中，并通过管道网络输送给各种奥术机械。
+Embers 是一个矮人风格的魔法科技模组。核心资源"余烬"是一种有限的能量，需要从基岩附近的地心提取，再输送给各种机器。
 
-主要特性：
-- **余烬开采**——通过激活器和泵从地球提取余烬
-- **水晶单元储存**——大型余烬储备库
-- **管道网络**——在机器之间分配余烬
-- **炼金工艺**——冲压机、熔炉、混合器
-- **矮人武器与工具**——斧、镐、锤、剑等
-- **增益系统**——为装备附加特殊能力
-- **研究树**——解锁高级技术
-- **地下自定义结构**——等待探索
+- **余烬能源**：余烬钻机、活化器、发射器与接收器、铜储能器和水晶单元
+- **金属加工**：熔炉、冲压机、混合离心机、加压精炼器和地质分离器，可以实现矿物翻倍
+- **物流**：物品与流体管道、提取管道和转运器
+- **炼金**：炼金石板与基座，使用各种要素
+- **装备**：发条工具、灰烬护甲，以及在曙光铁砧上装配的增强
+- **古代典籍**：游戏内的研究书，引导你逐步解锁内容
 
-## 本移植版
+## 本移植的改动
 
-从 Embers Rekindled 1.20.1 (Forge) 移植到 Minecraft 1.21.1 NeoForge，完整保留核心玩法。
-
-**状态：Beta** — 核心系统（机器、管道、物品、世界生成）已可用。部分高级功能（粒子着色器、自定义渲染效果）仍在开发中。
-
-## 协议与源码
-
-- 原版 Embers Rekindled：MIT 协议 — [GitHub](https://github.com/RCXcrafter/EmbersRekindled)
-- 本移植版同样遵循 **MIT 协议** 发布
-- 移植版源码：[GitHub](https://github.com/YOUR_REPO/EmbersReborn)
+- 完整迁移到 1.21.1：数据组件、数据驱动的配方，以及 `c` 命名空间下的标签
+- 按 NeoForge 方式重写了物品和流体能力，管道和漏斗能正常连接机器
+- 可选的 [Jade](https://www.curseforge.com/minecraft/mc-mods/jade) 兼容：提示框边框显示机器进度，提取管道卡住时给出提示
 
 ## 鸣谢
 
-衷心感谢原版 Embers Rekindled 团队：**RCXcrafter、BordListian、Elucent、TechnoMysterio、KomradeSpectre**。没有他们的作品，就没有本移植版。欢迎支持原版模组！
+感谢原版 Embers Rekindled 的作者 **RCXcrafter、BordListian、Elucent、TechnoMysterio 和 KomradeSpectre**。本模组的内容、贴图、模型和大部分代码都来自他们的 [Embers Rekindled](https://www.curseforge.com/minecraft/mc-mods/embers-rekindled)，欢迎支持原作。
+
+## 许可与源码
+
+- 与原版相同，使用 **MIT 许可证**发布。
+- 原版源码：[GitHub 上的 EmbersRekindled](https://github.com/RCXcrafter/EmbersRekindled)

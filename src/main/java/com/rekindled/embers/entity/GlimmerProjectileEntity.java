@@ -37,7 +37,7 @@ public class GlimmerProjectileEntity extends Projectile {
 	public static final GlowParticleOptions EMBER = new GlowParticleOptions(EmbersColors.EMBER_ID, new Vec3(0.0, 0.000001, 0.0), 3.0F, 120);
 	public static final SparkParticleOptions GLIMMER = new SparkParticleOptions(EmbersColors.GLIMMER_PROJECTILE_ID, 1.5F);
 	public static final SmokeParticleOptions SMOKE = new SmokeParticleOptions(EmbersColors.SMOKE_ID, 6.0F);
-	public static final EntityDataAccessor<Integer> lifetime = SynchedEntityData.defineId(EmberProjectileEntity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> lifetime = SynchedEntityData.defineId(GlimmerProjectileEntity.class, EntityDataSerializers.INT);
 
 	public GlimmerProjectileEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);

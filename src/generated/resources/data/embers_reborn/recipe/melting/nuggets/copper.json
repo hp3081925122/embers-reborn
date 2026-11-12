@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/copper"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:nuggets/copper"
+    "tag": "c:nuggets/copper"
   },
   "output": {
     "amount": 10,
-    "tag": "forge:molten_copper"
+    "tag": "c:molten_copper"
   }
 }

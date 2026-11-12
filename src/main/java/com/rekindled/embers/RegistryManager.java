@@ -597,12 +597,12 @@ public class RegistryManager {
 	public static final DeferredHolder<Item, Item> ALCHEMICAL_WASTE = ITEMS.register("alchemical_waste", () -> new AlchemyHintItem(new Item.Properties().stacksTo(1)));
 	public static final DeferredHolder<Item, Item> ALCHEMICAL_NOTE = ITEMS.register("alchemical_note", () -> new AlchemicalNoteItem(new Item.Properties().stacksTo(1)));
 	public static final DeferredHolder<Item, Item> CODEBREAKING_SLATE = ITEMS.register("codebreaking_slate", () -> new CodebreakingSlateItem(new Item.Properties().stacksTo(1)));
-	public static final DeferredHolder<Item, Item> TYRFING = ITEMS.register("tyrfing", () -> new TyrfingItem(EmbersTiers.TYRFING, new Item.Properties()));
+	public static final DeferredHolder<Item, Item> TYRFING = ITEMS.register("tyrfing", () -> new TyrfingItem(EmbersTiers.TYRFING, new Item.Properties().attributes(SwordItem.createAttributes(EmbersTiers.TYRFING, 3, -2.4F))));
 	public static final DeferredHolder<Item, Item> INFLICTOR_GEM = ITEMS.register("inflictor_gem", () -> new InflictorGemItem(new Item.Properties().stacksTo(1)));
-	public static final DeferredHolder<Item, Item> ASHEN_GOGGLES = ITEMS.register("ashen_goggles", () -> new AshenArmorGemItem(net.minecraft.core.Holder.direct(AshenArmorMaterial.INSTANCE), ArmorItem.Type.HELMET, new Item.Properties(), ConfigManager.ASHEN_GOGGLES_SLOTS));
-	public static final DeferredHolder<Item, Item> ASHEN_CLOAK = ITEMS.register("ashen_cloak", () -> new AshenArmorGemItem(net.minecraft.core.Holder.direct(AshenArmorMaterial.INSTANCE), ArmorItem.Type.CHESTPLATE, new Item.Properties(), ConfigManager.ASHEN_CLOAK_SLOTS));
-	public static final DeferredHolder<Item, Item> ASHEN_LEGGINGS = ITEMS.register("ashen_leggings", () -> new AshenArmorGemItem(net.minecraft.core.Holder.direct(AshenArmorMaterial.INSTANCE), ArmorItem.Type.LEGGINGS, new Item.Properties(), ConfigManager.ASHEN_LEGGINGS_SLOTS));
-	public static final DeferredHolder<Item, Item> ASHEN_BOOTS = ITEMS.register("ashen_boots", () -> new AshenArmorGemItem(net.minecraft.core.Holder.direct(AshenArmorMaterial.INSTANCE), ArmorItem.Type.BOOTS, new Item.Properties(), ConfigManager.ASHEN_BOOTS_SLOTS));
+	public static final DeferredHolder<Item, Item> ASHEN_GOGGLES = ITEMS.register("ashen_goggles", () -> new AshenArmorGemItem(net.minecraft.core.Holder.direct(AshenArmorMaterial.INSTANCE), ArmorItem.Type.HELMET, AshenArmorMaterial.properties(ArmorItem.Type.HELMET), ConfigManager.ASHEN_GOGGLES_SLOTS));
+	public static final DeferredHolder<Item, Item> ASHEN_CLOAK = ITEMS.register("ashen_cloak", () -> new AshenArmorGemItem(net.minecraft.core.Holder.direct(AshenArmorMaterial.INSTANCE), ArmorItem.Type.CHESTPLATE, AshenArmorMaterial.properties(ArmorItem.Type.CHESTPLATE), ConfigManager.ASHEN_CLOAK_SLOTS));
+	public static final DeferredHolder<Item, Item> ASHEN_LEGGINGS = ITEMS.register("ashen_leggings", () -> new AshenArmorGemItem(net.minecraft.core.Holder.direct(AshenArmorMaterial.INSTANCE), ArmorItem.Type.LEGGINGS, AshenArmorMaterial.properties(ArmorItem.Type.LEGGINGS), ConfigManager.ASHEN_LEGGINGS_SLOTS));
+	public static final DeferredHolder<Item, Item> ASHEN_BOOTS = ITEMS.register("ashen_boots", () -> new AshenArmorGemItem(net.minecraft.core.Holder.direct(AshenArmorMaterial.INSTANCE), ArmorItem.Type.BOOTS, AshenArmorMaterial.properties(ArmorItem.Type.BOOTS), ConfigManager.ASHEN_BOOTS_SLOTS));
 	public static final DeferredHolder<Item, Item> GLIMMER_CRYSTAL = ITEMS.register("glimmer_crystal", () -> new GlimmerCrystalItem(new Item.Properties().durability(800)));
 	public static final DeferredHolder<Item, Item> GLIMMER_LAMP = ITEMS.register("glimmer_lamp", () -> new GlimmerLampItem(new Item.Properties().durability(1200)));
 
@@ -1267,11 +1267,11 @@ public class RegistryManager {
 		public ToolSet(String name, Tier tier) {
 			this.name = name;
 
-			SWORD = ITEMS.register(name + "_sword", () -> new SwordItem(tier, new Item.Properties().attributes(net.minecraft.world.item.component.ItemAttributeModifiers.builder().build())));
-			SHOVEL = ITEMS.register(name + "_shovel", () -> new ShovelItem(tier, new Item.Properties()));
-			PICKAXE = ITEMS.register(name + "_pickaxe", () -> new PickaxeItem(tier, new Item.Properties()));
-			AXE = ITEMS.register(name + "_axe", () -> new AxeItem(tier, new Item.Properties()));
-			HOE = ITEMS.register(name + "_hoe", () -> new HoeItem(tier, new Item.Properties()));
+			SWORD = ITEMS.register(name + "_sword", () -> new SwordItem(tier, new Item.Properties().attributes(SwordItem.createAttributes(tier, 3, -2.4F))));
+			SHOVEL = ITEMS.register(name + "_shovel", () -> new ShovelItem(tier, new Item.Properties().attributes(ShovelItem.createAttributes(tier, 1.5F, -3.0F))));
+			PICKAXE = ITEMS.register(name + "_pickaxe", () -> new PickaxeItem(tier, new Item.Properties().attributes(PickaxeItem.createAttributes(tier, 1.0F, -2.8F))));
+			AXE = ITEMS.register(name + "_axe", () -> new AxeItem(tier, new Item.Properties().attributes(AxeItem.createAttributes(tier, 6.0F, -3.0F))));
+			HOE = ITEMS.register(name + "_hoe", () -> new HoeItem(tier, new Item.Properties().attributes(HoeItem.createAttributes(tier, -tier.getAttackDamageBonus(), Math.min(0.0F, tier.getAttackDamageBonus() - 3.0F)))));
 		}
 	}
 

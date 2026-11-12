@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "B": {
-      "tag": "forge:ingots/lead"
+      "tag": "c:ingots/lead"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "S": {
       "tag": "c:rods/wooden"

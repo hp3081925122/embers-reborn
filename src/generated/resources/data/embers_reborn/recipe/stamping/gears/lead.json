@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/lead"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_lead\",\"amount\":180}",
+  "fluid": "{\"tag\":\"c:molten_lead\",\"amount\":180}",
   "output": {
-    "tag": "forge:gears/lead"
+    "tag": "c:gears/lead"
   },
   "stamp": {
     "item": "embers_reborn:gear_stamp"

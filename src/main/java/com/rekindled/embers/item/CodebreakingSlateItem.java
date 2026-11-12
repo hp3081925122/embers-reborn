@@ -1,6 +1,7 @@
 package com.rekindled.embers.item;
 
 import com.rekindled.embers.gui.SlateMenu;
+import com.rekindled.embers.util.ItemNbtHelper;
 import com.rekindled.embers.util.Misc;
 
 import net.minecraft.nbt.CompoundTag;
@@ -49,16 +50,20 @@ public class CodebreakingSlateItem extends Item implements MenuProvider {
 			((ServerPlayer) player).openMenu(this);
 
 			//give players their waste back if they have a legacy slate
+			net.minecraft.core.HolderLookup.Provider registries = player.registryAccess();
 			ItemStackHandler inventory = new ItemStackHandler(7) {
 				public void onContentsChanged(int slot) {
+					ItemNbtHelper.setTagElement(slate, "inventory", this.serializeNBT(registries));
 				}
 			};
-			net.minecraft.nbt.CompoundTag nbt = com.rekindled.embers.util.ItemNbtHelper.getTagElement(slate, "inventory");
-			if (!nbt.isEmpty()) inventory.deserializeNBT(net.minecraft.core.RegistryAccess.EMPTY, nbt);
-			Misc.giveItemToPlayer(inventory.getStackInSlot(5), player);
-			inventory.setStackInSlot(5, ItemStack.EMPTY);
-			Misc.giveItemToPlayer(inventory.getStackInSlot(6), player);
-			inventory.setStackInSlot(6, ItemStack.EMPTY);
+			net.minecraft.nbt.CompoundTag nbt = ItemNbtHelper.getTagElement(slate, "inventory");
+			if (!nbt.isEmpty()) inventory.deserializeNBT(registries, nbt);
+			if (inventory.getSlots() > 6) {
+				Misc.giveItemToPlayer(inventory.getStackInSlot(5), player);
+				inventory.setStackInSlot(5, ItemStack.EMPTY);
+				Misc.giveItemToPlayer(inventory.getStackInSlot(6), player);
+				inventory.setStackInSlot(6, ItemStack.EMPTY);
+			}
 		}
 		return InteractionResultHolder.success(player.getItemInHand(hand));
 	}
@@ -71,6 +76,8 @@ public class CodebreakingSlateItem extends Item implements MenuProvider {
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
 		ItemStack heldItem = player.getMainHandItem();
+		if (!(heldItem.getItem() instanceof CodebreakingSlateItem))
+			heldItem = player.getOffhandItem();
 		return new SlateMenu(id, inv, heldItem);
 	}
 

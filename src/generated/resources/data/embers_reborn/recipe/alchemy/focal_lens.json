@@ -17,16 +17,16 @@
   },
   "inputs": [
     {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     },
     {
-      "tag": "forge:plates/silver"
+      "tag": "c:plates/silver"
     },
     {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     },
     {
-      "tag": "forge:plates/silver"
+      "tag": "c:plates/silver"
     }
   ],
   "output": {

@@ -3,6 +3,6 @@
   "input": "{\"tag\":\"minecraft:water\",\"amount\":1}",
   "output": {
     "amount": 5,
-    "tag": "forge:steam"
+    "tag": "c:steam"
   }
 }

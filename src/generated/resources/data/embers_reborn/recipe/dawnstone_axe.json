@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "M": {
-      "tag": "forge:ingots/dawnstone"
+      "tag": "c:ingots/dawnstone"
     },
     "S": {
       "tag": "c:rods/wooden"

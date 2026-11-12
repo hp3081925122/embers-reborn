@@ -6,10 +6,10 @@
       "tag": "embers_reborn:ashen_stone"
     },
     "C": {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     },
     "P": {
-      "tag": "forge:plates/silver"
+      "tag": "c:plates/silver"
     }
   },
   "pattern": [

@@ -1,4 +1,25 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:ingots/zinc"
+          }
+        },
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:nuggets/zinc"
+          }
+        }
+      ]
+    }
+  ],
   "type": "embers_reborn:alchemy",
   "aspects": [
     {
@@ -14,13 +35,13 @@
   },
   "inputs": [
     {
-      "tag": "forge:ingots/zinc"
+      "tag": "c:ingots/zinc"
     },
     {
-      "tag": "forge:ingots/zinc"
+      "tag": "c:ingots/zinc"
     },
     {
-      "tag": "forge:ingots/zinc"
+      "tag": "c:ingots/zinc"
     }
   ],
   "output": {

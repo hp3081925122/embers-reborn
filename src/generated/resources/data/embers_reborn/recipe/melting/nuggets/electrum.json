@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/electrum"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:nuggets/electrum"
+    "tag": "c:nuggets/electrum"
   },
   "output": {
     "amount": 10,
-    "tag": "forge:molten_electrum"
+    "tag": "c:molten_electrum"
   }
 }

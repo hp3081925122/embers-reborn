@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/tin"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_tin\",\"amount\":90}",
+  "fluid": "{\"tag\":\"c:molten_tin\",\"amount\":90}",
   "output": {
-    "tag": "forge:ingots/tin"
+    "tag": "c:ingots/tin"
   },
   "stamp": {
     "item": "embers_reborn:ingot_stamp"

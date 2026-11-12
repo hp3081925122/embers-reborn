@@ -43,10 +43,18 @@ public class AlchemyPedestalBlock extends DoubleTallMachineBlock {
 	}
 
 	@Override
-	public net.minecraft.world.InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-		if (level.getBlockEntity(pos) instanceof AlchemyPedestalBlockEntity pedestalEntity) {
-			return Misc.useItemOnInventory(pedestalEntity.inventory, level, player, InteractionHand.MAIN_HAND);
+	public net.minecraft.world.ItemInteractionResult useItemOn(net.minecraft.world.item.ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (!heldItem.isEmpty() && level.getBlockEntity(pos) instanceof AlchemyPedestalBlockEntity pedestalEntity) {
+			if (Misc.useItemOnInventory(pedestalEntity.inventory, level, player, hand) == InteractionResult.SUCCESS)
+				return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
 		}
+		return net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+	}
+
+	@Override
+	public net.minecraft.world.InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+		if (level.getBlockEntity(pos) instanceof AlchemyPedestalBlockEntity pedestalEntity)
+			return Misc.useItemOnInventory(pedestalEntity.inventory, level, player, InteractionHand.MAIN_HAND);
 		return InteractionResult.PASS;
 	}
 

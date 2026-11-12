@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/platinum"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:storage_blocks/platinum"
+    "tag": "c:storage_blocks/platinum"
   },
   "output": {
     "amount": 810,
-    "tag": "forge:molten_platinum"
+    "tag": "c:molten_platinum"
   }
 }

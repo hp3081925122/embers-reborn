@@ -3,13 +3,13 @@
   "category": "equipment",
   "key": {
     "B": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "E": {
-      "tag": "forge:nuggets/lead"
+      "tag": "c:nuggets/lead"
     },
     "I": {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     },
     "P": {
       "tag": "c:glass_blocks/colorless"

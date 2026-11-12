@@ -1,10 +1,10 @@
 {
   "values": [
-    "#forge:ingots/lead",
-    "#forge:ingots/silver",
-    "#forge:ingots/dawnstone",
-    "#forge:ingots/dwarven_mithril",
-    "#forge:ingots/caminite_brick",
-    "#forge:ingots/archaic_brick"
+    "#c:ingots/lead",
+    "#c:ingots/silver",
+    "#c:ingots/dawnstone",
+    "#c:ingots/dwarven_mithril",
+    "#c:ingots/caminite_brick",
+    "#c:ingots/archaic_brick"
   ]
 }

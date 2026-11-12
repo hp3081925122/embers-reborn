@@ -3,13 +3,13 @@
   "category": "misc",
   "key": {
     "B": {
-      "tag": "forge:storage_blocks/dawnstone"
+      "tag": "c:storage_blocks/dawnstone"
     },
     "C": {
       "item": "embers_reborn:caminite_bricks"
     },
     "I": {
-      "tag": "forge:ingots/dawnstone"
+      "tag": "c:ingots/dawnstone"
     }
   },
   "pattern": [

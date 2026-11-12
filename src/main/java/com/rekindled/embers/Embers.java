@@ -416,9 +416,9 @@ public class Embers {
 			RegistryManager.MINI_BOILER_ENTITY.get(), (be, side) -> {
 				if (be.getLevel() == null) return null;
 				net.minecraft.world.level.block.state.BlockState state = be.getLevel().getBlockState(be.getBlockPos());
-				net.minecraft.core.Direction facing = state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING)
-					? state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING) : null;
-				return facing == side ? be.upgrade : null;
+				net.minecraft.core.Direction facing = state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING)
+					? state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING) : null;
+				return facing != null && facing == side ? be.upgrade : null;
 			});
 
 		// --- Player entity capabilities (Batch4) ---

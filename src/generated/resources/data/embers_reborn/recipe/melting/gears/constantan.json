@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/constantan"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:gears/constantan"
+    "tag": "c:gears/constantan"
   },
   "output": {
     "amount": 180,
-    "tag": "forge:molten_constantan"
+    "tag": "c:molten_constantan"
   }
 }

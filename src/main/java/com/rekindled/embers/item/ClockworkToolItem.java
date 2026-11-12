@@ -5,6 +5,7 @@ import com.rekindled.embers.particle.GlowParticleOptions;
 import com.rekindled.embers.util.EmberInventoryUtil;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.component.Unbreakable;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -41,7 +43,8 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 
 
 	public ClockworkToolItem(Tier tier, TagKey<Block> blocks, Properties properties) {
-		super(tier, blocks, properties);
+		// 等级耐久是 -1，表示不损坏。1.21 会把它写成最大耐久 -1，第一下就会碎
+		super(tier, blocks, properties.component(DataComponents.UNBREAKABLE, new Unbreakable(false)));
 	}
 
 	@Override
@@ -63,7 +66,7 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		_getOrCreateTag(stack).putBoolean("didUse", true);
+		putBoolean(stack, "didUse", true);
 		if (target.level() instanceof ServerLevel serverLevel) {
 			serverLevel.sendParticles(GlowParticleOptions.EMBER, target.getX(), target.getY() + target.getEyeHeight() / 1.5, target.getZ(), 70, 0.15, 0.15, 0.15, 0.6);
 		}
@@ -72,7 +75,7 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 
 	@Override
 	public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-		_getOrCreateTag(stack).putBoolean("didUse", true);
+		putBoolean(stack, "didUse", true);
 		return super.mineBlock(stack, level, state, pos, entityLiving);
 	}
 
@@ -81,8 +84,30 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 		return true;
 	}
 
-	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchant){
-		return true;
+	// 1.20.1 canApplyAtEnchantingTable: only WEAPON/DIGGER enchantments, never BREAKABLE (unbreaking/mending) or sweeping edge.
+	// 1.21 enchantments are data-driven, so the old categories are matched by their supported_items tag.
+	private static final java.util.Set<TagKey<net.minecraft.world.item.Item>> WEAPON_TAGS = java.util.Set.of(
+			net.minecraft.tags.ItemTags.SWORD_ENCHANTABLE, net.minecraft.tags.ItemTags.SHARP_WEAPON_ENCHANTABLE,
+			net.minecraft.tags.ItemTags.WEAPON_ENCHANTABLE, net.minecraft.tags.ItemTags.FIRE_ASPECT_ENCHANTABLE);
+	private static final java.util.Set<TagKey<net.minecraft.world.item.Item>> DIGGER_TAGS = java.util.Set.of(
+			net.minecraft.tags.ItemTags.MINING_ENCHANTABLE, net.minecraft.tags.ItemTags.MINING_LOOT_ENCHANTABLE);
+
+	protected boolean allowsEnchantment(net.minecraft.core.Holder<Enchantment> enchant) {
+		if (enchant.is(Enchantments.SWEEPING_EDGE))
+			return false;
+		return enchant.value().getSupportedItems().unwrapKey()
+				.map(tag -> WEAPON_TAGS.contains(tag) || DIGGER_TAGS.contains(tag))
+				.orElse(false);
+	}
+
+	@Override
+	public boolean supportsEnchantment(ItemStack stack, net.minecraft.core.Holder<Enchantment> enchant) {
+		return allowsEnchantment(enchant);
+	}
+
+	@Override
+	public boolean isPrimaryItemFor(ItemStack stack, net.minecraft.core.Holder<Enchantment> enchant) {
+		return allowsEnchantment(enchant);
 	}
 
 	@Override
@@ -101,35 +126,45 @@ public class ClockworkToolItem extends DiggerItem implements IEmberChargedTool {
 		return false;
 	}
 
+	private static void putBoolean(ItemStack stack, String key, boolean value) {
+		net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
+		tag.putBoolean(key, value);
+		_setTag(stack, tag);
+	}
+
 	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
+		if (!stack.has(DataComponents.UNBREAKABLE)) {
+			stack.set(DataComponents.UNBREAKABLE, new Unbreakable(false));
+			stack.set(DataComponents.DAMAGE, 0);
+		}
 		if (!selected || world.isClientSide())
 			return;
+		net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
 		if (!_hasTag(stack)) {
-			_getOrCreateTag(stack);
-			_getTag(stack).putBoolean("poweredOn", false);
-			_getTag(stack).putBoolean("didUse", false);
-		} else {
-			if (entity instanceof Player player) {
-				if (world.getGameTime() % 5 == 0) {
-					if (EmberInventoryUtil.getEmberTotal(player) > 5.0) {
-						if (!_getTag(stack).getBoolean("poweredOn")) {
-							_getTag(stack).putBoolean("poweredOn", true);
-						}
-					} else {
-						if (_getTag(stack).getBoolean("poweredOn")) {
-							_getTag(stack).putBoolean("poweredOn", false);
-						}
-					}
-				}
-				if (_getTag(stack).getBoolean("didUse")) {
-					_getTag(stack).putBoolean("didUse", false);
-					EmberInventoryUtil.removeEmber(player, 5.0);
-					if (EmberInventoryUtil.getEmberTotal(player) < 5.0) {
-						_getTag(stack).putBoolean("poweredOn", false);
-					}
+			tag.putBoolean("poweredOn", false);
+			tag.putBoolean("didUse", false);
+			_setTag(stack, tag);
+			return;
+		}
+		if (entity instanceof Player player) {
+			boolean changed = false;
+			if (world.getGameTime() % 5 == 0) {
+				boolean powered = EmberInventoryUtil.getEmberTotal(player) > 5.0;
+				if (tag.getBoolean("poweredOn") != powered) {
+					tag.putBoolean("poweredOn", powered);
+					changed = true;
 				}
 			}
+			if (tag.getBoolean("didUse")) {
+				tag.putBoolean("didUse", false);
+				changed = true;
+				EmberInventoryUtil.removeEmber(player, 5.0);
+				if (EmberInventoryUtil.getEmberTotal(player) < 5.0)
+					tag.putBoolean("poweredOn", false);
+			}
+			if (changed)
+				_setTag(stack, tag);
 		}
 	}
 

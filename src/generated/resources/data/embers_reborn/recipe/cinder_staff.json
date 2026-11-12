@@ -6,10 +6,10 @@
       "item": "embers_reborn:ember_shard"
     },
     "I": {
-      "tag": "forge:ingots/dawnstone"
+      "tag": "c:ingots/dawnstone"
     },
     "S": {
-      "tag": "forge:plates/silver"
+      "tag": "c:plates/silver"
     },
     "W": {
       "tag": "c:rods/wooden"

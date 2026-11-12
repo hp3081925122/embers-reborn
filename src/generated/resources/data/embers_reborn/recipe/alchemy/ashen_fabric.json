@@ -17,10 +17,10 @@
   },
   "inputs": [
     {
-      "tag": "forge:dusts/ash"
+      "tag": "c:dusts/ash"
     },
     {
-      "tag": "forge:dusts/ash"
+      "tag": "c:dusts/ash"
     },
     {
       "tag": "c:strings"

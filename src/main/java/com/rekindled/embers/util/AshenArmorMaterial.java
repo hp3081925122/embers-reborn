@@ -19,7 +19,14 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class AshenArmorMaterial {
 
-	// Durability multipliers from vanilla: Helmet=11, Chestplate=16, Leggings=15, Boots=13
+	/** Same factor as 1.20.1: vanilla slot durability times 19. */
+	public static final int DURABILITY_FACTOR = 19;
+
+	public static net.minecraft.world.item.Item.Properties properties(ArmorItem.Type type) {
+		return new net.minecraft.world.item.Item.Properties().durability(type.getDurability(DURABILITY_FACTOR));
+	}
+
+	// Defense: Helmet=3, Chestplate=7, Leggings=5, Boots=3
 	public static final ArmorMaterial INSTANCE = new ArmorMaterial(
 		Map.of(
 			ArmorItem.Type.HELMET,     3,

@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/lead"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_lead\",\"amount\":10}",
+  "fluid": "{\"tag\":\"c:molten_lead\",\"amount\":10}",
   "output": {
-    "tag": "forge:nuggets/lead"
+    "tag": "c:nuggets/lead"
   },
   "stamp": {
     "item": "embers_reborn:nugget_stamp"

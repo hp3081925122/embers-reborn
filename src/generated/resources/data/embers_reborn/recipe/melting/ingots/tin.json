@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/tin"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:ingots/tin"
+    "tag": "c:ingots/tin"
   },
   "output": {
     "amount": 90,
-    "tag": "forge:molten_tin"
+    "tag": "c:molten_tin"
   }
 }

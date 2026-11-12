@@ -1,14 +1,35 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:raw_materials/zinc"
+          }
+        },
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:ingots/tin"
+          }
+        }
+      ]
+    }
+  ],
   "type": "embers_reborn:melting",
   "bonus": {
     "amount": 10,
-    "tag": "forge:molten_tin"
+    "tag": "c:molten_tin"
   },
   "input": {
-    "tag": "forge:raw_materials/zinc"
+    "tag": "c:raw_materials/zinc"
   },
   "output": {
     "amount": 120,
-    "tag": "forge:molten_zinc"
+    "tag": "c:molten_zinc"
   }
 }

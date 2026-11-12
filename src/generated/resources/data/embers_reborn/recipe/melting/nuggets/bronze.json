@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/bronze"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:nuggets/bronze"
+    "tag": "c:nuggets/bronze"
   },
   "output": {
     "amount": 10,
-    "tag": "forge:molten_bronze"
+    "tag": "c:molten_bronze"
   }
 }

@@ -76,7 +76,9 @@ public class ExplosionCharmItem extends Item implements IEmbersCurioItem {
 	}
 
 	public static ItemStack setItemCooldown(ItemStack stack, long time) {
-		_getOrCreateTag(stack).putLong(ITEM_COOLDOWN_KEY, time);
+		net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
+		tag.putLong(ITEM_COOLDOWN_KEY, time);
+		_setTag(stack, tag);
 		return stack;
 	}
 

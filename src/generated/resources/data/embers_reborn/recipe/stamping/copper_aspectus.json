@@ -1,6 +1,6 @@
 {
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_copper\",\"amount\":90}",
+  "fluid": "{\"tag\":\"c:molten_copper\",\"amount\":90}",
   "input": {
     "item": "embers_reborn:ember_shard"
   },

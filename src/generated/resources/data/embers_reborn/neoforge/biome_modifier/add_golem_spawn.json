@@ -16,7 +16,7 @@
           "values": [
             "#c:is_mushroom",
             "minecraft:deep_dark",
-            "#forge:no_default_monsters"
+            "#c:no_default_monsters"
           ]
         }
       }

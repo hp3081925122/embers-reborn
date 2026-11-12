@@ -52,7 +52,7 @@ public class MessageItemSound implements CustomPacketPayload {
 		buf.writeVarInt(id);
 		buf.writeResourceLocation(BuiltInRegistries.ITEM.getKey(item));
 		buf.writeResourceLocation(BuiltInRegistries.SOUND_EVENT.getKey(sound));
-		buf.writeUtf(source.getName());
+		buf.writeEnum(source);
 		buf.writeBoolean(repeat);
 		buf.writeFloat(volume);
 		buf.writeFloat(pitch);
@@ -62,7 +62,7 @@ public class MessageItemSound implements CustomPacketPayload {
 		int id = buf.readVarInt();
 		Item item = BuiltInRegistries.ITEM.get(buf.readResourceLocation());
 		SoundEvent sound = BuiltInRegistries.SOUND_EVENT.get(buf.readResourceLocation());
-		SoundSource source = SoundSource.valueOf(buf.readUtf().toUpperCase());
+		SoundSource source = buf.readEnum(SoundSource.class);
 		boolean repeat = buf.readBoolean();
 		float volume = buf.readFloat();
 		float pitch = buf.readFloat();

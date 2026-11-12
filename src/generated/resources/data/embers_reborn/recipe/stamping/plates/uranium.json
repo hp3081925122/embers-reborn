@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:plates/uranium"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_uranium\",\"amount\":90}",
+  "fluid": "{\"tag\":\"c:molten_uranium\",\"amount\":90}",
   "output": {
-    "tag": "forge:plates/uranium"
+    "tag": "c:plates/uranium"
   },
   "stamp": {
     "item": "embers_reborn:plate_stamp"

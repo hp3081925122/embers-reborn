@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/brass"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_brass\",\"amount\":90}",
+  "fluid": "{\"tag\":\"c:molten_brass\",\"amount\":90}",
   "output": {
-    "tag": "forge:ingots/brass"
+    "tag": "c:ingots/brass"
   },
   "stamp": {
     "item": "embers_reborn:ingot_stamp"

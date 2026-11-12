@@ -14,6 +14,8 @@ public class AlchemyResult {
 	public ItemStack result;
 	public int blackPins;
 	public int whitePins;
+	/** Per-slot correctness in recipe input order, or null when slot hints are disabled. */
+	public byte[] correct;
 
 	public AlchemyResult(List<PedestalContents> contents, ItemStack result, int blackPins, int whitePins) {
 		this.contents = contents;
@@ -37,6 +39,8 @@ public class AlchemyResult {
 		}
 		nbt.put("aspects", aspectNBT);
 		nbt.put("inputs", inputNBT);
+		if (correct != null)
+			nbt.putByteArray("correct", correct);
 
 		stack.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(nbt));
 		return stack;

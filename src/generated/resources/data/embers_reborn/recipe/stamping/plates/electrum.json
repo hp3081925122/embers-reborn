@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:plates/electrum"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_electrum\",\"amount\":90}",
+  "fluid": "{\"tag\":\"c:molten_electrum\",\"amount\":90}",
   "output": {
-    "tag": "forge:plates/electrum"
+    "tag": "c:plates/electrum"
   },
   "stamp": {
     "item": "embers_reborn:plate_stamp"

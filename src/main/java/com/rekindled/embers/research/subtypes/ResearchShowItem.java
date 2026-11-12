@@ -75,7 +75,7 @@ public class ResearchShowItem extends ResearchBase {
 			int slotY = basePosY - textOffY + 43 + y * 24;
 			for(int x = 0; x < stacks.length; x++) {
 				int slotX = basePosX - textOffX + batchOff + 20 + x * 24;
-				gui.renderItemStackMinusTooltipAt(graphics, stacks[x], slotX + 4, slotY + 4);
+				gui.renderItemStackAt(graphics, stacks[x], slotX + 4, slotY + 4, (int) gui.mouseX, (int) gui.mouseY);
 			}
 			if(displayItem.sideText != null) {
 				List<FormattedCharSequence> strings = fontRenderer.split(displayItem.getSideText(), 152 - stacks.length * 24);

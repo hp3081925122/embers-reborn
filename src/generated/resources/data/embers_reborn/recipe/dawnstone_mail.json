@@ -1,9 +1,15 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "curios"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
     "P": {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     }
   },
   "pattern": [

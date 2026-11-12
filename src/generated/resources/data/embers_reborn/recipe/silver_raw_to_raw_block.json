@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "X": {
-      "tag": "forge:raw_materials/silver"
+      "tag": "c:raw_materials/silver"
     },
     "Y": {
       "item": "embers_reborn:raw_silver"

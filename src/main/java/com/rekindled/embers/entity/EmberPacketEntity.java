@@ -28,7 +28,7 @@ public class EmberPacketEntity extends Entity {
 	public BlockPos pos = new BlockPos(0,0,0);
 	public BlockPos dest = new BlockPos(0,0,0);
 	public double value = 0;
-	public static final EntityDataAccessor<Integer> lifetime = SynchedEntityData.defineId(EmberProjectileEntity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> lifetime = SynchedEntityData.defineId(EmberPacketEntity.class, EntityDataSerializers.INT);
 
 	public EmberPacketEntity(EntityType<?> pEntityType, Level pLevel) {
 		super(pEntityType, pLevel);

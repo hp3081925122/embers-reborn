@@ -32,7 +32,7 @@ public class AncientCodexItem extends Item {
 			ResearchBase research = ResearchManager.researchByItem.get(context.getLevel().getBlockState(context.getClickedPos()).getBlock().asItem());
 			if (research != null) {
 				GuiCodex.instance.researchPage = research;
-				ResearchManager.sendCheckmark(research, true);
+				ResearchManager.markCheckedOnOpen(research);
 				Minecraft.getInstance().setScreen(GuiCodex.instance);
 				context.getLevel().playSound(context.getPlayer(), context.getPlayer(), EmbersSounds.CODEX_OPEN.get(), SoundSource.MASTER, 0.75f, 1.0f);
 				return InteractionResult.SUCCESS;

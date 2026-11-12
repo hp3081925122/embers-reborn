@@ -12,6 +12,9 @@ import net.neoforged.fml.config.ModConfig;
 public class ConfigManager {
 
 	public static ModConfigSpec.ConfigValue<Integer> MAX_PROXY_DISTANCE;
+	public static ModConfigSpec.ConfigValue<Boolean> ALCHEMY_SLOT_HINTS;
+	public static ModConfigSpec.ConfigValue<Double> ALCHEMY_FAILURE_CONSUME_CHANCE;
+	public static ModConfigSpec.ConfigValue<Boolean> ALCHEMY_FAILURE_KEEP_CORRECT;
 	public static ModConfigSpec.ConfigValue<Double> EMBER_BORE_SPEED_MOD;
 	public static ModConfigSpec.ConfigValue<Integer> EMBER_BORE_TIME;
 	public static ModConfigSpec.ConfigValue<Double> EMBER_BORE_FUEL_CONSUMPTION;
@@ -187,6 +190,10 @@ public class ConfigManager {
 		itemPreferences.add(0, "minecraft:oak_planks");
 		itemPreferences.add(1, "minecraft:cobblestone");
 		ITEM_PREFERENCES = COMMON.comment("Which items are preferred as the result of breaking down a tool on an anvil.").defineList("itemPreferences", itemPreferences, a -> true);
+
+		ALCHEMY_SLOT_HINTS = COMMON.comment("If alchemical notes record which aspect slots were correct, shown when hovering over an aspect in the Codebreaking Slate. Disable for the original guessing difficulty.").define("alchemy_slot_hints", true);
+		ALCHEMY_FAILURE_CONSUME_CHANCE = COMMON.comment("Chance for each pedestal to lose its ingredient when alchemy fails.").defineInRange("alchemy_failure_consume_chance", 0.3, 0.0, 1.0);
+		ALCHEMY_FAILURE_KEEP_CORRECT = COMMON.comment("If pedestals with the correct aspect never lose their ingredient on failure. Only applies while alchemy_slot_hints is on, since kept ingredients reveal the answer.").define("alchemy_failure_keep_correct", true);
 
 		COMMON.pop();
 		net.neoforged.fml.ModList.get().getModContainerById(Embers.MODID).ifPresent(mc -> mc.registerConfig(ModConfig.Type.COMMON, COMMON.build()));

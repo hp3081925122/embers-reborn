@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -41,7 +42,7 @@ public class ClockworkAxeItem extends ClockworkToolItem {
 
 
 	public ClockworkAxeItem(Properties properties) {
-		super(EmbersTiers.CLOCKWORK_AXE, BlockTags.MINEABLE_WITH_AXE, properties);
+		super(EmbersTiers.CLOCKWORK_AXE, BlockTags.MINEABLE_WITH_AXE, properties.attributes(DiggerItem.createAttributes(EmbersTiers.CLOCKWORK_AXE, 2.0F, -3.0F)));
 	}
 
 	public InteractionResult useOn(UseOnContext pContext) {
@@ -80,14 +81,17 @@ public class ClockworkAxeItem extends ClockworkToolItem {
 			if (player != null) {
 				itemstack.hurtAndBreak(1, player, net.minecraft.world.entity.EquipmentSlot.MAINHAND);
 			}
-			_getOrCreateTag(itemstack).putBoolean("didUse", true);
+			net.minecraft.nbt.CompoundTag useTag = _getOrCreateTag(itemstack);
+			useTag.putBoolean("didUse", true);
+			_setTag(itemstack, useTag);
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		} else {
 			return InteractionResult.PASS;
 		}
 	}
 
-	// canPerformAction removed: ToolAction removed in NeoForge 1.21.1
-
-	// canApplyAtEnchantingTable removed in 1.21.1
+	@Override
+	public boolean canPerformAction(ItemStack stack, net.neoforged.neoforge.common.ItemAbility ability) {
+		return hasEmber(stack) && net.neoforged.neoforge.common.ItemAbilities.DEFAULT_AXE_ACTIONS.contains(ability);
+	}
 }

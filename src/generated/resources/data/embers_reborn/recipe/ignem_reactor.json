@@ -6,10 +6,10 @@
       "item": "embers_reborn:caminite_bricks"
     },
     "C": {
-      "tag": "forge:ingots/copper"
+      "tag": "c:ingots/copper"
     },
     "S": {
-      "tag": "forge:plates/silver"
+      "tag": "c:plates/silver"
     },
     "W": {
       "item": "embers_reborn:wildfire_core"

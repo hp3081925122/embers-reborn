@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 
 public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 
-	public final ResourceLocation id;
+	public ResourceLocation id;
 
 	public final Ingredient tablet;
 	public final ArrayList<Ingredient> aspects;
@@ -36,11 +36,17 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 		this.failure = failure;
 	}
 
+	public void bindId(ResourceLocation id) {
+		if (this.id == null)
+			this.id = id;
+	}
+
 	@Override
 	public ArrayList<Ingredient> getCode(long seed) {
 		if (cachedSeed == null || cachedSeed != seed) {
 			code.clear();
-			Random rand = new Random(seed - id.getPath().hashCode());
+			int salt = id == null ? 0 : id.getPath().hashCode();
+			Random rand = new Random(seed - salt);
 			for (int i = 0; i < inputs.size(); i++) {
 				code.add(aspects.get(rand.nextInt(aspects.size())));
 			}
@@ -183,7 +189,14 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 			}
 		}
 
-		return new AlchemyResult(sortedContents, getResultItem(), blackPins, whitePins); //TODO: failures too?
+		AlchemyResult result = new AlchemyResult(sortedContents, getResultItem(), blackPins, whitePins); //TODO: failures too?
+		// sortedContents follows the recipe input order, so slot k is right when its aspect matches code k
+		if (com.rekindled.embers.ConfigManager.ALCHEMY_SLOT_HINTS.get() && sortedContents.size() == code.size()) {
+			result.correct = new byte[code.size()];
+			for (int k = 0; k < code.size(); k++)
+				result.correct[k] = (byte) (code.get(k).test(sortedContents.get(k).aspect) ? 1 : 0);
+		}
+		return result;
 	}
 
 		public ResourceLocation getId() {

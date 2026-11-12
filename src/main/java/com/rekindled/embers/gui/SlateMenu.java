@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.item.AlchemyHintItem;
+import com.rekindled.embers.util.ItemNbtHelper;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -58,13 +59,19 @@ public class SlateMenu extends AbstractContainerMenu {
 	public SlateMenu(int id, Inventory inv, ItemStack slate) {
 		super(RegistryManager.SLATE_MENU.get(), id);
 		this.slate = slate;
+		net.minecraft.core.HolderLookup.Provider registries = inv.player.registryAccess();
+		boolean[] loading = { true };
 		inventory = new ItemStackHandler(slotCount) {
 			public void onContentsChanged(int slot) {
+				if (loading[0])
+					return;
+				ItemNbtHelper.setTagElement(SlateMenu.this.slate, "inventory", this.serializeNBT(registries));
 			}
 		};
-		CompoundTag nbt = slate.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY).copyTag().getCompound("inventory");
+		CompoundTag nbt = ItemNbtHelper.getTagElement(slate, "inventory");
 		if (!nbt.isEmpty())
-			inventory.deserializeNBT(net.minecraft.core.RegistryAccess.EMPTY, nbt);
+			inventory.deserializeNBT(registries, nbt);
+		loading[0] = false;
 
 		//slate inventory
 		Slot master = this.addSlot(new SlotItemHandler(inventory, 0, slotIndent, heightMargin + layerHeight / 2 + 16));

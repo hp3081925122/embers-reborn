@@ -1,9 +1,15 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "curios"
+    }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
     "C": {
-      "tag": "forge:dusts/ash"
+      "tag": "c:dusts/ash"
     },
     "L": {
       "tag": "c:leathers"

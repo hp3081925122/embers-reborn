@@ -3,13 +3,13 @@
   "category": "equipment",
   "key": {
     "D": {
-      "tag": "forge:ingots/dawnstone"
+      "tag": "c:ingots/dawnstone"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "P": {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     },
     "S": {
       "item": "embers_reborn:ember_shard"

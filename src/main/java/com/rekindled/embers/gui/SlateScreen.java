@@ -34,6 +34,41 @@ public class SlateScreen extends AbstractContainerScreen<SlateMenu> {
 		this.renderBackground(graphics, 0, 0, 0);
 		super.render(graphics, pMouseX, pMouseY, pPartialTick);
 		this.renderTooltip(graphics, pMouseX, pMouseY);
+		renderAspectHint(graphics, pMouseX, pMouseY);
+	}
+
+	/** Hovering an aspect in a recorded guess shows whether that slot was right; needs a note made with alchemy_slot_hints on. */
+	private void renderAspectHint(GuiGraphics graphics, int mouseX, int mouseY) {
+		ItemStack baseStack = this.menu.getSlot(0).getItem();
+		if (baseStack.isEmpty())
+			return;
+		int x = (this.width - SlateMenu.slateWidth) / 2;
+		int y = (this.height - this.imageHeight) / 2;
+		int inputCount = AlchemyHintItem.getInputs(baseStack).size();
+		if (inputCount == 0)
+			return;
+		for (int i = 0; i < SlateMenu.slotCount; ++i) {
+			ItemStack stack = this.menu.getSlot(i).getItem();
+			ArrayList<ItemStack> aspects = AlchemyHintItem.getAspects(stack);
+			if (aspects.isEmpty())
+				return;
+			byte[] correct = AlchemyHintItem.getCorrect(stack);
+			if (correct == null)
+				continue;
+			int height = y + SlateMenu.heightMargin + i * SlateMenu.layerHeight + SlateMenu.layerHeight / 2 + (SlateMenu.slotHeight - 9);
+			for (int j = 0; j < inputCount && j < aspects.size() && j < correct.length; ++j) {
+				int slotX = x + SlateMenu.widthMargin + j * SlateMenu.layerWidth / inputCount + SlateMenu.layerWidth / (2 * inputCount) - 10;
+				if (mouseX >= slotX && mouseX < slotX + 20 && mouseY >= height && mouseY < height + 24) {
+					boolean right = correct[j] != 0;
+					graphics.renderComponentTooltip(this.font, java.util.List.of(
+							aspects.get(j).getHoverName(),
+							Component.translatable(Embers.MODID + ".alchemy_hint.slot." + (right ? "correct" : "wrong"))
+									.withStyle(right ? net.minecraft.ChatFormatting.GREEN : net.minecraft.ChatFormatting.RED)),
+							mouseX, mouseY);
+					return;
+				}
+			}
+		}
 	}
 
 	@Override

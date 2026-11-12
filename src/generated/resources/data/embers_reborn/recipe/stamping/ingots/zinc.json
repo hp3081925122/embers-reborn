@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/zinc"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_zinc\",\"amount\":90}",
+  "fluid": "{\"tag\":\"c:molten_zinc\",\"amount\":90}",
   "output": {
-    "tag": "forge:ingots/zinc"
+    "tag": "c:ingots/zinc"
   },
   "stamp": {
     "item": "embers_reborn:ingot_stamp"

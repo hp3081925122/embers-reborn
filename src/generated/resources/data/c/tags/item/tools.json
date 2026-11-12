@@ -15,6 +15,6 @@
     "embers_reborn:dawnstone_pickaxe",
     "embers_reborn:dawnstone_axe",
     "embers_reborn:dawnstone_hoe",
-    "#forge:tools/hammers"
+    "#c:tools/hammers"
   ]
 }

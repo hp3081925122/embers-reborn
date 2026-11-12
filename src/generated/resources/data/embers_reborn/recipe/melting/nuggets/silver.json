@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/silver"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:nuggets/silver"
+    "tag": "c:nuggets/silver"
   },
   "output": {
     "amount": 10,
-    "tag": "forge:molten_silver"
+    "tag": "c:molten_silver"
   }
 }

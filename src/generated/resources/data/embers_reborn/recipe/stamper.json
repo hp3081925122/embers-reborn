@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "B": {
-      "tag": "forge:storage_blocks/iron"
+      "tag": "c:storage_blocks/iron"
     },
     "C": {
-      "tag": "forge:ingots/copper"
+      "tag": "c:ingots/copper"
     },
     "X": {
       "item": "embers_reborn:caminite_brick"

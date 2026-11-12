@@ -16,6 +16,7 @@ import com.rekindled.embers.datagen.EmbersItemTags;
 import com.rekindled.embers.item.EmberStorageItem;
 import com.rekindled.embers.network.PacketHandler;
 import com.rekindled.embers.network.message.MessageResearchData;
+import com.rekindled.embers.network.message.MessageResearchOpen;
 import com.rekindled.embers.network.message.MessageResearchTick;
 import com.rekindled.embers.research.capability.DefaultResearchCapability;
 import com.rekindled.embers.research.capability.IResearchCapability;
@@ -108,16 +109,31 @@ public class ResearchManager {
 		}
 	}
 
+	public static boolean researchSynced = false;
+
 	public static void receiveResearchData(Map<ResourceLocation, Boolean> checkmarks) {
+		researchSynced = true;
 		for (ResearchBase research : getAllResearch()) {
 			Boolean checked = checkmarks.get(research.id);
-			if (checked != null)
-				research.check(checked);
+			research.checkmarkSet = checked != null;
+			if (research instanceof ResearchSwitchCategory)
+				continue;
+			research.check(checked != null && checked);
 		}
 	}
 
 	public static void sendCheckmark(ResearchBase research, boolean checked) {
 		PacketHandler.sendToServer(new MessageResearchTick(research.id, checked));
+	}
+
+	public static void markCheckedOnOpen(ResearchBase research) {
+		if (research == null || research.checkmarkSet)
+			return;
+		if (researchSynced) {
+			research.check(true);
+			research.checkmarkSet = true;
+		}
+		PacketHandler.sendToServer(new MessageResearchOpen(research.id));
 	}
 
 // Player capabilities registered via RegisterCapabilitiesEvent in Embers.registerCaps()

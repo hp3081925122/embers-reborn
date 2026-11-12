@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/tin"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_tin\",\"amount\":10}",
+  "fluid": "{\"tag\":\"c:molten_tin\",\"amount\":10}",
   "output": {
-    "tag": "forge:nuggets/tin"
+    "tag": "c:nuggets/tin"
   },
   "stamp": {
     "item": "embers_reborn:nugget_stamp"

@@ -98,7 +98,9 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 				sound = EmbersSounds.CINDER_STAFF_FAIL.get();
 			level.playSound(null, launchPos.x, launchPos.y, launchPos.z, sound, SoundSource.PLAYERS, 1.0f, 1.0f);
 		}
-		_getOrCreateTag(stack).putLong("lastUse", level.getGameTime());
+		net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
+		tag.putLong("lastUse", level.getGameTime());
+		_setTag(stack, tag);
 		entity.swing(entity.getUsedItemHand());
 		entity.stopUsingItem();
 	}

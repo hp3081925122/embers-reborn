@@ -1,6 +1,6 @@
 {
   "name": "Embers Reborn",
-  "summary": "Unofficial 1.21.1 NeoForge port of Embers Rekindled — a dwarven-themed ember magic mod with machines, pipes, weapons and research.",
+  "summary": "Unofficial 1.21.1 NeoForge port of Embers Rekindled: dwarven magitech with ember power, metalworking machines, pipes, alchemy and clockwork tools.",
   "license": "MIT",
   "distribution": "Allow distribution to 3rd party",
   "allowComments": true,
@@ -8,7 +8,7 @@
     ["Class", "Mods"],
     ["Main category", "Magic"],
     ["Additional categories", "Technology"],
-    ["Additional categories", "Utility & QoL"]
+    ["Additional categories", "Ores and Resources"]
   ],
   "description": "description.md",
   "icon": "cf-project-icon.png"

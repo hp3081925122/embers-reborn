@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/tin"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:storage_blocks/tin"
+    "tag": "c:storage_blocks/tin"
   },
   "output": {
     "amount": 810,
-    "tag": "forge:molten_tin"
+    "tag": "c:molten_tin"
   }
 }

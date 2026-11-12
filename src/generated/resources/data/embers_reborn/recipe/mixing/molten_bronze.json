@@ -1,11 +1,20 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/bronze"
+      }
+    }
+  ],
   "type": "embers_reborn:mixing",
   "inputs": [
-    "{\"tag\":\"forge:molten_copper\",\"amount\":3}",
-    "{\"tag\":\"forge:molten_tin\",\"amount\":1}"
+    "{\"tag\":\"c:molten_copper\",\"amount\":3}",
+    "{\"tag\":\"c:molten_tin\",\"amount\":1}"
   ],
   "output": {
     "amount": 4,
-    "tag": "forge:molten_bronze"
+    "tag": "c:molten_bronze"
   }
 }

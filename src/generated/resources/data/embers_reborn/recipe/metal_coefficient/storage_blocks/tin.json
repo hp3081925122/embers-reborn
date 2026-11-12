@@ -1,5 +1,14 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/tin"
+      }
+    }
+  ],
   "type": "embers_reborn:metal_coefficient",
-  "block_tag": "forge:storage_blocks/tin",
+  "block_tag": "c:storage_blocks/tin",
   "coefficient": 2.85
 }

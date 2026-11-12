@@ -6,13 +6,13 @@
       "item": "embers_reborn:ember_shard"
     },
     "G": {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     },
     "P": {
       "item": "embers_reborn:wildfire_core"
     },
     "X": {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     }
   },
   "pattern": [

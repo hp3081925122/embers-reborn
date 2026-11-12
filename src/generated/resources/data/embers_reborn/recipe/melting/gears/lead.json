@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/lead"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:gears/lead"
+    "tag": "c:gears/lead"
   },
   "output": {
     "amount": 180,
-    "tag": "forge:molten_lead"
+    "tag": "c:molten_lead"
   }
 }

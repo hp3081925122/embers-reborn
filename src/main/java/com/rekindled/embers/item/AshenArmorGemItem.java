@@ -56,14 +56,18 @@ public class AshenArmorGemItem extends AshenArmorItem implements IInflictorGemHo
 
 	@Override
 	public void attachGem(ItemStack holder, ItemStack gem, int slot) {
-		_getOrCreateTag(holder).put("gem" + slot, gem.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
+		net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(holder);
+		tag.put("gem" + slot, gem.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
+		_setTag(holder, tag);
 	}
 
 	@Override
 	public ItemStack detachGem(ItemStack holder, int slot) {
 		if (_getOrCreateTag(holder).contains("gem" + slot)) {
 			ItemStack gem = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, _getOrCreateTag(holder).getCompound("gem" + slot)).orElse(net.minecraft.world.item.ItemStack.EMPTY);
-			_getOrCreateTag(holder).remove("gem" + slot);
+			net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(holder);
+			tag.remove("gem" + slot);
+			_setTag(holder, tag);
 			return gem;
 		}
 		return ItemStack.EMPTY;

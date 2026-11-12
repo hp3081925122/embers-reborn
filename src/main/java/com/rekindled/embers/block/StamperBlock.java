@@ -50,7 +50,7 @@ public class StamperBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
 	@Override
 	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-		if (hit.getDirection() == Direction.DOWN && level.getBlockEntity(pos) instanceof StamperBlockEntity stamperEntity) {
+		if (level.getBlockEntity(pos) instanceof StamperBlockEntity stamperEntity) {
 			return Misc.useItemOnInventory(stamperEntity.stamp, level, player, InteractionHand.MAIN_HAND);
 		}
 		return InteractionResult.PASS;

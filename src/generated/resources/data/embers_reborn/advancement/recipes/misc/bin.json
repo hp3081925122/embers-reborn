@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#forge:plates/lead"
+            "items": "#c:plates/lead"
           }
         ]
       },

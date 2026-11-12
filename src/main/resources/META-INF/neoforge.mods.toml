@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
-issueTrackerURL="https://github.com/YOUR_REPO/EmbersReborn/issues"
+issueTrackerURL="https://github.com/hp3081925122/embers-reborn/issues"
 
 [[accessTransformers]]
 file="META-INF/accesstransformer.cfg"

@@ -1,6 +1,7 @@
 {
     "gui_light": "front",
     "textures": {
+        "particle": "embers_reborn:item/tool_parts_one",
         "0": "embers_reborn:item/tool_parts_one",
         "1": "embers_reborn:item/tool_parts_two"
     },

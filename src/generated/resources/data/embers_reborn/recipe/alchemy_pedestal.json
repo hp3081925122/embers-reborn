@@ -3,16 +3,16 @@
   "category": "misc",
   "key": {
     "B": {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     },
     "C": {
       "item": "embers_reborn:ember_crystal"
     },
     "D": {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     },
     "I": {
-      "tag": "forge:ingots/dawnstone"
+      "tag": "c:ingots/dawnstone"
     },
     "S": {
       "item": "embers_reborn:caminite_bricks"

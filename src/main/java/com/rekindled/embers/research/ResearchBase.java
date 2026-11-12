@@ -47,6 +47,7 @@ public class ResearchBase {
 	public float shownTarget = 0;
 
 	public boolean checked;
+	public boolean checkmarkSet;
 
 	public ResearchBase(ResourceLocation location, ItemStack icon, double x, double y) {
 		this.id = location;

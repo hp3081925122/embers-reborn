@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#forge:ingots/dawnstone"
+            "items": "#c:ingots/dawnstone"
           }
         ]
       },

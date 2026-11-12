@@ -308,6 +308,8 @@ public class EmbersLang extends LanguageProvider {
 		//text
 		add(Embers.MODID + ".alchemy_hint", "Upon closer inspection, you notice %s in the waste");
 		add(Embers.MODID + ".alchemy_hint.none", "no differently colored spots");
+		add(Embers.MODID + ".alchemy_hint.slot.correct", "This one is right");
+		add(Embers.MODID + ".alchemy_hint.slot.wrong", "This one is wrong");
 		add(Embers.MODID + ".alchemy_hint.black.one", "1 glowing spot");
 		add(Embers.MODID + ".alchemy_hint.black", "%s glowing spots");
 		add(Embers.MODID + ".alchemy_hint.white.one", "1 pale spot");
@@ -395,6 +397,12 @@ public class EmbersLang extends LanguageProvider {
 		add(Embers.MODID + ".tooltip.goggles.accessor_slot", "• Mechanical Core Slot");
 		add(Embers.MODID + ".tooltip.goggles.actuator_slot", "• Actuator Slot");
 		add(Embers.MODID + ".tooltip.goggles.redstone_signal", "§4▲§r Redstone Signal");
+		add(Embers.MODID + ".tooltip.fluid_extractor.stuck", "Stuck: add a fluid pipe in between");
+		add("config.jade.plugin_embers_reborn.fluid_extractor_stuck", "Fluid Extractor Stuck Hint");
+		add(Embers.MODID + ".tooltip.item_extractor.stuck", "Stuck: add an item pipe in between");
+		add("config.jade.plugin_embers_reborn.item_extractor_stuck", "Item Extractor Stuck Hint");
+		add(Embers.MODID + ".tooltip.mixer.fluid_dial", "Use a Fluid Dial to see the fluids inside");
+		add("config.jade.plugin_embers_reborn.mixer_fluid_dial_hint", "Mixer Centrifuge Fluid Dial Hint");
 
 		add(Embers.MODID + ".tooltip.crystal.level", "Level %s");
 		add(Embers.MODID + ".tooltip.crystal.xp", "Refinement %s/%s");
@@ -437,6 +445,7 @@ public class EmbersLang extends LanguageProvider {
 		addUpgradeDesc(RegistryManager.HEAT_INSULATION_ITEM, "Reduces cooling speed by 30% and adds 75 max heat.");
 		addUpgradeDesc(RegistryManager.EXCAVATION_BUCKETS_ITEM, "Allows bore to perform excavation recipes in addition to boring recipes.");
 
+		add(Embers.MODID + ".jade.bore_progress", "Mining: %s%%");
 		add(Embers.MODID + ".tooltip.research", "Hold Ctrl to open codex entry");
 		add(Embers.MODID + ".tooltip.research.world", "Ctrl + Right Click to open codex entry");
 
@@ -469,6 +478,10 @@ public class EmbersLang extends LanguageProvider {
 		add(Embers.MODID + ".jei.recipe.catalysis_combustion.burn_time", "Burn Time: %s");
 		add(Embers.MODID + ".jei.recipe.catalysis_combustion.multiplier", "Multiplier: %s");
 		add(Embers.MODID + ".jei.recipe.dawnstone_anvil", "Dawnstone Anvil");
+		add(Embers.MODID + ".jei.recipe.dawnstone_anvil.first", "Place this first");
+		add(Embers.MODID + ".jei.recipe.dawnstone_anvil.second", "Place this second");
+		add(Embers.MODID + ".jei.recipe.dawnstone_anvil.output_first", "Place %s first");
+		add(Embers.MODID + ".jei.recipe.dawnstone_anvil.output_second", "Then place %s");
 		add("dimension." + Level.OVERWORLD.location().toLanguageKey(), "Overworld");
 		add("dimension." + Level.NETHER.location().toLanguageKey(), "The Nether");
 		add("dimension." + Level.END.location().toLanguageKey(), "The End");
@@ -549,7 +562,7 @@ public class EmbersLang extends LanguageProvider {
 		add(Embers.MODID + ".research.page.pipes.tags", "Pipe;Transport;Item;Fluid;Liquid;");
 		add(Embers.MODID + ".research.page.pipes.desc", "One of the simplest mechanisms necessary for your ambitions is the pipe, a simple means of moving materials. You have developed both iron and lead pipes: Iron Pipes can be used to transport fluids, while Lead Pipes can be used to transport items. Pipes can only insert to tanks or inventories, however: to extract, you must craft a corresponding Extractor, place it adjacent to the container, and power it with redstone.");
 		add(Embers.MODID + ".research.page.routing.desc", "Items and Fluids in pipes follow simple rules to determine where they will go. They will always go forward, and will never bounce back or, heavens forbid, pop out of the pipe. At an intersection, they will always prioritize the opposite exit, so long as the other exits are weighed equally. When a tie must be broken, items and fluids will round-robin.");
-		add(Embers.MODID + ".research.page.valves.desc", "Extractors have a number of special properties, listed here: When turned off, they function as normal pipes. When turned on by a redstone signal, they will extract items from attached inventories and never accept items from pipes. This makes Extractors useful as valves in pipe systems, for flow control.");
+		add(Embers.MODID + ".research.page.valves.desc", "Extractors have a number of special properties, listed here: When turned off, they function as normal pipes. When turned on by a redstone signal, they will extract items from attached inventories and never accept items from pipes. This makes Extractors useful as valves in pipe systems, for flow control. Note that a powered Extractor treats every adjacent inventory or machine as a source and only outputs into pipes, never directly into a neighboring machine. To feed a machine, place a regular pipe between the Extractor and the machine.");
 		add(Embers.MODID + ".research.page.pipe_tools.desc", "Pipes will automatically connect to other adjacent pipes. When this is not wanted, your Tinker's Hammer can be used to disconnect them. (Note that both sides can be disconnected individually) Sometimes, routing in a pipe network can go awry. When this happens, pipes will expel smoke to show that they are clogged. To unclog a pipe, simply right-click it with a stick.");
 
 		add(Embers.MODID + ".research.page.requisition", "Item Requisition");
@@ -766,7 +779,7 @@ public class EmbersLang extends LanguageProvider {
 		add(Embers.MODID + ".research.page.dawnstone_anvil", "Dawnstone Anvil");
 		add(Embers.MODID + ".research.page.dawnstone_anvil.title", "Repairs");
 		add(Embers.MODID + ".research.page.dawnstone_anvil.tags", "Dawnstone;Anvil;Repair;Break;Damage;Hammer;");
-		add(Embers.MODID + ".research.page.dawnstone_anvil.desc", "The resilience of Dawnstone lends itself well to use in an Anvil. The Dawnstone Anvil may be used to both repair items, or break down items into their component parts. Place a damaged item on the anvil, then its repair material, then give it a good couple whacks with the Tinker Hammer to repair it. Place the damaged item alone and give it some strong blows, and it will break apart into its component pieces.");
+		add(Embers.MODID + ".research.page.dawnstone_anvil.desc", "The resilience of Dawnstone lends itself well to use in an Anvil. The Dawnstone Anvil may be used to both repair items, or break down items into their component parts. Place a damaged item on the anvil, then its repair material, then give it a good couple whacks with the Tinker Hammer to repair it. Place the damaged item alone and give it some strong blows, and it will break apart into its component pieces. §fOrder matters: the first item sits underneath and must be the item being worked. The material goes on top. Reversed, the hammer does nothing.");
 
 		add(Embers.MODID + ".research.page.autohammer", "Automatic Hammer");
 		add(Embers.MODID + ".research.page.autohammer.title", "Automatic Hammer");

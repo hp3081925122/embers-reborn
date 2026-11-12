@@ -1,5 +1,14 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/aluminium"
+      }
+    }
+  ],
   "type": "embers_reborn:metal_coefficient",
-  "block_tag": "forge:storage_blocks/aluminium",
+  "block_tag": "c:storage_blocks/aluminium",
   "coefficient": 2.85
 }

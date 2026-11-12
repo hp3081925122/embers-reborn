@@ -27,7 +27,7 @@ public class MessageResearchData implements CustomPacketPayload {
 	}
 
 	public MessageResearchData(Map<ResourceLocation, Boolean> ticks) {
-		this.ticks = ticks;
+		this.ticks = new HashMap<>(ticks);
 	}
 
 	public void write(FriendlyByteBuf buf) {

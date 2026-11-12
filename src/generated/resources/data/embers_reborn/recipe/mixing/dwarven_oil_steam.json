@@ -2,7 +2,7 @@
   "type": "embers_reborn:mixing",
   "inputs": [
     "{\"fluid\":\"embers_reborn:soul_crude\",\"amount\":5}",
-    "{\"tag\":\"forge:steam\",\"amount\":20}"
+    "{\"tag\":\"c:steam\",\"amount\":20}"
   ],
   "output": {
     "amount": 10,

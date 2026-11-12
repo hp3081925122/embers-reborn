@@ -24,6 +24,11 @@ repositories {
         url = 'https://www.cursemaven.com'
         content { includeGroup 'curse.maven' }
     }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content { includeGroup "maven.modrinth" }
+    }
 }
 
 base {
@@ -75,6 +80,11 @@ dependencies {
     // JEI — optional compile API, full runtime
     compileOnly "mezz.jei:jei-${project.minecraft_version}-neoforge-api:${project.jei_version}"
     runtimeOnly  "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
+
+    compileOnly "maven.modrinth:jade:${project.jade_version}"
+    runtimeOnly "maven.modrinth:jade:${project.jade_version}"
+
+    runtimeOnly "curse.maven:just-enough-characters-250702:${project.jecharacters_file}"
 
     // Curios API
     compileOnly "top.theillusivec4.curios:curios-neoforge:${project.curios_version}:api"

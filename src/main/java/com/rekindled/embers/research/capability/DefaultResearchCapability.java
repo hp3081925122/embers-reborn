@@ -22,6 +22,11 @@ public class DefaultResearchCapability implements IResearchCapability, net.neofo
 	}
 
 	@Override
+	public boolean hasCheckmark(ResourceLocation research) {
+		return checkmarks.containsKey(research);
+	}
+
+	@Override
 	public Map<ResourceLocation, Boolean> getCheckmarks() {
 		return checkmarks;
 	}

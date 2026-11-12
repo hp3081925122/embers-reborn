@@ -9,13 +9,13 @@
       "item": "embers_reborn:wildfire_core"
     },
     "D": {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     },
     "P": {
-      "tag": "forge:plates/silver"
+      "tag": "c:plates/silver"
     },
     "S": {
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     }
   },
   "pattern": [

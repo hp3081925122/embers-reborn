@@ -3,13 +3,13 @@
   "category": "misc",
   "key": {
     "B": {
-      "tag": "forge:storage_blocks/lead"
+      "tag": "c:storage_blocks/lead"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "P": {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     }
   },
   "pattern": [

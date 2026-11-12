@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/aluminum"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:storage_blocks/aluminum"
+    "tag": "c:storage_blocks/aluminum"
   },
   "output": {
     "amount": 810,
-    "tag": "forge:molten_aluminum"
+    "tag": "c:molten_aluminum"
   }
 }

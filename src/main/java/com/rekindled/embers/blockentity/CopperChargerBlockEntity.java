@@ -62,7 +62,7 @@ public class CopperChargerBlockEntity extends BlockEntity implements ISoundContr
 
 		@Override
 		public boolean isItemValid(int slot, ItemStack stack) {
-			return false;
+			return EmbersCapabilities.EMBER_ITEM_CAPABILITY.getCapability(stack, null) != null;
 		}
 
 		@Override

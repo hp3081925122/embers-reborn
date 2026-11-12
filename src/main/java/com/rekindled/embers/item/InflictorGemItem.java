@@ -49,7 +49,9 @@ public class InflictorGemItem extends Item implements IInflictorGem {
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!level.isClientSide && player.isSecondaryUseActive() && _getOrCreateTag(stack).contains("type")) {
-			_getOrCreateTag(stack).remove("type");
+			net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
+			tag.remove("type");
+			_setTag(stack, tag);
 			if (player.getHealth() > 1f)
 				player.setHealth(Math.max(player.getHealth() - 10.0f, 1f));
 		}
@@ -70,7 +72,9 @@ public class InflictorGemItem extends Item implements IInflictorGem {
 	public void attuneSource(ItemStack stack, LivingEntity entity, DamageSource source) {
 		String damageType = source.type().msgId();
 		if (!source.is(EmbersDamageTypeTags.INFLICTOR_GEM_BLACKLIST)) {
-			_getOrCreateTag(stack).putString("type", damageType);
+			net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
+			tag.putString("type", damageType);
+			_setTag(stack, tag);
 			if (entity != null)
 				entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), EmbersSounds.INFLICTOR_GEM.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
 		}

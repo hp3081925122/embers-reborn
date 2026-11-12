@@ -20,13 +20,13 @@
       "tag": "minecraft:coals"
     },
     {
-      "tag": "forge:ingots/archaic_brick"
+      "tag": "c:ingots/archaic_brick"
     },
     {
       "tag": "minecraft:coals"
     },
     {
-      "tag": "forge:ingots/archaic_brick"
+      "tag": "c:ingots/archaic_brick"
     }
   ],
   "output": {

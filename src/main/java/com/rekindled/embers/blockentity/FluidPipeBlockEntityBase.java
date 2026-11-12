@@ -145,11 +145,11 @@ public abstract class FluidPipeBlockEntityBase extends PipeBlockEntityBase imple
 	@Override
 	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.saveAdditional(nbt, provider);
-		writeTank(nbt);
+		writeTank(nbt, provider);
 	}
 
-	public void writeTank(CompoundTag nbt) {
-		nbt.put("tank", tank.writeToNBT(net.minecraft.core.RegistryAccess.EMPTY, new CompoundTag()));
+	public void writeTank(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		nbt.put("tank", tank.writeToNBT(provider, new CompoundTag()));
 	}
 
 	/* getCapabilityLEGACY removed */

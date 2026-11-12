@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:plates/gold"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_gold\",\"amount\":90}",
+  "fluid": "{\"tag\":\"c:molten_gold\",\"amount\":90}",
   "output": {
-    "tag": "forge:plates/gold"
+    "tag": "c:plates/gold"
   },
   "stamp": {
     "item": "embers_reborn:plate_stamp"

@@ -1,14 +1,28 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:raw_materials/platinum"
+          }
+        }
+      ]
+    }
+  ],
   "type": "embers_reborn:melting",
   "bonus": {
     "amount": 10,
-    "tag": "forge:molten_gold"
+    "tag": "c:molten_gold"
   },
   "input": {
-    "tag": "forge:raw_materials/platinum"
+    "tag": "c:raw_materials/platinum"
   },
   "output": {
     "amount": 120,
-    "tag": "forge:molten_platinum"
+    "tag": "c:molten_platinum"
   }
 }

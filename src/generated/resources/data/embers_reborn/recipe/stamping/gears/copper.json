@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/copper"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_copper\",\"amount\":180}",
+  "fluid": "{\"tag\":\"c:molten_copper\",\"amount\":180}",
   "output": {
-    "tag": "forge:gears/copper"
+    "tag": "c:gears/copper"
   },
   "stamp": {
     "item": "embers_reborn:gear_stamp"

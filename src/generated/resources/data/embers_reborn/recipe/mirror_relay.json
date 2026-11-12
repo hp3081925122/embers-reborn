@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "P": {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     },
     "S": {
-      "tag": "forge:ingots/silver"
+      "tag": "c:ingots/silver"
     }
   },
   "pattern": [

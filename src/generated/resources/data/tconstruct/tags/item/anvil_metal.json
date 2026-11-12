@@ -1,6 +1,6 @@
 {
   "values": [
-    "#forge:storage_blocks/dawnstone",
-    "#forge:storage_blocks/dwarven_mithril"
+    "#c:storage_blocks/dawnstone",
+    "#c:storage_blocks/dwarven_mithril"
   ]
 }

@@ -6,13 +6,13 @@
       "item": "embers_reborn:mechanical_core"
     },
     "C": {
-      "tag": "forge:storage_blocks/copper"
+      "tag": "c:storage_blocks/copper"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "P": {
-      "tag": "forge:plates/copper"
+      "tag": "c:plates/copper"
     }
   },
   "pattern": [

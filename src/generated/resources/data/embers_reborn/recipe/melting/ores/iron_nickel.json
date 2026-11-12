@@ -1,14 +1,35 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:ores/iron"
+          }
+        },
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:ingots/nickel"
+          }
+        }
+      ]
+    }
+  ],
   "type": "embers_reborn:melting",
   "bonus": {
     "amount": 20,
-    "tag": "forge:molten_nickel"
+    "tag": "c:molten_nickel"
   },
   "input": {
-    "tag": "forge:ores/iron"
+    "tag": "c:ores/iron"
   },
   "output": {
     "amount": 240,
-    "tag": "forge:molten_iron"
+    "tag": "c:molten_iron"
   }
 }

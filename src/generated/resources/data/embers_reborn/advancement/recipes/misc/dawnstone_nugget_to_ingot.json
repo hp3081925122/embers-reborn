@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#forge:nuggets/dawnstone"
+            "items": "#c:nuggets/dawnstone"
           }
         ]
       },

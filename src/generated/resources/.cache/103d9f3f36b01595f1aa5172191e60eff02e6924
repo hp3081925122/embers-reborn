@@ -1,6 +1,6 @@
-// 1.21.1	2026-11-12T09:42:51.0865723	Registries
+// 1.21.1	2026-11-12T18:36:11.2253391	Registries
 dc9ad9f2e7454ce4c444a1253b6a2ad3774a88d0 data/embers_reborn/damage_type/ember.json
-fdf6eee66c162c7727ad356b68aa86a2fce4bfee data/embers_reborn/neoforge/biome_modifier/add_golem_spawn.json
+40a898b6d30588fde4a1b4a98521f6aa55f8d2fd data/embers_reborn/neoforge/biome_modifier/add_golem_spawn.json
 86bb69bfe0cfe07dc9ed73bdcc8c6de4d2455bb8 data/embers_reborn/neoforge/biome_modifier/add_lead_ore.json
 1915aba504908446acbc80d43abf62e5a20a9214 data/embers_reborn/neoforge/biome_modifier/add_silver_ore.json
 6cd23a1e0f0d9cdd1fb786b894da9dd5bcf86a13 data/embers_reborn/worldgen/configured_feature/ore_lead.json
@@ -8,6 +8,6 @@ fdf6eee66c162c7727ad356b68aa86a2fce4bfee data/embers_reborn/neoforge/biome_modif
 0bd47e7f03288a7bd3c0b5f061f477e98cf5dafe data/embers_reborn/worldgen/placed_feature/ore_lead_placer.json
 971d2dc71470f48bd4ff0184975c280f38045a9b data/embers_reborn/worldgen/placed_feature/ore_silver_placer.json
 2804e1d2f7c1292b4934c0a3e579f30f2b972953 data/embers_reborn/worldgen/processor_list/small_ruin.json
-6b93e2331a299e1a3a602fc1b1a3bd2b768e54ef data/embers_reborn/worldgen/structure/small_ruin.json
+b8c6f567ebe222dcea618b8edaac9b018a623c3c data/embers_reborn/worldgen/structure/small_ruin.json
 6c7a863fb234f6cd87c8fe107a7838842599693e data/embers_reborn/worldgen/structure_set/small_ruin.json
 1c0c9e1c69cee114144dd5c667ce5dd9c5d34892 data/embers_reborn/worldgen/template_pool/small_ruin.json

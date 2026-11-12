@@ -221,10 +221,17 @@ public class AlchemyTabletBlockEntity extends BlockEntity implements ISparkable,
 								pedestal.inventory.setStackInSlot(0, ItemStack.EMPTY);
 							}
 						} else {
-							//this doesn't always consume the same amount of ingredients
-							//there is a chance the same pedestal gets cleared multiple times
-							for (int i = 0; i < event.getConsumeAmount(); i++) {
-								pedestals.get(rand.nextInt(pedestals.size())).inventory.setStackInSlot(0, ItemStack.EMPTY);
+							//each pedestal loses its ingredient with a fixed chance; an upgrade setting the consume amount to 0 keeps everything
+							if (event.getConsumeAmount() > 0) {
+								double chance = ConfigManager.ALCHEMY_FAILURE_CONSUME_CHANCE.get();
+								// correct[] only exists when slot hints are on, so keeping correct slots never leaks answers otherwise
+								boolean keepCorrect = ConfigManager.ALCHEMY_FAILURE_KEEP_CORRECT.get() && result.correct != null;
+								for (int i = 0; i < pedestals.size(); i++) {
+									if (keepCorrect && isCorrectSlot(result, contents.get(i)))
+										continue;
+									if (rand.nextDouble() < chance)
+										pedestals.get(i).inventory.setStackInSlot(0, ItemStack.EMPTY);
+								}
 							}
 						}
 
@@ -291,6 +298,15 @@ public class AlchemyTabletBlockEntity extends BlockEntity implements ISparkable,
 			setChanged();
 			level.playSound(null, worldPosition, EmbersSounds.ALCHEMY_START.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
 		}
+	}
+
+	/** result.contents holds the same PedestalContents objects in recipe order, aligned with result.correct */
+	private static boolean isCorrectSlot(AlchemyResult result, PedestalContents pedestal) {
+		for (int k = 0; k < result.contents.size() && k < result.correct.length; k++) {
+			if (result.contents.get(k) == pedestal)
+				return result.correct[k] != 0;
+		}
+		return false;
 	}
 
 	public static ArrayList<PedestalContents> getPedestalContents(List<AlchemyPedestalTopBlockEntity> pedestals) {

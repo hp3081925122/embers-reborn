@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "L": {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     },
     "P": {
       "item": "minecraft:paper"

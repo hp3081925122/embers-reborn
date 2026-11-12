@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/gold"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_gold\",\"amount\":180}",
+  "fluid": "{\"tag\":\"c:molten_gold\",\"amount\":180}",
   "output": {
-    "tag": "forge:gears/gold"
+    "tag": "c:gears/gold"
   },
   "stamp": {
     "item": "embers_reborn:gear_stamp"

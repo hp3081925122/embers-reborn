@@ -33,7 +33,8 @@ public class GeologicSeparatorUpgrade extends DefaultUpgradeProvider {
 			if (recipe instanceof MeltingRecipe) {
 				FluidStack bonus = ((MeltingRecipe) recipe).getBonus();
 				if (!bonus.isEmpty() && this.tile instanceof GeologicSeparatorBlockEntity) {
-					IFluidHandler fluidHandler = tile.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, tile.getBlockPos(), null);
+					// this.tile is the separator; the "tile" parameter is the melter that threw the event
+					IFluidHandler fluidHandler = this.tile.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, this.tile.getBlockPos(), null);
 					if (fluidHandler != null)
 						fluidHandler.fill(bonus.copy(), IFluidHandler.FluidAction.EXECUTE);
 				}

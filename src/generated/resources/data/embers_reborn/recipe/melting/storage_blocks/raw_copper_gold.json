@@ -1,14 +1,28 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:storage_blocks/raw_copper"
+          }
+        }
+      ]
+    }
+  ],
   "type": "embers_reborn:melting",
   "bonus": {
     "amount": 90,
-    "tag": "forge:molten_gold"
+    "tag": "c:molten_gold"
   },
   "input": {
-    "tag": "forge:storage_blocks/raw_copper"
+    "tag": "c:storage_blocks/raw_copper"
   },
   "output": {
     "amount": 1080,
-    "tag": "forge:molten_copper"
+    "tag": "c:molten_copper"
   }
 }

@@ -14,13 +14,13 @@
   },
   "inputs": [
     {
-      "tag": "forge:plates/iron"
+      "tag": "c:plates/iron"
     },
     {
-      "tag": "forge:plates/iron"
+      "tag": "c:plates/iron"
     },
     {
-      "tag": "forge:plates/iron"
+      "tag": "c:plates/iron"
     },
     {
       "tag": "c:ingots/copper"

@@ -234,10 +234,14 @@ public class Misc {
 	public static <C extends net.minecraft.world.item.crafting.RecipeInput, T extends net.minecraft.world.item.crafting.Recipe<C>> T getRecipe(T cache, RecipeType<?> type, C container, Level level) {
 		if (cache != null && cache.matches(container, level) )
 			return cache;
-		List<T> recipes = level.getRecipeManager().getRecipesFor((RecipeType<T>) type, container, level).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
-		if (recipes.isEmpty())
+		List<net.minecraft.world.item.crafting.RecipeHolder<T>> holders = level.getRecipeManager().getRecipesFor((RecipeType<T>) type, container, level);
+		if (holders.isEmpty())
 			return null;
-		return recipes.get(0);
+		net.minecraft.world.item.crafting.RecipeHolder<T> holder = holders.get(0);
+		T recipe = holder.value();
+		if (recipe instanceof com.rekindled.embers.recipe.AlchemyRecipeBase alchemy)
+			alchemy.bindId(holder.id());
+		return recipe;
 	}
 
 	public static ConcurrentHashMap<ResourceLocation, Item> tagItems = new ConcurrentHashMap<ResourceLocation, Item>();

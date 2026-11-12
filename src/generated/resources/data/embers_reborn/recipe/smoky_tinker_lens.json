@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "A": {
-      "tag": "forge:dusts/ash"
+      "tag": "c:dusts/ash"
     },
     "P": {
       "item": "embers_reborn:tinker_lens"

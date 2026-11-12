@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "X": {
-      "tag": "forge:nuggets/lead"
+      "tag": "c:nuggets/lead"
     },
     "Y": {
       "item": "embers_reborn:lead_nugget"

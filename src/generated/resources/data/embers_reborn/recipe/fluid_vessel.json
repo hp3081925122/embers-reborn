@@ -6,10 +6,10 @@
       "item": "embers_reborn:caminite_brick"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "P": {
-      "tag": "forge:plates/iron"
+      "tag": "c:plates/iron"
     }
   },
   "pattern": [

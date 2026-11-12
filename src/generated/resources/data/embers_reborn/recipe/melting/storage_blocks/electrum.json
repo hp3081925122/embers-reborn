@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/electrum"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:storage_blocks/electrum"
+    "tag": "c:storage_blocks/electrum"
   },
   "output": {
     "amount": 810,
-    "tag": "forge:molten_electrum"
+    "tag": "c:molten_electrum"
   }
 }

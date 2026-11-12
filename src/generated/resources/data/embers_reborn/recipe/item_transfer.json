@@ -3,13 +3,13 @@
   "category": "misc",
   "key": {
     "I": {
-      "tag": "forge:ingots/lead"
+      "tag": "c:ingots/lead"
     },
     "L": {
       "item": "embers_reborn:item_pipe"
     },
     "P": {
-      "tag": "forge:plates/lead"
+      "tag": "c:plates/lead"
     }
   },
   "pattern": [

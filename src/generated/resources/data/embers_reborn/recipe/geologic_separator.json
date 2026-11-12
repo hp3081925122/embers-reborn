@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "B": {
-      "tag": "forge:storage_blocks/silver"
+      "tag": "c:storage_blocks/silver"
     },
     "G": {
       "item": "embers_reborn:caminite_brick"

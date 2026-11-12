@@ -1,11 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "curios"
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_dawnstone_plate": {
       "conditions": {
         "items": [
           {
-            "items": "#forge:plates/dawnstone"
+            "items": "#c:plates/dawnstone"
           }
         ]
       },

@@ -6,10 +6,10 @@
       "item": "embers_reborn:ashen_fabric"
     },
     "D": {
-      "tag": "forge:ingots/dawnstone"
+      "tag": "c:ingots/dawnstone"
     },
     "P": {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     }
   },
   "pattern": [

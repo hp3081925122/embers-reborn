@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/nickel"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:storage_blocks/nickel"
+    "tag": "c:storage_blocks/nickel"
   },
   "output": {
     "amount": 810,
-    "tag": "forge:molten_nickel"
+    "tag": "c:molten_nickel"
   }
 }

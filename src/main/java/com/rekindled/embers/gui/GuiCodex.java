@@ -253,6 +253,7 @@ public class GuiCodex extends Screen {
 				if (selectedResearchPage.onOpen(this)) {
 					this.researchPage = selectedResearchPage;
 					playSound(EmbersSounds.CODEX_PAGE_OPEN.get());
+					ResearchManager.markCheckedOnOpen(selectedResearchPage);
 				}
 			} else if (mouseButton == 1) {
 				boolean newChecked = !selectedResearchPage.isChecked();
@@ -263,9 +264,11 @@ public class GuiCodex extends Screen {
 					playSound(EmbersSounds.CODEX_UNCHECK.get());
 				if (selectedResearchPage instanceof ResearchSwitchCategory selectedCategory) {
 					for (ResearchBase research : selectedCategory.targetCategory.researches) {
+						research.checkmarkSet = true;
 						ResearchManager.sendCheckmark(research, newChecked);
 					}
 				} else {
+					selectedResearchPage.checkmarkSet = true;
 					ResearchManager.sendCheckmark(selectedResearchPage, newChecked);
 				}
 			}
@@ -661,7 +664,9 @@ public class GuiCodex extends Screen {
 							int vOverlay = 0 * 48;
 							graphics.blit(r.getIconBackground(), basePosX + r.x - 24, basePosY + (int)((r.y - 16) * categorySpacingY), 0, uOverlay, vOverlay, 48, 48, 512, 512);
 						}
-						this.renderItemStackMinusTooltipAt(graphics, r.getIcon(), basePosX + r.x - 8, basePosY + (int)((r.y - 16) * categorySpacingY) + 16);
+						int iconX = basePosX + r.x - 8;
+						int iconY = basePosY + (int)((r.y - 16) * categorySpacingY) + 16;
+						this.renderItemStackAt(graphics, r.getIcon(), iconX, iconY, mouseX, mouseY);
 					}
 				}
 				//graphics.blit(researchCategory.getBackgroundTexture(), basePosX, basePosY2, 0, 0, 272, 384, 33, 512, 512);
@@ -694,7 +699,7 @@ public class GuiCodex extends Screen {
 					}
 				}
 
-				if(selectedPageIndex >= 0) {
+				if(selectedPageIndex >= 0 && !renderTooltip) {
 					ResearchBase page = researchCategory.researches.get(selectedPageIndex);
 					List<Component> tooltip = page.getTooltip(showTooltips);
 					if(!tooltip.isEmpty())

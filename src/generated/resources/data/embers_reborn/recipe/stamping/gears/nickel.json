@@ -1,8 +1,17 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/nickel"
+      }
+    }
+  ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"forge:molten_nickel\",\"amount\":180}",
+  "fluid": "{\"tag\":\"c:molten_nickel\",\"amount\":180}",
   "output": {
-    "tag": "forge:gears/nickel"
+    "tag": "c:gears/nickel"
   },
   "stamp": {
     "item": "embers_reborn:gear_stamp"

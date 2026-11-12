@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:storage_blocks/bronze"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:storage_blocks/bronze"
+    "tag": "c:storage_blocks/bronze"
   },
   "output": {
     "amount": 810,
-    "tag": "forge:molten_bronze"
+    "tag": "c:molten_bronze"
   }
 }

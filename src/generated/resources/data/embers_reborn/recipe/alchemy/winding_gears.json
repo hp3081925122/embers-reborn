@@ -14,16 +14,16 @@
   },
   "inputs": [
     {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     },
     {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     },
     {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     },
     {
-      "tag": "forge:plates/dawnstone"
+      "tag": "c:plates/dawnstone"
     }
   ],
   "output": {
@@ -31,6 +31,6 @@
     "id": "embers_reborn:winding_gears"
   },
   "tablet": {
-    "tag": "forge:ingots/dawnstone"
+    "tag": "c:ingots/dawnstone"
   }
 }

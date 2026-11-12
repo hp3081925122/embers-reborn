@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "X": {
-      "tag": "forge:raw_materials/lead"
+      "tag": "c:raw_materials/lead"
     },
     "Y": {
       "item": "embers_reborn:raw_lead"

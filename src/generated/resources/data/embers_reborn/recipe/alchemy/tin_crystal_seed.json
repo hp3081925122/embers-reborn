@@ -1,4 +1,25 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:and",
+      "values": [
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:ingots/tin"
+          }
+        },
+        {
+          "type": "neoforge:not",
+          "value": {
+            "type": "neoforge:tag_empty",
+            "tag": "c:nuggets/tin"
+          }
+        }
+      ]
+    }
+  ],
   "type": "embers_reborn:alchemy",
   "aspects": [
     {
@@ -14,13 +35,13 @@
   },
   "inputs": [
     {
-      "tag": "forge:ingots/tin"
+      "tag": "c:ingots/tin"
     },
     {
-      "tag": "forge:ingots/tin"
+      "tag": "c:ingots/tin"
     },
     {
-      "tag": "forge:ingots/tin"
+      "tag": "c:ingots/tin"
     }
   ],
   "output": {

@@ -110,7 +110,8 @@ public class ItemTransferBlockEntity extends ItemPipeBlockEntityBase {
 	}
 
 	private void writeFilter(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		nbt.put("filter", (net.minecraft.nbt.CompoundTag) filterItem.save(provider));
+		// ItemStack.save throws on an empty stack (no filter set); saveOptional writes an empty tag instead
+		nbt.put("filter", filterItem.saveOptional(provider));
 	}
 
 	public void setupFilter() {

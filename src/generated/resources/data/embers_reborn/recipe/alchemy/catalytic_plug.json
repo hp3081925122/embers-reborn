@@ -28,6 +28,6 @@
     "id": "embers_reborn:catalytic_plug"
   },
   "tablet": {
-    "tag": "forge:ingots/silver"
+    "tag": "c:ingots/silver"
   }
 }

@@ -3,10 +3,10 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:ingots/lead"
+      "tag": "c:ingots/lead"
     },
     {
-      "tag": "forge:ingots/lead"
+      "tag": "c:ingots/lead"
     },
     {
       "tag": "embers_reborn:tinker_hammer"

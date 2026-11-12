@@ -82,6 +82,13 @@ public class AlchemyHintItem extends Item {
 		return items;
 	}
 
+	/** @return per-slot correctness recorded on the note, or null for notes made with slot hints disabled */
+	public static byte[] getCorrect(ItemStack stack) {
+		if (_hasTag(stack) && _getTag(stack).contains("correct"))
+			return _getTag(stack).getByteArray("correct");
+		return null;
+	}
+
 	public static ItemStack getResult(ItemStack stack) {
 		if (_hasTag(stack) && _getTag(stack).contains("result")) {
 			return ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, _getTag(stack).getCompound("result")).orElse(ItemStack.EMPTY);

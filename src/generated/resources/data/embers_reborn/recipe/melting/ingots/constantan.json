@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/constantan"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:ingots/constantan"
+    "tag": "c:ingots/constantan"
   },
   "output": {
     "amount": 90,
-    "tag": "forge:molten_constantan"
+    "tag": "c:molten_constantan"
   }
 }

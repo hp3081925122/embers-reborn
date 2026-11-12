@@ -132,7 +132,8 @@ public class FluidRenderer {
 
 		// if rotating by 90 or 270, swap U and V
 		float minU, maxU, minV, maxV;
-		double size = flowing ? 8 : 16;
+		// 1.21 TextureAtlasSprite.getU/getV take a 0..1 fraction of the sprite (1.20.1 took 0..16 pixels)
+		double size = flowing ? 0.5 : 1;
 		if ((rotation % 180) == 90) {
 			minU = sprite.getU((float)(v1 * size));
 			maxU = sprite.getU((float)(v2 * size));

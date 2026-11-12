@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "X": {
-      "tag": "forge:nuggets/dawnstone"
+      "tag": "c:nuggets/dawnstone"
     },
     "Y": {
       "item": "embers_reborn:dawnstone_nugget"

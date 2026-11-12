@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 public interface IResearchCapability {
 	void setCheckmark(ResourceLocation research, boolean checked);
 	boolean isChecked(ResourceLocation research);
+	boolean hasCheckmark(ResourceLocation research);
 	Map<ResourceLocation, Boolean> getCheckmarks();
 	void writeToNBT(CompoundTag tag);
 	void readFromNBT(CompoundTag tag);

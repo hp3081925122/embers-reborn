@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:gears/brass"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:gears/brass"
+    "tag": "c:gears/brass"
   },
   "output": {
     "amount": 180,
-    "tag": "forge:molten_brass"
+    "tag": "c:molten_brass"
   }
 }

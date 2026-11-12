@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/invar"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:nuggets/invar"
+    "tag": "c:nuggets/invar"
   },
   "output": {
     "amount": 10,
-    "tag": "forge:molten_invar"
+    "tag": "c:molten_invar"
   }
 }

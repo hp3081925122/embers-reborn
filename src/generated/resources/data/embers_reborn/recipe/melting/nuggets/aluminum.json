@@ -1,10 +1,19 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/aluminum"
+      }
+    }
+  ],
   "type": "embers_reborn:melting",
   "input": {
-    "tag": "forge:nuggets/aluminum"
+    "tag": "c:nuggets/aluminum"
   },
   "output": {
     "amount": 10,
-    "tag": "forge:molten_aluminum"
+    "tag": "c:molten_aluminum"
   }
 }

@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "X": {
-      "tag": "forge:nuggets/silver"
+      "tag": "c:nuggets/silver"
     },
     "Y": {
       "item": "embers_reborn:silver_nugget"
