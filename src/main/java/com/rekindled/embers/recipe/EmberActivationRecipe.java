@@ -44,6 +44,7 @@ public class EmberActivationRecipe implements IEmberActivationRecipe {
 	public int process(net.minecraft.world.item.crafting.RecipeInput context) {
 		for (int i = 0; i < context.size(); i++) {
 			if (ingredient.test(context.getItem(i))) {
+				context.getItem(i).shrink(1);
 				break;
 			}
 		}

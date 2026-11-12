@@ -55,7 +55,7 @@ public class HearthCoilBlock extends BaseEntityBlock implements SimpleWaterlogge
 			}
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity != null) {
-				IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
+				IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(level, blockEntity.getBlockPos(), state, blockEntity, null);
 				if (handler != null) {
 					Misc.spawnInventoryInWorld(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, handler);
 					level.updateNeighbourForOutputSignal(pos, this);

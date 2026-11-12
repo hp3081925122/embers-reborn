@@ -70,6 +70,7 @@ public class StampingRecipe implements IStampingRecipe {
 	public ItemStack assemble(StampingContext context, net.minecraft.core.HolderLookup.Provider registry) {
 		for (int i = 0; i < context.size(); i++) {
 			if (input.test(context.getItem(i))) {
+				context.getItem(i).shrink(1);
 				break;
 			}
 		}

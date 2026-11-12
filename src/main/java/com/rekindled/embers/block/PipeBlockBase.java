@@ -293,7 +293,7 @@ public abstract class PipeBlockBase extends BaseEntityBlock implements SimpleWat
 		if (!pState.is(pNewState.getBlock())) {
 			BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
 			if (blockEntity != null) {
-				IItemHandler handler = pLevel.getCapability(Capabilities.ItemHandler.BLOCK, pPos, null);
+				IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(pLevel, pPos, pState, blockEntity, null);
 				if (handler != null) {
 					Misc.spawnInventoryInWorld(pLevel, pPos.getX() + 0.5, pPos.getY() + 0.5, pPos.getZ() + 0.5, handler);
 					pLevel.updateNeighbourForOutputSignal(pPos, this);

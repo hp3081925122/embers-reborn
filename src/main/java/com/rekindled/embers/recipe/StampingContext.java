@@ -12,7 +12,8 @@ public class StampingContext implements net.minecraft.world.item.crafting.Recipe
 	public ItemStack stamp;
 
 	public StampingContext(IItemHandlerModifiable inv, IFluidHandler fluids, ItemStack stamp) {
-				this.fluids = fluids;
+		this.items = inv;
+		this.fluids = fluids;
 		this.stamp = stamp;
 	}
 	public net.neoforged.neoforge.items.IItemHandlerModifiable items;

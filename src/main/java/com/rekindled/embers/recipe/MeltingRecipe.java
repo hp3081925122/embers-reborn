@@ -57,6 +57,7 @@ public class MeltingRecipe implements IMeltingRecipe {
 	public FluidStack process(net.minecraft.world.item.crafting.RecipeInput context) {
 		for (int i = 0; i < context.size(); i++) {
 			if (ingredient.test(context.getItem(i))) {
+				context.getItem(i).shrink(1);
 				break;
 			}
 		}

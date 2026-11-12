@@ -65,26 +65,19 @@ public class FluidVesselBlock extends AbstractCauldronBlock implements EntityBlo
 	}
 
 	@Override
-	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-		if (level.getBlockEntity(pos) instanceof FluidVesselBlockEntity vesselEntity) {
-		InteractionHand hand = InteractionHand.MAIN_HAND;
-			ItemStack heldItem = player.getItemInHand(hand);
-			if (!heldItem.isEmpty()) {
-				IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, vesselEntity.getBlockPos(), hit.getDirection());
-				if (cap != null) {
-					boolean didFill = FluidUtil.interactWithFluidHandler(player, hand, cap);
-
-					if (didFill) {
-						return InteractionResult.SUCCESS;
-					}
-				}
-				//prevent buckets from placing their fluid in the world when clicking on the vessel
-				if (net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(heldItem).isPresent()) {
-					return InteractionResult.CONSUME_PARTIAL;
-				}
+	public net.minecraft.world.ItemInteractionResult useItemOn(ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		//handled here instead of falling through to AbstractCauldronBlock, which would turn the vessel into a vanilla cauldron
+		if (level.getBlockEntity(pos) instanceof FluidVesselBlockEntity vesselEntity && !heldItem.isEmpty()) {
+			IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, vesselEntity.getBlockPos(), hit.getDirection());
+			if (cap != null && FluidUtil.interactWithFluidHandler(player, hand, cap)) {
+				return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide);
+			}
+			//prevent buckets from placing their fluid in the world when clicking on the vessel
+			if (FluidUtil.getFluidHandler(heldItem).isPresent()) {
+				return net.minecraft.world.ItemInteractionResult.CONSUME_PARTIAL;
 			}
 		}
-		return InteractionResult.PASS;
+		return net.minecraft.world.ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 
 	@Override

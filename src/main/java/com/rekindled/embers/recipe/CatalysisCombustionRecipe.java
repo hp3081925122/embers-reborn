@@ -55,6 +55,7 @@ public class CatalysisCombustionRecipe implements ICatalysisCombustionRecipe {
 	public int process(CatalysisCombustionContext context) {
 		for (int i = 0; i < context.size(); i++) {
 			if (ingredient.test(context.getItem(i))) {
+				context.getItem(i).shrink(1);
 				break;
 			}
 		}
