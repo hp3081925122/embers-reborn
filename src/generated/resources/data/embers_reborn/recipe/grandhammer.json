@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "tag": "forge:storage_blocks/dawnstone"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "I": {
+      "tag": "forge:ingots/dawnstone"
+    },
+    "W": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "BIB",
+    " C ",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:grandhammer"
+  }
+}

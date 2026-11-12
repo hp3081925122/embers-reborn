@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "tag": "forge:plates/dawnstone"
+    },
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "I": {
+      "tag": "forge:ingots/lead"
+    },
+    "S": {
+      "item": "embers_reborn:ember_crystal_cluster"
+    }
+  },
+  "pattern": [
+    " CI",
+    "GSG",
+    " G "
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:ember_bulb"
+  }
+}

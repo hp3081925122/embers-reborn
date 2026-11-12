@@ -1,0 +1,6 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle": "embers_reborn:block/caminite_bricks"
+	}
+}

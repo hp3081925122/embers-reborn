@@ -1,0 +1,33 @@
+{
+  "type": "embers_reborn:alchemy",
+  "aspects": [
+    {
+      "tag": "embers_reborn:aspectus/dawnstone"
+    },
+    {
+      "tag": "embers_reborn:aspectus/lead"
+    }
+  ],
+  "failure": {
+    "count": 1,
+    "id": "embers_reborn:alchemical_waste"
+  },
+  "inputs": [
+    {
+      "item": "embers_reborn:archaic_brick"
+    },
+    {
+      "item": "embers_reborn:archaic_brick"
+    },
+    {
+      "item": "embers_reborn:archaic_brick"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:ancient_motive_core"
+  },
+  "tablet": {
+    "item": "embers_reborn:ember_shard"
+  }
+}

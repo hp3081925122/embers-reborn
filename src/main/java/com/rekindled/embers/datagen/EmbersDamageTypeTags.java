@@ -18,7 +18,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class EmbersDamageTypeTags extends TagsProvider<DamageType> {
 
-	public static final TagKey<DamageType> INFLICTOR_GEM_BLACKLIST = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<DamageType> INFLICTOR_GEM_BLACKLIST = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "inflictor_gem_blacklist"));
 	public static final TagKey<DamageType> HOLY_DAMAGE = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath("consecration", "holy"));
 
 	public EmbersDamageTypeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {

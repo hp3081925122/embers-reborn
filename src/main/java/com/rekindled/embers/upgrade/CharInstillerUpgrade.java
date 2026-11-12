@@ -20,7 +20,7 @@ public class CharInstillerUpgrade extends DefaultUpgradeProvider {
 	protected static Random random = new Random();
 
 	public CharInstillerUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "char_instiller"), tile);
 	}
 
 	@Override

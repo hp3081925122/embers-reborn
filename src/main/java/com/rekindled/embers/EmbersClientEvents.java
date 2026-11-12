@@ -110,7 +110,7 @@ public class EmbersClientEvents {
 		ticks = 0;
 	}
 
-	public static void onClientTick(ClientTickEvent.Post event) {
+	public static void onClientTick(ClientTickEvent.Pre event) {
 		if (true) {
 			Minecraft mc = Minecraft.getInstance();
 			if (!mc.isPaused()) {

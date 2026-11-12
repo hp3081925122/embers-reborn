@@ -1,0 +1,11 @@
+{
+  "type": "embers_reborn:mixing",
+  "inputs": [
+    "{\"tag\":\"forge:molten_iron\",\"amount\":2}",
+    "{\"tag\":\"forge:molten_nickel\",\"amount\":1}"
+  ],
+  "output": {
+    "amount": 3,
+    "tag": "forge:molten_invar"
+  }
+}

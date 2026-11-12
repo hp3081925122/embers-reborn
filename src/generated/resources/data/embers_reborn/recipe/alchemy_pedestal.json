@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "forge:storage_blocks/copper"
+    },
+    "C": {
+      "item": "embers_reborn:ember_crystal"
+    },
+    "D": {
+      "tag": "forge:plates/dawnstone"
+    },
+    "I": {
+      "tag": "forge:ingots/dawnstone"
+    },
+    "S": {
+      "item": "embers_reborn:caminite_bricks"
+    }
+  },
+  "pattern": [
+    "D D",
+    "ICI",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:alchemy_pedestal"
+  }
+}

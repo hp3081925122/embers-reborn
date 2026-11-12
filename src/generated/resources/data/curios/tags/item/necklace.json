@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "embers_reborn:ember_amulet",
+      "required": false
+    },
+    {
+      "id": "embers_reborn:ashen_amulet",
+      "required": false
+    },
+    {
+      "id": "embers_reborn:nonbeliever_amulet",
+      "required": false
+    }
+  ]
+}

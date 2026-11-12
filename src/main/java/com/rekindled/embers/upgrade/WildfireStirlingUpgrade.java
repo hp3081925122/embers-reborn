@@ -22,7 +22,7 @@ public class WildfireStirlingUpgrade extends DefaultUpgradeProvider {
 	}
 
 	public WildfireStirlingUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "wildfire_stirling"), tile);
 	}
 
 	public static double getMultiplier(double multiplier, int distance, int count) {

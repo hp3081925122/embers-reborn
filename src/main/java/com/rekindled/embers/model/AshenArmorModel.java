@@ -26,10 +26,10 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 public class AshenArmorModel extends HumanoidModel<LivingEntity> {
 
-	public static final ModelLayerLocation ASHEN_ARMOR_HEAD = new ModelLayerLocation(ResourceLocation.parse(Embers.MODID + ":empty"), "head");
-	public static final ModelLayerLocation ASHEN_ARMOR_CHEST = new ModelLayerLocation(ResourceLocation.parse(Embers.MODID + ":empty"), "chest");
-	public static final ModelLayerLocation ASHEN_ARMOR_LEGS = new ModelLayerLocation(ResourceLocation.parse(Embers.MODID + ":empty"), "legs");
-	public static final ModelLayerLocation ASHEN_ARMOR_FEET = new ModelLayerLocation(ResourceLocation.parse(Embers.MODID + ":empty"), "feet");
+	public static final ModelLayerLocation ASHEN_ARMOR_HEAD = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "head");
+	public static final ModelLayerLocation ASHEN_ARMOR_CHEST = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "chest");
+	public static final ModelLayerLocation ASHEN_ARMOR_LEGS = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "legs");
+	public static final ModelLayerLocation ASHEN_ARMOR_FEET = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "feet");
 
 	public static final Map<EquipmentSlot, AshenArmorModel> ARMOR_MODELS = new EnumMap<>(EquipmentSlot.class);
 	public static final IClientItemExtensions ARMOR_MODEL_GETTER = new IClientItemExtensions() {

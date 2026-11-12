@@ -49,7 +49,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class ShiftingScalesAugment extends AugmentBase {
 
 	public static final ResourceLocation TEXTURE_HUD = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/icons.png");
-	public static final ResourceLocation SCALES = ResourceLocation.parse(Embers.MODID + ":empty");
+	public static final ResourceLocation SCALES = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "scales");
 
 	//Server
 	public static final int COOLDOWN = 33;
@@ -105,7 +105,7 @@ public class ShiftingScalesAugment extends AugmentBase {
 	}
 
 	@SubscribeEvent
-	public void onServerTick(ServerTickEvent event) {
+	public void onServerTick(ServerTickEvent.Pre event) {
 		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
 			for (UUID uuid : cooldownTicksServer.keySet()) {
 				int ticks = cooldownTicksServer.get(uuid) - 1;
@@ -115,8 +115,8 @@ public class ShiftingScalesAugment extends AugmentBase {
 	}
 
 	@SubscribeEvent
-	public void onUpdate(net.neoforged.neoforge.event.entity.living.LivingEvent event) {
-		LivingEntity entity = event.getEntity();
+	public void onUpdate(net.neoforged.neoforge.event.tick.EntityTickEvent.Pre event) {
+		if (!(event.getEntity() instanceof LivingEntity entity)) return;
 
 		if (!entity.level().isClientSide()) {
 			UUID uuid = entity.getUUID();
@@ -205,7 +205,7 @@ public class ShiftingScalesAugment extends AugmentBase {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
-	public void onClientTick(ClientTickEvent.Post event) {
+	public void onClientTick(ClientTickEvent.Pre event) {
 		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
 			Iterator<ShardParticle> iterator = shards.iterator();
 			while (iterator.hasNext()) {
@@ -306,7 +306,7 @@ public class ShiftingScalesAugment extends AugmentBase {
 		void readFromNBT(CompoundTag tag);
 	}
 
-	public static class DefaultScalesCapability implements IScalesCapability {
+	public static class DefaultScalesCapability implements IScalesCapability, INBTSerializable<CompoundTag> {
 		public double scales = -1;
 
 		@Override
@@ -327,6 +327,18 @@ public class ShiftingScalesAugment extends AugmentBase {
 		@Override
 		public void readFromNBT(CompoundTag tag) {
 			scales = tag.getDouble("scales");
+		}
+
+		@Override
+		public CompoundTag serializeNBT(net.minecraft.core.HolderLookup.Provider provider) {
+			CompoundTag tag = new CompoundTag();
+			writeToNBT(tag);
+			return tag;
+		}
+
+		@Override
+		public void deserializeNBT(net.minecraft.core.HolderLookup.Provider provider, CompoundTag tag) {
+			readFromNBT(tag);
 		}
 	}
 

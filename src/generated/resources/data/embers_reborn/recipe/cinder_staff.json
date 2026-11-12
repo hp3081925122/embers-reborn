@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "item": "embers_reborn:ember_shard"
+    },
+    "I": {
+      "tag": "forge:ingots/dawnstone"
+    },
+    "S": {
+      "tag": "forge:plates/silver"
+    },
+    "W": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "SES",
+    "IWI",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:cinder_staff"
+  }
+}

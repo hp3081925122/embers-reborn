@@ -94,7 +94,7 @@ public class AnvilRepairMateriaRecipe implements IDawnstoneAnvilRecipe, IVisuall
 		}
 		@Override
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AnvilRepairMateriaRecipe> streamCodec() {
-			return net.minecraft.network.codec.StreamCodec.unit(new AnvilRepairMateriaRecipe(null));
+			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new AnvilRepairMateriaRecipe(null));
 		}
 	}
 	@Override

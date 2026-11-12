@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "forge:plates/iron"
+    },
+    "P": {
+      "item": "embers_reborn:sealed_planks"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "I I",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:char_instiller"
+  }
+}

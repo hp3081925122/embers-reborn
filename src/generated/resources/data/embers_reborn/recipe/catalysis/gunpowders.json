@@ -1,0 +1,11 @@
+{
+  "type": "embers_reborn:catalysis_combustion",
+  "burn_time": 400,
+  "input": {
+    "tag": "c:gunpowders"
+  },
+  "machine": {
+    "item": "embers_reborn:catalysis_chamber"
+  },
+  "multiplier": 3.0
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "embers_reborn:caminite_bricks"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "S": {
+      "tag": "forge:plates/silver"
+    },
+    "W": {
+      "item": "embers_reborn:wildfire_core"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CWC",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:ignem_reactor"
+  }
+}

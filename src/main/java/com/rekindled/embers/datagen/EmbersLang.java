@@ -317,6 +317,8 @@ public class EmbersLang extends LanguageProvider {
 		add("death.attack.ember", "%1$s was incinerated");
 		add("death.attack.ember.player", "%1$s was incinerated by %2$s");
 		add("death.attack.ember.item", "%1$s was incinerated by %2$s using %3$s");
+		add("subtitles." + Embers.MODID + ".block.wildfire_stirling.start", "Wildfire Stirling starts");
+		add("subtitles." + Embers.MODID + ".block.wildfire_stirling.stop", "Wildfire Stirling stops");
 
 		add(Embers.MODID + ".decimal_format.ember", "0.#");
 		add(Embers.MODID + ".tooltip.emberdial.ember", "Ember: %s/%s");

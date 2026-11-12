@@ -22,56 +22,56 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class EmbersBlockTags extends BlockTagsProvider {
 
-	public static final TagKey<Block> EMITTER_CONNECTION = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> EMITTER_CONNECTION = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "emitter_connection"));
 	public static final TagKey<Block> EMITTER_CONNECTION_FLOOR = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "emitter_connection/floor"));
 	public static final TagKey<Block> EMITTER_CONNECTION_CEILING = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "emitter_connection/ceiling"));
 
-	public static final TagKey<Block> ITEM_PIPE_CONNECTION = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> ITEM_PIPE_CONNECTION = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item_pipe_connection"));
 	public static final TagKey<Block> ITEM_PIPE_CONNECTION_TOGGLEABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item_pipe_connection/toggleable"));
 
-	public static final TagKey<Block> FLUID_PIPE_CONNECTION = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> FLUID_PIPE_CONNECTION = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "fluid_pipe_connection"));
 	public static final TagKey<Block> FLUID_PIPE_CONNECTION_TOGGLEABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "fluid_pipe_connection/toggleable"));
 
 	public static final TagKey<Block> RELOCATION_NOT_SUPPORTED = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "relocation_not_supported"));
 
-	public static final TagKey<Block> MECH_CORE_PROXYABLE = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> MECH_CORE_PROXYABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mech_core_proxyable"));
 	public static final TagKey<Block> MECH_CORE_PROXYABLE_BOTTOM = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mech_core_proxyable/bottom"));
 	public static final TagKey<Block> MECH_CORE_PROXYABLE_TOP = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mech_core_proxyable/top"));
 
-	public static final TagKey<Block> HEAT_SOURCES = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> HEAT_SOURCES = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "heat_sources"));
 
-	public static final TagKey<Block> RESERVOIR_EXPANSION = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> RESERVOIR_END = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> RESERVOIR_CAP = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> RESERVOIR_EXPANSION = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "reservoir_expansion"));
+	public static final TagKey<Block> RESERVOIR_END = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "reservoir_end"));
+	public static final TagKey<Block> RESERVOIR_CAP = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "reservoir_cap"));
 
-	public static final TagKey<Block> CHAMBER_CONNECTION = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> CHAMBER_CONNECTION = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "chamber_connection"));
 
-	public static final TagKey<Block> DIAL = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> DIAL = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "dial"));
 
-	public static final TagKey<Block> EMBER_WRONG_INPUT_HINTER = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> EMBER_WRONG_INPUT_HINTER = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "wrong_input_hinter"));
 
 	public static final TagKey<Block> MINABLE_WITH_PICKAXE_SHOVEL = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mineable/pickaxe_shovel"));
 	public static final TagKey<Block> MINABLE_WITH_HAMMER = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mineable/hammer"));
 
-	public static final TagKey<Block> NEEDS_LEAD_TOOL = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> NEEDS_TYRFING = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> NEEDS_SILVER_TOOL = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> NEEDS_DAWNSTONE_TOOL = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> NEEDS_CLOCKWORK_TOOL = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> NEEDS_CLOCKWORK_HAMMER = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> NEEDS_LEAD_TOOL = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "needs_lead_tool"));
+	public static final TagKey<Block> NEEDS_TYRFING = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "needs_tyrfing"));
+	public static final TagKey<Block> NEEDS_SILVER_TOOL = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "needs_silver_tool"));
+	public static final TagKey<Block> NEEDS_DAWNSTONE_TOOL = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "needs_dawnstone_tool"));
+	public static final TagKey<Block> NEEDS_CLOCKWORK_TOOL = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "needs_clockwork_tool"));
+	public static final TagKey<Block> NEEDS_CLOCKWORK_HAMMER = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "needs_clockwork_hammer"));
 
 	public static final TagKey<Block> EMBER_CONSUMPTION_UPGRADEABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "upgradeable_with/consumption_multiplier"));
 	public static final TagKey<Block> EMBER_PRODUCTION_UPGRADEABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "upgradeable_with/production_multiplier"));
 	public static final TagKey<Block> SPEED_UPGRADEABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "upgradeable_with/speed_multiplier"));
 
 	//tags shared with items
-	public static final TagKey<Block> WORLD_BOTTOM = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> SNOW = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> WORLD_BOTTOM = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "world_bottom"));
+	public static final TagKey<Block> SNOW = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "snow"));
 
-	public static final TagKey<Block> PRISTINE_COPPER = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> EXPOSED_COPPER = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> WEATHERED_COPPER = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Block> OXIDIZED_COPPER = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> PRISTINE_COPPER = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pristine_copper"));
+	public static final TagKey<Block> EXPOSED_COPPER = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "exposed_copper"));
+	public static final TagKey<Block> WEATHERED_COPPER = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "weathered_copper"));
+	public static final TagKey<Block> OXIDIZED_COPPER = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "oxidized_copper"));
 
 	public static final TagKey<Block> LEAD_ORE = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ores/lead"));
 	public static final TagKey<Block> RAW_LEAD_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/raw_lead"));
@@ -84,7 +84,7 @@ public class EmbersBlockTags extends BlockTagsProvider {
 	public static final TagKey<Block> DAWNSTONE_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/dawnstone"));
 	public static final TagKey<Block> MITHRIL_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/dwarven_mithril"));
 
-	public static final TagKey<Block> CRYSTAL_SEEDS = BlockTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Block> CRYSTAL_SEEDS = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds"));
 	public static final TagKey<Block> COPPER_SEED = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/copper"));
 	public static final TagKey<Block> IRON_SEED = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/iron"));
 	public static final TagKey<Block> GOLD_SEED = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/gold"));

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "forge:ingots/lead"
+    },
+    "L": {
+      "item": "embers_reborn:item_pipe"
+    },
+    "P": {
+      "tag": "forge:plates/lead"
+    }
+  },
+  "pattern": [
+    "PLP",
+    "ILI",
+    "I I"
+  ],
+  "result": {
+    "count": 3,
+    "id": "embers_reborn:item_transfer"
+  }
+}

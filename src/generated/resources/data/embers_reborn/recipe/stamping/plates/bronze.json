@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:stamping",
+  "fluid": "{\"tag\":\"forge:molten_bronze\",\"amount\":90}",
+  "output": {
+    "tag": "forge:plates/bronze"
+  },
+  "stamp": {
+    "item": "embers_reborn:plate_stamp"
+  }
+}

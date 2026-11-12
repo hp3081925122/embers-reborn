@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 public class FilterSieve implements IFilter {
-	public static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.parse(Embers.MODID + ":empty");
+	public static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "sieve");
 
 	private ItemStack stack1;
 	private ItemStack stack2;

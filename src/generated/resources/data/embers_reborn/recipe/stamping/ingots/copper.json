@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:stamping",
+  "fluid": "{\"tag\":\"forge:molten_copper\",\"amount\":90}",
+  "output": {
+    "tag": "forge:ingots/copper"
+  },
+  "stamp": {
+    "item": "embers_reborn:ingot_stamp"
+  }
+}

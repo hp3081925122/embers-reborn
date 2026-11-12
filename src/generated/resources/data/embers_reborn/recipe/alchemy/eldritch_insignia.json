@@ -1,0 +1,39 @@
+{
+  "type": "embers_reborn:alchemy",
+  "aspects": [
+    {
+      "tag": "embers_reborn:aspectus/dawnstone"
+    },
+    {
+      "tag": "embers_reborn:aspectus/lead"
+    },
+    {
+      "tag": "embers_reborn:aspectus/iron"
+    }
+  ],
+  "failure": {
+    "count": 1,
+    "id": "embers_reborn:alchemical_waste"
+  },
+  "inputs": [
+    {
+      "tag": "minecraft:coals"
+    },
+    {
+      "tag": "forge:ingots/archaic_brick"
+    },
+    {
+      "tag": "minecraft:coals"
+    },
+    {
+      "tag": "forge:ingots/archaic_brick"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:eldritch_insignia"
+  },
+  "tablet": {
+    "item": "embers_reborn:archaic_circuit"
+  }
+}

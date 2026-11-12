@@ -1,0 +1,33 @@
+{
+  "type": "embers_reborn:alchemy",
+  "aspects": [
+    {
+      "tag": "embers_reborn:aspectus/iron"
+    },
+    {
+      "tag": "embers_reborn:aspectus/silver"
+    }
+  ],
+  "failure": {
+    "count": 1,
+    "id": "embers_reborn:alchemical_waste"
+  },
+  "inputs": [
+    {
+      "item": "minecraft:soul_sand"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
+  "output": {
+    "count": 5,
+    "id": "embers_reborn:archaic_brick"
+  },
+  "tablet": {
+    "item": "embers_reborn:archaic_brick"
+  }
+}

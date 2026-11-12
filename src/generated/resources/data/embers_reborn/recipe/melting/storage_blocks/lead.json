@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:melting",
+  "input": {
+    "tag": "forge:storage_blocks/lead"
+  },
+  "output": {
+    "amount": 810,
+    "tag": "forge:molten_lead"
+  }
+}

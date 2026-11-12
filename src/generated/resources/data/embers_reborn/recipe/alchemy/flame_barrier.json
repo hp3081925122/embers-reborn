@@ -1,0 +1,39 @@
+{
+  "type": "embers_reborn:alchemy",
+  "aspects": [
+    {
+      "tag": "embers_reborn:aspectus/dawnstone"
+    },
+    {
+      "tag": "embers_reborn:aspectus/silver"
+    },
+    {
+      "tag": "embers_reborn:aspectus/copper"
+    }
+  ],
+  "failure": {
+    "count": 1,
+    "id": "embers_reborn:alchemical_waste"
+  },
+  "inputs": [
+    {
+      "tag": "forge:plates/dawnstone"
+    },
+    {
+      "tag": "forge:plates/dawnstone"
+    },
+    {
+      "tag": "forge:plates/dawnstone"
+    },
+    {
+      "tag": "forge:ingots/silver"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:flame_barrier"
+  },
+  "tablet": {
+    "item": "embers_reborn:ember_crystal"
+  }
+}

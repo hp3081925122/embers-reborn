@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "embers_reborn:item/ember_jar_glass",
+    "layer1": "embers_reborn:item/ember_jar_glass_shine",
+    "layer2": "embers_reborn:item/ember_jar"
+  }
+}

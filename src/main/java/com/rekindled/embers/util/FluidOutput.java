@@ -13,21 +13,23 @@ import net.neoforged.neoforge.fluids.FluidStack;
 public class FluidOutput {
 
 	public static final com.mojang.serialization.Codec<FluidOutput> CODEC =
-		com.mojang.serialization.Codec.withAlternative(
+		com.mojang.serialization.Codec.either(
 			// tag + amount form
-			com.mojang.serialization.codecs.RecordCodecBuilder.create(inst -> inst.group(
+			com.mojang.serialization.codecs.RecordCodecBuilder.<FluidOutput>create(inst -> inst.group(
 				net.minecraft.resources.ResourceLocation.CODEC.fieldOf("tag").forGetter(o -> o.tag.location()),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("amount", 1).forGetter(o -> o.amount)
 			).apply(inst, (tag, amt) -> new FluidOutput(net.minecraft.tags.FluidTags.create(tag), amt))),
 			// fluid + amount form (FluidStack-like)
-			net.neoforged.neoforge.fluids.FluidStack.CODEC.xmap(FluidOutput::new, FluidOutput::getStack));
+			net.neoforged.neoforge.fluids.FluidStack.CODEC.xmap(FluidOutput::new, o -> o.stack))
+		.xmap(e -> e.map(o -> o, o -> o),
+			o -> o.tag != null ? com.mojang.datafixers.util.Either.left(o) : com.mojang.datafixers.util.Either.right(o));
 
 	public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, FluidOutput> STREAM_CODEC =
 		net.minecraft.network.codec.StreamCodec.of(
 			(buf, o) -> o.toNetwork(buf),
 			buf -> FluidOutput.fromNetwork(buf));
 
-	public static final FluidOutput EMPTY = new FluidOutput(net.minecraft.tags.FluidTags.create(net.minecraft.resources.ResourceLocation.parse(com.rekindled.embers.Embers.MODID + ":empty")), -1);
+	public static final FluidOutput EMPTY = new FluidOutput(net.minecraft.tags.FluidTags.create(net.minecraft.resources.ResourceLocation.withDefaultNamespace("empty")), -1);
 
 	public FluidStack stack = FluidStack.EMPTY;
 	public TagKey<Fluid> tag;

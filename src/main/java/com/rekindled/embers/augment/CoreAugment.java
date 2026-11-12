@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 public class CoreAugment extends AugmentBase {
 
 	public CoreAugment() {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), 0.0);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "core"), 0.0);
 	}
 
 	@Override

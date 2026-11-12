@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "tag": "c:slimeballs"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PSP",
+    "PPP"
+  ],
+  "result": {
+    "count": 8,
+    "id": "embers_reborn:sealed_planks"
+  }
+}

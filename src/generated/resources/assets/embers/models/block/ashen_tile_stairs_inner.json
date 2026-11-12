@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "embers:block/ashen_tile",
-    "side": "embers:block/ashen_tile",
-    "top": "embers:block/ashen_tile"
-  }
-}

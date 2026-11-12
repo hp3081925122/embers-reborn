@@ -1,0 +1,13 @@
+{
+  "type": "embers_reborn:stamping",
+  "input": {
+    "item": "minecraft:gravel"
+  },
+  "output": {
+    "count": 1,
+    "id": "minecraft:sand"
+  },
+  "stamp": {
+    "item": "embers_reborn:flat_stamp"
+  }
+}

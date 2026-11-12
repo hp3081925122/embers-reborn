@@ -81,10 +81,12 @@ public class CopperCellBlock extends BaseEntityBlock implements SimpleWaterlogge
 			if (nbt != null) {
 				for (ItemStack stack : items) {
 					if (stack.getItem() == RegistryManager.COPPER_CELL_ITEM.get()) {
-						IEmberCapability cap = (blockentity instanceof CopperCellBlockEntity ccbe && ccbe.getLevel() != null) ? ccbe.getLevel().getCapability(EmbersCapabilities.EMBER_CAPABILITY, ccbe.getBlockPos(), null) : null;
+						// write the cell's stored ember onto the dropped item (was writing back into the block itself)
+						IEmberCapability cap = EmbersCapabilities.EMBER_ITEM_CAPABILITY.getCapability(stack, null);
+						IEmberCapability source = ((CopperCellBlockEntity) blockentity).capability;
 						if (cap != null) {
-							cap.setEmber(nbt.getDouble(IEmberCapability.EMBER));
-							cap.setEmberCapacity(nbt.getDouble(IEmberCapability.EMBER_CAPACITY));
+							cap.setEmberCapacity(source.getEmberCapacity());
+							cap.setEmber(source.getEmber());
 						}
 					}
 				}

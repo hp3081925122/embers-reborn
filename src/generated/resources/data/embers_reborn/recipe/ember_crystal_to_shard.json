@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "embers_reborn:ember_crystal"
+    }
+  ],
+  "result": {
+    "count": 6,
+    "id": "embers_reborn:ember_shard"
+  }
+}

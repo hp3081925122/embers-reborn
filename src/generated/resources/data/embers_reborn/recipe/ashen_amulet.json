@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "tag": "forge:dusts/ash"
+    },
+    "L": {
+      "tag": "c:leathers"
+    },
+    "N": {
+      "item": "embers_reborn:archaic_brick"
+    }
+  },
+  "pattern": [
+    " L ",
+    "L L",
+    "NCN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:ashen_amulet"
+  }
+}

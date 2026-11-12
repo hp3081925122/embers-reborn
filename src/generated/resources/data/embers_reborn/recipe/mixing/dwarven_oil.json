@@ -1,0 +1,11 @@
+{
+  "type": "embers_reborn:mixing",
+  "inputs": [
+    "{\"fluid\":\"embers_reborn:soul_crude\",\"amount\":10}",
+    "{\"fluid\":\"embers_reborn:dwarven_gas\",\"amount\":5}"
+  ],
+  "output": {
+    "amount": 30,
+    "id": "embers_reborn:dwarven_oil"
+  }
+}

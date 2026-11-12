@@ -1,0 +1,20 @@
+{
+  "values": [
+    "embers_reborn:lead_sword",
+    "embers_reborn:lead_shovel",
+    "embers_reborn:lead_pickaxe",
+    "embers_reborn:lead_axe",
+    "embers_reborn:lead_hoe",
+    "embers_reborn:silver_sword",
+    "embers_reborn:silver_shovel",
+    "embers_reborn:silver_pickaxe",
+    "embers_reborn:silver_axe",
+    "embers_reborn:silver_hoe",
+    "embers_reborn:dawnstone_sword",
+    "embers_reborn:dawnstone_shovel",
+    "embers_reborn:dawnstone_pickaxe",
+    "embers_reborn:dawnstone_axe",
+    "embers_reborn:dawnstone_hoe",
+    "#forge:tools/hammers"
+  ]
+}

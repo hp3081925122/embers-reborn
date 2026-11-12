@@ -199,6 +199,8 @@ public class Embers {
 		RegistryManager.RECIPE_SERIALIZERS.register(modEventBus);
 		RegistryManager.LOOT_MODIFIERS.register(modEventBus);
 		RegistryManager.INGREDIENT_TYPES.register(modEventBus);
+		RegistryManager.ATTACHMENT_TYPES.register(modEventBus);
+		RegistryManager.DATA_COMPONENTS.register(modEventBus);
 		RegistryManager.MENU_TYPES.register(modEventBus);
 		RegistryManager.STRUCTURE_TYPES.register(modEventBus);
 		RegistryManager.STRUCTURE_PROCESSOR_TYPES.register(modEventBus);
@@ -228,6 +230,13 @@ public class Embers {
 	}
 
 	public void registerCaps(RegisterCapabilitiesEvent event) {
+		// Item / fluid handlers (ported from the 1.20.1 getCapability overrides)
+		com.rekindled.embers.blockentity.BlockEntityCapabilities.register(event);
+		// Fluid Vessel item keeps its fluid (1.20.1 initCapabilities -> FluidHandlerItemStack)
+		event.registerItem(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM,
+			(stack, ctx) -> new net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack(RegistryManager.FLUID_CONTENT, stack, ConfigManager.FLUID_VESSEL_CAPACITY.get()),
+			RegistryManager.FLUID_VESSEL_ITEM.get());
+
 		// --- Item ember capabilities (Batch4) ---
 		// EmberJar (IInventoryEmberCell + IHeldEmberCell)
 		event.registerItem(com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_ITEM_CAPABILITY,
@@ -413,12 +422,15 @@ public class Embers {
 			});
 
 		// --- Player entity capabilities (Batch4) ---
+		// Backed by data attachments so the data is the same object every query and is saved with the entity
 		event.registerEntity(com.rekindled.embers.api.capabilities.EmbersCapabilities.RESEARCH_CAPABILITY,
 			net.minecraft.world.entity.EntityType.PLAYER,
-			(player, ctx) -> new com.rekindled.embers.research.capability.ResearchCapabilityProvider().getCapability());
-		event.registerEntity(com.rekindled.embers.api.capabilities.EmbersCapabilities.SCALES_CAPABILITY,
-			net.minecraft.world.entity.EntityType.PLAYER,
-			(player, ctx) -> new com.rekindled.embers.augment.ShiftingScalesAugment.ScalesCapabilityProvider().getCapability());
+			(player, ctx) -> player.getData(RegistryManager.RESEARCH_ATTACHMENT));
+		// 1.20.1 attached scales to every LivingEntity, not only players
+		for (net.minecraft.world.entity.EntityType<?> type : net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE) {
+			event.registerEntity(com.rekindled.embers.api.capabilities.EmbersCapabilities.SCALES_CAPABILITY, type,
+				(entity, ctx) -> entity instanceof net.minecraft.world.entity.LivingEntity ? entity.getData(RegistryManager.SCALES_ATTACHMENT) : null);
+		}
 	}
 
 	public void entityAttributes(EntityAttributeCreationEvent event) {
@@ -426,7 +438,7 @@ public class Embers {
 	}
 
 	public void spawnPlacements(RegisterSpawnPlacementsEvent event) {
-		// TODO: spawnPlacements API changed in 1.21.1
+		event.register(RegistryManager.ANCIENT_GOLEM.get(), net.minecraft.world.entity.SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
 	}
 
 	public void gatherData(GatherDataEvent event) {
@@ -466,15 +478,13 @@ public class Embers {
 	public void registerRecipeSerializers(RegisterEvent event) {
 		if (event.getRegistryKey().equals(Registries.RECIPE_SERIALIZER)) {
 
-			com.rekindled.embers.recipe.HeatIngredient.TYPE = RegistryManager.HEAT_INGREDIENT_TYPE.get();
-			com.rekindled.embers.recipe.AugmentIngredient.TYPE = RegistryManager.AUGMENT_INGREDIENT_TYPE.get();
 		}
 		if (event.getRegistryKey().equals(Registries.LOOT_CONDITION_TYPE)) {
 			event.register(Registries.LOOT_CONDITION_TYPE, ResourceLocation.fromNamespaceAndPath(MODID, "match_curio"), () -> MatchCurioLootCondition.LOOT_CONDITION_TYPE);
 		}
 	}
 
-	@net.neoforged.fml.common.EventBusSubscriber(modid = Embers.MODID, bus = net.neoforged.fml.common.EventBusSubscriber.Bus.MOD)
+	@net.neoforged.fml.common.EventBusSubscriber(modid = Embers.MODID, bus = net.neoforged.fml.common.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	public static class ClientModEvents {
 
 		@OnlyIn(Dist.CLIENT)
@@ -494,7 +504,7 @@ public class Embers {
 			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_OIL.FLUID_FLOW.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_GAS.FLUID.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_GAS.FLUID_FLOW.get(), RenderType.translucent());
-			event.enqueueWork(() -> ItemProperties.register(RegistryManager.INFLICTOR_GEM.get(), ResourceLocation.parse(Embers.MODID + ":empty"), (stack, level, entity, seed) -> {
+			event.enqueueWork(() -> ItemProperties.register(RegistryManager.INFLICTOR_GEM.get(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "charged"), (stack, level, entity, seed) -> {
 				return _getOrCreateTag(stack).contains("type") ? 1.0F : 0.0F;
 			}));
 		}

@@ -322,7 +322,7 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		BoilingRecipeBuilder.create(RegistryManager.DWARVEN_GAS.FLUID.get(), 1).folder(boilingFolder).input(RegistryManager.DWARVEN_OIL.FLUID.get(), 1).save(consumer);
 
 		//gaseous fuel
-		GaseousFuelRecipeBuilder.create(ResourceLocation.parse(Embers.MODID + ":empty")).input(EmbersFluidTags.STEAM, 1).folder(gaseousFuelFolder).burnTime(1).powerMultiplier(2.0).save(consumer);
+		GaseousFuelRecipeBuilder.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "steam")).input(EmbersFluidTags.STEAM, 1).folder(gaseousFuelFolder).burnTime(1).powerMultiplier(2.0).save(consumer);
 		GaseousFuelRecipeBuilder.create(RegistryManager.DWARVEN_GAS.FLUID.get(), 1).folder(gaseousFuelFolder).burnTime(5).powerMultiplier(2.5).save(consumer);
 
 		//catalysis and combustion
@@ -340,26 +340,26 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		GenericRecipeBuilder.create(new AnvilBreakdownRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_breakdown"))).save(consumer);
 		GenericRecipeBuilder.create(new AnvilAugmentRemoveRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_augment_remove"))).save(consumer);
 
-		AnvilAugmentRecipeBuilder.create(RegistryManager.CORE_AUGMENT).folder(anvilFolder).tool((net.minecraft.world.item.crafting.Ingredient)(Object)HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE), true)).input(RegistryManager.ANCIENT_MOTIVE_CORE.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.TINKER_LENS_AUGMENT).folder(anvilFolder).tool((net.minecraft.world.item.crafting.Ingredient)(Object)AugmentIngredient.of(DifferenceIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_HELMETS), Ingredient.of(EmbersItemTags.TINKER_LENS_HELMETS)), RegistryManager.TINKER_LENS_AUGMENT, true)).input(RegistryManager.TINKER_LENS.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.SMOKY_LENS_AUGMENT).folder(anvilFolder).tool((net.minecraft.world.item.crafting.Ingredient)(Object)AugmentIngredient.of(IntersectionIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_HELMETS), Ingredient.of(EmbersItemTags.TINKER_LENS_HELMETS)), RegistryManager.SMOKY_LENS_AUGMENT, true)).input(RegistryManager.SMOKY_TINKER_LENS.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.SUPERHEATER_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY).input(RegistryManager.SUPERHEATER.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.CINDER_JET_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY).input(RegistryManager.CINDER_JET.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.BLASTING_CORE_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY).input(RegistryManager.BLASTING_CORE.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.CASTER_ORB_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY).input(RegistryManager.CASTER_ORB.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.RESONATING_BELL_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY).input(RegistryManager.RESONATING_BELL.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.FLAME_BARRIER_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY).input(RegistryManager.FLAME_BARRIER.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.ELDRITCH_INSIGNIA_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY).input(RegistryManager.ELDRITCH_INSIGNIA.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.INTELLIGENT_APPARATUS_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY).input(RegistryManager.INTELLIGENT_APPARATUS.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.CORE_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE), true).toVanilla()).input(RegistryManager.ANCIENT_MOTIVE_CORE.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.TINKER_LENS_AUGMENT).folder(anvilFolder).tool(AugmentIngredient.of(DifferenceIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_HELMETS), Ingredient.of(EmbersItemTags.TINKER_LENS_HELMETS)), RegistryManager.TINKER_LENS_AUGMENT, true).toVanilla()).input(RegistryManager.TINKER_LENS.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.SMOKY_LENS_AUGMENT).folder(anvilFolder).tool(AugmentIngredient.of(IntersectionIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_HELMETS), Ingredient.of(EmbersItemTags.TINKER_LENS_HELMETS)), RegistryManager.SMOKY_LENS_AUGMENT, true).toVanilla()).input(RegistryManager.SMOKY_TINKER_LENS.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.SUPERHEATER_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_TOOLS)).toVanilla()).input(RegistryManager.SUPERHEATER.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.CINDER_JET_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_ARMORS)).toVanilla()).input(RegistryManager.CINDER_JET.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.BLASTING_CORE_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_TOOLS_AND_ARMORS)).toVanilla()).input(RegistryManager.BLASTING_CORE.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.CASTER_ORB_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_TOOLS)).toVanilla()).input(RegistryManager.CASTER_ORB.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.RESONATING_BELL_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_TOOLS)).toVanilla()).input(RegistryManager.RESONATING_BELL.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.FLAME_BARRIER_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_ARMORS)).toVanilla()).input(RegistryManager.FLAME_BARRIER.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.ELDRITCH_INSIGNIA_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_ARMORS)).toVanilla()).input(RegistryManager.ELDRITCH_INSIGNIA.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.INTELLIGENT_APPARATUS_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_ARMORS)).toVanilla()).input(RegistryManager.INTELLIGENT_APPARATUS.get()).save(consumer);
 		Ingredient projectileWeapons = Ingredient.of(EmbersItemTags.AUGMENTABLE_PROJECTILE_WEAPONS);
 		AnvilAugmentRecipeBuilder.create(RegistryManager.DIFFRACTION_BARREL_AUGMENT).folder(anvilFolder).tool(projectileWeapons).input(RegistryManager.DIFFRACTION_BARREL.get()).save(consumer);
 		AnvilAugmentRecipeBuilder.create(RegistryManager.FOCAL_LENS_AUGMENT).folder(anvilFolder).tool(projectileWeapons).input(RegistryManager.FOCAL_LENS.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.SHIFTING_SCALES_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY).input(RegistryManager.SHIFTING_SCALES.get()).save(consumer);
-		AnvilAugmentRecipeBuilder.create(RegistryManager.WINDING_GEARS_AUGMENT).folder(anvilFolder).tool(Ingredient.EMPTY);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.SHIFTING_SCALES_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_ARMORS)).toVanilla()).input(RegistryManager.SHIFTING_SCALES.get()).save(consumer);
+		AnvilAugmentRecipeBuilder.create(RegistryManager.WINDING_GEARS_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(net.neoforged.neoforge.common.crafting.CompoundIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_TOOLS), Ingredient.of(EmbersItemTags.AUGMENTABLE_BOOTS))).toVanilla()).input(RegistryManager.WINDING_GEARS.get()).save(consumer);
 
 		//special recipes
-		GemSocketRecipeBuilder.create(Tags.Items.STRINGS).id(ResourceLocation.parse(Embers.MODID + ":empty")).save(consumer);
-		GenericRecipeBuilder.create(new GemUnsocketRecipe(ResourceLocation.parse(Embers.MODID + ":empty"))).save(consumer);
+		GemSocketRecipeBuilder.create(Tags.Items.STRINGS).id(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gem_socketing")).save(consumer);
+		GenericRecipeBuilder.create(new GemUnsocketRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gem_unsocketing"))).save(consumer);
 
 		//crafting
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, RegistryManager.EMBER_CRYSTAL.get())

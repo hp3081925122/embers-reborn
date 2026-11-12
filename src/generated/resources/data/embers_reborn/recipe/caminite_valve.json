@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "embers_reborn:caminite_bricks"
+    },
+    "P": {
+      "item": "embers_reborn:fluid_pipe"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "P P",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:caminite_valve"
+  }
+}

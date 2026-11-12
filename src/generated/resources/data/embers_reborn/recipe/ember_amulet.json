@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "embers_reborn:ember_crystal_cluster"
+    },
+    "L": {
+      "tag": "c:leathers"
+    },
+    "N": {
+      "tag": "forge:ingots/dawnstone"
+    }
+  },
+  "pattern": [
+    " L ",
+    "L L",
+    "NCN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:ember_amulet"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#c:armors",
+    {
+      "id": "miapi:modular_boots",
+      "required": false
+    }
+  ]
+}

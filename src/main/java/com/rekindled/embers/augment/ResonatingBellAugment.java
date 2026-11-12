@@ -42,7 +42,7 @@ public class ResonatingBellAugment extends AugmentBase {
 	}
 
 	@SubscribeEvent
-	public void onServerTick(ServerTickEvent event) {
+	public void onServerTick(ServerTickEvent.Pre event) {
 		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
 			for (UUID uuid : cooldownTicksServer.keySet()) {
 				Float ticks = cooldownTicksServer.get(uuid) - 1;

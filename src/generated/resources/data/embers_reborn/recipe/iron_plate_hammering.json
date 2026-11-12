@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/iron"
+    },
+    {
+      "tag": "forge:ingots/iron"
+    },
+    {
+      "tag": "embers_reborn:tinker_hammer"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:iron_plate"
+  }
+}

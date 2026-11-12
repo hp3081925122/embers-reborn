@@ -1,0 +1,9 @@
+{
+	"parent": "embers_reborn:block/field_chart_center",
+	"textures": {
+        "particle": "embers_reborn:block/field_chart_center_base",
+		"side": "embers_reborn:block/field_chart_edge_side",
+		"base": "embers_reborn:block/field_chart_center_base",
+		"overlay": "embers_reborn:block/field_chart_center_inverted_overlay"
+	}
+}

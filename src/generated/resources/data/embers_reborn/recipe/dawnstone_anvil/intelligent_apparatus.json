@@ -1,0 +1,13 @@
+{
+  "type": "embers_reborn:tool_augment",
+  "augment": "embers_reborn:intelligent_apparatus",
+  "input": {
+    "item": "embers_reborn:intelligent_apparatus"
+  },
+  "tool": {
+    "type": "embers_reborn:heat_ingredient",
+    "base": {
+      "tag": "embers_reborn:augmentables/armors"
+    }
+  }
+}

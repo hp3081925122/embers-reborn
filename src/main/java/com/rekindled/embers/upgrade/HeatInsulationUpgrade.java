@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public class HeatInsulationUpgrade extends DefaultUpgradeProvider {
 
 	public HeatInsulationUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "heat_insulation"), tile);
 	}
 
 	@Override

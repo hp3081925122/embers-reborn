@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
  */
 public class AugmentPredicate implements java.util.function.Predicate<ItemStack> {
 
-	public static final ResourceLocation ID = ResourceLocation.parse(Embers.MODID + ":empty");
+	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augment");
 
 	protected final IAugment augment;
 	protected final int level;

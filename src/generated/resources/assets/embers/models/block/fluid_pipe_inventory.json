@@ -1,6 +1,0 @@
-{
-  "parent": "embers:block/pipe_inventory",
-  "textures": {
-    "pipe": "embers:block/fluid_pipe_tex"
-  }
-}

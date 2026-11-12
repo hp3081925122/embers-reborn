@@ -66,11 +66,16 @@ public class CopperCellBlockItem extends BlockItem {
 
 	@Override
 	protected boolean updateCustomBlockEntityTag(BlockPos pPos, Level pLevel, @Nullable Player pPlayer, ItemStack pStack, BlockState pState) {
+		boolean changed = BlockItem.updateCustomBlockEntityTag(pLevel, pPlayer, pPos, pStack);
+		// 1.21 no longer reads a custom "BlockEntityTag", so copy the stored ember straight into the placed cell
 		IEmberCapability cap = com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_ITEM_CAPABILITY.getCapability(pStack, null);
-		if (cap != null) {
-			com.rekindled.embers.util.ItemNbtHelper.updateTagElement(pStack, "BlockEntityTag", cap::writeToNBT);
+		if (cap != null && !pLevel.isClientSide() && pLevel.getBlockEntity(pPos) instanceof com.rekindled.embers.blockentity.CopperCellBlockEntity cell) {
+			cell.capability.setEmberCapacity(cap.getEmberCapacity());
+			cell.capability.setEmber(cap.getEmber());
+			cell.setChanged();
+			changed = true;
 		}
-		return BlockItem.updateCustomBlockEntityTag(pLevel, pPlayer, pPos, pStack);
+		return changed;
 	}
 
 	@Override

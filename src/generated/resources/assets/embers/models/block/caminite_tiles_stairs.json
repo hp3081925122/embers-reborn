@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "embers:block/caminite_tiles",
-    "side": "embers:block/caminite_tiles",
-    "top": "embers:block/caminite_tiles"
-  }
-}

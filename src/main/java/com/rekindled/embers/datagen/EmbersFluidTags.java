@@ -28,7 +28,7 @@ public class EmbersFluidTags extends FluidTagsProvider {
 
 	public static final TagKey<Fluid> STEAM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "steam"));
 
-	public static final TagKey<Fluid> WATERY = FluidTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Fluid> WATERY = FluidTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "watery"));
 
 	//compatibility fluids
 	public static final TagKey<Fluid> MOLTEN_NICKEL = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_nickel"));
@@ -44,7 +44,7 @@ public class EmbersFluidTags extends FluidTagsProvider {
 	public static final TagKey<Fluid> MOLTEN_INVAR = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_invar"));
 
 	//ingot tooltips
-	public static final TagKey<Fluid> INGOT_TOOLTIP = FluidTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Fluid> INGOT_TOOLTIP = FluidTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ingot_tooltip"));
 	public static final TagKey<Fluid> METAL_TOOLTIPS = FluidTags.create(ResourceLocation.fromNamespaceAndPath("tconstruct", "tooltips/metal"));
 
 	public EmbersFluidTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {

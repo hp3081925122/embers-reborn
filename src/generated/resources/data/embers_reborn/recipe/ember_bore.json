@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "embers_reborn:mechanical_core"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "Y": {
+      "item": "embers_reborn:caminite_bricks"
+    }
+  },
+  "pattern": [
+    "YCY",
+    "YBY",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:ember_bore"
+  }
+}

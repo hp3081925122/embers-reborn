@@ -158,14 +158,12 @@ public class FluidVesselBlock extends AbstractCauldronBlock implements EntityBlo
 		List<ItemStack> items = super.getDrops(pState, pBuilder);
 		BlockEntity blockentity = pBuilder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
 		if (blockentity instanceof FluidVesselBlockEntity) {
-			CompoundTag nbt = blockentity.saveWithoutMetadata(net.minecraft.core.RegistryAccess.EMPTY);
-			if (nbt != null) {
+			net.neoforged.neoforge.fluids.FluidStack fluid = ((FluidVesselBlockEntity) blockentity).getTank().getFluid();
+			if (!fluid.isEmpty()) {
 				for (ItemStack stack : items) {
 					if (stack.getItem() == RegistryManager.FLUID_VESSEL_ITEM.get()) {
-						net.neoforged.neoforge.fluids.capability.IFluidHandlerItem capItem = net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(stack).orElse(null);
-					IFluidHandler cap = capItem;
-						if (cap != null) {
-						}
+						// keep the vessel's fluid on the dropped item, as in 1.20.1
+						stack.set(RegistryManager.FLUID_CONTENT, net.neoforged.neoforge.fluids.SimpleFluidContent.copyOf(fluid));
 					}
 				}
 			}

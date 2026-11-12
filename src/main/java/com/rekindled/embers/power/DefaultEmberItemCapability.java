@@ -25,14 +25,10 @@ public class DefaultEmberItemCapability implements IEmberCapability {
 
 	public DefaultEmberItemCapability(@Nonnull ItemStack stack, double capacity) {
 		this.stack = stack;
-		setEmberCapacity(capacity);
-		// NeoForge 1.21.1: LazyOptional removed — no-op
-
-		net.minecraft.nbt.CompoundTag BEnbt = _getCustomSubTag(stack, "BlockEntityTag");
-		if (BEnbt != null) {
-			setEmber(BEnbt.getDouble(EMBER));
-			setEmberCapacity(BEnbt.getDouble(EMBER_CAPACITY));
-		}
+		// Do not write to the stack here: capabilities are queried every frame (tooltips, bars),
+		// and writing would mutate the stack on every query. The default capacity is used until
+		// something actually stores a value.
+		this.capacity = capacity;
 	}
 
 	public void invalidate() {
@@ -52,12 +48,15 @@ public class DefaultEmberItemCapability implements IEmberCapability {
 	public double getEmberCapacity() {
 		if (stack.isEmpty())
 			return 0;
-		return _getOrCreateCustomTag(stack, "ForgeCaps").getDouble(EMBER_CAPACITY);
+		CompoundTag tag = _getOrCreateCustomTag(stack, "ForgeCaps");
+		return tag.contains(EMBER_CAPACITY) ? tag.getDouble(EMBER_CAPACITY) : capacity;
 	}
 
 	@Override
 	public void setEmber(double value) {
 		ember = value;
+		if (!_hasCustomField(stack, "ForgeCaps", EMBER_CAPACITY))
+			_putCustomTag(stack, "ForgeCaps", EMBER_CAPACITY, capacity);
 		_putCustomTag(stack, "ForgeCaps", EMBER, value);
 	}
 
@@ -132,6 +131,10 @@ public class DefaultEmberItemCapability implements IEmberCapability {
 			if (!tag.contains(key)) tag.put(key, new CompoundTag());
 			tag.getCompound(key).putDouble(field, value);
 		});
+	}
+	private static boolean _hasCustomField(ItemStack stack, String key, String field) {
+		CompoundTag root = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+		return root.contains(key) && root.getCompound(key).contains(field);
 	}
 	private static CompoundTag _getCustomSubTag(ItemStack stack, String key) {
 		CustomData cd = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);

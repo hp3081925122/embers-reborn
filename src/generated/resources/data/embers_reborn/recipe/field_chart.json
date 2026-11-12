@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "embers_reborn:archaic_brick"
+    },
+    "C": {
+      "item": "embers_reborn:ember_crystal_cluster"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BCB",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:field_chart"
+  }
+}

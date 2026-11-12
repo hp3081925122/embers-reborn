@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "embers_reborn:archaic_brick"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    }
+  },
+  "pattern": [
+    " B ",
+    "BCB",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:archaic_circuit"
+  }
+}

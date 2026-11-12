@@ -125,7 +125,7 @@ public class GemUnsocketRecipe implements CraftingRecipe {
 		}
 		@Override
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, GemUnsocketRecipe> streamCodec() {
-			return net.minecraft.network.codec.StreamCodec.unit(new GemUnsocketRecipe(null));
+			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new GemUnsocketRecipe(null));
 		}
 	}
 }

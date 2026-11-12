@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "embers_reborn:caminite_blend"
+    }
+  },
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:raw_nugget_stamp"
+  }
+}

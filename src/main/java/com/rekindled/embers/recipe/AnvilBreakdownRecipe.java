@@ -97,7 +97,7 @@ public class AnvilBreakdownRecipe implements IDawnstoneAnvilRecipe, IVisuallySpl
 		}
 		@Override
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AnvilBreakdownRecipe> streamCodec() {
-			return net.minecraft.network.codec.StreamCodec.unit(new AnvilBreakdownRecipe(null));
+			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new AnvilBreakdownRecipe(null));
 		}
 	}
 	@Override

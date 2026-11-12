@@ -1,8 +1,10 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
-accessTransformer="accesstransformer.cfg"
 issueTrackerURL="https://github.com/YOUR_REPO/EmbersReborn/issues"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
 
 [[mods]]
 modId="${mod_id}"

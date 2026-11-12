@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "embers:block/archaic_bricks",
-    "side": "embers:block/archaic_bricks",
-    "top": "embers:block/archaic_bricks"
-  }
-}

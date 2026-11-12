@@ -1,7 +1,0 @@
-{
-  "render_type": "embers:mithril",
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "embers:item/ingot_mithril_normal"
-  }
-}

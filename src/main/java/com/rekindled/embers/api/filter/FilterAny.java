@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 public class FilterAny implements IFilter {
-	public static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.parse(Embers.MODID + ":empty");
+	public static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "any");
 
 	@Override
 	public ResourceLocation getType() {

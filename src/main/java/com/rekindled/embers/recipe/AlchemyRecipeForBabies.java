@@ -57,9 +57,19 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 
 	public static class Serializer implements RecipeSerializer<AlchemyRecipeForBabies> {
 		@Override
-		public com.mojang.serialization.MapCodec<AlchemyRecipeForBabies> codec() { return com.mojang.serialization.MapCodec.unit(null); }
+		public com.mojang.serialization.MapCodec<AlchemyRecipeForBabies> codec() {
+			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
+				Ingredient.CODEC_NONEMPTY.fieldOf("tablet").forGetter(r -> r.tablet),
+				Ingredient.CODEC_NONEMPTY.listOf().fieldOf("aspects").forGetter(r -> r.aspects),
+				Ingredient.CODEC_NONEMPTY.listOf().fieldOf("inputs").forGetter(r -> r.inputs),
+				ItemStack.CODEC.fieldOf("output").forGetter(r -> r.output),
+				ItemStack.CODEC.optionalFieldOf("failure", new ItemStack(RegistryManager.ALCHEMICAL_WASTE.get())).forGetter(r -> r.failure)
+			).apply(inst, (tablet, aspects, inputs, output, failure) -> new AlchemyRecipeForBabies(null, tablet, new ArrayList<>(aspects), new ArrayList<>(inputs), output, failure)));
+		}
 		@Override
-		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AlchemyRecipeForBabies> streamCodec() { return net.minecraft.network.codec.StreamCodec.of((buf, v) -> {}, buf -> null); }
+		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AlchemyRecipeForBabies> streamCodec() {
+			return net.minecraft.network.codec.StreamCodec.of((buf, r) -> toNetwork(buf, r), buf -> fromNetwork(null, buf));
+		}
 
 				public AlchemyRecipeForBabies fromJson(ResourceLocation recipeId, JsonObject json) {
 			Ingredient tablet = Ingredient.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, json.get("tablet")).result().orElse(Ingredient.EMPTY);

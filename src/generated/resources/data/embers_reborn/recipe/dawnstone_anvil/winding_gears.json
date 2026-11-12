@@ -1,0 +1,18 @@
+{
+  "type": "embers_reborn:tool_augment",
+  "augment": "embers_reborn:winding_gears",
+  "input": {
+    "item": "embers_reborn:winding_gears"
+  },
+  "tool": {
+    "type": "embers_reborn:heat_ingredient",
+    "base": [
+      {
+        "tag": "embers_reborn:augmentables/tools"
+      },
+      {
+        "tag": "embers_reborn:augmentables/armors/boots"
+      }
+    ]
+  }
+}

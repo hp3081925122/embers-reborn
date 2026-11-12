@@ -1,0 +1,13 @@
+{
+  "type": "embers_reborn:tool_augment",
+  "augment": "embers_reborn:flame_barrier",
+  "input": {
+    "item": "embers_reborn:flame_barrier"
+  },
+  "tool": {
+    "type": "embers_reborn:heat_ingredient",
+    "base": {
+      "tag": "embers_reborn:augmentables/armors"
+    }
+  }
+}

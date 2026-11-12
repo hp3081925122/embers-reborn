@@ -42,7 +42,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ResearchManager {
-	public static final ResourceLocation PLAYER_RESEARCH = ResourceLocation.parse(Embers.MODID + ":empty");
+	public static final ResourceLocation PLAYER_RESEARCH = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "research");
 	public static final ResourceLocation PAGE_ICONS = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/gui/codex_pageicons.png");
 	public static final double PAGE_ICON_SIZE = 48;
 	public static List<ResearchCategory> researches = new ArrayList<ResearchCategory>();

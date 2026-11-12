@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public class MiniBoilerUpgrade extends DefaultUpgradeProvider {
 
 	public MiniBoilerUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mini_boiler"), tile);
 	}
 
 	@Override

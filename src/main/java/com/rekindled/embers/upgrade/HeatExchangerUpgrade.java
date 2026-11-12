@@ -20,7 +20,7 @@ public class HeatExchangerUpgrade extends DefaultUpgradeProvider {
 	public static double bonus = 300.0;
 
 	public HeatExchangerUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "heat_exchanger"), tile);
 	}
 
 	@Override

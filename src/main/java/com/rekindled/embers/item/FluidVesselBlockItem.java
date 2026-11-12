@@ -31,7 +31,8 @@ public class FluidVesselBlockItem extends BlockItem {
 
 	@Override
 	public int getMaxStackSize(ItemStack stack) {
-		if (false) { // FluidStack NBT migration deferred
+		net.neoforged.neoforge.fluids.SimpleFluidContent content = stack.get(com.rekindled.embers.RegistryManager.FLUID_CONTENT);
+		if (content != null && !content.isEmpty()) {
 			return 1;
 		}
 		return super.getMaxStackSize(stack);
@@ -41,11 +42,16 @@ public class FluidVesselBlockItem extends BlockItem {
 
 	@Override
 	protected boolean updateCustomBlockEntityTag(BlockPos pPos, Level pLevel, @Nullable Player pPlayer, ItemStack pStack, BlockState pState) {
-		net.minecraft.nbt.CompoundTag nbt = com.rekindled.embers.util.ItemNbtHelper.getOrCreateTag(pStack);
-		if (nbt.contains("Fluid")) {
-			// FluidStack NBT migration deferred
+		boolean changed = BlockItem.updateCustomBlockEntityTag(pLevel, pPlayer, pPos, pStack);
+		// copy the item's fluid into the placed vessel
+		net.neoforged.neoforge.fluids.SimpleFluidContent content = pStack.get(com.rekindled.embers.RegistryManager.FLUID_CONTENT);
+		if (content != null && !content.isEmpty() && !pLevel.isClientSide()
+				&& pLevel.getBlockEntity(pPos) instanceof com.rekindled.embers.blockentity.FluidVesselBlockEntity vessel) {
+			vessel.getTank().setFluid(content.copy());
+			vessel.setChanged();
+			changed = true;
 		}
-		return BlockItem.updateCustomBlockEntityTag(pLevel, pPlayer, pPos, pStack);
+		return changed;
 	}
 
 	@Override

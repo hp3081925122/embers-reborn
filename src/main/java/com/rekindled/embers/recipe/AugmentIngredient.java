@@ -105,6 +105,6 @@ public class AugmentIngredient implements ICustomIngredient {
 
 
 	@Override
-	public net.neoforged.neoforge.common.crafting.IngredientType<AugmentIngredient> getType() { return TYPE; }
+	public net.neoforged.neoforge.common.crafting.IngredientType<AugmentIngredient> getType() { return com.rekindled.embers.RegistryManager.AUGMENT_INGREDIENT_TYPE.get(); }
 
 }

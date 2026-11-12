@@ -126,7 +126,11 @@ public class SlateMenu extends AbstractContainerMenu {
 	}
 
 	public static SlateMenu fromBuffer(int id, Inventory inv, net.minecraft.network.RegistryFriendlyByteBuf buf) {
-		return new SlateMenu(id, inv, net.minecraft.world.item.ItemStack.STREAM_CODEC.decode(buf));
+		ItemStack slate = buf != null ? net.minecraft.world.item.ItemStack.STREAM_CODEC.decode(buf) : inv.player.getMainHandItem();
+		if (slate.isEmpty() || !(slate.getItem() instanceof com.rekindled.embers.item.CodebreakingSlateItem)) {
+			slate = inv.player.getOffhandItem();
+		}
+		return new SlateMenu(id, inv, slate);
 	}
 
 	public static class SlateSlot extends SlotItemHandler {

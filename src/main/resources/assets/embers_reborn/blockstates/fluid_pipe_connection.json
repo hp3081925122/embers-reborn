@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "embers_reborn:block/fluid_pipe_connection"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "embers_reborn:boring",
+  "amount_required": 5,
+  "block_tag": "c:gravels",
+  "chance": 1.0,
+  "output": {
+    "count": 1,
+    "id": "minecraft:flint"
+  },
+  "weight": 5
+}

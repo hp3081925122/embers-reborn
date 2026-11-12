@@ -1,0 +1,840 @@
+{
+  "block.activator.plume": {
+    "sounds": [
+      "embers_reborn:activator/plume1",
+      "embers_reborn:activator/plume2"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.activator.plume"
+  },
+  "block.alchemy.fail": {
+    "sounds": [
+      "embers_reborn:alchemy_tablet/fail"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.alchemy.fail"
+  },
+  "block.alchemy.loop": {
+    "sounds": [
+      "embers_reborn:alchemy_tablet/loop"
+    ]
+  },
+  "block.alchemy.start": {
+    "sounds": [
+      "embers_reborn:alchemy_tablet/start"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.alchemy.start"
+  },
+  "block.alchemy.success": {
+    "sounds": [
+      "embers_reborn:alchemy_tablet/success"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.alchemy.success"
+  },
+  "block.ashen_stone.break": {
+    "sounds": [
+      "embers_reborn:block/ashen_stone/break1",
+      "embers_reborn:block/ashen_stone/break2",
+      "embers_reborn:block/ashen_stone/break3",
+      "embers_reborn:block/ashen_stone/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.ashen_stone.fall": {
+    "sounds": [
+      "embers_reborn:block/ashen_stone/step1",
+      "embers_reborn:block/ashen_stone/step2",
+      "embers_reborn:block/ashen_stone/step3",
+      "embers_reborn:block/ashen_stone/step4"
+    ]
+  },
+  "block.ashen_stone.hit": {
+    "sounds": [
+      "embers_reborn:block/ashen_stone/step1",
+      "embers_reborn:block/ashen_stone/step2",
+      "embers_reborn:block/ashen_stone/step3",
+      "embers_reborn:block/ashen_stone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.ashen_stone.place": {
+    "sounds": [
+      "embers_reborn:block/ashen_stone/break1",
+      "embers_reborn:block/ashen_stone/break2",
+      "embers_reborn:block/ashen_stone/break3",
+      "embers_reborn:block/ashen_stone/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.ashen_stone.step": {
+    "sounds": [
+      "embers_reborn:block/ashen_stone/step1",
+      "embers_reborn:block/ashen_stone/step2",
+      "embers_reborn:block/ashen_stone/step3",
+      "embers_reborn:block/ashen_stone/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.beam_cannon.fire": {
+    "sounds": [
+      "embers_reborn:beam_cannon/fire"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.beam_cannon.fire"
+  },
+  "block.beam_cannon.hit": {
+    "sounds": [
+      "embers_reborn:beam_cannon/hit1",
+      "embers_reborn:beam_cannon/hit2"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.beam_cannon.hit"
+  },
+  "block.boiler.plume": {
+    "sounds": [
+      "embers_reborn:boiler/plume1",
+      "embers_reborn:boiler/plume2"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.boiler.plume"
+  },
+  "block.bore.loop": {
+    "sounds": [
+      "embers_reborn:ember_bore/run_loop"
+    ]
+  },
+  "block.bore.loop.superspeed": {
+    "sounds": [
+      "embers_reborn:ember_bore/superspeed_run_loop"
+    ]
+  },
+  "block.bore.loop_mine": {
+    "sounds": [
+      "embers_reborn:ember_bore/mine_loop"
+    ]
+  },
+  "block.bore.loop_mine.superspeed": {
+    "sounds": [
+      "embers_reborn:ember_bore/superspeed_mine_loop"
+    ]
+  },
+  "block.bore.start": {
+    "sounds": [
+      "embers_reborn:ember_bore/start"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.bore.start"
+  },
+  "block.bore.stop": {
+    "sounds": [
+      "embers_reborn:ember_bore/stop"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.bore.stop"
+  },
+  "block.caminite.break": {
+    "sounds": [
+      "embers_reborn:block/caminite/break1",
+      "embers_reborn:block/caminite/break2",
+      "embers_reborn:block/caminite/break3",
+      "embers_reborn:block/caminite/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.caminite.fall": {
+    "sounds": [
+      "embers_reborn:block/caminite/step1",
+      "embers_reborn:block/caminite/step2",
+      "embers_reborn:block/caminite/step3",
+      "embers_reborn:block/caminite/step4"
+    ]
+  },
+  "block.caminite.hit": {
+    "sounds": [
+      "embers_reborn:block/caminite/step1",
+      "embers_reborn:block/caminite/step2",
+      "embers_reborn:block/caminite/step3",
+      "embers_reborn:block/caminite/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.caminite.place": {
+    "sounds": [
+      "embers_reborn:block/caminite/break1",
+      "embers_reborn:block/caminite/break2",
+      "embers_reborn:block/caminite/break3",
+      "embers_reborn:block/caminite/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.caminite.step": {
+    "sounds": [
+      "embers_reborn:block/caminite/step1",
+      "embers_reborn:block/caminite/step2",
+      "embers_reborn:block/caminite/step3",
+      "embers_reborn:block/caminite/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.catalytic_plug.loop": {
+    "sounds": [
+      "embers_reborn:catalytic_plug/run_loop"
+    ]
+  },
+  "block.catalytic_plug.loop_ready": {
+    "sounds": [
+      "embers_reborn:catalytic_plug/ready_loop"
+    ]
+  },
+  "block.catalytic_plug.start": {
+    "sounds": [
+      "embers_reborn:catalytic_plug/start"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.catalytic_plug.start"
+  },
+  "block.catalytic_plug.stop": {
+    "sounds": [
+      "embers_reborn:catalytic_plug/stop"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.catalytic_plug.stop"
+  },
+  "block.copper_charger.loop": {
+    "sounds": [
+      "embers_reborn:copper_charger_loop"
+    ]
+  },
+  "block.copper_charger_siphon.loop": {
+    "sounds": [
+      "embers_reborn:charger_siphon_loop"
+    ]
+  },
+  "block.crystal_cell.grow": {
+    "sounds": [
+      "embers_reborn:crystal_cell/zap1",
+      "embers_reborn:crystal_cell/zap2",
+      "embers_reborn:crystal_cell/zap3",
+      "embers_reborn:crystal_cell/zap4"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.crystal_cell.grow"
+  },
+  "block.crystal_cell.loop": {
+    "sounds": [
+      "embers_reborn:crystal_cell/loop"
+    ]
+  },
+  "block.ember_transfer.emit.big": {
+    "sounds": [
+      "embers_reborn:ember_transmission/emit_big1",
+      "embers_reborn:ember_transmission/emit_big2",
+      "embers_reborn:ember_transmission/emit_big3",
+      "embers_reborn:ember_transmission/emit_big4"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.ember_transfer.emit.big"
+  },
+  "block.ember_transfer.emit.small": {
+    "sounds": [
+      "embers_reborn:ember_transmission/emit1",
+      "embers_reborn:ember_transmission/emit2",
+      "embers_reborn:ember_transmission/emit3",
+      "embers_reborn:ember_transmission/emit4"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.ember_transfer.emit.small"
+  },
+  "block.ember_transfer.receive.big": {
+    "sounds": [
+      "embers_reborn:ember_transmission/recep_big1",
+      "embers_reborn:ember_transmission/recep_big2",
+      "embers_reborn:ember_transmission/recep_big3",
+      "embers_reborn:ember_transmission/recep_big4"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.ember_transfer.receive.big"
+  },
+  "block.ember_transfer.receive.small": {
+    "sounds": [
+      "embers_reborn:ember_transmission/recep1",
+      "embers_reborn:ember_transmission/recep2",
+      "embers_reborn:ember_transmission/recep3",
+      "embers_reborn:ember_transmission/recep4"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.ember_transfer.receive.small"
+  },
+  "block.ember_transfer.relay": {
+    "sounds": [
+      "embers_reborn:ember_transmission/relay1",
+      "embers_reborn:ember_transmission/relay2",
+      "embers_reborn:ember_transmission/relay3",
+      "embers_reborn:ember_transmission/relay4"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.ember_transfer.relay"
+  },
+  "block.entropic_enumerator.turn": {
+    "sounds": [
+      "embers_reborn:entropic_enumerator/turn1",
+      "embers_reborn:entropic_enumerator/turn2",
+      "embers_reborn:entropic_enumerator/turn3",
+      "embers_reborn:entropic_enumerator/turn4",
+      "embers_reborn:entropic_enumerator/turn5",
+      "embers_reborn:entropic_enumerator/turn6",
+      "embers_reborn:entropic_enumerator/turn7"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.entropic_enumerator.turn"
+  },
+  "block.field_chart.loop": {
+    "sounds": [
+      "embers_reborn:field_chart_loop"
+    ]
+  },
+  "block.generator.loop": {
+    "sounds": [
+      "embers_reborn:generator_hold_embers"
+    ]
+  },
+  "block.heat_coil.cooking_loop": {
+    "sounds": [
+      "embers_reborn:heat_coil/cooking_loop"
+    ]
+  },
+  "block.heat_coil.high_loop": {
+    "sounds": [
+      "embers_reborn:heat_coil/high_loop"
+    ]
+  },
+  "block.heat_coil.low_loop": {
+    "sounds": [
+      "embers_reborn:heat_coil/low_loop"
+    ]
+  },
+  "block.heat_coil.mid_loop": {
+    "sounds": [
+      "embers_reborn:heat_coil/mid_loop"
+    ]
+  },
+  "block.ignem_reactor.plume": {
+    "sounds": [
+      "embers_reborn:ignem_reactor/plume1",
+      "embers_reborn:ignem_reactor/plume2"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.ignem_reactor.plume"
+  },
+  "block.inferno_forge.close": {
+    "sounds": [
+      "embers_reborn:inferno_forge/close"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.inferno_forge.close"
+  },
+  "block.inferno_forge.fail": {
+    "sounds": [
+      "embers_reborn:inferno_forge/fail"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.inferno_forge.fail"
+  },
+  "block.inferno_forge.loop": {
+    "sounds": [
+      "embers_reborn:inferno_forge/loop"
+    ]
+  },
+  "block.inferno_forge.open": {
+    "sounds": [
+      "embers_reborn:inferno_forge/open"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.inferno_forge.open"
+  },
+  "block.inferno_forge.start": {
+    "sounds": [
+      "embers_reborn:inferno_forge/start"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.inferno_forge.start"
+  },
+  "block.inferno_forge.success": {
+    "sounds": [
+      "embers_reborn:inferno_forge/success"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.inferno_forge.success"
+  },
+  "block.injector.loop": {
+    "sounds": [
+      "embers_reborn:injector_loop"
+    ]
+  },
+  "block.machine.break": {
+    "sounds": [
+      "embers_reborn:block/machine/break1",
+      "embers_reborn:block/machine/break2",
+      "embers_reborn:block/machine/break3",
+      "embers_reborn:block/machine/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.machine.place": {
+    "sounds": [
+      "embers_reborn:block/machine/break1",
+      "embers_reborn:block/machine/break2",
+      "embers_reborn:block/machine/break3",
+      "embers_reborn:block/machine/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.melter.loop": {
+    "sounds": [
+      "embers_reborn:melter_loop"
+    ]
+  },
+  "block.melter.loopblock.plinth.loop": {
+    "sounds": [
+      "embers_reborn:cinder_plinth_loop"
+    ]
+  },
+  "block.metal_seed.loop": {
+    "sounds": [
+      "embers_reborn:metal_seed/loop"
+    ]
+  },
+  "block.metal_seed.ping": {
+    "sounds": [
+      "embers_reborn:metal_seed/ping1",
+      "embers_reborn:metal_seed/ping2",
+      "embers_reborn:metal_seed/ping3"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.metal_seed.ping"
+  },
+  "block.mini_boiler.loop_fast": {
+    "sounds": [
+      "embers_reborn:mini_boiler/fast_loop"
+    ]
+  },
+  "block.mini_boiler.loop_mid": {
+    "sounds": [
+      "embers_reborn:mini_boiler/mid_loop"
+    ]
+  },
+  "block.mini_boiler.loop_slow": {
+    "sounds": [
+      "embers_reborn:mini_boiler/slow_loop"
+    ]
+  },
+  "block.mini_boiler.pressure_loop_high": {
+    "sounds": [
+      "embers_reborn:mini_boiler/pressure_loop3"
+    ]
+  },
+  "block.mini_boiler.pressure_loop_low": {
+    "sounds": [
+      "embers_reborn:mini_boiler/pressure_loop1"
+    ]
+  },
+  "block.mini_boiler.pressure_loop_mid": {
+    "sounds": [
+      "embers_reborn:mini_boiler/pressure_loop2"
+    ]
+  },
+  "block.mini_boiler.rupture": {
+    "sounds": [
+      "embers_reborn:mini_boiler/rupture"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.mini_boiler.rupture"
+  },
+  "block.mixer.loop": {
+    "sounds": [
+      "embers_reborn:mixer_loop"
+    ]
+  },
+  "block.multiblock.pack": {
+    "sounds": [
+      "embers_reborn:multiblock_pack"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.multiblock.unpack": {
+    "sounds": [
+      "embers_reborn:multiblock_unpack"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.pedestal.loop": {
+    "sounds": [
+      "embers_reborn:pedestal_loop"
+    ]
+  },
+  "block.pipe.connect": {
+    "sounds": [
+      "embers_reborn:pipe_connect1",
+      "embers_reborn:pipe_connect2"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.pipe.connect"
+  },
+  "block.pipe.disconnect": {
+    "sounds": [
+      "embers_reborn:pipe_disconnect1",
+      "embers_reborn:pipe_disconnect2"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.pipe.disconnect"
+  },
+  "block.pipe.vent": {
+    "sounds": [
+      "embers_reborn:pipe_vent"
+    ]
+  },
+  "block.pump.fast": {
+    "sounds": [
+      "embers_reborn:pump/fast1",
+      "embers_reborn:pump/fast2",
+      "embers_reborn:pump/fast3"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.pump.fast"
+  },
+  "block.pump.mid": {
+    "sounds": [
+      "embers_reborn:pump/mid1",
+      "embers_reborn:pump/mid2",
+      "embers_reborn:pump/mid3"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.pump.mid"
+  },
+  "block.pump.slow": {
+    "sounds": [
+      "embers_reborn:pump/slow"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.pump.slow"
+  },
+  "block.solid_metal.break": {
+    "sounds": [
+      "embers_reborn:block/solid_metal/break1",
+      "embers_reborn:block/solid_metal/break2",
+      "embers_reborn:block/solid_metal/break3",
+      "embers_reborn:block/solid_metal/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.solid_metal.place": {
+    "sounds": [
+      "embers_reborn:block/solid_metal/break1",
+      "embers_reborn:block/solid_metal/break2",
+      "embers_reborn:block/solid_metal/break3",
+      "embers_reborn:block/solid_metal/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.stamper.down": {
+    "sounds": [
+      "embers_reborn:stamper/down1",
+      "embers_reborn:stamper/down2",
+      "embers_reborn:stamper/down3"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.stamper.down"
+  },
+  "block.stamper.up": {
+    "sounds": [
+      "embers_reborn:stamper/up1",
+      "embers_reborn:stamper/up2",
+      "embers_reborn:stamper/up3"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.stamper.up"
+  },
+  "block.steam_engine.burn_loop": {
+    "sounds": [
+      "embers_reborn:steam_engine/burn_loop"
+    ]
+  },
+  "block.steam_engine.start_burn": {
+    "sounds": [
+      "embers_reborn:steam_engine/start_burn"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.steam_engine.start_burn"
+  },
+  "block.steam_engine.start_steam": {
+    "sounds": [
+      "embers_reborn:steam_engine/start_steam"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.steam_engine.start_steam"
+  },
+  "block.steam_engine.steam_loop": {
+    "sounds": [
+      "embers_reborn:steam_engine/steam_loop"
+    ]
+  },
+  "block.steam_engine.stop": {
+    "sounds": [
+      "embers_reborn:steam_engine/stop"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.steam_engine.stop"
+  },
+  "block.wildfire_stirling.loop": {
+    "sounds": [
+      "embers_reborn:wildfire_stirling/run_loop"
+    ]
+  },
+  "block.wildfire_stirling.loop_ready": {
+    "sounds": [
+      "embers_reborn:wildfire_stirling/ready_loop"
+    ]
+  },
+  "block.wildfire_stirling.start": {
+    "sounds": [
+      "embers_reborn:wildfire_stirling/start"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.wildfire_stirling.start"
+  },
+  "block.wildfire_stirling.stop": {
+    "sounds": [
+      "embers_reborn:wildfire_stirling/stop"
+    ],
+    "subtitle": "subtitles.embers_reborn.block.wildfire_stirling.stop"
+  },
+  "entity.ancient_golem.death": {
+    "sounds": [
+      "embers_reborn:agolem/die"
+    ],
+    "subtitle": "subtitles.embers_reborn.entity.ancient_golem.death"
+  },
+  "entity.ancient_golem.hurt": {
+    "sounds": [
+      "embers_reborn:agolem/hit1",
+      "embers_reborn:agolem/hit2",
+      "embers_reborn:agolem/hit3",
+      "embers_reborn:agolem/hit4"
+    ],
+    "subtitle": "subtitles.embers_reborn.entity.ancient_golem.hurt"
+  },
+  "entity.ancient_golem.punch": {
+    "sounds": [
+      "embers_reborn:agolem/punch1",
+      "embers_reborn:agolem/punch2",
+      "embers_reborn:agolem/punch3",
+      "embers_reborn:agolem/punch4"
+    ],
+    "subtitle": "subtitles.embers_reborn.entity.ancient_golem.punch"
+  },
+  "entity.ancient_golem.step": {
+    "sounds": [
+      "embers_reborn:agolem/step1",
+      "embers_reborn:agolem/step2",
+      "embers_reborn:agolem/step3",
+      "embers_reborn:agolem/step4"
+    ],
+    "subtitle": "subtitles.embers_reborn.entity.ancient_golem.step"
+  },
+  "fireball.big.fire": {
+    "sounds": [
+      "embers_reborn:fireball_big_launch1",
+      "embers_reborn:fireball_big_launch2"
+    ],
+    "subtitle": "subtitles.embers_reborn.fireball.big.fire"
+  },
+  "fireball.big.hit": {
+    "sounds": [
+      "embers_reborn:fireball_big_hit1",
+      "embers_reborn:fireball_big_hit2"
+    ],
+    "subtitle": "subtitles.embers_reborn.fireball.big.hit"
+  },
+  "fireball.small.fire": {
+    "sounds": [
+      "embers_reborn:fireball_small_launch1",
+      "embers_reborn:fireball_small_launch2"
+    ],
+    "subtitle": "subtitles.embers_reborn.fireball.small.fire"
+  },
+  "fireball.small.hit": {
+    "sounds": [
+      "embers_reborn:fireball_small_hit1",
+      "embers_reborn:fireball_small_hit2"
+    ],
+    "subtitle": "subtitles.embers_reborn.fireball.small.hit"
+  },
+  "item.ash_amulet.burn": {
+    "sounds": [
+      "embers_reborn:ash_amulet/burn1",
+      "embers_reborn:ash_amulet/burn2"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.ash_amulet.burn"
+  },
+  "item.bauble.equip": {
+    "sounds": [
+      "embers_reborn:bauble_equip"
+    ]
+  },
+  "item.bauble.unequip": {
+    "sounds": [
+      "embers_reborn:bauble_unequip"
+    ]
+  },
+  "item.blazing_ray.empty": {
+    "sounds": [
+      "embers_reborn:ignition_cannon/empty"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.blazing_ray.empty"
+  },
+  "item.blazing_ray.fire": {
+    "sounds": [
+      "embers_reborn:ignition_cannon/fire1",
+      "embers_reborn:ignition_cannon/fire2"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.blazing_ray.fire"
+  },
+  "item.cinder_jet.boost": {
+    "sounds": [
+      "embers_reborn:cinder_jet1",
+      "embers_reborn:cinder_jet2"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.cinder_jet.boost"
+  },
+  "item.cinder_staff.charge": {
+    "sounds": [
+      "embers_reborn:cinder_staff/charge"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.cinder_staff.charge"
+  },
+  "item.cinder_staff.fail": {
+    "sounds": [
+      "embers_reborn:cinder_staff/fail"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.cinder_staff.fail"
+  },
+  "item.cinder_staff.loop": {
+    "sounds": [
+      "embers_reborn:cinder_staff/loop"
+    ]
+  },
+  "item.codex.category.close": {
+    "sounds": [
+      "embers_reborn:ancient_codex/category_close"
+    ]
+  },
+  "item.codex.category.open": {
+    "sounds": [
+      "embers_reborn:ancient_codex/category_open"
+    ]
+  },
+  "item.codex.category.select": {
+    "sounds": [
+      "embers_reborn:ancient_codex/category_scrape_up1",
+      "embers_reborn:ancient_codex/category_scrape_up2",
+      "embers_reborn:ancient_codex/category_scrape_up3"
+    ]
+  },
+  "item.codex.category.switch": {
+    "sounds": [
+      "embers_reborn:ancient_codex/flip1",
+      "embers_reborn:ancient_codex/flip2"
+    ]
+  },
+  "item.codex.category.unselect": {
+    "sounds": [
+      "embers_reborn:ancient_codex/category_scrape_down1",
+      "embers_reborn:ancient_codex/category_scrape_down2",
+      "embers_reborn:ancient_codex/category_scrape_down3"
+    ]
+  },
+  "item.codex.check": {
+    "sounds": [
+      "embers_reborn:ancient_codex/check"
+    ]
+  },
+  "item.codex.close": {
+    "sounds": [
+      "embers_reborn:ancient_codex/close"
+    ]
+  },
+  "item.codex.lock": {
+    "sounds": [
+      "embers_reborn:ancient_codex/lock"
+    ]
+  },
+  "item.codex.open": {
+    "sounds": [
+      "embers_reborn:ancient_codex/open"
+    ]
+  },
+  "item.codex.page.close": {
+    "sounds": [
+      "embers_reborn:ancient_codex/page_close"
+    ]
+  },
+  "item.codex.page.open": {
+    "sounds": [
+      "embers_reborn:ancient_codex/page_open"
+    ]
+  },
+  "item.codex.page.switch": {
+    "sounds": [
+      "embers_reborn:ancient_codex/flip1",
+      "embers_reborn:ancient_codex/flip2"
+    ]
+  },
+  "item.codex.uncheck": {
+    "sounds": [
+      "embers_reborn:ancient_codex/uncheck"
+    ]
+  },
+  "item.codex.unlock": {
+    "sounds": [
+      "embers_reborn:ancient_codex/unlock"
+    ]
+  },
+  "item.explosion_charm.absorb": {
+    "sounds": [
+      "embers_reborn:explosion_charm/absorb1",
+      "embers_reborn:explosion_charm/absorb2"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.explosion_charm.absorb"
+  },
+  "item.explosion_charm.recharge": {
+    "sounds": [
+      "embers_reborn:explosion_charm/recharge"
+    ]
+  },
+  "item.heated.level_up": {
+    "sounds": [
+      "embers_reborn:heated_tool_level"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.heated.level_up"
+  },
+  "item.inflictor_gem.absorb": {
+    "sounds": [
+      "embers_reborn:inflictor_gem_absorb"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.inflictor_gem.absorb"
+  },
+  "item.metallurgic_dust.convert": {
+    "sounds": [
+      "embers_reborn:metallurgic_dust/convert1",
+      "embers_reborn:metallurgic_dust/convert2"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.metallurgic_dust.convert"
+  },
+  "item.metallurgic_dust.fail": {
+    "sounds": [
+      "embers_reborn:metallurgic_dust/fail1",
+      "embers_reborn:metallurgic_dust/fail2"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.metallurgic_dust.fail"
+  },
+  "item.resonating_bell.ring": {
+    "sounds": [
+      "embers_reborn:resonating_bell1",
+      "embers_reborn:resonating_bell2"
+    ],
+    "subtitle": "subtitles.embers_reborn.item.resonating_bell.ring"
+  },
+  "item.scale.break": {
+    "sounds": [
+      "embers_reborn:scale_heart_break1",
+      "embers_reborn:scale_heart_break2",
+      "embers_reborn:scale_heart_break3",
+      "embers_reborn:scale_heart_break4"
+    ]
+  },
+  "item.tyrfing.hit": {
+    "sounds": [
+      "embers_reborn:tyrfing_hit1",
+      "embers_reborn:tyrfing_hit2"
+    ]
+  },
+  "item.windup.spring": {
+    "sounds": [
+      "embers_reborn:spring_launch1",
+      "embers_reborn:spring_launch2"
+    ]
+  },
+  "music_disc.7f_patterns": {
+    "sounds": [
+      {
+        "name": "embers_reborn:7f_patterns",
+        "stream": true
+      }
+    ]
+  }
+}

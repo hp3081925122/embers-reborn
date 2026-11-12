@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:melting",
+  "input": {
+    "tag": "forge:gears/dawnstone"
+  },
+  "output": {
+    "amount": 180,
+    "tag": "forge:molten_dawnstone"
+  }
+}

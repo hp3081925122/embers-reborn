@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "embers_reborn:caminite_bricks"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "P": {
+      "tag": "forge:plates/lead"
+    },
+    "S": {
+      "tag": "forge:ingots/silver"
+    }
+  },
+  "pattern": [
+    " P ",
+    "SFS",
+    "PBP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:cinder_plinth"
+  }
+}

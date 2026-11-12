@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public class AtmosphericBellowsUpgrade extends DefaultUpgradeProvider {
 
 	public AtmosphericBellowsUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "atmospheric_bellows"), tile);
 	}
 
 	@Override

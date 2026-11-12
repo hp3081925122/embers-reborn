@@ -1,0 +1,9 @@
+{
+  "type": "embers_reborn:superheater",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {}
+    }
+  ]
+}

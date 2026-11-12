@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:stamping",
+  "fluid": "{\"tag\":\"forge:molten_electrum\",\"amount\":10}",
+  "output": {
+    "tag": "forge:nuggets/electrum"
+  },
+  "stamp": {
+    "item": "embers_reborn:nugget_stamp"
+  }
+}

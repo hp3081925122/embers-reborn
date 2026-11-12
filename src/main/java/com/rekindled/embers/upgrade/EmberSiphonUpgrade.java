@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public class EmberSiphonUpgrade extends DefaultUpgradeProvider {
 
 	public EmberSiphonUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ember_siphon"), tile);
 	}
 
 	@Override

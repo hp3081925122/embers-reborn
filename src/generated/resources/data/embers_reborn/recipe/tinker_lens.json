@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "tag": "forge:ingots/iron"
+    },
+    "E": {
+      "tag": "forge:nuggets/lead"
+    },
+    "I": {
+      "tag": "forge:plates/lead"
+    },
+    "P": {
+      "tag": "c:glass_blocks/colorless"
+    }
+  },
+  "pattern": [
+    "BE ",
+    "IPE",
+    "BE "
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:tinker_lens"
+  }
+}

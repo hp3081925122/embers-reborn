@@ -1,0 +1,14 @@
+{
+  "type": "embers_reborn:boring",
+  "amount_required": 3,
+  "block_tag": "embers_reborn:world_bottom",
+  "dimensions": [
+    "minecraft:overworld"
+  ],
+  "max_height": -57,
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:ember_grit"
+  },
+  "weight": 20
+}

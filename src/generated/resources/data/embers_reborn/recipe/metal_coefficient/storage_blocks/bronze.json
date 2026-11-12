@@ -1,0 +1,5 @@
+{
+  "type": "embers_reborn:metal_coefficient",
+  "block_tag": "forge:storage_blocks/bronze",
+  "coefficient": 2.625
+}

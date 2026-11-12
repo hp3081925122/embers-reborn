@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "embers_reborn:ashen_fabric"
+    },
+    "D": {
+      "tag": "forge:ingots/dawnstone"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "D D",
+    "D D"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:ashen_leggings"
+  }
+}

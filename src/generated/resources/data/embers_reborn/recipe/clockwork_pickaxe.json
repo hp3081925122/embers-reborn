@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "I": {
+      "tag": "forge:ingots/dawnstone"
+    },
+    "S": {
+      "item": "embers_reborn:ember_shard"
+    },
+    "W": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "ISI",
+    " C ",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:clockwork_pickaxe"
+  }
+}

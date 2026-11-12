@@ -67,8 +67,7 @@ public class EmberProjectileEntity extends Projectile {
 	}
 
 	public void shootFromRotation(Entity shooter, float x, float y, float z, float velocity, float inaccuracy, double value) {
-		// TODO: entity dimensions now require override of getDimensions(Pose); store in field instead
-		// this.dimensions = EntityDimensions.scalable((float) value / 10.0f, (float) value / 10.0f);
+		this.dimensions = EntityDimensions.scalable((float) value / 10.0f, (float) value / 10.0f); // public via AT
 		getEntityData().set(EmberProjectileEntity.value, (float) value);
 		this.setOwner(shooter);
 
@@ -76,8 +75,7 @@ public class EmberProjectileEntity extends Projectile {
 	}
 
 	public void shoot(double x, double y, double z, float velocity, float inaccuracy, double value) {
-		// TODO: entity dimensions now require override of getDimensions(Pose); store in field instead
-		// this.dimensions = EntityDimensions.scalable((float) value / 10.0f, (float) value / 10.0f);
+		this.dimensions = EntityDimensions.scalable((float) value / 10.0f, (float) value / 10.0f); // public via AT
 		getEntityData().set(EmberProjectileEntity.value, (float) value);
 
 		super.shoot(x, y, z, velocity, inaccuracy);

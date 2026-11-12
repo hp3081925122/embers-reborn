@@ -53,6 +53,12 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class GuiCodex extends Screen {
+	private static void drawIfNotEmpty(BufferBuilder b) {
+		com.mojang.blaze3d.vertex.MeshData mesh = b.build();
+		if (mesh != null)
+			com.mojang.blaze3d.vertex.BufferUploader.drawWithShader(mesh);
+	}
+
 	public double mouseX = 0;
 	public double mouseY = 0; 
 	public double smoothMouseX = 0;
@@ -585,7 +591,6 @@ public class GuiCodex extends Screen {
 					//Highlight search results
 					if (isShown && (searchResult.contains(r) || ResearchManager.isPathToLock(r) && searchResult.isEmpty())) {
 						Tesselator tess = Tesselator.getInstance();
-						BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
 						float x = r.x;
 						float y = (r.y + 8) * categorySpacingY;
 						RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
@@ -595,15 +600,15 @@ public class GuiCodex extends Screen {
 						amt *= Mth.clampedLerp(0.5,1.0,(float)(searchResult.size()-index) / searchResult.size());
 						for (float j = 0; j < 3; j ++){
 							float coeff = (j+1.0f) / 3.0f;
+							BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.TRIANGLES, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
 							RenderUtil.renderHighlightCircle(b,basePosX+x,basePosY+y,(25.0f+20.0f*coeff*coeff)* amt);
-							com.mojang.blaze3d.vertex.BufferUploader.drawWithShader(b.buildOrThrow());
+							drawIfNotEmpty(b);
 						}
 						RenderSystem.defaultBlendFunc();
 					}
 					//Highlight selection
 					if (isShown && r.selectedAmount > 0.1f) {
 						Tesselator tess = Tesselator.getInstance();
-						BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
 						float x = r.x;
 						float y = (r.y + 8) * categorySpacingY;
 						RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
@@ -611,15 +616,15 @@ public class GuiCodex extends Screen {
 						float amt = r.selectedAmount;
 						for (float j = 0; j < 8; j ++){
 							float coeff = (j+1.0f) /8.0f;
+							BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.TRIANGLES, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
 							RenderUtil.renderHighlightCircle(b,basePosX+x,basePosY+y,(25.0f+20.0f*coeff*coeff)* amt);
-							com.mojang.blaze3d.vertex.BufferUploader.drawWithShader(b.buildOrThrow());
+							drawIfNotEmpty(b);
 						}
 						RenderSystem.defaultBlendFunc();
 					}
 					if (r.ancestors.size() > 0) {
 						for (int l = 0; l < r.ancestors.size(); l ++){
 							Tesselator tess = Tesselator.getInstance();
-							BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
 							ResearchBase ancestor = r.ancestors.get(l);
 							float x1 = r.x;
 							float y1 = r.y;
@@ -633,8 +638,9 @@ public class GuiCodex extends Screen {
 								float coeff = (float)Math.pow((j+1.0f)/8.0f,1.5f);
 								float appearCoeff = Math.min(r.shownAmount,ancestor.shownAmount);
 
+								BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.TRIANGLE_STRIP, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
 								RenderUtil.renderWavyEmberLine(b, basePosX+x1, basePosY+y1, basePosX+x2, basePosY+y2, 4.0f*coeff, appearCoeff, EmbersColors.EMBER);
-								com.mojang.blaze3d.vertex.BufferUploader.drawWithShader(b.buildOrThrow());
+								drawIfNotEmpty(b);
 							}
 							RenderSystem.defaultBlendFunc();
 						}
@@ -672,7 +678,6 @@ public class GuiCodex extends Screen {
 					//Appearance effect
 					if (r.shownAmount > 0.0 && r.shownAmount < 1.0f){
 						Tesselator tess = Tesselator.getInstance();
-						BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
 						float x = r.x;
 						float y = (r.y + 8) * categorySpacingY;
 						RenderSystem.enableBlend();
@@ -681,8 +686,9 @@ public class GuiCodex extends Screen {
 						float amt = (float)Math.sin(r.shownAmount*Math.PI);
 						for (float j = 0; j < 8; j ++){
 							float coeff = (j+1.0f) /8.0f;
+							BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.TRIANGLES, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
 							RenderUtil.renderHighlightCircle(b,basePosX+x,basePosY+y,(25.0f+20.0f*coeff*coeff)* amt);
-							com.mojang.blaze3d.vertex.BufferUploader.drawWithShader(b.buildOrThrow());
+							drawIfNotEmpty(b);
 						}
 						RenderSystem.defaultBlendFunc();
 					}
@@ -826,9 +832,6 @@ public class GuiCodex extends Screen {
 			//int k1 = 400;
 			//float f = this.itemRenderer.blitOffset;
 			//this.itemRenderer.blitOffset = 400.0F;
-			Tesselator tesselator = Tesselator.getInstance();
-			BufferBuilder bufferbuilder = tesselator.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
-			RenderSystem.setShader(GameRenderer::getPositionColorShader);
 			Matrix4f matrix4f = graphics.pose().last().pose();
 			//net.neoforged.neoforge.client.event.RenderTooltipEvent.Color colorEvent = net.neoforged.neoforge.client.ForgeHooksClient.onRenderTooltipColor(this.tooltipStack, pPoseStack, j2, k2, preEvent.getFont(), pClientTooltipComponents);
 			int backgroundColor = new Color(0,0,0,128).getRGB();
@@ -849,7 +852,6 @@ public class GuiCodex extends Screen {
 			RenderSystem.enableDepthTest();
 			RenderSystem.enableBlend();
 			RenderSystem.defaultBlendFunc();
-			BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
 			RenderSystem.disableBlend();
 			MultiBufferSource.BufferSource multibuffersource$buffersource = MultiBufferSource.immediate(new com.mojang.blaze3d.vertex.ByteBufferBuilder(1536));
 			graphics.pose().translate(0.0D, 0.0D, 400.0D);

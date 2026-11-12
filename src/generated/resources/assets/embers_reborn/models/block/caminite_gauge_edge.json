@@ -1,0 +1,16 @@
+{
+  "parent": "embers_reborn:block/caminite_gauge_edge_base",
+  "children": {
+    "base": {
+      "parent": "embers_reborn:block/caminite_gauge_edge_base"
+    },
+    "glass": {
+      "parent": "embers_reborn:block/caminite_gauge_edge_glass"
+    }
+  },
+  "item_render_order": [
+    "base",
+    "glass"
+  ],
+  "loader": "neoforge:composite"
+}

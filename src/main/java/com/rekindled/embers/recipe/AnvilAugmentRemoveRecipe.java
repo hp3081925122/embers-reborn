@@ -82,7 +82,7 @@ public class AnvilAugmentRemoveRecipe implements IDawnstoneAnvilRecipe, IVisuall
 		}
 		@Override
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AnvilAugmentRemoveRecipe> streamCodec() {
-			return net.minecraft.network.codec.StreamCodec.unit(new AnvilAugmentRemoveRecipe(null));
+			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new AnvilAugmentRemoveRecipe(null));
 		}
 	}
 	@Override

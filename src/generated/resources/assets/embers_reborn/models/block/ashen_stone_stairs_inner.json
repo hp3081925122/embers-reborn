@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "embers_reborn:block/ashen_stone",
+    "side": "embers_reborn:block/ashen_stone",
+    "top": "embers_reborn:block/ashen_stone"
+  }
+}

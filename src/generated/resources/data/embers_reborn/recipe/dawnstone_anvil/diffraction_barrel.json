@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:tool_augment",
+  "augment": "embers_reborn:diffraction_barrel",
+  "input": {
+    "item": "embers_reborn:diffraction_barrel"
+  },
+  "tool": {
+    "tag": "embers_reborn:augmentables/projectiles"
+  }
+}

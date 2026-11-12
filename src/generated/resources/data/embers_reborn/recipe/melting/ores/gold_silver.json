@@ -1,0 +1,14 @@
+{
+  "type": "embers_reborn:melting",
+  "bonus": {
+    "amount": 20,
+    "tag": "forge:molten_silver"
+  },
+  "input": {
+    "tag": "forge:ores/gold"
+  },
+  "output": {
+    "amount": 240,
+    "tag": "forge:molten_gold"
+  }
+}

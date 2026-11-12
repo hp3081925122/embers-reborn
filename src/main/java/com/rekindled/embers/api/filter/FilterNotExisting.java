@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
 
 public class FilterNotExisting extends FilterExisting {
-    public static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.parse(Embers.MODID + ":empty");
+    public static final ResourceLocation RESOURCE_LOCATION = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "not_existing");
 
     @Override
     public ResourceLocation getType() {

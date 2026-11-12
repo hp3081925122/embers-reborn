@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "forge:ingots/lead"
+    },
+    "P": {
+      "item": "embers_reborn:item_pipe"
+    }
+  },
+  "pattern": [
+    " II",
+    "P  ",
+    " II"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:item_vacuum"
+  }
+}

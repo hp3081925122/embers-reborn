@@ -22,25 +22,25 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class EmbersItemTags extends ItemTagsProvider {
 
-	public static final TagKey<Item> PIPE_UNCLOGGER = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Item> MATERIA_BLACKLIST = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Item> BREAKDOWN_BLACKLIST = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Item> REPAIR_BLACKLIST = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> PIPE_UNCLOGGER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pipe_uncloggers"));
+	public static final TagKey<Item> MATERIA_BLACKLIST = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "materia_repair_blacklist"));
+	public static final TagKey<Item> BREAKDOWN_BLACKLIST = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "anvil_breakdown_blacklist"));
+	public static final TagKey<Item> REPAIR_BLACKLIST = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "anvil_repair_blacklist"));
 
 	//this tag is only for recipes
-	public static final TagKey<Item> TINKER_HAMMER = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> TINKER_HAMMER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "tinker_hammer"));
 
-	public static final TagKey<Item> INSCRIBABLE_PAPER = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> INSCRIBABLE_PAPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "inscribable_paper"));
 
 	public static final TagKey<Item> TOOLS_HAMMERS = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "tools/hammers"));
 
-	public static final TagKey<Item> NORMAL_WALK_SPEED_TOOL = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> NORMAL_WALK_SPEED_TOOL = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "normal_walk_speed_tool"));
 
-	public static final TagKey<Item> GAUGE_OVERLAY = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> GAUGE_OVERLAY = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gauge_overlay"));
 
-	public static final TagKey<Item> CINDER_PLINTH_BLACKLIST = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> CINDER_PLINTH_BLACKLIST = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "cinder_plinth_blacklist"));
 
-	public static final TagKey<Item> AUGMENTABLE = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> AUGMENTABLE = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables"));
 	public static final TagKey<Item> AUGMENTABLE_TOOLS_AND_ARMORS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/tools_armors"));
 	public static final TagKey<Item> AUGMENTABLE_TOOLS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/tools"));
 	public static final TagKey<Item> AUGMENTABLE_PROJECTILE_WEAPONS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/projectiles"));
@@ -50,9 +50,9 @@ public class EmbersItemTags extends ItemTagsProvider {
 	public static final TagKey<Item> AUGMENTABLE_LEGGINGS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/leggings"));
 	public static final TagKey<Item> AUGMENTABLE_BOOTS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augmentables/armors/boots"));
 
-	public static final TagKey<Item> TINKER_LENS_HELMETS = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> TINKER_LENS_HELMETS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "tinker_lens_helmets"));
 
-	public static final TagKey<Item> ASPECTUS = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus"));
 	public static final TagKey<Item> IRON_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/iron"));
 	public static final TagKey<Item> COPPER_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/copper"));
 	public static final TagKey<Item> LEAD_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/lead"));
@@ -60,7 +60,7 @@ public class EmbersItemTags extends ItemTagsProvider {
 	public static final TagKey<Item> DAWNSTONE_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/dawnstone"));
 	public static final TagKey<Item> MITHRIL_ASPECTUS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "aspectus/dwarven_mithril"));
 
-	public static final TagKey<Item> ASHEN_STONE = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> ASHEN_STONE = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_stone"));
 
 	public static final TagKey<Item> PLATES = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates"));
 	public static final TagKey<Item> IRON_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates/iron"));
@@ -111,19 +111,19 @@ public class EmbersItemTags extends ItemTagsProvider {
 	public static final TagKey<Item> ARCHAIC_BRICK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/archaic_brick"));
 	public static final TagKey<Item> ASH_DUST = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "dusts/ash"));
 
-	public static final TagKey<Item> ANCIENT_CODEX = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Item> STAMPS = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Item> DIALS = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> ANCIENT_CODEX = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ancient_codex"));
+	public static final TagKey<Item> STAMPS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "stamps"));
+	public static final TagKey<Item> DIALS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "dials"));
 
-	public static final TagKey<Item> WORLD_BOTTOM = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Item> SNOW = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> WORLD_BOTTOM = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "world_bottom"));
+	public static final TagKey<Item> SNOW = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "snow"));
 
-	public static final TagKey<Item> PRISTINE_COPPER = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Item> EXPOSED_COPPER = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Item> WEATHERED_COPPER = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final TagKey<Item> OXIDIZED_COPPER = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> PRISTINE_COPPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "pristine_copper"));
+	public static final TagKey<Item> EXPOSED_COPPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "exposed_copper"));
+	public static final TagKey<Item> WEATHERED_COPPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "weathered_copper"));
+	public static final TagKey<Item> OXIDIZED_COPPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "oxidized_copper"));
 
-	public static final TagKey<Item> CRYSTAL_SEEDS = ItemTags.create(ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final TagKey<Item> CRYSTAL_SEEDS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds"));
 	public static final TagKey<Item> COPPER_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/copper"));
 	public static final TagKey<Item> IRON_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/iron"));
 	public static final TagKey<Item> GOLD_SEED = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/gold"));

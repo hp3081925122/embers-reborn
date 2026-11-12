@@ -41,7 +41,7 @@ public class CasterOrbAugment extends AugmentBase {
 	}
 
 	@SubscribeEvent
-	public void onServerTick(ServerTickEvent event) {
+	public void onServerTick(ServerTickEvent.Pre event) {
 		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
 			for (UUID uuid : cooldownTicksServer.keySet()) {
 				Float ticks = cooldownTicksServer.get(uuid) - 1;
@@ -52,7 +52,7 @@ public class CasterOrbAugment extends AugmentBase {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
-	public void onClientTick(ClientTickEvent.Post event) {
+	public void onClientTick(ClientTickEvent.Pre event) {
 		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
 			Minecraft mc = Minecraft.getInstance();
 			if (mc.player != null) {

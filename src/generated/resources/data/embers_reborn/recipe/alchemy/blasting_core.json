@@ -1,0 +1,36 @@
+{
+  "type": "embers_reborn:alchemy",
+  "aspects": [
+    {
+      "tag": "embers_reborn:aspectus/copper"
+    },
+    {
+      "tag": "embers_reborn:aspectus/iron"
+    }
+  ],
+  "failure": {
+    "count": 1,
+    "id": "embers_reborn:alchemical_waste"
+  },
+  "inputs": [
+    {
+      "tag": "forge:plates/iron"
+    },
+    {
+      "tag": "forge:plates/iron"
+    },
+    {
+      "tag": "forge:plates/iron"
+    },
+    {
+      "tag": "c:ingots/copper"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:blasting_core"
+  },
+  "tablet": {
+    "tag": "c:gunpowders"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "embers_reborn:ashen_fabric"
+    }
+  },
+  "pattern": [
+    "C C",
+    "C C",
+    "C C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:ashen_boots"
+  }
+}

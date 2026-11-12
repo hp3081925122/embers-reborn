@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public class EntropicEnumeratorUpgrade extends DefaultUpgradeProvider {
 
 	public EntropicEnumeratorUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "entropic_enumerator"), tile);
 	}
 
 	@Override

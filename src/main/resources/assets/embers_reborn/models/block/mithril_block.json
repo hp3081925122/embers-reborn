@@ -1,0 +1,8 @@
+{
+  "render_type": "embers_reborn:mithril",
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+	"particle": "embers_reborn:block/block_mithril",
+    "all": "embers_reborn:block/block_mithril_normal"
+  }
+}

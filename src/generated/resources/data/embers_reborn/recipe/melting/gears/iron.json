@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:melting",
+  "input": {
+    "tag": "forge:gears/iron"
+  },
+  "output": {
+    "amount": 180,
+    "tag": "forge:molten_iron"
+  }
+}

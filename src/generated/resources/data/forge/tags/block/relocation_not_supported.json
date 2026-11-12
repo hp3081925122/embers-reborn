@@ -1,0 +1,34 @@
+{
+  "values": [
+    "embers_reborn:ember_bore",
+    "embers_reborn:ember_bore_edge",
+    "embers_reborn:ember_activator",
+    "embers_reborn:melter",
+    "embers_reborn:mixer_centrifuge",
+    "embers_reborn:pressure_refinery",
+    "embers_reborn:hearth_coil",
+    "embers_reborn:hearth_coil_edge",
+    "embers_reborn:reservoir",
+    "embers_reborn:reservoir_edge",
+    "embers_reborn:caminite_ring",
+    "embers_reborn:caminite_ring_edge",
+    "embers_reborn:caminite_gauge",
+    "embers_reborn:caminite_gauge_edge",
+    "embers_reborn:caminite_valve",
+    "embers_reborn:caminite_valve_edge",
+    "embers_reborn:crystal_cell",
+    "embers_reborn:crystal_cell_edge",
+    "embers_reborn:alchemy_pedestal",
+    "embers_reborn:mechanical_pump",
+    "embers_reborn:field_chart",
+    "embers_reborn:field_chart_edge",
+    "embers_reborn:combustion_chamber",
+    "embers_reborn:catalysis_chamber",
+    "embers_reborn:inferno_forge",
+    "#embers_reborn:crystal_seeds",
+    {
+      "id": "embers_reborn:explosion_pedestal",
+      "required": false
+    }
+  ]
+}

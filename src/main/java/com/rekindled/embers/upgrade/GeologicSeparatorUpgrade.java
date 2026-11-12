@@ -18,7 +18,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 public class GeologicSeparatorUpgrade extends DefaultUpgradeProvider {
 
 	public GeologicSeparatorUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "geologic_separator"), tile);
 	}
 
 	@Override

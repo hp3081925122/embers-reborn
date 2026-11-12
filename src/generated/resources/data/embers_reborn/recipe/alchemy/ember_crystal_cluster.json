@@ -1,0 +1,39 @@
+{
+  "type": "embers_reborn:alchemy",
+  "aspects": [
+    {
+      "tag": "embers_reborn:aspectus/copper"
+    },
+    {
+      "tag": "embers_reborn:aspectus/iron"
+    },
+    {
+      "tag": "embers_reborn:aspectus/dawnstone"
+    }
+  ],
+  "failure": {
+    "count": 1,
+    "id": "embers_reborn:alchemical_waste"
+  },
+  "inputs": [
+    {
+      "tag": "c:gunpowders"
+    },
+    {
+      "item": "embers_reborn:ember_shard"
+    },
+    {
+      "item": "embers_reborn:ember_shard"
+    },
+    {
+      "item": "embers_reborn:ember_shard"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:ember_crystal_cluster"
+  },
+  "tablet": {
+    "item": "embers_reborn:ember_crystal"
+  }
+}

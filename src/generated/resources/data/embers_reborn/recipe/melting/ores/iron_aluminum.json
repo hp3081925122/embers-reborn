@@ -1,0 +1,14 @@
+{
+  "type": "embers_reborn:melting",
+  "bonus": {
+    "amount": 20,
+    "tag": "forge:molten_aluminum"
+  },
+  "input": {
+    "tag": "forge:ores/iron"
+  },
+  "output": {
+    "amount": 240,
+    "tag": "forge:molten_iron"
+  }
+}

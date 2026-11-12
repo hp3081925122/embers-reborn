@@ -44,18 +44,18 @@ public class EmbersItemModels extends ItemModelProvider {
 		layeredItem(CuriosCompat.EMBER_BULB, "item/generated", "ember_bulb_glass", "ember_bulb_glass_shine", "ember_bulb");
 		itemWithTexture(RegistryManager.MUSIC_DISC_7F_PATTERNS, "music_disc_ember");
 		basicItem(RegistryManager.ALCHEMICAL_WASTE.get());
-		withExistingParent(RegistryManager.ALCHEMICAL_NOTE.getId().getPath(), ResourceLocation.fromNamespaceAndPath("forge", "item/default")).customLoader(SeparateTransformsModelBuilder::begin)
-		.base(basicItem(ResourceLocation.parse(Embers.MODID + ":empty")))
-		.perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(new UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "builtin/entity"))))
-		.perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(new UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "builtin/entity"))))
-		.perspective(ItemDisplayContext.GUI, nested().parent(new UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "builtin/entity"))))
-		.perspective(ItemDisplayContext.FIXED, nested().parent(new UncheckedModelFile(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "builtin/entity"))));
+		withExistingParent(RegistryManager.ALCHEMICAL_NOTE.getId().getPath(), ResourceLocation.fromNamespaceAndPath("neoforge", "item/default")).customLoader(SeparateTransformsModelBuilder::begin)
+		.base(basicItem(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "alchemical_note_item")))
+		.perspective(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, nested().parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("builtin/entity"))))
+		.perspective(ItemDisplayContext.FIRST_PERSON_LEFT_HAND, nested().parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("builtin/entity"))))
+		.perspective(ItemDisplayContext.GUI, nested().parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("builtin/entity"))))
+		.perspective(ItemDisplayContext.FIXED, nested().parent(new UncheckedModelFile(ResourceLocation.withDefaultNamespace("builtin/entity"))));
 		basicItem(RegistryManager.CODEBREAKING_SLATE.get());
 		layeredItem(RegistryManager.TYRFING, "item/handheld", "tyrfing", "tyrfing_gem");
-		withExistingParent(RegistryManager.INFLICTOR_GEM.getId().getPath(), ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item/generated"))
+		withExistingParent(RegistryManager.INFLICTOR_GEM.getId().getPath(), ResourceLocation.withDefaultNamespace("item/generated"))
 		.texture("layer0", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item/inflictor_gem"))
-		.override().predicate(ResourceLocation.parse(Embers.MODID + ":empty"), 1)
-		.model(singleTexture("inflictor_gem_charged", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item/generated"), "layer0", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item/inflictor_gem_charged")));
+		.override().predicate(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "charged"), 1)
+		.model(singleTexture("inflictor_gem_charged", ResourceLocation.withDefaultNamespace("item/generated"), "layer0", ResourceLocation.fromNamespaceAndPath(Embers.MODID, "item/inflictor_gem_charged")));
 		basicItem(RegistryManager.ASHEN_GOGGLES.get());
 		basicItem(RegistryManager.ASHEN_CLOAK.get());
 		basicItem(RegistryManager.ASHEN_LEGGINGS.get());
@@ -110,6 +110,7 @@ public class EmbersItemModels extends ItemModelProvider {
 		itemWithTexture(RegistryManager.LEAD_ASPECTUS, "aspectus_lead");
 		itemWithTexture(RegistryManager.SILVER_ASPECTUS, "aspectus_silver");
 		itemWithTexture(RegistryManager.DAWNSTONE_ASPECTUS, "aspectus_dawnstone");
+		itemWithTexture(RegistryManager.MITHRIL_ASPECTUS, "aspectus_mithril");
 
 		itemWithTexture(RegistryManager.IRON_PLATE, "plate_iron");
 		//itemWithTexture(RegistryManager.GOLD_PLATE, "plate_gold");
@@ -129,6 +130,8 @@ public class EmbersItemModels extends ItemModelProvider {
 		itemWithTexture(RegistryManager.DAWNSTONE_INGOT, "ingot_dawnstone");
 		itemWithTexture(RegistryManager.DAWNSTONE_NUGGET, "nugget_dawnstone");
 		itemWithTexture(RegistryManager.DAWNSTONE_PLATE, "plate_dawnstone");
+		itemWithTexture(RegistryManager.MITHRIL_NUGGET, "nugget_mithril");
+		itemWithTexture(RegistryManager.MITHRIL_PLATE, "plate_mithril");
 
 		toolModels(RegistryManager.LEAD_TOOLS);
 		toolModels(RegistryManager.SILVER_TOOLS);

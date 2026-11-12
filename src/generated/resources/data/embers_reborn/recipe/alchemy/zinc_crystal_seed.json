@@ -1,0 +1,33 @@
+{
+  "type": "embers_reborn:alchemy",
+  "aspects": [
+    {
+      "tag": "embers_reborn:aspectus/iron"
+    },
+    {
+      "tag": "embers_reborn:aspectus/lead"
+    }
+  ],
+  "failure": {
+    "count": 1,
+    "id": "embers_reborn:alchemical_waste"
+  },
+  "inputs": [
+    {
+      "tag": "forge:ingots/zinc"
+    },
+    {
+      "tag": "forge:ingots/zinc"
+    },
+    {
+      "tag": "forge:ingots/zinc"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:zinc_crystal_seed"
+  },
+  "tablet": {
+    "tag": "embers_reborn:crystal_seeds"
+  }
+}

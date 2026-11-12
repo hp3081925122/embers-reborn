@@ -38,8 +38,8 @@ public class CinderJetAugment extends AugmentBase {
 	}
 
 	@SubscribeEvent
-	public void onLivingTick(net.neoforged.neoforge.event.entity.living.LivingEvent event) {
-		LivingEntity entity = event.getEntity();
+	public void onLivingTick(net.neoforged.neoforge.event.tick.EntityTickEvent.Pre event) {
+		if (!(event.getEntity() instanceof LivingEntity entity)) return;
 		if (entity instanceof Player player && (!entity.level().isClientSide() || entity == Minecraft.getInstance().player)) {
 			UUID id = entity.getUUID();
 			if (getSprinting(entity.level()).containsKey(id)) {

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "forge:raw_materials/silver"
+    },
+    "Y": {
+      "item": "embers_reborn:raw_silver"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:raw_silver_block"
+  }
+}

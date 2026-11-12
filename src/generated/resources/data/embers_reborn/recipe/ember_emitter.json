@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "P": {
+      "item": "embers_reborn:caminite_plate"
+    }
+  },
+  "pattern": [
+    " C ",
+    " C ",
+    "IPI"
+  ],
+  "result": {
+    "count": 4,
+    "id": "embers_reborn:ember_emitter"
+  }
+}

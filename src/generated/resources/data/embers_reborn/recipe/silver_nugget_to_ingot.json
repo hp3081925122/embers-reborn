@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "forge:nuggets/silver"
+    },
+    "Y": {
+      "item": "embers_reborn:silver_nugget"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:silver_ingot"
+  }
+}

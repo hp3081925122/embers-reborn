@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:melting",
+  "input": {
+    "tag": "forge:plates/uranium"
+  },
+  "output": {
+    "amount": 90,
+    "tag": "forge:molten_uranium"
+  }
+}

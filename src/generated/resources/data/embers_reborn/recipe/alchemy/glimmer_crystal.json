@@ -1,0 +1,36 @@
+{
+  "type": "embers_reborn:alchemy",
+  "aspects": [
+    {
+      "tag": "embers_reborn:aspectus/copper"
+    },
+    {
+      "tag": "embers_reborn:aspectus/dawnstone"
+    }
+  ],
+  "failure": {
+    "count": 1,
+    "id": "embers_reborn:alchemical_waste"
+  },
+  "inputs": [
+    {
+      "tag": "c:gunpowders"
+    },
+    {
+      "tag": "c:gunpowders"
+    },
+    {
+      "item": "embers_reborn:ember_shard"
+    },
+    {
+      "item": "embers_reborn:ember_shard"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:glimmer_crystal"
+  },
+  "tablet": {
+    "tag": "c:gems/quartz"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:stamping",
+  "fluid": "{\"tag\":\"forge:molten_tin\",\"amount\":180}",
+  "output": {
+    "tag": "forge:gears/tin"
+  },
+  "stamp": {
+    "item": "embers_reborn:gear_stamp"
+  }
+}

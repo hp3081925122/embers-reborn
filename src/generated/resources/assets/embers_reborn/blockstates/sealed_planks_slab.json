@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "embers_reborn:block/sealed_planks_slab"
+    },
+    "type=double": {
+      "model": "embers_reborn:block/sealed_planks"
+    },
+    "type=top": {
+      "model": "embers_reborn:block/sealed_planks_slab_top"
+    }
+  }
+}

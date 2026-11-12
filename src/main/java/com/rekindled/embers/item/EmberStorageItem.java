@@ -34,6 +34,12 @@ public abstract class EmberStorageItem extends Item {
 	public static ItemStack withFill(Item item, double ember) {
 		ItemStack stack = new ItemStack(item);
 		IEmberCapability cap = com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_ITEM_CAPABILITY.getCapability(stack, null);
+		if (cap == null && item instanceof EmberStorageItem storage) {
+			cap = new DefaultEmberItemCapability(stack, storage.getCapacity());
+		}
+		if (cap == null) {
+			return stack;
+		}
 		cap.setEmber(ember);
 		return stack;
 	}

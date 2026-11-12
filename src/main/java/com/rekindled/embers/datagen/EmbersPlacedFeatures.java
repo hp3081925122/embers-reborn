@@ -21,10 +21,10 @@ import net.minecraft.world.level.levelgen.placement.RarityFilter;
 
 public class EmbersPlacedFeatures {
 
-	public static final ResourceKey<PlacedFeature> ORE_LEAD_KEY = ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final ResourceKey<PlacedFeature> ORE_LEAD_KEY = ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ore_lead_placer"));
 	public static final List<PlacementModifier> ORE_LEAD_PLACEMENT = commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.absolute(-28), VerticalAnchor.absolute(28)));
 
-	public static final ResourceKey<PlacedFeature> ORE_SILVER_KEY = ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final ResourceKey<PlacedFeature> ORE_SILVER_KEY = ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ore_silver_placer"));
 	public static final List<PlacementModifier> ORE_SILVER_PLACEMENT = commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(64)));
 
 	public static void generate(BootstrapContext<PlacedFeature> bootstrap) {

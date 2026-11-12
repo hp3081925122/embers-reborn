@@ -142,7 +142,9 @@ public class AugmentUtilImpl implements IAugmentUtil {
 			augmentCompound.putString("name", augment.getName().toString());
 			ListTag items = new ListTag();
 			augmentCompound.put("items", items);
-			items.add(augmentStack.save(net.minecraft.core.RegistryAccess.EMPTY));
+			if (!augmentStack.isEmpty()) {
+				items.add(augmentStack.save(net.minecraft.core.RegistryAccess.EMPTY));
+			}
 			augmentCompound.putInt("level", 1);
 			list.add(augmentCompound);
 		} else {
@@ -151,7 +153,9 @@ public class AugmentUtilImpl implements IAugmentUtil {
 				if (augmentCompound.contains("name")) {
 					if (augmentCompound.getString("name").equals(augment.getName().toString())) {
 						ListTag items = augmentCompound.getList("items", Tag.TAG_COMPOUND);
-						items.add(augmentStack.save(net.minecraft.core.RegistryAccess.EMPTY));
+						if (!augmentStack.isEmpty()) {
+							items.add(augmentStack.save(net.minecraft.core.RegistryAccess.EMPTY));
+						}
 						augmentCompound.putInt("level", level + 1);
 					}
 				}

@@ -1,0 +1,8 @@
+{
+  "type": "embers_reborn:boiling",
+  "input": "{\"tag\":\"minecraft:water\",\"amount\":1}",
+  "output": {
+    "amount": 5,
+    "tag": "forge:steam"
+  }
+}

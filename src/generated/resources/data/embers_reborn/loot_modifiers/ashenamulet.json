@@ -1,0 +1,9 @@
+{
+  "type": "embers_reborn:ashenamulet",
+  "conditions": [
+    {
+      "condition": "embers_reborn:match_curio",
+      "predicate": {}
+    }
+  ]
+}

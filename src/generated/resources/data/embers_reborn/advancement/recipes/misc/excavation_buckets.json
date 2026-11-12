@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "embers_reborn:ember_bore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "embers_reborn:excavation_buckets"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "embers_reborn:excavation_buckets"
+    ]
+  }
+}

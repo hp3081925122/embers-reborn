@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "embers_reborn:caminite_brick"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "P": {
+      "tag": "forge:plates/iron"
+    }
+  },
+  "pattern": [
+    "B B",
+    "P P",
+    "BIB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:fluid_vessel"
+  }
+}

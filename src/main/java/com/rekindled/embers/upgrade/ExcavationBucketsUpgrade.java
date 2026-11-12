@@ -31,7 +31,7 @@ public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
 	public static BakedModel buckets;
 
 	public ExcavationBucketsUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "excavation_buckets"), tile);
 	}
 
 	@Override

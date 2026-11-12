@@ -57,8 +57,9 @@ public class TinkerHammerItem extends Item {
 
 	@Override
 	public final ItemStack getCraftingRemainingItem(ItemStack stack) {
+		// 1.20.1 rebuilt the hammer with the same NBT when the slot reported empty; keep all components the same way
 		if (stack.isEmpty())
-			return stack.copyWithCount(stack.getCount()); // TODO: preserve tag via DataComponents
+			return new ItemStack(this.builtInRegistryHolder(), Math.max(1, stack.getCount()), stack.getComponentsPatch());
 		return stack.copy();
 	}
 

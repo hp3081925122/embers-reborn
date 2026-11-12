@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "embers:block/metal_platform",
-    "side": "embers:block/metal_platform_side"
-  }
-}

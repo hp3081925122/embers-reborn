@@ -58,7 +58,7 @@ public class WindingGearsAugment extends AugmentBase {
 
 
 
-	public static final ResourceLocation TEXTURE_HUD = ResourceLocation.parse("embers:textures/gui/icons.png");
+	public static final ResourceLocation TEXTURE_HUD = ResourceLocation.fromNamespaceAndPath(com.rekindled.embers.Embers.MODID, "textures/gui/icons.png");
 	public static final int BAR_U = 0;
 	public static final int BAR_V = 32;
 	public static final int BAR_WIDTH = 180;
@@ -209,8 +209,8 @@ public class WindingGearsAugment extends AugmentBase {
 	}
 
 	@SubscribeEvent
-	public void onTick(net.neoforged.neoforge.event.entity.living.LivingEvent event) {
-		LivingEntity entity = event.getEntity();
+	public void onTick(net.neoforged.neoforge.event.tick.EntityTickEvent.Pre event) {
+		if (!(event.getEntity() instanceof LivingEntity entity)) return;
 		Map<Entity,Double> bounce = bounceLocal.get();
 		if (bounce.containsKey(entity)) {
 			entity.setDeltaMovement(entity.getDeltaMovement().add(new Vec3(0, bounce.get(entity), 0)));

@@ -30,7 +30,7 @@ public class CatalyticPlugUpgrade extends DefaultUpgradeProvider {
 	}
 
 	public CatalyticPlugUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "catalytic_plug"), tile);
 	}
 
 	public static double getMultiplier(double multiplier, int distance, int count) {

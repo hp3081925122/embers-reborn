@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:stamping",
+  "fluid": "{\"tag\":\"forge:molten_silver\",\"amount\":180}",
+  "output": {
+    "tag": "forge:gears/silver"
+  },
+  "stamp": {
+    "item": "embers_reborn:gear_stamp"
+  }
+}

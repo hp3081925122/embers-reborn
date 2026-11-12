@@ -1,8 +1,8 @@
 {
   "entries": [
-    "embers:ashenamulet",
-    "embers:superheater",
-    "embers:grandhammer"
+    "embers_reborn:grandhammer",
+    "embers_reborn:superheater",
+    "embers_reborn:ashenamulet"
   ],
   "replace": false
 }

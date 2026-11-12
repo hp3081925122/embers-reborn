@@ -178,7 +178,7 @@ public class EmbersEvents {
 			EmberWorldData.get(server);
 	}
 
-	public static void onServerTick(LevelTickEvent event) {
+	public static void onServerTick(LevelTickEvent.Pre event) {
 		if (event.getLevel() instanceof net.minecraft.server.level.ServerLevel && event.getLevel().dimension() == Level.OVERWORLD) {
 			boolean changed = false;
 			if (Misc.random.nextInt(400) == 0) {

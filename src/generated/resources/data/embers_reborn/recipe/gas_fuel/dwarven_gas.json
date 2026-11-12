@@ -1,0 +1,6 @@
+{
+  "type": "embers_reborn:gaseous_fuel",
+  "burn_time": 5,
+  "input": "{\"fluid\":\"embers_reborn:dwarven_gas\",\"amount\":1}",
+  "power_multiplier": 2.5
+}

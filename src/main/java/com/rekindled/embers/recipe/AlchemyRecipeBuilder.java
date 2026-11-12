@@ -22,7 +22,7 @@ public class AlchemyRecipeBuilder {
 
 	public ResourceLocation id;
 	public ItemStack output;
-	public ItemStack failure = ItemStack.EMPTY;
+	public ItemStack failure = new ItemStack(RegistryManager.ALCHEMICAL_WASTE.get());
 	public Ingredient tablet;
 	public ArrayList<Ingredient> aspects = new ArrayList<Ingredient>();
 	public ArrayList<Ingredient> inputs = new ArrayList<Ingredient>();

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "embers_reborn:caminite_bricks"
+    },
+    "C": {
+      "item": "embers_reborn:wildfire_core"
+    },
+    "D": {
+      "tag": "forge:plates/dawnstone"
+    },
+    "P": {
+      "tag": "forge:plates/silver"
+    },
+    "S": {
+      "tag": "forge:ingots/silver"
+    }
+  },
+  "pattern": [
+    "S S",
+    "DCD",
+    "BPB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:ember_injector"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "P": {
+      "tag": "forge:plates/dawnstone"
+    }
+  },
+  "pattern": [
+    "P P",
+    "PPP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:dawnstone_mail"
+  }
+}

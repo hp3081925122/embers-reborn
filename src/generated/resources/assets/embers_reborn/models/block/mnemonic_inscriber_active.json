@@ -1,0 +1,6 @@
+{
+  "parent": "embers_reborn:block/mnemonic_inscriber",
+  "textures": {
+    "4": "embers_reborn:block/mnemonic_on"
+  }
+}

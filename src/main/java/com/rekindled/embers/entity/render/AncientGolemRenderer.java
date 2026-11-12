@@ -15,7 +15,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class AncientGolemRenderer extends MobRenderer<AncientGolemEntity, AncientGolemModel<AncientGolemEntity>> {
 
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.parse(Embers.MODID + ":empty"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ancient_golem"), "main");
 	public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/entity/golem.png");
 
 	public AncientGolemRenderer(EntityRendererProvider.Context context) {

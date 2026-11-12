@@ -95,7 +95,7 @@ public class AnvilRepairRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitR
 		}
 		@Override
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AnvilRepairRecipe> streamCodec() {
-			return net.minecraft.network.codec.StreamCodec.unit(new AnvilRepairRecipe(null));
+			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new AnvilRepairRecipe(null));
 		}
 	}
 	@Override

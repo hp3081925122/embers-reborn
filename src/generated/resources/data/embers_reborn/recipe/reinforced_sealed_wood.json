@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "embers_reborn:sealed_planks"
+    },
+    {
+      "item": "minecraft:iron_bars"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:reinforced_sealed_planks"
+  }
+}

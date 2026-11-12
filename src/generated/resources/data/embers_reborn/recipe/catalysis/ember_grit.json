@@ -1,0 +1,11 @@
+{
+  "type": "embers_reborn:catalysis_combustion",
+  "burn_time": 400,
+  "input": {
+    "item": "embers_reborn:ember_grit"
+  },
+  "machine": {
+    "item": "embers_reborn:catalysis_chamber"
+  },
+  "multiplier": 2.0
+}

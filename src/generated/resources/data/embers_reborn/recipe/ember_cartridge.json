@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "S": {
+      "item": "embers_reborn:ember_crystal"
+    }
+  },
+  "pattern": [
+    "ICI",
+    "GSG",
+    " G "
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:ember_cartridge"
+  }
+}

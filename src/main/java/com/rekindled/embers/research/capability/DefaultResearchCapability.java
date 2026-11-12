@@ -8,7 +8,7 @@ import com.rekindled.embers.Embers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 
-public class DefaultResearchCapability implements IResearchCapability {
+public class DefaultResearchCapability implements IResearchCapability, net.neoforged.neoforge.common.util.INBTSerializable<CompoundTag> {
 	Map<ResourceLocation, Boolean> checkmarks = new HashMap<>();
 
 	@Override
@@ -46,5 +46,17 @@ public class DefaultResearchCapability implements IResearchCapability {
 				checkmarks.put(ResourceLocation.fromNamespaceAndPath(Embers.MODID, key), checkmarksTag.getBoolean(key));
 			}
 		}
+	}
+
+	@Override
+	public CompoundTag serializeNBT(net.minecraft.core.HolderLookup.Provider provider) {
+		CompoundTag tag = new CompoundTag();
+		writeToNBT(tag);
+		return tag;
+	}
+
+	@Override
+	public void deserializeNBT(net.minecraft.core.HolderLookup.Provider provider, CompoundTag tag) {
+		readFromNBT(tag);
 	}
 }

@@ -1,0 +1,14 @@
+{
+  "type": "embers_reborn:melting",
+  "bonus": {
+    "amount": 20,
+    "tag": "forge:molten_tin"
+  },
+  "input": {
+    "tag": "forge:ores/zinc"
+  },
+  "output": {
+    "amount": 240,
+    "tag": "forge:molten_zinc"
+  }
+}

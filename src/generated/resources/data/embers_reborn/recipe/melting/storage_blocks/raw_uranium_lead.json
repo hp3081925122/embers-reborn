@@ -1,0 +1,14 @@
+{
+  "type": "embers_reborn:melting",
+  "bonus": {
+    "amount": 90,
+    "tag": "forge:molten_lead"
+  },
+  "input": {
+    "tag": "forge:storage_blocks/raw_uranium"
+  },
+  "output": {
+    "amount": 1080,
+    "tag": "forge:molten_uranium"
+  }
+}

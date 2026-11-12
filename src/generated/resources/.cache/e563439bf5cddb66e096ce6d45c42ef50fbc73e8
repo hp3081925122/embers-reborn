@@ -1,0 +1,24 @@
+// 1.21.1	2026-11-12T09:42:51.0920048	Tags for minecraft:fluid mod id embers_reborn
+4ac84b8521a9748ba97598b0dbf05707256d4231 data/c/tags/fluid/gaseous.json
+e15511d83d04bb7c73ab440206b4e3d9ef64a953 data/embers_reborn/tags/fluid/ingot_tooltip.json
+d26028b2a8e11c663ec9a14ee723c257992049e9 data/embers_reborn/tags/fluid/watery.json
+dcb0a783e3c93c2f704599d7710a77deaca9827a data/forge/tags/fluid/molten_aluminum.json
+036ab144a64e641718e999bb055c17d3072159f9 data/forge/tags/fluid/molten_brass.json
+aaf8a2b1cb5a33f26ff71a5f18258253beaba1d3 data/forge/tags/fluid/molten_bronze.json
+5e3c9f713752a461a62d76206480b155d8011a59 data/forge/tags/fluid/molten_constantan.json
+92e55d112f590dd75df735875ce4ae659cf50488 data/forge/tags/fluid/molten_copper.json
+96d410693c99cc5657569634c28e1352d201f72a data/forge/tags/fluid/molten_dawnstone.json
+ddf3b19501a6d679f0d3120793706767a95e6228 data/forge/tags/fluid/molten_dwarven_mithril.json
+b6b5c4499c38ec351682430128a4497bd8167bc2 data/forge/tags/fluid/molten_electrum.json
+7c910ec20e3c0e9b224800b206db62a8c8636990 data/forge/tags/fluid/molten_gold.json
+6a51b8e2b8e5b24262f2878cf2a56b88b4521451 data/forge/tags/fluid/molten_invar.json
+c4371c2cc4207229e853cf551f8526c065c1b3ec data/forge/tags/fluid/molten_iron.json
+ef81773fe0a01c3b8afebae2478894b89742bbce data/forge/tags/fluid/molten_lead.json
+02cde862d6d8f2268d8b3c338494d57e2337d85a data/forge/tags/fluid/molten_nickel.json
+965d2173048976f1e3919df7b1280857e2b10f84 data/forge/tags/fluid/molten_platinum.json
+08c2c4e9d3e7e633e3a52726d576537614c72db3 data/forge/tags/fluid/molten_silver.json
+04d613a91b65eb0d9f3be6c7ea7982006754f11e data/forge/tags/fluid/molten_tin.json
+127d97c83bf92d0959f8d0e13b05708eec4f7697 data/forge/tags/fluid/molten_uranium.json
+8a24277449f2d65b046d4c3c5cfcdfedb8d70646 data/forge/tags/fluid/molten_zinc.json
+32d8802c439e2ea24498fa9e2904fde5342bdd39 data/forge/tags/fluid/steam.json
+ceb9a0d1a5f60721c1b3cfb001544ef62f9cfc81 data/tconstruct/tags/fluid/tooltips/metal.json

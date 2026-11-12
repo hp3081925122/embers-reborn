@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "embers_reborn:block/caminite_tiles_slab"
+    },
+    "type=double": {
+      "model": "embers_reborn:block/caminite_tiles"
+    },
+    "type=top": {
+      "model": "embers_reborn:block/caminite_tiles_slab_top"
+    }
+  }
+}

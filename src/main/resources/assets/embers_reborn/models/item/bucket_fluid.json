@@ -1,0 +1,8 @@
+{
+    "parent": "neoforge:item/default",
+	"textures": {
+        "base": "embers_reborn:item/bucket_base",
+        "cover": "embers_reborn:item/bucket_cover",
+        "fluid": "embers_reborn:item/bucket_fluid"
+  	}
+}

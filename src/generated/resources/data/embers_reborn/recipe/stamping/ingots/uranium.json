@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:stamping",
+  "fluid": "{\"tag\":\"forge:molten_uranium\",\"amount\":90}",
+  "output": {
+    "tag": "forge:ingots/uranium"
+  },
+  "stamp": {
+    "item": "embers_reborn:ingot_stamp"
+  }
+}

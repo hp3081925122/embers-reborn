@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "embers_reborn:caminite_bricks"
+    },
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "G G",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "embers_reborn:caminite_gauge"
+  }
+}

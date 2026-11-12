@@ -31,22 +31,23 @@ public class SteamFluidType extends EmbersFluidType {
 		entity.hurt(entity.level().damageSources().inFire(), 1.0F);
 
 		entity.level().getProfiler().push("jump");
-		if (true) { // TODO-AT: entity.jumping is protected, needs access transformer
+		// jumping / noJumpDelay are made public by accesstransformer.cfg
+		if (entity.jumping) {
 			boolean flag = entity.isInWater();
 			if (!flag || entity.onGround()) {
 				if (!entity.isInLava() || entity.onGround()) {
-					if ((entity.onGround() || flag) /* noJumpDelay check skipped — private field */) {
-						// TODO-AT: jumpFromGround(entity); (needs access transformer for private noJumpDelay)
-						// TODO-AT: entity.noJumpDelay = 10 (private field, needs AT)
+					if ((entity.onGround() || flag) && entity.noJumpDelay == 0) {
+						jumpFromGround(entity);
+						entity.noJumpDelay = 10;
 					}
 				} else {
-					entity.setDeltaMovement(entity.getDeltaMovement().add(0.0, 0.05, 0.0)); // TODO: jumpInFluid replaced
+					entity.jumpInFluid(NeoForgeMod.LAVA_TYPE.value());
 				}
 			} else {
-				entity.setDeltaMovement(entity.getDeltaMovement().add(0.0, 0.05, 0.0)); // TODO: jumpInFluid replaced
+				entity.jumpInFluid(NeoForgeMod.WATER_TYPE.value());
 			}
 		} else {
-			// TODO-AT: entity.noJumpDelay = 0 (private field, needs AT)
+			entity.noJumpDelay = 0;
 		}
 		entity.level().getProfiler().pop();
 
@@ -87,7 +88,7 @@ public class SteamFluidType extends EmbersFluidType {
 		}
 
 		entity.hasImpulse = true;
-		// TODO: EventHooks.onLivingJump(entity); — check if exists in 1.21.1
+		net.neoforged.neoforge.common.CommonHooks.onLivingJump(entity);
 	}
 
 	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {

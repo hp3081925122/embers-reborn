@@ -82,6 +82,6 @@ public class HeatIngredient implements ICustomIngredient {
 
 
 	@Override
-	public net.neoforged.neoforge.common.crafting.IngredientType<HeatIngredient> getType() { return TYPE; }
+	public net.neoforged.neoforge.common.crafting.IngredientType<HeatIngredient> getType() { return com.rekindled.embers.RegistryManager.HEAT_INGREDIENT_TYPE.get(); }
 
 }

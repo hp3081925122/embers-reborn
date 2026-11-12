@@ -27,7 +27,7 @@ import net.minecraft.world.phys.Vec3;
 public class MnemonicInscriberUpgrade extends DefaultUpgradeProvider {
 
 	public MnemonicInscriberUpgrade(BlockEntity tile) {
-		super(ResourceLocation.parse(Embers.MODID + ":empty"), tile);
+		super(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mnemonic_inscriber"), tile);
 	}
 
 	@Override

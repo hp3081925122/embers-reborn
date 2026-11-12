@@ -143,6 +143,8 @@ public class PipeBlockEntityBase extends BlockEntity {
 		syncConnections = true;
 		requestModelDataUpdate();
 		setChanged();
+		if (level != null)
+			invalidateCapabilities();
 	}
 
 	public PipeConnection getConnection(Direction direction) {
@@ -154,6 +156,8 @@ public class PipeBlockEntityBase extends BlockEntity {
 		syncConnections = true;
 		requestModelDataUpdate();
 		setChanged();
+		if (level != null)
+			invalidateCapabilities();
 	}
 
 	@OnlyIn(Dist.CLIENT)

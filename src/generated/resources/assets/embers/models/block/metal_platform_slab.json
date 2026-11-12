@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "embers:block/metal_platform",
-    "side": "embers:block/metal_platform_side",
-    "top": "embers:block/metal_platform"
-  }
-}

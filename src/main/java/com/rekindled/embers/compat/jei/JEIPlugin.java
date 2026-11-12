@@ -37,7 +37,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
 
-	public static ResourceLocation pluginID = ResourceLocation.parse(Embers.MODID + ":empty");
+	public static ResourceLocation pluginID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "jei_plugin");
 
 	public static final RecipeType<IBoringRecipe> BORING = RecipeType.create(Embers.MODID, "boring", IBoringRecipe.class);
 	public static final RecipeType<IBoringRecipe> EXCAVATION = RecipeType.create(Embers.MODID, "excavation", IBoringRecipe.class);

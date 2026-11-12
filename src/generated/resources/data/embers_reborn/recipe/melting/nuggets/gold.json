@@ -1,0 +1,10 @@
+{
+  "type": "embers_reborn:melting",
+  "input": {
+    "tag": "forge:nuggets/gold"
+  },
+  "output": {
+    "amount": 10,
+    "tag": "forge:molten_gold"
+  }
+}

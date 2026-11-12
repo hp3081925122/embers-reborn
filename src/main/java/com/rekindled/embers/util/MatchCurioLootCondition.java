@@ -3,9 +3,8 @@ package com.rekindled.embers.util;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.rekindled.embers.compat.curios.CuriosCompat;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -21,42 +20,41 @@ import net.neoforged.fml.ModList;
 /**
  * A LootItemCondition that checks worn curios against an {@link ItemPredicate}.
  */
-public class MatchCurioLootCondition implements LootItemCondition {
+public record MatchCurioLootCondition(ItemPredicate predicate) implements LootItemCondition {
 
-		public static LootItemConditionType LOOT_CONDITION_TYPE = null;
+	public static final MapCodec<MatchCurioLootCondition> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
+			ItemPredicate.CODEC.fieldOf("predicate").forGetter(MatchCurioLootCondition::predicate)
+	).apply(inst, MatchCurioLootCondition::new));
 
-	final ItemPredicate predicate;
+	public static final LootItemConditionType LOOT_CONDITION_TYPE = new LootItemConditionType(CODEC);
 
-	public MatchCurioLootCondition(ItemPredicate pToolPredicate) {
-		this.predicate = pToolPredicate;
-	}
-
+	@Override
 	public LootItemConditionType getType() {
 		return LOOT_CONDITION_TYPE;
 	}
 
+	@Override
 	public Set<LootContextParam<?>> getReferencedContextParams() {
-		return ImmutableSet.of(net.minecraft.world.level.storage.loot.parameters.LootContextParams.DIRECT_ATTACKING_ENTITY, LootContextParams.THIS_ENTITY);
+		return ImmutableSet.of(LootContextParams.ATTACKING_ENTITY, LootContextParams.THIS_ENTITY);
 	}
 
+	@Override
 	public boolean test(LootContext context) {
 		if (!ModList.get().isLoaded("curios"))
 			return false;
 
 		Entity user = null;
-		if (context.hasParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.DIRECT_ATTACKING_ENTITY))
-			user = context.getParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.DIRECT_ATTACKING_ENTITY);
+		if (context.hasParam(LootContextParams.ATTACKING_ENTITY))
+			user = context.getParam(LootContextParams.ATTACKING_ENTITY);
 		else if (context.hasParam(LootContextParams.THIS_ENTITY))
 			user = context.getParam(LootContextParams.THIS_ENTITY);
 
-		if (user instanceof LivingEntity)
-			return CuriosCompat.checkForCurios((LivingEntity) user, stack -> true);
+		if (user instanceof LivingEntity living)
+			return CuriosCompat.checkForCurios(living, predicate::test);
 		return false;
 	}
 
 	public static LootItemCondition.Builder curioMatches(ItemPredicate.Builder pToolPredicateBuilder) {
-		return () -> {
-			return new MatchCurioLootCondition(pToolPredicateBuilder.build());
-		};
+		return () -> new MatchCurioLootCondition(pToolPredicateBuilder.build());
 	}
-	}
+}

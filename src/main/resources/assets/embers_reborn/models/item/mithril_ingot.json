@@ -1,0 +1,7 @@
+{
+  "render_type": "embers_reborn:mithril",
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "embers_reborn:item/ingot_mithril_normal"
+  }
+}

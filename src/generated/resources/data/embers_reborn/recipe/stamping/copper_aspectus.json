@@ -1,0 +1,14 @@
+{
+  "type": "embers_reborn:stamping",
+  "fluid": "{\"tag\":\"forge:molten_copper\",\"amount\":90}",
+  "input": {
+    "item": "embers_reborn:ember_shard"
+  },
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:copper_aspectus"
+  },
+  "stamp": {
+    "item": "embers_reborn:ingot_stamp"
+  }
+}

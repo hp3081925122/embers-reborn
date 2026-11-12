@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "embers_reborn:lead_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "embers_reborn:lead_nugget"
+  }
+}

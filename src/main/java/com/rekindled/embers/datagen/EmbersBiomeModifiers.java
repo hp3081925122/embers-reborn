@@ -30,10 +30,10 @@ import net.neoforged.neoforge.registries.holdersets.OrHolderSet;
 
 public class EmbersBiomeModifiers {
 
-	public static final ResourceKey<BiomeModifier> ORE_LEAD_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.parse(Embers.MODID + ":empty"));
-	public static final ResourceKey<BiomeModifier> ORE_SILVER_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final ResourceKey<BiomeModifier> ORE_LEAD_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "add_lead_ore"));
+	public static final ResourceKey<BiomeModifier> ORE_SILVER_KEY = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "add_silver_ore"));
 
-	public static final ResourceKey<BiomeModifier> GOLEM_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.parse(Embers.MODID + ":empty"));
+	public static final ResourceKey<BiomeModifier> GOLEM_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "add_golem_spawn"));
 
 	public static final TagKey<Biome> NO_MONSTERS = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("forge", "no_default_monsters"));
 

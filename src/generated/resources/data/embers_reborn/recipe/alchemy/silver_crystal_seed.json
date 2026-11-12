@@ -1,0 +1,33 @@
+{
+  "type": "embers_reborn:alchemy",
+  "aspects": [
+    {
+      "tag": "embers_reborn:aspectus/iron"
+    },
+    {
+      "tag": "embers_reborn:aspectus/silver"
+    }
+  ],
+  "failure": {
+    "count": 1,
+    "id": "embers_reborn:alchemical_waste"
+  },
+  "inputs": [
+    {
+      "tag": "forge:ingots/silver"
+    },
+    {
+      "tag": "forge:ingots/silver"
+    },
+    {
+      "tag": "forge:ingots/silver"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "embers_reborn:silver_crystal_seed"
+  },
+  "tablet": {
+    "tag": "embers_reborn:crystal_seeds"
+  }
+}
