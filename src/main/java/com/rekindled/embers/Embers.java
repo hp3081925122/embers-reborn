@@ -546,6 +546,12 @@ public class Embers {
 
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
+		static void registerRenderPipelines(net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent event) {
+			com.rekindled.embers.render.EmbersParticleLayers.registerPipelines(event);
+		}
+
+		@OnlyIn(Dist.CLIENT)
+		@SubscribeEvent
 		static void addParticleProvider(RegisterParticleProvidersEvent event) {
 			event.registerSpriteSet(RegistryManager.GLOW_PARTICLE.get(), GlowParticle.Provider::new);
 			event.registerSpriteSet(RegistryManager.STAR_PARTICLE.get(), StarParticle.Provider::new);
