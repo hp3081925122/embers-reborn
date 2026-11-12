@@ -5,8 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "BlockEntityRemoveMixin",
-    "PropertiesIdMixin$ItemProps",
-    "PropertiesIdMixin$BlockProps"
+    "ItemPropertiesIdMixin",
+    "BlockPropertiesIdMixin"
   ],
   "client": [],
   "injectors": {
