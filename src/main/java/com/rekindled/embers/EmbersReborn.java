@@ -33,7 +33,7 @@ public class EmbersReborn {
      * @param modEventBus injected by FML
      */
     public EmbersReborn(IEventBus modEventBus) {
-        // TODO Batch 3: RegistryManager.BLOCKS.register(modEventBus) etc.
+        // TODO Batch 3: com.rekindled.embers.util.RegCtx.block(RegistryManager.BLOCKS, modEventBus) etc.
         // TODO Batch 3: EmbersAPIImpl.init(), ConfigManager.register(), CuriosCompat.init()
         // TODO Batch 4: Capability / Data Attachment registration
         // TODO Batch 5: PacketHandler.init()

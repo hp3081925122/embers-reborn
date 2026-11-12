@@ -4,7 +4,9 @@
   "package": "com.rekindled.embers.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "BlockEntityRemoveMixin"
+    "BlockEntityRemoveMixin",
+    "PropertiesIdMixin$ItemProps",
+    "PropertiesIdMixin$BlockProps"
   ],
   "client": [],
   "injectors": {

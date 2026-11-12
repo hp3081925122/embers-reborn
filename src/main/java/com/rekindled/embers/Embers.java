@@ -185,8 +185,8 @@ public class Embers {
 		modEventBus.addListener(com.rekindled.embers.network.PacketHandler::register);
 
 		EmbersAPIImpl.init();
-		RegistryManager.BLOCKS.register(modEventBus);
-		RegistryManager.ITEMS.register(modEventBus);
+		com.rekindled.embers.util.RegCtx.block(RegistryManager.BLOCKS, modEventBus);
+		com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, modEventBus);
 		RegistryManager.FLUIDTYPES.register(modEventBus);
 		RegistryManager.FLUIDS.register(modEventBus);
 		RegistryManager.ENTITY_TYPES.register(modEventBus);

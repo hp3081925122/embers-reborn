@@ -44,18 +44,18 @@ import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 public class CuriosCompat {
 
-	public static final DeferredHolder<Block, Block> EXPLOSION_PEDESTAL = RegistryManager.BLOCKS.register("explosion_pedestal", () -> new ExplosionPedestalBlock(Properties.of().mapColor(MapColor.COLOR_ORANGE).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion(), EmbersSounds.MULTIBLOCK_EXTRA));
+	public static final DeferredHolder<Block, Block> EXPLOSION_PEDESTAL = com.rekindled.embers.util.RegCtx.block(RegistryManager.BLOCKS, "explosion_pedestal", () -> new ExplosionPedestalBlock(Properties.of().mapColor(MapColor.COLOR_ORANGE).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion(), EmbersSounds.MULTIBLOCK_EXTRA));
 
-	public static final DeferredHolder<Item, Item> EMBER_RING = RegistryManager.ITEMS.register("ember_ring", () -> new EmberDiscountBaubleItem(new Item.Properties().stacksTo(1), 0.15));
-	public static final DeferredHolder<Item, Item> EMBER_BELT = RegistryManager.ITEMS.register("ember_belt", () -> new EmberDiscountBaubleItem(new Item.Properties().stacksTo(1), 0.25));
-	public static final DeferredHolder<Item, Item> EMBER_AMULET = RegistryManager.ITEMS.register("ember_amulet", () -> new EmberDiscountBaubleItem(new Item.Properties().stacksTo(1), 0.2));
-	public static final DeferredHolder<Item, Item> EMBER_BULB = RegistryManager.ITEMS.register("ember_bulb", () -> new EmberBulbItem(new Item.Properties().stacksTo(1)));
-	public static final DeferredHolder<Item, Item> DAWNSTONE_MAIL = RegistryManager.ITEMS.register("dawnstone_mail", () -> new DawnstoneMailItem(new Item.Properties().stacksTo(1)));
-	public static final DeferredHolder<Item, Item> ASHEN_AMULET = RegistryManager.ITEMS.register("ashen_amulet", () -> new GenericCurioItemItem(new Item.Properties().stacksTo(1)));
-	public static final DeferredHolder<Item, Item> NONBELEIVER_AMULET = RegistryManager.ITEMS.register("nonbeliever_amulet", () -> new NonbeleiverAmuletItem(new Item.Properties().stacksTo(1)));
-	public static final DeferredHolder<Item, Item> EXPLOSION_CHARM = RegistryManager.ITEMS.register("explosion_charm", () -> new ExplosionCharmItem(new Item.Properties().stacksTo(1)));
+	public static final DeferredHolder<Item, Item> EMBER_RING = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "ember_ring", () -> new EmberDiscountBaubleItem(new Item.Properties().stacksTo(1), 0.15));
+	public static final DeferredHolder<Item, Item> EMBER_BELT = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "ember_belt", () -> new EmberDiscountBaubleItem(new Item.Properties().stacksTo(1), 0.25));
+	public static final DeferredHolder<Item, Item> EMBER_AMULET = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "ember_amulet", () -> new EmberDiscountBaubleItem(new Item.Properties().stacksTo(1), 0.2));
+	public static final DeferredHolder<Item, Item> EMBER_BULB = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "ember_bulb", () -> new EmberBulbItem(new Item.Properties().stacksTo(1)));
+	public static final DeferredHolder<Item, Item> DAWNSTONE_MAIL = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "dawnstone_mail", () -> new DawnstoneMailItem(new Item.Properties().stacksTo(1)));
+	public static final DeferredHolder<Item, Item> ASHEN_AMULET = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "ashen_amulet", () -> new GenericCurioItemItem(new Item.Properties().stacksTo(1)));
+	public static final DeferredHolder<Item, Item> NONBELEIVER_AMULET = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "nonbeliever_amulet", () -> new NonbeleiverAmuletItem(new Item.Properties().stacksTo(1)));
+	public static final DeferredHolder<Item, Item> EXPLOSION_CHARM = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "explosion_charm", () -> new ExplosionCharmItem(new Item.Properties().stacksTo(1)));
 
-	public static final DeferredHolder<Item, Item> EXPLOSION_PEDESTAL_ITEM = RegistryManager.ITEMS.register("explosion_pedestal", () -> new BlockItem(EXPLOSION_PEDESTAL.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> EXPLOSION_PEDESTAL_ITEM = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "explosion_pedestal", () -> new BlockItem(EXPLOSION_PEDESTAL.get(), new Item.Properties()));
 
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ExplosionPedestalBlockEntity>> EXPLOSION_PEDESTAL_ENTITY = RegistryManager.BLOCK_ENTITY_TYPES.register("explosion_pedestal", () -> BlockEntityType.Builder.of(ExplosionPedestalBlockEntity::new, EXPLOSION_PEDESTAL.get()).build(null));
 
