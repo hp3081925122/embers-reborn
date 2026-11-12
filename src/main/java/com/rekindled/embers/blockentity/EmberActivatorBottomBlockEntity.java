@@ -74,7 +74,7 @@ public class EmberActivatorBottomBlockEntity extends BlockEntity implements IExt
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+		com.rekindled.embers.util.NbtBridge.load(inventory, provider, nbt.getCompoundOrEmpty("inventory"));
 		progress = nbt.getIntOr("progress", 0);
 	}
 
@@ -87,7 +87,7 @@ public class EmberActivatorBottomBlockEntity extends BlockEntity implements IExt
 	}
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		nbt.put("inventory", inventory.serializeNBT(provider));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 		nbt.putInt("progress", progress);
 	}
 

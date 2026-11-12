@@ -103,7 +103,7 @@ public class CopperChargerBlockEntity extends BlockEntity implements ISoundContr
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		if (nbt.contains("inventory"))
-			inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+			com.rekindled.embers.util.NbtBridge.load(inventory, provider, nbt.getCompoundOrEmpty("inventory"));
 		isWorking = nbt.getBooleanOr("working", false);
 		reverse = nbt.getBooleanOr("reverse", false);
 	}
@@ -118,14 +118,14 @@ public class CopperChargerBlockEntity extends BlockEntity implements ISoundContr
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		nbt.put("ember", capability.serializeNBT(provider));
-		nbt.put("inventory", inventory.serializeNBT(provider));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 	}
 
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
 		nbt.put("ember", capability.serializeNBT(provider));
-		nbt.put("inventory", inventory.serializeNBT(provider));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 		nbt.putBoolean("working", isWorking);
 		nbt.putBoolean("reverse", reverse);
 		return nbt;

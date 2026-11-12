@@ -78,7 +78,7 @@ public class CatalyticPlugBlockEntity extends BlockEntity implements ISoundContr
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		tank.readFromNBT(provider, nbt.getCompoundOrEmpty("tank"));
+		com.rekindled.embers.util.NbtBridge.load(tank, provider, nbt.getCompoundOrEmpty("tank"));
 		activeTicks = nbt.getIntOr("active", 0);
 		burnTime = nbt.getIntOr("burnTime", 0);
 	}
@@ -92,7 +92,7 @@ public class CatalyticPlugBlockEntity extends BlockEntity implements ISoundContr
 	}
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		nbt.put("tank", tank.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("tank", com.rekindled.embers.util.NbtBridge.writeTank(tank, provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.putInt("active", activeTicks);
 		nbt.putInt("burnTime", burnTime);
 	}
@@ -100,7 +100,7 @@ public class CatalyticPlugBlockEntity extends BlockEntity implements ISoundContr
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
-		nbt.put("tank", tank.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("tank", com.rekindled.embers.util.NbtBridge.writeTank(tank, provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.putInt("active", activeTicks);
 		nbt.putInt("burnTime", burnTime);
 		return nbt;

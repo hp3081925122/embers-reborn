@@ -141,7 +141,7 @@ public abstract class FluidPipeBlockEntityBase extends PipeBlockEntityBase imple
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("tank"))
-			tank.readFromNBT(provider, nbt.getCompoundOrEmpty("tank"));
+			com.rekindled.embers.util.NbtBridge.load(tank, provider, nbt.getCompoundOrEmpty("tank"));
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public abstract class FluidPipeBlockEntityBase extends PipeBlockEntityBase imple
 	}
 
 	public void writeTank(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		nbt.put("tank", tank.writeToNBT(provider, new CompoundTag()));
+		nbt.put("tank", com.rekindled.embers.util.NbtBridge.writeTank(tank, provider, new CompoundTag()));
 	}
 
 	/* getCapabilityLEGACY removed */

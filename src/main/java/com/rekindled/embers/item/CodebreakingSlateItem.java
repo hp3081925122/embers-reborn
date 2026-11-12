@@ -52,11 +52,11 @@ public class CodebreakingSlateItem extends Item implements MenuProvider {
 			net.minecraft.core.HolderLookup.Provider registries = player.registryAccess();
 			ItemStackHandler inventory = new ItemStackHandler(7) {
 				public void onContentsChanged(int slot) {
-					ItemNbtHelper.setTagElement(slate, "inventory", this.serializeNBT(registries));
+					ItemNbtHelper.setTagElement(slate, "inventory", com.rekindled.embers.util.NbtBridge.save(this, registries));
 				}
 			};
 			net.minecraft.nbt.CompoundTag nbt = ItemNbtHelper.getTagElement(slate, "inventory");
-			if (!nbt.isEmpty()) inventory.deserializeNBT(registries, nbt);
+			if (!nbt.isEmpty()) com.rekindled.embers.util.NbtBridge.load(inventory, registries, nbt);
 			if (inventory.getSlots() > 6) {
 				Misc.giveItemToPlayer(inventory.getStackInSlot(5), player);
 				inventory.setStackInSlot(5, ItemStack.EMPTY);

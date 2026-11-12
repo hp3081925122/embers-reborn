@@ -72,19 +72,19 @@ public class StampBaseBlockEntity extends OpenTankBlockEntity implements IExtraC
 	@Override
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditionalNbt(nbt, provider);
-		inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+		com.rekindled.embers.util.NbtBridge.load(inventory, provider, nbt.getCompoundOrEmpty("inventory"));
 	}
 
 	@Override
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.saveAdditionalNbt(nbt, provider);
-		nbt.put("inventory", inventory.serializeNBT(provider));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 	}
 
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
-		nbt.put("inventory", inventory.serializeNBT(provider));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 		return nbt;
 	}
 

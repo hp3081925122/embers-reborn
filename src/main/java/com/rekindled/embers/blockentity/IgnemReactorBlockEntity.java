@@ -113,7 +113,7 @@ public class IgnemReactorBlockEntity extends BlockEntity implements ISoundContro
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains("inventory"))
-			inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+			com.rekindled.embers.util.NbtBridge.load(inventory, provider, nbt.getCompoundOrEmpty("inventory"));
 		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		if (nbt.contains("progress"))
 			progress = nbt.getIntOr("progress", 0);
@@ -130,7 +130,7 @@ public class IgnemReactorBlockEntity extends BlockEntity implements ISoundContro
 	}
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		nbt.put("inventory", inventory.serializeNBT(provider));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 		nbt.put("ember", capability.serializeNBT(provider));
 		nbt.putInt("progress", progress);
 		nbt.putDouble("catalyzer", catalyzerMult);

@@ -95,7 +95,7 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains("inventory"))
-			inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+			com.rekindled.embers.util.NbtBridge.load(inventory, provider, nbt.getCompoundOrEmpty("inventory"));
 		if (nbt.contains("fueled"))
 			ticksFueled = nbt.getDoubleOr("fueled", 0.0D);
 		isRunning = nbt.getBooleanOr("isRunning", false);
@@ -110,7 +110,7 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 	}
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		nbt.put("inventory", inventory.serializeNBT(provider));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 		nbt.putDouble("fueled", ticksFueled);
 		nbt.putBoolean("isRunning", isRunning);
 	}

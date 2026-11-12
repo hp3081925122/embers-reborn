@@ -103,7 +103,7 @@ public class StamperBlockEntity extends BlockEntity implements IMechanicallyPowe
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		capability.deserializeNBT(provider, nbt.getCompoundOrEmpty("ember"));
 		powered = nbt.getBooleanOr("powered", false);
-		stamp.deserializeNBT(provider, nbt.getCompoundOrEmpty("stamp"));
+		com.rekindled.embers.util.NbtBridge.load(stamp, provider, nbt.getCompoundOrEmpty("stamp"));
 	}
 
 	@Override
@@ -117,14 +117,14 @@ public class StamperBlockEntity extends BlockEntity implements IMechanicallyPowe
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		nbt.put("ember", capability.serializeNBT(provider));
 		nbt.putBoolean("powered", powered);
-		nbt.put("stamp", stamp.serializeNBT(provider));
+		nbt.put("stamp", com.rekindled.embers.util.NbtBridge.save(stamp, provider));
 	}
 
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
 		nbt.putBoolean("powered", powered);
-		nbt.put("stamp", stamp.serializeNBT(provider));
+		nbt.put("stamp", com.rekindled.embers.util.NbtBridge.save(stamp, provider));
 		return nbt;
 	}
 

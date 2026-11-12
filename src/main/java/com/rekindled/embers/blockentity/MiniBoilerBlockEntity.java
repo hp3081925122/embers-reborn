@@ -101,8 +101,8 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 	@Override
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditionalNbt(nbt, provider);
-		fluidTank.readFromNBT(provider, nbt.getCompoundOrEmpty("fluidTank"));
-		gasTank.readFromNBT(provider, nbt.getCompoundOrEmpty("gasTank"));
+		com.rekindled.embers.util.NbtBridge.load(fluidTank, provider, nbt.getCompoundOrEmpty("fluidTank"));
+		com.rekindled.embers.util.NbtBridge.load(gasTank, provider, nbt.getCompoundOrEmpty("gasTank"));
 		lastBoil = nbt.getIntOr("lastBoil", 0);
 		boilTime = nbt.getIntOr("boilTime", 0);
 	}
@@ -110,8 +110,8 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 	@Override
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.saveAdditionalNbt(nbt, provider);
-		nbt.put("fluidTank", fluidTank.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
-		nbt.put("gasTank", gasTank.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("fluidTank", com.rekindled.embers.util.NbtBridge.writeTank(fluidTank, provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("gasTank", com.rekindled.embers.util.NbtBridge.writeTank(gasTank, provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.putInt("lastBoil", lastBoil);
 		nbt.putInt("boilTime", boilTime);
 	}
@@ -119,8 +119,8 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
-		nbt.put("fluidTank", fluidTank.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
-		nbt.put("gasTank", gasTank.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("fluidTank", com.rekindled.embers.util.NbtBridge.writeTank(fluidTank, provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("gasTank", com.rekindled.embers.util.NbtBridge.writeTank(gasTank, provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.putInt("lastBoil", lastBoil);
 		nbt.putInt("boilTime", boilTime);
 		return nbt;

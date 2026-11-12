@@ -68,7 +68,7 @@ public class DawnstoneAnvilBlockEntity extends BlockEntity implements IHammerabl
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		progress = nbt.getIntOr("progress", 0);
-		inventory.deserializeNBT(provider, nbt.getCompoundOrEmpty("inventory"));
+		com.rekindled.embers.util.NbtBridge.load(inventory, provider, nbt.getCompoundOrEmpty("inventory"));
 	}
 
 	@Override
@@ -81,14 +81,14 @@ public class DawnstoneAnvilBlockEntity extends BlockEntity implements IHammerabl
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		nbt.putInt("progress", progress);
-		nbt.put("inventory", inventory.serializeNBT(provider));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 	}
 
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
 		nbt.putInt("progress", progress);
-		nbt.put("inventory", inventory.serializeNBT(provider));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 		return nbt;
 	}
 

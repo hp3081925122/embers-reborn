@@ -65,12 +65,12 @@ public class SlateMenu extends AbstractContainerMenu {
 			public void onContentsChanged(int slot) {
 				if (loading[0])
 					return;
-				ItemNbtHelper.setTagElement(SlateMenu.this.slate, "inventory", this.serializeNBT(registries));
+				ItemNbtHelper.setTagElement(SlateMenu.this.slate, "inventory", com.rekindled.embers.util.NbtBridge.save(this, registries));
 			}
 		};
 		CompoundTag nbt = ItemNbtHelper.getTagElement(slate, "inventory");
 		if (!nbt.isEmpty())
-			inventory.deserializeNBT(registries, nbt);
+			com.rekindled.embers.util.NbtBridge.load(inventory, registries, nbt);
 		loading[0] = false;
 
 		//slate inventory

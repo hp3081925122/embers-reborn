@@ -82,10 +82,10 @@ public class MixerCentrifugeBottomBlockEntity extends BlockEntity implements IMe
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		north.readFromNBT(provider, nbt.getCompoundOrEmpty("northTank"));
-		south.readFromNBT(provider, nbt.getCompoundOrEmpty("southTank"));
-		east.readFromNBT(provider, nbt.getCompoundOrEmpty("eastTank"));
-		west.readFromNBT(provider, nbt.getCompoundOrEmpty("westTank"));
+		com.rekindled.embers.util.NbtBridge.load(north, provider, nbt.getCompoundOrEmpty("northTank"));
+		com.rekindled.embers.util.NbtBridge.load(south, provider, nbt.getCompoundOrEmpty("southTank"));
+		com.rekindled.embers.util.NbtBridge.load(east, provider, nbt.getCompoundOrEmpty("eastTank"));
+		com.rekindled.embers.util.NbtBridge.load(west, provider, nbt.getCompoundOrEmpty("westTank"));
 		isWorking = nbt.getBooleanOr("working", false);
 	}
 
@@ -98,20 +98,20 @@ public class MixerCentrifugeBottomBlockEntity extends BlockEntity implements IMe
 	}
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		nbt.put("northTank", north.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
-		nbt.put("southTank", south.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
-		nbt.put("eastTank", east.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
-		nbt.put("westTank", west.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("northTank", com.rekindled.embers.util.NbtBridge.writeTank(north, provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("southTank", com.rekindled.embers.util.NbtBridge.writeTank(south, provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("eastTank", com.rekindled.embers.util.NbtBridge.writeTank(east, provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("westTank", com.rekindled.embers.util.NbtBridge.writeTank(west, provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.putBoolean("working", isWorking);
 	}
 
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
-		nbt.put("northTank", north.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
-		nbt.put("southTank", south.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
-		nbt.put("eastTank", east.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
-		nbt.put("westTank", west.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("northTank", com.rekindled.embers.util.NbtBridge.writeTank(north, provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("southTank", com.rekindled.embers.util.NbtBridge.writeTank(south, provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("eastTank", com.rekindled.embers.util.NbtBridge.writeTank(east, provider, new net.minecraft.nbt.CompoundTag()));
+		nbt.put("westTank", com.rekindled.embers.util.NbtBridge.writeTank(west, provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.putBoolean("working", isWorking);
 		return nbt;
 	}

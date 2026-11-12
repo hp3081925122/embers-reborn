@@ -88,6 +88,12 @@ public final class NbtBridge {
 		return output.buildResult();
 	}
 
+	/** 1.21.1 FluidTank#writeToNBT(provider, tag): writes the tank into tag and returns it. */
+	public static CompoundTag writeTank(FluidTank tank, HolderLookup.Provider provider, CompoundTag tag) {
+		tag.merge(save(tank, provider));
+		return tag;
+	}
+
 	public static void load(FluidTank tank, HolderLookup.Provider provider, CompoundTag tag) {
 		tank.deserialize(input(provider, tag));
 	}

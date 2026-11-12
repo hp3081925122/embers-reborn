@@ -44,7 +44,7 @@ public abstract class OpenTankBlockEntity extends net.minecraft.world.level.bloc
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		tank.readFromNBT(provider, nbt);
+		com.rekindled.embers.util.NbtBridge.load(tank, provider, nbt);
 		if (nbt.contains("lastEscaped")) {
 			lastEscaped = FluidStack.parseOptional(provider, nbt.getCompoundOrEmpty("lastEscaped"));
 			lastEscapedTickServer = nbt.getLongOr("lastEscapedTick", 0L);
@@ -60,7 +60,7 @@ public abstract class OpenTankBlockEntity extends net.minecraft.world.level.bloc
 	}
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		tank.writeToNBT(provider, nbt);
+		com.rekindled.embers.util.NbtBridge.writeTank(tank, provider, nbt);
 		if (lastEscaped != null) {
 			nbt.put("lastEscaped", (net.minecraft.nbt.CompoundTag) lastEscaped.save(provider, new net.minecraft.nbt.CompoundTag()));
 			nbt.putLong("lastEscapedTick", lastEscapedTickServer);
@@ -70,7 +70,7 @@ public abstract class OpenTankBlockEntity extends net.minecraft.world.level.bloc
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
-		tank.writeToNBT(provider, nbt);
+		com.rekindled.embers.util.NbtBridge.writeTank(tank, provider, nbt);
 		if (lastEscaped != null) {
 			nbt.put("lastEscaped", (net.minecraft.nbt.CompoundTag) lastEscaped.save(provider, new net.minecraft.nbt.CompoundTag()));
 			nbt.putLong("lastEscapedTick", lastEscapedTickServer);
