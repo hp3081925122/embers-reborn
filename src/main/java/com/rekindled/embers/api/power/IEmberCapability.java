@@ -3,7 +3,7 @@ package com.rekindled.embers.api.power;
 import com.rekindled.embers.Embers;
 
 import net.minecraft.nbt.CompoundTag;
-import net.neoforged.neoforge.common.util.INBTSerializable;
+import com.rekindled.embers.util.INBTSerializable;
 
 /**
  * Ember energy storage interface.

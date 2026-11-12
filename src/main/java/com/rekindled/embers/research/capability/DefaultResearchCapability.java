@@ -8,7 +8,7 @@ import com.rekindled.embers.Embers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 
-public class DefaultResearchCapability implements IResearchCapability, net.neoforged.neoforge.common.util.INBTSerializable<CompoundTag> {
+public class DefaultResearchCapability implements IResearchCapability, com.rekindled.embers.util.INBTSerializable<CompoundTag> {
 	Map<Identifier, Boolean> checkmarks = new HashMap<>();
 
 	@Override

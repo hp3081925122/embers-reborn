@@ -8,7 +8,7 @@ import com.rekindled.embers.api.capabilities.EmbersCapabilities;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.neoforged.neoforge.common.util.INBTSerializable;
+import com.rekindled.embers.util.INBTSerializable;
 
 public class ResearchCapabilityProvider implements INBTSerializable<CompoundTag> {
 	private IResearchCapability capability;
