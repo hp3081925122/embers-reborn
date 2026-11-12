@@ -93,10 +93,10 @@ public abstract class EmberStorageItem extends Item {
 					int r = 255;
 					int g = (int)(255.0f*(1.0f-coeff) + (64.0f*timerSine+64.0f)*coeff);
 					int b = (int)(255.0f*(1.0f-coeff) + 16.0f*coeff);
-					return Misc.intColor(r, g, b);
+					return 0xFF000000 | Misc.intColor(r, g, b);
 				}
 			}
-			return 0xFFFFFF;
+			return 0xFFFFFFFF;
 		}
 	}
 }

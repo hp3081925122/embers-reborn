@@ -14,6 +14,8 @@ public class SneakyBufferSourceWrapper implements MultiBufferSource {
 
 	@Override
 	public VertexConsumer getBuffer(RenderType renderType) {
+		if (renderType instanceof RenderType.CompositeRenderType composite)
+			return buffer.getBuffer(EmbersRenderTypes.GLOW_TEXT.apply(composite.state().textureState));
 		return buffer.getBuffer(renderType);
 	}
 }

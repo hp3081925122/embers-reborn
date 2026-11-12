@@ -53,9 +53,9 @@ public class TyrfingItem extends SwordItem implements ITyrfingWeapon {
 				int r = (int)(64.0f*timerSine);
 				int g = (int)(16.0f);
 				int b = (int)(32.0f+32.0f*timerSine);
-				return Misc.intColor(r, g, b);
+				return 0xFF000000 | Misc.intColor(r, g, b);
 			}
-			return 0xFFFFFF;
+			return 0xFFFFFFFF;
 		}		
 	}
 }

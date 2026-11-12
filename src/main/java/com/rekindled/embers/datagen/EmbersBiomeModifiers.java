@@ -35,7 +35,7 @@ public class EmbersBiomeModifiers {
 
 	public static final ResourceKey<BiomeModifier> GOLEM_SPAWN = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(Embers.MODID, "add_golem_spawn"));
 
-	public static final TagKey<Biome> NO_MONSTERS = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("forge", "no_default_monsters"));
+	public static final TagKey<Biome> NO_MONSTERS = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("c", "no_default_monsters"));
 
 	public static void generate(BootstrapContext<BiomeModifier> bootstrap) {
 		HolderGetter<PlacedFeature> placed = bootstrap.lookup(Registries.PLACED_FEATURE);

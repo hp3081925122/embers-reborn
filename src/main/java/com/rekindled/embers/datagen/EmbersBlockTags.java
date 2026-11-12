@@ -32,7 +32,7 @@ public class EmbersBlockTags extends BlockTagsProvider {
 	public static final TagKey<Block> FLUID_PIPE_CONNECTION = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "fluid_pipe_connection"));
 	public static final TagKey<Block> FLUID_PIPE_CONNECTION_TOGGLEABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "fluid_pipe_connection/toggleable"));
 
-	public static final TagKey<Block> RELOCATION_NOT_SUPPORTED = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "relocation_not_supported"));
+	public static final TagKey<Block> RELOCATION_NOT_SUPPORTED = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "relocation_not_supported"));
 
 	public static final TagKey<Block> MECH_CORE_PROXYABLE = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mech_core_proxyable"));
 	public static final TagKey<Block> MECH_CORE_PROXYABLE_BOTTOM = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "mech_core_proxyable/bottom"));
@@ -73,16 +73,16 @@ public class EmbersBlockTags extends BlockTagsProvider {
 	public static final TagKey<Block> WEATHERED_COPPER = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "weathered_copper"));
 	public static final TagKey<Block> OXIDIZED_COPPER = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "oxidized_copper"));
 
-	public static final TagKey<Block> LEAD_ORE = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ores/lead"));
-	public static final TagKey<Block> RAW_LEAD_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/raw_lead"));
+	public static final TagKey<Block> LEAD_ORE = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "ores/lead"));
+	public static final TagKey<Block> RAW_LEAD_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/raw_lead"));
 
-	public static final TagKey<Block> SILVER_ORE = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ores/silver"));
-	public static final TagKey<Block> RAW_SILVER_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/raw_silver"));
+	public static final TagKey<Block> SILVER_ORE = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "ores/silver"));
+	public static final TagKey<Block> RAW_SILVER_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/raw_silver"));
 
-	public static final TagKey<Block> LEAD_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/lead"));
-	public static final TagKey<Block> SILVER_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/silver"));
-	public static final TagKey<Block> DAWNSTONE_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/dawnstone"));
-	public static final TagKey<Block> MITHRIL_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/dwarven_mithril"));
+	public static final TagKey<Block> LEAD_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/lead"));
+	public static final TagKey<Block> SILVER_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/silver"));
+	public static final TagKey<Block> DAWNSTONE_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/dawnstone"));
+	public static final TagKey<Block> MITHRIL_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/dwarven_mithril"));
 
 	public static final TagKey<Block> CRYSTAL_SEEDS = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds"));
 	public static final TagKey<Block> COPPER_SEED = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/copper"));
@@ -100,11 +100,11 @@ public class EmbersBlockTags extends BlockTagsProvider {
 	public static final TagKey<Block> MITHRIL_SEED = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "crystal_seeds/dwarven_mithril"));
 
 	//tags not used in this class
-	public static final TagKey<Block> BRONZE_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/bronze"));
-	public static final TagKey<Block> NICKEL_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/nickel"));
-	public static final TagKey<Block> TIN_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/tin"));
-	public static final TagKey<Block> ALUMINUM_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/aluminium"));
-	public static final TagKey<Block> ELECTRUM_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/electrum"));
+	public static final TagKey<Block> BRONZE_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/bronze"));
+	public static final TagKey<Block> NICKEL_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/nickel"));
+	public static final TagKey<Block> TIN_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/tin"));
+	public static final TagKey<Block> ALUMINUM_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/aluminium"));
+	public static final TagKey<Block> ELECTRUM_BLOCK = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/electrum"));
 
 	//compat
 	public static final TagKey<Block> ANVIL_METAL = BlockTags.create(ResourceLocation.fromNamespaceAndPath("tconstruct", "anvil_metal"));

@@ -18,30 +18,30 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class EmbersFluidTags extends FluidTagsProvider {
 
-	public static final TagKey<Fluid> MOLTEN_IRON = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_iron"));
-	public static final TagKey<Fluid> MOLTEN_GOLD = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_gold"));
-	public static final TagKey<Fluid> MOLTEN_COPPER = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_copper"));
-	public static final TagKey<Fluid> MOLTEN_LEAD = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_lead"));
-	public static final TagKey<Fluid> MOLTEN_SILVER = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_silver"));
-	public static final TagKey<Fluid> MOLTEN_DAWNSTONE = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_dawnstone"));
-	public static final TagKey<Fluid> MOLTEN_MITHRIL = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_dwarven_mithril"));
+	public static final TagKey<Fluid> MOLTEN_IRON = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_iron"));
+	public static final TagKey<Fluid> MOLTEN_GOLD = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_gold"));
+	public static final TagKey<Fluid> MOLTEN_COPPER = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_copper"));
+	public static final TagKey<Fluid> MOLTEN_LEAD = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_lead"));
+	public static final TagKey<Fluid> MOLTEN_SILVER = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_silver"));
+	public static final TagKey<Fluid> MOLTEN_DAWNSTONE = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_dawnstone"));
+	public static final TagKey<Fluid> MOLTEN_MITHRIL = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_dwarven_mithril"));
 
-	public static final TagKey<Fluid> STEAM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "steam"));
+	public static final TagKey<Fluid> STEAM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "steam"));
 
 	public static final TagKey<Fluid> WATERY = FluidTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "watery"));
 
 	//compatibility fluids
-	public static final TagKey<Fluid> MOLTEN_NICKEL = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_nickel"));
-	public static final TagKey<Fluid> MOLTEN_TIN = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_tin"));
-	public static final TagKey<Fluid> MOLTEN_ALUMINUM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_aluminum"));
-	public static final TagKey<Fluid> MOLTEN_ZINC = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_zinc"));
-	public static final TagKey<Fluid> MOLTEN_PLATINUM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_platinum"));
-	public static final TagKey<Fluid> MOLTEN_URANIUM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_uranium"));
-	public static final TagKey<Fluid> MOLTEN_BRONZE = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_bronze"));
-	public static final TagKey<Fluid> MOLTEN_ELECTRUM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_electrum"));
-	public static final TagKey<Fluid> MOLTEN_BRASS = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_brass"));
-	public static final TagKey<Fluid> MOLTEN_CONSTANTAN = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_constantan"));
-	public static final TagKey<Fluid> MOLTEN_INVAR = FluidTags.create(ResourceLocation.fromNamespaceAndPath("forge", "molten_invar"));
+	public static final TagKey<Fluid> MOLTEN_NICKEL = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_nickel"));
+	public static final TagKey<Fluid> MOLTEN_TIN = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_tin"));
+	public static final TagKey<Fluid> MOLTEN_ALUMINUM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_aluminum"));
+	public static final TagKey<Fluid> MOLTEN_ZINC = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_zinc"));
+	public static final TagKey<Fluid> MOLTEN_PLATINUM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_platinum"));
+	public static final TagKey<Fluid> MOLTEN_URANIUM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_uranium"));
+	public static final TagKey<Fluid> MOLTEN_BRONZE = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_bronze"));
+	public static final TagKey<Fluid> MOLTEN_ELECTRUM = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_electrum"));
+	public static final TagKey<Fluid> MOLTEN_BRASS = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_brass"));
+	public static final TagKey<Fluid> MOLTEN_CONSTANTAN = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_constantan"));
+	public static final TagKey<Fluid> MOLTEN_INVAR = FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", "molten_invar"));
 
 	//ingot tooltips
 	public static final TagKey<Fluid> INGOT_TOOLTIP = FluidTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ingot_tooltip"));

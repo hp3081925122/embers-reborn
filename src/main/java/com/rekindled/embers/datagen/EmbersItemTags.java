@@ -32,7 +32,7 @@ public class EmbersItemTags extends ItemTagsProvider {
 
 	public static final TagKey<Item> INSCRIBABLE_PAPER = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "inscribable_paper"));
 
-	public static final TagKey<Item> TOOLS_HAMMERS = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "tools/hammers"));
+	public static final TagKey<Item> TOOLS_HAMMERS = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "tools/hammers"));
 
 	public static final TagKey<Item> NORMAL_WALK_SPEED_TOOL = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "normal_walk_speed_tool"));
 
@@ -62,54 +62,54 @@ public class EmbersItemTags extends ItemTagsProvider {
 
 	public static final TagKey<Item> ASHEN_STONE = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ashen_stone"));
 
-	public static final TagKey<Item> PLATES = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates"));
-	public static final TagKey<Item> IRON_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates/iron"));
-	//public static final TagKey<Item> GOLD_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates/gold"));
-	public static final TagKey<Item> COPPER_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates/copper"));
+	public static final TagKey<Item> PLATES = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates"));
+	public static final TagKey<Item> IRON_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/iron"));
+	//public static final TagKey<Item> GOLD_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/gold"));
+	public static final TagKey<Item> COPPER_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/copper"));
 
-	public static final TagKey<Item> COPPER_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/copper"));
+	public static final TagKey<Item> COPPER_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/copper"));
 
-	public static final TagKey<Item> LEAD_ORE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ores/lead"));
-	public static final TagKey<Item> RAW_LEAD_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/raw_lead"));
-	public static final TagKey<Item> LEAD_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/lead"));
+	public static final TagKey<Item> LEAD_ORE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ores/lead"));
+	public static final TagKey<Item> RAW_LEAD_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/raw_lead"));
+	public static final TagKey<Item> LEAD_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/lead"));
 
-	public static final TagKey<Item> RAW_LEAD = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "raw_materials/lead"));
-	public static final TagKey<Item> LEAD_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/lead"));
-	public static final TagKey<Item> LEAD_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/lead"));
-	public static final TagKey<Item> LEAD_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates/lead"));
+	public static final TagKey<Item> RAW_LEAD = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "raw_materials/lead"));
+	public static final TagKey<Item> LEAD_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/lead"));
+	public static final TagKey<Item> LEAD_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/lead"));
+	public static final TagKey<Item> LEAD_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/lead"));
 
-	public static final TagKey<Item> SILVER_ORE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ores/silver"));
-	public static final TagKey<Item> RAW_SILVER_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/raw_silver"));
-	public static final TagKey<Item> SILVER_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/silver"));
+	public static final TagKey<Item> SILVER_ORE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ores/silver"));
+	public static final TagKey<Item> RAW_SILVER_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/raw_silver"));
+	public static final TagKey<Item> SILVER_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/silver"));
 
-	public static final TagKey<Item> RAW_SILVER = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "raw_materials/silver"));
-	public static final TagKey<Item> SILVER_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/silver"));
-	public static final TagKey<Item> SILVER_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/silver"));
-	public static final TagKey<Item> SILVER_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates/silver"));
+	public static final TagKey<Item> RAW_SILVER = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "raw_materials/silver"));
+	public static final TagKey<Item> SILVER_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/silver"));
+	public static final TagKey<Item> SILVER_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/silver"));
+	public static final TagKey<Item> SILVER_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/silver"));
 
-	public static final TagKey<Item> DAWNSTONE_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/dawnstone"));
-	public static final TagKey<Item> DAWNSTONE_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/dawnstone"));
-	public static final TagKey<Item> DAWNSTONE_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/dawnstone"));
-	public static final TagKey<Item> DAWNSTONE_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates/dawnstone"));
+	public static final TagKey<Item> DAWNSTONE_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/dawnstone"));
+	public static final TagKey<Item> DAWNSTONE_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/dawnstone"));
+	public static final TagKey<Item> DAWNSTONE_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/dawnstone"));
+	public static final TagKey<Item> DAWNSTONE_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/dawnstone"));
 
-	public static final TagKey<Item> MITHRIL_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "storage_blocks/dwarven_mithril"));
-	public static final TagKey<Item> MITHRIL_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/dwarven_mithril"));
-	public static final TagKey<Item> MITHRIL_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/dwarven_mithril"));
-	public static final TagKey<Item> MITHRIL_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "plates/dwarven_mithril"));
+	public static final TagKey<Item> MITHRIL_BLOCK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "storage_blocks/dwarven_mithril"));
+	public static final TagKey<Item> MITHRIL_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/dwarven_mithril"));
+	public static final TagKey<Item> MITHRIL_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/dwarven_mithril"));
+	public static final TagKey<Item> MITHRIL_PLATE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "plates/dwarven_mithril"));
 
-	public static final TagKey<Item> NICKEL_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/nickel"));
-	public static final TagKey<Item> TIN_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/tin"));
-	public static final TagKey<Item> ALUMINUM_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/aluminum"));
-	public static final TagKey<Item> ZINC_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/zinc"));
+	public static final TagKey<Item> NICKEL_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/nickel"));
+	public static final TagKey<Item> TIN_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/tin"));
+	public static final TagKey<Item> ALUMINUM_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/aluminum"));
+	public static final TagKey<Item> ZINC_INGOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/zinc"));
 
-	public static final TagKey<Item> NICKEL_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/nickel"));
-	public static final TagKey<Item> TIN_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/tin"));
-	public static final TagKey<Item> ALUMINUM_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/aluminum"));
-	public static final TagKey<Item> ZINC_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/zinc"));
+	public static final TagKey<Item> NICKEL_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/nickel"));
+	public static final TagKey<Item> TIN_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/tin"));
+	public static final TagKey<Item> ALUMINUM_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/aluminum"));
+	public static final TagKey<Item> ZINC_NUGGET = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/zinc"));
 
-	public static final TagKey<Item> CAMINITE_BRICK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/caminite_brick"));
-	public static final TagKey<Item> ARCHAIC_BRICK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "ingots/archaic_brick"));
-	public static final TagKey<Item> ASH_DUST = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "dusts/ash"));
+	public static final TagKey<Item> CAMINITE_BRICK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/caminite_brick"));
+	public static final TagKey<Item> ARCHAIC_BRICK = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/archaic_brick"));
+	public static final TagKey<Item> ASH_DUST = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "dusts/ash"));
 
 	public static final TagKey<Item> ANCIENT_CODEX = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "ancient_codex"));
 	public static final TagKey<Item> STAMPS = ItemTags.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "stamps"));

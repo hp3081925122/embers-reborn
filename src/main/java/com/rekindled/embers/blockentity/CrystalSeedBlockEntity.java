@@ -59,7 +59,7 @@ public class CrystalSeedBlockEntity extends BlockEntity implements IEmberInjecta
 		willSpawn = getSpawns(xp);
 		this.type = type;
 		this.texture = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "textures/block/material_" + type + ".png");
-		this.tag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", "nuggets/" + type));
+		this.tag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/" + type));
 	}
 
 	public static boolean[] getSpawns(int xp) {
