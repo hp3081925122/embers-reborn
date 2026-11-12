@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#forge:armors/boots",
+    {
+      "id": "miapi:modular_boots",
+      "required": false
+    }
+  ]
+}

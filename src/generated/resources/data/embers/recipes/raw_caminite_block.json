@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "X": {
+      "item": "embers:caminite_blend"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "result": {
+    "count": 3,
+    "item": "embers:raw_caminite_block"
+  },
+  "show_notification": true
+}

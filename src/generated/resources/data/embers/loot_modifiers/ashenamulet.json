@@ -1,0 +1,13 @@
+{
+  "type": "embers:ashenamulet",
+  "conditions": [
+    {
+      "condition": "embers:match_curio",
+      "predicate": {
+        "items": [
+          "embers:ashen_amulet"
+        ]
+      }
+    }
+  ]
+}

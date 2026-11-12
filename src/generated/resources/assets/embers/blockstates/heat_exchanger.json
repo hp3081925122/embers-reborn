@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,waterlogged=false": {
+      "model": "embers:block/heat_exchanger",
+      "y": 90
+    },
+    "facing=east,waterlogged=true": {
+      "model": "embers:block/heat_exchanger",
+      "y": 90
+    },
+    "facing=north,waterlogged=false": {
+      "model": "embers:block/heat_exchanger"
+    },
+    "facing=north,waterlogged=true": {
+      "model": "embers:block/heat_exchanger"
+    },
+    "facing=south,waterlogged=false": {
+      "model": "embers:block/heat_exchanger",
+      "y": 180
+    },
+    "facing=south,waterlogged=true": {
+      "model": "embers:block/heat_exchanger",
+      "y": 180
+    },
+    "facing=west,waterlogged=false": {
+      "model": "embers:block/heat_exchanger",
+      "y": 270
+    },
+    "facing=west,waterlogged=true": {
+      "model": "embers:block/heat_exchanger",
+      "y": 270
+    }
+  }
+}

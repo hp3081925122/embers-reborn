@@ -1,0 +1,115 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.1.37'
+}
+
+version = project.mod_version
+group = project.mod_group_id
+
+repositories {
+    mavenLocal()
+    maven { url = 'https://maven.neoforged.net/releases' }
+    maven {
+        name = "Jared"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        url = 'https://www.cursemaven.com'
+        content { includeGroup 'curse.maven' }
+    }
+}
+
+base {
+    archivesName = "${project.mod_id}-${project.minecraft_version}-neoforge"
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    server {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        programArgument '--nogui'
+    }
+
+    gameTestServer {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    data {
+        programArguments.addAll '--mod', project.mod_id,
+                '--all',
+                '--output', file('src/generated/resources/').getAbsolutePath(),
+                '--existing', file('src/main/resources/').getAbsolutePath()
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+// Register Access Transformer so NeoGradle applies it at compile time
+minecraft {
+    accessTransformers {
+        file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${project.neo_version}"
+
+    // JEI — optional compile API, full runtime
+    compileOnly "mezz.jei:jei-${project.minecraft_version}-neoforge-api:${project.jei_version}"
+    runtimeOnly  "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
+
+    // Curios API
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${project.curios_version}:api"
+    runtimeOnly  "top.theillusivec4.curios:curios-neoforge:${project.curios_version}"
+}
+
+tasks.withType(ProcessResources).configureEach {
+    def replaceProperties = [
+            minecraft_version      : project.minecraft_version,
+            minecraft_version_range: project.minecraft_version_range,
+            neo_version            : project.neo_version,
+            neo_version_range      : project.neo_version_range,
+            loader_version_range   : project.loader_version_range,
+            mod_id                 : project.mod_id,
+            mod_name               : project.mod_name,
+            mod_license            : project.mod_license,
+            mod_version            : project.mod_version,
+            mod_authors            : project.mod_authors,
+            mod_description        : project.mod_description
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) { from components.java }
+    }
+    repositories {
+        maven { url "file://${project.projectDir}/repo" }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

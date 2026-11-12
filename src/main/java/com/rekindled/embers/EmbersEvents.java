@@ -1,0 +1,256 @@
+package com.rekindled.embers;
+
+import java.util.HashMap;
+
+import com.rekindled.embers.api.augment.AugmentUtil;
+import com.rekindled.embers.api.event.EmberProjectileEvent;
+import com.rekindled.embers.api.item.IInflictorGem;
+import com.rekindled.embers.api.item.IInflictorGemHolder;
+import com.rekindled.embers.api.item.ITyrfingWeapon;
+import com.rekindled.embers.augment.ShiftingScalesAugment;
+import com.rekindled.embers.blockentity.ExplosionPedestalBlockEntity;
+import com.rekindled.embers.datagen.EmbersDamageTypes;
+import com.rekindled.embers.datagen.EmbersItemTags;
+import com.rekindled.embers.datagen.EmbersSounds;
+import com.rekindled.embers.network.PacketHandler;
+import com.rekindled.embers.network.message.MessageEmberGenOffset;
+import com.rekindled.embers.network.message.MessageWorldSeed;
+import com.rekindled.embers.research.ResearchManager;
+import com.rekindled.embers.util.EmberGenUtil;
+import com.rekindled.embers.util.EmberWorldData;
+import com.rekindled.embers.util.ExplosionCharmWorldInfo;
+import com.rekindled.embers.util.Misc;
+
+import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.ArrowLooseEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
+import net.neoforged.neoforge.event.level.LevelEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys;
+public class EmbersEvents {
+
+	// MissingMappings not registered - new mod install, no remapping needed
+
+	public static void onJoin(EntityJoinLevelEvent event) {
+		if (event.getEntity() instanceof ServerPlayer && !event.getLevel().isClientSide()) {
+			ServerPlayer player = (ServerPlayer) event.getEntity();
+			ResearchManager.sendResearchData(player);
+			ShiftingScalesAugment.sendScalesData(player);
+			PacketHandler.sendToPlayer(new MessageWorldSeed(((net.minecraft.server.level.ServerLevel) event.getLevel()).getSeed()), player);
+			PacketHandler.sendToPlayer(new MessageEmberGenOffset(EmberGenUtil.offX, EmberGenUtil.offZ), player);
+		}
+	}
+
+	public static void onEntityDamaged(LivingIncomingDamageEvent event) {
+		if (event.getSource().is(EmbersDamageTypes.EMBER_KEY)) {
+			if (event.getEntity().fireImmune() || event.getEntity().hasEffect(MobEffects.FIRE_RESISTANCE)) {
+				event.setAmount(event.getAmount() * 0.5f);
+			}
+		}
+
+		attuneInflictorGem(event.getEntity(), event.getSource(), event.getEntity().getMainHandItem());
+		attuneInflictorGem(event.getEntity(), event.getSource(), event.getEntity().getOffhandItem());
+
+		float mult = 1.0f;
+		for (ItemStack armor : event.getEntity().getArmorSlots()) {
+			mult -= getInflictorGemResistance(event, armor);
+			addHeat(event.getEntity(), armor, 5.0f);
+		}
+		if (mult <= 0) {
+			event.setCanceled(true);
+		}
+		event.setAmount(event.getAmount() * mult);
+
+		final Entity source = event.getSource().getDirectEntity();//.getEntity();
+		if (source instanceof LivingEntity livingSource) {
+			final ItemStack heldStack = livingSource.getMainHandItem();
+			if (heldStack.getItem() instanceof ITyrfingWeapon tyrfing) {
+				tyrfing.attack(event, event.getEntity().getAttribute(Attributes.ARMOR).getValue());
+			}
+			addHeat(source, heldStack, Math.max(1.0f, 0.5f * event.getAmount()));
+		}
+	}
+
+	public static void onBlockBreak(BlockEvent.BreakEvent event) {
+		Player player = event.getPlayer();
+		if (player != null) {
+			if (event.getState().getDestroySpeed(event.getLevel(), event.getPos()) > 0) {
+				addHeat(player, player.getMainHandItem(), 1.0f);
+			}
+		}
+	}
+
+	public static void onProjectileFired(EmberProjectileEvent event) {
+		addHeat(event.getShooter(), event.getStack(), event.getProjectiles().size() * (float) Mth.clampedLerp(0.5, 3.0, event.getCharge()));
+	}
+
+	public static void onArrowLoose(ArrowLooseEvent event) {
+		addHeat(event.getEntity(), event.getBow(), 1.0f);
+	}
+
+	public static void onAnvilUpdate(AnvilUpdateEvent event) {
+		if (event.getLeft().isRepairable() && !event.getLeft().is(EmbersItemTags.MATERIA_BLACKLIST) && event.getRight().getItem() == RegistryManager.ISOLATED_MATERIA.get()) {
+			int i = 0;
+			int j = 0;
+			int k = 0;
+			int l2 = Math.min(event.getLeft().getDamageValue(), event.getLeft().getMaxDamage() / 4);
+			if (l2 <= 0) {
+				event.setOutput(ItemStack.EMPTY);
+				event.setCost(0);
+				return;
+			}
+			int i3;
+			ItemStack copy = event.getLeft().copy();
+			for (i3 = 0; l2 > 0 && i3 < event.getRight().getCount(); ++i3) {
+				int j3 = copy.getDamageValue() - l2;
+				copy.setDamageValue(j3);
+				i++;
+				l2 = Math.min(event.getLeft().getDamageValue(), event.getLeft().getMaxDamage() / 4);
+			}
+			event.setMaterialCost(i3);
+
+			if (event.getLeft().has(net.minecraft.core.component.DataComponents.CUSTOM_NAME)) {
+				if (true) {
+					k = 1;
+					i += k;
+					copy.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME, Component.literal(event.getName()));
+				}
+			} else if (event.getLeft().has(net.minecraft.core.component.DataComponents.CUSTOM_NAME)) {
+				k = 1;
+				i += k;
+				copy.remove(net.minecraft.core.component.DataComponents.CUSTOM_NAME);
+			}
+			event.setCost(j + i);
+			if (i <= 0) {
+				copy = ItemStack.EMPTY;
+			}
+			if (k == i && k > 0 && event.getCost() >= 40) {
+				event.setCost(39);
+			}
+			if (event.getCost() >= 40 && !event.getPlayer().getAbilities().instabuild) {
+				copy = ItemStack.EMPTY;
+			}
+			if (!copy.isEmpty()) {
+				int k2 = copy.getOrDefault(net.minecraft.core.component.DataComponents.REPAIR_COST, 0);
+
+				if (k != i || k == 0) {
+					k2 = k2 * 2 + 1;
+				}
+
+				copy.set(net.minecraft.core.component.DataComponents.REPAIR_COST, k2);
+			}
+			event.setOutput(copy);
+		}
+	}
+
+	public static void onLevelLoad(LevelEvent.Load event) {
+		if (event.getLevel() instanceof ServerLevel server && server.dimension() == Level.OVERWORLD)
+			EmberWorldData.get(server);
+	}
+
+	public static void onServerTick(LevelTickEvent event) {
+		if (event.getLevel() instanceof net.minecraft.server.level.ServerLevel && event.getLevel().dimension() == Level.OVERWORLD) {
+			boolean changed = false;
+			if (Misc.random.nextInt(400) == 0) {
+				EmberGenUtil.offX++;
+				changed = true;
+			}
+			if (Misc.random.nextInt(400) == 0) {
+				EmberGenUtil.offZ++;
+				changed = true;
+			}
+			if (changed) {
+				PacketHandler.sendToAll(new MessageEmberGenOffset(EmberGenUtil.offX, EmberGenUtil.offZ));
+				EmberWorldData.get((ServerLevel) event.getLevel()).setDirty();
+			}
+		}
+	}
+
+	public static HashMap<ResourceLocation, ExplosionCharmWorldInfo> explosionCharmData = new HashMap<>();
+
+	public static void putExplosionCharm(Level world, BlockPos pos) {
+		if (!explosionCharmData.containsKey(world.dimension().location()))
+			explosionCharmData.put(world.dimension().location(), new ExplosionCharmWorldInfo());
+		ExplosionCharmWorldInfo data = explosionCharmData.get(world.dimension().location());
+		data.put(pos);
+	}
+
+	public static void onExplosion(ExplosionEvent.Start event) {
+		Level world = event.getLevel();
+		Explosion explosion = event.getExplosion();
+		ExplosionCharmWorldInfo data = explosionCharmData.get(world.dimension().location());
+		if (data == null)
+			return;
+		BlockPos charmPos = data.getClosestExplosionCharm(world, BlockPos.containing(explosion.center()), 8);
+		if (charmPos != null) {
+			BlockEntity tile = world.getBlockEntity(charmPos);
+			if (tile instanceof ExplosionPedestalBlockEntity) {
+				((ExplosionPedestalBlockEntity) tile).absorb(explosion);
+				event.setCanceled(true);
+			}
+		}
+	}
+
+	public static void onTagsReload(TagsUpdatedEvent event) {
+		if (event.shouldUpdateStaticData()) {
+			ResearchManager.reloadLookupIngredients();
+		}
+	}
+
+	public static void addHeat(Entity entity, ItemStack stack, float added) {
+		if (AugmentUtil.hasHeat(stack)) {
+			double maxHeat = AugmentUtil.getMaxHeat(stack);
+			double heat = AugmentUtil.getHeat(stack);
+			if (heat < maxHeat) {
+				AugmentUtil.addHeat(stack, added);
+				if (heat + added >= maxHeat)
+					entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), EmbersSounds.HEATED_ITEM_LEVELUP.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+			}
+		}
+	}
+
+	public static void attuneInflictorGem(LivingEntity entityLiving, DamageSource source, ItemStack stack) {
+		if (stack.getItem() instanceof IInflictorGem) {
+			((IInflictorGem) stack.getItem()).attuneSource(stack, entityLiving, source);
+		}
+	}
+
+	public static float getInflictorGemResistance(LivingIncomingDamageEvent event, ItemStack stack) {
+		Item item = stack.getItem();
+		if (item instanceof IInflictorGemHolder) {
+			IInflictorGemHolder inflictorGemHolder = (IInflictorGemHolder) item;
+			return inflictorGemHolder.getTotalDamageResistance(event.getEntity(), event.getSource(), stack);
+		}
+		return 0;
+	}
+}

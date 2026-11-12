@@ -1,0 +1,72 @@
+package com.rekindled.embers.block;
+
+import com.rekindled.embers.RegistryManager;
+import com.rekindled.embers.blockentity.ItemExtractorBlockEntity;
+import com.rekindled.embers.blockentity.ItemPipeBlockEntityBase;
+import com.rekindled.embers.datagen.EmbersBlockTags;
+import com.rekindled.embers.util.Misc;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+
+public class ItemExtractorBlock extends ExtractorBlockBase {
+	@Override
+	public com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.block.BaseEntityBlock> codec() {
+		return simpleCodec(ItemExtractorBlock::new);
+	}
+
+
+	public ItemExtractorBlock(Properties pProperties) {
+		super(pProperties);
+	}
+
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+		return RegistryManager.ITEM_EXTRACTOR_ENTITY.get().create(pPos, pState);
+	}
+
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+		return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, RegistryManager.ITEM_EXTRACTOR_ENTITY.get(), ItemExtractorBlockEntity::clientTick) : createTickerHelper(pBlockEntityType, RegistryManager.ITEM_EXTRACTOR_ENTITY.get(), ItemExtractorBlockEntity::serverTick);
+	}
+
+	@Override
+	public TagKey<Block> getConnectionTag() {
+		return EmbersBlockTags.ITEM_PIPE_CONNECTION;
+	}
+
+	@Override
+	public TagKey<Block> getToggleConnectionTag() {
+		return EmbersBlockTags.ITEM_PIPE_CONNECTION_TOGGLEABLE;
+	}
+
+	@Override
+	public boolean connectToTile(BlockEntity blockEntity, Direction direction) {
+		return blockEntity != null && blockEntity.getLevel() != null && blockEntity.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), direction.getOpposite()) != null;
+	}
+
+	@Override
+	public boolean unclog(BlockEntity blockEntity, Level level, BlockPos pos) {
+		if (blockEntity instanceof ItemPipeBlockEntityBase pipeEntity && pipeEntity.clogged) {
+			IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
+			if (handler instanceof IItemHandlerModifiable) {
+				Misc.spawnInventoryInWorld(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, handler);
+				level.updateNeighbourForOutputSignal(pos, this);
+				((IItemHandlerModifiable) handler).setStackInSlot(0, ItemStack.EMPTY);
+				return true;
+			}
+		}
+		return false;
+	}
+}
