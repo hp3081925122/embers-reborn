@@ -1,50 +1,41 @@
 package com.rekindled.embers.util;
 
-import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 import com.rekindled.embers.Embers;
-import com.rekindled.embers.RegistryManager;
 
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 
 /**
- * In 1.21.1 ArmorMaterial is a record (cannot be extended).
- * Provide a static INSTANCE of the record and a Holder for use with ArmorItem.
+ * Ashen armor material, same values as 1.20.1: durability factor 19, defense 3/7/5/3, enchantability 18,
+ * toughness 1, no knockback resistance, repaired with ashen fabric (item tag embers_reborn:repairs_ashen_armor).
  */
-public class AshenArmorMaterial {
+public final class AshenArmorMaterial {
+	public static final TagKey<Item> REPAIR = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Embers.MODID, "repairs_ashen_armor"));
+	public static final ResourceKey<EquipmentAsset> ASSET = ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(Embers.MODID, "ashen"));
 
-	/** Same factor as 1.20.1: vanilla slot durability times 19. */
-	public static final int DURABILITY_FACTOR = 19;
-
-	public static net.minecraft.world.item.Item.Properties properties(ArmorItem.Type type) {
-		return new net.minecraft.world.item.Item.Properties().durability(type.getDurability(DURABILITY_FACTOR));
-	}
-
-	// Defense: Helmet=3, Chestplate=7, Leggings=5, Boots=3
 	public static final ArmorMaterial INSTANCE = new ArmorMaterial(
-		Map.of(
-			ArmorItem.Type.HELMET,     3,
-			ArmorItem.Type.CHESTPLATE, 7,
-			ArmorItem.Type.LEGGINGS,   5,
-			ArmorItem.Type.BOOTS,      3
-		),
-		18, // enchantmentValue
-		SoundEvents.ARMOR_EQUIP_GENERIC, // Holder<SoundEvent> in 1.21.1
-		() -> Ingredient.of(RegistryManager.ASHEN_FABRIC.get()),
-		List.of(new ArmorMaterial.Layer(Identifier.parse(Embers.MODID + ":empty"))),
-		1.0f, // toughness
-		0.0f  // knockbackResistance
-	);
+			19,
+			Map.of(ArmorType.HELMET, 3, ArmorType.CHESTPLATE, 7, ArmorType.LEGGINGS, 5, ArmorType.BOOTS, 3, ArmorType.BODY, 7),
+			18,
+			SoundEvents.ARMOR_EQUIP_GENERIC,
+			1.0f,
+			0.0f,
+			REPAIR,
+			ASSET);
 
-	/** Wrap in a plain Holder for use with ArmorItem constructor. */
-	public static final net.minecraft.core.Holder<ArmorMaterial> HOLDER =
-		net.minecraft.core.Holder.direct(INSTANCE);
+	public static Item.Properties properties(ArmorType type) {
+		return new Item.Properties().humanoidArmor(INSTANCE, type);
+	}
 
 	private AshenArmorMaterial() {}
 }

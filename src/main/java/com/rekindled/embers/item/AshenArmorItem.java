@@ -23,18 +23,13 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-public class AshenArmorItem extends ArmorItem {
+public class AshenArmorItem extends net.minecraft.world.item.Item {
 
-	public AshenArmorItem(net.minecraft.core.Holder<net.minecraft.world.item.ArmorMaterial> material, Type type, Properties properties) {
-		super(material, type, properties);
+	public AshenArmorItem(Properties properties) {
+		super(properties);
 	}
 
-	@Override
-	public Identifier getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
-		return Identifier.fromNamespaceAndPath(Embers.MODID, "textures/models/armor/robe.png");
-	}
-
-	public void setDamage(ItemStack stack, int damage) {
+public void setDamage(ItemStack stack, int damage) {
 		super.setDamage(stack, Math.min(damage, getMaxDamage(stack) - 1));
 	}
 

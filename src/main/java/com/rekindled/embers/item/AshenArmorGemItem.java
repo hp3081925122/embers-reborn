@@ -39,8 +39,8 @@ public class AshenArmorGemItem extends AshenArmorItem implements IInflictorGemHo
 
 	public Supplier<Integer> gemSlots;
 
-	public AshenArmorGemItem(net.minecraft.core.Holder<net.minecraft.world.item.ArmorMaterial> material, Type type, Properties properties, Supplier<Integer> gemSlots) {
-		super(material, type, properties);
+	public AshenArmorGemItem(Properties properties, Supplier<Integer> gemSlots) {
+		super(properties);
 		this.gemSlots = gemSlots;
 	}
 
