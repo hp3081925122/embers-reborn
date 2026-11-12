@@ -47,6 +47,31 @@ public final class NbtBridge {
 		return TagValueInput.create(ProblemReporter.DISCARDING, provider, tag);
 	}
 
+	public static HolderLookup.Provider serverProvider() {
+		if (ServerLifecycleHooks.getCurrentServer() != null)
+			return ServerLifecycleHooks.getCurrentServer().registryAccess();
+		return RegistryAccess.EMPTY;
+	}
+
+	/** Data attachment builder for the mod's CompoundTag based capability data (research, shifting scales). */
+	public static <T extends INBTSerializable<CompoundTag>> net.neoforged.neoforge.attachment.AttachmentType.Builder<T> attachment(java.util.function.Supplier<T> factory) {
+		return net.neoforged.neoforge.attachment.AttachmentType.builder(factory).serialize(new net.neoforged.neoforge.attachment.IAttachmentSerializer<T>() {
+			@Override
+			public T read(net.neoforged.neoforge.attachment.IAttachmentHolder holder, ValueInput input) {
+				T value = factory.get();
+				value.deserializeNBT(input.lookup(), NbtBridge.read(input));
+				return value;
+			}
+
+			@Override
+			public boolean write(T attachment, ValueOutput output) {
+				CompoundTag tag = attachment.serializeNBT(serverProvider());
+				NbtBridge.write(output, tag);
+				return true;
+			}
+		});
+	}
+
 	public static CompoundTag save(ItemStackHandler handler, HolderLookup.Provider provider) {
 		TagValueOutput output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, provider);
 		handler.serialize(output);

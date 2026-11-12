@@ -373,9 +373,9 @@ public class RegistryManager {
 	public static final DeferredRegister<net.neoforged.neoforge.attachment.AttachmentType<?>> ATTACHMENT_TYPES =
 		DeferredRegister.create(net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.ATTACHMENT_TYPES, Embers.MODID);
 	public static final java.util.function.Supplier<net.neoforged.neoforge.attachment.AttachmentType<com.rekindled.embers.research.capability.DefaultResearchCapability>> RESEARCH_ATTACHMENT =
-		ATTACHMENT_TYPES.register("research", () -> net.neoforged.neoforge.attachment.AttachmentType.serializable(com.rekindled.embers.research.capability.DefaultResearchCapability::new).copyOnDeath().build());
+		ATTACHMENT_TYPES.register("research", () -> com.rekindled.embers.util.NbtBridge.attachment(com.rekindled.embers.research.capability.DefaultResearchCapability::new).copyOnDeath().build());
 	public static final java.util.function.Supplier<net.neoforged.neoforge.attachment.AttachmentType<com.rekindled.embers.augment.ShiftingScalesAugment.DefaultScalesCapability>> SCALES_ATTACHMENT =
-		ATTACHMENT_TYPES.register("scales", () -> net.neoforged.neoforge.attachment.AttachmentType.serializable(com.rekindled.embers.augment.ShiftingScalesAugment.DefaultScalesCapability::new).build());
+		ATTACHMENT_TYPES.register("scales", () -> com.rekindled.embers.util.NbtBridge.attachment(com.rekindled.embers.augment.ShiftingScalesAugment.DefaultScalesCapability::new).build());
 	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(Registries.MENU, Embers.MODID);
 	public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES = DeferredRegister.create(Registries.STRUCTURE_TYPE, Embers.MODID);
 	public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSOR_TYPES = DeferredRegister.create(Registries.STRUCTURE_PROCESSOR, Embers.MODID);
