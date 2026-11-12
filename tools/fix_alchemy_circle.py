@@ -3,7 +3,7 @@ import pathlib, re
 f = pathlib.Path(__file__).resolve().parent.parent / "src/main/java/com/rekindled/embers/particle/AlchemyCircleParticle.java"
 t = f.read_bytes().decode("utf-8")
 start = t.index("\tpublic void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {")
-end = t.index("\t@Override\n\tpublic int getLightCoords", start)
+end = re.search(r"\t@Override\r?\n\tpublic int getLightCoords", t[start:]).start() + start
 new_method = (
     "\t/** Flat circle lying on the ground, drawn from both sides like the 1.21.1 render(). */\n"
     "\t@Override\n"
