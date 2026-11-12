@@ -1,21 +1,13 @@
 plugins {
     id 'java-library'
-    id 'eclipse'
-    id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.1.37'
+    id 'net.neoforged.moddev' version '2.0.140'
 }
 
 version = project.mod_version
 group = project.mod_group_id
 
 repositories {
-    mavenLocal()
-    maven { url = 'https://maven.neoforged.net/releases' }
-    maven {
-        name = "Jared"
-        url = "https://maven.blamejared.com/"
-    }
     maven {
         name = "Illusive Soulworks maven"
         url = "https://maven.theillusivec4.top/"
@@ -24,71 +16,61 @@ repositories {
         url = 'https://www.cursemaven.com'
         content { includeGroup 'curse.maven' }
     }
-    maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-        content { includeGroup "maven.modrinth" }
-    }
 }
 
 base {
     archivesName = "${project.mod_id}-${project.minecraft_version}-neoforge"
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
-runs {
-    configureEach {
-        systemProperty 'forge.logging.markers', 'REGISTRIES'
-        systemProperty 'forge.logging.console.level', 'debug'
-        modSource project.sourceSets.main
+neoForge {
+    version = project.neo_version
+
+    accessTransformers = files('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        data {
+            clientData()
+            programArguments.addAll '--mod', project.mod_id, '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath()
+        }
     }
 
-    client {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
-
-    server {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
-    }
-
-    gameTestServer {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
-
-    data {
-        programArguments.addAll '--mod', project.mod_id,
-                '--all',
-                '--output', file('src/generated/resources/').getAbsolutePath(),
-                '--existing', file('src/main/resources/').getAbsolutePath()
+    mods {
+        "${project.mod_id}" {
+            sourceSet(sourceSets.main)
+        }
     }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-// Register Access Transformer so NeoGradle applies it at compile time
-minecraft {
-    accessTransformers {
-        file('src/main/resources/META-INF/accesstransformer.cfg')
-    }
-}
-
 dependencies {
-    implementation "net.neoforged:neoforge:${project.neo_version}"
-
-    // JEI — optional compile API, full runtime
-    compileOnly "mezz.jei:jei-${project.minecraft_version}-neoforge-api:${project.jei_version}"
-    runtimeOnly  "mezz.jei:jei-${project.minecraft_version}-neoforge:${project.jei_version}"
-
-    compileOnly "maven.modrinth:jade:${project.jade_version}"
-    runtimeOnly "maven.modrinth:jade:${project.jade_version}"
-
+    // JEI, Jade and Just Enough Characters: optional at runtime, compile against the full jars
+    implementation "curse.maven:jei-238222:${project.jei_file}"
+    implementation "curse.maven:jade-324717:${project.jade_file}"
     runtimeOnly "curse.maven:just-enough-characters-250702:${project.jecharacters_file}"
 
-    // Curios API
     compileOnly "top.theillusivec4.curios:curios-neoforge:${project.curios_version}:api"
-    runtimeOnly  "top.theillusivec4.curios:curios-neoforge:${project.curios_version}"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${project.curios_version}"
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -121,5 +103,6 @@ publishing {
 }
 
 tasks.withType(JavaCompile).configureEach {
+    options.release = 25
     options.encoding = 'UTF-8'
 }
