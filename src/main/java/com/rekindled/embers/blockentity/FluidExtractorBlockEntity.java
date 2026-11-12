@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.List;
 import java.util.Random;
 
@@ -108,7 +110,7 @@ public class FluidExtractorBlockEntity extends FluidPipeBlockEntityBase implemen
 			BlockEntity tile = level.getBlockEntity(pos.relative(facing));
 			if (tile != null && !(tile instanceof FluidPipeBlockEntityBase)) {
 				if (blockEntity.active) {
-					IFluidHandler handler = level.getCapability(Capabilities.FluidHandler.BLOCK, tile.getBlockPos(), facing.getOpposite());
+					IFluidHandler handler = LegacyCaps.fluid(level, tile.getBlockPos(), facing.getOpposite());
 					if (handler != null && handler.drain(MAX_DRAIN, IFluidHandler.FluidAction.SIMULATE) != null) {
 						FluidStack extracted = handler.drain(MAX_DRAIN, IFluidHandler.FluidAction.SIMULATE);
 						int filled = blockEntity.tank.fill(extracted, IFluidHandler.FluidAction.SIMULATE);

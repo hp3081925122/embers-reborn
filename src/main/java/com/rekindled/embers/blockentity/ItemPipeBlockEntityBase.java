@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.ArrayList;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import java.util.Optional;
@@ -68,7 +70,7 @@ public abstract class ItemPipeBlockEntityBase extends PipeBlockEntityBase implem
 					continue;
 				BlockEntity tile = level.getBlockEntity(pos.relative(facing));
 				if (tile != null) {
-					IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, pos.relative(facing), facing.getOpposite());
+					IItemHandler handler = LegacyCaps.item(level, pos.relative(facing), facing.getOpposite());
 					if (handler != null) {
 						int priority = PRIORITY_BLOCK;
 						if (tile instanceof IItemPipePriority)

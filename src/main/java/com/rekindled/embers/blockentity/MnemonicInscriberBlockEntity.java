@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.List;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import java.util.Optional;
@@ -99,12 +101,12 @@ public class MnemonicInscriberBlockEntity extends BlockEntity implements IExtraC
 
 	@Override
 	public boolean hasCapabilityDescription(BlockCapability<?, ?> capability) {
-		return capability == Capabilities.ItemHandler.BLOCK;
+		return capability == LegacyCaps.ITEM_BLOCK;
 	}
 
 	@Override
 	public void addCapabilityDescription(List<Component> strings, BlockCapability<?, ?> capability, Direction facing) {
-		if (capability == Capabilities.ItemHandler.BLOCK)
+		if (capability == LegacyCaps.ITEM_BLOCK)
 			strings.add(IExtraCapabilityInformation.formatCapability(EnumIOType.INPUT, Embers.MODID + ".tooltip.goggles.item", Component.translatable(Embers.MODID + ".tooltip.goggles.item.paper")));
 	}
 }

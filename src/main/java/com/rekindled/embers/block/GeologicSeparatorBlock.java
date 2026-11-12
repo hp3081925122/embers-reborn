@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import javax.annotation.Nullable;
 
 import com.rekindled.embers.RegistryManager;
@@ -63,7 +65,7 @@ public class GeologicSeparatorBlock extends BaseEntityBlock implements SimpleWat
 		InteractionHand hand = InteractionHand.MAIN_HAND;
 			ItemStack heldItem = player.getItemInHand(hand);
 			if (!heldItem.isEmpty()) {
-				IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, vesselEntity.getBlockPos(), hit.getDirection());
+				IFluidHandler cap = LegacyCaps.fluid(level, vesselEntity.getBlockPos(), hit.getDirection());
 				if (cap != null) {
 					boolean didFill = FluidUtil.interactWithFluidHandler(player, hand, cap);
 

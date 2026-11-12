@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -341,12 +343,12 @@ public class HearthCoilBlockEntity extends BlockEntity implements ISoundControll
 
 	@Override
 	public boolean hasCapabilityDescription(BlockCapability<?, ?> capability) {
-		return capability == Capabilities.ItemHandler.BLOCK;
+		return capability == LegacyCaps.ITEM_BLOCK;
 	}
 
 	@Override
 	public void addCapabilityDescription(List<Component> strings, BlockCapability<?, ?> capability, Direction facing) {
-		if (capability == Capabilities.ItemHandler.BLOCK)
+		if (capability == LegacyCaps.ITEM_BLOCK)
 			strings.add(IExtraCapabilityInformation.formatCapability(EnumIOType.OUTPUT, Embers.MODID + ".tooltip.goggles.item", null));
 	}
 

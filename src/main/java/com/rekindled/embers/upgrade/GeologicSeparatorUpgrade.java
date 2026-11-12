@@ -1,5 +1,7 @@
 package com.rekindled.embers.upgrade;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.List;
 
 import com.rekindled.embers.Embers;
@@ -34,7 +36,7 @@ public class GeologicSeparatorUpgrade extends DefaultUpgradeProvider {
 				FluidStack bonus = ((MeltingRecipe) recipe).getBonus();
 				if (!bonus.isEmpty() && this.tile instanceof GeologicSeparatorBlockEntity) {
 					// this.tile is the separator; the "tile" parameter is the melter that threw the event
-					IFluidHandler fluidHandler = this.tile.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, this.tile.getBlockPos(), null);
+					IFluidHandler fluidHandler = LegacyCaps.fluid(this.tile.getLevel(), this.tile.getBlockPos(), null);
 					if (fluidHandler != null)
 						fluidHandler.fill(bonus.copy(), IFluidHandler.FluidAction.EXECUTE);
 				}

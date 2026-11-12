@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.blockentity.FluidPipeBlockEntity;
 import com.rekindled.embers.blockentity.FluidPipeBlockEntityBase;
@@ -50,7 +52,7 @@ public class FluidPipeBlock extends PipeBlockBase {
 
 	@Override
 	public boolean connectToTile(BlockEntity blockEntity, Direction direction) {
-		return blockEntity != null && blockEntity.getLevel() != null && blockEntity.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, blockEntity.getBlockPos(), direction.getOpposite()) != null;
+		return blockEntity != null && blockEntity.getLevel() != null && LegacyCaps.fluid(blockEntity.getLevel(), blockEntity.getBlockPos(), direction.getOpposite()) != null;
 	}
 
 	@Override
@@ -59,7 +61,7 @@ public class FluidPipeBlock extends PipeBlockBase {
 			pipeEntity.resetFrom();
 			pipeEntity.lastTransfer = null;
 			pipeEntity.syncTransfer = true;
-			IFluidHandler handler = level.getCapability(Capabilities.FluidHandler.BLOCK, blockEntity.getBlockPos(), null);
+			IFluidHandler handler = LegacyCaps.fluid(level, blockEntity.getBlockPos(), null);
 			handler.drain(handler.getTankCapacity(0), IFluidHandler.FluidAction.EXECUTE);
 			level.updateNeighbourForOutputSignal(pos, this);
 			return true;

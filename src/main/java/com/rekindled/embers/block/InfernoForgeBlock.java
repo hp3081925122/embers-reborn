@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import com.rekindled.embers.Embers;
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.block.MechEdgeBlockBase.MechEdge;
@@ -101,7 +103,7 @@ public class InfernoForgeBlock extends DoubleTallMachineBlock implements SimpleW
 			}
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity != null) {
-				IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(level, blockEntity.getBlockPos(), state, blockEntity, null);
+				IItemHandler handler = LegacyCaps.item(level, blockEntity.getBlockPos(), state, blockEntity, null);
 				if (handler != null) {
 					Misc.spawnInventoryInWorld(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, handler);
 					level.updateNeighbourForOutputSignal(pos, this);

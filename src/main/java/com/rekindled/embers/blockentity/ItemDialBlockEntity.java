@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.api.tile.IDialEntity;
 
@@ -56,7 +58,7 @@ public class ItemDialBlockEntity extends BlockEntity implements IDialEntity {
 			Direction facing = state.getValue(BlockStateProperties.FACING);
 			BlockEntity blockEntity = level.getBlockEntity(worldPosition.relative(facing, -1));
 			if (blockEntity != null) {
-				IItemHandler cap = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), facing.getOpposite());
+				IItemHandler cap = LegacyCaps.item(level, blockEntity.getBlockPos(), facing.getOpposite());
 				if (cap != null) {
 					ListTag items = new ListTag();
 					for (int i = 0; i < cap.getSlots() && i < maxLines; i++) {

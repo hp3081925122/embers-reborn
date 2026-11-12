@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -387,7 +389,7 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 
 	@Override
 	public boolean hasCapabilityDescription(BlockCapability<?, ?> capability) {
-		return capability == Capabilities.FluidHandler.BLOCK;
+		return capability == LegacyCaps.FLUID_BLOCK;
 	}
 
 	@Override

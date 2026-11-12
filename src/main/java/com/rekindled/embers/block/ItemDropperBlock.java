@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import javax.annotation.Nullable;
 
 import com.rekindled.embers.RegistryManager;
@@ -52,7 +54,7 @@ public class ItemDropperBlock extends BaseEntityBlock implements SimpleWaterlogg
 		if (!state.is(newState.getBlock())) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity != null) {
-				IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(level, pos, state, blockEntity, null);
+				IItemHandler handler = LegacyCaps.item(level, pos, state, blockEntity, null);
 				if (handler != null) {
 					Misc.spawnInventoryInWorld(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, handler);
 					level.updateNeighbourForOutputSignal(pos, this);

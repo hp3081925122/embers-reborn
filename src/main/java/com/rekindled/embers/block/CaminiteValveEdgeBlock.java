@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.blockentity.CaminiteValveBlockEntity;
 
@@ -55,7 +57,7 @@ public class CaminiteValveEdgeBlock extends MechEdgeBlockBase implements EntityB
 		InteractionHand hand = InteractionHand.MAIN_HAND;
 			ItemStack heldItem = player.getItemInHand(hand);
 			if (!heldItem.isEmpty() && valveEntity.getReservoir() != null) {
-				IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, valveEntity.getReservoir().getBlockPos(), null);
+				IFluidHandler cap = LegacyCaps.fluid(level, valveEntity.getReservoir().getBlockPos(), null);
 				if (cap != null) {
 					boolean didFill = FluidUtil.interactWithFluidHandler(player, hand, cap);
 

@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -297,12 +299,12 @@ public class IgnemReactorBlockEntity extends BlockEntity implements ISoundContro
 
 	@Override
 	public boolean hasCapabilityDescription(BlockCapability<?, ?> capability) {
-		return capability == Capabilities.ItemHandler.BLOCK || capability == EmbersCapabilities.EMBER_CAPABILITY;
+		return capability == LegacyCaps.ITEM_BLOCK || capability == EmbersCapabilities.EMBER_CAPABILITY;
 	}
 
 	@Override
 	public void addCapabilityDescription(List<Component> strings, BlockCapability<?, ?> capability, Direction facing) {
-		if (capability == Capabilities.ItemHandler.BLOCK)
+		if (capability == LegacyCaps.ITEM_BLOCK)
 			strings.add(IExtraCapabilityInformation.formatCapability(EnumIOType.INPUT, Embers.MODID + ".tooltip.goggles.item", Component.translatable(Embers.MODID + ".tooltip.goggles.item.ember")));
 		if (capability == EmbersCapabilities.EMBER_CAPABILITY)
 			strings.add(IExtraCapabilityInformation.formatCapability(EnumIOType.OUTPUT, Embers.MODID + ".tooltip.goggles.ember", null));

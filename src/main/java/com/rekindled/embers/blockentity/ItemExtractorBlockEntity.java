@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -152,7 +154,7 @@ public class ItemExtractorBlockEntity extends ItemPipeBlockEntityBase implements
 			BlockEntity tile = level.getBlockEntity(pos.relative(facing));
 
 			if (tile != null && !(tile instanceof ItemPipeBlockEntityBase)) {
-				IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, tile.getBlockPos(), facing.getOpposite());
+				IItemHandler handler = LegacyCaps.item(level, tile.getBlockPos(), facing.getOpposite());
 				if (handler != null && (blockEntity.active || (currentOrder != null && currentOrder.getSize() > 0))) {
 					int slot = -1;
 					for (int j = 0; j < handler.getSlots() && slot == -1; j++) {

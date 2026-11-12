@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.block.MechEdgeBlockBase.MechEdge;
 import com.rekindled.embers.blockentity.ReservoirBlockEntity;
@@ -70,7 +72,7 @@ public class ReservoirBlock extends BaseEntityBlock implements SimpleWaterlogged
 		InteractionHand hand = InteractionHand.MAIN_HAND;
 			ItemStack heldItem = player.getItemInHand(hand);
 			if (!heldItem.isEmpty()) {
-				IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, reservoirEntity.getBlockPos(), hit.getDirection());
+				IFluidHandler cap = LegacyCaps.fluid(level, reservoirEntity.getBlockPos(), hit.getDirection());
 				if (cap != null) {
 					boolean didFill = FluidUtil.interactWithFluidHandler(player, hand, cap);
 

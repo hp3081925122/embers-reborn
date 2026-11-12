@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.blockentity.ItemPipeBlockEntity;
 import com.rekindled.embers.blockentity.ItemPipeBlockEntityBase;
@@ -53,7 +55,7 @@ public class ItemPipeBlock extends PipeBlockBase {
 
 	@Override
 	public boolean connectToTile(BlockEntity blockEntity, Direction direction) {
-		return blockEntity != null && blockEntity.getLevel() != null && blockEntity.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), direction.getOpposite()) != null;
+		return blockEntity != null && blockEntity.getLevel() != null && LegacyCaps.item(blockEntity.getLevel(), blockEntity.getBlockPos(), direction.getOpposite()) != null;
 	}
 
 	@Override
@@ -62,7 +64,7 @@ public class ItemPipeBlock extends PipeBlockBase {
 			pipeEntity.resetFrom();
 			pipeEntity.lastTransfer = null;
 			pipeEntity.syncTransfer = true;
-			IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
+			IItemHandler handler = LegacyCaps.item(level, blockEntity.getBlockPos(), null);
 			if (handler instanceof IItemHandlerModifiable) {
 				Misc.spawnInventoryInWorld(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, handler);
 				level.updateNeighbourForOutputSignal(pos, this);

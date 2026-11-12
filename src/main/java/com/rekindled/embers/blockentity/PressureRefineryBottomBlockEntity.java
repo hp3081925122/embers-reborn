@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -198,14 +200,14 @@ public class PressureRefineryBottomBlockEntity extends net.minecraft.world.level
 
 	@Override
 	public boolean hasCapabilityDescription(BlockCapability<?, ?> capability) {
-		return capability == Capabilities.ItemHandler.BLOCK;
+		return capability == LegacyCaps.ITEM_BLOCK;
 	}
 
 	@Override
 	public void addCapabilityDescription(List<Component> strings, BlockCapability<?, ?> capability, Direction facing) {
-		if (capability == Capabilities.ItemHandler.BLOCK)
+		if (capability == LegacyCaps.ITEM_BLOCK)
 			strings.add(IExtraCapabilityInformation.formatCapability(EnumIOType.INPUT, Embers.MODID + ".tooltip.goggles.item", Component.translatable(Embers.MODID + ".tooltip.goggles.item.ember")));
-		if(capability == Capabilities.FluidHandler.BLOCK)
+		if(capability == LegacyCaps.FLUID_BLOCK)
 			strings.add(IExtraCapabilityInformation.formatCapability(EnumIOType.INPUT, Embers.MODID + ".tooltip.goggles.fluid", Component.translatable(Embers.MODID + ".tooltip.goggles.fluid.water")));
 	}
 

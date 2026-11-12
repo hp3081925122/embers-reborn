@@ -1,5 +1,7 @@
 package com.rekindled.embers;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -421,7 +423,7 @@ public class EmbersClientEvents {
 	}
 
 	public static void addCapabilityItemDescription(List<Component> text, BlockEntity tile, Direction facing) {
-		BlockCapability<?, ?> capability = Capabilities.ItemHandler.BLOCK;
+		BlockCapability<?, ?> capability = LegacyCaps.ITEM_BLOCK;
 		if (tile.getLevel() != null && tile.getLevel().getCapability((net.neoforged.neoforge.capabilities.BlockCapability) capability, tile.getBlockPos(), facing) != null) {
 			IExtraCapabilityInformation.EnumIOType ioType = IExtraCapabilityInformation.EnumIOType.BOTH;
 			Component filter = null;
@@ -434,7 +436,7 @@ public class EmbersClientEvents {
 	}
 
 	public static void addCapabilityFluidDescription(List<Component> text, BlockEntity tile, Direction facing) {
-		BlockCapability<?, ?> capability = Capabilities.FluidHandler.BLOCK;
+		BlockCapability<?, ?> capability = LegacyCaps.FLUID_BLOCK;
 		if (tile.getLevel() != null && tile.getLevel().getCapability((net.neoforged.neoforge.capabilities.BlockCapability) capability, tile.getBlockPos(), facing) != null) {
 			IExtraCapabilityInformation.EnumIOType ioType = IExtraCapabilityInformation.EnumIOType.BOTH;
 			Component filter = null;

@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -43,7 +45,7 @@ public class ItemDialBlock extends DialBaseBlock {
 	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
 		BlockEntity blockEntity = level.getBlockEntity(pos.relative(state.getValue(FACING), -1));
 		if (blockEntity != null) {
-			IItemHandler cap = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), state.getValue(FACING).getOpposite());
+			IItemHandler cap = LegacyCaps.item(level, blockEntity.getBlockPos(), state.getValue(FACING).getOpposite());
 			if (cap != null) {
 				double contents = 0.0;
 				double capacity = 0.0;

@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.HashSet;
 import java.util.List;
 import net.neoforged.neoforge.capabilities.BlockCapability;
@@ -107,7 +109,7 @@ public class AlchemyPedestalTopBlockEntity extends AlchemyPedestalBlockEntity im
 
 	@Override
 	public boolean hasCapabilityDescription(BlockCapability<?, ?> capability) {
-		return capability == Capabilities.ItemHandler.BLOCK;
+		return capability == LegacyCaps.ITEM_BLOCK;
 	}
 
 	@Override

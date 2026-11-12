@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -237,12 +239,12 @@ public class WildfireStirlingBlockEntity extends BlockEntity implements ISoundCo
 
 	@Override
 	public boolean hasCapabilityDescription(BlockCapability<?, ?> capability) {
-		return capability == Capabilities.FluidHandler.BLOCK;
+		return capability == LegacyCaps.FLUID_BLOCK;
 	}
 
 	@Override
 	public void addCapabilityDescription(List<Component> strings, BlockCapability<?, ?> capability, Direction facing) {
-		if (capability == Capabilities.FluidHandler.BLOCK)
+		if (capability == LegacyCaps.FLUID_BLOCK)
 			strings.add(IExtraCapabilityInformation.formatCapability(EnumIOType.INPUT, Embers.MODID + ".tooltip.goggles.fluid", Component.translatable(Embers.MODID + ".tooltip.goggles.fluid.steam")));
 	}
 }

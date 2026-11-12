@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import javax.annotation.Nullable;
 
 import com.rekindled.embers.util.Misc;
@@ -60,7 +62,7 @@ public abstract class DoubleTallMachineBlock extends BaseEntityBlock implements 
 			}
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity != null) {
-				IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(level, blockEntity.getBlockPos(), state, blockEntity, null);
+				IItemHandler handler = LegacyCaps.item(level, blockEntity.getBlockPos(), state, blockEntity, null);
 				if (handler != null) {
 					Misc.spawnInventoryInWorld(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, handler);
 					level.updateNeighbourForOutputSignal(pos, this);

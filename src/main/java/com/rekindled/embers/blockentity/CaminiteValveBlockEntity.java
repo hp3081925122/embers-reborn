@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,49 +32,49 @@ public class CaminiteValveBlockEntity extends BlockEntity {
 			@Override
 			public int getTanks() {
 				if (reservoir != null)
-					return level.getCapability(Capabilities.FluidHandler.BLOCK, reservoir.getBlockPos(), null).getTanks();
+					return LegacyCaps.fluid(level, reservoir.getBlockPos(), null).getTanks();
 				return 0;
 			}
 
 			@Override
 			public FluidStack getFluidInTank(int tank) {
 				if (reservoir != null)
-					return level.getCapability(Capabilities.FluidHandler.BLOCK, reservoir.getBlockPos(), null).getFluidInTank(tank);
+					return LegacyCaps.fluid(level, reservoir.getBlockPos(), null).getFluidInTank(tank);
 				return FluidStack.EMPTY;
 			}
 
 			@Override
 			public int getTankCapacity(int tank) {
 				if (reservoir != null)
-					return level.getCapability(Capabilities.FluidHandler.BLOCK, reservoir.getBlockPos(), null).getTankCapacity(tank);
+					return LegacyCaps.fluid(level, reservoir.getBlockPos(), null).getTankCapacity(tank);
 				return 0;
 			}
 
 			@Override
 			public boolean isFluidValid(int tank, FluidStack stack) {
 				if (reservoir != null)
-					return level.getCapability(Capabilities.FluidHandler.BLOCK, reservoir.getBlockPos(), null).isFluidValid(tank, stack);
+					return LegacyCaps.fluid(level, reservoir.getBlockPos(), null).isFluidValid(tank, stack);
 				return false;
 			}
 
 			@Override
 			public int fill(FluidStack resource, FluidAction action) {
 				if (reservoir != null)
-					return level.getCapability(Capabilities.FluidHandler.BLOCK, reservoir.getBlockPos(), null).fill(resource, action);
+					return LegacyCaps.fluid(level, reservoir.getBlockPos(), null).fill(resource, action);
 				return 0;
 			}
 
 			@Override
 			public FluidStack drain(FluidStack resource, FluidAction action) {
 				if (reservoir != null)
-					return level.getCapability(Capabilities.FluidHandler.BLOCK, reservoir.getBlockPos(), null).drain(resource, action);
+					return LegacyCaps.fluid(level, reservoir.getBlockPos(), null).drain(resource, action);
 				return FluidStack.EMPTY;
 			}
 
 			@Override
 			public FluidStack drain(int maxDrain, FluidAction action) {
 				if (reservoir != null)
-					return level.getCapability(Capabilities.FluidHandler.BLOCK, reservoir.getBlockPos(), null).drain(maxDrain, action);
+					return LegacyCaps.fluid(level, reservoir.getBlockPos(), null).drain(maxDrain, action);
 				return FluidStack.EMPTY;
 			}
 		};

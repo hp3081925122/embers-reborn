@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.ArrayList;
 
 import com.rekindled.embers.Embers;
@@ -43,7 +45,7 @@ public class FluidDialBlock extends DialBaseBlock {
 	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
 		BlockEntity blockEntity = level.getBlockEntity(pos.relative(state.getValue(FACING), -1));
 		if (blockEntity != null) {
-			IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, blockEntity.getBlockPos(), state.getValue(FACING).getOpposite());
+			IFluidHandler cap = LegacyCaps.fluid(level, blockEntity.getBlockPos(), state.getValue(FACING).getOpposite());
 			if (cap != null) {
 				int totalCapacity = 0;
 				int totalContents = 0;

@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import javax.annotation.Nullable;
 
 import com.rekindled.embers.RegistryManager;
@@ -57,7 +59,7 @@ public class StampBaseBlock extends BaseEntityBlock implements SimpleWaterlogged
 		if (level.getBlockEntity(pos) instanceof StampBaseBlockEntity stamperEntity) {
 			ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
 			if (!heldItem.isEmpty()) {
-				IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, stamperEntity.getBlockPos(), hit.getDirection());
+				IFluidHandler cap = LegacyCaps.fluid(level, stamperEntity.getBlockPos(), hit.getDirection());
 				if (cap != null && FluidUtil.interactWithFluidHandler(player, InteractionHand.MAIN_HAND, cap)) {
 					return InteractionResult.SUCCESS;
 				}
@@ -72,7 +74,7 @@ public class StampBaseBlock extends BaseEntityBlock implements SimpleWaterlogged
 		if (!state.is(newState.getBlock())) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if (blockEntity != null) {
-				IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(level, blockEntity.getBlockPos(), state, blockEntity, null);
+				IItemHandler handler = LegacyCaps.item(level, blockEntity.getBlockPos(), state, blockEntity, null);
 				if (handler != null) {
 					Misc.spawnInventoryInWorld(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, handler);
 					level.updateNeighbourForOutputSignal(pos, this);

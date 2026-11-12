@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.api.tile.IDialEntity;
 
@@ -60,7 +62,7 @@ public class FluidDialBlockEntity extends BlockEntity implements IDialEntity {
 			Direction facing = state.getValue(BlockStateProperties.FACING);
 			BlockEntity blockEntity = level.getBlockEntity(worldPosition.relative(facing, -1));
 			if (blockEntity != null) {
-				IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, blockEntity.getBlockPos(), facing.getOpposite());
+				IFluidHandler cap = LegacyCaps.fluid(level, blockEntity.getBlockPos(), facing.getOpposite());
 				if (cap != null) {
 					ListTag tanks = new ListTag();
 					for (int i = 0; i < cap.getTanks() && (i + extraLines) < maxLines; i++) {

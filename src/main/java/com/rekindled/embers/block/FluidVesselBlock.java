@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -68,7 +70,7 @@ public class FluidVesselBlock extends AbstractCauldronBlock implements EntityBlo
 	public net.minecraft.world.ItemInteractionResult useItemOn(ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		//handled here instead of falling through to AbstractCauldronBlock, which would turn the vessel into a vanilla cauldron
 		if (level.getBlockEntity(pos) instanceof FluidVesselBlockEntity vesselEntity && !heldItem.isEmpty()) {
-			IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, vesselEntity.getBlockPos(), hit.getDirection());
+			IFluidHandler cap = LegacyCaps.fluid(level, vesselEntity.getBlockPos(), hit.getDirection());
 			if (cap != null && FluidUtil.interactWithFluidHandler(player, hand, cap)) {
 				return net.minecraft.world.ItemInteractionResult.sidedSuccess(level.isClientSide());
 			}
@@ -118,7 +120,7 @@ public class FluidVesselBlock extends AbstractCauldronBlock implements EntityBlo
 	@Override
 	public void receiveStalactiteDrip(BlockState state, Level level, BlockPos pos, Fluid fluid) {
 		if (level.getBlockEntity(pos) instanceof FluidVesselBlockEntity vesselEntity) {
-			IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, vesselEntity.getBlockPos(), Direction.UP);
+			IFluidHandler cap = LegacyCaps.fluid(level, vesselEntity.getBlockPos(), Direction.UP);
 			if (cap != null) {
 				int amount = 333;
 				if (fluid == Fluids.LAVA)

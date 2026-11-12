@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.ArrayList;
 
 import com.rekindled.embers.api.tile.IFluidPipePriority;
@@ -64,7 +66,7 @@ public abstract class FluidPipeBlockEntityBase extends PipeBlockEntityBase imple
 					continue;
 				BlockEntity tile = level.getBlockEntity(pos.relative(facing));
 				if (tile != null) {
-					IFluidHandler handler = level.getCapability(Capabilities.FluidHandler.BLOCK, tile.getBlockPos(), facing.getOpposite());
+					IFluidHandler handler = LegacyCaps.fluid(level, tile.getBlockPos(), facing.getOpposite());
 					if (handler != null) {
 						int priority = PRIORITY_BLOCK;
 						if (tile instanceof IFluidPipePriority)

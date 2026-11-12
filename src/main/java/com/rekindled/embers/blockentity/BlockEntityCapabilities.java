@@ -21,43 +21,48 @@ import net.neoforged.neoforge.items.IItemHandler;
  */
 public class BlockEntityCapabilities {
 
-	private static final BlockCapability<IItemHandler, Direction> ITEM = Capabilities.ItemHandler.BLOCK;
-	private static final BlockCapability<IFluidHandler, Direction> FLUID = Capabilities.FluidHandler.BLOCK;
+	private static <T extends net.minecraft.world.level.block.entity.BlockEntity> void items(RegisterCapabilitiesEvent event, BlockEntityType<T> type, java.util.function.BiFunction<T, Direction, IItemHandler> provider) {
+		event.registerBlockEntity(Capabilities.Item.BLOCK, type, (be, side) -> com.rekindled.embers.util.LegacyHandlers.items(provider.apply(be, side)));
+	}
+
+	private static <T extends net.minecraft.world.level.block.entity.BlockEntity> void fluids(RegisterCapabilitiesEvent event, BlockEntityType<T> type, java.util.function.BiFunction<T, Direction, IFluidHandler> provider) {
+		event.registerBlockEntity(Capabilities.Fluid.BLOCK, type, (be, side) -> com.rekindled.embers.util.LegacyHandlers.fluids(provider.apply(be, side)));
+	}
 
 	public static void register(RegisterCapabilitiesEvent event) {
 		// --- item handlers, all sides ---
-		event.registerBlockEntity(ITEM, RegistryManager.ALCHEMY_PEDESTAL_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.BIN_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.CATALYSIS_CHAMBER_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.COMBUSTION_CHAMBER_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.CINDER_PLINTH_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.COPPER_CHARGER_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.DAWNSTONE_ANVIL_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.IGNEM_REACTOR_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.MELTER_TOP_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.STAMP_BASE_ENTITY.get(), (be, side) -> be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.STAMPER_ENTITY.get(), (be, side) -> be.stamp);
+		items(event, RegistryManager.ALCHEMY_PEDESTAL_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.BIN_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.CATALYSIS_CHAMBER_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.COMBUSTION_CHAMBER_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.CINDER_PLINTH_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.COPPER_CHARGER_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.DAWNSTONE_ANVIL_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.IGNEM_REACTOR_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.MELTER_TOP_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.STAMP_BASE_ENTITY.get(), (be, side) -> be.inventory);
+		items(event, RegistryManager.STAMPER_ENTITY.get(), (be, side) -> be.stamp);
 
 		// --- item handlers, sided ---
-		event.registerBlockEntity(ITEM, RegistryManager.ALCHEMY_TABLET_ENTITY.get(),
+		items(event, RegistryManager.ALCHEMY_TABLET_ENTITY.get(),
 				(be, side) -> side == Direction.DOWN ? be.outputHandler : be.inventory);
-		event.registerBlockEntity(ITEM, RegistryManager.CRYSTAL_CELL_ENTITY.get(),
+		items(event, RegistryManager.CRYSTAL_CELL_ENTITY.get(),
 				(be, side) -> (side == null || side == Direction.DOWN) ? be.inventory : null);
-		event.registerBlockEntity(ITEM, RegistryManager.HEARTH_COIL_ENTITY.get(),
+		items(event, RegistryManager.HEARTH_COIL_ENTITY.get(),
 				(be, side) -> (side == null || side == Direction.DOWN) ? be.inventory : null);
-		event.registerBlockEntity(ITEM, RegistryManager.EMBER_ACTIVATOR_BOTTOM_ENTITY.get(),
+		items(event, RegistryManager.EMBER_ACTIVATOR_BOTTOM_ENTITY.get(),
 				(be, side) -> side != Direction.DOWN ? be.inventory : null);
-		event.registerBlockEntity(ITEM, RegistryManager.PRESSURE_REFINERY_BOTTOM_ENTITY.get(),
+		items(event, RegistryManager.PRESSURE_REFINERY_BOTTOM_ENTITY.get(),
 				(be, side) -> side != Direction.DOWN ? be.inventory : null);
-		event.registerBlockEntity(ITEM, RegistryManager.EMBER_BORE_ENTITY.get(),
+		items(event, RegistryManager.EMBER_BORE_ENTITY.get(),
 				(be, side) -> (side == null || side == Direction.UP) ? be.inventory : null);
-		event.registerBlockEntity(ITEM, RegistryManager.ITEM_DROPPER_ENTITY.get(),
+		items(event, RegistryManager.ITEM_DROPPER_ENTITY.get(),
 				(be, side) -> side == Direction.UP ? be.inventory : null);
-		event.registerBlockEntity(ITEM, RegistryManager.ITEM_VACUUM_ENTITY.get(), (be, side) -> {
+		items(event, RegistryManager.ITEM_VACUUM_ENTITY.get(), (be, side) -> {
 			Direction facing = facing(be.getBlockState(), BlockStateProperties.FACING);
 			return facing != null && side == facing.getOpposite() ? be.inventory : null;
 		});
-		event.registerBlockEntity(ITEM, RegistryManager.MNEMONIC_INSCRIBER_ENTITY.get(), (be, side) -> {
+		items(event, RegistryManager.MNEMONIC_INSCRIBER_ENTITY.get(), (be, side) -> {
 			if (side == null)
 				return be.inventory;
 			Direction facing = facing(be.getBlockState(), BlockStateProperties.FACING);
@@ -65,17 +70,17 @@ public class BlockEntityCapabilities {
 		});
 
 		// --- item pipes ---
-		event.registerBlockEntity(ITEM, RegistryManager.ITEM_PIPE_ENTITY.get(), (be, side) -> {
+		items(event, RegistryManager.ITEM_PIPE_ENTITY.get(), (be, side) -> {
 			if (side != null && be.getConnection(side).transfer)
 				return be.sideHandlers[side.get3DDataValue()];
 			return be.inventory;
 		});
-		event.registerBlockEntity(ITEM, RegistryManager.ITEM_EXTRACTOR_ENTITY.get(), (be, side) -> {
+		items(event, RegistryManager.ITEM_EXTRACTOR_ENTITY.get(), (be, side) -> {
 			if (side != null && be.getConnection(side).transfer)
 				return be.sideHandlers[side.get3DDataValue()];
 			return be.inventory;
 		});
-		event.registerBlockEntity(ITEM, RegistryManager.ITEM_TRANSFER_ENTITY.get(), (be, side) -> {
+		items(event, RegistryManager.ITEM_TRANSFER_ENTITY.get(), (be, side) -> {
 			if (side == null)
 				return be.inventory;
 			Direction facing = facing(be.getBlockState(), BlockStateProperties.FACING);
@@ -87,17 +92,17 @@ public class BlockEntityCapabilities {
 		});
 
 		// --- fluid pipes ---
-		event.registerBlockEntity(FLUID, RegistryManager.FLUID_PIPE_ENTITY.get(), (be, side) -> {
+		fluids(event, RegistryManager.FLUID_PIPE_ENTITY.get(), (be, side) -> {
 			if (side != null && be.getConnection(side).transfer)
 				return be.sideHandlers[side.get3DDataValue()];
 			return be.tank;
 		});
-		event.registerBlockEntity(FLUID, RegistryManager.FLUID_EXTRACTOR_ENTITY.get(), (be, side) -> {
+		fluids(event, RegistryManager.FLUID_EXTRACTOR_ENTITY.get(), (be, side) -> {
 			if (side != null && be.getConnection(side).transfer)
 				return be.sideHandlers[side.get3DDataValue()];
 			return be.tank;
 		});
-		event.registerBlockEntity(FLUID, RegistryManager.FLUID_TRANSFER_ENTITY.get(), (be, side) -> {
+		fluids(event, RegistryManager.FLUID_TRANSFER_ENTITY.get(), (be, side) -> {
 			if (side == null)
 				return be.tank;
 			Direction facing = facing(be.getBlockState(), BlockStateProperties.FACING);
@@ -109,34 +114,34 @@ public class BlockEntityCapabilities {
 		});
 
 		// --- fluid tanks (block entity is the handler) ---
-		event.registerBlockEntity(FLUID, RegistryManager.FLUID_VESSEL_ENTITY.get(), (be, side) -> be);
-		event.registerBlockEntity(FLUID, RegistryManager.MELTER_TOP_ENTITY.get(), (be, side) -> be);
-		event.registerBlockEntity(FLUID, RegistryManager.STAMP_BASE_ENTITY.get(), (be, side) -> be);
-		event.registerBlockEntity(FLUID, RegistryManager.MIXER_CENTRIFUGE_TOP_ENTITY.get(), (be, side) -> be);
-		event.registerBlockEntity(FLUID, RegistryManager.PRESSURE_REFINERY_BOTTOM_ENTITY.get(), (be, side) -> be);
-		event.registerBlockEntity(FLUID, RegistryManager.RESERVOIR_ENTITY.get(),
+		fluids(event, RegistryManager.FLUID_VESSEL_ENTITY.get(), (be, side) -> be);
+		fluids(event, RegistryManager.MELTER_TOP_ENTITY.get(), (be, side) -> be);
+		fluids(event, RegistryManager.STAMP_BASE_ENTITY.get(), (be, side) -> be);
+		fluids(event, RegistryManager.MIXER_CENTRIFUGE_TOP_ENTITY.get(), (be, side) -> be);
+		fluids(event, RegistryManager.PRESSURE_REFINERY_BOTTOM_ENTITY.get(), (be, side) -> be);
+		fluids(event, RegistryManager.RESERVOIR_ENTITY.get(),
 				(be, side) -> (side == null || side == Direction.DOWN) ? be : null);
-		event.registerBlockEntity(FLUID, RegistryManager.GEOLOGIC_SEPARATOR_ENTITY.get(),
+		fluids(event, RegistryManager.GEOLOGIC_SEPARATOR_ENTITY.get(),
 				(be, side) -> side != Direction.UP ? be : null);
 
 		// --- fluid handlers, sided ---
-		event.registerBlockEntity(FLUID, RegistryManager.CAMINITE_VALVE_ENTITY.get(),
+		fluids(event, RegistryManager.CAMINITE_VALVE_ENTITY.get(),
 				(be, side) -> (side == null || side.getAxis() != Direction.Axis.Y) ? be.fluidHandler : null);
-		event.registerBlockEntity(FLUID, RegistryManager.CATALYTIC_PLUG_ENTITY.get(), (be, side) -> {
+		fluids(event, RegistryManager.CATALYTIC_PLUG_ENTITY.get(), (be, side) -> {
 			Direction facing = facing(be.getBlockState(), BlockStateProperties.FACING);
 			return facing != null && (side == null || side == facing) ? be.tank : null;
 		});
-		event.registerBlockEntity(FLUID, RegistryManager.WILDFIRE_STIRLING_ENTITY.get(), (be, side) -> {
+		fluids(event, RegistryManager.WILDFIRE_STIRLING_ENTITY.get(), (be, side) -> {
 			Direction facing = facing(be.getBlockState(), BlockStateProperties.FACING);
 			return facing != null && (side == null || side == facing) ? be.tank : null;
 		});
-		event.registerBlockEntity(FLUID, RegistryManager.MINI_BOILER_ENTITY.get(), (be, side) -> {
+		fluids(event, RegistryManager.MINI_BOILER_ENTITY.get(), (be, side) -> {
 			if (side == Direction.UP)
 				return be.gasTank;
 			Direction facing = facing(be.getBlockState(), BlockStateProperties.HORIZONTAL_FACING);
 			return (side == Direction.DOWN || side != facing) ? be.fluidTank : null;
 		});
-		event.registerBlockEntity(FLUID, RegistryManager.MIXER_CENTRIFUGE_BOTTOM_ENTITY.get(), (be, side) -> {
+		fluids(event, RegistryManager.MIXER_CENTRIFUGE_BOTTOM_ENTITY.get(), (be, side) -> {
 			if (side == null)
 				return null;
 			return switch (side) {
@@ -149,8 +154,8 @@ public class BlockEntityCapabilities {
 		});
 
 		// --- mechanical core proxies every capability to the attached multiblock ---
-		proxy(event, ITEM);
-		proxy(event, FLUID);
+		proxy(event, Capabilities.Item.BLOCK);
+		proxy(event, Capabilities.Fluid.BLOCK);
 		proxy(event, EmbersCapabilities.EMBER_CAPABILITY);
 		proxy(event, EmbersCapabilities.UPGRADE_PROVIDER_CAPABILITY);
 	}
@@ -167,7 +172,7 @@ public class BlockEntityCapabilities {
 		});
 	}
 
-	private static Direction facing(BlockState state, net.minecraft.world.level.block.state.properties.DirectionProperty property) {
+	private static Direction facing(BlockState state, net.minecraft.world.level.block.state.properties.EnumProperty<Direction> property) {
 		return state.hasProperty(property) ? state.getValue(property) : null;
 	}
 }

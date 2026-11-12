@@ -1,5 +1,7 @@
 package com.rekindled.embers.block;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.blockentity.MelterBottomBlockEntity;
 import com.rekindled.embers.blockentity.MelterTopBlockEntity;
@@ -43,7 +45,7 @@ public class MelterBlock extends DoubleTallMachineBlock {
 		if (state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) != DoubleBlockHalf.LOWER && level.getBlockEntity(pos) instanceof MelterTopBlockEntity melterEntity) {
 			ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
 			if (!heldItem.isEmpty()) {
-				IFluidHandler cap = level.getCapability(Capabilities.FluidHandler.BLOCK, melterEntity.getBlockPos(), hit.getDirection());
+				IFluidHandler cap = LegacyCaps.fluid(level, melterEntity.getBlockPos(), hit.getDirection());
 				if (cap != null && FluidUtil.interactWithFluidHandler(player, InteractionHand.MAIN_HAND, cap)) {
 					return InteractionResult.SUCCESS;
 				}

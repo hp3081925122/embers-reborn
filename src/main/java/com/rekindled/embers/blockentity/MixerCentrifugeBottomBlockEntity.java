@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.HashSet;
 import java.util.List;
 import net.neoforged.neoforge.capabilities.BlockCapability;
@@ -216,7 +218,7 @@ public class MixerCentrifugeBottomBlockEntity extends BlockEntity implements IMe
 
 	@Override
 	public boolean hasCapabilityDescription(BlockCapability<?, ?> capability) {
-		return capability == Capabilities.FluidHandler.BLOCK;
+		return capability == LegacyCaps.FLUID_BLOCK;
 	}
 
 	@Override

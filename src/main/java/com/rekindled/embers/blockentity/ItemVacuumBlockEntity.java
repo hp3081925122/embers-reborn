@@ -1,5 +1,7 @@
 package com.rekindled.embers.blockentity;
 
+import com.rekindled.embers.util.LegacyCaps;
+
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +44,7 @@ public class ItemVacuumBlockEntity extends BlockEntity implements IExtraCapabili
 		Direction facing = state.getValue(BlockStateProperties.FACING);
 		BlockEntity tile = level.getBlockEntity(pos.relative(facing.getOpposite()));
 		if (level.hasNeighborSignal(pos) && tile != null) {
-			IItemHandler inventory = level.getCapability(Capabilities.ItemHandler.BLOCK, tile.getBlockPos(), null);
+			IItemHandler inventory = LegacyCaps.item(level, tile.getBlockPos(), null);
 			if (inventory != null) {
 				Vec3i vec = facing.getNormal();
 				AABB suckBB = new AABB(pos.getX() - 6 + vec.getX() * 7, pos.getY() - 6 + vec.getY() * 7, pos.getZ() - 6 + vec.getZ() * 7, pos.getX() + 7 + vec.getX() * 7, pos.getY() + 7 + vec.getY() * 7, pos.getZ() + 7 + vec.getZ() * 7);
