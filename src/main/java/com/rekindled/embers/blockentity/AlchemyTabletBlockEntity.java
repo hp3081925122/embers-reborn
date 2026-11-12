@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.rekindled.embers.ConfigManager;
 import com.rekindled.embers.Embers;
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.api.event.AlchemyResultEvent;
