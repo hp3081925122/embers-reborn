@@ -147,15 +147,15 @@ public abstract class ItemPipeBlockEntityBase extends PipeBlockEntityBase implem
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.loadAdditional(nbt, provider);
+	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("inventory"))
 			inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.saveAdditional(nbt, provider);
+	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		super.saveAdditionalNbt(nbt, provider);
 		writeInventory(nbt);
 	}
 

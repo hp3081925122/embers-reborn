@@ -76,8 +76,12 @@ public class MixerCentrifugeBottomBlockEntity extends BlockEntity implements IMe
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.loadAdditional(nbt, provider);
+	protected void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
+		super.loadAdditional(input);
+		loadAdditionalNbt(com.rekindled.embers.util.NbtBridge.read(input), input.lookup());
+	}
+
+	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		north.readFromNBT(provider, nbt.getCompound("northTank"));
 		south.readFromNBT(provider, nbt.getCompound("southTank"));
 		east.readFromNBT(provider, nbt.getCompound("eastTank"));
@@ -86,8 +90,14 @@ public class MixerCentrifugeBottomBlockEntity extends BlockEntity implements IMe
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.saveAdditional(nbt, provider);
+	protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput output) {
+		super.saveAdditional(output);
+		net.minecraft.nbt.CompoundTag nbt = new net.minecraft.nbt.CompoundTag();
+		saveAdditionalNbt(nbt, com.rekindled.embers.util.NbtBridge.provider(this));
+		com.rekindled.embers.util.NbtBridge.write(output, nbt);
+	}
+
+	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		nbt.put("northTank", north.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.put("southTank", south.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.put("eastTank", east.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));

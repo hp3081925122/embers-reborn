@@ -31,7 +31,12 @@ public class ItemDialBlockEntity extends BlockEntity implements IDialEntity {
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+	protected void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
+		super.loadAdditional(input);
+		loadAdditionalNbt(com.rekindled.embers.util.NbtBridge.read(input), input.lookup());
+	}
+
+	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		ListTag items = nbt.getList("items", Tag.TAG_COMPOUND);
 		itemStacks = new ItemStack[items.size()];
 		if (items.size() > 0) {

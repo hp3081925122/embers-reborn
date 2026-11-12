@@ -95,8 +95,8 @@ public class ItemExtractorBlockEntity extends ItemPipeBlockEntityBase implements
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.loadAdditional(nbt, provider);
+	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("orders")) {
 			ListTag tagOrders = nbt.getList("orders",10);
 			orders.clear();
@@ -107,8 +107,8 @@ public class ItemExtractorBlockEntity extends ItemPipeBlockEntityBase implements
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.saveAdditional(nbt, provider);
+	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		super.saveAdditionalNbt(nbt, provider);
 		ListTag tagOrders = new ListTag();
 		for (OrderStack order : orders) {
 			tagOrders.add(order.writeToNBT(new CompoundTag()));

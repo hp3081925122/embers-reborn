@@ -76,8 +76,8 @@ public class ItemTransferBlockEntity extends ItemPipeBlockEntityBase {
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.loadAdditional(nbt, provider);
+	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("filter")) {
 			filterItem = ItemStack.parse(provider, nbt.getCompound("filter")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
 		}
@@ -96,8 +96,8 @@ public class ItemTransferBlockEntity extends ItemPipeBlockEntityBase {
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.saveAdditional(nbt, provider);
+	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		super.saveAdditionalNbt(nbt, provider);
 		writeFilter(nbt, provider);
 	}
 

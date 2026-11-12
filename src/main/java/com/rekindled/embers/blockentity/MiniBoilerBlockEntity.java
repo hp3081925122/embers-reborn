@@ -99,8 +99,8 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 		return null;
 	}
 	@Override
-	public void loadAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.loadAdditional(nbt, provider);
+	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		super.loadAdditionalNbt(nbt, provider);
 		fluidTank.readFromNBT(provider, nbt.getCompound("fluidTank"));
 		gasTank.readFromNBT(provider, nbt.getCompound("gasTank"));
 		lastBoil = nbt.getInt("lastBoil");
@@ -108,8 +108,8 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.saveAdditional(nbt, provider);
+	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		super.saveAdditionalNbt(nbt, provider);
 		nbt.put("fluidTank", fluidTank.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.put("gasTank", gasTank.writeToNBT(provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.putInt("lastBoil", lastBoil);

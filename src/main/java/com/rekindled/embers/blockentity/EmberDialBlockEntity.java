@@ -26,7 +26,12 @@ public class EmberDialBlockEntity extends BlockEntity implements IDialEntity {
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+	protected void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
+		super.loadAdditional(input);
+		loadAdditionalNbt(com.rekindled.embers.util.NbtBridge.read(input), input.lookup());
+	}
+
+	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		if (nbt.contains(IEmberCapability.EMBER))
 			ember = nbt.getDouble(IEmberCapability.EMBER);
 		if (nbt.contains(IEmberCapability.EMBER_CAPACITY))

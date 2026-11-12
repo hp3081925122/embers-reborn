@@ -102,16 +102,26 @@ public class CrystalSeedBlockEntity extends BlockEntity implements IEmberInjecta
 	}
 
 	@Override
-	public void loadAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.loadAdditional(nbt, provider);
+	protected void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
+		super.loadAdditional(input);
+		loadAdditionalNbt(com.rekindled.embers.util.NbtBridge.read(input), input.lookup());
+	}
+
+	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		loadSpawnsFromString(nbt.getString("spawns"));
 		size = nbt.getInt("size");
 		xp = nbt.getInt("xp");
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
-		super.saveAdditional(nbt, provider);
+	protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput output) {
+		super.saveAdditional(output);
+		net.minecraft.nbt.CompoundTag nbt = new net.minecraft.nbt.CompoundTag();
+		saveAdditionalNbt(nbt, com.rekindled.embers.util.NbtBridge.provider(this));
+		com.rekindled.embers.util.NbtBridge.write(output, nbt);
+	}
+
+	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		nbt.putString("spawns", getSpawnString(willSpawn));
 		nbt.putInt("size", size);
 		nbt.putInt("xp", xp);
