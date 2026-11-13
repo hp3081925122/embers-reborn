@@ -11,7 +11,7 @@ import com.rekindled.embers.api.augment.AugmentUtil;
 import com.rekindled.embers.datagen.EmbersSounds;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
@@ -337,7 +337,7 @@ public class WindingGearsAugment extends AugmentBase {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static void renderSpringUnderlay(GuiGraphics graphics, float partialTicks, int width, int height) {
+	public static void renderSpringUnderlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
 		int fill = (int) (spoolLast * (1 - partialTicks) + spool * partialTicks);
 		fill += 16;
 		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
@@ -359,16 +359,16 @@ public class WindingGearsAugment extends AugmentBase {
 			int evenFillBack = Mth.clamp(last - 16, 0, 8);
 			int oddFillBack = Mth.clamp(last - 0, 0, 8);
 
-			graphics.blit(TEXTURE_HUD, x, y, u, v, evenWidth, BAR_HEIGHT);
-			graphics.blit(TEXTURE_HUD, x + evenWidth, y + 8 - evenFillBack, u + evenWidth, v + 8 - evenFillBack, 8, evenFillBack);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x,  y,  u,  v,  evenWidth,  BAR_HEIGHT, 256, 256);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + evenWidth,  y + 8 - evenFillBack,  u + evenWidth,  v + 8 - evenFillBack,  8,  evenFillBack, 256, 256);
 			v += 16;
-			graphics.blit(TEXTURE_HUD, x, y, u, v, oddWidth, BAR_HEIGHT);
-			graphics.blit(TEXTURE_HUD, x + oddWidth, y + 8 - oddFillBack, u + oddWidth, v + 8 - oddFillBack, 8, oddFillBack);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x,  y,  u,  v,  oddWidth,  BAR_HEIGHT, 256, 256);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + oddWidth,  y + 8 - oddFillBack,  u + oddWidth,  v + 8 - oddFillBack,  8,  oddFillBack, 256, 256);
 		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static void renderSpringOverlay(GuiGraphics graphics, float partialTicks, int width, int height) {
+	public static void renderSpringOverlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
 		int fill = (int) (spoolLast * (1 - partialTicks) + spool * partialTicks);
 		double currentAngle = angleLast * (1 - partialTicks) + angle * partialTicks;
 		int gearFrame = (int) (currentAngle * 4f / 360f);
@@ -394,13 +394,13 @@ public class WindingGearsAugment extends AugmentBase {
 			int evenFillFront = Mth.clamp(last - 24, 0, 8);
 			int oddFillFront = Mth.clamp(last - 8, 0, 8);
 
-			graphics.blit(TEXTURE_HUD, x - 9, y - 1, uGear, vGear, 10, 10);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x - 9,  y - 1,  uGear,  vGear,  10,  10, 256, 256);
 
-			graphics.blit(TEXTURE_HUD, x, y, u, v, evenWidth, BAR_HEIGHT);
-			graphics.blit(TEXTURE_HUD, x + evenWidth, y, u + evenWidth, v, 8, evenFillFront);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x,  y,  u,  v,  evenWidth,  BAR_HEIGHT, 256, 256);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + evenWidth,  y,  u + evenWidth,  v,  8,  evenFillFront, 256, 256);
 			v += 16;
-			graphics.blit(TEXTURE_HUD, x, y, u, v, oddWidth, BAR_HEIGHT);
-			graphics.blit(TEXTURE_HUD, x + oddWidth, y, u + oddWidth, v, 8, oddFillFront);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x,  y,  u,  v,  oddWidth,  BAR_HEIGHT, 256, 256);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + oddWidth,  y,  u + oddWidth,  v,  8,  oddFillFront, 256, 256);
 		}
 	}
 }

@@ -25,7 +25,7 @@ import com.rekindled.embers.network.PacketHandler;
 import com.rekindled.embers.network.message.MessageScalesData;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
@@ -172,7 +172,7 @@ public class ShiftingScalesAugment extends AugmentBase {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static void renderHeartsOverlay(GuiGraphics graphics, float partialTicks, int width, int height) {
+	public static void renderHeartsOverlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
 		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
 		if (mc.player.isCreative() || mc.player.isSpectator())
 			return;
@@ -189,7 +189,7 @@ public class ShiftingScalesAugment extends AugmentBase {
 		for (int i = 0; i < segs; i++) {
 			if (i == segs - 1)
 				u = ((last + 2) % 3) * 9;
-			graphics.blit(TEXTURE_HUD, x + 8 * (i % 10), y - 10 * (i / 10), u, v, 9, 9);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + 8 * (i % 10),  y - 10 * (i / 10),  u,  v,  9,  9, 256, 256);
 		}
 	}
 
@@ -216,7 +216,7 @@ public class ShiftingScalesAugment extends AugmentBase {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static void renderIngameOverlay(GuiGraphics graphics, float partialTicks, int width, int height) {
+	public static void renderIngameOverlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
 		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
 		if (mc.player.isCreative() || mc.player.isSpectator())
 			return;
@@ -227,7 +227,7 @@ public class ShiftingScalesAugment extends AugmentBase {
 				iterator.remove();
 			int u = particle.getFrame() % 8 > 4 ? 5 : 0;
 			int v = 9;
-			graphics.blit(TEXTURE_HUD, (int) particle.getX() - 2, (int) particle.getY() - 2, u, v, 5, 5);
+			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD, (int) particle.getX() - 2, (int) particle.getY() - 2, u, v, 5, 5, 256, 256);
 		}
 		Random random = new Random();
 		if (scales < scalesLast) {

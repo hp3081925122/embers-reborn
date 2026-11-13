@@ -56,7 +56,7 @@ import com.rekindled.embers.util.Misc;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
@@ -317,7 +317,7 @@ public class EmbersClientEvents {
 		return target;
 	}
 
-	public static void renderIngameOverlay(net.minecraft.client.gui.GuiGraphics graphics, net.minecraft.client.DeltaTracker deltaTracker) {
+	public static void renderIngameOverlay(net.minecraft.client.gui.GuiGraphicsExtractor graphics, net.minecraft.client.DeltaTracker deltaTracker) {
 		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
 		if (mc.options.hideGui)
 			return;
@@ -352,7 +352,7 @@ public class EmbersClientEvents {
 					}
 					if (!text.isEmpty()) {
 						for (int i = 0; i < text.size(); i++) {
-							graphics.drawString(net.minecraft.client.Minecraft.getInstance().font, text.get(i), net.minecraft.client.Minecraft.getInstance().getWindow().getGuiScaledWidth() / 2 - net.minecraft.client.Minecraft.getInstance().font.width(text.get(i)) / 2, net.minecraft.client.Minecraft.getInstance().getWindow().getGuiScaledHeight() / 2 + 40 + 11 * i, 0xFFFFFF);
+							graphics.text(net.minecraft.client.Minecraft.getInstance().font, text.get(i), net.minecraft.client.Minecraft.getInstance().getWindow().getGuiScaledWidth() / 2 - net.minecraft.client.Minecraft.getInstance().font.width(text.get(i)) / 2, net.minecraft.client.Minecraft.getInstance().getWindow().getGuiScaledHeight() / 2 + 40 + 11 * i, 0xFFFFFFFF);
 						}
 					}
 				}
@@ -364,15 +364,15 @@ public class EmbersClientEvents {
 		}
 	}
 
-	public static void renderAtmosphericGauge(GuiGraphics graphics, Player player, float partialTicks, int width, int height) {
+	public static void renderAtmosphericGauge(GuiGraphicsExtractor graphics, Player player, float partialTicks, int width, int height) {
 		int x = width / 2;
 		int y = height / 2;
 
-		graphics.pose().pushPose();
+		graphics.pose().pushMatrix();
 
 		//int offsetX = 0;
 
-		graphics.blit(GAUGE, x - 16, y - 16, 0, 0, 0, 32, 32, 32, 32);
+		graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, GAUGE, x - 16, y - 16, 0, 0, 32, 32, 32, 32);
 
 		//double angle = 195.0;
 		//EmberWorldData data = EmberWorldData.get(world);
@@ -389,13 +389,13 @@ public class EmbersClientEvents {
 			//}
 		}
 
-		graphics.pose().translate(x, y, 0);
-		graphics.pose().mulPose(Axis.ZP.rotationDegrees((float) gaugeAngle));
-		graphics.pose().translate(-2.5, -2.5, 0);
+		graphics.pose().translate((float) (x), (float) (y));
+		graphics.pose().rotate((float) Math.toRadians((float) gaugeAngle));
+		graphics.pose().translate((float) (-2.5), (float) (-2.5));
 
-		graphics.blit(GAUGE_POINTER, 0, 0, 0, 0, 0, 12, 5, 16, 16);
+		graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, GAUGE_POINTER, 0, 0, 0, 0, 12, 5, 16, 16);
 
-		graphics.pose().popPose();
+		graphics.pose().popMatrix();
 	}
 
 	private static void addCapabilityInformation(List<Component> text, BlockState state, BlockEntity tile, Direction facing) {
