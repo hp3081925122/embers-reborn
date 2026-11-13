@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.Block;
 
 public class MetalCoefficientRecipe implements IMetalCoefficientRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer(); 
+	public static final RecipeSerializer<MetalCoefficientRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec()); 
 
 	public final Identifier id;
 
@@ -65,19 +65,19 @@ public class MetalCoefficientRecipe implements IMetalCoefficientRecipe {
 		return coefficient;
 	}
 
-	public static class Serializer implements RecipeSerializer<MetalCoefficientRecipe> {
+	public static class Serializer {
 		public MetalCoefficientRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable MetalCoefficientRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, MetalCoefficientRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<MetalCoefficientRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				net.minecraft.resources.Identifier.CODEC.fieldOf("block_tag").forGetter(r -> r.blockTag.location()),
 				com.mojang.serialization.Codec.DOUBLE.fieldOf("coefficient").forGetter(r -> r.coefficient)
 			).apply(inst, (tag, coeff) -> new MetalCoefficientRecipe(null, net.minecraft.tags.BlockTags.create(tag), coeff)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, MetalCoefficientRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				net.minecraft.network.codec.ByteBufCodecs.fromCodec(net.minecraft.resources.Identifier.CODEC), r -> r.blockTag.location(),

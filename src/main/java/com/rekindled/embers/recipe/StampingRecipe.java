@@ -21,7 +21,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class StampingRecipe implements IStampingRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer();
+	public static final RecipeSerializer<StampingRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
 	public final Identifier id;
 
@@ -141,12 +141,12 @@ public class StampingRecipe implements IStampingRecipe {
 				net.minecraft.network.codec.ByteBufCodecs.VAR_INT, ta -> ta.amount,
 				(tag, count) -> new TagAmount(ItemTags.create(tag), count)));
 
-	public static class Serializer implements RecipeSerializer<StampingRecipe> {
+	public static class Serializer {
 		public StampingRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable StampingRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, StampingRecipe recipe) {}
 
-		@Override
+		
 		public com.mojang.serialization.MapCodec<StampingRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("stamp").forGetter(r -> r.stamp),
@@ -156,7 +156,7 @@ public class StampingRecipe implements IStampingRecipe {
 			).apply(inst, (s, i, f, o) -> new StampingRecipe(null, s, i, f, o)));
 		}
 
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, StampingRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC, r -> r.stamp,

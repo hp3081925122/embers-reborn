@@ -19,7 +19,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class AlchemyRecipe extends AlchemyRecipeBase {
 
-	public static final Serializer SERIALIZER = new Serializer();
+	public static final RecipeSerializer<AlchemyRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
 	public AlchemyRecipe(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
 		super(id, tablet, aspects, inputs, output, failure);
@@ -30,12 +30,12 @@ public class AlchemyRecipe extends AlchemyRecipeBase {
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<AlchemyRecipe> {
+	public static class Serializer {
 		public AlchemyRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable AlchemyRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, AlchemyRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<AlchemyRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("tablet").forGetter(r -> r.tablet),
@@ -45,7 +45,7 @@ public class AlchemyRecipe extends AlchemyRecipeBase {
 				net.minecraft.world.item.ItemStack.CODEC.optionalFieldOf("failure", new net.minecraft.world.item.ItemStack(com.rekindled.embers.RegistryManager.ALCHEMICAL_WASTE.get())).forGetter(r -> r.failure)
 			).apply(inst, (tablet, aspects, inputs, output, failure) -> new AlchemyRecipe(null, tablet, new java.util.ArrayList<>(aspects), new java.util.ArrayList<>(inputs), output, failure)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AlchemyRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC, r -> r.tablet,

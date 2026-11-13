@@ -10,7 +10,6 @@ import com.rekindled.embers.particle.TyrfingParticleOptions;
 import com.rekindled.embers.util.Misc;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -45,17 +44,5 @@ public class TyrfingItem extends Item implements ITyrfingWeapon {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class ColorHandler implements ItemColor {
-		@Override
-		public int getColor(ItemStack stack, int tintIndex) {
-			if (tintIndex == 1) {
-				float timerSine = ((float)Math.sin(8.0*Math.toRadians(EmbersClientEvents.ticks % 360))+1.0f)/2.0f;
-				int r = (int)(64.0f*timerSine);
-				int g = (int)(16.0f);
-				int b = (int)(32.0f+32.0f*timerSine);
-				return 0xFF000000 | Misc.intColor(r, g, b);
-			}
-			return 0xFFFFFFFF;
-		}		
-	}
+
 }

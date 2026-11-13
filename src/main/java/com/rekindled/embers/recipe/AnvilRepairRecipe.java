@@ -22,7 +22,7 @@ import net.neoforged.neoforge.common.CommonHooks;
 
 public class AnvilRepairRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitRecipe<IDawnstoneAnvilRecipe> {
 
-	public static final Serializer SERIALIZER = new Serializer(); 
+	public static final RecipeSerializer<AnvilRepairRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec()); 
 
 	public final Identifier id;
 
@@ -84,16 +84,16 @@ public class AnvilRepairRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitR
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<AnvilRepairRecipe> {
+	public static class Serializer {
 		public AnvilRepairRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable AnvilRepairRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, AnvilRepairRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<AnvilRepairRecipe> codec() {
 			return com.mojang.serialization.MapCodec.unit(new AnvilRepairRecipe(null));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AnvilRepairRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new AnvilRepairRecipe(null));
 		}

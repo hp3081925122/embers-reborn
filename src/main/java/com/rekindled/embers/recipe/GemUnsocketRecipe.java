@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 
 public class GemUnsocketRecipe implements CraftingRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer();
+	public static final RecipeSerializer<GemUnsocketRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
 	public final Identifier id;
 
@@ -114,16 +114,16 @@ public class GemUnsocketRecipe implements CraftingRecipe {
 		return CraftingBookCategory.EQUIPMENT;
 	}
 
-	public static class Serializer implements RecipeSerializer<GemUnsocketRecipe> {
+	public static class Serializer {
 		public GemUnsocketRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable GemUnsocketRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, GemUnsocketRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<GemUnsocketRecipe> codec() {
 			return com.mojang.serialization.MapCodec.unit(new GemUnsocketRecipe(null));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, GemUnsocketRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new GemUnsocketRecipe(null));
 		}

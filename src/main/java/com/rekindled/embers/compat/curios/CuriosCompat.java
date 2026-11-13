@@ -23,7 +23,6 @@ import com.rekindled.embers.research.ResearchBase;
 import com.rekindled.embers.research.ResearchManager;
 import com.rekindled.embers.research.subtypes.ResearchShowItem;
 
-import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
@@ -36,7 +35,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
@@ -62,10 +60,6 @@ public class CuriosCompat {
 	public static void init() {}
 
 	@OnlyIn(Dist.CLIENT)
-	public static void registerColorHandler(RegisterColorHandlersEvent.Item event, ItemColor itemColor) {
-		event.register(itemColor, EMBER_BULB.get());
-	}
-
 	public static boolean checkForCurios(LivingEntity living, Predicate<ItemStack> predicate) {
 		Optional<ICuriosItemHandler> inv = CuriosApi.getCuriosInventory(living);
 		if (inv.isPresent()) {

@@ -20,7 +20,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class MixingRecipe implements IMixingRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer(); 
+	public static final RecipeSerializer<MixingRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec()); 
 
 	public final Identifier id;
 
@@ -102,19 +102,19 @@ public class MixingRecipe implements IMixingRecipe {
 		return output.getStack();
 	}
 
-	public static class Serializer implements RecipeSerializer<MixingRecipe> {
+	public static class Serializer {
 		public MixingRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable MixingRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, MixingRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<MixingRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				com.rekindled.embers.recipe.FluidIngredient.CODEC.listOf().fieldOf("inputs").forGetter(r -> r.inputs),
 				com.rekindled.embers.util.FluidOutput.CODEC.fieldOf("output").forGetter(r -> r.output)
 			).apply(inst, (inputs, output) -> new MixingRecipe(null, new java.util.ArrayList<>(inputs), output)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, MixingRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				com.rekindled.embers.recipe.FluidIngredient.STREAM_CODEC.apply(net.minecraft.network.codec.ByteBufCodecs.list()), r -> r.inputs,

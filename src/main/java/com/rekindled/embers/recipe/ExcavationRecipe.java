@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.Block;
 
 public class ExcavationRecipe extends BoringRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer();
+	public static final RecipeSerializer<ExcavationRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
 	public ExcavationRecipe(BoringRecipe recipe) {
 		super(recipe.id, recipe.result, recipe.minHeight, recipe.maxHeight, recipe.dimensions, recipe.biomes, recipe.requiredBlock, recipe.amountRequired, recipe.chance);
@@ -37,18 +37,18 @@ public class ExcavationRecipe extends BoringRecipe {
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<ExcavationRecipe> {
+	public static class Serializer {
 		public ExcavationRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable ExcavationRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, ExcavationRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<ExcavationRecipe> codec() {
 			return BoringRecipe.SERIALIZER.codec().xmap(
 				b -> new ExcavationRecipe(b),
 				e -> new BoringRecipe(null, e.result, e.minHeight, e.maxHeight, e.dimensions, e.biomes, e.requiredBlock, e.amountRequired, e.chance));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, ExcavationRecipe> streamCodec() {
 			return BoringRecipe.SERIALIZER.streamCodec().map(
 				b -> new ExcavationRecipe(b),

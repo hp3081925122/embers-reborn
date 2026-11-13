@@ -14,7 +14,6 @@ import com.rekindled.embers.util.DecimalFormats;
 import com.rekindled.embers.util.Misc;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -82,21 +81,5 @@ public abstract class EmberStorageItem extends Item {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class ColorHandler implements ItemColor {
-		@Override
-		public int getColor(ItemStack stack, int tintIndex) {
-			if (tintIndex == 0) {
-				IEmberCapability capability = com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_ITEM_CAPABILITY.getCapability(stack, null);
-				if (capability != null) {
-					float coeff = (float)(capability.getEmber() / capability.getEmberCapacity());
-					float timerSine = ((float)Math.sin(8.0*Math.toRadians(EmbersClientEvents.ticks % 360))+1.0f)/2.0f;
-					int r = 255;
-					int g = (int)(255.0f*(1.0f-coeff) + (64.0f*timerSine+64.0f)*coeff);
-					int b = (int)(255.0f*(1.0f-coeff) + 16.0f*coeff);
-					return 0xFF000000 | Misc.intColor(r, g, b);
-				}
-			}
-			return 0xFFFFFFFF;
-		}
-	}
+
 }

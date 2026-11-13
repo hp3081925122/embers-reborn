@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BoringRecipe implements IBoringRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer();
+	public static final RecipeSerializer<BoringRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
 	public final Identifier id;
 
@@ -130,12 +130,12 @@ public class BoringRecipe implements IBoringRecipe {
 		return list;
 	}
 
-	public static class Serializer implements RecipeSerializer<BoringRecipe> {
+	public static class Serializer {
 		public BoringRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable BoringRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, BoringRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<BoringRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.<BoringRecipe>mapCodec(inst -> inst.group(
 				net.minecraft.world.item.ItemStack.CODEC.fieldOf("output").forGetter((BoringRecipe r) -> r.result.getStack()),
@@ -150,7 +150,7 @@ public class BoringRecipe implements IBoringRecipe {
 			).apply(inst, (stack, weight, minH, maxH, dims, biomes2, blockTag, amt, chance2) ->
 				new BoringRecipe(null, new com.rekindled.embers.util.WeightedItemStack(stack, weight), minH, maxH, dims, biomes2, net.minecraft.tags.BlockTags.create(blockTag), amt, chance2)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, BoringRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.of(
 				(buf, r) -> {

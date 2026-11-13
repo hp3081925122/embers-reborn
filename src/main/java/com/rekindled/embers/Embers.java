@@ -94,13 +94,10 @@ import com.rekindled.embers.util.HeatBarTooltip.HeatBarClientTooltip;
 import com.rekindled.embers.util.MatchCurioLootCondition;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -115,18 +112,15 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.crafting.CraftingHelper;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -180,8 +174,8 @@ public class Embers {
 		modEventBus.addListener(com.rekindled.embers.network.PacketHandler::register);
 
 		EmbersAPIImpl.init();
-		com.rekindled.embers.util.RegCtx.block(RegistryManager.BLOCKS, modEventBus);
-		com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, modEventBus);
+		RegistryManager.BLOCKS.register(modEventBus);
+		RegistryManager.ITEMS.register(modEventBus);
 		RegistryManager.FLUIDTYPES.register(modEventBus);
 		RegistryManager.FLUIDS.register(modEventBus);
 		RegistryManager.ENTITY_TYPES.register(modEventBus);
@@ -486,15 +480,6 @@ public class Embers {
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onLevelRender);
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onTooltip);
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onWorldRender);
-			ItemBlockRenderTypes.setRenderLayer(RegistryManager.STEAM.FLUID.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(RegistryManager.STEAM.FLUID_FLOW.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_OIL.FLUID.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_OIL.FLUID_FLOW.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_GAS.FLUID.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(RegistryManager.DWARVEN_GAS.FLUID_FLOW.get(), RenderType.translucent());
-			event.enqueueWork(() -> ItemProperties.register(RegistryManager.INFLICTOR_GEM.get(), Identifier.fromNamespaceAndPath(Embers.MODID, "charged"), (stack, level, entity, seed) -> {
-				return _getOrCreateTag(stack).contains("type") ? 1.0F : 0.0F;
-			}));
 		}
 
 		@OnlyIn(Dist.CLIENT)
@@ -515,11 +500,11 @@ public class Embers {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
 				com.rekindled.embers.augment.ShiftingScalesAugment.renderHeartsOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
-			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.JUMP_METER, Identifier.parse(Embers.MODID + ":winding_gears_spring_bottom"), (graphics, deltaTracker) -> {
+			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.CONTEXTUAL_INFO_BAR_BACKGROUND, Identifier.parse(Embers.MODID + ":winding_gears_spring_bottom"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
 				com.rekindled.embers.augment.WindingGearsAugment.renderSpringUnderlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
-			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.EXPERIENCE_BAR, Identifier.parse(Embers.MODID + ":winding_gears_spring_top"), (graphics, deltaTracker) -> {
+			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.CONTEXTUAL_INFO_BAR, Identifier.parse(Embers.MODID + ":winding_gears_spring_top"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
 				com.rekindled.embers.augment.WindingGearsAugment.renderSpringOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
@@ -527,9 +512,9 @@ public class Embers {
 
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
-		static void addResourceListener(RegisterClientReloadListenersEvent event) {
-			event.registerReloadListener(new DecimalFormats());
-			event.registerReloadListener(new EmbersColors());
+		static void addResourceListener(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
+			event.addListener(Identifier.fromNamespaceAndPath(MODID, "decimal_formats"), new DecimalFormats());
+			event.addListener(Identifier.fromNamespaceAndPath(MODID, "colors"), new EmbersColors());
 		}
 
 		@OnlyIn(Dist.CLIENT)
@@ -621,17 +606,31 @@ public class Embers {
 
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
-		static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
-			ItemColor emberContainerColor = new EmberStorageItem.ColorHandler();
-			if (ModList.get().isLoaded("curios"))
-				CuriosCompat.registerColorHandler(event, emberContainerColor);
-			event.register(emberContainerColor, RegistryManager.EMBER_JAR.get(), RegistryManager.EMBER_CARTRIDGE.get());
-			event.register(new TyrfingItem.ColorHandler(), RegistryManager.TYRFING.get());
+		static void registerFluidModels(net.neoforged.neoforge.client.event.RegisterFluidModelsEvent event) {
+			com.rekindled.embers.fluidtypes.EmbersFluidClient.registerFluidModels(event);
 		}
 
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
-		static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
+		static void registerClientExtensions(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent event) {
+			com.rekindled.embers.fluidtypes.EmbersFluidClient.registerClientExtensions(event);
+		}
+
+		@OnlyIn(Dist.CLIENT)
+		@SubscribeEvent
+		static void registerItemTints(RegisterColorHandlersEvent.ItemTintSources event) {
+			com.rekindled.embers.client.EmbersItemClient.registerTints(event);
+		}
+
+		@OnlyIn(Dist.CLIENT)
+		@SubscribeEvent
+		static void registerItemProperties(net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent event) {
+			com.rekindled.embers.client.EmbersItemClient.registerProperties(event);
+		}
+
+		@OnlyIn(Dist.CLIENT)
+		@SubscribeEvent
+		static void registerGeometryLoaders(ModelEvent.RegisterLoaders event) {
 			event.register(Identifier.parse(Embers.MODID + ":pipe"), PipeModel.Loader.INSTANCE);
 		}
 

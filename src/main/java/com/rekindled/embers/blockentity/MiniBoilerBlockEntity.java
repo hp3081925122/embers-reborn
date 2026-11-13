@@ -50,7 +50,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -278,7 +277,7 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 			spouts = 1;
 
 		@SuppressWarnings("resource")
-		Vector3f color = IClientFluidTypeExtensions.of(getGas().getFluidType()).modifyFogColor(Minecraft.getInstance().gameRenderer.getMainCamera(), 0, (ClientLevel) level, 6, 0, new Vector3f(1, 1, 1));
+		Vector3f color = com.rekindled.embers.fluidtypes.EmbersFluidClient.fogColor(getGas());
 		Random posRand = new Random(worldPosition.asLong());
 		for (int i = 0; i < spouts; i++) {
 			double angleA = posRand.nextDouble() * Math.PI * 2;

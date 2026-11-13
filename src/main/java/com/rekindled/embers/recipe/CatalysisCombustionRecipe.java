@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 
 public class CatalysisCombustionRecipe implements ICatalysisCombustionRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer(); 
+	public static final RecipeSerializer<CatalysisCombustionRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec()); 
 
 	public final Identifier id;
 
@@ -90,12 +90,12 @@ public class CatalysisCombustionRecipe implements ICatalysisCombustionRecipe {
 		return multiplier;
 	}
 
-	public static class Serializer implements RecipeSerializer<CatalysisCombustionRecipe> {
+	public static class Serializer {
 		public CatalysisCombustionRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable CatalysisCombustionRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, CatalysisCombustionRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<CatalysisCombustionRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(r -> r.ingredient),
@@ -104,7 +104,7 @@ public class CatalysisCombustionRecipe implements ICatalysisCombustionRecipe {
 				com.mojang.serialization.Codec.DOUBLE.fieldOf("multiplier").forGetter(r -> r.multiplier)
 			).apply(inst, (ing, mach, bt, mul) -> new CatalysisCombustionRecipe(null, ing, mach, bt, mul)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, CatalysisCombustionRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC, r -> r.ingredient,

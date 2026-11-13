@@ -1,6 +1,14 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "embers_reborn:item/inflictor_gem"
+    "type": "minecraft:condition",
+    "property": "embers_reborn:charged",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "embers_reborn:item/inflictor_gem_charged"
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "embers_reborn:item/inflictor_gem"
+    }
   }
 }

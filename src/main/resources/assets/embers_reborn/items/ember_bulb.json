@@ -1,6 +1,11 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "embers_reborn:item/ember_bulb"
+    "model": "embers_reborn:item/ember_bulb",
+    "tints": [
+      {
+        "type": "embers_reborn:ember_charge"
+      }
+    ]
   }
 }

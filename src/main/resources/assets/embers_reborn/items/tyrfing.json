@@ -1,6 +1,15 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "embers_reborn:item/tyrfing"
+    "model": "embers_reborn:item/tyrfing",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -1
+      },
+      {
+        "type": "embers_reborn:tyrfing_glow"
+      }
+    ]
   }
 }

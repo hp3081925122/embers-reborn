@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 
 public class AnvilAugmentRemoveRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitRecipe<IDawnstoneAnvilRecipe> {
 
-	public static final Serializer SERIALIZER = new Serializer(); 
+	public static final RecipeSerializer<AnvilAugmentRemoveRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec()); 
 
 	public final Identifier id;
 
@@ -71,16 +71,16 @@ public class AnvilAugmentRemoveRecipe implements IDawnstoneAnvilRecipe, IVisuall
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<AnvilAugmentRemoveRecipe> {
+	public static class Serializer {
 		public AnvilAugmentRemoveRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable AnvilAugmentRemoveRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, AnvilAugmentRemoveRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<AnvilAugmentRemoveRecipe> codec() {
 			return com.mojang.serialization.MapCodec.unit(new AnvilAugmentRemoveRecipe(null));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AnvilAugmentRemoveRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new AnvilAugmentRemoveRecipe(null));
 		}

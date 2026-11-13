@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 
 public class AnvilAugmentRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitRecipe<IDawnstoneAnvilRecipe> {
 
-	public static final Serializer SERIALIZER = new Serializer(); 
+	public static final RecipeSerializer<AnvilAugmentRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec()); 
 
 	public final Identifier id;
 
@@ -90,12 +90,12 @@ public class AnvilAugmentRecipe implements IDawnstoneAnvilRecipe, IVisuallySplit
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<AnvilAugmentRecipe> {
+	public static class Serializer {
 		public AnvilAugmentRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable AnvilAugmentRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, AnvilAugmentRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<AnvilAugmentRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("tool").forGetter(r -> r.tool),
@@ -103,7 +103,7 @@ public class AnvilAugmentRecipe implements IDawnstoneAnvilRecipe, IVisuallySplit
 				net.minecraft.resources.Identifier.CODEC.fieldOf("augment").forGetter(r -> r.augment.getName())
 			).apply(inst, (tool, input, augRL) -> new AnvilAugmentRecipe(null, tool, input, com.rekindled.embers.api.augment.AugmentUtil.getAugment(augRL))));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AnvilAugmentRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC, r -> r.tool,

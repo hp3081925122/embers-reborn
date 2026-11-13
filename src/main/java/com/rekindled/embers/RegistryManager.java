@@ -283,7 +283,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
@@ -294,11 +293,8 @@ import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -325,7 +321,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathType;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.fluids.FluidInteractionRegistry;
@@ -411,7 +406,7 @@ public class RegistryManager {
 
 	@SuppressWarnings("unchecked")
 	public static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> registerEntity(String name, EntityType.Builder<T> builder) {
-		return ENTITY_TYPES.register(name, () -> builder.build(Embers.MODID + ":" + name));
+		return ENTITY_TYPES.register(name, () -> builder.build(net.minecraft.resources.ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(Embers.MODID, name))));
 	}
 
 		@SuppressWarnings({"unchecked", "rawtypes"})
@@ -499,8 +494,8 @@ public class RegistryManager {
 	public static final DeferredHolder<Block, Block> ATMOSPHERIC_GAUGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "atmospheric_gauge", () -> new AtmosphericGaugeBlock(Properties.of().mapColor(MapColor.NONE).sound(EmbersSounds.LIGHT_METAL).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
 	public static final DeferredHolder<Block, Block> EMBER_EMITTER = com.rekindled.embers.util.RegCtx.block(BLOCKS, "ember_emitter", () -> new EmberEmitterBlock(Properties.of().mapColor(MapColor.NONE).sound(EmbersSounds.LIGHT_MACHINE).requiresCorrectToolForDrops().strength(0.6f).noOcclusion().forceSolidOn()));
 	public static final DeferredHolder<Block, Block> EMBER_RECEIVER = com.rekindled.embers.util.RegCtx.block(BLOCKS, "ember_receiver", () -> new EmberReceiverBlock(Properties.of().mapColor(MapColor.NONE).sound(EmbersSounds.LIGHT_MACHINE).requiresCorrectToolForDrops().strength(0.6f).noOcclusion().forceSolidOn()));
-	public static final DeferredHolder<Block, Block> CAMINITE_LEVER = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_lever", () -> new WaterloggableLeverBlock(Properties.of().mapColor(MapColor.NONE).noCollission().sound(EmbersSounds.CAMINITE).strength(0.75f)));
-	public static final DeferredHolder<Block, ButtonBlock> CAMINITE_BUTTON = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_button", () -> new WaterloggableButtonBlock(BlockSetType.STONE, 20, Properties.of().mapColor(MapColor.NONE).noCollission().strength(0.5f)));
+	public static final DeferredHolder<Block, Block> CAMINITE_LEVER = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_lever", () -> new WaterloggableLeverBlock(Properties.of().mapColor(MapColor.NONE).noCollision().sound(EmbersSounds.CAMINITE).strength(0.75f)));
+	public static final DeferredHolder<Block, ButtonBlock> CAMINITE_BUTTON = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_button", () -> new WaterloggableButtonBlock(BlockSetType.STONE, 20, Properties.of().mapColor(MapColor.NONE).noCollision().strength(0.5f)));
 	public static final DeferredHolder<Block, Block> ITEM_PIPE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "item_pipe", () -> new ItemPipeBlock(Properties.of().mapColor(MapColor.NONE).sound(EmbersSounds.LIGHT_METAL).requiresCorrectToolForDrops().strength(1.6f).dynamicShape().noOcclusion().forceSolidOn()));
 	public static final DeferredHolder<Block, Block> ITEM_EXTRACTOR = com.rekindled.embers.util.RegCtx.block(BLOCKS, "item_extractor", () -> new ItemExtractorBlock(Properties.of().mapColor(MapColor.NONE).sound(EmbersSounds.LIGHT_METAL).requiresCorrectToolForDrops().strength(1.6f).dynamicShape().noOcclusion().forceSolidOn()));
 	public static final DeferredHolder<Block, Block> EMBER_BORE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "ember_bore", () -> new EmberBoreBlock(Properties.of().mapColor(MapColor.COLOR_GRAY).sound(EmbersSounds.MULTIBLOCK_CENTER).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
@@ -527,11 +522,11 @@ public class RegistryManager {
 	public static final DeferredHolder<Block, Block> HEARTH_COIL_EDGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "hearth_coil_edge", () -> new HearthCoilEdgeBlock(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.BLOCK).sound(EmbersSounds.MULTIBLOCK_EXTRA).requiresCorrectToolForDrops().strength(1.6f)));
 	public static final DeferredHolder<Block, Block> RESERVOIR = com.rekindled.embers.util.RegCtx.block(BLOCKS, "reservoir", () -> new ReservoirBlock(Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE_MULTIBLOCK_CENTER).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
 	public static final DeferredHolder<Block, Block> RESERVOIR_EDGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "reservoir_edge", () -> new ReservoirEdgeBlock(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.BLOCK).sound(EmbersSounds.MULTIBLOCK_EXTRA).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final DeferredHolder<Block, Block> CAMINITE_RING = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_ring", () -> new CaminiteRingBlock(Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.BLOCK).noCollission().sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
+	public static final DeferredHolder<Block, Block> CAMINITE_RING = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_ring", () -> new CaminiteRingBlock(Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.BLOCK).noCollision().sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
 	public static final DeferredHolder<Block, Block> CAMINITE_RING_EDGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_ring_edge", () -> new CaminiteRingEdgeBlock(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.BLOCK).sound(EmbersSounds.CAMINITE_MULTIBLOCK_EXTRA).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final DeferredHolder<Block, Block> CAMINITE_GAUGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_gauge", () -> new CaminiteGaugeBlock(Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.BLOCK).noCollission().sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
+	public static final DeferredHolder<Block, Block> CAMINITE_GAUGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_gauge", () -> new CaminiteGaugeBlock(Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.BLOCK).noCollision().sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
 	public static final DeferredHolder<Block, Block> CAMINITE_GAUGE_EDGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_gauge_edge", () -> new CaminiteGaugeEdgeBlock(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.BLOCK).sound(EmbersSounds.CAMINITE_MULTIBLOCK_EXTRA).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final DeferredHolder<Block, Block> CAMINITE_VALVE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_valve", () -> new CaminiteValveBlock(Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.BLOCK).noCollission().sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
+	public static final DeferredHolder<Block, Block> CAMINITE_VALVE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_valve", () -> new CaminiteValveBlock(Properties.of().mapColor(MapColor.NONE).pushReaction(PushReaction.BLOCK).noCollision().sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
 	public static final DeferredHolder<Block, Block> CAMINITE_VALVE_EDGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_valve_edge", () -> new CaminiteValveEdgeBlock(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.BLOCK).sound(EmbersSounds.CAMINITE_MULTIBLOCK_EXTRA).requiresCorrectToolForDrops().strength(1.6f)));
 	public static final DeferredHolder<Block, Block> CRYSTAL_CELL = com.rekindled.embers.util.RegCtx.block(BLOCKS, "crystal_cell", () -> new CrystalCellBlock(Properties.of().mapColor(MapColor.WOOD).pushReaction(PushReaction.BLOCK).sound(EmbersSounds.MULTIBLOCK_CENTER).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
 	public static final DeferredHolder<Block, Block> CRYSTAL_CELL_EDGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "crystal_cell_edge", () -> new CrystalCellEdgeBlock(Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.MULTIBLOCK_EXTRA).requiresCorrectToolForDrops().strength(1.6f)));
@@ -567,7 +562,7 @@ public class RegistryManager {
 	public static final DeferredHolder<Block, Block> IGNEM_REACTOR = com.rekindled.embers.util.RegCtx.block(BLOCKS, "ignem_reactor", () -> new IgnemReactorBlock(Properties.of().mapColor(MapColor.COLOR_ORANGE).sound(EmbersSounds.MACHINE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion().forceSolidOn()));
 	public static final DeferredHolder<Block, Block> CATALYSIS_CHAMBER = com.rekindled.embers.util.RegCtx.block(BLOCKS, "catalysis_chamber", () -> new CatalysisChamberBlock(Properties.of().mapColor(MapColor.COLOR_GRAY).sound(EmbersSounds.MACHINE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion().forceSolidOn(), EmbersSounds.MULTIBLOCK_EXTRA));
 	public static final DeferredHolder<Block, Block> COMBUSTION_CHAMBER = com.rekindled.embers.util.RegCtx.block(BLOCKS, "combustion_chamber", () -> new CombustionChamberBlock(Properties.of().mapColor(MapColor.COLOR_GRAY).sound(EmbersSounds.MACHINE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion().forceSolidOn(), EmbersSounds.MULTIBLOCK_EXTRA));
-	public static final DeferredHolder<Block, Block> GLIMMER = com.rekindled.embers.util.RegCtx.block(BLOCKS, "glimmer", () -> new GlimmerBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.STONE).strength(0f).lightLevel(state -> 15).noCollission().noOcclusion()));
+	public static final DeferredHolder<Block, Block> GLIMMER = com.rekindled.embers.util.RegCtx.block(BLOCKS, "glimmer", () -> new GlimmerBlock(Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.STONE).strength(0f).lightLevel(state -> 15).noCollision().noOcclusion()));
 	public static final DeferredHolder<Block, Block> CINDER_PLINTH = com.rekindled.embers.util.RegCtx.block(BLOCKS, "cinder_plinth", () -> new CinderPlinthBlock(Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).sound(EmbersSounds.MACHINE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
 	public static final DeferredHolder<Block, Block> DAWNSTONE_ANVIL = com.rekindled.embers.util.RegCtx.block(BLOCKS, "dawnstone_anvil", () -> new DawnstoneAnvilBlock(Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.ANVIL).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
 	public static final DeferredHolder<Block, Block> AUTOMATIC_HAMMER = com.rekindled.embers.util.RegCtx.block(BLOCKS, "automatic_hammer", () -> new AutomaticHammerBlock(Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.MACHINE).requiresCorrectToolForDrops().strength(1.6f).noOcclusion()));
@@ -929,7 +924,7 @@ public class RegistryManager {
 			String id,
 			BlockEntityType.BlockEntitySupplier<T> factory,
 			java.util.function.Supplier<? extends Block> block) {
-		java.util.function.Supplier sup = () -> BlockEntityType.Builder.of(factory, block.get()).build(null);
+		java.util.function.Supplier sup = () -> new BlockEntityType<>(factory, block.get());
 		Object holder = BLOCK_ENTITY_TYPES_NEW.register(id, sup);
 		return (DeferredHolder<BlockEntityType<?>, BlockEntityType<T>>) holder;
 	}
@@ -1032,7 +1027,7 @@ public class RegistryManager {
 	public static final DeferredHolder<EntityType<?>, EntityType<AncientGolemEntity>> ANCIENT_GOLEM = registerEntity("ancient_golem", EntityType.Builder.<AncientGolemEntity>of(AncientGolemEntity::new, MobCategory.MONSTER).sized(0.6F, 1.8F).fireImmune().clientTrackingRange(8));
 
 	//spawn eggs
-	public static final DeferredHolder<Item, Item> ANCIENT_GOLEM_SPAWN_EGG = com.rekindled.embers.util.RegCtx.item(ITEMS, "ancient_golem_spawn_egg", () -> new DeferredSpawnEggItem(ANCIENT_GOLEM, Misc.intColor(48, 38, 35), Misc.intColor(79, 66, 61), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> ANCIENT_GOLEM_SPAWN_EGG = com.rekindled.embers.util.RegCtx.item(ITEMS, "ancient_golem_spawn_egg", () -> new net.minecraft.world.item.SpawnEggItem(new Item.Properties().spawnEgg(ANCIENT_GOLEM.get())));
 
 	//augments
 	public static final IAugment CORE_AUGMENT = AugmentUtil.registerAugment(new CoreAugment());
@@ -1289,7 +1284,7 @@ public class RegistryManager {
 			this.name = type;
 
 			BLOCK = com.rekindled.embers.util.RegCtx.block(BLOCKS, type + "_crystal_seed", () -> new CrystalSeedBlock(Properties.of().mapColor(MapColor.NONE).sound(SoundType.AMETHYST).requiresCorrectToolForDrops().strength(1.6f).noOcclusion().forceSolidOn(), type));
-			BLOCKENTITY = BLOCK_ENTITY_TYPES.register(type + "_crystal_seed", () -> BlockEntityType.Builder.of((pos, state) -> new CrystalSeedBlockEntity(pos, state, type), BLOCK.get()).build(null));
+			BLOCKENTITY = BLOCK_ENTITY_TYPES.register(type + "_crystal_seed", () -> new BlockEntityType<>((pos, state) -> new CrystalSeedBlockEntity(pos, state, type), BLOCK.get()));
 			seeds.put(type, this);
 		}
 

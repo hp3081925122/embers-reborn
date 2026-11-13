@@ -31,7 +31,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
@@ -156,7 +155,7 @@ public class MelterTopBlockEntity extends OpenTankBlockEntity implements IExtraC
 	@SuppressWarnings("resource")
 	@Override
 	protected void updateEscapeParticles() {
-		Vector3f color = IClientFluidTypeExtensions.of(lastEscaped.getFluid().getFluidType()).modifyFogColor(Minecraft.getInstance().gameRenderer.getMainCamera(), 0, (ClientLevel) this.level, 6, 0, new Vector3f(1, 1, 1));
+		Vector3f color = com.rekindled.embers.fluidtypes.EmbersFluidClient.fogColor(lastEscaped.getFluid());
 		Random random = new Random();
 		for (int i = 0; i < 3; i++) {
 			float xOffset = 0.5f + (random.nextFloat() - 0.5f) * 2 * 0.2f;

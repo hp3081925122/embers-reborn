@@ -14,7 +14,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class GaseousFuelRecipe implements IGaseousFuelRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer(); 
+	public static final RecipeSerializer<GaseousFuelRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec()); 
 
 	public final Identifier id;
 
@@ -85,12 +85,12 @@ public class GaseousFuelRecipe implements IGaseousFuelRecipe {
 		return powerMultiplier;
 	}
 
-	public static class Serializer implements RecipeSerializer<GaseousFuelRecipe> {
+	public static class Serializer {
 		public GaseousFuelRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable GaseousFuelRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, GaseousFuelRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<GaseousFuelRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				com.rekindled.embers.recipe.FluidIngredient.CODEC.fieldOf("input").forGetter(r -> r.input),
@@ -98,7 +98,7 @@ public class GaseousFuelRecipe implements IGaseousFuelRecipe {
 				com.mojang.serialization.Codec.DOUBLE.fieldOf("power_multiplier").forGetter(r -> r.powerMultiplier)
 			).apply(inst, (input, bt, pm) -> new GaseousFuelRecipe(null, input, bt, pm)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, GaseousFuelRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				com.rekindled.embers.recipe.FluidIngredient.STREAM_CODEC, r -> r.input,

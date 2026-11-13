@@ -15,7 +15,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class BoilingRecipe implements IBoilingRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer(); 
+	public static final RecipeSerializer<BoilingRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec()); 
 
 	public final Identifier id;
 
@@ -74,19 +74,19 @@ public class BoilingRecipe implements IBoilingRecipe {
 		return output.getStack();
 	}
 
-	public static class Serializer implements RecipeSerializer<BoilingRecipe> {
+	public static class Serializer {
 		public BoilingRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable BoilingRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, BoilingRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<BoilingRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				com.rekindled.embers.recipe.FluidIngredient.CODEC.fieldOf("input").forGetter(r -> r.input),
 				com.rekindled.embers.util.FluidOutput.CODEC.fieldOf("output").forGetter(r -> r.output)
 			).apply(inst, (input, output) -> new BoilingRecipe(null, input, output)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, BoilingRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				com.rekindled.embers.recipe.FluidIngredient.STREAM_CODEC, r -> r.input,

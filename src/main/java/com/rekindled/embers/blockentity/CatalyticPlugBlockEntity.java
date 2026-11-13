@@ -36,7 +36,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -150,7 +149,7 @@ public class CatalyticPlugBlockEntity extends BlockEntity implements ISoundContr
 				planars = null; break;
 			}
 			@SuppressWarnings("resource")
-			Vector3f color = IClientFluidTypeExtensions.of(blockEntity.tank.getFluid().getFluid().getFluidType()).modifyFogColor(Minecraft.getInstance().gameRenderer.getMainCamera(), 0, (ClientLevel) level, 6, 0, new Vector3f(1, 1, 1));
+			Vector3f color = com.rekindled.embers.fluidtypes.EmbersFluidClient.fogColor(blockEntity.tank.getFluid().getFluid());
 			for (Direction planar : planars) {
 				BlockState sideState = level.getBlockState(pos.relative(planar));
 				if (!sideState.getFaceOcclusionShape(level, pos.relative(planar), planar.getOpposite()).isEmpty())

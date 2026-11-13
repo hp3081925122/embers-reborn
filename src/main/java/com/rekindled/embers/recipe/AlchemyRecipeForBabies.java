@@ -19,7 +19,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 
 public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 
-	public static final Serializer SERIALIZER = new Serializer();
+	public static final RecipeSerializer<AlchemyRecipeForBabies> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
 	public AlchemyRecipeForBabies(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
 		super(id, tablet, aspects, inputs, output, failure);
@@ -55,8 +55,8 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 		return SERIALIZER;
 	}
 
-	public static class Serializer implements RecipeSerializer<AlchemyRecipeForBabies> {
-		@Override
+	public static class Serializer {
+		
 		public com.mojang.serialization.MapCodec<AlchemyRecipeForBabies> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				Ingredient.CODEC_NONEMPTY.fieldOf("tablet").forGetter(r -> r.tablet),
@@ -66,7 +66,7 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 				ItemStack.CODEC.optionalFieldOf("failure", new ItemStack(RegistryManager.ALCHEMICAL_WASTE.get())).forGetter(r -> r.failure)
 			).apply(inst, (tablet, aspects, inputs, output, failure) -> new AlchemyRecipeForBabies(null, tablet, new ArrayList<>(aspects), new ArrayList<>(inputs), output, failure)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AlchemyRecipeForBabies> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.of((buf, r) -> toNetwork(buf, r), buf -> fromNetwork(null, buf));
 		}

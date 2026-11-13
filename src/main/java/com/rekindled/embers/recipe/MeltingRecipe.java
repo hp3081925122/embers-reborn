@@ -15,7 +15,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 public class MeltingRecipe implements IMeltingRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer(); 
+	public static final RecipeSerializer<MeltingRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec()); 
 
 	public final Identifier id;
 
@@ -82,12 +82,12 @@ public class MeltingRecipe implements IMeltingRecipe {
 		return ingredient;
 	}
 
-	public static class Serializer implements RecipeSerializer<MeltingRecipe> {
+	public static class Serializer {
 		public MeltingRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable MeltingRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, MeltingRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<MeltingRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(r -> r.ingredient),
@@ -95,7 +95,7 @@ public class MeltingRecipe implements IMeltingRecipe {
 				com.rekindled.embers.util.FluidOutput.CODEC.optionalFieldOf("bonus", com.rekindled.embers.util.FluidOutput.EMPTY).forGetter(r -> r.bonus)
 			).apply(inst, (ingredient, output, bonus) -> new MeltingRecipe(null, ingredient, output, bonus)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, MeltingRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC, r -> r.ingredient,

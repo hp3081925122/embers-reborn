@@ -1,22 +1,15 @@
 package com.rekindled.embers.fluidtypes;
 
-import java.util.function.Consumer;
 
 import org.joml.Vector3f;
 
-import com.mojang.blaze3d.shaders.FogShape;
-import com.mojang.blaze3d.systems.RenderSystem;
 
-import net.minecraft.client.Camera;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 
 public class MoltenMetalFluidType extends EmbersFluidType {
 
@@ -50,31 +43,6 @@ public class MoltenMetalFluidType extends EmbersFluidType {
 
 		entity.lavaHurt();
 		return true;
-	}
-
-	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
-		consumer.accept(new IClientFluidTypeExtensions() {
-			@Override
-			public Identifier getStillTexture() {
-				return TEXTURE_STILL;
-			}
-
-			@Override
-			public Identifier getFlowingTexture() {
-				return TEXTURE_FLOW;
-			}
-
-			@Override
-			public Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
-				return FOG_COLOR;
-			}
-
-			@Override
-			public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick, float nearDistance, float farDistance, FogShape shape) {
-				RenderSystem.setShaderFogStart(fogStart);
-				RenderSystem.setShaderFogEnd(fogEnd);
-			}
-		});
 	}
 
 	@Override

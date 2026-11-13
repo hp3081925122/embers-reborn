@@ -20,7 +20,7 @@ import net.minecraft.world.level.Level;
 
 public class GemSocketRecipe implements CraftingRecipe {
 
-	public static final Serializer SERIALIZER = new Serializer();
+	public static final RecipeSerializer<GemSocketRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
 	public final Identifier id;
 
@@ -115,18 +115,18 @@ public class GemSocketRecipe implements CraftingRecipe {
 		return CraftingBookCategory.EQUIPMENT;
 	}
 
-	public static class Serializer implements RecipeSerializer<GemSocketRecipe> {
+	public static class Serializer {
 		public GemSocketRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }
 		public @Nullable GemSocketRecipe fromNetwork(Identifier recipeId, net.minecraft.network.RegistryFriendlyByteBuf buffer) {return null; }
 		public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer, GemSocketRecipe recipe) {}
 	
-		@Override
+		
 		public com.mojang.serialization.MapCodec<GemSocketRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(r -> r.ingredient)
 			).apply(inst, ing -> new GemSocketRecipe(null, ing)));
 		}
-		@Override
+		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, GemSocketRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC, r -> r.ingredient,
