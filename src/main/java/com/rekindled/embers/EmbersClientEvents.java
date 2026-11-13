@@ -472,6 +472,13 @@ public class EmbersClientEvents {
 		}
 	}
 
+	public static final String[] STANDALONE_MODELS = {"ember_bore_blades", "mechanical_pump_piston_bottom", "mechanical_pump_piston_top", "stamper_arm", "automatic_hammer_end", "inferno_forge_hatch", "atmospheric_bellows_top", "atmospheric_bellows_leather", "entropic_enumerator_drf", "entropic_enumerator_dlf", "entropic_enumerator_urf", "entropic_enumerator_ulf", "entropic_enumerator_drb", "entropic_enumerator_dlb", "entropic_enumerator_urb", "entropic_enumerator_ulb", "excavation_buckets_wheel", "ember_bore_excavation_buckets"};
+
+	public static void registerAdditionalModels(ModelEvent.RegisterAdditional event) {
+		for (String name : STANDALONE_MODELS)
+			event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + name)));
+	}
+
 	public static void afterModelBake(ModelEvent.BakingCompleted event) {
 		bakedModels = event.getModels();
 		ModelBakery bakery = event.getModelBakery();
@@ -498,7 +505,7 @@ public class EmbersClientEvents {
 	public static BakedModel getModel(ModelBakery bakery, String name) {
 		if (bakedModels == null) return null;
 		return bakedModels.get(ModelResourceLocation.standalone(
-				ResourceLocation.fromNamespaceAndPath(Embers.MODID, name)));
+				ResourceLocation.fromNamespaceAndPath(Embers.MODID, "block/" + name)));
 	}
 
 	public static ItemStack lastHoveredItem = ItemStack.EMPTY;

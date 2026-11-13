@@ -559,6 +559,12 @@ public class Embers {
 
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
+		static void registerAdditionalModels(net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional event) {
+			EmbersClientEvents.registerAdditionalModels(event);
+		}
+
+		@OnlyIn(Dist.CLIENT)
+		@SubscribeEvent
 		static void onModelsBaked(net.neoforged.neoforge.client.event.ModelEvent.BakingCompleted event) {
 			EmbersClientEvents.afterModelBake(event);
 		}
