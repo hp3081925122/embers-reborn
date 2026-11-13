@@ -99,7 +99,7 @@ public class MirrorRelayBlockEntity extends BlockEntity implements IEmberPacketP
 		}
 		if (level instanceof ServerLevel serverLevel) {
 			for (ChunkPos chunk : trajectoryChunks) {
-				if (!serverLevel.isNaturalSpawningAllowed(chunk))
+				if (!serverLevel.canSpawnEntitiesInChunk(chunk))
 					return false;
 			}
 		}

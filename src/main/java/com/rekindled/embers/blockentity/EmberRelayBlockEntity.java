@@ -100,7 +100,7 @@ public class EmberRelayBlockEntity extends BlockEntity implements IEmberPacketPr
 		}
 		if (level instanceof ServerLevel serverLevel) {
 			for (ChunkPos chunk : trajectoryChunks) {
-				if (!serverLevel.isNaturalSpawningAllowed(chunk))
+				if (!serverLevel.canSpawnEntitiesInChunk(chunk))
 					return false;
 			}
 		}

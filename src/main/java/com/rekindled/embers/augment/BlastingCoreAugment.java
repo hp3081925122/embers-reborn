@@ -28,7 +28,7 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.level.BlockEvent.BreakEvent;
+import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
 public class BlastingCoreAugment extends AugmentBase {
@@ -46,7 +46,7 @@ public class BlastingCoreAugment extends AugmentBase {
 	}
 
 	@SubscribeEvent
-	public void onBreak(BreakEvent event) {
+	public void onBreak(BreakBlockEvent event) {
 		LevelAccessor world = event.getLevel();
 		BlockPos pos = event.getPos();
 		if (event.getPlayer() != null) {

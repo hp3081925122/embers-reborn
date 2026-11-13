@@ -139,7 +139,7 @@ public class BeamSplitterBlockEntity extends BlockEntity implements IEmberPacket
 		if (target != null && level.getBlockEntity(target) instanceof IEmberPacketReceiver targetBE) {
 			if (level instanceof ServerLevel serverLevel) {
 				for (ChunkPos chunk : trajectoryChunks) {
-					if (!serverLevel.isNaturalSpawningAllowed(chunk))
+					if (!serverLevel.canSpawnEntitiesInChunk(chunk))
 						return false;
 				}
 			}
@@ -177,13 +177,13 @@ public class BeamSplitterBlockEntity extends BlockEntity implements IEmberPacket
 				value = ember;
 
 			if (room1 || (!room1 && !room2)) {
-				EmberPacketEntity packet1 = RegistryManager.EMBER_PACKET.get().create(level);
+				EmberPacketEntity packet1 = RegistryManager.EMBER_PACKET.get().create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
 				Vec3 velocity1 = EmberEmitterBlockEntity.getBurstVelocity(Direction.get(AxisDirection.POSITIVE, axis));
 				packet1.initCustom(worldPosition, target1, velocity1.x, velocity1.y, velocity1.z, value);
 				level.addFreshEntity(packet1);
 			}
 			if (room2 || (!room1 && !room2)) {
-				EmberPacketEntity packet2 = RegistryManager.EMBER_PACKET.get().create(level);
+				EmberPacketEntity packet2 = RegistryManager.EMBER_PACKET.get().create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
 				Vec3 velocity2 = EmberEmitterBlockEntity.getBurstVelocity(Direction.get(AxisDirection.NEGATIVE, axis));
 				packet2.initCustom(worldPosition, target2, velocity2.x, velocity2.y, velocity2.z, value);
 				level.addFreshEntity(packet2);

@@ -44,7 +44,7 @@ public class EmberEjectorBlockEntity extends EmberEmitterBlockEntity {
 			BlockEntity targetTile = level.getBlockEntity(blockEntity.target);
 			if (targetTile instanceof IEmberPacketReceiver) {
 				if (((IEmberPacketReceiver) targetTile).hasRoomFor(TRANSFER_RATE)) {
-					EmberPacketEntity packet = RegistryManager.EMBER_PACKET.get().create(blockEntity.level);
+					EmberPacketEntity packet = RegistryManager.EMBER_PACKET.get().create(blockEntity.level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
 					Vec3 velocity = getBurstVelocity(facing);
 					packet.initCustom(pos, blockEntity.target, velocity.x, velocity.y, velocity.z, Math.min(TRANSFER_RATE, blockEntity.capability.getEmber()));
 					blockEntity.capability.removeAmount(Math.min(TRANSFER_RATE, blockEntity.capability.getEmber()), true);

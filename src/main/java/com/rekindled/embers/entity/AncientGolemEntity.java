@@ -62,7 +62,7 @@ public class AncientGolemEntity extends Monster {
 		if (!this.isRemoved() && this.getHealth() > 0 && this.tickCount % 100 == 0 && this.getTarget() != null) {
 			if (!level().isClientSide()) {
 				playSound(EmbersSounds.FIREBALL.get(), 1.0f, 1.0f);
-				EmberProjectileEntity proj = RegistryManager.EMBER_PROJECTILE.get().create(level());
+				EmberProjectileEntity proj = RegistryManager.EMBER_PROJECTILE.get().create(level(), net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
 				DamageSource damage = new DamageEmber(this.level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(EmbersDamageTypes.EMBER_KEY), proj, this);
 				EffectDamage effect = new EffectDamage(4.0f, e -> damage, 1, 1.0f);
 

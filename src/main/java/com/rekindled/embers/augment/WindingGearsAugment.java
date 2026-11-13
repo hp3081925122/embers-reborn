@@ -268,7 +268,7 @@ public class WindingGearsAugment extends AugmentBase {
 	}
 
 	@SubscribeEvent
-	public void onBreak(BlockEvent.BreakEvent event) {
+	public void onBreak(net.neoforged.neoforge.event.level.block.BreakBlockEvent event) {
 		Player player = event.getPlayer();
 		if (!event.isCanceled() && player != null) {
 			ItemStack mainStack = player.getMainHandItem();

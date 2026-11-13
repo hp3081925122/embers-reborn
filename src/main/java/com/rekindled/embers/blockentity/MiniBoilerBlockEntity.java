@@ -147,7 +147,7 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 		}
 		loaded = true;
 		setChanged();
-		level.getChunkAt(worldPosition).setUnsaved(true);
+		level.getChunkAt(worldPosition).markUnsaved();
 		level.updateNeighbourForOutputSignal(worldPosition, block);
 	}
 
@@ -222,7 +222,7 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 		level.removeBlock(worldPosition, false);
 		EffectDamage effect = new EffectDamage(4.0f, preset -> level.damageSources().explosion(explosion), 10, 0.0f);
 		for(int i = 0; i < 12; i++) {
-			EmberProjectileEntity proj = RegistryManager.EMBER_PROJECTILE.get().create(level);
+			EmberProjectileEntity proj = RegistryManager.EMBER_PROJECTILE.get().create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
 			proj.shoot(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5, 0.5f, 0.0f, 10.0f);
 			proj.setPos(posX, posY, posZ);
 			proj.setLifetime(20 + random.nextInt(40));

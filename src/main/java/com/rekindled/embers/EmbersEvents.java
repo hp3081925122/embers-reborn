@@ -101,7 +101,7 @@ public class EmbersEvents {
 		}
 	}
 
-	public static void onBlockBreak(BlockEvent.BreakEvent event) {
+	public static void onBlockBreak(net.neoforged.neoforge.event.level.block.BreakBlockEvent event) {
 		Player player = event.getPlayer();
 		if (player != null) {
 			if (event.getState().getDestroySpeed(event.getLevel(), event.getPos()) > 0) {

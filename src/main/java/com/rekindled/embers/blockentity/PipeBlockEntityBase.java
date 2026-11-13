@@ -121,7 +121,7 @@ public class PipeBlockEntityBase extends BlockEntity {
 		Misc.sendToTrackingPlayers(level, worldPosition, getUpdatePacket());
 		loaded = true;
 		setChanged();
-		level.getChunkAt(worldPosition).setUnsaved(true);
+		level.getChunkAt(worldPosition).markUnsaved();
 		level.updateNeighbourForOutputSignal(worldPosition, block);
 	}
 

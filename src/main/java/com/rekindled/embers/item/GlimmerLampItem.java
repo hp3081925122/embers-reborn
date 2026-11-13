@@ -36,7 +36,7 @@ public class GlimmerLampItem extends Item {
 	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!level.isClientSide()) {
-			GlimmerProjectileEntity light = RegistryManager.GLIMMER_PROJECTILE.get().create(level);
+			GlimmerProjectileEntity light = RegistryManager.GLIMMER_PROJECTILE.get().create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
 			double handmod = hand == InteractionHand.MAIN_HAND ? 1.0 : -1.0;
 			handmod *= player.getMainArm() == HumanoidArm.RIGHT ? 1.0 : -1.0;
 			double posX = player.position().x + player.getLookAngle().x + handmod * (player.getBbWidth() / 2.0) * Math.sin(Math.toRadians(-player.getYHeadRot() - 90));
