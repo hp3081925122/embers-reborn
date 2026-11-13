@@ -220,7 +220,7 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 
 						ArrayList<ItemStack> returns = new ArrayList<>();
 						if (!stacks.isEmpty()) {
-							Optional<WeightedItemStack> picked = WeightedRandom.getRandomItem(level.getRandom(), stacks);
+							Optional<WeightedItemStack> picked = WeightedRandom.getRandomItem(level.getRandom(), stacks, WeightedItemStack::weight);
 							returns.add(picked.get().getStack().copy());
 						}
 						UpgradeUtil.transformOutput(blockEntity, returns, blockEntity.upgrades);

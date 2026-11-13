@@ -66,7 +66,7 @@ public class GaseousFuelRecipe implements IGaseousFuelRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends GaseousFuelRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

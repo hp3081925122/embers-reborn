@@ -66,7 +66,6 @@ public class StampingRecipe implements IStampingRecipe {
 		return getResultItem();
 	}
 
-	@Override
 	public ItemStack assemble(StampingContext context, net.minecraft.core.HolderLookup.Provider registry) {
 		for (int i = 0; i < context.size(); i++) {
 			if (com.rekindled.embers.util.Ingredients.test(input, context.getItem(i))) {
@@ -88,7 +87,7 @@ public class StampingRecipe implements IStampingRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends StampingRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

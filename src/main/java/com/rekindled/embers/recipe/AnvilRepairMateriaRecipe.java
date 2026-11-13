@@ -27,7 +27,6 @@ public class AnvilRepairMateriaRecipe implements IDawnstoneAnvilRecipe, IVisuall
 
 	public static List<IDawnstoneAnvilRecipe> visualRecipes = new ArrayList<IDawnstoneAnvilRecipe>();
 	Ingredient materia = Ingredient.of(RegistryManager.ISOLATED_MATERIA.get());
-	Ingredient blacklist = Ingredient.of(EmbersItemTags.MATERIA_BLACKLIST);
 
 	public AnvilRepairMateriaRecipe(Identifier id) {
 		this.id = id;
@@ -36,7 +35,7 @@ public class AnvilRepairMateriaRecipe implements IDawnstoneAnvilRecipe, IVisuall
 	@Override
 	public boolean matches(net.minecraft.world.item.crafting.RecipeInput context, Level pLevel) {
 		ItemStack tool = context.getItem(0);
-		return tool.isRepairable() && tool.isDamaged() && !blacklist.test(tool) && materia.test(context.getItem(1));
+		return tool.isDamageableItem() && tool.isDamaged() && !tool.is(EmbersItemTags.MATERIA_BLACKLIST) && materia.test(context.getItem(1));
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class AnvilRepairMateriaRecipe implements IDawnstoneAnvilRecipe, IVisuall
 		visualRecipes.clear();
 		for (Holder<Item> holder : BuiltInRegistries.ITEM.asHolderIdMap()) {
 			ItemStack toolStack = new ItemStack(holder.value());
-			if (toolStack.isRepairable() && !blacklist.test(toolStack)) {
+			if (toolStack.isDamageableItem() && !toolStack.is(EmbersItemTags.MATERIA_BLACKLIST)) {
 				ItemStack brokenTool = toolStack.copy();
 				brokenTool.setDamageValue(brokenTool.getMaxDamage() / 2);
 				visualRecipes.add(new AnvilDisplayRecipe(id, List.of(toolStack), List.of(brokenTool), materia));
@@ -79,7 +78,7 @@ public class AnvilRepairMateriaRecipe implements IDawnstoneAnvilRecipe, IVisuall
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends AnvilRepairMateriaRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 
@@ -97,8 +96,6 @@ public class AnvilRepairMateriaRecipe implements IDawnstoneAnvilRecipe, IVisuall
 			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new AnvilRepairMateriaRecipe(null));
 		}
 	}
-	@Override
 	public ItemStack assemble(net.minecraft.world.item.crafting.RecipeInput input, net.minecraft.core.HolderLookup.Provider provider) { return getResultItem(provider); }
-	@Override
 	public ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider provider) { return net.minecraft.world.item.ItemStack.EMPTY; }
 }

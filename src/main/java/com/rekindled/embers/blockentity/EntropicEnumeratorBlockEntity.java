@@ -142,7 +142,7 @@ public class EntropicEnumeratorBlockEntity extends BlockEntity implements IExtra
 	@Override
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
-		saveAdditional(nbt, net.minecraft.core.RegistryAccess.EMPTY);
+		saveAdditional(nbt, provider);
 		return nbt;
 	}
 

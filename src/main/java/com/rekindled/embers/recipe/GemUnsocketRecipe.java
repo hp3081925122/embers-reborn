@@ -17,7 +17,7 @@ import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
-public class GemUnsocketRecipe implements CraftingRecipe {
+public class GemUnsocketRecipe extends net.minecraft.world.item.crafting.CustomRecipe {
 
 	public static final RecipeSerializer<GemUnsocketRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
@@ -48,7 +48,7 @@ public class GemUnsocketRecipe implements CraftingRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(net.minecraft.world.item.crafting.CraftingInput container, net.minecraft.core.HolderLookup.Provider registryAccess) {
+	public ItemStack assemble(net.minecraft.world.item.crafting.CraftingInput container) {
 		ItemStack capeStack = ItemStack.EMPTY;
 		for (int i = 0; i < container.size(); i++) {
 			if (!container.getItem(i).isEmpty() && container.getItem(i).getItem() instanceof IInflictorGemHolder) {
@@ -81,12 +81,10 @@ public class GemUnsocketRecipe implements CraftingRecipe {
 		return gems;
 	}
 
-	@Override
 	public boolean canCraftInDimensions(int width, int height) {
 		return width * height >= 1;
 	}
 
-	@Override
 	public ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider registry) {
 		return new ItemStack(RegistryManager.ASHEN_CLOAK.get());
 	}
@@ -105,7 +103,7 @@ public class GemUnsocketRecipe implements CraftingRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends GemUnsocketRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

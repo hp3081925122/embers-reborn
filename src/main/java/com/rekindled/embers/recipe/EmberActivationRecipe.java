@@ -55,7 +55,7 @@ public class EmberActivationRecipe implements IEmberActivationRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends EmberActivationRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

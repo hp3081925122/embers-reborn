@@ -232,7 +232,7 @@ public abstract class FluidIngredient {
 		int count = buffer.readInt();
 		FluidIngredient[] ingredients = new FluidIngredient[count];
 		for (int i = 0; i < count; i++) {
-			Fluid fluid = BuiltInRegistries.FLUID.get(buffer.readIdentifier());
+			Fluid fluid = BuiltInRegistries.FLUID.getValue(buffer.readIdentifier());
 			if (fluid == null) {
 				fluid = Fluids.EMPTY;
 			}
@@ -330,7 +330,7 @@ public abstract class FluidIngredient {
 		 */
 		private static FluidMatch deserialize(JsonObject json) {
 			String fluidName = GsonHelper.getAsString(json, "fluid", GsonHelper.getAsString(json, "name", ""));
-			Fluid fluid = BuiltInRegistries.FLUID.get(Identifier.parse(fluidName));
+			Fluid fluid = BuiltInRegistries.FLUID.getValue(Identifier.parse(fluidName));
 			if (fluid == null || fluid == Fluids.EMPTY) {
 				throw new JsonSyntaxException("Unknown fluid '" + fluidName + "'");
 			}

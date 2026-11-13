@@ -147,7 +147,7 @@ public class Misc {
 
 	public static FluidStack deserializeFluidStack(JsonObject json) {
 		String fluidName = GsonHelper.getAsString(json, "fluid");
-		Fluid fluid = BuiltInRegistries.FLUID.get(Identifier.parse(fluidName));
+		Fluid fluid = BuiltInRegistries.FLUID.getValue(Identifier.parse(fluidName));
 		if (fluid == null || fluid == Fluids.EMPTY) {
 			throw new JsonSyntaxException("Unknown fluid " + fluidName);
 		}

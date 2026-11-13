@@ -143,7 +143,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 			ListTag items = new ListTag();
 			augmentCompound.put("items", items);
 			if (!augmentStack.isEmpty()) {
-				items.add(augmentStack.save(net.minecraft.core.RegistryAccess.EMPTY));
+				items.add(com.rekindled.embers.util.NbtBridge.save(augmentStack, com.rekindled.embers.util.NbtBridge.registries()));
 			}
 			augmentCompound.putInt("level", 1);
 			list.add(augmentCompound);
@@ -154,7 +154,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 					if (augmentCompound.getStringOr("name", "").equals(augment.getName().toString())) {
 						ListTag items = augmentCompound.getListOrEmpty("items");
 						if (!augmentStack.isEmpty()) {
-							items.add(augmentStack.save(net.minecraft.core.RegistryAccess.EMPTY));
+							items.add(com.rekindled.embers.util.NbtBridge.save(augmentStack, com.rekindled.embers.util.NbtBridge.registries()));
 						}
 						augmentCompound.putInt("level", level + 1);
 					}
@@ -188,7 +188,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 							if (tagAugment.contains("items")) {
 								ListTag items = tagAugment.getListOrEmpty("items");
 								for (int j = 0; j < items.size(); j++) {
-									ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, items.getCompoundOrEmpty(j))
+									com.rekindled.embers.util.NbtBridge.parse(com.rekindled.embers.util.NbtBridge.registries(), items.getCompoundOrEmpty(j))
 											.ifPresent(results::add);
 								}
 							}

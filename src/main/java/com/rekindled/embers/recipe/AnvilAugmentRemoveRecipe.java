@@ -67,7 +67,7 @@ public class AnvilAugmentRemoveRecipe implements IDawnstoneAnvilRecipe, IVisuall
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends AnvilAugmentRemoveRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 
@@ -85,8 +85,6 @@ public class AnvilAugmentRemoveRecipe implements IDawnstoneAnvilRecipe, IVisuall
 			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new AnvilAugmentRemoveRecipe(null));
 		}
 	}
-	@Override
 	public ItemStack assemble(net.minecraft.world.item.crafting.RecipeInput input, net.minecraft.core.HolderLookup.Provider provider) { return getResultItem(provider); }
-	@Override
 	public ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider provider) { return net.minecraft.world.item.ItemStack.EMPTY; }
 }

@@ -15,13 +15,12 @@ public interface IEmberActivationRecipe extends Recipe<net.minecraft.world.item.
 
 	public int process(net.minecraft.world.item.crafting.RecipeInput context);
 
-	@Override
 	public default ItemStack getToastSymbol() {
 		return new ItemStack(RegistryManager.EMBER_ACTIVATOR_ITEM.get());
 	}
 
 	@Override
-	public default RecipeType<?> getType() {
+	public default RecipeType<IEmberActivationRecipe> getType() {
 		return RegistryManager.EMBER_ACTIVATION.get();
 	}
 
@@ -29,7 +28,6 @@ public interface IEmberActivationRecipe extends Recipe<net.minecraft.world.item.
 
 	public int getDisplayOutput();
 
-	@Override
 	@Deprecated
 	public default ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider registry) {
 		return ItemStack.EMPTY;
@@ -40,9 +38,39 @@ public interface IEmberActivationRecipe extends Recipe<net.minecraft.world.item.
 		return ItemStack.EMPTY;
 	}
 
-	@Override
 	@Deprecated
 	public default boolean canCraftInDimensions(int width, int height) {
 		return true;
+	}
+
+	@Override
+	public default ItemStack assemble(net.minecraft.world.item.crafting.RecipeInput input) {
+		return ItemStack.EMPTY;
+	}
+
+	/** Machine recipe, not a recipe book entry; also keeps RecipeManager from discarding it as unplaceable. */
+	@Override
+	public default boolean isSpecial() {
+		return true;
+	}
+
+	@Override
+	public default boolean showNotification() {
+		return false;
+	}
+
+	@Override
+	public default String group() {
+		return "";
+	}
+
+	@Override
+	public default net.minecraft.world.item.crafting.PlacementInfo placementInfo() {
+		return net.minecraft.world.item.crafting.PlacementInfo.NOT_PLACEABLE;
+	}
+
+	@Override
+	public default net.minecraft.world.item.crafting.RecipeBookCategory recipeBookCategory() {
+		return net.minecraft.world.item.crafting.RecipeBookCategories.CRAFTING_MISC;
 	}
 }

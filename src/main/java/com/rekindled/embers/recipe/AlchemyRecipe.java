@@ -26,7 +26,7 @@ public class AlchemyRecipe extends AlchemyRecipeBase {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends AlchemyRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

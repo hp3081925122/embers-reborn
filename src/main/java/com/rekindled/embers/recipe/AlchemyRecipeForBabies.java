@@ -51,7 +51,7 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends AlchemyRecipeForBabies> getSerializer() {
 		return SERIALIZER;
 	}
 

@@ -66,7 +66,7 @@ public class CatalysisCombustionRecipe implements ICatalysisCombustionRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends CatalysisCombustionRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

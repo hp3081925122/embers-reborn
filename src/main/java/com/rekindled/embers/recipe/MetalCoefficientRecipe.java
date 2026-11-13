@@ -47,7 +47,7 @@ public class MetalCoefficientRecipe implements IMetalCoefficientRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends MetalCoefficientRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

@@ -84,7 +84,7 @@ public class FluidTransferBlockEntity extends FluidPipeBlockEntityBase {
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("filter")) {
-			filterFluid = FluidStack.parseOptional(provider, nbt.getCompoundOrEmpty("filter"));
+			filterFluid = com.rekindled.embers.util.NbtBridge.parseOptionalFluid(provider, nbt.getCompoundOrEmpty("filter"));
 		}
 	}
 
@@ -115,7 +115,7 @@ public class FluidTransferBlockEntity extends FluidPipeBlockEntityBase {
 
 	private void writeFilter(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		// FluidStack.save throws on an empty stack (no filter set); saveOptional writes an empty tag instead
-		nbt.put("filter", filterFluid.saveOptional(provider));
+		nbt.put("filter", com.rekindled.embers.util.NbtBridge.saveOptional(filterFluid, provider));
 	}
 
 	public static void serverTick(Level level, BlockPos pos, BlockState state, FluidTransferBlockEntity blockEntity) {

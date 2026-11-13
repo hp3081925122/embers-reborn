@@ -28,12 +28,12 @@ public class ExcavationRecipe extends BoringRecipe {
 	}
 
 	@Override
-	public RecipeType<?> getType() {
+	public RecipeType<IBoringRecipe> getType() {
 		return RegistryManager.EXCAVATION.get();
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends ExcavationRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

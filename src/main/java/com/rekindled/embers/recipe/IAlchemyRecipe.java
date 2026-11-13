@@ -21,17 +21,15 @@ public interface IAlchemyRecipe extends Recipe<AlchemyContext> {
 
 	public AlchemyResult getResult(AlchemyContext context);
 
-	@Override
 	public default ItemStack getToastSymbol() {
 		return new ItemStack(RegistryManager.ALCHEMY_TABLET_ITEM.get());
 	}
 
 	@Override
-	public default RecipeType<?> getType() {
+	public default RecipeType<IAlchemyRecipe> getType() {
 		return RegistryManager.ALCHEMY.get();
 	}
 
-	@Override
 	public default ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider registry) {
 		return getResultItem();
 	}
@@ -46,7 +44,6 @@ public interface IAlchemyRecipe extends Recipe<AlchemyContext> {
 
 	public ItemStack getfailureItem();
 
-	@Override
 	@Deprecated
 	public default boolean canCraftInDimensions(int width, int height) {
 		return true;
@@ -60,5 +57,36 @@ public interface IAlchemyRecipe extends Recipe<AlchemyContext> {
 			this.aspect = aspect;
 			this.input = input;
 		}
+	}
+
+	@Override
+	public default ItemStack assemble(AlchemyContext input) {
+		return ItemStack.EMPTY;
+	}
+
+	/** Machine recipe, not a recipe book entry; also keeps RecipeManager from discarding it as unplaceable. */
+	@Override
+	public default boolean isSpecial() {
+		return true;
+	}
+
+	@Override
+	public default boolean showNotification() {
+		return false;
+	}
+
+	@Override
+	public default String group() {
+		return "";
+	}
+
+	@Override
+	public default net.minecraft.world.item.crafting.PlacementInfo placementInfo() {
+		return net.minecraft.world.item.crafting.PlacementInfo.NOT_PLACEABLE;
+	}
+
+	@Override
+	public default net.minecraft.world.item.crafting.RecipeBookCategory recipeBookCategory() {
+		return net.minecraft.world.item.crafting.RecipeBookCategories.CRAFTING_MISC;
 	}
 }

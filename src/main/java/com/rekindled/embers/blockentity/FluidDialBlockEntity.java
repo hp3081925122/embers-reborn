@@ -44,7 +44,7 @@ public class FluidDialBlockEntity extends BlockEntity implements IDialEntity {
 		if (tanks.size() > 0) {
 			for (int i = 0; i < tanks.size(); i++) {
 				CompoundTag tank = tanks.getCompoundOrEmpty(i);
-				fluids[i] = FluidStack.parseOptional(provider, tank);
+				fluids[i] = com.rekindled.embers.util.NbtBridge.parseOptionalFluid(provider, tank);
 				capacities[i] = tank.getIntOr("capacity", 0);
 			}
 		}
@@ -74,7 +74,7 @@ public class FluidDialBlockEntity extends BlockEntity implements IDialEntity {
 						FluidStack contents = cap.getFluidInTank(i);
 						CompoundTag tank = new CompoundTag();
 						if (!contents.isEmpty())
-							contents.save(provider, tank);
+							tank.merge((CompoundTag) com.rekindled.embers.util.NbtBridge.saveOptional(contents, provider));
 						tank.putInt("capacity", cap.getTankCapacity(i));
 
 						tanks.add(tank);

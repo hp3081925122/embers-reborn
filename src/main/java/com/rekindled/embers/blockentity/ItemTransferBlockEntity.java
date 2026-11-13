@@ -79,7 +79,7 @@ public class ItemTransferBlockEntity extends ItemPipeBlockEntityBase {
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditionalNbt(nbt, provider);
 		if (nbt.contains("filter")) {
-			filterItem = ItemStack.parse(provider, nbt.getCompoundOrEmpty("filter")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+			filterItem = com.rekindled.embers.util.NbtBridge.parse(provider, nbt.getCompoundOrEmpty("filter")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
 		}
 		setupFilter();
 	}
@@ -111,7 +111,7 @@ public class ItemTransferBlockEntity extends ItemPipeBlockEntityBase {
 
 	private void writeFilter(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		// ItemStack.save throws on an empty stack (no filter set); saveOptional writes an empty tag instead
-		nbt.put("filter", filterItem.saveOptional(provider));
+		nbt.put("filter", com.rekindled.embers.util.NbtBridge.saveOptional(filterItem, provider));
 	}
 
 	public void setupFilter() {

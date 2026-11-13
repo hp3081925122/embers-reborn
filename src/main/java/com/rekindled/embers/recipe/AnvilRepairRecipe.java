@@ -27,7 +27,6 @@ public class AnvilRepairRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitR
 	public final Identifier id;
 
 	public static List<IDawnstoneAnvilRecipe> visualRecipes = new ArrayList<IDawnstoneAnvilRecipe>();
-	Ingredient blacklist = Ingredient.of(EmbersItemTags.REPAIR_BLACKLIST);
 
 	public AnvilRepairRecipe(Identifier id) {
 		this.id = id;
@@ -36,7 +35,7 @@ public class AnvilRepairRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitR
 	@Override
 	public boolean matches(net.minecraft.world.item.crafting.RecipeInput context, Level pLevel) {
 		ItemStack tool = context.getItem(0);
-		return tool.isRepairable() && tool.isDamaged() && !blacklist.test(tool) && tool.getItem().isValidRepairItem(tool, context.getItem(1));
+		return tool.isDamageableItem() && tool.isDamaged() && !tool.is(EmbersItemTags.REPAIR_BLACKLIST) && tool.isValidRepairItem(context.getItem(1));
 	}
 
 	@Override
@@ -52,7 +51,7 @@ public class AnvilRepairRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitR
 		for (Holder<Item> holder : BuiltInRegistries.ITEM.asHolderIdMap()) {
 			Ingredient repairMaterial = Misc.getRepairIngredient(holder.value());
 			ItemStack toolStack = new ItemStack(holder.value());
-			if (!com.rekindled.embers.util.Ingredients.isEmpty(repairMaterial) && toolStack.isRepairable() && !blacklist.test(toolStack)) {
+			if (!com.rekindled.embers.util.Ingredients.isEmpty(repairMaterial) && toolStack.isDamageableItem() && !toolStack.is(EmbersItemTags.REPAIR_BLACKLIST)) {
 				ItemStack brokenTool = toolStack.copy();
 				brokenTool.setDamageValue(brokenTool.getMaxDamage() / 2);
 				visualRecipes.add(new AnvilDisplayRecipe(id, List.of(toolStack), List.of(brokenTool), repairMaterial));
@@ -80,7 +79,7 @@ public class AnvilRepairRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitR
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends AnvilRepairRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 
@@ -98,8 +97,6 @@ public class AnvilRepairRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitR
 			return net.minecraft.network.codec.StreamCodec.of((buf, recipe) -> {}, buf -> new AnvilRepairRecipe(null));
 		}
 	}
-	@Override
 	public ItemStack assemble(net.minecraft.world.item.crafting.RecipeInput input, net.minecraft.core.HolderLookup.Provider provider) { return getResultItem(provider); }
-	@Override
 	public ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider provider) { return net.minecraft.world.item.ItemStack.EMPTY; }
 }

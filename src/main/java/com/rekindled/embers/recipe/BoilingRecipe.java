@@ -60,7 +60,7 @@ public class BoilingRecipe implements IBoilingRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends BoilingRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

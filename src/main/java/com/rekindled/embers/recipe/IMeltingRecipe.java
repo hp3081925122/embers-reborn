@@ -18,13 +18,12 @@ public interface IMeltingRecipe extends Recipe<net.minecraft.world.item.crafting
 
 	public FluidStack process(net.minecraft.world.item.crafting.RecipeInput context);
 
-	@Override
 	public default ItemStack getToastSymbol() {
 		return new ItemStack(RegistryManager.MELTER_ITEM.get());
 	}
 
 	@Override
-	public default RecipeType<?> getType() {
+	public default RecipeType<IMeltingRecipe> getType() {
 		return RegistryManager.MELTING.get();
 	}
 
@@ -32,7 +31,6 @@ public interface IMeltingRecipe extends Recipe<net.minecraft.world.item.crafting
 
 	public Ingredient getDisplayInput();
 
-	@Override
 	@Deprecated
 	public default ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider registry) {
 		return ItemStack.EMPTY;
@@ -43,9 +41,39 @@ public interface IMeltingRecipe extends Recipe<net.minecraft.world.item.crafting
 		return ItemStack.EMPTY;
 	}
 
-	@Override
 	@Deprecated
 	public default boolean canCraftInDimensions(int width, int height) {
 		return true;
+	}
+
+	@Override
+	public default ItemStack assemble(net.minecraft.world.item.crafting.RecipeInput input) {
+		return ItemStack.EMPTY;
+	}
+
+	/** Machine recipe, not a recipe book entry; also keeps RecipeManager from discarding it as unplaceable. */
+	@Override
+	public default boolean isSpecial() {
+		return true;
+	}
+
+	@Override
+	public default boolean showNotification() {
+		return false;
+	}
+
+	@Override
+	public default String group() {
+		return "";
+	}
+
+	@Override
+	public default net.minecraft.world.item.crafting.PlacementInfo placementInfo() {
+		return net.minecraft.world.item.crafting.PlacementInfo.NOT_PLACEABLE;
+	}
+
+	@Override
+	public default net.minecraft.world.item.crafting.RecipeBookCategory recipeBookCategory() {
+		return net.minecraft.world.item.crafting.RecipeBookCategories.CRAFTING_MISC;
 	}
 }

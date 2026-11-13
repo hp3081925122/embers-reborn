@@ -62,8 +62,8 @@ public class FilterSieve implements IFilter {
 	@Override
 	public CompoundTag writeToNBT(CompoundTag tag) {
 		tag.putString("type",getType().toString());
-		tag.put("stack1",stack1.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
-		tag.put("stack2",stack2.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
+		tag.put("stack1",com.rekindled.embers.util.NbtBridge.saveOptional(stack1, com.rekindled.embers.util.NbtBridge.registries()));
+		tag.put("stack2",com.rekindled.embers.util.NbtBridge.saveOptional(stack2, com.rekindled.embers.util.NbtBridge.registries()));
 		tag.putInt("offset",offset);
 		tag.putInt("setting",setting.ordinal());
 		tag.putBoolean("inverted",inverted);
@@ -73,8 +73,8 @@ public class FilterSieve implements IFilter {
 
 	@Override
 	public void readFromNBT(CompoundTag tag) {
-		stack1 = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, tag.getCompoundOrEmpty("stack1")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
-		stack2 = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, tag.getCompoundOrEmpty("stack2")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+		stack1 = com.rekindled.embers.util.NbtBridge.parse(com.rekindled.embers.util.NbtBridge.registries(), tag.getCompoundOrEmpty("stack1")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+		stack2 = com.rekindled.embers.util.NbtBridge.parse(com.rekindled.embers.util.NbtBridge.registries(), tag.getCompoundOrEmpty("stack2")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
 		offset = tag.getIntOr("offset", 0);
 		setting = EnumFilterSetting.values()[tag.getIntOr("setting", 0)];
 		inverted = tag.getBooleanOr("invert", false);

@@ -29,13 +29,13 @@ public class AlchemyResult {
 		nbt.putInt("blackPins", blackPins);
 		nbt.putInt("whitePins", whitePins);
 
-		nbt.put("result", result.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
+		nbt.put("result", com.rekindled.embers.util.NbtBridge.saveOptional(result, com.rekindled.embers.util.NbtBridge.registries()));
 
 		ListTag aspectNBT = new ListTag();
 		ListTag inputNBT = new ListTag();
 		for (PedestalContents contents : contents) {
-			aspectNBT.add(contents.aspect.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
-			inputNBT.add(contents.input.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
+			aspectNBT.add(com.rekindled.embers.util.NbtBridge.saveOptional(contents.aspect, com.rekindled.embers.util.NbtBridge.registries()));
+			inputNBT.add(com.rekindled.embers.util.NbtBridge.saveOptional(contents.input, com.rekindled.embers.util.NbtBridge.registries()));
 		}
 		nbt.put("aspects", aspectNBT);
 		nbt.put("inputs", inputNBT);

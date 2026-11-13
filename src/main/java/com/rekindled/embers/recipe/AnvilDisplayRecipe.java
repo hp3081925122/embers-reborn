@@ -52,11 +52,9 @@ public class AnvilDisplayRecipe implements IDawnstoneAnvilRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends AnvilDisplayRecipe> getSerializer() {
 		return AnvilRepairRecipe.SERIALIZER;
 	}
-	@Override
 	public ItemStack assemble(net.minecraft.world.item.crafting.RecipeInput input, net.minecraft.core.HolderLookup.Provider provider) { return getResultItem(provider); }
-	@Override
 	public ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider provider) { return net.minecraft.world.item.ItemStack.EMPTY; }
 }

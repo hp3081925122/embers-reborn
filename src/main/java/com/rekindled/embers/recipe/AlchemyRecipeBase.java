@@ -98,7 +98,6 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 		return true;
 	}
 
-	@Override
 	public ItemStack assemble(AlchemyContext context, net.minecraft.core.HolderLookup.Provider registry) {
 		getCode(context.seed);
 		int blackPins = 0;
@@ -136,8 +135,8 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 			ListTag aspectNBT = new ListTag();
 			ListTag inputNBT = new ListTag();
 			for (PedestalContents contents : context.contents) {
-				aspectNBT.add(contents.aspect.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
-				inputNBT.add(contents.input.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
+				aspectNBT.add(com.rekindled.embers.util.NbtBridge.saveOptional(contents.aspect, com.rekindled.embers.util.NbtBridge.registries()));
+				inputNBT.add(com.rekindled.embers.util.NbtBridge.saveOptional(contents.input, com.rekindled.embers.util.NbtBridge.registries()));
 			}
 			nbt.put("aspects", aspectNBT);
 			nbt.put("inputs", inputNBT);

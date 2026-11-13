@@ -88,7 +88,7 @@ public class MixingRecipe implements IMixingRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends MixingRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 

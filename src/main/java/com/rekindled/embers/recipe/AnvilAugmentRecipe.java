@@ -55,7 +55,7 @@ public class AnvilAugmentRecipe implements IDawnstoneAnvilRecipe, IVisuallySplit
 	@Override
 	public List<IDawnstoneAnvilRecipe> getVisualRecipes() {
 		visualRecipes.clear();
-		for (ItemStack stack : tool.getItems()) {
+		for (ItemStack stack : com.rekindled.embers.util.Ingredients.stacks(tool)) {
 			ItemStack leveledTool = stack.copy();
 			if (augment.countTowardsTotalLevel()) {
 				AugmentUtil.setLevel(leveledTool, AugmentUtil.getLevel(leveledTool) + 1);
@@ -86,7 +86,7 @@ public class AnvilAugmentRecipe implements IDawnstoneAnvilRecipe, IVisuallySplit
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<? extends AnvilAugmentRecipe> getSerializer() {
 		return SERIALIZER;
 	}
 
@@ -112,8 +112,6 @@ public class AnvilAugmentRecipe implements IDawnstoneAnvilRecipe, IVisuallySplit
 				(tool, input, augRL) -> new AnvilAugmentRecipe(null, tool, input, com.rekindled.embers.api.augment.AugmentUtil.getAugment(augRL)));
 		}
 	}
-	@Override
 	public ItemStack assemble(net.minecraft.world.item.crafting.RecipeInput input, net.minecraft.core.HolderLookup.Provider provider) { return getResultItem(provider); }
-	@Override
 	public ItemStack getResultItem(net.minecraft.core.HolderLookup.Provider provider) { return net.minecraft.world.item.ItemStack.EMPTY; }
 }
