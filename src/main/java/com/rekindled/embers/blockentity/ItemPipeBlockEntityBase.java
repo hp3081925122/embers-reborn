@@ -160,7 +160,7 @@ public abstract class ItemPipeBlockEntityBase extends PipeBlockEntityBase implem
 	}
 
 	public void writeInventory(CompoundTag nbt) /* no provider */  {
-		nbt.put("inventory", inventory.serializeNBT(com.rekindled.embers.util.NbtBridge.registries()));
+		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, com.rekindled.embers.util.NbtBridge.registries()));
 	}
 
 	@Deprecated @SuppressWarnings("deprecation")

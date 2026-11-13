@@ -148,7 +148,7 @@ public abstract class PipeBlockBase extends BaseEntityBlock implements SimpleWat
 						pipe.setConnection(face, PipeConnection.END);
 					}
 					level.updateNeighbourForOutputSignal(pos, this);
-					facingState.updateShape(face.getOpposite(), state, level, facingPos, pos);
+					facingState.updateShape(level, level, facingPos, face.getOpposite(), pos, state, level.getRandom());
 					level.playLocalSound(pos.getX() + 0.5 + face.getStepX() * 0.4, pos.getY() + 0.5 + face.getStepY() * 0.4, pos.getZ() + 0.5 + face.getStepZ() * 0.4, EmbersSounds.PIPE_CONNECT.get(), SoundSource.BLOCKS, 1.0f, 1.0f, false);
 					return InteractionResult.SUCCESS;
 				}
@@ -170,7 +170,7 @@ public abstract class PipeBlockBase extends BaseEntityBlock implements SimpleWat
 				if (pipe.getConnection(direction).transfer && !facingState.is(getConnectionTag()) && !connected(direction, facingState)) {
 					pipe.setConnection(direction, PipeConnection.DISABLED);
 					level.updateNeighbourForOutputSignal(pos, this);
-					facingState.updateShape(direction.getOpposite(), state, level, facingPos, pos);
+					facingState.updateShape(level, level, facingPos, direction.getOpposite(), pos, state, level.getRandom());
 					level.playLocalSound(pos.getX() + 0.5 + direction.getStepX() * 0.4, pos.getY() + 0.5 + direction.getStepY() * 0.4, pos.getZ() + 0.5 + direction.getStepZ() * 0.4, EmbersSounds.PIPE_DISCONNECT.get(), SoundSource.BLOCKS, 1.0f, 1.0f, false);
 					return InteractionResult.SUCCESS;
 				}

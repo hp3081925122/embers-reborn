@@ -206,7 +206,7 @@ public class PipeBlockEntityBase extends BlockEntity {
 			lastTransfer = Misc.readNullableFacing(nbt.getIntOr("lastTransfer", 0));
 		for (Direction facing : Direction.values())
 			if (nbt.contains("from" + facing.get3DDataValue()))
-				from[facing.get3DDataValue()] = nbt.getBoolean("from" + facing.get3DDataValue());
+				from[facing.get3DDataValue()] = nbt.getBooleanOr("from" + facing.get3DDataValue(), false);
 		if (nbt.contains("lastRobin"))
 			lastRobin = nbt.getIntOr("lastRobin", 0);
 		loadConnections(nbt);
@@ -216,7 +216,7 @@ public class PipeBlockEntityBase extends BlockEntity {
 	public void loadConnections(CompoundTag nbt) {
 		for (Direction direction : Direction.values()) {
 			if (nbt.contains("connection" + direction.get3DDataValue()))
-				connections[direction.get3DDataValue()] = PipeConnection.values()[nbt.getInt("connection" + direction.get3DDataValue())];
+				connections[direction.get3DDataValue()] = PipeConnection.values()[nbt.getIntOr("connection" + direction.get3DDataValue(), 0)];
 		}
 		requestModelDataUpdate();
 	}

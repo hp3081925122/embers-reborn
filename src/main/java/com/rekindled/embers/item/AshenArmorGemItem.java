@@ -12,7 +12,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -64,7 +63,7 @@ public class AshenArmorGemItem extends AshenArmorItem implements IInflictorGemHo
 	@Override
 	public ItemStack detachGem(ItemStack holder, int slot) {
 		if (_getOrCreateTag(holder).contains("gem" + slot)) {
-			ItemStack gem = com.rekindled.embers.util.NbtBridge.parse(com.rekindled.embers.util.NbtBridge.registries(), _getOrCreateTag(holder).getCompound("gem" + slot)).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+			ItemStack gem = com.rekindled.embers.util.NbtBridge.parse(com.rekindled.embers.util.NbtBridge.registries(), _getOrCreateTag(holder).getCompoundOrEmpty("gem" + slot)).orElse(net.minecraft.world.item.ItemStack.EMPTY);
 			net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(holder);
 			tag.remove("gem" + slot);
 			_setTag(holder, tag);
@@ -90,7 +89,7 @@ public class AshenArmorGemItem extends AshenArmorItem implements IInflictorGemHo
 		ItemStack[] stacks = new ItemStack[getGemSlots(holder)];
 		for (int i = 0; i < stacks.length; i++) {
 			if(_getOrCreateTag(holder).contains("gem" + i))
-				stacks[i] = com.rekindled.embers.util.NbtBridge.parse(com.rekindled.embers.util.NbtBridge.registries(), _getOrCreateTag(holder).getCompound("gem" + i)).orElse(ItemStack.EMPTY);
+				stacks[i] = com.rekindled.embers.util.NbtBridge.parse(com.rekindled.embers.util.NbtBridge.registries(), _getOrCreateTag(holder).getCompoundOrEmpty("gem" + i)).orElse(ItemStack.EMPTY);
 			else
 				stacks[i] = ItemStack.EMPTY;
 		}

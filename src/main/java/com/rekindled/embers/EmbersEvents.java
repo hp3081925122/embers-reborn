@@ -21,7 +21,7 @@ import com.rekindled.embers.util.EmberWorldData;
 import com.rekindled.embers.util.ExplosionCharmWorldInfo;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -82,7 +82,8 @@ public class EmbersEvents {
 		attuneInflictorGem(event.getEntity(), event.getSource(), event.getEntity().getOffhandItem());
 
 		float mult = 1.0f;
-		for (ItemStack armor : event.getEntity().getArmorSlots()) {
+		for (net.minecraft.world.entity.EquipmentSlot armorSlot : net.minecraft.world.entity.EquipmentSlotGroup.ARMOR) {
+			ItemStack armor = event.getEntity().getItemBySlot(armorSlot);
 			mult -= getInflictorGemResistance(event, armor);
 			addHeat(event.getEntity(), armor, 5.0f);
 		}
@@ -119,7 +120,7 @@ public class EmbersEvents {
 	}
 
 	public static void onAnvilUpdate(AnvilUpdateEvent event) {
-		if (event.getLeft().isRepairable() && !event.getLeft().is(EmbersItemTags.MATERIA_BLACKLIST) && event.getRight().getItem() == RegistryManager.ISOLATED_MATERIA.get()) {
+		if (event.getLeft().isDamageableItem() && !event.getLeft().is(EmbersItemTags.MATERIA_BLACKLIST) && event.getRight().getItem() == RegistryManager.ISOLATED_MATERIA.get()) {
 			int i = 0;
 			int j = 0;
 			int k = 0;

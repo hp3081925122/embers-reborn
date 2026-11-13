@@ -237,7 +237,7 @@ public class Misc {
 			return null;
 		T recipe = holder.value();
 		if (recipe instanceof com.rekindled.embers.recipe.AlchemyRecipeBase alchemy)
-			alchemy.bindId(holder.id());
+			alchemy.bindId(holder.id().identifier());
 		return recipe;
 	}
 
@@ -504,7 +504,7 @@ public class Misc {
 		}
 		if (!inventory.getStackInSlot(0).isEmpty()) {
 			if (!level.isClientSide()) {
-				giveItemToPlayer(inventory.getStackInSlot(0), player, player.getInventory().selected);
+				giveItemToPlayer(inventory.getStackInSlot(0), player, player.getInventory().getSelectedSlot());
 				inventory.setStackInSlot(0, ItemStack.EMPTY);
 			}
 			return InteractionResult.SUCCESS;
@@ -519,7 +519,7 @@ public class Misc {
 	public static void giveItemToPlayer(ItemStack stack, Player player, int slot) {
 		boolean success = false;
 
-		if (slot != -1 && player.getInventory().items.get(slot).isEmpty()) {
+		if (slot != -1 && player.getInventory().getNonEquipmentItems().get(slot).isEmpty()) {
 			success = player.getInventory().add(slot, stack) && stack.isEmpty();
 		}
 		if (!success)
