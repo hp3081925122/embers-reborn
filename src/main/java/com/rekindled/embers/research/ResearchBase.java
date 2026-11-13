@@ -11,7 +11,7 @@ import com.rekindled.embers.gui.GuiCodex;
 import com.rekindled.embers.util.Vec2i;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
@@ -302,7 +302,7 @@ public class ResearchBase {
 		return true;
 	}
 
-	public void renderPageContent(GuiGraphics graphics, GuiCodex gui, int basePosX, int basePosY, Font fontRenderer) {
+	public void renderPageContent(GuiGraphicsExtractor graphics, GuiCodex gui, int basePosX, int basePosY, Font fontRenderer) {
 		List<FormattedCharSequence> strings = getLines(fontRenderer, getText(), GuiCodex.pageWidth - 40);
 		for (int i = 0; i < Math.min(strings.size(),17); i++){
 			GuiCodex.drawTextGlowing(fontRenderer, graphics, strings.get(i), basePosX+20, basePosY+43+i*(fontRenderer.lineHeight+3));

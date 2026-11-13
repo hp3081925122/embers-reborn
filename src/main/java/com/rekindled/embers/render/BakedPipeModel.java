@@ -5,96 +5,96 @@ import java.util.List;
 
 import com.rekindled.embers.blockentity.PipeBlockEntityBase;
 
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.ItemOverrides;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.core.Direction;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.model.data.ModelData;
 
-public class BakedPipeModel implements BakedModel {
+public class BakedPipeModel implements BlockStateModel {
+    private final BlockStateModelPart centerModel;
+    private final BlockStateModelPart[] connectionModel;
+    private final BlockStateModelPart[] endModel;
+    @SuppressWarnings("unchecked")
+    private final List<BlockStateModelPart>[] partCache = new List[729];
 
-	private final BakedModel centerModel;
-	private BakedModel[] connectionModel;
-	private BakedModel[] endModel;
-	public static final List<BakedQuad> EMPTY = new ArrayList<BakedQuad>();
+    public BakedPipeModel(BlockStateModelPart centerModel, BlockStateModelPart[] connectionModel, BlockStateModelPart[] endModel) {
+        this.centerModel = centerModel;
+        this.connectionModel = connectionModel;
+        this.endModel = endModel;
+    }
 
-	@SuppressWarnings("unchecked")
-	public final List<BakedQuad>[] QUAD_CACHE = new List[729];
+    public static int getCacheIndex(int[] data) {
+        return (((((data[0] * 3 + data[1]) * 3 + data[2]) * 3 + data[3]) * 3 + data[4]) * 3) + data[5];
+    }
 
-	public BakedPipeModel(BakedModel centerModel, BakedModel[] connectionModel, BakedModel[] endModel) {
-		this.centerModel = centerModel;
-		this.connectionModel = connectionModel;
-		this.endModel = endModel;
-	}
+    @Override
+    @Deprecated
+    public void collectParts(RandomSource random, List<BlockStateModelPart> output) {
+        output.add(centerModel);
+    }
 
-	public static int getCacheIndex(int[] data) {
-		return (((((data[0] * 3 + data[1]) * 3 + data[2]) * 3 + data[3]) * 3 + data[4]) * 3) + data[5];
-	}
+    @Override
+    public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> output) {
+        int[] sides = null;
+        if (level != null && pos != null) {
+            ModelData data = level.getModelData(pos);
+            if (data != null) {
+                sides = data.get(PipeBlockEntityBase.DATA_TYPE);
+            }
+        }
+        if (sides == null || sides.length < 6) {
+            output.add(centerModel);
+            return;
+        }
+        int index = getCacheIndex(sides);
+        List<BlockStateModelPart> parts = partCache[index];
+        if (parts == null) {
+            parts = new ArrayList<>(7);
+            parts.add(centerModel);
+            for (int i = 0; i < 6; i++) {
+                if (sides[i] == 1) {
+                    parts.add(connectionModel[i]);
+                } else if (sides[i] == 2) {
+                    parts.add(endModel[i]);
+                }
+            }
+            partCache[index] = List.copyOf(parts);
+        }
+        output.addAll(parts);
+    }
 
-	@Override
-	public List<BakedQuad> getQuads(BlockState state, Direction side, RandomSource rand, ModelData data, RenderType renderType) {
-		if (side != null)
-			return EMPTY;
-		int[] sides = data.get(PipeBlockEntityBase.DATA_TYPE);
+    @Override
+    @Deprecated
+    public Material.Baked particleMaterial() {
+        return centerModel.particleMaterial();
+    }
 
-		if (sides != null) {
-			List<BakedQuad> quads = QUAD_CACHE[getCacheIndex(sides)];
-			if (quads != null)
-				return quads;
+    @Override
+    public Material.Baked particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state) {
+        return centerModel.particleMaterial();
+    }
 
-			quads = new ArrayList<BakedQuad>();
-			quads.addAll(centerModel.getQuads(state, side, rand, data, renderType));
-			if (quads.isEmpty())
-				return quads;
-			for (int i = 0; i < sides.length; i++) {
-				if (sides[i] == 1)
-					quads.addAll(connectionModel[i].getQuads(state, side, rand, data, renderType));
-				else if (sides[i] == 2)
-					quads.addAll(endModel[i].getQuads(state, side, rand, data, renderType));
-			}
-			if (!quads.isEmpty())
-				QUAD_CACHE[getCacheIndex(sides)] = new ArrayList<BakedQuad>(quads);
-			return quads;
-		}
-		return centerModel.getQuads(state, side, rand, data, renderType);
-	}
+    @Override
+    @Deprecated
+    public int materialFlags() {
+        return centerModel.materialFlags();
+    }
 
-	@Override
-	public List<BakedQuad> getQuads(BlockState state, Direction side, RandomSource rand) {
-		return centerModel.getQuads(state, side, rand);
-	}
-
-	@Override
-	public boolean useAmbientOcclusion() {
-		return centerModel.useAmbientOcclusion();
-	}
-
-	@Override
-	public boolean isGui3d() {
-		return centerModel.isGui3d();
-	}
-
-	@Override
-	public boolean usesBlockLight() {
-		return centerModel.usesBlockLight();
-	}
-
-	@Override
-	public boolean isCustomRenderer() {
-		return centerModel.isCustomRenderer();
-	}
-
-	@Override
-	public TextureAtlasSprite getParticleIcon() {
-		return centerModel.getParticleIcon();
-	}
-
-	@Override
-	public ItemOverrides getOverrides() {
-		return ItemOverrides.EMPTY;
-	}
+    @Override
+    public int materialFlags(BlockAndTintGetter level, BlockPos pos, BlockState state) {
+        int flags = centerModel.materialFlags();
+        for (BlockStateModelPart part : connectionModel) {
+            flags |= part.materialFlags();
+        }
+        for (BlockStateModelPart part : endModel) {
+            flags |= part.materialFlags();
+        }
+        return flags;
+    }
 }
+

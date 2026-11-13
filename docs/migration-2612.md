@@ -51,3 +51,12 @@
 - 工具等级（master 165b2b8）：SimpleTier 第一个参数是"挖不了的方块"标签，旧移植传成了本模组空的 needs_*_tool 标签，铅/银/黎明石/Tyrfing 工具什么都能挖出掉落。已按 1.20.1 改回铁级、发条镐斧钻石级、发条锤石级，2612 同步。
 
 （发现一条记一条，两边都改）
+
+## ABCD 并行批次审核（2026-11-13）
+
+- A：已接入自定义粒子 RenderPipeline、rough/FAB shader 资源，并保留旧渲染类型兼容字段；FluidRenderer 等文件未发现额外 26.1 差异。仍需修复 `EmbersRenderTypes` 中旧 `RenderType` 依赖及管线注册后的编译错误。
+- B：已迁移配方 Runner、补齐两个物品标签；方块状态和物品模型保留完整旧逻辑，尚未迁移到 26.1 `ModelProvider`/`BlockModelGenerators`/`ItemModelGenerators`。
+- C：已改用 `GuiGraphicsExtractor`，保留研究树独立缓冲、空缓冲跳过、波浪连线、光圈/高亮和解码石板对错提示；仍需处理 26.1 中旧 Tesselator/GL 状态调用的编译错误。
+- D：已迁移灰烬护甲模型到 `HumanoidRenderState`/新客户端护甲扩展签名，并把 `BakedPipeModel` 改为 `BlockStateModel`；`PipeModel`/`PipeModelBuilder` 的新模型加载器注册仍未完成。
+
+本批次首次编译 `tools\compile2612.ps1 -Log c6.log` 因 Gradle Java 堆溢出中止，`build\c6.log.err` 已写出 2654 个错误（242 个文件）；主要集中在尚未迁移的 datagen、旧渲染 API、模型加载器和全局剩余 API。当前不宣称 A-D 已可编译，后续需按错误摘要逐批收敛。

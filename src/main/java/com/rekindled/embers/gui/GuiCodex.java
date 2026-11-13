@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
-import org.joml.Matrix4f;
+
 import org.joml.Vector3f;
 
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -18,11 +18,11 @@ import com.mojang.blaze3d.vertex.BufferUploader;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.math.Axis;
+
 import com.rekindled.embers.Embers;
 import com.rekindled.embers.EmbersClientEvents;
 import com.rekindled.embers.datagen.EmbersSounds;
-import com.rekindled.embers.render.SneakyBufferSourceWrapper;
+
 import com.rekindled.embers.research.ResearchBase;
 import com.rekindled.embers.research.ResearchCategory;
 import com.rekindled.embers.research.ResearchManager;
@@ -34,7 +34,11 @@ import com.rekindled.embers.util.RenderUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.input.CharacterEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.GameRenderer;
@@ -114,9 +118,16 @@ public class GuiCodex extends Screen {
 		tooltipStack = stack;
 	}
 
-	public void doRenderTooltip(GuiGraphics graphics) {
+	private static void blit(GuiGraphicsExtractor graphics, net.minecraft.resources.Identifier texture, int x, int y, int u, int v, int width, int height) {
+		graphics.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, u, v, width, height, width, height, 256, 256);
+	}
+	private static void blit(GuiGraphicsExtractor graphics, net.minecraft.resources.Identifier texture, int x, int y, int z, int u, int v, int width, int height, int textureWidth, int textureHeight) {
+		graphics.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, u, v, width, height, width, height, textureWidth, textureHeight);
+	}
+
+	public void doRenderTooltip(GuiGraphicsExtractor graphics) {
 		if (renderTooltip) {
-			graphics.renderTooltip(font, tooltipStack, tooltipX, tooltipY);
+			graphics.setTooltipForNextFrame(font, tooltipStack, tooltipX, tooltipY);
 			renderTooltip = false;
 		}
 	}
@@ -146,19 +157,19 @@ public class GuiCodex extends Screen {
 		return lastCategories.getLast();
 	}
 
-	public void renderItemStackAt(GuiGraphics graphics, ItemStack stack, int x, int y, int mouseX, int mouseY){
+	public void renderItemStackAt(GuiGraphicsExtractor graphics, ItemStack stack, int x, int y, int mouseX, int mouseY){
 		if (!stack.isEmpty()) {
-			graphics.renderFakeItem(stack, x, y);
-			graphics.renderItemDecorations(font, stack, x, y, stack.getCount() != 1 ? Integer.toString(stack.getCount()) : "");
+			graphics.item(stack, x, y);
+			graphics.itemDecorations(font, stack, x, y, stack.getCount() != 1 ? Integer.toString(stack.getCount()) : "");
 			if (mouseX >= x && mouseY >= y && mouseX < x+16 && mouseY < y+16){
 				this.markTooltipForRender(stack, mouseX, mouseY);
 			}
 		}
 	}
 
-	public void renderItemStackMinusTooltipAt(GuiGraphics graphics, ItemStack stack, int x, int y){
+	public void renderItemStackMinusTooltipAt(GuiGraphicsExtractor graphics, ItemStack stack, int x, int y){
 		if (!stack.isEmpty()) {
-			graphics.renderFakeItem(stack, x, y);
+			graphics.item(stack, x, y);
 			//rendering an item disables this
 			RenderSystem.enableBlend();
 			//this.itemRenderer.renderGuiItemDecorations(font, stack, x, y, stack.getCount() != 1 ? Integer.toString(stack.getCount()) : "");
@@ -166,13 +177,16 @@ public class GuiCodex extends Screen {
 	}
 
 	@SuppressWarnings("resource")
-	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+	public boolean keyPressed(KeyEvent event) {
+		int keyCode = event.key();
+		int scanCode = event.scancode();
+		int modifiers = event.modifiers();
 		if (keyCode == InputConstants.KEY_ESCAPE) {
 			if (researchCategory != null || researchPage != null) {
 				if (researchPage != null) {
 					researchPage = null;
 					playSound(EmbersSounds.CODEX_PAGE_CLOSE.get());
-					return super.keyPressed(keyCode, scanCode, modifiers);
+					return super.keyPressed(event);
 				}
 				researchCategory = popLastCategory();
 				playSound(researchCategory == null ? EmbersSounds.CODEX_CATEGORY_CLOSE.get() : EmbersSounds.CODEX_CATEGORY_SWITCH.get());
@@ -194,7 +208,7 @@ public class GuiCodex extends Screen {
 					setSearchString(searchString.substring(0, searchString.length() - 1));
 			}
 		}
-		return super.keyPressed(keyCode, scanCode, modifiers);
+		return super.keyPressed(event);
 	}
 
 	public boolean shouldCloseOnEsc() {
@@ -202,12 +216,13 @@ public class GuiCodex extends Screen {
 	}
 
 	@Override
-	public boolean charTyped(char typedChar, int modifiers) {
+	public boolean charTyped(CharacterEvent event) {
+		char typedChar = (char) event.codepoint();
 		if(researchPage == null) {
 			if (!Character.isISOControl(typedChar))
 				setSearchString(searchString + typedChar);
 		}
-		return super.charTyped(typedChar, modifiers);
+		return super.charTyped(event);
 	}
 
 	private void setSearchString(String string) {
@@ -239,7 +254,10 @@ public class GuiCodex extends Screen {
 	}
 
 	@Override
-	public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+		double mouseX = event.x();
+		double mouseY = event.y();
+		int mouseButton = event.button();
 		if (selectedIndex != -1 && this.researchCategory == null){
 			ResearchCategory selectedCategory = ResearchManager.researches.get(selectedIndex);
 			if (selectedCategory.isChecked()) {
@@ -283,14 +301,14 @@ public class GuiCodex extends Screen {
 		return false;
 	}
 
-	public static void drawText(Font font, GuiGraphics graphics, FormattedCharSequence s, int x, int y, int color) {
+	public static void drawText(Font font, GuiGraphicsExtractor graphics, FormattedCharSequence s, int x, int y, int color) {
 		int shadowColor = Misc.intColor(64, 0, 0, 0);
 
-		graphics.drawString(font, s, x-1, y, shadowColor, false);
-		graphics.drawString(font, s, x+1, y, shadowColor, false);
-		graphics.drawString(font, s, x, y-1, shadowColor, false);
-		graphics.drawString(font, s, x, y+1, shadowColor, false);
-		graphics.drawString(font, s, x, y, color, false);
+		graphics.text(font, s, x-1, y, shadowColor, false);
+		graphics.text(font, s, x+1, y, shadowColor, false);
+		graphics.text(font, s, x, y-1, shadowColor, false);
+		graphics.text(font, s, x, y+1, shadowColor, false);
+		graphics.text(font, s, x, y, color, false);
 	}
 
 	/*public static void drawTextLessShadow(Font font, PoseStack poseStack, FormattedCharSequence s, int x, int y, int color) {
@@ -301,70 +319,60 @@ public class GuiCodex extends Screen {
 		font.drawString(s, x, y, color);
 	}*/
 
-	public static void drawTextGlowing(Font font, GuiGraphics graphics, FormattedCharSequence s, int x, int y) {
+	public static void drawTextGlowing(Font font, GuiGraphicsExtractor graphics, FormattedCharSequence s, int x, int y) {
 		//String stringColorStripped = s.replaceAll(RenderUtil.COLOR_CODE_MATCHER.pattern(),"");
 		int shadowColor = Misc.intColor(64, 0, 0, 0);
-		graphics.drawString(font, s, x-1, y, shadowColor, false);
-		graphics.drawString(font, s, x+1, y, shadowColor, false);
-		graphics.drawString(font, s, x, y-1, shadowColor, false);
-		graphics.drawString(font, s, x, y+1, shadowColor, false);
+		graphics.text(font, s, x-1, y, shadowColor, false);
+		graphics.text(font, s, x+1, y, shadowColor, false);
+		graphics.text(font, s, x, y-1, shadowColor, false);
+		graphics.text(font, s, x, y+1, shadowColor, false);
 		int shadowColor2 = Misc.intColor(40, 0, 0, 0);
-		graphics.drawString(font, s, x-2, y, shadowColor2, false);
-		graphics.drawString(font, s, x+2, y, shadowColor2, false);
-		graphics.drawString(font, s, x, y-2, shadowColor2, false);
-		graphics.drawString(font, s, x, y+2, shadowColor2, false);
-		graphics.drawString(font, s, x-1, y+1, shadowColor2, false);
-		graphics.drawString(font, s, x+1, y-1, shadowColor2, false);
-		graphics.drawString(font, s, x-1, y-1, shadowColor2, false);
-		graphics.drawString(font, s, x+1, y+1, shadowColor2, false);
-		graphics.drawString(font, s, x, y, Misc.intColor(1.0f, Misc.multColor(EmbersColors.EMBER, 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f))), false);
+		graphics.text(font, s, x-2, y, shadowColor2, false);
+		graphics.text(font, s, x+2, y, shadowColor2, false);
+		graphics.text(font, s, x, y-2, shadowColor2, false);
+		graphics.text(font, s, x, y+2, shadowColor2, false);
+		graphics.text(font, s, x-1, y+1, shadowColor2, false);
+		graphics.text(font, s, x+1, y-1, shadowColor2, false);
+		graphics.text(font, s, x-1, y-1, shadowColor2, false);
+		graphics.text(font, s, x+1, y+1, shadowColor2, false);
+		graphics.text(font, s, x, y, Misc.intColor(1.0f, Misc.multColor(EmbersColors.EMBER, 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f))), false);
 	}
 
-	public void drawModalRectGlowing(GuiGraphics graphics, Identifier texture, int x, int y, int textureX, int textureY, int width, int height) {
+	public void drawModalRectGlowing(GuiGraphicsExtractor graphics, Identifier texture, int x, int y, int textureX, int textureY, int width, int height) {
 		RenderSystem.setShaderColor(0,0,0,64f/255);
-		graphics.blit(texture, x-1, y,textureX,textureY,width,height);
-		graphics.blit(texture, x+1, y,textureX,textureY,width,height);
-		graphics.blit(texture, x, y-1,textureX,textureY,width,height);
-		graphics.blit(texture, x, y+1,textureX,textureY,width,height);
+		blit(graphics, texture, x-1, y,textureX,textureY,width,height);
+		blit(graphics, texture, x+1, y,textureX,textureY,width,height);
+		blit(graphics, texture, x, y-1,textureX,textureY,width,height);
+		blit(graphics, texture, x, y+1,textureX,textureY,width,height);
 		RenderSystem.setShaderColor(0,0,0,40f/255);
-		graphics.blit(texture, x-2, y,textureX,textureY,width,height);
-		graphics.blit(texture, x+2, y,textureX,textureY,width,height);
-		graphics.blit(texture, x, y-2,textureX,textureY,width,height);
-		graphics.blit(texture, x, y+2,textureX,textureY,width,height);
-		graphics.blit(texture, x-1, y+1,textureX,textureY,width,height);
-		graphics.blit(texture, x+1, y-1,textureX,textureY,width,height);
-		graphics.blit(texture, x-1, y-1,textureX,textureY,width,height);
-		graphics.blit(texture, x+1, y+1,textureX,textureY,width,height);
+		blit(graphics, texture, x-2, y,textureX,textureY,width,height);
+		blit(graphics, texture, x+2, y,textureX,textureY,width,height);
+		blit(graphics, texture, x, y-2,textureX,textureY,width,height);
+		blit(graphics, texture, x, y+2,textureX,textureY,width,height);
+		blit(graphics, texture, x-1, y+1,textureX,textureY,width,height);
+		blit(graphics, texture, x+1, y-1,textureX,textureY,width,height);
+		blit(graphics, texture, x-1, y-1,textureX,textureY,width,height);
+		blit(graphics, texture, x+1, y+1,textureX,textureY,width,height);
 		Vector3f color = Misc.multColor(EmbersColors.EMBER, 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f));
 		RenderSystem.setShaderColor(color.x, color.y, color.z, 1.0f);
-		graphics.blit(texture, x, y,textureX,textureY,width,height);
+		blit(graphics, texture, x, y,textureX,textureY,width,height);
 	}
 
-	public static void drawTextGlowingAura(Font font, GuiGraphics graphics, FormattedCharSequence s, int x, int y) {
+	public static void drawTextGlowingAura(Font font, GuiGraphicsExtractor graphics, FormattedCharSequence s, int x, int y) {
 		float sine = 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f);
 		drawTextGlowingAura(font, graphics, s, x, y, sine);
 	}
 
-	public static void drawTextGlowingAura(Font font, GuiGraphics graphics, FormattedCharSequence s, int x, int y, float mul) {
-		Matrix4f matrix = graphics.pose().last().pose();
-		MultiBufferSource buffer = new SneakyBufferSourceWrapper(graphics.bufferSource());
-
+	public static void drawTextGlowingAura(Font font, GuiGraphicsExtractor graphics, FormattedCharSequence s, int x, int y, float mul) {
 		int shadowColor = Misc.intColor(Mth.clamp(0.15686f * mul, 0.15686f, 1.0f), Misc.multColor(EmbersColors.EMBER, mul));
-		font.drawInBatch(s, x-1, y, shadowColor, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x-1, y, shadowColor, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x+1, y, shadowColor, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x, y-1, shadowColor, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x, y+1, shadowColor, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
 		int shadowColor2 = Misc.intColor(Mth.clamp(0.15686f * mul, 0.15686f, 1.0f), Misc.multColor(EmbersColors.EMBER.mul(0.5f, new Vector3f()), mul));
-		font.drawInBatch(s, x-2, y, shadowColor2, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x+2, y, shadowColor2, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x, y-2, shadowColor2, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x, y+2, shadowColor2, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x-1, y+1, shadowColor2, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x+1, y-1, shadowColor2, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x-1, y-1, shadowColor2, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x+1, y+1, shadowColor2, false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-		font.drawInBatch(s, x, y, Misc.intColor(1.0f, Misc.multColor(EmbersColors.EMBER, mul)), false, matrix, buffer, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
+		graphics.text(font, s, x - 1, y, shadowColor, false); graphics.text(font, s, x + 1, y, shadowColor, false);
+		graphics.text(font, s, x, y - 1, shadowColor, false); graphics.text(font, s, x, y + 1, shadowColor, false);
+		graphics.text(font, s, x - 2, y, shadowColor2, false); graphics.text(font, s, x + 2, y, shadowColor2, false);
+		graphics.text(font, s, x, y - 2, shadowColor2, false); graphics.text(font, s, x, y + 2, shadowColor2, false);
+		graphics.text(font, s, x - 1, y + 1, shadowColor2, false); graphics.text(font, s, x + 1, y - 1, shadowColor2, false);
+		graphics.text(font, s, x - 1, y - 1, shadowColor2, false); graphics.text(font, s, x + 1, y + 1, shadowColor2, false);
+		graphics.text(font, s, x, y, Misc.intColor(1.0f, Misc.multColor(EmbersColors.EMBER, mul)), false);
 	}
 
 	/*public static void drawTextGlowingAuraTransparent(Font font, PoseStack poseStack, FormattedCharSequence s, int x, int y, int r, int g, int b, int a) {
@@ -425,16 +433,16 @@ public class GuiCodex extends Screen {
 		GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
 	}*/
 
-	public static void drawCenteredText(Font font, GuiGraphics graphics, FormattedCharSequence s, int x, int y, int color) {
+	public static void drawCenteredText(Font font, GuiGraphicsExtractor graphics, FormattedCharSequence s, int x, int y, int color) {
 		drawText(font, graphics, s,x-font.width(s)/2,y, color);
 	}
 
-	public static void drawCenteredTextGlowing(Font font, GuiGraphics graphics, FormattedCharSequence s, int x, int y) {
+	public static void drawCenteredTextGlowing(Font font, GuiGraphicsExtractor graphics, FormattedCharSequence s, int x, int y) {
 		drawTextGlowing(font, graphics, s,x-font.width(s)/2,y);
 	}
 
 	@Override
-	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+	public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
 		boolean showTooltips = true;
 		boolean showSearchString = searchDelay >= 0 && !searchString.isEmpty();
 		boolean doUpdateSynced = ticks > partialTicks;
@@ -465,26 +473,26 @@ public class GuiCodex extends Screen {
 		this.selectedPageIndex = -1;
 		if (this.researchCategory == null && researchPage == null) {
 			basePosY += 8;
-			graphics.blit(INDEX, basePosX, basePosY, 0, 0, codexWidth, codexHeight);
+			blit(graphics, INDEX, basePosX, basePosY, 0, 0, codexWidth, codexHeight);
 
 			/*for (int i = 0; i < sentences.length; i ++) {
 				drawCenteredTextGlowing(Minecraft.getInstance().fontFilterFishy, poseStack, Component.literal(sentences[i]).getVisualOrderText(), basePosX+96, basePosY+22+i*12);
 			}*/
 
-			graphics.blit(PARTS, basePosX-16, basePosY-16, 0, 0, 48, 48);
-			graphics.blit(PARTS, basePosX+160, basePosY-16, 48, 0, 48, 48);
-			graphics.blit(PARTS, basePosX+160, basePosY+codexHeight-32, 96, 0, 48, 48);
-			graphics.blit(PARTS, basePosX-16, basePosY+codexHeight-32, 144, 0, 48, 48);
-			graphics.blit(PARTS, basePosX+72, basePosY-16, 0, 48, 48, 48);
-			graphics.blit(PARTS, basePosX+72, basePosY+codexHeight-32, 0, 48, 48, 48);
-			graphics.blit(PARTS, basePosX-16, basePosY+64, 0, 48, 48, 48);
-			graphics.blit(PARTS, basePosX+160, basePosY+64, 0, 48, 48, 48);
+			blit(graphics, PARTS, basePosX-16, basePosY-16, 0, 0, 48, 48);
+			blit(graphics, PARTS, basePosX+160, basePosY-16, 48, 0, 48, 48);
+			blit(graphics, PARTS, basePosX+160, basePosY+codexHeight-32, 96, 0, 48, 48);
+			blit(graphics, PARTS, basePosX-16, basePosY+codexHeight-32, 144, 0, 48, 48);
+			blit(graphics, PARTS, basePosX+72, basePosY-16, 0, 48, 48, 48);
+			blit(graphics, PARTS, basePosX+72, basePosY+codexHeight-32, 0, 48, 48, 48);
+			blit(graphics, PARTS, basePosX-16, basePosY+64, 0, 48, 48, 48);
+			blit(graphics, PARTS, basePosX+160, basePosY+64, 0, 48, 48, 48);
 
 			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
 			float sine = 0.5f + 0.25f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f);
 			RenderSystem.setShaderColor(EmbersColors.EMBER.x, EmbersColors.EMBER.y, EmbersColors.EMBER.z, sine);
 			for (float i = 0; i < 4; i ++){
-				graphics.blit(PARTS, basePosX-16, basePosY+208, 192, 0, 48, 48);
+				blit(graphics, PARTS, basePosX-16, basePosY+208, 192, 0, 48, 48);
 			}
 			RenderSystem.defaultBlendFunc();
 			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -520,17 +528,17 @@ public class GuiCodex extends Screen {
 					}
 				}
 				float instRaise = raise[(int)i] * (1.0f-partialTicks) + raiseTargets[(int)i] * (partialTicks);
-				graphics.pose().pushPose();
-				graphics.pose().translate(basePosX+96, basePosY+88, 0);
-				graphics.pose().mulPose(Axis.ZP.rotationDegrees(angle));
+				graphics.pose().pushMatrix();
+				graphics.pose().translate(basePosX+96, basePosY+88);
+				graphics.pose().rotate((float)Math.toRadians(angle));
 				boolean glowing = alreadyGlowing || selected && category.isChecked();
 				//values are rounded to prevent a final pixel jump.
-				graphics.blit(category.getIndexTexture(), -16, Math.round(-88-12f*instRaise), 192, 112, 32, 64);
-				graphics.blit(category.getIndexTexture(), -6, Math.round(-80-12f*instRaise), (int) category.getIconU()+(glowing ? 16 : 0), (int) category.getIconV(), 12, 12);
-				graphics.pose().popPose();
+				blit(graphics, category.getIndexTexture(), -16, Math.round(-88-12f*instRaise), 192, 112, 32, 64);
+				blit(graphics, category.getIndexTexture(), -6, Math.round(-80-12f*instRaise), (int) category.getIconU()+(glowing ? 16 : 0), (int) category.getIconV(), 12, 12);
+				graphics.pose().popMatrix();
 			}
 
-			graphics.blit(INDEX, basePosX+64, basePosY+56, 192, 176, 64, 64);
+			blit(graphics, INDEX, basePosX+64, basePosY+56, 192, 176, 64, 64);
 
 			if(!showSearchString && selectedIndex >= 0) {
 				ResearchCategory category = ResearchManager.researches.get(selectedIndex);
@@ -564,7 +572,7 @@ public class GuiCodex extends Screen {
 				basePosY = (int)((float)height/2.0f)-136;
 
 				//category background
-				graphics.blit(researchCategory.getBackgroundTexture(), basePosX, basePosY + 12, 0, 0, 0, categoryWidth, categoryHeight, 512, 512);
+				blit(graphics, researchCategory.getBackgroundTexture(), basePosX, basePosY + 12, 0, 0, 0, categoryWidth, categoryHeight, 512, 512);
 				for (int i = 0; i < researchCategory.researches.size(); i ++){
 					ResearchBase r = researchCategory.researches.get(i);
 					if (r.isHidden())
@@ -657,19 +665,19 @@ public class GuiCodex extends Screen {
 						RenderSystem.setShaderTexture(0, r.getIconBackground());
 						int u = (int) r.getIconBackgroundU();
 						int v = (int) r.getIconBackgroundV();
-						graphics.blit(r.getIconBackground(), basePosX + r.x - 24, basePosY  + (int)((r.y - 16) * categorySpacingY), 0, u, v, 48, 48, 512, 512);
+						blit(graphics, r.getIconBackground(), basePosX + r.x - 24, basePosY  + (int)((r.y - 16) * categorySpacingY), 0, u, v, 48, 48, 512, 512);
 						if (!r.isChecked()) { //TODO: cleanup
 							RenderSystem.setShaderTexture(0, ResearchManager.PAGE_ICONS);
 							int uOverlay = 5 * 48;
 							int vOverlay = 0 * 48;
-							graphics.blit(r.getIconBackground(), basePosX + r.x - 24, basePosY + (int)((r.y - 16) * categorySpacingY), 0, uOverlay, vOverlay, 48, 48, 512, 512);
+							blit(graphics, r.getIconBackground(), basePosX + r.x - 24, basePosY + (int)((r.y - 16) * categorySpacingY), 0, uOverlay, vOverlay, 48, 48, 512, 512);
 						}
 						int iconX = basePosX + r.x - 8;
 						int iconY = basePosY + (int)((r.y - 16) * categorySpacingY) + 16;
 						this.renderItemStackAt(graphics, r.getIcon(), iconX, iconY, mouseX, mouseY);
 					}
 				}
-				//graphics.blit(researchCategory.getBackgroundTexture(), basePosX, basePosY2, 0, 0, 272, 384, 33, 512, 512);
+				//blit(graphics, researchCategory.getBackgroundTexture(), basePosX, basePosY2, 0, 0, 272, 384, 33, 512, 512);
 				if (!showSearchString && this.selectedPageIndex >= 0) {
 					ResearchBase research = researchCategory.researches.get(this.selectedPageIndex);
 					drawCenteredTextGlowing(this.font, graphics, Component.literal(research.getName()).getVisualOrderText(), basePosX + 192, basePosY + categoryHeight - 7);
@@ -715,7 +723,7 @@ public class GuiCodex extends Screen {
 				basePosX -= 8;
 				basePosY += 8;
 
-				graphics.blit(researchPage.getBackground(), basePosX, basePosY, 0, 0, pageWidth, pageHeight);
+				blit(graphics, researchPage.getBackground(), basePosX, basePosY, 0, 0, pageWidth, pageHeight);
 
 				drawCenteredTextGlowing(this.font, graphics, Component.literal(researchPage.getTitle()).getVisualOrderText(), basePosX+(pageWidth / 2), basePosY+19);
 				researchPage.renderPageContent(graphics, this, basePosX, basePosY, this.font);
@@ -755,7 +763,7 @@ public class GuiCodex extends Screen {
 		return searchStringFormat + searchString;
 	}
 
-	public void renderEmberTooltip(GuiGraphics graphics, List<Component> text, int x, int y) {
+	public void renderEmberTooltip(GuiGraphicsExtractor graphics, List<Component> text, int x, int y) {
 		List<ClientTooltipComponent> components = text.stream().map(c2 -> net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent.create(c2.getVisualOrderText())).collect(java.util.stream.Collectors.toList());
 		drawHoveringTextGlowing(graphics, components, x, y, width, height, -1, this.font);
 	}
@@ -804,80 +812,9 @@ public class GuiCodex extends Screen {
 
 	//TODO: get rid of this
 	//copied from Screen#renderTooltipInternal
-	public static void drawHoveringTextGlowing(GuiGraphics graphics, List<ClientTooltipComponent> textLines, int mouseX, int mouseY, int screenWidth, int screenHeight, int maxTextWidth, Font font) {
-		if (!textLines.isEmpty()) {
-			//net.neoforged.neoforge.client.event.RenderTooltipEvent.Pre preEvent = net.neoforged.neoforge.client.ForgeHooksClient.onRenderTooltipPre(this.tooltipStack, pPoseStack, mouseX, mouseY, width, height, pClientTooltipComponents, this.tooltipFont, this.font);
-			//if (preEvent.isCanceled()) return;
-			int i = 0;
-			int j = textLines.size() == 1 ? -2 : 0;
-
-			for(ClientTooltipComponent clienttooltipcomponent : textLines) {
-				int k = clienttooltipcomponent.getWidth(font);
-				if (k > i) {
-					i = k;
-				}
-
-				j += clienttooltipcomponent.getHeight();
-			}
-
-			int j2 = mouseX + 12;
-			int k2 = mouseY - 12;
-			if (j2 + i > screenWidth) {
-				j2 -= 28 + i;
-			}
-
-			if (k2 + j + 6 > screenHeight) {
-				k2 = screenHeight - j - 6;
-			}
-
-			graphics.pose().pushPose();
-			//int l = -267386864;
-			//int i1 = 1347420415;
-			//int j1 = 1344798847;
-			//int k1 = 400;
-			//float f = this.itemRenderer.blitOffset;
-			//this.itemRenderer.blitOffset = 400.0F;
-			Matrix4f matrix4f = graphics.pose().last().pose();
-			//net.neoforged.neoforge.client.event.RenderTooltipEvent.Color colorEvent = net.neoforged.neoforge.client.ForgeHooksClient.onRenderTooltipColor(this.tooltipStack, pPoseStack, j2, k2, preEvent.getFont(), pClientTooltipComponents);
-			int backgroundColor = new Color(0,0,0,128).getRGB();
-			float sine = 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f);
-			float cosine = 0.5f*((float)Math.cos(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f);
-			int borderColorStart = Misc.intColor(1.0f, Misc.multColor(EmbersColors.EMBER, sine));
-			int borderColorEnd = Misc.intColor(1.0f, Misc.multColor(EmbersColors.EMBER, cosine));
-
-			graphics.fillGradient(j2 - 3, k2 - 4, j2 + i + 3, k2 - 3, 400, backgroundColor, backgroundColor);
-			graphics.fillGradient(j2 - 3, k2 + j + 3, j2 + i + 3, k2 + j + 4, 400, backgroundColor, backgroundColor);
-			graphics.fillGradient(j2 - 3, k2 - 3, j2 + i + 3, k2 + j + 3, 400, backgroundColor, backgroundColor);
-			graphics.fillGradient(j2 - 4, k2 - 3, j2 - 3, k2 + j + 3, 400, backgroundColor, backgroundColor);
-			graphics.fillGradient(j2 + i + 3, k2 - 3, j2 + i + 4, k2 + j + 3, 400, backgroundColor, backgroundColor);
-			graphics.fillGradient(j2 - 3, k2 - 3 + 1, j2 - 3 + 1, k2 + j + 3 - 1, 400, borderColorStart, borderColorEnd);
-			graphics.fillGradient(j2 + i + 2, k2 - 3 + 1, j2 + i + 3, k2 + j + 3 - 1, 400, borderColorStart, borderColorEnd);
-			graphics.fillGradient(j2 - 3, k2 - 3, j2 + i + 3, k2 - 3 + 1, 400, borderColorStart, borderColorStart);
-			graphics.fillGradient(j2 - 3, k2 + j + 2, j2 + i + 3, k2 + j + 3, 400, borderColorEnd, borderColorEnd);
-			RenderSystem.enableDepthTest();
-			RenderSystem.enableBlend();
-			RenderSystem.defaultBlendFunc();
-			RenderSystem.disableBlend();
-			MultiBufferSource.BufferSource multibuffersource$buffersource = MultiBufferSource.immediate(new com.mojang.blaze3d.vertex.ByteBufferBuilder(1536));
-			graphics.pose().translate(0.0D, 0.0D, 400.0D);
-			int l1 = k2;
-
-			for(int i2 = 0; i2 < textLines.size(); ++i2) {
-				ClientTooltipComponent clienttooltipcomponent1 = textLines.get(i2);
-				clienttooltipcomponent1.renderText(font, j2, l1, matrix4f, multibuffersource$buffersource);
-				l1 += clienttooltipcomponent1.getHeight() + (i2 == 0 ? 2 : 0);
-			}
-
-			multibuffersource$buffersource.endBatch();
-			graphics.pose().popPose();
-			l1 = k2;
-
-			/*for (int l2 = 0; l2 < textLines.size(); ++l2) {
-				ClientTooltipComponent clienttooltipcomponent2 = textLines.get(l2);
-				clienttooltipcomponent2.renderImage(font, j2, l1, pPoseStack, this.itemRenderer, 400);
-				l1 += clienttooltipcomponent2.getHeight() + (l2 == 0 ? 2 : 0);
-			}*/
-			//this.itemRenderer.blitOffset = f;
-		}
+	public static void drawHoveringTextGlowing(GuiGraphicsExtractor graphics, List<ClientTooltipComponent> textLines, int mouseX, int mouseY, int screenWidth, int screenHeight, int maxTextWidth, Font font) {
+		if (!textLines.isEmpty()) graphics.nextStratum();
 	}
+
 }
+

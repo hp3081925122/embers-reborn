@@ -9,7 +9,8 @@ import com.rekindled.embers.research.ResearchBase;
 import com.rekindled.embers.util.Vec2i;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.resources.Identifier;
@@ -53,7 +54,7 @@ public class ResearchShowItem extends ResearchBase {
 	}
 
 	@Override
-	public void renderPageContent(GuiGraphics graphics, GuiCodex gui, int basePosX, int basePosY, Font fontRenderer) {
+	public void renderPageContent(GuiGraphicsExtractor graphics, GuiCodex gui, int basePosX, int basePosY, Font fontRenderer) {
 		int textOffX = 3;
 		int textOffY = 2;
 		int y = 0;
@@ -63,7 +64,7 @@ public class ResearchShowItem extends ResearchBase {
 			int slotY = basePosY - textOffY + 43 + y * 24;
 			for(int x = 0; x < stacks.length; x++) {
 				int slotX = basePosX - textOffX + batchOff + 20;
-				graphics.blit(getBackground(), slotX + x * 24, slotY, GuiCodex.pageWidth, 0, 24, 24);
+				graphics.blit(RenderPipelines.GUI_TEXTURED, getBackground(), slotX + x * 24, slotY, GuiCodex.pageWidth, 0, 24, 24, 24, 24, 256, 256);
 			}
 			y++;
 		}

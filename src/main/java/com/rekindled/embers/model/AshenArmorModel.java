@@ -8,6 +8,8 @@ import com.rekindled.embers.RegistryManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -18,13 +20,16 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;
+import net.minecraft.client.resources.model.EquipmentClientInfo;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-public class AshenArmorModel extends HumanoidModel<LivingEntity> {
+public class AshenArmorModel extends HumanoidModel<HumanoidRenderState> {
 
 	public static final ModelLayerLocation ASHEN_ARMOR_HEAD = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "head");
 	public static final ModelLayerLocation ASHEN_ARMOR_CHEST = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Embers.MODID, "ashen_armor"), "chest");
@@ -34,9 +39,16 @@ public class AshenArmorModel extends HumanoidModel<LivingEntity> {
 	public static final Map<EquipmentSlot, AshenArmorModel> ARMOR_MODELS = new EnumMap<>(EquipmentSlot.class);
 	public static final IClientItemExtensions ARMOR_MODEL_GETTER = new IClientItemExtensions() {
 		@Override
-		public HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-			AshenArmorModel model = AshenArmorModel.ARMOR_MODELS.get(equipmentSlot);
-			model.setup(livingEntity, itemStack);
+		public Model getHumanoidArmorModel(ItemStack itemStack, EquipmentClientInfo.LayerType layerType, Model original) {
+			Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
+			if (equippable == null) {
+				return original;
+			}
+			AshenArmorModel model = AshenArmorModel.ARMOR_MODELS.get(equippable.slot());
+			if (model == null) {
+				return original;
+			}
+			model.updateGems(itemStack);
 			return model;
 		}
 	};
@@ -52,6 +64,21 @@ public class AshenArmorModel extends HumanoidModel<LivingEntity> {
 			cape = this.body.getChild("cape");
 			for (int i = 0; i < gems.length; i++) {
 				gems[i] = cape.getChild("cape_gem_" + i);
+			}
+		}
+	}
+
+	public void updateGems(ItemStack itemStack) {
+		if (cape == null) {
+			return;
+		}
+		if (itemStack.getItem() == RegistryManager.ASHEN_CLOAK.get()) {
+			for (int i = 0; i < gems.length; i++) {
+				gems[i].visible = com.rekindled.embers.util.ItemNbtHelper.hasTagElement(itemStack, "gem" + i);
+			}
+		} else {
+			for (ModelPart gem : gems) {
+				gem.visible = false;
 			}
 		}
 	}
@@ -119,7 +146,7 @@ public class AshenArmorModel extends HumanoidModel<LivingEntity> {
 		MeshDefinition mesh = new MeshDefinition();
 		PartDefinition root = mesh.getRoot();
 		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
-		root.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
+		head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		root.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);
 		root.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
 		root.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
@@ -177,8 +204,8 @@ public class AshenArmorModel extends HumanoidModel<LivingEntity> {
 	public static MeshDefinition createChestMesh() {
 		MeshDefinition mesh = new MeshDefinition();
 		PartDefinition root = mesh.getRoot();
-		root.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
-		root.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
+		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
+		head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition armL = root.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition armR = root.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
@@ -246,8 +273,8 @@ public class AshenArmorModel extends HumanoidModel<LivingEntity> {
 	public static MeshDefinition createLegsMesh() {
 		MeshDefinition mesh = new MeshDefinition();
 		PartDefinition root = mesh.getRoot();
-		root.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
-		root.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
+		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
+		head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		root.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);
 		root.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
@@ -272,8 +299,8 @@ public class AshenArmorModel extends HumanoidModel<LivingEntity> {
 	public static MeshDefinition createFeetMesh() {
 		MeshDefinition mesh = new MeshDefinition();
 		PartDefinition root = mesh.getRoot();
-		root.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
-		root.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
+		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO);
+		head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		root.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.ZERO);
 		root.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.ZERO);
 		root.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.ZERO);
