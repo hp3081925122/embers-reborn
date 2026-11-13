@@ -335,10 +335,10 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 		CatalysisCombustionRecipeBuilder.create(Items.BLAZE_POWDER).combustion().domain(Embers.MODID).folder(combustionFolder).multiplier(4.0).burnTime(400).save(consumer);
 
 		//dawnstone anvil
-		GenericRecipeBuilder.create(new AnvilRepairRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_repair"))).save(consumer);
-		GenericRecipeBuilder.create(new AnvilRepairMateriaRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_materia_repair"))).save(consumer);
-		GenericRecipeBuilder.create(new AnvilBreakdownRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_breakdown"))).save(consumer);
-		GenericRecipeBuilder.create(new AnvilAugmentRemoveRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_augment_remove"))).save(consumer);
+		GenericRecipeBuilder.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_repair"), new AnvilRepairRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_repair"))).save(consumer);
+		GenericRecipeBuilder.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_materia_repair"), new AnvilRepairMateriaRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_materia_repair"))).save(consumer);
+		GenericRecipeBuilder.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_breakdown"), new AnvilBreakdownRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_breakdown"))).save(consumer);
+		GenericRecipeBuilder.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_augment_remove"), new AnvilAugmentRemoveRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_augment_remove"))).save(consumer);
 
 		AnvilAugmentRecipeBuilder.create(RegistryManager.CORE_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE), true).toVanilla()).input(RegistryManager.ANCIENT_MOTIVE_CORE.get()).save(consumer);
 		AnvilAugmentRecipeBuilder.create(RegistryManager.TINKER_LENS_AUGMENT).folder(anvilFolder).tool(AugmentIngredient.of(DifferenceIngredient.of(Ingredient.of(EmbersItemTags.AUGMENTABLE_HELMETS), Ingredient.of(EmbersItemTags.TINKER_LENS_HELMETS)), RegistryManager.TINKER_LENS_AUGMENT, true).toVanilla()).input(RegistryManager.TINKER_LENS.get()).save(consumer);
@@ -359,7 +359,7 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 
 		//special recipes
 		GemSocketRecipeBuilder.create(Tags.Items.STRINGS).id(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gem_socketing")).save(consumer);
-		GenericRecipeBuilder.create(new GemUnsocketRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gem_unsocketing"))).save(consumer);
+		GenericRecipeBuilder.create(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gem_unsocketing"), new GemUnsocketRecipe(ResourceLocation.fromNamespaceAndPath(Embers.MODID, "gem_unsocketing"))).save(consumer);
 
 		//crafting
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, RegistryManager.EMBER_CRYSTAL.get())

@@ -11,16 +11,18 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class GenericRecipeBuilder {
 
+	public ResourceLocation id;
 	public Recipe<?> recipe;
 
-	public static GenericRecipeBuilder create(Recipe<?> recipe) {
+	public static GenericRecipeBuilder create(ResourceLocation id, Recipe<?> recipe) {
 		GenericRecipeBuilder builder = new GenericRecipeBuilder();
+		builder.id = id;
 		builder.recipe = recipe;
 		return builder;
 	}
 
 	public void save(RecipeOutput consumer) {
-		consumer.accept(net.minecraft.resources.ResourceLocation.parse("embers_reborn:generic_recipe_" + System.nanoTime()), recipe, null);
+		consumer.accept(id, recipe, null);
 	}
 
 	// Finished inner class removed - RecipeOutput.accept(RL, Recipe, Advancement) in 1.21.1
