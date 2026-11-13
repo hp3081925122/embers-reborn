@@ -56,16 +56,11 @@ public class TinkerHammerItem extends Item {
 	}
 
 	@Override
-	public final ItemStack getCraftingRemainingItem(ItemStack stack) {
-		// 1.20.1 rebuilt the hammer with the same NBT when the slot reported empty; keep all components the same way
-		if (stack.isEmpty())
-			return new ItemStack(this.builtInRegistryHolder(), Math.max(1, stack.getCount()), stack.getComponentsPatch());
-		return stack.copy();
-	}
-
-	@Override
-	public boolean hasCraftingRemainingItem() {
-		return true;
+	public net.minecraft.world.item.ItemStackTemplate getCraftingRemainder(net.minecraft.world.item.ItemInstance instance) {
+		// 1.20.1: the hammer stays in the grid with all its data
+		if (instance instanceof ItemStack stack && !stack.isEmpty())
+			return net.minecraft.world.item.ItemStackTemplate.fromNonEmptyStack(stack.copyWithCount(1));
+		return new net.minecraft.world.item.ItemStackTemplate(this);
 	}
 
 	@Override

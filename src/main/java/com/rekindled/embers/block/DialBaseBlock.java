@@ -104,7 +104,7 @@ public abstract class DialBaseBlock extends DirectionalBlock implements IDial, E
 		if (state.hasAnalogOutputSignal()) {
 			BlockEntity blockEntity = level.getBlockEntity(pos.relative(state.getValue(FACING), -1));
 			if (blockEntity != null && blockEntity.hasLevel()) {
-				int power = state.getAnalogOutputSignal(blockEntity.getLevel(), pos);
+				int power = state.getAnalogOutputSignal(blockEntity.getLevel(), pos, net.minecraft.core.Direction.UP);
 				if (state.getValue(BlockStateProperties.POWER) != power) {
 					blockEntity.getLevel().setBlock(pos, state.setValue(BlockStateProperties.POWER, power), 1);
 					blockEntity.getLevel().updateNeighbourForOutputSignal(pos, state.getBlock());

@@ -77,6 +77,11 @@ public class EmberPacketEntity extends Entity {
 		com.rekindled.embers.util.NbtBridge.write(valueOutput, nbt);
 	}
 
+	public boolean hurtServer(net.minecraft.server.level.ServerLevel level, net.minecraft.world.damagesource.DamageSource source, float damage) {
+		return false;
+	}
+
+	@Override
 	public void tick() {
 		//super.tick();
 		int lifetime = getEntityData().get(EmberPacketEntity.lifetime);

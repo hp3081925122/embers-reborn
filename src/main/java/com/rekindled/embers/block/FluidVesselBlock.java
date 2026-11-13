@@ -98,11 +98,6 @@ public class FluidVesselBlock extends AbstractCauldronBlock implements EntityBlo
 	}
 
 	@Override
-	public boolean isEntityInsideContent(BlockState state, BlockPos pos, Entity entity) {
-		return false;
-	}
-
-	@Override
 	public boolean hasAnalogOutputSignal(BlockState state) {
 		return false;
 	}

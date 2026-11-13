@@ -1,14 +1,19 @@
 package com.rekindled.embers.util;
 
+import com.mojang.serialization.Codec;
 import com.rekindled.embers.Embers;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.saveddata.SavedDataType;
 
 public class EmberWorldData extends SavedData {
-	
-	private static final String NAME = Embers.MODID + "_data";
+
+	private static final Codec<EmberWorldData> CODEC = CompoundTag.CODEC.xmap(EmberWorldData::new, data -> data.save(new CompoundTag()));
+	// 26.1 stores namespaced saved data under data/<namespace>/<path>.dat
+	public static final SavedDataType<EmberWorldData> TYPE = new SavedDataType<>(Identifier.fromNamespaceAndPath(Embers.MODID, "data"), () -> new EmberWorldData(new CompoundTag()), CODEC);
 
 	public EmberWorldData(CompoundTag nbt) {
 		EmberGenUtil.offX = nbt.getIntOr("offX", 0);
@@ -16,11 +21,10 @@ public class EmberWorldData extends SavedData {
 	}
 
 	public static EmberWorldData get(ServerLevel world) {
-		return world.getDataStorage().computeIfAbsent(new net.minecraft.world.level.saveddata.SavedData.Factory<>(() -> new EmberWorldData(new CompoundTag()), (tag, prov) -> new EmberWorldData(tag), null), NAME);
+		return world.getDataStorage().computeIfAbsent(TYPE);
 	}
 
-	@Override
-	public CompoundTag save(CompoundTag tag, net.minecraft.core.HolderLookup.Provider provider) {
+	public CompoundTag save(CompoundTag tag) {
 		tag.putInt("offX", EmberGenUtil.offX);
 		tag.putInt("offZ", EmberGenUtil.offZ);
 		return tag;

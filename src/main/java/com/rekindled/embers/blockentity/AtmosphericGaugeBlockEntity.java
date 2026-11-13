@@ -39,9 +39,9 @@ public class AtmosphericGaugeBlockEntity extends BlockEntity {
 	}
 
 	public static void serverTick(Level level, BlockPos pos, BlockState state, AtmosphericGaugeBlockEntity blockEntity) {
-		if (blockEntity.power != state.getAnalogOutputSignal(level, pos)) {
+		if (blockEntity.power != state.getAnalogOutputSignal(level, pos, net.minecraft.core.Direction.UP)) {
 			level.updateNeighbourForOutputSignal(pos, state.getBlock());
-			blockEntity.power = state.getAnalogOutputSignal(level, pos);
+			blockEntity.power = state.getAnalogOutputSignal(level, pos, net.minecraft.core.Direction.UP);
 			blockEntity.setChanged();
 		}
 	}
