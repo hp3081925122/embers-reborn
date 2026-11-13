@@ -32,7 +32,8 @@ public class AlchemicalNoteItem extends Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> tooltipAdder, TooltipFlag isAdvanced) {
+		List<Component> tooltip = new com.rekindled.embers.util.TooltipList(tooltipAdder);
 		ItemStack result = AlchemyHintItem.getResult(stack);
 		if (!result.isEmpty())
 			tooltip.add(Component.translatable(result.getDescriptionId()).withStyle(ChatFormatting.GRAY));

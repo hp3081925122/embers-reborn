@@ -98,7 +98,8 @@ public class AlchemyHintItem extends Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> tooltipAdder, TooltipFlag isAdvanced) {
+		List<Component> tooltip = new com.rekindled.embers.util.TooltipList(tooltipAdder);
 		int blackPins = getBlackPins(stack);
 		int whitePins = getWhitePins(stack);
 		if (blackPins != 0)

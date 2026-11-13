@@ -70,7 +70,7 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 	}
 
 	@Override
-	public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+	public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
 		if (!level.isClientSide()) {
 			double charge = (Math.min(ConfigManager.CINDER_STAFF_MAX_CHARGE.get(), getUseDuration(stack, (net.minecraft.world.entity.LivingEntity) null) - timeLeft)) / (double) ConfigManager.CINDER_STAFF_MAX_CHARGE.get();
 			Vec3 launchPos = getLaunchPos(entity);
@@ -104,6 +104,7 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 		_setTag(stack, tag);
 		entity.swing(entity.getUsedItemHand());
 		entity.stopUsingItem();
+		return true;
 	}
 
 	@Override

@@ -123,7 +123,7 @@ public class AtmosphericGaugeBlock extends DirectionalBlock implements EntityBlo
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, net.minecraft.core.Direction direction) {
 		if (level instanceof ServerLevel server) {
 			return Mth.clamp(Math.round(15.0f * EmberGenUtil.getEmberDensity(server.getSeed(), pos.getX(), pos.getZ())), 0, 15);
 		}

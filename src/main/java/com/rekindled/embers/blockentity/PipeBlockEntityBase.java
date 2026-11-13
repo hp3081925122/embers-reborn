@@ -176,8 +176,8 @@ public class PipeBlockEntityBase extends BlockEntity {
 	}
 
 	@Override
-	public void onDataPacket(net.minecraft.network.Connection net, net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket pkt, net.minecraft.core.HolderLookup.Provider lookupProvider) {
-		super.onDataPacket(net, pkt, lookupProvider);
+	public void onDataPacket(net.minecraft.network.Connection net, net.minecraft.world.level.storage.ValueInput valueInput) {
+		super.onDataPacket(net, valueInput);
 		if (level != null && level.isClientSide()) {
 			level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
 		}

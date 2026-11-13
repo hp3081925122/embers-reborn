@@ -38,8 +38,9 @@ public void setDamage(ItemStack stack, int damage) {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
-		super.appendHoverText(stack, context, tooltip, isAdvanced);
+	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> tooltipAdder, TooltipFlag isAdvanced) {
+		List<Component> tooltip = new com.rekindled.embers.util.TooltipList(tooltipAdder);
+		super.appendHoverText(stack, context, tooltipDisplay, tooltipAdder, isAdvanced);
 		if (isBroken(stack))
 			tooltip.add(Component.translatable(Embers.MODID + ".tooltip.broken").withStyle(ChatFormatting.GRAY));
 	}

@@ -119,17 +119,20 @@ public class EmberProjectileEntity extends Projectile {
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag nbt) {
+	protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput valueInput) {
+		CompoundTag nbt = com.rekindled.embers.util.NbtBridge.read(valueInput);
 		getEntityData().set(value, nbt.getFloatOr("value", 0.0F));
 		getEntityData().set(color, nbt.getIntOr("color", 0));
 		getEntityData().set(colorId, nbt.getStringOr("colorId", ""));
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag nbt) {
+	protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput valueOutput) {
+		CompoundTag nbt = new CompoundTag();
 		nbt.putFloat("value", getEntityData().get(value));
 		nbt.putInt("color", getEntityData().get(color));
 		nbt.putString("colorId", getEntityData().get(colorId));
+		com.rekindled.embers.util.NbtBridge.write(valueOutput, nbt);
 	}
 
 	public void tick() {

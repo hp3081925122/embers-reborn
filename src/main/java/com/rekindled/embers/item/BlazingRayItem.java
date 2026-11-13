@@ -57,7 +57,7 @@ public class BlazingRayItem extends Item implements IProjectileWeapon {
 	}
 
 	@Override
-	public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+	public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
 		if (!level.isClientSide()) {
 			double charge = (Math.min(ConfigManager.BLAZING_RAY_MAX_CHARGE.get(), getUseDuration(stack, (net.minecraft.world.entity.LivingEntity) null) - timeLeft)) / (double) ConfigManager.BLAZING_RAY_MAX_CHARGE.get();
 			double handmod = entity.getUsedItemHand() == InteractionHand.MAIN_HAND ? 1.0 : -1.0;
@@ -87,6 +87,7 @@ public class BlazingRayItem extends Item implements IProjectileWeapon {
 			tag.putLong("lastUse", level.getGameTime());
 			_setTag(stack, tag);
 		}
+		return true;
 	}
 
 	@Override

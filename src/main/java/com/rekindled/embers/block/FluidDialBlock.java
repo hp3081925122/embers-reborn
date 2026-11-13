@@ -42,7 +42,7 @@ public class FluidDialBlock extends DialBaseBlock {
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, net.minecraft.core.Direction direction) {
 		BlockEntity blockEntity = level.getBlockEntity(pos.relative(state.getValue(FACING), -1));
 		if (blockEntity != null) {
 			IFluidHandler cap = LegacyCaps.fluid(level, blockEntity.getBlockPos(), state.getValue(FACING).getOpposite());

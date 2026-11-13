@@ -55,7 +55,8 @@ public class FluidVesselBlockItem extends BlockItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> tooltipAdder, TooltipFlag isAdvanced) {
+		List<Component> tooltip = new com.rekindled.embers.util.TooltipList(tooltipAdder);
 		IFluidHandler cap = net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(stack).orElse(null);
 		if (cap != null) {
 			tooltip.add(FluidDialBlock.formatFluidStack(cap.getFluidInTank(0), cap.getTankCapacity(0)).withStyle(ChatFormatting.GRAY));

@@ -55,7 +55,8 @@ public class EmberPacketEntity extends Entity {
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundTag nbt) {
+	protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput valueInput) {
+		CompoundTag nbt = com.rekindled.embers.util.NbtBridge.read(valueInput);
 		if (nbt.contains("destX")){
 			dest = new BlockPos(nbt.getIntOr("destX", 0), nbt.getIntOr("destY", 0), nbt.getIntOr("destZ", 0));
 		}
@@ -64,7 +65,8 @@ public class EmberPacketEntity extends Entity {
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundTag nbt) {
+	protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput valueOutput) {
+		CompoundTag nbt = new CompoundTag();
 		if (dest != null){
 			nbt.putInt("destX", dest.getX());
 			nbt.putInt("destY", dest.getY());
@@ -72,6 +74,7 @@ public class EmberPacketEntity extends Entity {
 		}
 		nbt.putDouble("value", value);
 		nbt.putInt("lifetime", getEntityData().get(lifetime));
+		com.rekindled.embers.util.NbtBridge.write(valueOutput, nbt);
 	}
 
 	public void tick() {

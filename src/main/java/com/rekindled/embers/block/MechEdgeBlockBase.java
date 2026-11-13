@@ -79,7 +79,7 @@ public abstract class MechEdgeBlockBase extends Block implements SimpleWaterlogg
 	public abstract Block getCenterBlock();
 
 	@Override
-	public ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader pLevel, BlockPos pPos, BlockState pState) {
+	protected ItemStack getCloneItemStack(net.minecraft.world.level.LevelReader pLevel, BlockPos pPos, BlockState pState, boolean includeData) {
 		return new ItemStack(getCenterBlock());
 	}
 

@@ -23,7 +23,8 @@ public class EmberRecordItem extends net.minecraft.world.item.Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack pStack, net.minecraft.world.item.Item.TooltipContext context, List<Component> pTooltip, TooltipFlag pFlag) {
+	public void appendHoverText(ItemStack pStack, net.minecraft.world.item.Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> tooltipAdder, TooltipFlag pFlag) {
+		List<Component> pTooltip = new com.rekindled.embers.util.TooltipList(tooltipAdder);
 
 	}
 
