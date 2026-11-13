@@ -5,7 +5,6 @@ import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.blockentity.MechanicalPumpBottomBlockEntity;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
@@ -31,7 +30,7 @@ public class MechanicalPumpBlockEntityRenderer extends com.rekindled.embers.rend
 		double amountUp = Math.abs(Math.sin((Math.PI * progress)/400.0));
 
 		if (level.getBlockState(pos).isAir())
-			packedLight = LightTexture.pack(level.getBrightness(LightLayer.BLOCK, pos), level.getBrightness(LightLayer.SKY, pos));
+			packedLight = net.minecraft.util.LightCoordsUtil.pack(level.getBrightness(LightLayer.BLOCK, pos), level.getBrightness(LightLayer.SKY, pos));
 
 		BlockState blockState = level.getBlockState(blockEntity.getBlockPos());
 		if (blockState.getBlock() == RegistryManager.MECHANICAL_PUMP.get()) {

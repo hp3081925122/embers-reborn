@@ -60,8 +60,8 @@ public class MessageItemSound implements CustomPacketPayload {
 
 	public static MessageItemSound read(FriendlyByteBuf buf) {
 		int id = buf.readVarInt();
-		Item item = BuiltInRegistries.ITEM.get(buf.readIdentifier());
-		SoundEvent sound = BuiltInRegistries.SOUND_EVENT.get(buf.readIdentifier());
+		Item item = BuiltInRegistries.ITEM.getValue(buf.readIdentifier());
+		SoundEvent sound = BuiltInRegistries.SOUND_EVENT.getValue(buf.readIdentifier());
 		SoundSource source = buf.readEnum(SoundSource.class);
 		boolean repeat = buf.readBoolean();
 		float volume = buf.readFloat();

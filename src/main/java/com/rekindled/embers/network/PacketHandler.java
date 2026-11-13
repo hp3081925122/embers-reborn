@@ -51,7 +51,7 @@ public class PacketHandler {
 
 	/** Send a payload to the server from client side. */
 	public static void sendToServer(CustomPacketPayload payload) {
-		PacketDistributor.sendToServer(payload);
+		net.neoforged.neoforge.client.network.ClientPacketDistributor.sendToServer(payload);
 	}
 
 	/** Send a payload to a specific player. */

@@ -45,7 +45,7 @@ public class GlimmerCrystalItem extends Item {
 	public InteractionResult useOn(UseOnContext pContext) {
 		InteractionResult interactionresult = this.place(new BlockPlaceContext(pContext));
 		if (!interactionresult.consumesAction() && pContext.getItemInHand().has(net.minecraft.core.component.DataComponents.FOOD)) {
-			InteractionResult interactionresult1 = this.use(pContext.getLevel(), pContext.getPlayer(), pContext.getHand()).getResult();
+			InteractionResult interactionresult1 = this.use(pContext.getLevel(), pContext.getPlayer(), pContext.getHand());
 			return interactionresult1 == InteractionResult.CONSUME ? InteractionResult.CONSUME : interactionresult1;
 		} else {
 			return interactionresult;

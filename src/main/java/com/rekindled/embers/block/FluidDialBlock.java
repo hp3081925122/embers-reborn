@@ -83,7 +83,7 @@ public class FluidDialBlock extends DialBaseBlock {
 	@OnlyIn(Dist.CLIENT)
 	public static MutableComponent formatFluidStack(FluidStack contents, int capacity) {
 		if (!contents.isEmpty())
-			return Component.translatable(Embers.MODID + ".tooltip.fluiddial.fluid", contents.getDisplayName().getString(), contents.getAmount(), capacity);
+			return Component.translatable(Embers.MODID + ".tooltip.fluiddial.fluid", contents.getHoverName().getString(), contents.getAmount(), capacity);
 		else
 			return Component.translatable(Embers.MODID + ".tooltip.fluiddial.nofluid", capacity);
 	}

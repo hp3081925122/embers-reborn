@@ -84,6 +84,6 @@ public class CodebreakingSlateItem extends Item implements MenuProvider {
 
 	@Override
 	public Component getDisplayName() {
-		return getDescription();
+		return getName(new ItemStack(this));
 	}
 }

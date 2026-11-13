@@ -28,7 +28,7 @@ public class FluidRenderer {
 	 * @return  Sprite location
 	 */
 	public static TextureAtlasSprite getBlockSprite(Identifier sprite) {
-		return Minecraft.getInstance().getModelManager().getAtlas(InventoryMenu.BLOCK_ATLAS).getSprite(sprite);
+		return Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(net.minecraft.data.AtlasIds.BLOCKS).getSprite(sprite);
 	}
 
 	/**

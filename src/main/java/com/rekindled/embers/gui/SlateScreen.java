@@ -33,9 +33,7 @@ public class SlateScreen extends AbstractContainerScreen<SlateMenu> {
 	public static int slotOffset = SlateMenu.slotIndent + 3;
 
 	public SlateScreen(SlateMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
-		super(pMenu, pPlayerInventory, pTitle);
-		this.imageHeight = SlateMenu.invHeight + SlateMenu.slateHeight;
-		this.imageWidth = SlateMenu.invWidth;
+		super(pMenu, pPlayerInventory, pTitle, SlateMenu.invWidth, SlateMenu.invHeight + SlateMenu.slateHeight);
 		this.inventoryLabelY = this.imageHeight - 94;
 	}
 

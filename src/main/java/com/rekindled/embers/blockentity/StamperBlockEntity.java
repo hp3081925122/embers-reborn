@@ -190,7 +190,7 @@ public class StamperBlockEntity extends BlockEntity implements IMechanicallyPowe
 						UpgradeUtil.throwEvent(blockEntity, new MachineRecipeEvent.Success<>(blockEntity, blockEntity.cachedRecipe), blockEntity.upgrades);
 
 						//the recipe is responsible for taking items and fluid from the inventory
-						blockEntity.cachedRecipe.assemble(context, level.registryAccess());
+						blockEntity.cachedRecipe.assemble(context);
 
 						BlockPos middlePos = pos.below();
 						for (ItemStack remainder : results) {

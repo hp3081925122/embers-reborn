@@ -90,7 +90,7 @@ public class EmbersColors implements ResourceManagerReloadListener {
 
 	public static int getColorFromTexture(ResourceManager manager, String name) throws FileNotFoundException, IOException {
 		NativeImage image = NativeImage.read(manager.getResource(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/colors/" + name + ".png")).orElseThrow(FileNotFoundException::new).open());
-		int color = image.getPixelRGBA(0, 0); //yeah so this is actually ABGR :)
+		int color = net.minecraft.util.ARGB.toABGR(image.getPixel(0, 0)); //yeah so this is actually ABGR :)
 		image.close();
 
 		//maybe I'll bother with this later

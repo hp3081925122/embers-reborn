@@ -74,7 +74,7 @@ public class MiniBoilerBlock extends BaseEntityBlock implements SimpleWaterlogge
 					}
 				}
 				//prevent buckets from placing their fluid in the world when clicking on the boiler
-				if (heldItem.getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM) != null) {
+				if (net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(heldItem).isPresent()) {
 					return InteractionResult.CONSUME;
 				}
 			}

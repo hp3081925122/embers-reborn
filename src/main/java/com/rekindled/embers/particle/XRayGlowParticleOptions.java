@@ -36,7 +36,7 @@ public class XRayGlowParticleOptions implements ParticleOptions {
 	public static final Codec<XRayGlowParticleOptions> CODEC = RecordCodecBuilder.create((p_175793_) -> {
 		return p_175793_.group(Identifier.CODEC.fieldOf("color_id").forGetter((p_175797_) -> {
 			return p_175797_.colorId;
-		}), ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((p_175797_) -> {
+		}), ExtraCodecs.VECTOR3F.<org.joml.Vector3f>xmap(org.joml.Vector3f::new, v -> v).fieldOf("color").forGetter((p_175797_) -> {
 			return p_175797_.color;
 		}), Vec3.CODEC.fieldOf("motion").forGetter((p_175797_) -> {
 			return p_175797_.motion;

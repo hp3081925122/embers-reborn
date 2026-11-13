@@ -152,7 +152,7 @@ public class CatalyticPlugBlockEntity extends BlockEntity implements ISoundContr
 			Vector3f color = com.rekindled.embers.fluidtypes.EmbersFluidClient.fogColor(blockEntity.tank.getFluid().getFluid());
 			for (Direction planar : planars) {
 				BlockState sideState = level.getBlockState(pos.relative(planar));
-				if (!sideState.getFaceOcclusionShape(level, pos.relative(planar), planar.getOpposite()).isEmpty())
+				if (!sideState.getFaceOcclusionShape(planar.getOpposite()).isEmpty())
 					continue;
 				float x = pos.getX() + (float) baseOffset.x + planar.getUnitVec3i().getX() * wideoffset;
 				float y = pos.getY() + (float) baseOffset.y + planar.getUnitVec3i().getY() * wideoffset;

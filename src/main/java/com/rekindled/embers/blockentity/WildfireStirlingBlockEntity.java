@@ -138,7 +138,7 @@ public class WildfireStirlingBlockEntity extends BlockEntity implements ISoundCo
 			}
 			for (Direction planar : planars) {
 				BlockState sideState = level.getBlockState(pos.relative(planar));
-				if (!sideState.getFaceOcclusionShape(level, pos.relative(planar), planar.getOpposite()).isEmpty())
+				if (!sideState.getFaceOcclusionShape(planar.getOpposite()).isEmpty())
 					continue;
 				Direction cross = facing.getClockWise(planar.getAxis());
 				float x1 = pos.getX() + (float) baseOffset.x + planar.getUnitVec3i().getX() * wideoffset;

@@ -8,7 +8,6 @@ import com.rekindled.embers.api.upgrades.UpgradeUtil;
 import com.rekindled.embers.blockentity.EmberBoreBlockEntity;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
@@ -34,7 +33,7 @@ public class EmberBoreBlockEntityRenderer extends com.rekindled.embers.render.Le
 		Level level = blockEntity.getLevel();
 
 		if (level.getBlockState(pos).isAir())
-			packedLight = LightTexture.pack(level.getBrightness(LightLayer.BLOCK, pos), level.getBrightness(LightLayer.SKY, pos));
+			packedLight = net.minecraft.util.LightCoordsUtil.pack(level.getBrightness(LightLayer.BLOCK, pos), level.getBrightness(LightLayer.SKY, pos));
 
 		BlockState blockState = level.getBlockState(blockEntity.getBlockPos());
 		if (blockState.getBlock() == RegistryManager.EMBER_BORE.get()) {

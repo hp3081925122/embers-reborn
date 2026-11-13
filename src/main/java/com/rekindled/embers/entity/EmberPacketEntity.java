@@ -38,7 +38,7 @@ public class EmberPacketEntity extends Entity {
 	}
 
 	public void initCustom(BlockPos pos, BlockPos dest, double vx, double vy, double vz, double value) {
-		this.moveTo(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+		this.snapTo(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
 		this.setDeltaMovement(vx, vy, vz);
 		this.dest = dest;
 		this.pos = pos;

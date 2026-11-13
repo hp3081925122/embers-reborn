@@ -60,6 +60,6 @@ public class FocalLensAugment extends AugmentBase {
 
 	public static boolean isPVPEnabled(Level world) {
 		MinecraftServer server = world.getServer();
-		return server != null && server.isPvpAllowed() && ConfigManager.PVP_EVERYBODY_IS_ENEMY.get(); //oh the misery
+		return server != null && world instanceof net.minecraft.server.level.ServerLevel serverLevel && serverLevel.isPvpAllowed() && ConfigManager.PVP_EVERYBODY_IS_ENEMY.get(); //oh the misery
 	}
 }

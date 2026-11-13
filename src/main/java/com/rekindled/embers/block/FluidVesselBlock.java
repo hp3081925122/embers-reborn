@@ -62,7 +62,7 @@ public class FluidVesselBlock extends AbstractCauldronBlock implements EntityBlo
 	protected static final VoxelShape VESSEL_AABB = Shapes.or(Block.box(0,0,0,4,16,4),Block.box(12,0,0,16,16,4),Block.box(12,0,12,16,16,16),Block.box(0,0,12,4,16,16),Block.box(4,0,12,12,16,14),Block.box(4,0,2,12,16,4),Block.box(2,0,4,4,16,12),Block.box(12,0,4,14,16,12),Block.box(4,0,4,12,2,12),Block.box(6,6,0,10,10,2),Block.box(6,6,14,10,10,16),Block.box(14,6,6,16,10,10),Block.box(0,6,6,2,10,10));
 
 	public FluidVesselBlock(Properties properties) {
-		super(properties, net.minecraft.core.cauldron.CauldronInteraction.EMPTY);
+		super(properties, new net.minecraft.core.cauldron.CauldronInteraction.Dispatcher());
 		this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, false));
 	}
 

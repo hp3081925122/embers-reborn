@@ -80,7 +80,7 @@ public class SteamFluidType extends EmbersFluidType {
 			entity.setDeltaMovement(entity.getDeltaMovement().add((double)(-Mth.sin(f) * 0.2F), 0.0D, (double)(Mth.cos(f) * 0.2F)));
 		}
 
-		entity.hasImpulse = true;
+		entity.needsSync = true;
 		net.neoforged.neoforge.common.CommonHooks.onLivingJump(entity);
 	}
 

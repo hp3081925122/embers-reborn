@@ -123,8 +123,8 @@ public class EmbersAPIImpl implements IEmbersAPI {
 	@Override
 	public void registerWearableLens(Ingredient ingredient) {
 		Misc.IS_WEARING_LENS.add((player) -> {
-			if (ingredient.test(player.getInventory().armor.get(EquipmentSlot.HEAD.getIndex()))) {
-				return AugmentUtil.getAugmentLevel(player.getInventory().armor.get(EquipmentSlot.HEAD.getIndex()), RegistryManager.SMOKY_LENS_AUGMENT) < 1;
+			if (ingredient.test(player.getItemBySlot(EquipmentSlot.HEAD))) {
+				return AugmentUtil.getAugmentLevel(player.getItemBySlot(EquipmentSlot.HEAD), RegistryManager.SMOKY_LENS_AUGMENT) < 1;
 			}
 			return false;
 		});

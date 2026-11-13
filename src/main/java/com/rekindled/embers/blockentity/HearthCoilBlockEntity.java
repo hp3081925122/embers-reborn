@@ -218,7 +218,7 @@ public class HearthCoilBlockEntity extends BlockEntity implements ISoundControll
 					}
 
 					if (blockEntity.cachedRecipes.get(type) != null) {
-						ArrayList<ItemStack> returns = Lists.newArrayList(((net.minecraft.world.item.crafting.Recipe) blockEntity.cachedRecipes.get(type)).assemble(wrapper, level.registryAccess()));
+						ArrayList<ItemStack> returns = Lists.newArrayList(((net.minecraft.world.item.crafting.Recipe) blockEntity.cachedRecipes.get(type)).assemble(wrapper));
 						//int inputCount = recipe.getInputConsumed();
 						UpgradeUtil.throwEvent(blockEntity, new MachineRecipeEvent.Success<>(blockEntity, blockEntity.cachedRecipes.get(type)), blockEntity.upgrades);
 						UpgradeUtil.transformOutput(blockEntity, returns, blockEntity.upgrades);

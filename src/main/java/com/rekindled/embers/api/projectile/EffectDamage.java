@@ -57,7 +57,7 @@ public class EffectDamage implements IProjectileEffect {
 	public void onEntityImpact(Entity entity, @Nullable IProjectilePreset projectile) {
 		Entity shooter = projectile != null ? projectile.getShooter() : null;
 		Entity projectileEntity = projectile != null ? projectile.getEntity() : null;
-		if (entity.hurt(source.apply(projectileEntity), damage))
+		if (entity.level() instanceof net.minecraft.server.level.ServerLevel serverLevel && entity.hurtServer(serverLevel, source.apply(projectileEntity), damage))
 			entity.igniteForSeconds(fire);
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingTarget = (LivingEntity) entity;
