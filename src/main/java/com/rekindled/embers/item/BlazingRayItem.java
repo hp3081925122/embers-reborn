@@ -1,5 +1,7 @@
 package com.rekindled.embers.item;
 
+import net.minecraft.world.InteractionResult;
+
 import java.util.Random;
 
 import com.rekindled.embers.ConfigManager;
@@ -22,7 +24,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
@@ -68,7 +70,7 @@ public class BlazingRayItem extends Item implements IProjectileWeapon {
 			double targY = entity.getY() + entity.getLookAngle().y * ConfigManager.BLAZING_RAY_MAX_DISTANCE.get() + (ConfigManager.BLAZING_RAY_MAX_SPREAD.get() * (1.0 - charge) * (rand.nextFloat() - 0.5));
 			double targZ = entity.getZ() + entity.getLookAngle().z * ConfigManager.BLAZING_RAY_MAX_DISTANCE.get() + (ConfigManager.BLAZING_RAY_MAX_SPREAD.get() * (1.0 - charge) * (rand.nextFloat() - 0.5));
 
-			DamageSource damage = new DamageEmber(level.registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(EmbersDamageTypes.EMBER_KEY), entity, true);
+			DamageSource damage = new DamageEmber(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(EmbersDamageTypes.EMBER_KEY), entity, true);
 			EffectDamage effect = new EffectDamage(ConfigManager.BLAZING_RAY_DAMAGE.get().floatValue(), e -> damage, 1, 1.0f);
 			ProjectileRay ray = new ProjectileRay(entity, new Vec3(posX, posY, posZ), new Vec3(targX, targY, targZ), false, effect);
 
@@ -98,8 +100,8 @@ public class BlazingRayItem extends Item implements IProjectileWeapon {
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack pStack) {
-		return UseAnim.BOW;
+	public ItemUseAnimation getUseAnimation(ItemStack pStack) {
+		return ItemUseAnimation.BOW;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.rekindled.embers.item;
 
+import net.minecraft.world.InteractionResult;
+
 import java.util.List;
 
 import com.rekindled.embers.Embers;

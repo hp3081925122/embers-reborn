@@ -113,7 +113,7 @@ public class ToolExplosion extends Explosion {
 				BlockState blockstate = myLevel.getBlockState(blockpos);
 				if (!blockstate.isAir()) {
 					BlockPos blockpos1 = blockpos.immutable();
-					myLevel.getProfiler().push("explosion_blocks");
+					net.minecraft.util.profiling.Profiler.get().push("explosion_blocks");
 					if (blockstate.canDropFromExplosion(myLevel, blockpos, this)) {
 						Level $$9 = myLevel;
 						if ($$9 instanceof ServerLevel) {
@@ -137,7 +137,7 @@ public class ToolExplosion extends Explosion {
 					}
 
 					blockstate.onBlockExploded(myLevel, blockpos, this);
-					myLevel.getProfiler().pop();
+					net.minecraft.util.profiling.Profiler.get().pop();
 				}
 			}
 

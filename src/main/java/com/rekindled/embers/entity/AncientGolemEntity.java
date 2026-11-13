@@ -63,7 +63,7 @@ public class AncientGolemEntity extends Monster {
 			if (!level().isClientSide()) {
 				playSound(EmbersSounds.FIREBALL.get(), 1.0f, 1.0f);
 				EmberProjectileEntity proj = RegistryManager.EMBER_PROJECTILE.get().create(level());
-				DamageSource damage = new DamageEmber(this.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(EmbersDamageTypes.EMBER_KEY), proj, this);
+				DamageSource damage = new DamageEmber(this.level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(EmbersDamageTypes.EMBER_KEY), proj, this);
 				EffectDamage effect = new EffectDamage(4.0f, e -> damage, 1, 1.0f);
 
 				Vec3 lookVec = getLookAngle();

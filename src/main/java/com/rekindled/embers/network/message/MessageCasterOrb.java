@@ -84,7 +84,7 @@ public class MessageCasterOrb implements CustomPacketPayload {
 						double value = 8.0 * (Math.atan(0.6 * (level)) / (1.25));
 						value *= resonance;
 
-						DamageSource damage = new DamageEmber(player.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(EmbersDamageTypes.EMBER_KEY), player, true);
+						DamageSource damage = new DamageEmber(player.level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(EmbersDamageTypes.EMBER_KEY), player, true);
 						EffectDamage effect = new EffectDamage((float) value, e -> damage, 1, 1.0);
 						ProjectileFireball fireball = new ProjectileFireball(player, new Vec3(xOrigin, yOrigin, zOrigin), new Vec3(xVel, yVel, zVel), value, 160, effect);
 						EmberProjectileEvent event = new EmberProjectileEvent(player, heldStack, 0.0, fireball);

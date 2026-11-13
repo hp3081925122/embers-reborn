@@ -1,5 +1,7 @@
 package com.rekindled.embers.item;
 
+import net.minecraft.world.InteractionResult;
+
 import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.entity.GlimmerProjectileEntity;
 

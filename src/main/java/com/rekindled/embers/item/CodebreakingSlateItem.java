@@ -1,5 +1,7 @@
 package com.rekindled.embers.item;
 
+import net.minecraft.world.InteractionResult;
+
 import com.rekindled.embers.gui.SlateMenu;
 import com.rekindled.embers.util.ItemNbtHelper;
 import com.rekindled.embers.util.Misc;

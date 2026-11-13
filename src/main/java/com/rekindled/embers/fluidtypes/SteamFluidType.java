@@ -23,7 +23,7 @@ public class SteamFluidType extends EmbersFluidType {
 	public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
 		entity.hurt(entity.level().damageSources().inFire(), 1.0F);
 
-		entity.level().getProfiler().push("jump");
+		net.minecraft.util.profiling.Profiler.get().push("jump");
 		// jumping / noJumpDelay are made public by accesstransformer.cfg
 		if (entity.jumping) {
 			boolean flag = entity.isInWater();
@@ -42,7 +42,7 @@ public class SteamFluidType extends EmbersFluidType {
 		} else {
 			entity.noJumpDelay = 0;
 		}
-		entity.level().getProfiler().pop();
+		net.minecraft.util.profiling.Profiler.get().pop();
 
 		float f2 = 0.6f;
 		float f3 = entity.onGround() ? f2 * 0.91F : 0.91F;
@@ -52,7 +52,7 @@ public class SteamFluidType extends EmbersFluidType {
 			d2 += (0.05D * (double)(entity.getEffect(MobEffects.LEVITATION).getAmplifier() + 1) - vec35.y) * 0.2D;
 			entity.resetFallDistance();
 		} else if (entity.level().isClientSide() && !entity.level().hasChunkAt(entity.blockPosition())) {
-			if (entity.getY() > (double)entity.level().getMinBuildHeight()) {
+			if (entity.getY() > (double)entity.level().getMinY()) {
 				d2 = -0.1D;
 			} else {
 				d2 = 0.0D;

@@ -516,7 +516,7 @@ public class EmbersClientEvents {
 			ResearchBase research = ResearchManager.researchByItem.get(event.getItemStack().getItem());
 			if (research != null) {
 				float openProgress = 0;
-				if (Screen.hasControlDown()) {
+				if (net.minecraft.client.Minecraft.getInstance().hasControlDown()) {
 					if (tickStartedHoldingCtrl == Integer.MAX_VALUE) {
 						tickStartedHoldingCtrl = ticks;
 					}

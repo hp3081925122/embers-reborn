@@ -1,5 +1,7 @@
 package com.rekindled.embers.item;
 
+import net.minecraft.world.InteractionResult;
+
 import java.util.Random;
 import java.util.function.Function;
 
@@ -32,7 +34,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
@@ -77,7 +79,7 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 			float aoeSize = (float) (charge * ConfigManager.CINDER_STAFF_AOE_SIZE.get());
 			int lifetime = charge >= 0.06 ? ConfigManager.CINDER_STAFF_LIFETIME.get() : 5;
 
-			Function<Entity, DamageSource> damageSource = e -> new DamageEmber(level.registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(EmbersDamageTypes.EMBER_KEY), e, entity);
+			Function<Entity, DamageSource> damageSource = e -> new DamageEmber(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(EmbersDamageTypes.EMBER_KEY), e, entity);
 			EffectArea effect = new EffectArea(new EffectDamage(damage, damageSource, 1, 1.0), aoeSize, false);
 			ProjectileFireball fireball = new ProjectileFireball(entity, launchPos, entity.getLookAngle().scale(0.85), size, lifetime, effect);
 			EmberProjectileEvent event = new EmberProjectileEvent(entity, stack, charge, fireball);
@@ -161,8 +163,8 @@ public class CinderStaffItem extends Item implements IProjectileWeapon {
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack pStack) {
-		return UseAnim.BOW;
+	public ItemUseAnimation getUseAnimation(ItemStack pStack) {
+		return ItemUseAnimation.BOW;
 	}
 
 	@Override

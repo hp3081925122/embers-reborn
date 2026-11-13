@@ -33,7 +33,7 @@ public class FlameBarrierAugment extends AugmentBase {
 			float strength = (float)(2.0*(Math.atan(0.6*(barrierLevel))/(Math.PI)));
 			if (barrierLevel > 0 && EmberInventoryUtil.getEmberTotal(player) >= cost) {
 				EmberInventoryUtil.removeEmber(player, cost);
-				DamageSource damage = new DamageEmber(player.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(EmbersDamageTypes.EMBER_KEY), player);
+				DamageSource damage = new DamageEmber(player.level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(EmbersDamageTypes.EMBER_KEY), player);
 				event.getSource().getEntity().hurt(damage, strength*event.getNewDamage()*0.5f);
 				event.getSource().getEntity().igniteForSeconds(barrierLevel+1);
 				event.getEntity().level().playSound(null, event.getEntity(), EmbersSounds.FIREBALL_HIT.get(), SoundSource.PLAYERS, 1.0f, 1.0f);

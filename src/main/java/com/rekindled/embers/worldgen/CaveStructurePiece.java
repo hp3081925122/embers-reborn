@@ -43,8 +43,8 @@ public class CaveStructurePiece extends PoolElementStructurePiece {
 
 	public static int getCaveFloor(BlockPos endPos, int maxHeight, WorldGenLevel level, Structure.GenerationContext context) {
 		List<Integer> heights = new ArrayList<Integer>();
-		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(endPos.getX(), level.getMinBuildHeight() + 9, endPos.getZ());
-		for (int i = level.getMinBuildHeight() + 9; i <= endPos.getY() && i <= maxHeight; i++) {
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(endPos.getX(), level.getMinY() + 9, endPos.getZ());
+		for (int i = level.getMinY() + 9; i <= endPos.getY() && i <= maxHeight; i++) {
 			boolean solid = !level.getBlockState(pos).canBeReplaced();
 			pos.setY(i + 1);
 			boolean replaceable = level.getBlockState(pos).canBeReplaced();

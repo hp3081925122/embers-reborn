@@ -27,7 +27,7 @@ public class AncientCodexItem extends Item {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-		if (context.getLevel().isClientSide() && Screen.hasControlDown() && context.getPlayer() != null) {
+		if (context.getLevel().isClientSide() && net.minecraft.client.Minecraft.getInstance().hasControlDown() && context.getPlayer() != null) {
 			ResearchBase research = ResearchManager.researchByItem.get(context.getLevel().getBlockState(context.getClickedPos()).getBlock().asItem());
 			if (research != null) {
 				GuiCodex.instance.researchPage = research;

@@ -172,7 +172,7 @@ public class BeamCannonBlockEntity extends BlockEntity implements IUpgradeable, 
 		}
 		List<Entity> entities = level.getEntities((Entity) null, new AABB(worldPosition.getCenter(), hitPos.getCenter()), EntitySelector.NO_SPECTATORS);
 		for (Entity entity : entities) {
-			DamageSource damageSource = new DamageEmber(level.registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(EmbersDamageTypes.EMBER_KEY), worldPosition.getCenter());
+			DamageSource damageSource = new DamageEmber(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(EmbersDamageTypes.EMBER_KEY), worldPosition.getCenter());
 			entity.hurt(damageSource, (float)damage);
 		}
 
