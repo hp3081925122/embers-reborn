@@ -15,7 +15,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
@@ -59,7 +59,7 @@ public class EmberActivationCategory implements IRecipeCategory<IEmberActivation
 
 	@SuppressWarnings("resource")
 	@Override
-	public void draw(IEmberActivationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) { 
+	public void draw(IEmberActivationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) { 
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 10, Component.translatable(Embers.MODID + ".jei.recipe.ember_activation.ember", recipe.getDisplayOutput()));
 	}
 }

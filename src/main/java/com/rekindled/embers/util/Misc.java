@@ -24,7 +24,7 @@ import com.rekindled.embers.api.tile.IProxyable;
 import com.rekindled.embers.datagen.EmbersBlockTags;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -173,9 +173,9 @@ public class Misc {
 			return power * slope;
 	}
 
-	public static void drawComponents(Font fontRenderer, GuiGraphics guiGraphics, int x, int y, Component... components) {
+	public static void drawComponents(Font fontRenderer, GuiGraphicsExtractor guiGraphics, int x, int y, Component... components) {
 		for (Component component : components) {
-			guiGraphics.drawString(fontRenderer, component, x, y, 0xFFFFFF);
+			guiGraphics.text(fontRenderer, component, x, y, 0xFFFFFFFF);
 			y += fontRenderer.lineHeight + 2;
 		}
 	}

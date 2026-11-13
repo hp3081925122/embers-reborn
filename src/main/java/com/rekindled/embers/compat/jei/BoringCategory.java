@@ -21,7 +21,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
@@ -95,7 +95,7 @@ public class BoringCategory implements IRecipeCategory<IBoringRecipe> {
 
 	@SuppressWarnings("resource")
 	@Override
-	public void draw(IBoringRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+	public void draw(IBoringRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
 		Font fontRenderer = Minecraft.getInstance().font;
 		Misc.drawComponents(fontRenderer, guiGraphics, 28, 10, Component.translatable(Embers.MODID + ".jei.recipe.boring.weight", recipe.getDisplayOutput().getWeight().asInt()));
 		Misc.drawComponents(fontRenderer, guiGraphics, 28, 30, Component.translatable(Embers.MODID + ".jei.recipe.boring.required_blocks"));

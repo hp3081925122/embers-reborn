@@ -19,7 +19,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
@@ -66,7 +66,7 @@ public class GaseousFuelCategory implements IRecipeCategory<IGaseousFuelRecipe> 
 
 	@SuppressWarnings("resource")
 	@Override
-	public void draw(IGaseousFuelRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+	public void draw(IGaseousFuelRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
 		DecimalFormat multiplierFormat = DecimalFormats.getDecimalFormat(Embers.MODID + ".decimal_format.ember_multiplier");
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 5, Component.translatable(Embers.MODID + ".jei.recipe.gaseous_fuel.burn_time", recipe.getDisplayBurnTime()));
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 17, Component.translatable(Embers.MODID + ".jei.recipe.gaseous_fuel.power_multiplier", multiplierFormat.format(recipe.getDisplayMultiplier())));

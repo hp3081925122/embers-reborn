@@ -18,7 +18,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
@@ -62,7 +62,7 @@ public class MetalCoefficientCategory implements IRecipeCategory<IMetalCoefficie
 
 	@SuppressWarnings("resource")
 	@Override
-	public void draw(IMetalCoefficientRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+	public void draw(IMetalCoefficientRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
 		DecimalFormat multiplierFormat = DecimalFormats.getDecimalFormat(Embers.MODID + ".decimal_format.ember_multiplier");
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 10, Component.literal(multiplierFormat.format(recipe.getDisplayCoefficient())));
 	}
