@@ -7,10 +7,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class VaporParticle extends SingleQuadParticle {
 
 	public float minScale = 0.5f;
@@ -57,7 +54,6 @@ public class VaporParticle extends SingleQuadParticle {
 		return com.rekindled.embers.render.EmbersParticleLayers.ADDITIVE;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class Provider implements net.minecraft.client.particle.ParticleProvider<VaporParticleOptions> {
 		private final net.minecraft.client.particle.SpriteSet sprites;
 

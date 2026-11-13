@@ -1,20 +1,14 @@
 {
   "type": "embers_reborn:tool_augment",
   "augment": "embers_reborn:tinker_lens",
-  "input": {
-    "item": "embers_reborn:tinker_lens"
-  },
+  "input": "embers_reborn:tinker_lens",
   "tool": {
-    "type": "embers_reborn:augment_ingredient",
+    "neoforge:ingredient_type": "embers_reborn:augment_ingredient",
     "augment": "embers_reborn:tinker_lens",
     "base": {
-      "type": "neoforge:difference",
-      "base": {
-        "tag": "embers_reborn:augmentables/armors/helmets"
-      },
-      "subtracted": {
-        "tag": "embers_reborn:tinker_lens_helmets"
-      }
+      "neoforge:ingredient_type": "neoforge:difference",
+      "base": "#embers_reborn:augmentables/armors/helmets",
+      "subtracted": "#embers_reborn:tinker_lens_helmets"
     },
     "inverted": true
   }

@@ -2,19 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "B": {
-      "tag": "c:slimeballs"
-    },
-    "P": {
-      "item": "minecraft:piston"
-    }
+    "B": "#c:slime_balls",
+    "P": "minecraft:piston"
   },
   "pattern": [
     "B",
     "P"
   ],
   "result": {
-    "count": 1,
     "id": "minecraft:sticky_piston"
   }
 }

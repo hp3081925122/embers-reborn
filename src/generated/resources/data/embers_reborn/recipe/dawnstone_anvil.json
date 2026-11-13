@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "tag": "c:storage_blocks/dawnstone"
-    },
-    "C": {
-      "item": "embers_reborn:caminite_bricks"
-    },
-    "I": {
-      "tag": "c:ingots/dawnstone"
-    }
+    "B": "#c:storage_blocks/dawnstone",
+    "C": "embers_reborn:caminite_bricks",
+    "I": "#c:ingots/dawnstone"
   },
   "pattern": [
     "BBB",
@@ -18,7 +12,6 @@
     "CCC"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:dawnstone_anvil"
   }
 }

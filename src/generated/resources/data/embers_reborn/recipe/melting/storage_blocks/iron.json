@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:storage_blocks/iron"
-  },
+  "input": "#c:storage_blocks/iron",
   "output": {
     "amount": 810,
     "tag": "c:molten_iron"

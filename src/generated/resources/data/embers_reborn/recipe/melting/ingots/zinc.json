@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:ingots/zinc"
-  },
+  "input": "#c:ingots/zinc",
   "output": {
     "amount": 90,
     "tag": "c:molten_zinc"

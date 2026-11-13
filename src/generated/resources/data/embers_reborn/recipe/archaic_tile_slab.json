@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": {
-      "item": "embers_reborn:archaic_tile"
-    }
+    "X": "embers_reborn:archaic_tile"
   },
   "pattern": [
     "XXX"

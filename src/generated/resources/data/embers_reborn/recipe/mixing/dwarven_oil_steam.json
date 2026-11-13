@@ -1,8 +1,14 @@
 {
   "type": "embers_reborn:mixing",
   "inputs": [
-    "{\"fluid\":\"embers_reborn:soul_crude\",\"amount\":5}",
-    "{\"tag\":\"c:steam\",\"amount\":20}"
+    {
+      "amount": 5,
+      "fluid": "embers_reborn:soul_crude"
+    },
+    {
+      "amount": 20,
+      "tag": "c:steam"
+    }
   ],
   "output": {
     "amount": 10,

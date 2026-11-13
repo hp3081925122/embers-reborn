@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "embers_reborn:block/archaic_large_bricks",
-    "side": "embers_reborn:block/archaic_large_bricks",
-    "top": "embers_reborn:block/archaic_large_bricks"
-  }
-}

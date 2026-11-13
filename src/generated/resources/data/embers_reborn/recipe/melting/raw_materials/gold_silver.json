@@ -18,9 +18,7 @@
     "amount": 10,
     "tag": "c:molten_silver"
   },
-  "input": {
-    "tag": "c:raw_materials/gold"
-  },
+  "input": "#c:raw_materials/gold",
   "output": {
     "amount": 120,
     "tag": "c:molten_gold"

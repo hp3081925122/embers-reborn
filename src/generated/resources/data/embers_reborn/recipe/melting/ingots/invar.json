@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:ingots/invar"
-  },
+  "input": "#c:ingots/invar",
   "output": {
     "amount": 90,
     "tag": "c:molten_invar"

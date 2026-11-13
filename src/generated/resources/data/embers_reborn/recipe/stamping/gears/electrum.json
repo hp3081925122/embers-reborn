@@ -9,11 +9,12 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_electrum\",\"amount\":180}",
+  "fluid": {
+    "amount": 180,
+    "tag": "c:molten_electrum"
+  },
   "output": {
     "tag": "c:gears/electrum"
   },
-  "stamp": {
-    "item": "embers_reborn:gear_stamp"
-  }
+  "stamp": "embers_reborn:gear_stamp"
 }

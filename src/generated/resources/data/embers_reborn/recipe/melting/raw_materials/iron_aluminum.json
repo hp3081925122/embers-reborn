@@ -29,9 +29,7 @@
     "amount": 10,
     "tag": "c:molten_aluminum"
   },
-  "input": {
-    "tag": "c:raw_materials/iron"
-  },
+  "input": "#c:raw_materials/iron",
   "output": {
     "amount": 120,
     "tag": "c:molten_iron"

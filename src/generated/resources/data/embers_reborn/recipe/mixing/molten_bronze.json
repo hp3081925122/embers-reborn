@@ -10,8 +10,14 @@
   ],
   "type": "embers_reborn:mixing",
   "inputs": [
-    "{\"tag\":\"c:molten_copper\",\"amount\":3}",
-    "{\"tag\":\"c:molten_tin\",\"amount\":1}"
+    {
+      "amount": 3,
+      "tag": "c:molten_copper"
+    },
+    {
+      "amount": 1,
+      "tag": "c:molten_tin"
+    }
   ],
   "output": {
     "amount": 4,

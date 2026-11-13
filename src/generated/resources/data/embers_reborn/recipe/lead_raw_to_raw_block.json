@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": {
-      "tag": "c:raw_materials/lead"
-    },
-    "Y": {
-      "item": "embers_reborn:raw_lead"
-    }
+    "X": "#c:raw_materials/lead",
+    "Y": "embers_reborn:raw_lead"
   },
   "pattern": [
     "XXX",
@@ -15,7 +11,6 @@
     "XXX"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:raw_lead_block"
   }
 }

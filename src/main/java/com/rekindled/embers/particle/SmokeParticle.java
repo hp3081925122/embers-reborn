@@ -6,10 +6,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SingleQuadParticle;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class SmokeParticle extends SingleQuadParticle {
 
 	public float rotScale = random.nextFloat() * 0.1f + 0.05f;
@@ -48,7 +45,6 @@ public class SmokeParticle extends SingleQuadParticle {
 		return com.rekindled.embers.render.EmbersParticleLayers.TRANSLUCENT_NODEPTH;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class Provider implements net.minecraft.client.particle.ParticleProvider<SmokeParticleOptions> {
 		private final net.minecraft.client.particle.SpriteSet sprites;
 

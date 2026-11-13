@@ -3,11 +3,8 @@
   "category": "misc",
   "cookingtime": 100,
   "experience": 0.1,
-  "ingredient": {
-    "item": "embers_reborn:dawnstone_shovel"
-  },
+  "ingredient": "embers_reborn:dawnstone_shovel",
   "result": {
-    "count": 1,
     "id": "embers_reborn:dawnstone_nugget"
   }
 }

@@ -1,4 +1,4 @@
-// 1.21.1	2026-11-12T18:36:11.1993019	Tags for minecraft:block mod id embers_reborn
+// 26.1.2	2026-11-14T00:02:39.2123146	Tags for minecraft:block mod id embers_reborn
 6d0e8a41a39e23f6da58fa1d1652f7c47225aa2e data/c/tags/block/ores.json
 32daacb7cd4c38105d0b5ae688e0b523e3cd013a data/c/tags/block/ores/lead.json
 f96fb9b233b6819dc5ba366329ea3e052bc18207 data/c/tags/block/ores/silver.json
@@ -28,7 +28,7 @@ a10727511c676d55795e77ef15436a80bc315a4d data/embers_reborn/tags/block/crystal_s
 b182c4f29ad67a14c8b539d41706e9cc2cd272d7 data/embers_reborn/tags/block/crystal_seeds/uranium.json
 f1d3ca25115b06b51b7216a48e0c8d9bae8c9ad6 data/embers_reborn/tags/block/crystal_seeds/zinc.json
 467201693246a65bdb7dc554e34e568eaa3097d1 data/embers_reborn/tags/block/dial.json
-607fad0aa5f8285cd1d83cc8d45712431b3be52e data/embers_reborn/tags/block/emitter_connection.json
+34b8fc5186de1a81eea47990cee429df2ce755ca data/embers_reborn/tags/block/emitter_connection.json
 d6501b5d9540045ec47e27ff8e0ae0f4f6988267 data/embers_reborn/tags/block/emitter_connection/ceiling.json
 3db2d06f953ef49aa4d65db92d19ed28193e6710 data/embers_reborn/tags/block/emitter_connection/floor.json
 9e84883299d2b1e59c40ec66226f51f1ed9df6c9 data/embers_reborn/tags/block/exposed_copper.json

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "embers_reborn:block/caminite_large_bricks",
-    "side": "embers_reborn:block/caminite_large_bricks",
-    "top": "embers_reborn:block/caminite_large_bricks"
-  }
-}

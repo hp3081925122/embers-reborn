@@ -25,9 +25,7 @@
     "amount": 10,
     "tag": "c:molten_tin"
   },
-  "input": {
-    "tag": "c:raw_materials/zinc"
-  },
+  "input": "#c:raw_materials/zinc",
   "output": {
     "amount": 120,
     "tag": "c:molten_zinc"

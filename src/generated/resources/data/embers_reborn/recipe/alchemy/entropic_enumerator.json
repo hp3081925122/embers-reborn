@@ -1,42 +1,22 @@
 {
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/lead"
-    },
-    {
-      "tag": "embers_reborn:aspectus/dawnstone"
-    }
+    "#embers_reborn:aspectus/lead",
+    "#embers_reborn:aspectus/dawnstone"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "tag": "c:ingots/copper"
-    },
-    {
-      "tag": "c:ingots/iron"
-    },
-    {
-      "tag": "c:ingots/gold"
-    },
-    {
-      "tag": "c:ingots/lead"
-    },
-    {
-      "tag": "c:ingots/silver"
-    },
-    {
-      "tag": "c:ingots/dawnstone"
-    }
+    "#c:ingots/copper",
+    "#c:ingots/iron",
+    "#c:ingots/gold",
+    "#c:ingots/lead",
+    "#c:ingots/silver",
+    "#c:ingots/dawnstone"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:entropic_enumerator"
   },
-  "tablet": {
-    "item": "embers_reborn:ashen_tile"
-  }
+  "tablet": "embers_reborn:ashen_tile"
 }

@@ -74,8 +74,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
@@ -86,7 +84,6 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.fml.LogicalSide;
 import net.neoforged.neoforge.items.IItemHandler;
 
-@OnlyIn(Dist.CLIENT)
 public class EmbersClientEvents {
 
 	public static final net.neoforged.neoforge.client.gui.GuiLayer INGAME_OVERLAY = EmbersClientEvents::renderIngameOverlay;

@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:gears/aluminum"
-  },
+  "input": "#c:gears/aluminum",
   "output": {
     "amount": 180,
     "tag": "c:molten_aluminum"

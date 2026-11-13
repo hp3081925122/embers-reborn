@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:nuggets/dawnstone"
-  },
+  "input": "#c:nuggets/dawnstone",
   "output": {
     "amount": 10,
     "tag": "c:molten_dawnstone"

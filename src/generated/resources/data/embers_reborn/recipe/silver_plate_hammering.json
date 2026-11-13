@@ -2,18 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "c:ingots/silver"
-    },
-    {
-      "tag": "c:ingots/silver"
-    },
-    {
-      "tag": "embers_reborn:tinker_hammer"
-    }
+    "#c:ingots/silver",
+    "#c:ingots/silver",
+    "#embers_reborn:tinker_hammer"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:silver_plate"
   }
 }

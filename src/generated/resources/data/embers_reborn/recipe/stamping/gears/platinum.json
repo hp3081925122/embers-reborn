@@ -9,11 +9,12 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_platinum\",\"amount\":180}",
+  "fluid": {
+    "amount": 180,
+    "tag": "c:molten_platinum"
+  },
   "output": {
     "tag": "c:gears/platinum"
   },
-  "stamp": {
-    "item": "embers_reborn:gear_stamp"
-  }
+  "stamp": "embers_reborn:gear_stamp"
 }

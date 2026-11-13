@@ -3,11 +3,8 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "embers_reborn:raw_nugget_stamp"
-  },
+  "ingredient": "embers_reborn:raw_nugget_stamp",
   "result": {
-    "count": 1,
     "id": "embers_reborn:nugget_stamp"
   }
 }

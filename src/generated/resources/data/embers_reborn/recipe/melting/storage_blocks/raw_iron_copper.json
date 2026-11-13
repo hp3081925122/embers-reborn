@@ -26,9 +26,7 @@
     "amount": 90,
     "tag": "c:molten_copper"
   },
-  "input": {
-    "tag": "c:storage_blocks/raw_iron"
-  },
+  "input": "#c:storage_blocks/raw_iron",
   "output": {
     "amount": 1080,
     "tag": "c:molten_iron"

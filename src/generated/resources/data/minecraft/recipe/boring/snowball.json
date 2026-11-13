@@ -4,7 +4,6 @@
   "block_tag": "embers_reborn:snow",
   "chance": 0.9,
   "output": {
-    "count": 1,
     "id": "minecraft:snowball"
   },
   "weight": 50

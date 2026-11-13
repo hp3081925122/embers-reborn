@@ -1,13 +1,8 @@
 {
   "type": "embers_reborn:stamping",
-  "input": {
-    "item": "embers_reborn:ember_shard"
-  },
+  "input": "embers_reborn:ember_shard",
   "output": {
-    "count": 1,
     "id": "embers_reborn:ember_grit"
   },
-  "stamp": {
-    "item": "embers_reborn:flat_stamp"
-  }
+  "stamp": "embers_reborn:flat_stamp"
 }

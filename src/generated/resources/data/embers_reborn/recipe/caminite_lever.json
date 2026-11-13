@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "P": {
-      "item": "embers_reborn:caminite_plate"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "P": "embers_reborn:caminite_plate",
+    "S": "#c:rods/wooden"
   },
   "pattern": [
     "S",

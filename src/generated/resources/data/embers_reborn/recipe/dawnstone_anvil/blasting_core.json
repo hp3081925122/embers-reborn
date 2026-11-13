@@ -1,13 +1,9 @@
 {
   "type": "embers_reborn:tool_augment",
   "augment": "embers_reborn:blasting_core",
-  "input": {
-    "item": "embers_reborn:blasting_core"
-  },
+  "input": "embers_reborn:blasting_core",
   "tool": {
-    "type": "embers_reborn:heat_ingredient",
-    "base": {
-      "tag": "embers_reborn:augmentables/tools_armors"
-    }
+    "neoforge:ingredient_type": "embers_reborn:heat_ingredient",
+    "base": "#embers_reborn:augmentables/tools_armors"
   }
 }

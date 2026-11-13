@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "M": {
-      "tag": "c:ingots/lead"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "M": "#c:ingots/lead",
+    "S": "#c:rods/wooden"
   },
   "pattern": [
     "MM",
@@ -15,7 +11,6 @@
     " S"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:lead_axe"
   }
 }

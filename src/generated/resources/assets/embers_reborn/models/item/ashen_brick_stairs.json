@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "embers_reborn:block/ashen_brick",
-    "side": "embers_reborn:block/ashen_brick",
-    "top": "embers_reborn:block/ashen_brick"
-  }
-}

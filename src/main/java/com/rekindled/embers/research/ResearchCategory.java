@@ -15,8 +15,6 @@ import com.rekindled.embers.util.Vec2i;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class ResearchCategory {
 
@@ -110,12 +108,10 @@ public class ResearchCategory {
 		return getPrerequisites().stream().allMatch(ResearchBase::isChecked);
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public String getName() {
 		return I18n.get(id.getNamespace() + ".research." + id.getPath());
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public List<Component> getTooltip(boolean showTooltips) {
 		ArrayList<Component> tooltip = new ArrayList<>();
 		boolean isChecked = isChecked();

@@ -18,9 +18,7 @@
     "amount": 20,
     "tag": "c:molten_gold"
   },
-  "input": {
-    "tag": "c:ores/copper"
-  },
+  "input": "#c:ores/copper",
   "output": {
     "amount": 240,
     "tag": "c:molten_copper"

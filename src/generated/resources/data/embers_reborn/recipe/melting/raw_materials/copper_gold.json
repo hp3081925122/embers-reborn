@@ -18,9 +18,7 @@
     "amount": 10,
     "tag": "c:molten_gold"
   },
-  "input": {
-    "tag": "c:raw_materials/copper"
-  },
+  "input": "#c:raw_materials/copper",
   "output": {
     "amount": 120,
     "tag": "c:molten_copper"

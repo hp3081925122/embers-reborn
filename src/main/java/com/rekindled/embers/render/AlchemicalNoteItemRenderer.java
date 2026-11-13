@@ -28,8 +28,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 /**
  * Alchemical note held like a map, framed, or as a GUI icon with its result on top.
@@ -37,7 +35,6 @@ import net.neoforged.api.distmarker.OnlyIn;
  * The item definition picks the mode per display context; the drawing code is the 1.20.1 renderer,
  * with nested items resolved into ItemStackRenderStates when the note is extracted.
  */
-@OnlyIn(Dist.CLIENT)
 public class AlchemicalNoteItemRenderer implements SpecialModelRenderer<AlchemicalNoteItemRenderer.NoteData> {
 
 	public enum Mode implements StringRepresentable {

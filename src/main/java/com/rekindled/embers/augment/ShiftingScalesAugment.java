@@ -36,8 +36,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import com.rekindled.embers.util.INBTSerializable;
@@ -171,7 +169,6 @@ public class ShiftingScalesAugment extends AugmentBase {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static void renderHeartsOverlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
 		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
 		if (mc.player.isCreative() || mc.player.isSpectator())
@@ -193,17 +190,14 @@ public class ShiftingScalesAugment extends AugmentBase {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static int getBarY(int height) {
 		return height - 39;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static int getBarX(int width) {
 		return width / 2 - 11 - 8 * 10;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent.Pre event) {
 		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
@@ -215,7 +209,6 @@ public class ShiftingScalesAugment extends AugmentBase {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static void renderIngameOverlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
 		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
 		if (mc.player.isCreative() || mc.player.isSpectator())

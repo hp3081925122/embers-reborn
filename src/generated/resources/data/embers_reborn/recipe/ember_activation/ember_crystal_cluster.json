@@ -1,7 +1,5 @@
 {
   "type": "embers_reborn:ember_activation",
   "ember": 4400,
-  "input": {
-    "item": "embers_reborn:ember_crystal_cluster"
-  }
+  "input": "embers_reborn:ember_crystal_cluster"
 }

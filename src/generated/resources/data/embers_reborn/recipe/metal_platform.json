@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "X": {
-      "item": "embers_reborn:solidified_metal"
-    }
+    "X": "embers_reborn:solidified_metal"
   },
   "pattern": [
     "XX",

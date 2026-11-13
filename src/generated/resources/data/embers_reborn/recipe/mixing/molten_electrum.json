@@ -10,8 +10,14 @@
   ],
   "type": "embers_reborn:mixing",
   "inputs": [
-    "{\"tag\":\"c:molten_silver\",\"amount\":2}",
-    "{\"tag\":\"c:molten_gold\",\"amount\":2}"
+    {
+      "amount": 2,
+      "tag": "c:molten_silver"
+    },
+    {
+      "amount": 2,
+      "tag": "c:molten_gold"
+    }
   ],
   "output": {
     "amount": 4,

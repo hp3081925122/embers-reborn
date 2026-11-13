@@ -1,6 +1,4 @@
 {
   "type": "embers_reborn:gem_socket",
-  "ingredient": {
-    "tag": "c:strings"
-  }
+  "ingredient": "#c:strings"
 }

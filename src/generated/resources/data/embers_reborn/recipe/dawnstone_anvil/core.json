@@ -1,14 +1,10 @@
 {
   "type": "embers_reborn:tool_augment",
   "augment": "embers_reborn:core",
-  "input": {
-    "item": "embers_reborn:ancient_motive_core"
-  },
+  "input": "embers_reborn:ancient_motive_core",
   "tool": {
-    "type": "embers_reborn:heat_ingredient",
-    "base": {
-      "tag": "embers_reborn:augmentables"
-    },
+    "neoforge:ingredient_type": "embers_reborn:heat_ingredient",
+    "base": "#embers_reborn:augmentables",
     "inverted": true
   }
 }

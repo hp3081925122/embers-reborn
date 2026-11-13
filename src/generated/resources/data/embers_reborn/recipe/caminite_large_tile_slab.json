@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": {
-      "item": "embers_reborn:caminite_large_tile"
-    }
+    "X": "embers_reborn:caminite_large_tile"
   },
   "pattern": [
     "XXX"

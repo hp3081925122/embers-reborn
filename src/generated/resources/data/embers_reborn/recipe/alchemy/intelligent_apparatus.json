@@ -1,39 +1,21 @@
 {
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/copper"
-    },
-    {
-      "tag": "embers_reborn:aspectus/lead"
-    },
-    {
-      "tag": "embers_reborn:aspectus/silver"
-    }
+    "#embers_reborn:aspectus/copper",
+    "#embers_reborn:aspectus/lead",
+    "#embers_reborn:aspectus/silver"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "tag": "c:ingots/copper"
-    },
-    {
-      "item": "embers_reborn:archaic_circuit"
-    },
-    {
-      "tag": "c:ingots/copper"
-    },
-    {
-      "item": "embers_reborn:archaic_circuit"
-    }
+    "#c:ingots/copper",
+    "embers_reborn:archaic_circuit",
+    "#c:ingots/copper",
+    "embers_reborn:archaic_circuit"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:intelligent_apparatus"
   },
-  "tablet": {
-    "tag": "c:plates/copper"
-  }
+  "tablet": "#c:plates/copper"
 }

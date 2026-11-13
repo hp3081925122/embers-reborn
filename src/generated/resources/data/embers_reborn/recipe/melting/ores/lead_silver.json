@@ -18,9 +18,7 @@
     "amount": 20,
     "tag": "c:molten_silver"
   },
-  "input": {
-    "tag": "c:ores/lead"
-  },
+  "input": "#c:ores/lead",
   "output": {
     "amount": 240,
     "tag": "c:molten_lead"

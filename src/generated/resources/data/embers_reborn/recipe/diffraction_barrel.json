@@ -2,21 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "P": {
-      "tag": "c:plates/iron"
-    },
-    "X": {
-      "item": "embers_reborn:superheater"
-    }
+    "I": "#c:ingots/iron",
+    "P": "#c:plates/iron",
+    "X": "embers_reborn:superheater"
   },
   "pattern": [
     "IPX"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:diffraction_barrel"
   }
 }

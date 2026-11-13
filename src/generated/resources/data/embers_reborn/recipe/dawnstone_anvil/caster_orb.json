@@ -1,13 +1,9 @@
 {
   "type": "embers_reborn:tool_augment",
   "augment": "embers_reborn:caster_orb",
-  "input": {
-    "item": "embers_reborn:caster_orb"
-  },
+  "input": "embers_reborn:caster_orb",
   "tool": {
-    "type": "embers_reborn:heat_ingredient",
-    "base": {
-      "tag": "embers_reborn:augmentables/tools"
-    }
+    "neoforge:ingredient_type": "embers_reborn:heat_ingredient",
+    "base": "#embers_reborn:augmentables/tools"
   }
 }

@@ -12,8 +12,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class MessageEmberRayFX implements CustomPacketPayload {
@@ -73,7 +71,6 @@ public class MessageEmberRayFX implements CustomPacketPayload {
 		return TYPE;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@SuppressWarnings("resource")
 	public static void spawnParticles(MessageEmberRayFX msg) {
 		Level world = Minecraft.getInstance().level;

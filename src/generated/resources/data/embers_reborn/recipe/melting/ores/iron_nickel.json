@@ -25,9 +25,7 @@
     "amount": 20,
     "tag": "c:molten_nickel"
   },
-  "input": {
-    "tag": "c:ores/iron"
-  },
+  "input": "#c:ores/iron",
   "output": {
     "amount": 240,
     "tag": "c:molten_iron"

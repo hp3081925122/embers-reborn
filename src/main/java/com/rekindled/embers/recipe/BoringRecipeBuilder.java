@@ -14,6 +14,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -21,7 +22,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public class BoringRecipeBuilder {
 
 	public Identifier id;
-	public ItemStack result;
+	public ItemStackTemplate result;
 	public int weight = 20;
 	public int minHeight = Integer.MIN_VALUE;
 	public int maxHeight = Integer.MAX_VALUE;
@@ -32,15 +33,19 @@ public class BoringRecipeBuilder {
 	public double chance = -1.0;
 	public RecipeSerializer<?> type = RegistryManager.BORING_SERIALIZER.get();
 
-	public static BoringRecipeBuilder create(ItemStack itemStack) {
+	public static BoringRecipeBuilder create(ItemStackTemplate itemStack) {
 		BoringRecipeBuilder builder = new BoringRecipeBuilder();
 		builder.result = itemStack;
-		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
+		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.item().value());
 		return builder;
 	}
 
+	public static BoringRecipeBuilder create(ItemStack itemStack) {
+		return create(ItemStackTemplate.fromNonEmptyStack(itemStack));
+	}
+
 	public static BoringRecipeBuilder create(Item item) {
-		return create(new ItemStack(item));
+		return create(new ItemStackTemplate(item));
 	}
 
 	public BoringRecipeBuilder id(Identifier id) {

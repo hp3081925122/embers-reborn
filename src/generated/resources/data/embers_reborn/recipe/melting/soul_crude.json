@@ -1,12 +1,8 @@
 {
   "type": "embers_reborn:melting",
   "input": [
-    {
-      "item": "minecraft:soul_sand"
-    },
-    {
-      "item": "minecraft:soul_soil"
-    }
+    "minecraft:soul_sand",
+    "minecraft:soul_soil"
   ],
   "output": {
     "amount": 100,

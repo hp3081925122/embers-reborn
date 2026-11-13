@@ -4,6 +4,10 @@ import java.util.Optional;
 
 import org.jetbrains.annotations.Nullable;
 
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -12,7 +16,18 @@ import net.minecraft.world.item.crafting.Ingredient;
  * test() keeps the 1.20.1 Ingredient.EMPTY semantics: an empty ingredient matches only an empty stack.
  */
 public final class Ingredients {
+	private static HolderGetter<Item> items = BuiltInRegistries.ITEM;
+
 	private Ingredients() {}
+
+	/** Datagen has no loaded tags; recipe providers pass their registration lookup so tag references resolve. */
+	public static void setItemLookup(@Nullable HolderGetter<Item> lookup) {
+		items = lookup == null ? BuiltInRegistries.ITEM : lookup;
+	}
+
+	public static Ingredient tag(TagKey<Item> tag) {
+		return Ingredient.of(items.getOrThrow(tag));
+	}
 
 	public static boolean isEmpty(@Nullable Ingredient ingredient) {
 		return ingredient == null || ingredient.isEmpty();
@@ -36,6 +51,6 @@ public final class Ingredients {
 	}
 
 	public static Optional<Ingredient> optional(@Nullable Ingredient ingredient) {
-		return isEmpty(ingredient) ? Optional.empty() : Optional.of(ingredient);
+		return Optional.ofNullable(ingredient);
 	}
 }

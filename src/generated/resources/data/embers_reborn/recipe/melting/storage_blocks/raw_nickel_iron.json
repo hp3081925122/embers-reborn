@@ -18,9 +18,7 @@
     "amount": 90,
     "tag": "c:molten_iron"
   },
-  "input": {
-    "tag": "c:storage_blocks/raw_nickel"
-  },
+  "input": "#c:storage_blocks/raw_nickel",
   "output": {
     "amount": 1080,
     "tag": "c:molten_nickel"

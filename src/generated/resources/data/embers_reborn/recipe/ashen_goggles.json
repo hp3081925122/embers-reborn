@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "embers_reborn:ashen_fabric"
-    },
-    "D": {
-      "tag": "c:ingots/dawnstone"
-    },
-    "S": {
-      "tag": "c:strings"
-    }
+    "C": "embers_reborn:ashen_fabric",
+    "D": "#c:ingots/dawnstone",
+    "S": "#c:strings"
   },
   "pattern": [
     " S ",
@@ -18,7 +12,6 @@
     "DCD"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:ashen_goggles"
   }
 }

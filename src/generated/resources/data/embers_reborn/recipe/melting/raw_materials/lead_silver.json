@@ -18,9 +18,7 @@
     "amount": 10,
     "tag": "c:molten_silver"
   },
-  "input": {
-    "tag": "c:raw_materials/lead"
-  },
+  "input": "#c:raw_materials/lead",
   "output": {
     "amount": 120,
     "tag": "c:molten_lead"

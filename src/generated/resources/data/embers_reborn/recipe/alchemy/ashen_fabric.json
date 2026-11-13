@@ -1,39 +1,21 @@
 {
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/iron"
-    },
-    {
-      "tag": "embers_reborn:aspectus/lead"
-    },
-    {
-      "tag": "embers_reborn:aspectus/dawnstone"
-    }
+    "#embers_reborn:aspectus/iron",
+    "#embers_reborn:aspectus/lead",
+    "#embers_reborn:aspectus/dawnstone"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "tag": "c:dusts/ash"
-    },
-    {
-      "tag": "c:dusts/ash"
-    },
-    {
-      "tag": "c:strings"
-    },
-    {
-      "tag": "c:strings"
-    }
+    "#c:dusts/ash",
+    "#c:dusts/ash",
+    "#c:strings",
+    "#c:strings"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:ashen_fabric"
   },
-  "tablet": {
-    "tag": "minecraft:wool"
-  }
+  "tablet": "#minecraft:wool"
 }

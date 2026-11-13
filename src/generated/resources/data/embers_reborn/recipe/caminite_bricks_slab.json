@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": {
-      "item": "embers_reborn:caminite_bricks"
-    }
+    "X": "embers_reborn:caminite_bricks"
   },
   "pattern": [
     "XXX"

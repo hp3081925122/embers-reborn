@@ -34,7 +34,9 @@ public class GaseousFuelRecipeBuilder {
 	}
 
 	public static GaseousFuelRecipeBuilder create(Fluid fluid, int amount) {
-		return create(new FluidStack(fluid, amount));
+		GaseousFuelRecipeBuilder builder = create(BuiltInRegistries.FLUID.getKey(fluid));
+		builder.input = FluidIngredient.of(fluid, amount);
+		return builder;
 	}
 
 	public GaseousFuelRecipeBuilder id(Identifier id) {

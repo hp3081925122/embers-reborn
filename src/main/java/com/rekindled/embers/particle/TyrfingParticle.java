@@ -9,10 +9,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class TyrfingParticle extends SingleQuadParticle {
 
 	public int phase = Misc.random.nextInt(360);
@@ -75,7 +72,6 @@ public class TyrfingParticle extends SingleQuadParticle {
 		return com.rekindled.embers.render.EmbersParticleLayers.TRANSLUCENT_NODEPTH;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class Provider implements net.minecraft.client.particle.ParticleProvider<TyrfingParticleOptions> {
 		private final net.minecraft.client.particle.SpriteSet sprites;
 

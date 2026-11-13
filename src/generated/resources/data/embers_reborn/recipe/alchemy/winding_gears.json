@@ -1,36 +1,20 @@
 {
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/copper"
-    },
-    {
-      "tag": "embers_reborn:aspectus/dawnstone"
-    }
+    "#embers_reborn:aspectus/copper",
+    "#embers_reborn:aspectus/dawnstone"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "tag": "c:plates/dawnstone"
-    },
-    {
-      "tag": "c:plates/dawnstone"
-    },
-    {
-      "tag": "c:plates/dawnstone"
-    },
-    {
-      "tag": "c:plates/dawnstone"
-    }
+    "#c:plates/dawnstone",
+    "#c:plates/dawnstone",
+    "#c:plates/dawnstone",
+    "#c:plates/dawnstone"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:winding_gears"
   },
-  "tablet": {
-    "tag": "c:ingots/dawnstone"
-  }
+  "tablet": "#c:ingots/dawnstone"
 }

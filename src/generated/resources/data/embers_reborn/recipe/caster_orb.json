@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "item": "embers_reborn:ember_crystal"
-    },
-    "D": {
-      "tag": "c:ingots/dawnstone"
-    },
-    "P": {
-      "tag": "c:plates/dawnstone"
-    }
+    "C": "embers_reborn:ember_crystal",
+    "D": "#c:ingots/dawnstone",
+    "P": "#c:plates/dawnstone"
   },
   "pattern": [
     "DCD",
@@ -18,7 +12,6 @@
     " P "
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:caster_orb"
   }
 }

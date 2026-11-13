@@ -31,7 +31,13 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class CombustionChamberBlockEntity extends BlockEntity implements IExtraCapabilityInformation {
 
-	public static ItemStack machine = new ItemStack(RegistryManager.COMBUSTION_CHAMBER_ITEM.get());
+	private static ItemStack machine;
+
+	private static ItemStack machine() {
+		if (machine == null)
+			machine = new ItemStack(RegistryManager.COMBUSTION_CHAMBER_ITEM.get());
+		return machine;
+	}
 	int progress = 0;
 	double multiplier = 0;
 	public ItemStackHandler inventory = new ItemStackHandler(1) {
@@ -97,7 +103,7 @@ public class CombustionChamberBlockEntity extends BlockEntity implements IExtraC
 			blockEntity.setChanged();
 		}
 		if (blockEntity.progress == 0 && !blockEntity.inventory.getStackInSlot(0).isEmpty()) {
-			CatalysisCombustionContext wrapper = new CatalysisCombustionContext(blockEntity.inventory, machine);
+			CatalysisCombustionContext wrapper = new CatalysisCombustionContext(blockEntity.inventory, machine());
 			blockEntity.cachedRecipe = Misc.getRecipe(blockEntity.cachedRecipe, RegistryManager.CATALYSIS_COMBUSTION.get(), wrapper, level);
 			if (blockEntity.cachedRecipe != null) {
 				blockEntity.multiplier = blockEntity.cachedRecipe.getmultiplier(wrapper);

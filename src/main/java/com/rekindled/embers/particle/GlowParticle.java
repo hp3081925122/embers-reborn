@@ -7,10 +7,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class GlowParticle extends SingleQuadParticle {
 
 	public GlowParticle(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, GlowParticleOptions pOptions, net.minecraft.client.renderer.texture.TextureAtlasSprite sprite) {
@@ -67,7 +64,6 @@ public class GlowParticle extends SingleQuadParticle {
 		return com.rekindled.embers.render.EmbersParticleLayers.EMBER_ROUGH;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class Provider implements net.minecraft.client.particle.ParticleProvider<GlowParticleOptions> {
 		private final net.minecraft.client.particle.SpriteSet sprites;
 

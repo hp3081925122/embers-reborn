@@ -18,9 +18,7 @@
     "amount": 20,
     "tag": "c:molten_gold"
   },
-  "input": {
-    "tag": "c:ores/platinum"
-  },
+  "input": "#c:ores/platinum",
   "output": {
     "amount": 240,
     "tag": "c:molten_platinum"

@@ -1,4 +1,4 @@
-// 1.21.1	2026-11-12T18:36:11.2014994	Tags for minecraft:damage_type mod id embers_reborn
+// 26.1.2	2026-11-14T00:02:39.215617	Tags for minecraft:damage_type mod id embers_reborn
 73b00a0f25035f7f0f4fc311496522f356e3ee19 data/consecration/tags/damage_type/holy.json
 a5caa930fab787fa91ba961dcd04f9193ab82c8d data/embers_reborn/tags/damage_type/inflictor_gem_blacklist.json
 73b00a0f25035f7f0f4fc311496522f356e3ee19 data/minecraft/tags/damage_type/bypasses_armor.json

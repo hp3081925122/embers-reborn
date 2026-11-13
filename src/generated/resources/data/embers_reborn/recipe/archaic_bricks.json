@@ -2,16 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "X": {
-      "item": "embers_reborn:archaic_brick"
-    }
+    "X": "embers_reborn:archaic_brick"
   },
   "pattern": [
     "XX",
     "XX"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:archaic_bricks"
   }
 }

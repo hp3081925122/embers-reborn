@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "embers_reborn:block/sealed_keg_top",
-    "side": "embers_reborn:block/sealed_planks"
-  }
-}

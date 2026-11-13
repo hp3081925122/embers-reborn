@@ -20,8 +20,6 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class ResearchBase {
 	public Identifier id;
@@ -192,7 +190,6 @@ public class ResearchBase {
 			return true;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public List<Component> getTooltip(boolean showTooltips) {
 		ArrayList<Component> tooltip = new ArrayList<>();
 		if (showTooltips || !isChecked()) {
@@ -203,12 +200,10 @@ public class ResearchBase {
 		return tooltip;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public String getName() {
 		return I18n.get(id.getNamespace() + ".research.page." + id.getPath());
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public String getTitle() {
 		if (hasMultiplePages())
 			return I18n.get(id.getNamespace() + ".research.multipage", I18n.get(id.getNamespace() + ".research.page." + getFirstPage().id.getPath() + ".title"), pageNumber+1, getPageCount()+1);
@@ -216,7 +211,6 @@ public class ResearchBase {
 			return I18n.get(id.getNamespace() + ".research.page." + id.getPath() + ".title");
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private String[] getTags() {
 		String translateKey = id.getNamespace() + ".research.page." + id.getPath() + ".tags";
 		if (I18n.exists(translateKey)) {
@@ -226,12 +220,10 @@ public class ResearchBase {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public Component getText() {
 		return Component.translatable(id.getNamespace() + ".research.page." + id.getPath() + ".desc");
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public List<FormattedCharSequence> getLines(Font fontRenderer, FormattedText s, int width) {
 		return fontRenderer.split(s, width);
 	}

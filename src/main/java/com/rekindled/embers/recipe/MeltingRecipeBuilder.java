@@ -32,19 +32,19 @@ public class MeltingRecipeBuilder {
 	}
 
 	public static MeltingRecipeBuilder create(TagKey<Item> tag) {
-		MeltingRecipeBuilder builder = create(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
+		MeltingRecipeBuilder builder = create(com.rekindled.embers.util.Ingredients.tag(tag));
 		builder.id = tag.location();
 		return builder;
 	}
 
 	public static MeltingRecipeBuilder create(ItemStack itemStack) {
-		MeltingRecipeBuilder builder = create(Ingredient.of(itemStack.getItem()));
-		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
-		return builder;
+		return create(itemStack.getItem());
 	}
 
 	public static MeltingRecipeBuilder create(Item item) {
-		return create(new ItemStack(item));
+		MeltingRecipeBuilder builder = create(Ingredient.of(item));
+		builder.id = BuiltInRegistries.ITEM.getKey(item);
+		return builder;
 	}
 
 	public MeltingRecipeBuilder id(Identifier id) {
@@ -68,12 +68,12 @@ public class MeltingRecipeBuilder {
 	}
 
 	public MeltingRecipeBuilder output(FluidStack output) {
-		this.output = new FluidOutput(output);
+		this.output = new FluidOutput(net.neoforged.neoforge.fluids.FluidStackTemplate.fromNonEmptyStack(output));
 		return this;
 	}
 
 	public MeltingRecipeBuilder output(Fluid fluid, int amount) {
-		output(new FluidStack(fluid, amount));
+		this.output = new FluidOutput(fluid, amount);
 		return this;
 	}
 
@@ -83,12 +83,12 @@ public class MeltingRecipeBuilder {
 	}
 
 	public MeltingRecipeBuilder bonus(FluidStack bonus) {
-		this.bonus = new FluidOutput(bonus);
+		this.bonus = new FluidOutput(net.neoforged.neoforge.fluids.FluidStackTemplate.fromNonEmptyStack(bonus));
 		return this;
 	}
 
 	public MeltingRecipeBuilder bonus(Fluid fluid, int amount) {
-		bonus(new FluidStack(fluid, amount));
+		this.bonus = new FluidOutput(fluid, amount);
 		return this;
 	}
 

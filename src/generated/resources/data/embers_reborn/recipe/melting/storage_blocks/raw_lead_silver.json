@@ -18,9 +18,7 @@
     "amount": 90,
     "tag": "c:molten_silver"
   },
-  "input": {
-    "tag": "c:storage_blocks/raw_lead"
-  },
+  "input": "#c:storage_blocks/raw_lead",
   "output": {
     "amount": 1080,
     "tag": "c:molten_lead"

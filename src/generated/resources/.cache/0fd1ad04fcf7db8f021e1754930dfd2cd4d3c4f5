@@ -1,4 +1,4 @@
-// 1.21.1	2026-11-12T18:36:11.230131	Tags for minecraft:item mod id embers_reborn
+// 26.1.2	2026-11-14T00:02:39.2264259	Tags for minecraft:item mod id embers_reborn
 a69f4e4df2511f5cc583f3058458521d0d7bd96a data/curios/tags/item/belt.json
 1e8e8e9db8b037fb0284135bb568f350be431e54 data/curios/tags/item/body.json
 d3d539144354463d82270a3a074e4cf17454a3ea data/curios/tags/item/charm.json
@@ -36,7 +36,7 @@ b351dd42be79fa972b9da2d5504ff4a2cd95f1b6 data/c/tags/item/plates/silver.json
 df3c448ec4096a2621ce3ca721460d96ff195fbf data/c/tags/item/raw_materials.json
 c53ef53bc61642766f16e2325f4e1ca159c14763 data/c/tags/item/raw_materials/lead.json
 f4340fd5f64dc73010b3bdeaa8c4fc370f64983a data/c/tags/item/raw_materials/silver.json
-660c5cd7a6919e69c0cf94910a668bfba0e6dd92 data/c/tags/item/slimeballs.json
+660c5cd7a6919e69c0cf94910a668bfba0e6dd92 data/c/tags/item/slime_balls.json
 7c1cfacbfc84af725bc699f44f0a8d3a0b3fba92 data/c/tags/item/storage_blocks.json
 885899c2762533f584154092726bb6fe4f2ae55a data/c/tags/item/storage_blocks/dawnstone.json
 4c08eb3c6443804daa1862094177f1aa5f32c2f7 data/c/tags/item/storage_blocks/dwarven_mithril.json

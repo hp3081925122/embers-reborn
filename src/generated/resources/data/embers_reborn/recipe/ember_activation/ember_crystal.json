@@ -1,7 +1,5 @@
 {
   "type": "embers_reborn:ember_activation",
   "ember": 2400,
-  "input": {
-    "item": "embers_reborn:ember_crystal"
-  }
+  "input": "embers_reborn:ember_crystal"
 }

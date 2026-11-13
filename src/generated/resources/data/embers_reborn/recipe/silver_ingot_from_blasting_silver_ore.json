@@ -1,14 +1,11 @@
 {
-  "type": "minecraft:smelting",
+  "type": "minecraft:blasting",
   "category": "misc",
   "cookingtime": 100,
   "experience": 0.7,
   "group": "silver_ingot",
-  "ingredient": {
-    "item": "embers_reborn:silver_ore"
-  },
+  "ingredient": "embers_reborn:silver_ore",
   "result": {
-    "count": 1,
     "id": "embers_reborn:silver_ingot"
   }
 }

@@ -1,33 +1,19 @@
 {
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/dawnstone"
-    },
-    {
-      "tag": "embers_reborn:aspectus/silver"
-    }
+    "#embers_reborn:aspectus/dawnstone",
+    "#embers_reborn:aspectus/silver"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "item": "embers_reborn:fluid_pipe"
-    },
-    {
-      "tag": "c:glass_blocks/colorless"
-    },
-    {
-      "item": "embers_reborn:fluid_pipe"
-    }
+    "embers_reborn:fluid_pipe",
+    "#c:glass_blocks/colorless",
+    "embers_reborn:fluid_pipe"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:catalytic_plug"
   },
-  "tablet": {
-    "tag": "c:ingots/silver"
-  }
+  "tablet": "#c:ingots/silver"
 }

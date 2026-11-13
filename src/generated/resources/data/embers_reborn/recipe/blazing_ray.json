@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "D": {
-      "tag": "c:ingots/dawnstone"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "P": {
-      "tag": "c:plates/dawnstone"
-    },
-    "S": {
-      "item": "embers_reborn:ember_shard"
-    },
-    "W": {
-      "tag": "c:rods/wooden"
-    }
+    "D": "#c:ingots/dawnstone",
+    "I": "#c:ingots/iron",
+    "P": "#c:plates/dawnstone",
+    "S": "embers_reborn:ember_shard",
+    "W": "#c:rods/wooden"
   },
   "pattern": [
     " DP",
@@ -24,7 +14,6 @@
     "SW "
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:blazing_ray"
   }
 }

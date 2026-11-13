@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "X": {
-      "item": "embers_reborn:reinforced_sealed_planks"
-    }
+    "X": "embers_reborn:reinforced_sealed_planks"
   },
   "pattern": [
     "X",

@@ -19,12 +19,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
 
-	@OnlyIn(Dist.CLIENT)
 	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart buckets;
 
 	public ExcavationBucketsUpgrade(BlockEntity tile) {

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "embers_reborn:block/ashen_tile",
-    "side": "embers_reborn:block/ashen_tile",
-    "top": "embers_reborn:block/ashen_tile"
-  }
-}

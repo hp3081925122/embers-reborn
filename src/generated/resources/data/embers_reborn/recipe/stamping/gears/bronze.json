@@ -9,11 +9,12 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_bronze\",\"amount\":180}",
+  "fluid": {
+    "amount": 180,
+    "tag": "c:molten_bronze"
+  },
   "output": {
     "tag": "c:gears/bronze"
   },
-  "stamp": {
-    "item": "embers_reborn:gear_stamp"
-  }
+  "stamp": "embers_reborn:gear_stamp"
 }

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "embers_reborn:caminite_tiles"
-  },
+  "ingredient": "embers_reborn:caminite_tiles",
   "result": {
     "count": 2,
     "id": "embers_reborn:caminite_tiles_slab"

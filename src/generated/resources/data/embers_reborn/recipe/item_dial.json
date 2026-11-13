@@ -2,19 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "L": {
-      "tag": "c:plates/lead"
-    },
-    "P": {
-      "item": "minecraft:paper"
-    }
+    "L": "#c:plates/lead",
+    "P": "minecraft:paper"
   },
   "pattern": [
     "P",
     "L"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:item_dial"
   }
 }

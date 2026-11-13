@@ -3,11 +3,8 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "embers_reborn:dawnstone_pickaxe"
-  },
+  "ingredient": "embers_reborn:dawnstone_pickaxe",
   "result": {
-    "count": 1,
     "id": "embers_reborn:dawnstone_nugget"
   }
 }

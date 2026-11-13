@@ -99,7 +99,12 @@ public class EmbersRecipes extends RecipeProvider {
 
 	@Override
 	protected void buildRecipes() {
-		buildAll(this.output);
+		com.rekindled.embers.util.Ingredients.setItemLookup(this.items);
+		try {
+			buildAll(this.output);
+		} finally {
+			com.rekindled.embers.util.Ingredients.setItemLookup(null);
+		}
 	}
 
 	public static class Runner extends RecipeProvider.Runner {
@@ -184,9 +189,9 @@ public class EmbersRecipes extends RecipeProvider {
 
 		//stamper crushing
 		StampingRecipeBuilder.create(RegistryManager.EMBER_GRIT.get()).domain(Embers.MODID).folder(stampingFolder).stamp(RegistryManager.FLAT_STAMP.get()).input(RegistryManager.EMBER_SHARD.get()).save(ConsumerWrapperBuilder.wrap().build(consumer)); //today is the day
-		StampingRecipeBuilder.create(new ItemStack(RegistryManager.EMBER_SHARD.get(), 6)).domain(Embers.MODID).folder(stampingFolder).stamp(RegistryManager.FLAT_STAMP.get()).input(RegistryManager.EMBER_CRYSTAL.get()).save(ConsumerWrapperBuilder.wrap().build(consumer));
-		StampingRecipeBuilder.create(new ItemStack(RegistryManager.ASH.get(), 8)).domain(Embers.MODID).folder(stampingFolder).stamp(RegistryManager.FLAT_STAMP.get()).input(RegistryManager.ALCHEMICAL_WASTE.get()).save(ConsumerWrapperBuilder.wrap().build(consumer));
-		StampingRecipeBuilder.create(new ItemStack(Items.BLAZE_POWDER, 4)).domain(Embers.MODID).folder(stampingFolder).stamp(RegistryManager.FLAT_STAMP.get()).input(Tags.Items.RODS_BLAZE).save(ConsumerWrapperBuilder.wrap().build(consumer));
+		StampingRecipeBuilder.create(RegistryManager.EMBER_SHARD.get(), 6).domain(Embers.MODID).folder(stampingFolder).stamp(RegistryManager.FLAT_STAMP.get()).input(RegistryManager.EMBER_CRYSTAL.get()).save(ConsumerWrapperBuilder.wrap().build(consumer));
+		StampingRecipeBuilder.create(RegistryManager.ASH.get(), 8).domain(Embers.MODID).folder(stampingFolder).stamp(RegistryManager.FLAT_STAMP.get()).input(RegistryManager.ALCHEMICAL_WASTE.get()).save(ConsumerWrapperBuilder.wrap().build(consumer));
+		StampingRecipeBuilder.create(Items.BLAZE_POWDER, 4).domain(Embers.MODID).folder(stampingFolder).stamp(RegistryManager.FLAT_STAMP.get()).input(Tags.Items.RODS_BLAZE).save(ConsumerWrapperBuilder.wrap().build(consumer));
 		StampingRecipeBuilder.create(Items.SAND).domain(Embers.MODID).folder(stampingFolder).stamp(RegistryManager.FLAT_STAMP.get()).input(Items.GRAVEL).save(ConsumerWrapperBuilder.wrap().build(consumer));
 
 		//aspectus recipes
@@ -225,13 +230,13 @@ public class EmbersRecipes extends RecipeProvider {
 		MetalCoefficientRecipeBuilder.create(Tags.Blocks.STORAGE_BLOCKS_GOLD).domain(Embers.MODID).folder(coefficientFolder).coefficient(3.0).save(consumer);
 
 		//alchemy
-		AlchemyRecipeBuilder.create(new ItemStack(Items.NETHERRACK, 4)).tablet(RegistryManager.EMBER_GRIT.get()).domain(Embers.MODID).folder(alchemyFolder)
+		AlchemyRecipeBuilder.create(Items.NETHERRACK, 4).tablet(RegistryManager.EMBER_GRIT.get()).domain(Embers.MODID).folder(alchemyFolder)
 		.inputs(Items.COBBLESTONE, Items.COBBLESTONE, Items.COBBLESTONE, Items.COBBLESTONE)
 		.aspects(EmbersItemTags.COPPER_ASPECTUS, EmbersItemTags.IRON_ASPECTUS).save(consumer);
-		AlchemyRecipeBuilder.create(new ItemStack(Items.SOUL_SAND, 4)).tablet(RegistryManager.ASH.get()).domain(Embers.MODID).folder(alchemyFolder)
+		AlchemyRecipeBuilder.create(Items.SOUL_SAND, 4).tablet(RegistryManager.ASH.get()).domain(Embers.MODID).folder(alchemyFolder)
 		.inputs(Items.SAND, Items.SAND, Items.SAND, Items.SAND)
 		.aspects(EmbersItemTags.COPPER_ASPECTUS, EmbersItemTags.IRON_ASPECTUS).save(consumer);
-		AlchemyRecipeBuilder.create(new ItemStack(RegistryManager.ARCHAIC_BRICK.get(), 5)).tablet(RegistryManager.ARCHAIC_BRICK.get()).folder(alchemyFolder)
+		AlchemyRecipeBuilder.create(RegistryManager.ARCHAIC_BRICK.get(), 5).tablet(RegistryManager.ARCHAIC_BRICK.get()).folder(alchemyFolder)
 		.inputs(Items.SOUL_SAND, Items.CLAY_BALL, Items.CLAY_BALL)
 		.aspects(EmbersItemTags.IRON_ASPECTUS, EmbersItemTags.SILVER_ASPECTUS).save(consumer);
 		AlchemyRecipeBuilder.create(RegistryManager.ANCIENT_MOTIVE_CORE.get()).tablet(RegistryManager.EMBER_SHARD.get()).folder(alchemyFolder)
@@ -258,7 +263,7 @@ public class EmbersRecipes extends RecipeProvider {
 		AlchemyRecipeBuilder.create(RegistryManager.TYRFING.get()).tablet(RegistryManager.LEAD_TOOLS.SWORD.get()).folder(alchemyFolder)
 		.inputs(Tags.Items.STORAGE_BLOCKS_COAL, Tags.Items.OBSIDIANS, EmbersItemTags.LEAD_INGOT, EmbersItemTags.LEAD_INGOT)
 		.aspects(EmbersItemTags.LEAD_ASPECTUS, EmbersItemTags.SILVER_ASPECTUS).save(consumer);
-		AlchemyRecipeBuilder.create(new ItemStack(RegistryManager.ISOLATED_MATERIA.get(), 4)).tablet(Tags.Items.INGOTS_IRON).folder(alchemyFolder)
+		AlchemyRecipeBuilder.create(RegistryManager.ISOLATED_MATERIA.get(), 4).tablet(Tags.Items.INGOTS_IRON).folder(alchemyFolder)
 		.inputs(tag(net.minecraft.tags.ItemTags.create(net.minecraft.resources.Identifier.parse("c:gems/quartz"))), Ingredient.of(Items.CLAY_BALL), tag(Tags.Items.GEMS_LAPIS))
 		.aspects(EmbersItemTags.COPPER_ASPECTUS, EmbersItemTags.IRON_ASPECTUS, EmbersItemTags.LEAD_ASPECTUS, EmbersItemTags.SILVER_ASPECTUS).save(consumer);
 		AlchemyRecipeBuilder.create(RegistryManager.CATALYTIC_PLUG.get()).tablet(EmbersItemTags.SILVER_INGOT).folder(alchemyFolder)
@@ -294,7 +299,7 @@ public class EmbersRecipes extends RecipeProvider {
 		AlchemyRecipeBuilder.create(RegistryManager.INFLICTOR_GEM.get()).tablet(Tags.Items.GEMS_DIAMOND).folder(alchemyFolder)
 		.inputs(EmbersItemTags.DAWNSTONE_INGOT, ItemTags.COALS, ItemTags.COALS, ItemTags.COALS)
 		.aspects(EmbersItemTags.DAWNSTONE_ASPECTUS, EmbersItemTags.SILVER_ASPECTUS, EmbersItemTags.LEAD_ASPECTUS).save(consumer);
-		AlchemyRecipeBuilder.create(new ItemStack(RegistryManager.ADHESIVE.get(), 6)).tablet(Items.CLAY_BALL).folder(alchemyFolder)
+		AlchemyRecipeBuilder.create(RegistryManager.ADHESIVE.get(), 6).tablet(Items.CLAY_BALL).folder(alchemyFolder)
 		.inputs(Items.BONE_MEAL, Items.BONE_MEAL)
 		.aspects(EmbersItemTags.IRON_ASPECTUS, EmbersItemTags.LEAD_ASPECTUS).save(consumer);
 		AlchemyRecipeBuilder.create(RegistryManager.GLIMMER_CRYSTAL.get()).tablet(net.minecraft.tags.ItemTags.create(net.minecraft.resources.Identifier.parse("c:gems/quartz"))).folder(alchemyFolder)
@@ -487,7 +492,7 @@ public class EmbersRecipes extends RecipeProvider {
 		.define('X', RegistryManager.CAMINITE_BLEND.get())
 		.unlockedBy("has_caminite", has(RegistryManager.CAMINITE_BLEND.get()))
 		.save(consumer, recipeKey("raw_caminite_block"));
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryManager.RAW_CAMINITE_BLOCK.get()), RecipeCategory.MISC, net.minecraft.world.item.crafting.CookingBookCategory.MISC, RegistryManager.CAMINITE_LARGE_TILE.get(), 0.1F, 200)
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryManager.RAW_CAMINITE_BLOCK.get()), RecipeCategory.MISC, net.minecraft.world.item.crafting.CookingBookCategory.BLOCKS, RegistryManager.CAMINITE_LARGE_TILE.get(), 0.1F, 200)
 		.unlockedBy("has_caminite", has(RegistryManager.CAMINITE_BLEND.get())).save(consumer, recipeKey("caminite_large_tile_smelting"));
 		shaped(RecipeCategory.BUILDING_BLOCKS, RegistryManager.CAMINITE_TILES.get(), 4)
 		.pattern("XX")

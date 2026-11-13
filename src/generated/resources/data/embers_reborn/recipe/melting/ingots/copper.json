@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:ingots/copper"
-  },
+  "input": "#c:ingots/copper",
   "output": {
     "amount": 90,
     "tag": "c:molten_copper"

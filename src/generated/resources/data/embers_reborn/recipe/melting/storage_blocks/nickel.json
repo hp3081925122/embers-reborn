@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:storage_blocks/nickel"
-  },
+  "input": "#c:storage_blocks/nickel",
   "output": {
     "amount": 810,
     "tag": "c:molten_nickel"

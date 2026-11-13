@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "embers_reborn:caminite_bricks"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "P": {
-      "tag": "c:plates/lead"
-    }
+    "B": "embers_reborn:caminite_bricks",
+    "I": "#c:ingots/iron",
+    "P": "#c:plates/lead"
   },
   "pattern": [
     "IBI",
@@ -18,7 +12,6 @@
     "I I"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:mechanical_core"
   }
 }

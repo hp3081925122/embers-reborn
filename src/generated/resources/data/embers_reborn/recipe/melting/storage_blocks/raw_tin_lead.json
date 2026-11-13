@@ -18,9 +18,7 @@
     "amount": 90,
     "tag": "c:molten_lead"
   },
-  "input": {
-    "tag": "c:storage_blocks/raw_tin"
-  },
+  "input": "#c:storage_blocks/raw_tin",
   "output": {
     "amount": 1080,
     "tag": "c:molten_tin"

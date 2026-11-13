@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "A": {
-      "tag": "c:dusts/ash"
-    },
-    "S": {
-      "tag": "c:stones"
-    }
+    "A": "#c:dusts/ash",
+    "S": "#c:stones"
   },
   "pattern": [
     " S ",

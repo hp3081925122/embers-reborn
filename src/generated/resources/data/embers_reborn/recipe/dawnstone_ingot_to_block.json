@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": {
-      "tag": "c:ingots/dawnstone"
-    },
-    "Y": {
-      "item": "embers_reborn:dawnstone_ingot"
-    }
+    "X": "#c:ingots/dawnstone",
+    "Y": "embers_reborn:dawnstone_ingot"
   },
   "pattern": [
     "XXX",
@@ -15,7 +11,6 @@
     "XXX"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:dawnstone_block"
   }
 }

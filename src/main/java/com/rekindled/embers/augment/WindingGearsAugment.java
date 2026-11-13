@@ -26,8 +26,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
@@ -80,12 +78,10 @@ public class WindingGearsAugment extends AugmentBase {
 		NeoForge.EVENT_BUS.register(this);
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static int getBarY(int height) {
 		return height - 31;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static int getBarX(int width) {
 		return width / 2 - 11 - 81;
 	}
@@ -303,7 +299,6 @@ public class WindingGearsAugment extends AugmentBase {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void onClientUpdate(ClientTickEvent.Post event) {
 		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
@@ -326,17 +321,14 @@ public class WindingGearsAugment extends AugmentBase {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private boolean canAutoAttack(LocalPlayer player, ItemStack stack, EntityHitResult objectMouseOver) {
 		return player.getAttackStrengthScale(0) >= 1.0f && getCharge(player.level(), stack) > 0 /* && !isInvulnerable(objectMouseOver.entityHit)*/;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private boolean isInvulnerable(Entity entity) {
 		return entity.isInvulnerable() || (entity instanceof LivingEntity && entity.invulnerableTime > 0);
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static void renderSpringUnderlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
 		int fill = (int) (spoolLast * (1 - partialTicks) + spool * partialTicks);
 		fill += 16;
@@ -367,7 +359,6 @@ public class WindingGearsAugment extends AugmentBase {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static void renderSpringOverlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
 		int fill = (int) (spoolLast * (1 - partialTicks) + spool * partialTicks);
 		double currentAngle = angleLast * (1 - partialTicks) + angle * partialTicks;

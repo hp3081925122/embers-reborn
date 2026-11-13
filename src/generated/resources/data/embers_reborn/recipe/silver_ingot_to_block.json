@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": {
-      "tag": "c:ingots/silver"
-    },
-    "Y": {
-      "item": "embers_reborn:silver_ingot"
-    }
+    "X": "#c:ingots/silver",
+    "Y": "embers_reborn:silver_ingot"
   },
   "pattern": [
     "XXX",
@@ -15,7 +11,6 @@
     "XXX"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:silver_block"
   }
 }

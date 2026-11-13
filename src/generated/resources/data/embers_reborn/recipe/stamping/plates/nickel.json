@@ -9,11 +9,12 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_nickel\",\"amount\":90}",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_nickel"
+  },
   "output": {
     "tag": "c:plates/nickel"
   },
-  "stamp": {
-    "item": "embers_reborn:plate_stamp"
-  }
+  "stamp": "embers_reborn:plate_stamp"
 }

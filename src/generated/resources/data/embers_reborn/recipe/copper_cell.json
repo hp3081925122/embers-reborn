@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "embers_reborn:caminite_bricks"
-    },
-    "C": {
-      "tag": "c:storage_blocks/copper"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    }
+    "B": "embers_reborn:caminite_bricks",
+    "C": "#c:storage_blocks/copper",
+    "I": "#c:ingots/iron"
   },
   "pattern": [
     "BIB",
@@ -18,7 +12,6 @@
     "BIB"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:copper_cell"
   }
 }

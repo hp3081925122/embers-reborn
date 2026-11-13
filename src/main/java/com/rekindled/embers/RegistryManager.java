@@ -452,38 +452,38 @@ public class RegistryManager {
 	public static final DeferredHolder<Block, Block> MITHRIL_BLOCK = com.rekindled.embers.util.RegCtx.block(BLOCKS, "mithril_block", () -> new MithrilBlock(Properties.of().mapColor(MapColor.GLOW_LICHEN).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops().strength(5.0F, 6.0F).noOcclusion()));
 
 	public static final DeferredHolder<Block, Block> CAMINITE_BRICKS = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_bricks", () -> new Block(Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks CAMINITE_BRICKS_DECO = new StoneDecoBlocks("caminite_bricks", CAMINITE_BRICKS, Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f));
+	public static final StoneDecoBlocks CAMINITE_BRICKS_DECO = new StoneDecoBlocks("caminite_bricks", CAMINITE_BRICKS, () -> Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f));
 	public static final DeferredHolder<Block, Block> CAMINITE_LARGE_BRICKS = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_large_bricks", () -> new Block(Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks CAMINITE_LARGE_BRICKS_DECO = new StoneDecoBlocks("caminite_large_bricks", CAMINITE_LARGE_BRICKS, Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
+	public static final StoneDecoBlocks CAMINITE_LARGE_BRICKS_DECO = new StoneDecoBlocks("caminite_large_bricks", CAMINITE_LARGE_BRICKS, () -> Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
 	public static final DeferredHolder<Block, Block> RAW_CAMINITE_BLOCK = com.rekindled.embers.util.RegCtx.block(BLOCKS, "raw_caminite_block", () -> new Block(Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).sound(SoundType.GRAVEL).requiresCorrectToolForDrops().strength(1.6f)));
 	public static final DeferredHolder<Block, Block> CAMINITE_LARGE_TILE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_large_tile", () -> new Block(Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks CAMINITE_LARGE_TILE_DECO = new StoneDecoBlocks("caminite_large_tile", CAMINITE_LARGE_TILE, Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
+	public static final StoneDecoBlocks CAMINITE_LARGE_TILE_DECO = new StoneDecoBlocks("caminite_large_tile", CAMINITE_LARGE_TILE, () -> Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
 	public static final DeferredHolder<Block, Block> CAMINITE_TILES = com.rekindled.embers.util.RegCtx.block(BLOCKS, "caminite_tiles", () -> new Block(Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks CAMINITE_TILES_DECO = new StoneDecoBlocks("caminite_tiles", CAMINITE_TILES, Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
+	public static final StoneDecoBlocks CAMINITE_TILES_DECO = new StoneDecoBlocks("caminite_tiles", CAMINITE_TILES, () -> Properties.of().mapColor(MapColor.WOOD).sound(EmbersSounds.CAMINITE).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
 	public static final DeferredHolder<Block, Block> ARCHAIC_BRICKS = com.rekindled.embers.util.RegCtx.block(BLOCKS, "archaic_bricks", () -> new Block(Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks ARCHAIC_BRICKS_DECO = new StoneDecoBlocks("archaic_bricks", ARCHAIC_BRICKS, Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f));
+	public static final StoneDecoBlocks ARCHAIC_BRICKS_DECO = new StoneDecoBlocks("archaic_bricks", ARCHAIC_BRICKS, () -> Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f));
 	public static final DeferredHolder<Block, Block> ARCHAIC_EDGE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "archaic_edge", () -> new Block(Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f)));
 	public static final DeferredHolder<Block, Block> ARCHAIC_TILE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "archaic_tile", () -> new Block(Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks ARCHAIC_TILE_DECO = new StoneDecoBlocks("archaic_tile", ARCHAIC_TILE, Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
+	public static final StoneDecoBlocks ARCHAIC_TILE_DECO = new StoneDecoBlocks("archaic_tile", ARCHAIC_TILE, () -> Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
 	public static final DeferredHolder<Block, Block> ARCHAIC_LARGE_BRICKS = com.rekindled.embers.util.RegCtx.block(BLOCKS, "archaic_large_bricks", () -> new Block(Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks ARCHAIC_LARGE_BRICKS_DECO = new StoneDecoBlocks("archaic_large_bricks", ARCHAIC_LARGE_BRICKS, Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
+	public static final StoneDecoBlocks ARCHAIC_LARGE_BRICKS_DECO = new StoneDecoBlocks("archaic_large_bricks", ARCHAIC_LARGE_BRICKS, () -> Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f), true, true, false);
 	public static final DeferredHolder<Block, Block> ARCHAIC_LIGHT = com.rekindled.embers.util.RegCtx.block(BLOCKS, "archaic_light", () -> new ArchaicLightBlock(Properties.of().mapColor(MapColor.COLOR_ORANGE).sound(SoundType.NETHER_BRICKS).requiresCorrectToolForDrops().strength(1.6f).lightLevel(state -> 15)));
 	public static final DeferredHolder<Block, Block> ASHEN_STONE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "ashen_stone", () -> new Block(Properties.of().mapColor(MapColor.COLOR_BLACK).sound(EmbersSounds.ASHEN_STONE).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks ASHEN_STONE_DECO = new StoneDecoBlocks("ashen_stone", ASHEN_STONE, Properties.of().mapColor(MapColor.COLOR_BLACK).sound(EmbersSounds.ASHEN_STONE).requiresCorrectToolForDrops().strength(1.6f));
+	public static final StoneDecoBlocks ASHEN_STONE_DECO = new StoneDecoBlocks("ashen_stone", ASHEN_STONE, () -> Properties.of().mapColor(MapColor.COLOR_BLACK).sound(EmbersSounds.ASHEN_STONE).requiresCorrectToolForDrops().strength(1.6f));
 	public static final DeferredHolder<Block, Block> ASHEN_BRICK = com.rekindled.embers.util.RegCtx.block(BLOCKS, "ashen_brick", () -> new Block(Properties.of().mapColor(MapColor.COLOR_BLACK).sound(EmbersSounds.ASHEN_STONE).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks ASHEN_BRICK_DECO = new StoneDecoBlocks("ashen_brick", ASHEN_BRICK, Properties.of().mapColor(MapColor.COLOR_BLACK).sound(EmbersSounds.ASHEN_STONE).requiresCorrectToolForDrops().strength(1.6f));
+	public static final StoneDecoBlocks ASHEN_BRICK_DECO = new StoneDecoBlocks("ashen_brick", ASHEN_BRICK, () -> Properties.of().mapColor(MapColor.COLOR_BLACK).sound(EmbersSounds.ASHEN_STONE).requiresCorrectToolForDrops().strength(1.6f));
 	public static final DeferredHolder<Block, Block> ASHEN_TILE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "ashen_tile", () -> new Block(Properties.of().mapColor(MapColor.COLOR_BLACK).sound(EmbersSounds.ASHEN_STONE).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks ASHEN_TILE_DECO = new StoneDecoBlocks("ashen_tile", ASHEN_TILE, Properties.of().mapColor(MapColor.COLOR_BLACK).sound(EmbersSounds.ASHEN_STONE).requiresCorrectToolForDrops().strength(1.6f));
+	public static final StoneDecoBlocks ASHEN_TILE_DECO = new StoneDecoBlocks("ashen_tile", ASHEN_TILE, () -> Properties.of().mapColor(MapColor.COLOR_BLACK).sound(EmbersSounds.ASHEN_STONE).requiresCorrectToolForDrops().strength(1.6f));
 	public static final DeferredHolder<Block, Block> SEALED_PLANKS = com.rekindled.embers.util.RegCtx.block(BLOCKS, "sealed_planks", () -> new Block(Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.WOOD).strength(1.6f)));
-	public static final StoneDecoBlocks SEALED_PLANKS_DECO = new StoneDecoBlocks("sealed_planks", SEALED_PLANKS, Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.WOOD).strength(1.6f), true, true, false);
+	public static final StoneDecoBlocks SEALED_PLANKS_DECO = new StoneDecoBlocks("sealed_planks", SEALED_PLANKS, () -> Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.WOOD).strength(1.6f), true, true, false);
 	public static final DeferredHolder<Block, Block> REINFORCED_SEALED_PLANKS = com.rekindled.embers.util.RegCtx.block(BLOCKS, "reinforced_sealed_planks", () -> new Block(Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.WOOD).strength(2.6f)));
 	public static final DeferredHolder<Block, Block> SEALED_WOOD_TILE = com.rekindled.embers.util.RegCtx.block(BLOCKS, "sealed_wood_tile", () -> new Block(Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.WOOD).strength(1.6f)));
-	public static final StoneDecoBlocks SEALED_WOOD_TILE_DECO = new StoneDecoBlocks("sealed_wood_tile", SEALED_WOOD_TILE, Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.WOOD).strength(1.6f), true, true, false);
+	public static final StoneDecoBlocks SEALED_WOOD_TILE_DECO = new StoneDecoBlocks("sealed_wood_tile", SEALED_WOOD_TILE, () -> Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.WOOD).strength(1.6f), true, true, false);
 	public static final DeferredHolder<Block, RotatedPillarBlock> SEALED_WOOD_PILLAR = com.rekindled.embers.util.RegCtx.block(BLOCKS, "sealed_wood_pillar", () -> new RotatedPillarBlock(Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.WOOD).strength(1.6f)));
 	public static final DeferredHolder<Block, RotatedPillarBlock> SEALED_WOOD_KEG = com.rekindled.embers.util.RegCtx.block(BLOCKS, "sealed_wood_keg", () -> new RotatedPillarBlock(Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.WOOD).strength(1.6f)));
 	public static final DeferredHolder<Block, Block> SOLIDIFIED_METAL = com.rekindled.embers.util.RegCtx.block(BLOCKS, "solidified_metal", () -> new Block(Properties.of().mapColor(MapColor.COLOR_GRAY).sound(EmbersSounds.SOLID_METAL).requiresCorrectToolForDrops().strength(1.6f)));
 	public static final DeferredHolder<Block, Block> METAL_PLATFORM = com.rekindled.embers.util.RegCtx.block(BLOCKS, "metal_platform", () -> new Block(Properties.of().mapColor(MapColor.COLOR_GRAY).sound(EmbersSounds.SOLID_METAL).requiresCorrectToolForDrops().strength(1.6f)));
-	public static final StoneDecoBlocks METAL_PLATFORM_DECO = new StoneDecoBlocks("metal_platform", METAL_PLATFORM, Properties.of().mapColor(MapColor.COLOR_GRAY).sound(EmbersSounds.SOLID_METAL).requiresCorrectToolForDrops().strength(1.6f), false, true, false);
+	public static final StoneDecoBlocks METAL_PLATFORM_DECO = new StoneDecoBlocks("metal_platform", METAL_PLATFORM, () -> Properties.of().mapColor(MapColor.COLOR_GRAY).sound(EmbersSounds.SOLID_METAL).requiresCorrectToolForDrops().strength(1.6f), false, true, false);
 	public static final DeferredHolder<Block, Block> EMBER_LANTERN = com.rekindled.embers.util.RegCtx.block(BLOCKS, "ember_lantern", () -> new EmberLanternBlock(Properties.of().mapColor(MapColor.NONE).sound(SoundType.LANTERN).requiresCorrectToolForDrops().strength(1.6f).lightLevel(state -> 15)));
 
 	public static final DeferredHolder<Block, Block> COPPER_CELL = com.rekindled.embers.util.RegCtx.block(BLOCKS, "copper_cell", () -> new CopperCellBlock(Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).sound(EmbersSounds.MACHINE).requiresCorrectToolForDrops().strength(1.4f).noOcclusion().isRedstoneConductor((a, b, c) -> true)));
@@ -1021,9 +1021,9 @@ public class RegistryManager {
 			.build());
 
 	//entities
-	public static final DeferredHolder<EntityType<?>, EntityType<EmberPacketEntity>> EMBER_PACKET = registerEntity("ember_packet", EntityType.Builder.<EmberPacketEntity>of(EmberPacketEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).fireImmune().clientTrackingRange(3).updateInterval(1));
-	public static final DeferredHolder<EntityType<?>, EntityType<EmberProjectileEntity>> EMBER_PROJECTILE = registerEntity("ember_projectile", EntityType.Builder.<EmberProjectileEntity>of(EmberProjectileEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).fireImmune().clientTrackingRange(3).updateInterval(1));
-	public static final DeferredHolder<EntityType<?>, EntityType<GlimmerProjectileEntity>> GLIMMER_PROJECTILE = registerEntity("glimmer_projectile", EntityType.Builder.<GlimmerProjectileEntity>of(GlimmerProjectileEntity::new, MobCategory.MISC).sized(0.5F, 0.5F).fireImmune().clientTrackingRange(3).updateInterval(1));
+	public static final DeferredHolder<EntityType<?>, EntityType<EmberPacketEntity>> EMBER_PACKET = registerEntity("ember_packet", EntityType.Builder.<EmberPacketEntity>of(EmberPacketEntity::new, MobCategory.MISC).noLootTable().sized(0.5F, 0.5F).fireImmune().clientTrackingRange(3).updateInterval(1));
+	public static final DeferredHolder<EntityType<?>, EntityType<EmberProjectileEntity>> EMBER_PROJECTILE = registerEntity("ember_projectile", EntityType.Builder.<EmberProjectileEntity>of(EmberProjectileEntity::new, MobCategory.MISC).noLootTable().sized(0.5F, 0.5F).fireImmune().clientTrackingRange(3).updateInterval(1));
+	public static final DeferredHolder<EntityType<?>, EntityType<GlimmerProjectileEntity>> GLIMMER_PROJECTILE = registerEntity("glimmer_projectile", EntityType.Builder.<GlimmerProjectileEntity>of(GlimmerProjectileEntity::new, MobCategory.MISC).noLootTable().sized(0.5F, 0.5F).fireImmune().clientTrackingRange(3).updateInterval(1));
 	public static final DeferredHolder<EntityType<?>, EntityType<AncientGolemEntity>> ANCIENT_GOLEM = registerEntity("ancient_golem", EntityType.Builder.<AncientGolemEntity>of(AncientGolemEntity::new, MobCategory.MONSTER).sized(0.6F, 1.8F).fireImmune().clientTrackingRange(8));
 
 	//spawn eggs
@@ -1218,17 +1218,17 @@ public class RegistryManager {
 		public DeferredHolder<Block, WallBlock> wall = null;
 		public DeferredHolder<Item, Item> wallItem = null;
 
-		public StoneDecoBlocks(String name, DeferredHolder<Block, Block> block, Properties properties, boolean stairs, boolean slab, boolean wall) {
+		public StoneDecoBlocks(String name, DeferredHolder<Block, Block> block, java.util.function.Supplier<Properties> properties, boolean stairs, boolean slab, boolean wall) {
 			this.name = name;
 			this.block = block;
 			if (stairs) {
-				this.stairs = com.rekindled.embers.util.RegCtx.block(BLOCKS, name + "_stairs", () -> new StairBlock(block.get().defaultBlockState(), properties));
+				this.stairs = com.rekindled.embers.util.RegCtx.block(BLOCKS, name + "_stairs", () -> new StairBlock(block.get().defaultBlockState(), properties.get()));
 			}
 			if (slab) {
-				this.slab = com.rekindled.embers.util.RegCtx.block(BLOCKS, name + "_slab", () -> new SlabBlock(properties));
+				this.slab = com.rekindled.embers.util.RegCtx.block(BLOCKS, name + "_slab", () -> new SlabBlock(properties.get()));
 			}
 			if (wall) {
-				this.wall = com.rekindled.embers.util.RegCtx.block(BLOCKS, name + "_wall", () -> new WallBlock(properties));
+				this.wall = com.rekindled.embers.util.RegCtx.block(BLOCKS, name + "_wall", () -> new WallBlock(properties.get()));
 			}
 		}
 
@@ -1244,7 +1244,7 @@ public class RegistryManager {
 			}
 		}
 
-		public StoneDecoBlocks(String name, DeferredHolder<Block, Block> block, Properties properties) {
+		public StoneDecoBlocks(String name, DeferredHolder<Block, Block> block, java.util.function.Supplier<Properties> properties) {
 			this(name, block, properties, true, true, true);
 		}
 	}

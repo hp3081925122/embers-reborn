@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "embers_reborn:silver_block"
-    }
+    "embers_reborn:silver_block"
   ],
   "result": {
     "count": 9,

@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "tag": "c:ingots/copper"
-    },
-    "I": {
-      "tag": "c:ingots/dawnstone"
-    },
-    "S": {
-      "item": "embers_reborn:ember_shard"
-    },
-    "W": {
-      "tag": "c:rods/wooden"
-    }
+    "C": "#c:ingots/copper",
+    "I": "#c:ingots/dawnstone",
+    "S": "embers_reborn:ember_shard",
+    "W": "#c:rods/wooden"
   },
   "pattern": [
     "ISI",
@@ -21,7 +13,6 @@
     " W "
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:clockwork_pickaxe"
   }
 }

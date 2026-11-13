@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:nuggets/constantan"
-  },
+  "input": "#c:nuggets/constantan",
   "output": {
     "amount": 10,
     "tag": "c:molten_constantan"

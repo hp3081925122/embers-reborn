@@ -2,21 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "tag": "c:plates/copper"
-    },
-    "I": {
-      "tag": "c:ingots/dawnstone"
-    },
-    "P": {
-      "tag": "c:plates/dawnstone"
-    },
-    "S": {
-      "item": "embers_reborn:ember_shard"
-    },
-    "W": {
-      "tag": "c:rods/wooden"
-    }
+    "C": "#c:plates/copper",
+    "I": "#c:ingots/dawnstone",
+    "P": "#c:plates/dawnstone",
+    "S": "embers_reborn:ember_shard",
+    "W": "#c:rods/wooden"
   },
   "pattern": [
     "PCP",
@@ -24,7 +14,6 @@
     " W "
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:clockwork_axe"
   }
 }

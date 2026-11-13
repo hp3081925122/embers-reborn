@@ -29,9 +29,7 @@
     "amount": 20,
     "tag": "c:molten_aluminum"
   },
-  "input": {
-    "tag": "c:ores/iron"
-  },
+  "input": "#c:ores/iron",
   "output": {
     "amount": 240,
     "tag": "c:molten_iron"

@@ -13,8 +13,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class MessageCrystalCellGrowFX implements CustomPacketPayload {
@@ -57,7 +55,6 @@ public class MessageCrystalCellGrowFX implements CustomPacketPayload {
 		return TYPE;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@SuppressWarnings("resource")
 	public static void spawnParticles(MessageCrystalCellGrowFX msg) {
 		Level level = Minecraft.getInstance().level;

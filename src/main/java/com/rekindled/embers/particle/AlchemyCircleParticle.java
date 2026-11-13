@@ -14,10 +14,7 @@ import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class AlchemyCircleParticle extends SingleQuadParticle {
 
 	public float rotScale = 0.02f;
@@ -76,7 +73,6 @@ public class AlchemyCircleParticle extends SingleQuadParticle {
 		return com.rekindled.embers.render.EmbersParticleLayers.EMBER_HARD;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class Provider implements net.minecraft.client.particle.ParticleProvider<AlchemyCircleParticleOptions> {
 		private final net.minecraft.client.particle.SpriteSet sprites;
 

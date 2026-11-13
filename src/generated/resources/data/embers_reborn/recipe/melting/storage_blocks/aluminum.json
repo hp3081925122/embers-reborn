@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:storage_blocks/aluminum"
-  },
+  "input": "#c:storage_blocks/aluminum",
   "output": {
     "amount": 810,
     "tag": "c:molten_aluminum"

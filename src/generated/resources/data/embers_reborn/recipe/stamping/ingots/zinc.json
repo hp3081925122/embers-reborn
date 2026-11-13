@@ -9,11 +9,12 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_zinc\",\"amount\":90}",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_zinc"
+  },
   "output": {
     "tag": "c:ingots/zinc"
   },
-  "stamp": {
-    "item": "embers_reborn:ingot_stamp"
-  }
+  "stamp": "embers_reborn:ingot_stamp"
 }

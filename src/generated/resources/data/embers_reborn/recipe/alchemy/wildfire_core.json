@@ -1,42 +1,22 @@
 {
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/copper"
-    },
-    {
-      "tag": "embers_reborn:aspectus/iron"
-    },
-    {
-      "tag": "embers_reborn:aspectus/silver"
-    },
-    {
-      "tag": "embers_reborn:aspectus/dawnstone"
-    }
+    "#embers_reborn:aspectus/copper",
+    "#embers_reborn:aspectus/iron",
+    "#embers_reborn:aspectus/silver",
+    "#embers_reborn:aspectus/dawnstone"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "tag": "c:ingots/dawnstone"
-    },
-    {
-      "item": "embers_reborn:ember_crystal_cluster"
-    },
-    {
-      "tag": "c:ingots/dawnstone"
-    },
-    {
-      "tag": "c:plates/copper"
-    }
+    "#c:ingots/dawnstone",
+    "embers_reborn:ember_crystal_cluster",
+    "#c:ingots/dawnstone",
+    "#c:plates/copper"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:wildfire_core"
   },
-  "tablet": {
-    "item": "embers_reborn:ancient_motive_core"
-  }
+  "tablet": "embers_reborn:ancient_motive_core"
 }

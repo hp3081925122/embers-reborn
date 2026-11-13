@@ -27,19 +27,19 @@ public class GemSocketRecipeBuilder {
 	}
 
 	public static GemSocketRecipeBuilder create(TagKey<Item> tag) {
-		GemSocketRecipeBuilder builder = create(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
+		GemSocketRecipeBuilder builder = create(com.rekindled.embers.util.Ingredients.tag(tag));
 		builder.id = tag.location();
 		return builder;
 	}
 
 	public static GemSocketRecipeBuilder create(ItemStack itemStack) {
-		GemSocketRecipeBuilder builder = create(Ingredient.of(itemStack.getItem()));
-		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
-		return builder;
+		return create(itemStack.getItem());
 	}
 
 	public static GemSocketRecipeBuilder create(Item item) {
-		return create(new ItemStack(item));
+		GemSocketRecipeBuilder builder = create(Ingredient.of(item));
+		builder.id = BuiltInRegistries.ITEM.getKey(item);
+		return builder;
 	}
 
 	public GemSocketRecipeBuilder id(Identifier id) {

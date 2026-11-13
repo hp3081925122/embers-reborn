@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "embers_reborn:dawnstone_block"
-    }
+    "embers_reborn:dawnstone_block"
   ],
   "result": {
     "count": 9,

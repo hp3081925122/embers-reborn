@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "embers_reborn:ember_shard"
-    },
-    "X": {
-      "item": "embers_reborn:archaic_brick"
-    }
+    "S": "embers_reborn:ember_shard",
+    "X": "embers_reborn:archaic_brick"
   },
   "pattern": [
     "XXX",

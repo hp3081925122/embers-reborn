@@ -18,8 +18,6 @@ import com.rekindled.embers.util.Misc;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class CatalyticPlugUpgrade extends DefaultUpgradeProvider {
 
@@ -100,7 +98,6 @@ public class CatalyticPlugUpgrade extends DefaultUpgradeProvider {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public void throwEvent(BlockEntity tile, List<UpgradeContext> upgrades, UpgradeEvent event, int distance, int count) {
 		if (event instanceof DialInformationEvent dialEvent && EmberDialBlock.DIAL_TYPE.equals(dialEvent.getDialType())) {
 			double multiplier = 1.0;

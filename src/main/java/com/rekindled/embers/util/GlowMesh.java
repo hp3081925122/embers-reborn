@@ -17,8 +17,6 @@ import net.minecraft.client.gui.render.TextureSetup;
 import net.minecraft.client.renderer.state.gui.GuiElementRenderState;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 /**
  * Collects the Codex glow geometry (1.20.1 drew it with Tesselator as TRIANGLES or TRIANGLE_STRIP,
@@ -26,7 +24,6 @@ import net.neoforged.api.distmarker.OnlyIn;
  * The 26.1 GUI pipelines only take quads, so each triangle becomes a quad with a repeated last vertex
  * and each strip segment becomes one quad. Keeps the old addVertex(...).setColor(...) call shape.
  */
-@OnlyIn(Dist.CLIENT)
 public class GlowMesh {
 
 	private final boolean strip;

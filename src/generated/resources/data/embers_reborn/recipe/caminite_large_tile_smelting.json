@@ -3,11 +3,8 @@
   "category": "blocks",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "embers_reborn:raw_caminite_block"
-  },
+  "ingredient": "embers_reborn:raw_caminite_block",
   "result": {
-    "count": 1,
     "id": "embers_reborn:caminite_large_tile"
   }
 }

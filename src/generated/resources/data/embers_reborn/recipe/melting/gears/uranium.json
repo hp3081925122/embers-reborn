@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:gears/uranium"
-  },
+  "input": "#c:gears/uranium",
   "output": {
     "amount": 180,
     "tag": "c:molten_uranium"

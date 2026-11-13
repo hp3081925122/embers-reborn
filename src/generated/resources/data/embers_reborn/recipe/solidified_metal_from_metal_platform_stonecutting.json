@@ -1,10 +1,7 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "embers_reborn:metal_platform"
-  },
+  "ingredient": "embers_reborn:metal_platform",
   "result": {
-    "count": 1,
     "id": "embers_reborn:solidified_metal"
   }
 }

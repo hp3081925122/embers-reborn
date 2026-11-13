@@ -5,13 +5,10 @@ import com.google.common.collect.Maps;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import java.text.DecimalFormat;
 import java.util.Map;
 
-@OnlyIn(Dist.CLIENT)
 public class DecimalFormats implements ResourceManagerReloadListener {
 	private static final Map<String,DecimalFormat> decimalFormats = Maps.newHashMap();
 

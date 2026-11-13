@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "tag": "c:storage_blocks/iron"
-    },
-    "C": {
-      "tag": "c:ingots/copper"
-    },
-    "X": {
-      "item": "embers_reborn:caminite_brick"
-    }
+    "B": "#c:storage_blocks/iron",
+    "C": "#c:ingots/copper",
+    "X": "embers_reborn:caminite_brick"
   },
   "pattern": [
     "XCX",
@@ -18,7 +12,6 @@
     "X X"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:stamper"
   }
 }

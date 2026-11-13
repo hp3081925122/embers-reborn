@@ -18,9 +18,7 @@
     "amount": 90,
     "tag": "c:molten_lead"
   },
-  "input": {
-    "tag": "c:storage_blocks/raw_uranium"
-  },
+  "input": "#c:storage_blocks/raw_uranium",
   "output": {
     "amount": 1080,
     "tag": "c:molten_uranium"

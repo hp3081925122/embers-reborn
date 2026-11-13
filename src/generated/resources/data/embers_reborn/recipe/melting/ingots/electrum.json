@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:ingots/electrum"
-  },
+  "input": "#c:ingots/electrum",
   "output": {
     "amount": 90,
     "tag": "c:molten_electrum"

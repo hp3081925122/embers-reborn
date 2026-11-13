@@ -30,19 +30,19 @@ public class CatalysisCombustionRecipeBuilder {
 	}
 
 	public static CatalysisCombustionRecipeBuilder create(TagKey<Item> tag) {
-		CatalysisCombustionRecipeBuilder builder = create(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
+		CatalysisCombustionRecipeBuilder builder = create(com.rekindled.embers.util.Ingredients.tag(tag));
 		builder.id = tag.location();
 		return builder;
 	}
 
 	public static CatalysisCombustionRecipeBuilder create(ItemStack itemStack) {
-		CatalysisCombustionRecipeBuilder builder = create(Ingredient.of(itemStack.getItem()));
-		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
-		return builder;
+		return create(itemStack.getItem());
 	}
 
 	public static CatalysisCombustionRecipeBuilder create(Item item) {
-		return create(new ItemStack(item));
+		CatalysisCombustionRecipeBuilder builder = create(Ingredient.of(item));
+		builder.id = BuiltInRegistries.ITEM.getKey(item);
+		return builder;
 	}
 
 	public CatalysisCombustionRecipeBuilder id(Identifier id) {

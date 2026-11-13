@@ -22,9 +22,7 @@
     "amount": 90,
     "tag": "c:molten_iron"
   },
-  "input": {
-    "tag": "c:storage_blocks/raw_zinc"
-  },
+  "input": "#c:storage_blocks/raw_zinc",
   "output": {
     "amount": 1080,
     "tag": "c:molten_zinc"

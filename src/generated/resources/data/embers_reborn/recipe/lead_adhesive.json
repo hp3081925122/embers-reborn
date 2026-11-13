@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "B": {
-      "tag": "c:slimeballs"
-    },
-    "S": {
-      "tag": "c:strings"
-    }
+    "B": "#c:slime_balls",
+    "S": "#c:strings"
   },
   "pattern": [
     "SS ",

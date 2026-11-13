@@ -21,25 +21,23 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class StampingRecipe implements IStampingRecipe {
 
-	public static final RecipeSerializer<StampingRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
-
 	public final Identifier id;
 
 	public final Ingredient stamp;
 	public final Ingredient input;
 	public final FluidIngredient fluid;
 
-	public final Either<ItemStack, TagAmount> output;
+	public final Either<net.minecraft.world.item.ItemStackTemplate, TagAmount> output;
 
 	public StampingRecipe(Identifier id, Ingredient stamp, Ingredient input, FluidIngredient fluid, TagAmount output) {
 		this(id, stamp, input, fluid, Either.right(output));
 	}
 
-	public StampingRecipe(Identifier id, Ingredient stamp, Ingredient input, FluidIngredient fluid, ItemStack output) {
+	public StampingRecipe(Identifier id, Ingredient stamp, Ingredient input, FluidIngredient fluid, net.minecraft.world.item.ItemStackTemplate output) {
 		this(id, stamp, input, fluid, Either.left(output));
 	}
 
-	public StampingRecipe(Identifier id, Ingredient stamp, Ingredient input, FluidIngredient fluid, Either<ItemStack, TagAmount> output) {
+	public StampingRecipe(Identifier id, Ingredient stamp, Ingredient input, FluidIngredient fluid, Either<net.minecraft.world.item.ItemStackTemplate, TagAmount> output) {
 		this.id = id;
 		this.stamp = stamp;
 		this.input = input;
@@ -94,7 +92,7 @@ public class StampingRecipe implements IStampingRecipe {
 	@Override
 	public ItemStack getResultItem() {
 		if (output.left().isPresent())
-			return output.left().get();
+			return output.left().get().create();
 		return new ItemStack(Misc.getTaggedItem(output.right().get().tag), output.right().get().amount);
 	}
 
@@ -124,21 +122,23 @@ public class StampingRecipe implements IStampingRecipe {
 	}
 
 	// Output Either codec / stream codec — declared before Serializer so inner class can see them
-	public static final com.mojang.serialization.Codec<Either<ItemStack, TagAmount>> OUTPUT_CODEC =
+	public static final com.mojang.serialization.Codec<Either<net.minecraft.world.item.ItemStackTemplate, TagAmount>> OUTPUT_CODEC =
 		com.mojang.serialization.Codec.either(
-			net.minecraft.world.item.ItemStack.CODEC,
+			net.minecraft.world.item.ItemStackTemplate.CODEC,
 			com.mojang.serialization.codecs.RecordCodecBuilder.<TagAmount>create(inst -> inst.group(
 				net.minecraft.resources.Identifier.CODEC.fieldOf("tag").forGetter(ta -> ta.tag.location()),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("count", 1).forGetter(ta -> ta.amount)
 			).apply(inst, (tag, count) -> new TagAmount(ItemTags.create(tag), count))));
 
-	public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, Either<ItemStack, TagAmount>> OUTPUT_STREAM_CODEC =
-		net.minecraft.network.codec.ByteBufCodecs.<net.minecraft.network.RegistryFriendlyByteBuf, ItemStack, TagAmount>either(
-			net.minecraft.world.item.ItemStack.OPTIONAL_STREAM_CODEC,
+	public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, Either<net.minecraft.world.item.ItemStackTemplate, TagAmount>> OUTPUT_STREAM_CODEC =
+		net.minecraft.network.codec.ByteBufCodecs.<net.minecraft.network.RegistryFriendlyByteBuf, net.minecraft.world.item.ItemStackTemplate, TagAmount>either(
+			net.minecraft.world.item.ItemStackTemplate.STREAM_CODEC,
 			net.minecraft.network.codec.StreamCodec.composite(
 				net.minecraft.network.codec.ByteBufCodecs.fromCodec(net.minecraft.resources.Identifier.CODEC), ta -> ta.tag.location(),
 				net.minecraft.network.codec.ByteBufCodecs.VAR_INT, ta -> ta.amount,
 				(tag, count) -> new TagAmount(ItemTags.create(tag), count)));
+
+	public static final RecipeSerializer<StampingRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
 	public static class Serializer {
 		public StampingRecipe fromJson(Identifier recipeId, JsonObject json) {return null; }

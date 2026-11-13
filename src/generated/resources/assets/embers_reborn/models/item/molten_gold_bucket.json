@@ -1,7 +1,0 @@
-{
-  "parent": "embers_reborn:item/bucket_fluid",
-  "cover_is_mask": false,
-  "flip_gas": true,
-  "fluid": "embers_reborn:molten_gold",
-  "loader": "neoforge:fluid_container"
-}

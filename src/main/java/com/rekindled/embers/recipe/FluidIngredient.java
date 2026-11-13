@@ -30,11 +30,16 @@ public abstract class FluidIngredient {
 	/** Empty fluid ingredient, matches nothing */
 	public static final FluidIngredient EMPTY = new Empty();
 
-	/** Codec: round-trip via Gson JSON string (safe with any DynamicOps) */
 	public static final com.mojang.serialization.Codec<FluidIngredient> CODEC =
-		com.mojang.serialization.Codec.STRING.xmap(
-			(str) -> FluidIngredient.deserialize(new com.google.gson.Gson().fromJson(str, com.google.gson.JsonElement.class), "fluid"),
-			(ing) -> new com.google.gson.Gson().toJson(ing.serialize()));
+		com.mojang.serialization.Codec.either(com.mojang.serialization.Codec.STRING, net.minecraft.util.ExtraCodecs.JSON).comapFlatMap(
+			either -> {
+				try {
+					return com.mojang.serialization.DataResult.success(FluidIngredient.deserialize(either.map(com.google.gson.JsonParser::parseString, json -> json), "fluid"));
+				} catch (RuntimeException e) {
+					return com.mojang.serialization.DataResult.error(() -> "Invalid fluid ingredient: " + e.getMessage());
+				}
+			},
+			ing -> com.mojang.datafixers.util.Either.right(ing.serialize()));
 
 	/** StreamCodec: network encode/decode using existing write/read methods */
 	public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, FluidIngredient> STREAM_CODEC =

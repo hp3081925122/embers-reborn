@@ -18,9 +18,7 @@
     "amount": 10,
     "tag": "c:molten_lead"
   },
-  "input": {
-    "tag": "c:raw_materials/tin"
-  },
+  "input": "#c:raw_materials/tin",
   "output": {
     "amount": 120,
     "tag": "c:molten_tin"

@@ -137,7 +137,7 @@ public class BoringRecipe implements IBoringRecipe {
 		
 		public com.mojang.serialization.MapCodec<BoringRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.<BoringRecipe>mapCodec(inst -> inst.group(
-				net.minecraft.world.item.ItemStack.CODEC.fieldOf("output").forGetter((BoringRecipe r) -> r.result.getStack()),
+				net.minecraft.world.item.ItemStackTemplate.CODEC.fieldOf("output").forGetter((BoringRecipe r) -> r.result.getTemplate()),
 				com.mojang.serialization.Codec.INT.fieldOf("weight").forGetter((BoringRecipe r) -> r.result.weight()),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("min_height", Integer.MIN_VALUE).forGetter((BoringRecipe r) -> r.minHeight),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("max_height", Integer.MAX_VALUE).forGetter((BoringRecipe r) -> r.maxHeight),
@@ -153,7 +153,7 @@ public class BoringRecipe implements IBoringRecipe {
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, BoringRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.of(
 				(buf, r) -> {
-					net.minecraft.world.item.ItemStack.OPTIONAL_STREAM_CODEC.encode(buf, r.result.getStack());
+					net.minecraft.world.item.ItemStackTemplate.STREAM_CODEC.encode(buf, r.result.getTemplate());
 					buf.writeVarInt(r.result.weight());
 					buf.writeVarInt(r.minHeight);
 					buf.writeVarInt(r.maxHeight);
@@ -164,7 +164,7 @@ public class BoringRecipe implements IBoringRecipe {
 					buf.writeDouble(r.chance);
 				},
 				buf -> {
-					net.minecraft.world.item.ItemStack stack = net.minecraft.world.item.ItemStack.OPTIONAL_STREAM_CODEC.decode(buf);
+					net.minecraft.world.item.ItemStackTemplate stack = net.minecraft.world.item.ItemStackTemplate.STREAM_CODEC.decode(buf);
 					int weight = buf.readVarInt();
 					int minH = buf.readVarInt();
 					int maxH = buf.readVarInt();

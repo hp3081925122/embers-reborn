@@ -3,11 +3,8 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "embers_reborn:raw_plate_stamp"
-  },
+  "ingredient": "embers_reborn:raw_plate_stamp",
   "result": {
-    "count": 1,
     "id": "embers_reborn:plate_stamp"
   }
 }

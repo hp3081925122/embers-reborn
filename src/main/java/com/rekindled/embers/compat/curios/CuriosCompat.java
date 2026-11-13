@@ -33,8 +33,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
@@ -59,7 +57,6 @@ public class CuriosCompat {
 
 	public static void init() {}
 
-	@OnlyIn(Dist.CLIENT)
 	public static boolean checkForCurios(LivingEntity living, Predicate<ItemStack> predicate) {
 		Optional<ICuriosItemHandler> inv = CuriosApi.getCuriosInventory(living);
 		if (inv.isPresent()) {

@@ -1,36 +1,20 @@
 {
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/lead"
-    },
-    {
-      "tag": "embers_reborn:aspectus/silver"
-    }
+    "#embers_reborn:aspectus/lead",
+    "#embers_reborn:aspectus/silver"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "tag": "c:storage_blocks/coal"
-    },
-    {
-      "tag": "c:obsidians"
-    },
-    {
-      "tag": "c:ingots/lead"
-    },
-    {
-      "tag": "c:ingots/lead"
-    }
+    "#c:storage_blocks/coal",
+    "#c:obsidians",
+    "#c:ingots/lead",
+    "#c:ingots/lead"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:tyrfing"
   },
-  "tablet": {
-    "item": "embers_reborn:lead_sword"
-  }
+  "tablet": "embers_reborn:lead_sword"
 }

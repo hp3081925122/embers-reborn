@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:storage_blocks/bronze"
-  },
+  "input": "#c:storage_blocks/bronze",
   "output": {
     "amount": 810,
     "tag": "c:molten_bronze"

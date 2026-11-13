@@ -18,9 +18,7 @@
     "amount": 90,
     "tag": "c:molten_iron"
   },
-  "input": {
-    "tag": "c:storage_blocks/raw_aluminum"
-  },
+  "input": "#c:storage_blocks/raw_aluminum",
   "output": {
     "amount": 1080,
     "tag": "c:molten_aluminum"

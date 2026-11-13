@@ -2,22 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:bucket"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "X": {
-      "item": "embers_reborn:caminite_brick"
-    }
+    "B": "minecraft:bucket",
+    "I": "#c:ingots/iron",
+    "X": "embers_reborn:caminite_brick"
   },
   "pattern": [
     "I I",
     "XBX"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:stamp_base"
   }
 }

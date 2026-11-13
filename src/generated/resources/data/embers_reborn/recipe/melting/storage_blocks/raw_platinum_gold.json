@@ -18,9 +18,7 @@
     "amount": 90,
     "tag": "c:molten_gold"
   },
-  "input": {
-    "tag": "c:storage_blocks/raw_platinum"
-  },
+  "input": "#c:storage_blocks/raw_platinum",
   "output": {
     "amount": 1080,
     "tag": "c:molten_platinum"

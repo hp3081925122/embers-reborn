@@ -21,7 +21,7 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 
 	public static final RecipeSerializer<AlchemyRecipeForBabies> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
-	public AlchemyRecipeForBabies(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
+	public AlchemyRecipeForBabies(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, net.minecraft.world.item.ItemStackTemplate output, net.minecraft.world.item.ItemStackTemplate failure) {
 		super(id, tablet, aspects, inputs, output, failure);
 	}
 
@@ -62,9 +62,9 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 				Ingredient.CODEC.fieldOf("tablet").forGetter(r -> r.tablet),
 				Ingredient.CODEC.listOf().fieldOf("aspects").forGetter(r -> r.aspects),
 				Ingredient.CODEC.listOf().fieldOf("inputs").forGetter(r -> r.inputs),
-				ItemStack.CODEC.fieldOf("output").forGetter(r -> r.output),
-				ItemStack.CODEC.optionalFieldOf("failure", new ItemStack(RegistryManager.ALCHEMICAL_WASTE.get())).forGetter(r -> r.failure)
-			).apply(inst, (tablet, aspects, inputs, output, failure) -> new AlchemyRecipeForBabies(null, tablet, new ArrayList<>(aspects), new ArrayList<>(inputs), output, failure)));
+				net.minecraft.world.item.ItemStackTemplate.CODEC.fieldOf("output").forGetter(r -> r.output),
+				net.minecraft.world.item.ItemStackTemplate.CODEC.optionalFieldOf("failure").forGetter(r -> java.util.Optional.of(r.failure))
+			).apply(inst, (tablet, aspects, inputs, output, failure) -> new AlchemyRecipeForBabies(null, tablet, new ArrayList<>(aspects), new ArrayList<>(inputs), output, failure.orElseGet(() -> new net.minecraft.world.item.ItemStackTemplate(RegistryManager.ALCHEMICAL_WASTE.get())))));
 		}
 		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AlchemyRecipeForBabies> streamCodec() {
@@ -88,12 +88,12 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 					aspects.add(Ingredient.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, element).result().orElse(null));
 				}
 			}
-			ItemStack output = net.minecraft.world.item.ItemStack.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, GsonHelper.getAsJsonObject(json, "output")).result().orElse(net.minecraft.world.item.ItemStack.EMPTY);
-			ItemStack failure;
+			net.minecraft.world.item.ItemStackTemplate output = net.minecraft.world.item.ItemStackTemplate.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, GsonHelper.getAsJsonObject(json, "output")).getOrThrow();
+			net.minecraft.world.item.ItemStackTemplate failure;
 			if (json.has("failure")) {
-				failure = net.minecraft.world.item.ItemStack.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, GsonHelper.getAsJsonObject(json, "failure")).result().orElse(net.minecraft.world.item.ItemStack.EMPTY);
+				failure = net.minecraft.world.item.ItemStackTemplate.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, GsonHelper.getAsJsonObject(json, "failure")).getOrThrow();
 			} else {
-				failure = new ItemStack(RegistryManager.ALCHEMICAL_WASTE.get());
+				failure = new net.minecraft.world.item.ItemStackTemplate(RegistryManager.ALCHEMICAL_WASTE.get());
 			}
 			return new AlchemyRecipeForBabies(recipeId, tablet, aspects, inputs, output, failure);
 		}
@@ -102,8 +102,8 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 			Ingredient tablet = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
 			ArrayList<Ingredient> aspects = buffer.readCollection((i) -> new ArrayList<>(), (buf) -> Ingredient.CONTENTS_STREAM_CODEC.decode((net.minecraft.network.RegistryFriendlyByteBuf) buf));
 			ArrayList<Ingredient> inputs = buffer.readCollection((i) -> new ArrayList<>(), (buf) -> Ingredient.CONTENTS_STREAM_CODEC.decode((net.minecraft.network.RegistryFriendlyByteBuf) buf));
-			ItemStack output = net.minecraft.world.item.ItemStack.STREAM_CODEC.decode(buffer);
-			ItemStack failure = net.minecraft.world.item.ItemStack.STREAM_CODEC.decode(buffer);
+			net.minecraft.world.item.ItemStackTemplate output = net.minecraft.world.item.ItemStackTemplate.STREAM_CODEC.decode(buffer);
+			net.minecraft.world.item.ItemStackTemplate failure = net.minecraft.world.item.ItemStackTemplate.STREAM_CODEC.decode(buffer);
 
 			return new AlchemyRecipeForBabies(recipeId, tablet, aspects, inputs, output, failure);
 		}
@@ -112,8 +112,8 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 			Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.tablet);
 			buffer.writeCollection(recipe.aspects, (buf, input) -> Ingredient.CONTENTS_STREAM_CODEC.encode((net.minecraft.network.RegistryFriendlyByteBuf) buf, input));
 			buffer.writeCollection(recipe.inputs, (buf, input) -> Ingredient.CONTENTS_STREAM_CODEC.encode((net.minecraft.network.RegistryFriendlyByteBuf) buf, input));
-			net.minecraft.world.item.ItemStack.STREAM_CODEC.encode(buffer, recipe.output);
-			net.minecraft.world.item.ItemStack.STREAM_CODEC.encode(buffer, recipe.failure);
+			net.minecraft.world.item.ItemStackTemplate.STREAM_CODEC.encode(buffer, recipe.output);
+			net.minecraft.world.item.ItemStackTemplate.STREAM_CODEC.encode(buffer, recipe.failure);
 		}
 	}
 }

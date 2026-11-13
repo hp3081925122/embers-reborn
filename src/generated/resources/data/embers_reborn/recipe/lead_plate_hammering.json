@@ -2,18 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "c:ingots/lead"
-    },
-    {
-      "tag": "c:ingots/lead"
-    },
-    {
-      "tag": "embers_reborn:tinker_hammer"
-    }
+    "#c:ingots/lead",
+    "#c:ingots/lead",
+    "#embers_reborn:tinker_hammer"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:lead_plate"
   }
 }

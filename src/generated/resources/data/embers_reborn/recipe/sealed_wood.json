@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "P": {
-      "tag": "minecraft:planks"
-    },
-    "S": {
-      "tag": "c:slimeballs"
-    }
+    "P": "#minecraft:planks",
+    "S": "#c:slime_balls"
   },
   "pattern": [
     "PPP",

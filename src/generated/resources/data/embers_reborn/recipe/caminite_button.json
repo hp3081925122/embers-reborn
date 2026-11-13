@@ -2,12 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "embers_reborn:caminite_brick"
-    }
+    "embers_reborn:caminite_brick"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:caminite_button"
   }
 }

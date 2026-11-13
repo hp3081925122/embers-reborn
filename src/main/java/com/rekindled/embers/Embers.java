@@ -106,7 +106,6 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
@@ -200,7 +199,7 @@ public class Embers {
 	public void commonSetup(final FMLCommonSetupEvent event) {
 		RegistryManager.init(event);
 				NeoForge.EVENT_BUS.addListener(ResearchManager::onClone);
-		ResearchManager.initResearches();
+		NeoForge.EVENT_BUS.addListener(ResearchManager::onComponentsBound);
 		NeoForge.EVENT_BUS.addListener(EmbersEvents::onJoin);
 		NeoForge.EVENT_BUS.addListener(EventPriority.LOW, EmbersEvents::onEntityDamaged);
 		NeoForge.EVENT_BUS.addListener(EmbersEvents::onBlockBreak);
@@ -466,7 +465,6 @@ public class Embers {
 	@net.neoforged.fml.common.EventBusSubscriber(modid = Embers.MODID, value = Dist.CLIENT)
 	public static class ClientModEvents {
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		public static void clientSetup(FMLClientSetupEvent event) {
 
@@ -480,13 +478,11 @@ public class Embers {
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onTooltip);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerMenuScreens(net.neoforged.neoforge.client.event.RegisterMenuScreensEvent event) {
 			event.register(RegistryManager.SLATE_MENU.get(), com.rekindled.embers.gui.SlateScreen::new);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		public static void overlayRegister(RegisterGuiLayersEvent event) {
 			event.registerAboveAll(Identifier.parse(Embers.MODID + ":embers_ingame_overlay"), EmbersClientEvents.INGAME_OVERLAY);
@@ -508,21 +504,18 @@ public class Embers {
 			});
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void addResourceListener(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
 			event.addListener(Identifier.fromNamespaceAndPath(MODID, "decimal_formats"), new DecimalFormats());
 			event.addListener(Identifier.fromNamespaceAndPath(MODID, "colors"), new EmbersColors());
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerRenderPipelines(net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent event) {
 			com.rekindled.embers.render.EmbersParticleLayers.registerPipelines(event);
 			com.rekindled.embers.render.EmbersRenderTypes.registerPipelines(event);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void addParticleProvider(RegisterParticleProvidersEvent event) {
 			event.registerSpriteSet(RegistryManager.GLOW_PARTICLE.get(), GlowParticle.Provider::new);
@@ -535,19 +528,16 @@ public class Embers {
 			event.registerSpriteSet(RegistryManager.XRAY_GLOW_PARTICLE.get(), XRayGlowParticle.Provider::new);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerStandaloneModels(net.neoforged.neoforge.client.event.ModelEvent.RegisterStandalone event) {
 			com.rekindled.embers.render.EmbersStandaloneModels.register(event);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void onModelsBaked(net.neoforged.neoforge.client.event.ModelEvent.BakingCompleted event) {
 			EmbersClientEvents.afterModelBake(event);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			event.registerEntityRenderer(RegistryManager.EMBER_PACKET.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
@@ -598,7 +588,6 @@ public class Embers {
 			event.registerBlockEntityRenderer(RegistryManager.EXCAVATION_BUCKETS_ENTITY.get(), ExcavationBucketsBlockEntityRenderer::new);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 			event.registerLayerDefinition(AncientGolemRenderer.LAYER_LOCATION, AncientGolemModel::createLayer);
@@ -608,44 +597,37 @@ public class Embers {
 			event.registerLayerDefinition(AshenArmorModel.ASHEN_ARMOR_FEET, () -> LayerDefinition.create(AshenArmorModel.createFeetMesh(), 64, 64));
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerFluidModels(net.neoforged.neoforge.client.event.RegisterFluidModelsEvent event) {
 			com.rekindled.embers.fluidtypes.EmbersFluidClient.registerFluidModels(event);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerClientExtensions(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent event) {
 			com.rekindled.embers.fluidtypes.EmbersFluidClient.registerClientExtensions(event);
 			event.registerItem(com.rekindled.embers.model.AshenArmorModel.ARMOR_MODEL_GETTER, RegistryManager.ASHEN_GOGGLES.get(), RegistryManager.ASHEN_CLOAK.get(), RegistryManager.ASHEN_LEGGINGS.get(), RegistryManager.ASHEN_BOOTS.get());
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerSpecialModels(net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent event) {
 			event.register(Identifier.fromNamespaceAndPath(MODID, "alchemical_note"), com.rekindled.embers.render.AlchemicalNoteItemRenderer.Unbaked.MAP_CODEC);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerItemTints(RegisterColorHandlersEvent.ItemTintSources event) {
 			com.rekindled.embers.client.EmbersItemClient.registerTints(event);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerItemProperties(net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent event) {
 			com.rekindled.embers.client.EmbersItemClient.registerProperties(event);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerBlockStateModels(net.neoforged.neoforge.client.event.RegisterBlockStateModels event) {
 			event.registerModel(Identifier.parse(Embers.MODID + ":pipe"), PipeModel.CODEC);
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
 		static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
 			event.register(GlowingTextTooltip.class, GlowingTextClientTooltip::new);

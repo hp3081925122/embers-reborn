@@ -17,8 +17,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class EmberDialBlock extends DialBaseBlock {
 
@@ -59,7 +57,6 @@ public class EmberDialBlock extends DialBaseBlock {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static MutableComponent formatEmber(double ember, double emberCapacity) {
 		DecimalFormat emberFormat = DecimalFormats.getDecimalFormat(Embers.MODID + ".decimal_format.ember");
 		return Component.translatable(Embers.MODID + ".tooltip.emberdial.ember", emberFormat.format(ember), emberFormat.format(emberCapacity));

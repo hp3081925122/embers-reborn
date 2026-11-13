@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "X": {
-      "item": "embers_reborn:sealed_wood_tile"
-    }
+    "X": "embers_reborn:sealed_wood_tile"
   },
   "pattern": [
     "XX",

@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "tag": "c:storage_blocks/lead"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "P": {
-      "tag": "c:plates/lead"
-    }
+    "B": "#c:storage_blocks/lead",
+    "I": "#c:ingots/iron",
+    "P": "#c:plates/lead"
   },
   "pattern": [
     "PPP",
@@ -18,7 +12,6 @@
     "PPP"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:excavation_buckets"
   }
 }

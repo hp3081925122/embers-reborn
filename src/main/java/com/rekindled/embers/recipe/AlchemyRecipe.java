@@ -21,7 +21,7 @@ public class AlchemyRecipe extends AlchemyRecipeBase {
 
 	public static final RecipeSerializer<AlchemyRecipe> SERIALIZER = new RecipeSerializer<>(new Serializer().codec(), new Serializer().streamCodec());
 
-	public AlchemyRecipe(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
+	public AlchemyRecipe(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, net.minecraft.world.item.ItemStackTemplate output, net.minecraft.world.item.ItemStackTemplate failure) {
 		super(id, tablet, aspects, inputs, output, failure);
 	}
 
@@ -41,9 +41,9 @@ public class AlchemyRecipe extends AlchemyRecipeBase {
 				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("tablet").forGetter(r -> r.tablet),
 				net.minecraft.world.item.crafting.Ingredient.CODEC.listOf().fieldOf("aspects").forGetter(r -> r.aspects),
 				net.minecraft.world.item.crafting.Ingredient.CODEC.listOf().fieldOf("inputs").forGetter(r -> r.inputs),
-				net.minecraft.world.item.ItemStack.CODEC.fieldOf("output").forGetter(r -> r.output),
-				net.minecraft.world.item.ItemStack.CODEC.optionalFieldOf("failure", new net.minecraft.world.item.ItemStack(com.rekindled.embers.RegistryManager.ALCHEMICAL_WASTE.get())).forGetter(r -> r.failure)
-			).apply(inst, (tablet, aspects, inputs, output, failure) -> new AlchemyRecipe(null, tablet, new java.util.ArrayList<>(aspects), new java.util.ArrayList<>(inputs), output, failure)));
+				net.minecraft.world.item.ItemStackTemplate.CODEC.fieldOf("output").forGetter(r -> r.output),
+				net.minecraft.world.item.ItemStackTemplate.CODEC.optionalFieldOf("failure").forGetter(r -> java.util.Optional.of(r.failure))
+			).apply(inst, (tablet, aspects, inputs, output, failure) -> new AlchemyRecipe(null, tablet, new java.util.ArrayList<>(aspects), new java.util.ArrayList<>(inputs), output, failure.orElseGet(() -> new net.minecraft.world.item.ItemStackTemplate(RegistryManager.ALCHEMICAL_WASTE.get())))));
 		}
 		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, AlchemyRecipe> streamCodec() {
@@ -51,8 +51,8 @@ public class AlchemyRecipe extends AlchemyRecipeBase {
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC, r -> r.tablet,
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC.apply(net.minecraft.network.codec.ByteBufCodecs.list()), r -> r.aspects,
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC.apply(net.minecraft.network.codec.ByteBufCodecs.list()), r -> r.inputs,
-				net.minecraft.world.item.ItemStack.OPTIONAL_STREAM_CODEC, r -> r.output,
-				net.minecraft.world.item.ItemStack.OPTIONAL_STREAM_CODEC, r -> r.failure,
+				net.minecraft.world.item.ItemStackTemplate.STREAM_CODEC, r -> r.output,
+				net.minecraft.world.item.ItemStackTemplate.STREAM_CODEC, r -> r.failure,
 				(tablet, aspects, inputs, output, failure) -> new AlchemyRecipe(null, tablet, new java.util.ArrayList<>(aspects), new java.util.ArrayList<>(inputs), output, failure));
 		}
 	}

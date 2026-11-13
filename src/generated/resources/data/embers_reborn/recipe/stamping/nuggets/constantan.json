@@ -9,11 +9,12 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_constantan\",\"amount\":10}",
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_constantan"
+  },
   "output": {
     "tag": "c:nuggets/constantan"
   },
-  "stamp": {
-    "item": "embers_reborn:nugget_stamp"
-  }
+  "stamp": "embers_reborn:nugget_stamp"
 }

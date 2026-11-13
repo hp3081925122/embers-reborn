@@ -2,19 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": {
-      "tag": "c:plates/iron"
-    },
-    "P": {
-      "item": "minecraft:paper"
-    }
+    "I": "#c:plates/iron",
+    "P": "minecraft:paper"
   },
   "pattern": [
     "P",
     "I"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:fluid_dial"
   }
 }

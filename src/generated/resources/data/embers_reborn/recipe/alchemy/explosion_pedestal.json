@@ -7,24 +7,16 @@
   ],
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/silver"
-    }
+    "#embers_reborn:aspectus/silver"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "item": "embers_reborn:explosion_charm"
-    }
+    "embers_reborn:explosion_charm"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:explosion_pedestal"
   },
-  "tablet": {
-    "item": "embers_reborn:alchemy_pedestal"
-  }
+  "tablet": "embers_reborn:alchemy_pedestal"
 }

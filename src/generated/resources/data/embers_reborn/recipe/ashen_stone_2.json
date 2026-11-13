@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "embers_reborn:ashen_tile"
-    }
+    "S": "embers_reborn:ashen_tile"
   },
   "pattern": [
     "SS",

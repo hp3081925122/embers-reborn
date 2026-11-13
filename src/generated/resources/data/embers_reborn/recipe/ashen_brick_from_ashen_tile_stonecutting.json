@@ -1,10 +1,7 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "embers_reborn:ashen_tile"
-  },
+  "ingredient": "embers_reborn:ashen_tile",
   "result": {
-    "count": 1,
     "id": "embers_reborn:ashen_brick"
   }
 }

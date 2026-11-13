@@ -8,12 +8,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "embers_reborn:ember_crystal_cluster"
-    },
-    "N": {
-      "tag": "c:ingots/dawnstone"
-    }
+    "C": "embers_reborn:ember_crystal_cluster",
+    "N": "#c:ingots/dawnstone"
   },
   "pattern": [
     "CN ",
@@ -21,7 +17,6 @@
     " N "
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:ember_ring"
   }
 }

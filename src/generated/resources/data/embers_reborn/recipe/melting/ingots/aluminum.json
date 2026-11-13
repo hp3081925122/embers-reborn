@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:ingots/aluminum"
-  },
+  "input": "#c:ingots/aluminum",
   "output": {
     "amount": 90,
     "tag": "c:molten_aluminum"

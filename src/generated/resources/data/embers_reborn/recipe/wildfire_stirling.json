@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "embers_reborn:ember_shard"
-    },
-    "G": {
-      "tag": "c:storage_blocks/copper"
-    },
-    "P": {
-      "item": "embers_reborn:wildfire_core"
-    },
-    "X": {
-      "tag": "c:plates/dawnstone"
-    }
+    "B": "embers_reborn:ember_shard",
+    "G": "#c:storage_blocks/copper",
+    "P": "embers_reborn:wildfire_core",
+    "X": "#c:plates/dawnstone"
   },
   "pattern": [
     "XGX",
@@ -21,7 +13,6 @@
     "BPB"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:wildfire_stirling"
   }
 }

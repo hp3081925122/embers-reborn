@@ -7,10 +7,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class XRayGlowParticle extends SingleQuadParticle {
 
 	public float rBase = 1.0F;
@@ -77,7 +74,6 @@ public class XRayGlowParticle extends SingleQuadParticle {
 		return com.rekindled.embers.render.EmbersParticleLayers.ADDITIVE_XRAY;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class Provider implements net.minecraft.client.particle.ParticleProvider<XRayGlowParticleOptions> {
 		private final net.minecraft.client.particle.SpriteSet sprites;
 

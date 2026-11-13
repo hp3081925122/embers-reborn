@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "tag": "c:ingots/copper"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "P": {
-      "item": "embers_reborn:caminite_plate"
-    }
+    "C": "#c:ingots/copper",
+    "I": "#c:ingots/iron",
+    "P": "embers_reborn:caminite_plate"
   },
   "pattern": [
     "I I",

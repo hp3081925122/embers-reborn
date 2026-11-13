@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "embers_reborn:caminite_bricks"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "T": {
-      "item": "embers_reborn:fluid_vessel"
-    }
+    "B": "embers_reborn:caminite_bricks",
+    "I": "#c:ingots/iron",
+    "T": "embers_reborn:fluid_vessel"
   },
   "pattern": [
     "B B",
@@ -18,7 +12,6 @@
     "BTB"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:reservoir"
   }
 }

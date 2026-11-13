@@ -1,33 +1,19 @@
 {
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/iron"
-    },
-    {
-      "tag": "embers_reborn:aspectus/copper"
-    }
+    "#embers_reborn:aspectus/iron",
+    "#embers_reborn:aspectus/copper"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "tag": "c:ingots/copper"
-    },
-    {
-      "tag": "c:ingots/copper"
-    },
-    {
-      "tag": "c:ingots/copper"
-    }
+    "#c:ingots/copper",
+    "#c:ingots/copper",
+    "#c:ingots/copper"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:copper_crystal_seed"
   },
-  "tablet": {
-    "tag": "embers_reborn:crystal_seeds"
-  }
+  "tablet": "#embers_reborn:crystal_seeds"
 }

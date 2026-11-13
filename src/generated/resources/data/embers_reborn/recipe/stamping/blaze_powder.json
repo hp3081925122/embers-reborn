@@ -1,13 +1,9 @@
 {
   "type": "embers_reborn:stamping",
-  "input": {
-    "tag": "c:rods/blaze"
-  },
+  "input": "#c:rods/blaze",
   "output": {
     "count": 4,
     "id": "minecraft:blaze_powder"
   },
-  "stamp": {
-    "item": "embers_reborn:flat_stamp"
-  }
+  "stamp": "embers_reborn:flat_stamp"
 }

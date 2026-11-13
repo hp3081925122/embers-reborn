@@ -31,8 +31,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class EntropicEnumeratorBlockEntity extends BlockEntity implements IExtraCapabilityInformation {
 
@@ -971,7 +969,6 @@ public class EntropicEnumeratorBlockEntity extends BlockEntity implements IExtra
 	}
 
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void clientTick(Level level, BlockPos pos, BlockState state, EntropicEnumeratorBlockEntity blockEntity) {
 		if (level.getGameTime() >= blockEntity.nextMoveTime) {
 			long turnTicks = level.getGameTime() - blockEntity.nextMoveTime;

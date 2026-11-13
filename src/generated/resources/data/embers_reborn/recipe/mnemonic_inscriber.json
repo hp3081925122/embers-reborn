@@ -2,19 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "embers_reborn:intelligent_apparatus"
-    },
-    "C": {
-      "item": "embers_reborn:ember_crystal"
-    }
+    "A": "embers_reborn:intelligent_apparatus",
+    "C": "embers_reborn:ember_crystal"
   },
   "pattern": [
     "C",
     "A"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:mnemonic_inscriber"
   }
 }

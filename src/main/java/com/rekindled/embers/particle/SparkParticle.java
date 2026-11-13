@@ -6,10 +6,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SingleQuadParticle;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class SparkParticle extends SingleQuadParticle {
 
 	public float rBase = 1.0F;
@@ -62,7 +59,6 @@ public class SparkParticle extends SingleQuadParticle {
 		return com.rekindled.embers.render.EmbersParticleLayers.EMBER;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class Provider implements net.minecraft.client.particle.ParticleProvider<SparkParticleOptions> {
 		private final net.minecraft.client.particle.SpriteSet sprites;
 

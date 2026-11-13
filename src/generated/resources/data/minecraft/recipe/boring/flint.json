@@ -4,7 +4,6 @@
   "block_tag": "c:gravels",
   "chance": 1.0,
   "output": {
-    "count": 1,
     "id": "minecraft:flint"
   },
   "weight": 5

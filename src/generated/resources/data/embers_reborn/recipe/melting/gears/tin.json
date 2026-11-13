@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:gears/tin"
-  },
+  "input": "#c:gears/tin",
   "output": {
     "amount": 180,
     "tag": "c:molten_tin"

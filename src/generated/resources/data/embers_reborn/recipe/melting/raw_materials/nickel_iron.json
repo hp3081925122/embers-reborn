@@ -18,9 +18,7 @@
     "amount": 10,
     "tag": "c:molten_iron"
   },
-  "input": {
-    "tag": "c:raw_materials/nickel"
-  },
+  "input": "#c:raw_materials/nickel",
   "output": {
     "amount": 120,
     "tag": "c:molten_nickel"

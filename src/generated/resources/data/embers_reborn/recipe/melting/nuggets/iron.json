@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:nuggets/iron"
-  },
+  "input": "#c:nuggets/iron",
   "output": {
     "amount": 10,
     "tag": "c:molten_iron"

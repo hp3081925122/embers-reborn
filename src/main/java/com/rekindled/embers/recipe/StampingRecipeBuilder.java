@@ -26,17 +26,25 @@ public class StampingRecipeBuilder {
 	public Ingredient stamp;
 	public Ingredient input = null;
 	public FluidIngredient fluid = FluidIngredient.EMPTY;
-	public Either<ItemStack, TagAmount> output;
+	public Either<net.minecraft.world.item.ItemStackTemplate, TagAmount> output;
 
-	public static StampingRecipeBuilder create(ItemStack itemStack) {
+	public static StampingRecipeBuilder create(net.minecraft.world.item.ItemStackTemplate itemStack) {
 		StampingRecipeBuilder builder = new StampingRecipeBuilder();
 		builder.output = Either.left(itemStack);
-		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
+		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.item().value());
 		return builder;
 	}
 
+	public static StampingRecipeBuilder create(ItemStack itemStack) {
+		return create(net.minecraft.world.item.ItemStackTemplate.fromNonEmptyStack(itemStack));
+	}
+
 	public static StampingRecipeBuilder create(Item item) {
-		return create(new ItemStack(item));
+		return create(new net.minecraft.world.item.ItemStackTemplate(item));
+	}
+
+	public static StampingRecipeBuilder create(Item item, int count) {
+		return create(new net.minecraft.world.item.ItemStackTemplate(item, count));
 	}
 
 	public static StampingRecipeBuilder create(TagKey<Item> tag, int amount) {
@@ -76,7 +84,7 @@ public class StampingRecipeBuilder {
 	}
 
 	public StampingRecipeBuilder stamp(TagKey<Item> tag) {
-		stamp(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
+		stamp(com.rekindled.embers.util.Ingredients.tag(tag));
 		return this;
 	}
 
@@ -91,7 +99,7 @@ public class StampingRecipeBuilder {
 	}
 
 	public StampingRecipeBuilder input(TagKey<Item> tag) {
-		input(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
+		input(com.rekindled.embers.util.Ingredients.tag(tag));
 		return this;
 	}
 

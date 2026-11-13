@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "embers_reborn:block/fluid/molten_iron_still"
-  }
-}

@@ -1,10 +1,6 @@
 {
   "type": "embers_reborn:tool_augment",
   "augment": "embers_reborn:focal_lens",
-  "input": {
-    "item": "embers_reborn:focal_lens"
-  },
-  "tool": {
-    "tag": "embers_reborn:augmentables/projectiles"
-  }
+  "input": "embers_reborn:focal_lens",
+  "tool": "#embers_reborn:augmentables/projectiles"
 }

@@ -28,19 +28,19 @@ public class EmberActivationRecipeBuilder {
 	}
 
 	public static EmberActivationRecipeBuilder create(TagKey<Item> tag) {
-		EmberActivationRecipeBuilder builder = create(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
+		EmberActivationRecipeBuilder builder = create(com.rekindled.embers.util.Ingredients.tag(tag));
 		builder.id = tag.location();
 		return builder;
 	}
 
 	public static EmberActivationRecipeBuilder create(ItemStack itemStack) {
-		EmberActivationRecipeBuilder builder = create(Ingredient.of(itemStack.getItem()));
-		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
-		return builder;
+		return create(itemStack.getItem());
 	}
 
 	public static EmberActivationRecipeBuilder create(Item item) {
-		return create(new ItemStack(item));
+		EmberActivationRecipeBuilder builder = create(Ingredient.of(item));
+		builder.id = BuiltInRegistries.ITEM.getKey(item);
+		return builder;
 	}
 
 	public EmberActivationRecipeBuilder id(Identifier id) {

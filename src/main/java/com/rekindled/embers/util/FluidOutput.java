@@ -9,6 +9,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStackTemplate;
 
 public class FluidOutput {
 
@@ -20,7 +21,7 @@ public class FluidOutput {
 				com.mojang.serialization.Codec.INT.optionalFieldOf("amount", 1).forGetter(o -> o.amount)
 			).apply(inst, (tag, amt) -> new FluidOutput(net.minecraft.tags.FluidTags.create(tag), amt))),
 			// fluid + amount form (FluidStack-like)
-			net.neoforged.neoforge.fluids.FluidStack.CODEC.xmap(FluidOutput::new, o -> o.stack))
+			FluidStackTemplate.CODEC.xmap(FluidOutput::new, o -> o.template))
 		.xmap(e -> e.map(o -> o, o -> o),
 			o -> o.tag != null ? com.mojang.datafixers.util.Either.left(o) : com.mojang.datafixers.util.Either.right(o));
 
@@ -31,12 +32,17 @@ public class FluidOutput {
 
 	public static final FluidOutput EMPTY = new FluidOutput(net.minecraft.tags.FluidTags.create(net.minecraft.resources.Identifier.withDefaultNamespace("empty")), -1);
 
-	public FluidStack stack = FluidStack.EMPTY;
+	public FluidStackTemplate template;
 	public TagKey<Fluid> tag;
 	public int amount = 0;
+	private FluidStack stack;
 
-	public FluidOutput(FluidStack stack) {
-		this.stack = stack;
+	public FluidOutput(FluidStackTemplate template) {
+		this.template = template;
+	}
+
+	public FluidOutput(Fluid fluid, int amount) {
+		this(new FluidStackTemplate(fluid, amount));
 	}
 
 	public FluidOutput(TagKey<Fluid> tag, int amount) {
@@ -49,9 +55,8 @@ public class FluidOutput {
 	}
 
 	public FluidStack getStack() {
-		if (!stack.isEmpty())
-			return stack;
-		stack = new FluidStack(Misc.getTaggedFluid(tag), amount);
+		if (stack == null)
+			stack = template != null ? template.create() : new FluidStack(Misc.getTaggedFluid(tag), amount);
 		return stack;
 	}
 
@@ -59,7 +64,7 @@ public class FluidOutput {
 		if (json.has("tag")) {
 			return new FluidOutput(FluidTags.create(Identifier.parse(GsonHelper.getAsString(json, "tag"))), GsonHelper.getAsInt(json, "amount", 1));
 		}
-		return new FluidOutput(Misc.deserializeFluidStack(json));
+		return new FluidOutput(FluidStackTemplate.fromNonEmptyStack(Misc.deserializeFluidStack(json)));
 	}
 
 	public JsonObject toJson() {
@@ -69,14 +74,14 @@ public class FluidOutput {
 			json.addProperty("amount", amount);
 			return json;
 		}
-		return Misc.serializeFluidStack(stack);
+		return Misc.serializeFluidStack(getStack());
 	}
 
 	public static FluidOutput fromNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer) {
 		if (buffer.readBoolean()) {
 			return new FluidOutput(FluidTags.create(buffer.readIdentifier()), buffer.readInt());
 		}
-		return new FluidOutput(net.neoforged.neoforge.fluids.FluidStack.STREAM_CODEC.decode(buffer));
+		return new FluidOutput(FluidStackTemplate.STREAM_CODEC.decode(buffer));
 	}
 
 	public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer) {
@@ -86,7 +91,7 @@ public class FluidOutput {
 			buffer.writeInt(amount);
 		} else {
 			buffer.writeBoolean(false);
-			net.neoforged.neoforge.fluids.FluidStack.STREAM_CODEC.encode(buffer, stack);
+			FluidStackTemplate.STREAM_CODEC.encode(buffer, template);
 		}
 	}
 }

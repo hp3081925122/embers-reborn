@@ -1,11 +1,7 @@
 {
   "type": "embers_reborn:catalysis_combustion",
   "burn_time": 400,
-  "input": {
-    "tag": "c:dusts/glowstone"
-  },
-  "machine": {
-    "item": "embers_reborn:catalysis_chamber"
-  },
+  "input": "#c:dusts/glowstone",
+  "machine": "embers_reborn:catalysis_chamber",
   "multiplier": 4.0
 }

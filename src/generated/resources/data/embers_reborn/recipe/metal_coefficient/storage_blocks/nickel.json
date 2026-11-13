@@ -4,6 +4,7 @@
       "type": "neoforge:not",
       "value": {
         "type": "neoforge:tag_empty",
+        "registry": "minecraft:block",
         "tag": "c:storage_blocks/nickel"
       }
     }

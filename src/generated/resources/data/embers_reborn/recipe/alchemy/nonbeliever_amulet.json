@@ -7,42 +7,22 @@
   ],
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/dawnstone"
-    },
-    {
-      "tag": "embers_reborn:aspectus/silver"
-    },
-    {
-      "tag": "embers_reborn:aspectus/lead"
-    },
-    {
-      "tag": "embers_reborn:aspectus/iron"
-    }
+    "#embers_reborn:aspectus/dawnstone",
+    "#embers_reborn:aspectus/silver",
+    "#embers_reborn:aspectus/lead",
+    "#embers_reborn:aspectus/iron"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "item": "embers_reborn:eldritch_insignia"
-    },
-    {
-      "item": "embers_reborn:archaic_circuit"
-    },
-    {
-      "item": "embers_reborn:archaic_brick"
-    },
-    {
-      "item": "embers_reborn:archaic_circuit"
-    }
+    "embers_reborn:eldritch_insignia",
+    "embers_reborn:archaic_circuit",
+    "embers_reborn:archaic_brick",
+    "embers_reborn:archaic_circuit"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:nonbeliever_amulet"
   },
-  "tablet": {
-    "item": "embers_reborn:ashen_amulet"
-  }
+  "tablet": "embers_reborn:ashen_amulet"
 }

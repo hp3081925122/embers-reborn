@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "embers_reborn:sealed_wood_tile"
-  },
+  "ingredient": "embers_reborn:sealed_wood_tile",
   "result": {
     "count": 2,
     "id": "embers_reborn:sealed_wood_tile_slab"

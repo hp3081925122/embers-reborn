@@ -55,7 +55,7 @@ public class AnvilAugmentRecipeBuilder {
 	}
 
 	public AnvilAugmentRecipeBuilder tool(TagKey<Item> tag) {
-		tool(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
+		tool(com.rekindled.embers.util.Ingredients.tag(tag));
 		return this;
 	}
 
@@ -70,7 +70,7 @@ public class AnvilAugmentRecipeBuilder {
 	}
 
 	public AnvilAugmentRecipeBuilder input(TagKey<Item> tag) {
-		input(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
+		input(com.rekindled.embers.util.Ingredients.tag(tag));
 		return this;
 	}
 

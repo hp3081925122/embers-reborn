@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:ingots/brass"
-  },
+  "input": "#c:ingots/brass",
   "output": {
     "amount": 90,
     "tag": "c:molten_brass"

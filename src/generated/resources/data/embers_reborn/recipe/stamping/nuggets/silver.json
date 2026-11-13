@@ -9,11 +9,12 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_silver\",\"amount\":10}",
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_silver"
+  },
   "output": {
     "tag": "c:nuggets/silver"
   },
-  "stamp": {
-    "item": "embers_reborn:nugget_stamp"
-  }
+  "stamp": "embers_reborn:nugget_stamp"
 }

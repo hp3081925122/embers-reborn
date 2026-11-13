@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "E": {
-      "item": "embers_reborn:ember_shard"
-    },
-    "I": {
-      "tag": "c:ingots/iron"
-    },
-    "P": {
-      "tag": "c:plates/iron"
-    }
+    "E": "embers_reborn:ember_shard",
+    "I": "#c:ingots/iron",
+    "P": "#c:plates/iron"
   },
   "pattern": [
     "P",

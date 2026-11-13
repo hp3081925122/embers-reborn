@@ -3,11 +3,8 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "embers_reborn:silver_shovel"
-  },
+  "ingredient": "embers_reborn:silver_shovel",
   "result": {
-    "count": 1,
     "id": "embers_reborn:silver_nugget"
   }
 }

@@ -2,16 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": {
-      "item": "embers_reborn:ember_shard"
-    }
+    "X": "embers_reborn:ember_shard"
   },
   "pattern": [
     "XXX",
     "XXX"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:ember_crystal"
   }
 }

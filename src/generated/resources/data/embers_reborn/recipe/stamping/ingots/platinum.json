@@ -9,11 +9,12 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_platinum\",\"amount\":90}",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_platinum"
+  },
   "output": {
     "tag": "c:ingots/platinum"
   },
-  "stamp": {
-    "item": "embers_reborn:ingot_stamp"
-  }
+  "stamp": "embers_reborn:ingot_stamp"
 }

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "embers_reborn:block/metal_platform",
-    "side": "embers_reborn:block/metal_platform_side",
-    "top": "embers_reborn:block/metal_platform"
-  }
-}

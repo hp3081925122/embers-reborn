@@ -1,10 +1,7 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "embers_reborn:sealed_wood_pillar"
-  },
+  "ingredient": "embers_reborn:sealed_wood_pillar",
   "result": {
-    "count": 1,
     "id": "embers_reborn:sealed_planks"
   }
 }

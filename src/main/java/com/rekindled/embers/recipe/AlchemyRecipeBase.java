@@ -21,13 +21,13 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 	public final ArrayList<Ingredient> aspects;
 	public final ArrayList<Ingredient> inputs;
 
-	public final ItemStack output;
-	public final ItemStack failure;
+	public final net.minecraft.world.item.ItemStackTemplate output;
+	public final net.minecraft.world.item.ItemStackTemplate failure;
 
 	public Long cachedSeed = null;
 	public ArrayList<Ingredient> code = new ArrayList<Ingredient>();
 
-	public AlchemyRecipeBase(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, ItemStack output, ItemStack failure) {
+	public AlchemyRecipeBase(Identifier id, Ingredient tablet, ArrayList<Ingredient> aspects, ArrayList<Ingredient> inputs, net.minecraft.world.item.ItemStackTemplate output, net.minecraft.world.item.ItemStackTemplate failure) {
 		this.id = id;
 		this.tablet = tablet;
 		this.aspects = aspects;
@@ -127,7 +127,7 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 		whitePins -= blackPins;
 
 		if (blackPins < code.size()) {
-			ItemStack waste = failure.copy();
+			ItemStack waste = failure.create();
 			CompoundTag nbt = new CompoundTag();
 			nbt.putInt("blackPins", blackPins);
 			nbt.putInt("whitePins", whitePins);
@@ -140,10 +140,10 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 			}
 			nbt.put("aspects", aspectNBT);
 			nbt.put("inputs", inputNBT);
-
+			waste.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(nbt));
 			return waste;
 		}
-		return output;
+		return output.create();
 	}
 
 	@Override
@@ -219,11 +219,11 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 
 	@Override
 	public ItemStack getResultItem() {
-		return output;
+		return output.create();
 	}
 
 	@Override
 	public ItemStack getfailureItem() {
-		return failure;
+		return failure.create();
 	}
 }

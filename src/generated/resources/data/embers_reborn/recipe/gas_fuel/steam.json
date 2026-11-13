@@ -1,6 +1,9 @@
 {
   "type": "embers_reborn:gaseous_fuel",
   "burn_time": 1,
-  "input": "{\"tag\":\"c:steam\",\"amount\":1}",
+  "input": {
+    "amount": 1,
+    "tag": "c:steam"
+  },
   "power_multiplier": 2.0
 }

@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:plates/silver"
-  },
+  "input": "#c:plates/silver",
   "output": {
     "amount": 90,
     "tag": "c:molten_silver"

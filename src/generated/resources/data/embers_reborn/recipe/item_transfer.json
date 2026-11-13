@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": {
-      "tag": "c:ingots/lead"
-    },
-    "L": {
-      "item": "embers_reborn:item_pipe"
-    },
-    "P": {
-      "tag": "c:plates/lead"
-    }
+    "I": "#c:ingots/lead",
+    "L": "embers_reborn:item_pipe",
+    "P": "#c:plates/lead"
   },
   "pattern": [
     "PLP",

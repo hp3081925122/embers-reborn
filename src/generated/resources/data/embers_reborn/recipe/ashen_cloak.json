@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "embers_reborn:ashen_fabric"
-    },
-    "D": {
-      "tag": "c:ingots/dawnstone"
-    },
-    "P": {
-      "tag": "c:plates/dawnstone"
-    }
+    "C": "embers_reborn:ashen_fabric",
+    "D": "#c:ingots/dawnstone",
+    "P": "#c:plates/dawnstone"
   },
   "pattern": [
     "P P",
@@ -18,7 +12,6 @@
     "CDC"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:ashen_cloak"
   }
 }

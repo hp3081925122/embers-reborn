@@ -1,13 +1,9 @@
 {
   "type": "embers_reborn:stamping",
-  "input": {
-    "item": "embers_reborn:alchemical_waste"
-  },
+  "input": "embers_reborn:alchemical_waste",
   "output": {
     "count": 8,
     "id": "embers_reborn:ash"
   },
-  "stamp": {
-    "item": "embers_reborn:flat_stamp"
-  }
+  "stamp": "embers_reborn:flat_stamp"
 }

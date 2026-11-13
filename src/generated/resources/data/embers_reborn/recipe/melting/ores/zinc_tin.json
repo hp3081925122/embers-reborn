@@ -25,9 +25,7 @@
     "amount": 20,
     "tag": "c:molten_tin"
   },
-  "input": {
-    "tag": "c:ores/zinc"
-  },
+  "input": "#c:ores/zinc",
   "output": {
     "amount": 240,
     "tag": "c:molten_zinc"

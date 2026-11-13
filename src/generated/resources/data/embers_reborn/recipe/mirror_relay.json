@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "P": {
-      "tag": "c:plates/lead"
-    },
-    "S": {
-      "tag": "c:ingots/silver"
-    }
+    "P": "#c:plates/lead",
+    "S": "#c:ingots/silver"
   },
   "pattern": [
     " P ",

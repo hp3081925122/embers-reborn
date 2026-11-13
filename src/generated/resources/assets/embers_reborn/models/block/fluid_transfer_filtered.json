@@ -1,9 +1,0 @@
-{
-  "parent": "embers_reborn:block/item_transfer_filtered",
-  "textures": {
-    "bottom": "embers_reborn:block/fluid_transfer_bottom",
-    "particle": "embers_reborn:block/fluid_transfer_side",
-    "side": "embers_reborn:block/fluid_transfer_side",
-    "top": "embers_reborn:block/fluid_transfer_top"
-  }
-}

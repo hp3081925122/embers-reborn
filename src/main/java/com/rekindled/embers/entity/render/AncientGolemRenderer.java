@@ -9,11 +9,8 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
-@OnlyIn(Dist.CLIENT)
 public class AncientGolemRenderer extends MobRenderer<AncientGolemEntity, LivingEntityRenderState, AncientGolemModel> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Embers.MODID, "ancient_golem"), "main");

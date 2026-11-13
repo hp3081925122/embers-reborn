@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "X": {
-      "item": "embers_reborn:ashen_stone"
-    }
+    "X": "embers_reborn:ashen_stone"
   },
   "pattern": [
     "X  ",

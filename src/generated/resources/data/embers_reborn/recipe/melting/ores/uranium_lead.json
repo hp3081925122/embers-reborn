@@ -18,9 +18,7 @@
     "amount": 20,
     "tag": "c:molten_lead"
   },
-  "input": {
-    "tag": "c:ores/uranium"
-  },
+  "input": "#c:ores/uranium",
   "output": {
     "amount": 240,
     "tag": "c:molten_uranium"

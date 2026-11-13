@@ -25,13 +25,16 @@ public class MixingRecipeBuilder {
 
 	public static MixingRecipeBuilder create(FluidStack fluidStack) {
 		MixingRecipeBuilder builder = new MixingRecipeBuilder();
-		builder.output = new FluidOutput(fluidStack);
+		builder.output = new FluidOutput(net.neoforged.neoforge.fluids.FluidStackTemplate.fromNonEmptyStack(fluidStack));
 		builder.id = BuiltInRegistries.FLUID.getKey(fluidStack.getFluid());
 		return builder;
 	}
 
 	public static MixingRecipeBuilder create(Fluid fluid, int amount) {
-		return create(new FluidStack(fluid, amount));
+		MixingRecipeBuilder builder = new MixingRecipeBuilder();
+		builder.output = new FluidOutput(fluid, amount);
+		builder.id = BuiltInRegistries.FLUID.getKey(fluid);
+		return builder;
 	}
 
 	public static MixingRecipeBuilder create(TagKey<Fluid> tag, int amount) {
@@ -82,12 +85,12 @@ public class MixingRecipeBuilder {
 	}
 
 	public MixingRecipeBuilder output(FluidStack output) {
-		this.output = new FluidOutput(output);
+		this.output = new FluidOutput(net.neoforged.neoforge.fluids.FluidStackTemplate.fromNonEmptyStack(output));
 		return this;
 	}
 
 	public MixingRecipeBuilder output(Fluid fluid, int amount) {
-		output(new FluidStack(fluid, amount));
+		this.output = new FluidOutput(fluid, amount);
 		return this;
 	}
 

@@ -21,22 +21,30 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public class AlchemyRecipeBuilder {
 
 	public Identifier id;
-	public ItemStack output;
-	public ItemStack failure = new ItemStack(RegistryManager.ALCHEMICAL_WASTE.get());
+	public net.minecraft.world.item.ItemStackTemplate output;
+	public net.minecraft.world.item.ItemStackTemplate failure;
 	public Ingredient tablet;
 	public ArrayList<Ingredient> aspects = new ArrayList<Ingredient>();
 	public ArrayList<Ingredient> inputs = new ArrayList<Ingredient>();
 	public boolean babbyGames = false;
 
-	public static AlchemyRecipeBuilder create(ItemStack itemStack) {
+	public static AlchemyRecipeBuilder create(net.minecraft.world.item.ItemStackTemplate itemStack) {
 		AlchemyRecipeBuilder builder = new AlchemyRecipeBuilder();
 		builder.output = itemStack;
-		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
+		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.item().value());
 		return builder;
 	}
 
+	public static AlchemyRecipeBuilder create(ItemStack itemStack) {
+		return create(net.minecraft.world.item.ItemStackTemplate.fromNonEmptyStack(itemStack));
+	}
+
 	public static AlchemyRecipeBuilder create(ItemLike item) {
-		return create(new ItemStack(item));
+		return create(new net.minecraft.world.item.ItemStackTemplate(item.asItem()));
+	}
+
+	public static AlchemyRecipeBuilder create(ItemLike item, int count) {
+		return create(new net.minecraft.world.item.ItemStackTemplate(item.asItem(), count));
 	}
 
 	public AlchemyRecipeBuilder id(Identifier id) {
@@ -65,27 +73,27 @@ public class AlchemyRecipeBuilder {
 	}
 
 	public AlchemyRecipeBuilder tablet(TagKey<Item> tag) {
-		tablet(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
+		tablet(com.rekindled.embers.util.Ingredients.tag(tag));
 		return this;
 	}
 
 	public AlchemyRecipeBuilder output(ItemStack output) {
-		this.output = output;
+		this.output = net.minecraft.world.item.ItemStackTemplate.fromNonEmptyStack(output);
 		return this;
 	}
 
 	public AlchemyRecipeBuilder output(Item item) {
-		output(new ItemStack(item));
+		this.output = new net.minecraft.world.item.ItemStackTemplate(item);
 		return this;
 	}
 
 	public AlchemyRecipeBuilder failure(ItemStack failure) {
-		this.failure = failure;
+		this.failure = net.minecraft.world.item.ItemStackTemplate.fromNonEmptyStack(failure);
 		return this;
 	}
 
 	public AlchemyRecipeBuilder failure(Item item) {
-		failure(new ItemStack(item));
+		this.failure = new net.minecraft.world.item.ItemStackTemplate(item);
 		return this;
 	}
 
@@ -126,14 +134,14 @@ public class AlchemyRecipeBuilder {
 	@SafeVarargs
 	public final AlchemyRecipeBuilder aspects(TagKey<Item>... aspects) {
 		for (TagKey<Item> aspect : aspects)
-			this.aspects.add(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(aspect)));
+			this.aspects.add(com.rekindled.embers.util.Ingredients.tag(aspect));
 		return this;
 	}
 
 	@SafeVarargs
 	public final AlchemyRecipeBuilder inputs(TagKey<Item>... inputs) {
 		for (TagKey<Item> input : inputs)
-			this.inputs.add(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(input)));
+			this.inputs.add(com.rekindled.embers.util.Ingredients.tag(input));
 		return this;
 	}
 
@@ -143,6 +151,7 @@ public class AlchemyRecipeBuilder {
 	}
 
 	public AlchemyRecipeBase build() {
+		net.minecraft.world.item.ItemStackTemplate failure = this.failure != null ? this.failure : new net.minecraft.world.item.ItemStackTemplate(RegistryManager.ALCHEMICAL_WASTE.get());
 		if (babbyGames)
 			return new AlchemyRecipeForBabies(id, tablet, aspects, inputs, output, failure);
 		return new AlchemyRecipe(id, tablet, aspects, inputs, output, failure);

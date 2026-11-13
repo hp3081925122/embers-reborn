@@ -9,9 +9,7 @@
     }
   ],
   "type": "embers_reborn:melting",
-  "input": {
-    "tag": "c:nuggets/uranium"
-  },
+  "input": "#c:nuggets/uranium",
   "output": {
     "amount": 10,
     "tag": "c:molten_uranium"

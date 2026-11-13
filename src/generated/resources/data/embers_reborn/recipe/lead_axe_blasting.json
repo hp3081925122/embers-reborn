@@ -3,11 +3,8 @@
   "category": "misc",
   "cookingtime": 100,
   "experience": 0.1,
-  "ingredient": {
-    "item": "embers_reborn:lead_axe"
-  },
+  "ingredient": "embers_reborn:lead_axe",
   "result": {
-    "count": 1,
     "id": "embers_reborn:lead_nugget"
   }
 }

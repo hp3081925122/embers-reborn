@@ -2,22 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "tag": "c:storage_blocks/silver"
-    },
-    "G": {
-      "item": "embers_reborn:caminite_brick"
-    },
-    "I": {
-      "item": "embers_reborn:fluid_vessel"
-    }
+    "B": "#c:storage_blocks/silver",
+    "G": "embers_reborn:caminite_brick",
+    "I": "embers_reborn:fluid_vessel"
   },
   "pattern": [
     "  B",
     "GIG"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:geologic_separator"
   }
 }

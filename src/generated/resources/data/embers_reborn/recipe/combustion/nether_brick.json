@@ -1,11 +1,7 @@
 {
   "type": "embers_reborn:catalysis_combustion",
   "burn_time": 400,
-  "input": {
-    "item": "minecraft:nether_brick"
-  },
-  "machine": {
-    "item": "embers_reborn:combustion_chamber"
-  },
+  "input": "minecraft:nether_brick",
+  "machine": "embers_reborn:combustion_chamber",
   "multiplier": 3.0
 }

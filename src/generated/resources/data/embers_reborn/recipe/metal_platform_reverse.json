@@ -2,16 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "X": {
-      "item": "embers_reborn:metal_platform_slab"
-    }
+    "X": "embers_reborn:metal_platform_slab"
   },
   "pattern": [
     "X",
     "X"
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:metal_platform"
   }
 }

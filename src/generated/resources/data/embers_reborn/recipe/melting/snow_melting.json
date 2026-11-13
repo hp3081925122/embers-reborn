@@ -1,8 +1,6 @@
 {
   "type": "embers_reborn:melting",
-  "input": {
-    "item": "minecraft:snowball"
-  },
+  "input": "minecraft:snowball",
   "output": {
     "amount": 250,
     "id": "minecraft:water"

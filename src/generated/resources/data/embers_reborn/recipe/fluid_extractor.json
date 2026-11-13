@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "embers_reborn:caminite_plate"
-    },
-    "P": {
-      "item": "embers_reborn:fluid_pipe"
-    },
-    "R": {
-      "tag": "c:dusts/redstone"
-    }
+    "B": "embers_reborn:caminite_plate",
+    "P": "embers_reborn:fluid_pipe",
+    "R": "#c:dusts/redstone"
   },
   "pattern": [
     " R ",
@@ -18,7 +12,6 @@
     " R "
   ],
   "result": {
-    "count": 1,
     "id": "embers_reborn:fluid_extractor"
   }
 }

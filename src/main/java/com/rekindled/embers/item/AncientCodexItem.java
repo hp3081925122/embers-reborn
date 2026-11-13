@@ -15,8 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class AncientCodexItem extends Item {
 
@@ -25,7 +23,6 @@ public class AncientCodexItem extends Item {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
 		if (context.getLevel().isClientSide() && net.minecraft.client.Minecraft.getInstance().hasControlDown() && context.getPlayer() != null) {
 			ResearchBase research = ResearchManager.researchByItem.get(context.getLevel().getBlockState(context.getClickedPos()).getBlock().asItem());
@@ -41,7 +38,6 @@ public class AncientCodexItem extends Item {
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
 	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		if (level.isClientSide()) {
 			Minecraft.getInstance().setScreen(GuiCodex.instance);

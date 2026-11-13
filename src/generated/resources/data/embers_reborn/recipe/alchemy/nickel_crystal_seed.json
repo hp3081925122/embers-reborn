@@ -22,33 +22,19 @@
   ],
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/iron"
-    },
-    {
-      "tag": "embers_reborn:aspectus/lead"
-    }
+    "#embers_reborn:aspectus/iron",
+    "#embers_reborn:aspectus/lead"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "tag": "c:ingots/nickel"
-    },
-    {
-      "tag": "c:ingots/nickel"
-    },
-    {
-      "tag": "c:ingots/nickel"
-    }
+    "#c:ingots/nickel",
+    "#c:ingots/nickel",
+    "#c:ingots/nickel"
   ],
   "output": {
-    "count": 1,
     "id": "embers_reborn:nickel_crystal_seed"
   },
-  "tablet": {
-    "tag": "embers_reborn:crystal_seeds"
-  }
+  "tablet": "#embers_reborn:crystal_seeds"
 }

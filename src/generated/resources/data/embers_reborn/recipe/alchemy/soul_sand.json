@@ -1,36 +1,21 @@
 {
   "type": "embers_reborn:alchemy",
   "aspects": [
-    {
-      "tag": "embers_reborn:aspectus/copper"
-    },
-    {
-      "tag": "embers_reborn:aspectus/iron"
-    }
+    "#embers_reborn:aspectus/copper",
+    "#embers_reborn:aspectus/iron"
   ],
   "failure": {
-    "count": 1,
     "id": "embers_reborn:alchemical_waste"
   },
   "inputs": [
-    {
-      "item": "minecraft:sand"
-    },
-    {
-      "item": "minecraft:sand"
-    },
-    {
-      "item": "minecraft:sand"
-    },
-    {
-      "item": "minecraft:sand"
-    }
+    "minecraft:sand",
+    "minecraft:sand",
+    "minecraft:sand",
+    "minecraft:sand"
   ],
   "output": {
     "count": 4,
     "id": "minecraft:soul_sand"
   },
-  "tablet": {
-    "item": "embers_reborn:ash"
-  }
+  "tablet": "embers_reborn:ash"
 }

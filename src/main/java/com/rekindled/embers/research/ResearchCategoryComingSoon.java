@@ -7,8 +7,6 @@ import com.rekindled.embers.Embers;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class ResearchCategoryComingSoon extends ResearchCategory {
 
@@ -29,7 +27,6 @@ public class ResearchCategoryComingSoon extends ResearchCategory {
 		return false;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@Override
 	public List<Component> getTooltip(boolean showTooltips) {
 		ArrayList<Component> tooltip = new ArrayList<>();
