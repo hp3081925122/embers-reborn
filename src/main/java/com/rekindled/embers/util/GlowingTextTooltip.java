@@ -1,14 +1,10 @@
 package com.rekindled.embers.util;
 
-import org.joml.Matrix4f;
-
 import com.rekindled.embers.gui.GuiCodex;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 
@@ -45,7 +41,7 @@ public class GlowingTextTooltip implements TooltipComponent {
 		}
 
 		@Override
-		public int getHeight() {
+		public int getHeight(Font font) {
 			return 10;
 		}
 
@@ -55,20 +51,18 @@ public class GlowingTextTooltip implements TooltipComponent {
 		}
 
 		@Override
-		public void renderText(Font font, int mouseX, int mouseY, Matrix4f matrix, MultiBufferSource.BufferSource bufferSource) {
-			font.drawInBatch(tooltip.normalText, (float)mouseX, (float)mouseY, -1, true, matrix, bufferSource, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
+		public void extractText(GuiGraphicsExtractor graphics, Font font, int x, int y) {
+			graphics.text(font, tooltip.normalText, x, y, -1, true);
 		}
 
 		@Override
-		public void renderImage(Font font, int x, int y, GuiGraphics graphics) {
+		public void extractImage(Font font, int x, int y, int w, int h, GuiGraphicsExtractor graphics) {
 			if (tooltip.intensity < -1.0f) {
 				GuiCodex.drawTextGlowingAura(font, graphics, tooltip.glowingText.getVisualOrderText(), font.width(tooltip.normalText) + x, y);
 			} else {
-				font.drawInBatch(tooltip.glowingText, x, y, -1, true, graphics.pose().last().pose(), graphics.bufferSource(), Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
-				graphics.pose().pushPose();
-				graphics.pose().translate(0, 0, 0.06);
+				graphics.text(font, tooltip.glowingText, x, y, -1, true);
+				// 1.20.1 pushed the aura 0.06 forward in z; 26.1 GUI draws in submission order, so drawing it after the text is enough
 				GuiCodex.drawTextGlowingAura(font, graphics, tooltip.glowingText.plainCopy().getVisualOrderText(), font.width(tooltip.normalText) + x, y, tooltip.intensity);
-				graphics.pose().popPose();
 			}
 		}
 	}

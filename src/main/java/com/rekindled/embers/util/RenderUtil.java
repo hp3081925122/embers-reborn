@@ -1,16 +1,23 @@
 package com.rekindled.embers.util;
 
+import org.joml.Matrix3x2f;
+import org.joml.Matrix3x2fc;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.jspecify.annotations.Nullable;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.rekindled.embers.EmbersClientEvents;
 import com.rekindled.embers.render.EmbersRenderTypes;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.navigation.ScreenRectangle;
+import net.minecraft.client.gui.render.TextureSetup;
+import net.minecraft.client.renderer.state.gui.GuiElementRenderState;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -78,27 +85,60 @@ public class RenderUtil {
 		}
 	}
 
-	public static void drawColorRectBatched(PoseStack pose, MultiBufferSource.BufferSource bufferSource, float x, float y, float zLevel, float widthIn, float heightIn,
+	/**
+	 * Additive four-colour quad on the 26.1 GUI render state. Vertex order matches 1.20.1:
+	 * colour 1 bottom-left, 2 bottom-right, 3 top-right, 4 top-left. Float coordinates are kept
+	 * because the heat bar slices are sub-pixel wide.
+	 */
+	public static void drawColorRectBatched(GuiGraphicsExtractor graphics, float x, float y, float widthIn, float heightIn,
 			float r1, float g1, float b1, float a1,
 			float r2, float g2, float b2, float a2,
 			float r3, float g3, float b3, float a3,
 			float r4, float g4, float b4, float a4)
 	{
-		Matrix4f matrix4f = pose.last().pose();
-		VertexConsumer vertexconsumer = bufferSource.getBuffer(EmbersRenderTypes.GLOW_GUI);
-		vertexconsumer.addVertex(matrix4f, x + 0, y + heightIn, zLevel).setColor(r1, g1, b1, a1);
-		vertexconsumer.addVertex(matrix4f, x + widthIn, y + heightIn, zLevel).setColor(r2, g2, b2, a2);
-		vertexconsumer.addVertex(matrix4f, x + widthIn, y + 0, zLevel).setColor(r3, g3, b3, a3);
-		vertexconsumer.addVertex(matrix4f, x + 0, y + 0, zLevel).setColor(r4, g4, b4, a4);
+		graphics.submitGuiElementRenderState(new GlowQuadRenderState(new Matrix3x2f(graphics.pose()), x, y, widthIn, heightIn,
+				ARGB.colorFromFloat(a1, r1, g1, b1), ARGB.colorFromFloat(a2, r2, g2, b2),
+				ARGB.colorFromFloat(a3, r3, g3, b3), ARGB.colorFromFloat(a4, r4, g4, b4),
+				graphics.peekScissorStack()));
 	}
 
-	public static void drawHeatBarEnd(PoseStack pose, MultiBufferSource.BufferSource bufferSource, float x, float y, float zLevel, float widthIn, float heightIn, float minU, float minV, float maxU, float maxV) {
-		Matrix4f matrix4f = pose.last().pose();
-		VertexConsumer vertexconsumer = bufferSource.getBuffer(EmbersRenderTypes.HEAT_BAR_ENDS);
-		vertexconsumer.addVertex(matrix4f, x + 0, y + 0, zLevel).setUv(minU, minV);
-		vertexconsumer.addVertex(matrix4f, x + 0, y + heightIn, zLevel).setUv(minU, maxV);
-		vertexconsumer.addVertex(matrix4f, x + widthIn, y + heightIn, zLevel).setUv(maxU, maxV);
-		vertexconsumer.addVertex(matrix4f, x + widthIn, y + 0, zLevel).setUv(maxU, minV);
+	/** Heat bar end cap; UVs are fractions of the 16x16 heat_bar.png like in 1.20.1. */
+	public static void drawHeatBarEnd(GuiGraphicsExtractor graphics, int x, int y, int widthIn, int heightIn, float minU, float minV, float maxU, float maxV) {
+		graphics.blit(EmbersRenderTypes.HEAT_BAR_ENDS_PIPELINE, EmbersRenderTypes.HEAT_BAR_TEXTURE, x, y, minU * 16, minV * 16, widthIn, heightIn,
+				Math.round((maxU - minU) * 16), Math.round((maxV - minV) * 16), 16, 16);
+	}
+
+	public record GlowQuadRenderState(Matrix3x2fc pose, float x, float y, float w, float h, int c1, int c2, int c3, int c4,
+			@Nullable ScreenRectangle scissorArea, @Nullable ScreenRectangle bounds) implements GuiElementRenderState {
+
+		public GlowQuadRenderState(Matrix3x2fc pose, float x, float y, float w, float h, int c1, int c2, int c3, int c4, @Nullable ScreenRectangle scissorArea) {
+			this(pose, x, y, w, h, c1, c2, c3, c4, scissorArea, computeBounds(pose, x, y, w, h, scissorArea));
+		}
+
+		private static ScreenRectangle computeBounds(Matrix3x2fc pose, float x, float y, float w, float h, @Nullable ScreenRectangle scissorArea) {
+			int x0 = Mth.floor(x);
+			int y0 = Mth.floor(y);
+			ScreenRectangle rect = new ScreenRectangle(x0, y0, Math.max(1, Mth.ceil(x + w) - x0), Math.max(1, Mth.ceil(y + h) - y0)).transformMaxBounds(pose);
+			return scissorArea != null ? scissorArea.intersection(rect) : rect;
+		}
+
+		@Override
+		public void buildVertices(VertexConsumer consumer) {
+			consumer.addVertexWith2DPose(pose, x, y + h).setColor(c1);
+			consumer.addVertexWith2DPose(pose, x + w, y + h).setColor(c2);
+			consumer.addVertexWith2DPose(pose, x + w, y).setColor(c3);
+			consumer.addVertexWith2DPose(pose, x, y).setColor(c4);
+		}
+
+		@Override
+		public RenderPipeline pipeline() {
+			return EmbersRenderTypes.GLOW_GUI_PIPELINE;
+		}
+
+		@Override
+		public TextureSetup textureSetup() {
+			return TextureSetup.noTexture();
+		}
 	}
 
 	public static void renderAlchemyCircle(VertexConsumer buf, Matrix4f matrix4f, float x, float y, float z, float r, float g, float b, float a, float radius, float angle) {
