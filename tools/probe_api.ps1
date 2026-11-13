@@ -1,17 +1,18 @@
 $s = "E:\模组\mc源码\2612sources\net\minecraft"
-$n = "E:\模组\mc源码\2612neoforge-sources\net\neoforged\neoforge"
-$w = Split-Path $PSScriptRoot -Parent
-"--IConditionBuilder"
-Get-ChildItem $n -Recurse -Filter 'IConditionBuilder.java' | ForEach-Object { $_.FullName }
-"--slime tags"
-Select-String "$n\common\Tags.java" -Pattern 'SLIME' | ForEach-Object { $_.Line.Trim() }
-"--cooking serializers"
-Select-String "$s\world\item\crafting\RecipeSerializer.java" -Pattern 'SMELT|BLAST' | ForEach-Object { $_.Line.Trim() }
-Select-String "$s\data\recipes\RecipeProvider.java" -Pattern 'void oreCooking|CookingBookCategory' | ForEach-Object { $_.Line.Trim() }
-"--receivers of identifier() errors"
-$l = Get-Content "$w\build\c7.log.err" -Encoding UTF8
-$out = @()
-for ($i = 0; $i -lt $l.Count; $i++) {
-    if ($l[$i] -match 'symbol:\s+method identifier\(\)') { $out += $l[$i + 1].Trim() }
-}
-$out | Group-Object | ForEach-Object { '{0,4} {1}' -f $_.Count, $_.Name }
+"--TagEntry optional"
+Select-String "$s\tags\TagEntry.java" -Pattern 'public static TagEntry \w+\(' | ForEach-Object { $_.Line.Trim() }
+"--TagsProvider appender methods"
+Select-String "$s\data\tags\TagsProvider.java" -Pattern 'protected .*\(TagKey<T>' | ForEach-Object { $_.Line.Trim() }
+"--ItemPredicate package"
+Get-ChildItem "$s\advancements" -Recurse -Filter ItemPredicate.java | ForEach-Object { $_.FullName.Substring($s.Length) }
+"--SpawnerData"
+Get-ChildItem "$s\world\level\biome" -Filter MobSpawnSettings.java | Select-String 'record SpawnerData|public SpawnerData\(' | ForEach-Object { $_.Line.Trim() }
+"--WeightedList"
+Get-ChildItem "$s\util\random" -Filter *.java | ForEach-Object Name
+Select-String "$s\util\random\WeightedList.java" -Pattern 'public static <E> WeightedList<E> (of|create)\(|public static <E> Builder<E> builder' | ForEach-Object { $_.Line.Trim() }
+"--AddSpawnsBiomeModifier"
+Get-ChildItem "E:\模组\mc源码\2612neoforge-sources" -Recurse -Filter BiomeModifiers.java | Select-String 'record AddSpawnsBiomeModifier|public AddSpawnsBiomeModifier\(' | ForEach-Object { $_.Line.Trim() }
+"--StructureSpawnOverride"
+Get-ChildItem "$s\world\level\levelgen\structure" -Filter StructureSpawnOverride.java | Select-String 'record' | ForEach-Object { $_.Line.Trim() }
+"--chain blocks"
+Select-String "$s\world\level\block\Blocks.java" -Pattern 'public static final Block \w*CHAIN\b' | ForEach-Object { $_.Line.Trim() }

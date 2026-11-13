@@ -8,7 +8,7 @@ import com.rekindled.embers.util.GrandhammerLootModifier;
 import com.rekindled.embers.util.MatchCurioLootCondition;
 import com.rekindled.embers.util.SuperHeaterLootModifier;
 
-import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;

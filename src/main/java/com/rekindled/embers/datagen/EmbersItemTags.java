@@ -18,7 +18,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class EmbersItemTags extends ItemTagsProvider {
 
@@ -261,7 +260,7 @@ public class EmbersItemTags extends ItemTagsProvider {
 		tag(Tags.Items.ARMORS).add(RegistryManager.ASHEN_LEGGINGS.get());
 		tag(Tags.Items.ARMORS).add(RegistryManager.ASHEN_BOOTS.get());
 
-		tag(Tags.Items.SLIMEBALLS).add(RegistryManager.ADHESIVE.get());
+		tag(Tags.Items.SLIME_BALLS).add(RegistryManager.ADHESIVE.get());
 
 		tag(ItemTags.CREEPER_DROP_MUSIC_DISCS).add(RegistryManager.MUSIC_DISC_7F_PATTERNS.get());
 
@@ -276,45 +275,45 @@ public class EmbersItemTags extends ItemTagsProvider {
 
 		//compat stuff
 		tag(AUGMENTABLE_TOOLS)
-		.addOptional(Identifier.fromNamespaceAndPath("weaponmaster", "wm_broadsword"))
-		.addOptional(Identifier.fromNamespaceAndPath("weaponmaster", "wm_rapier"))
-		.addOptional(Identifier.fromNamespaceAndPath("weaponmaster", "wm_broadswordlarge"))
-		.addOptional(Identifier.fromNamespaceAndPath("weaponmaster", "wm_rapierlarge"));
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("weaponmaster", "wm_broadsword")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("weaponmaster", "wm_rapier")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("weaponmaster", "wm_broadswordlarge")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("weaponmaster", "wm_rapierlarge")));
 
 		tag(AUGMENTABLE_TOOLS)
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_sword"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_katana"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_naginata"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_greatsword"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_dagger"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_spear"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_throwing_knife"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_rapier"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_longsword"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_trident"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_scythe"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_sickle"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_shovel"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_pickaxe"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_axe"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_hoe"))
-		.addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_mattock"));
-		tag(AUGMENTABLE_HELMETS).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_helmet"));
-		tag(AUGMENTABLE_CHESTPLATES).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_chestplate")).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_elytra"));
-		tag(AUGMENTABLE_LEGGINGS).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_leggings"));
-		tag(AUGMENTABLE_BOOTS).addOptional(Identifier.fromNamespaceAndPath("miapi", "modular_boots"));
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_sword")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_katana")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_naginata")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_greatsword")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_dagger")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_spear")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_throwing_knife")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_rapier")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_longsword")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_trident")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_scythe")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_sickle")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_shovel")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_pickaxe")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_axe")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_hoe")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_mattock")));
+		tag(AUGMENTABLE_HELMETS).add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_helmet")));
+		tag(AUGMENTABLE_CHESTPLATES).add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_chestplate"))).add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_elytra")));
+		tag(AUGMENTABLE_LEGGINGS).add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_leggings")));
+		tag(AUGMENTABLE_BOOTS).add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("miapi", "modular_boots")));
 
 		tag(AUGMENTABLE_TOOLS)
-		.addOptional(Identifier.fromNamespaceAndPath("tetra", "modular_single"))
-		.addOptional(Identifier.fromNamespaceAndPath("tetra", "modular_double"))
-		.addOptional(Identifier.fromNamespaceAndPath("tetra", "modular_sword"));
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("tetra", "modular_single")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("tetra", "modular_double")))
+		.add(net.minecraft.tags.TagEntry.optionalElement(Identifier.fromNamespaceAndPath("tetra", "modular_sword")));
 
-		tag(ANY_CURIO).addOptional(CuriosCompat.EMBER_BULB.getId());
-		tag(RING_CURIO).addOptional(CuriosCompat.EMBER_RING.getId());
-		tag(BELT_CURIO).addOptional(CuriosCompat.EMBER_BELT.getId());
-		tag(AMULET_CURIO).addOptional(CuriosCompat.EMBER_AMULET.getId()).addOptional(CuriosCompat.ASHEN_AMULET.getId()).addOptional(CuriosCompat.NONBELEIVER_AMULET.getId());
-		tag(BODY_CURIO).addOptional(CuriosCompat.DAWNSTONE_MAIL.getId());
-		tag(CHARM_CURIO).addOptional(CuriosCompat.EXPLOSION_CHARM.getId());
+		tag(ANY_CURIO).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.EMBER_BULB.getId()));
+		tag(RING_CURIO).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.EMBER_RING.getId()));
+		tag(BELT_CURIO).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.EMBER_BELT.getId()));
+		tag(AMULET_CURIO).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.EMBER_AMULET.getId())).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.ASHEN_AMULET.getId())).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.NONBELEIVER_AMULET.getId()));
+		tag(BODY_CURIO).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.DAWNSTONE_MAIL.getId()));
+		tag(CHARM_CURIO).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.EXPLOSION_CHARM.getId()));
 	}
 
 	public void toolTags(ToolSet set) {

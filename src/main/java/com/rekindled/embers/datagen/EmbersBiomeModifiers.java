@@ -47,7 +47,7 @@ public class EmbersBiomeModifiers {
 		bootstrap.register(ORE_LEAD_KEY, new AddFeaturesBiomeModifier(overworldBiomes, HolderSet.direct(placed.getOrThrow(EmbersPlacedFeatures.ORE_LEAD_KEY)), Decoration.UNDERGROUND_ORES));
 		bootstrap.register(ORE_SILVER_KEY, new AddFeaturesBiomeModifier(overworldBiomes, HolderSet.direct(placed.getOrThrow(EmbersPlacedFeatures.ORE_SILVER_KEY)), Decoration.UNDERGROUND_ORES));
 
-		bootstrap.register(GOLEM_SPAWN, new AddSpawnsBiomeModifier(hostileSpawns, List.of(new MobSpawnSettings.SpawnerData(RegistryManager.ANCIENT_GOLEM.get(), 15, 1, 1))));
+		bootstrap.register(GOLEM_SPAWN, new AddSpawnsBiomeModifier(hostileSpawns, net.minecraft.util.random.WeightedList.of(new net.minecraft.util.random.Weighted<>(new MobSpawnSettings.SpawnerData(RegistryManager.ANCIENT_GOLEM.get(), 1, 1), 15))));
 	}
 
 	//wow this is stupid

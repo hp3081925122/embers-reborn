@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class EmbersBlockTags extends BlockTagsProvider {
 
@@ -123,7 +122,7 @@ public class EmbersBlockTags extends BlockTagsProvider {
 			}
 		}.run();
 
-		tag(EMITTER_CONNECTION).add(Blocks.LEVER, Blocks.LADDER, Blocks.IRON_BARS, Blocks.TRIPWIRE_HOOK, Blocks.WALL_TORCH, Blocks.SOUL_WALL_TORCH, Blocks.REDSTONE_WALL_TORCH, Blocks.BELL, Blocks.LANTERN, Blocks.SOUL_LANTERN, Blocks.END_ROD, Blocks.LIGHTNING_ROD, Blocks.CHAIN)
+		tag(EMITTER_CONNECTION).add(Blocks.LEVER, Blocks.LADDER, Blocks.IRON_BARS, Blocks.TRIPWIRE_HOOK, Blocks.WALL_TORCH, Blocks.SOUL_WALL_TORCH, Blocks.REDSTONE_WALL_TORCH, Blocks.BELL, Blocks.LANTERN, Blocks.SOUL_LANTERN, Blocks.END_ROD, Blocks.LIGHTNING_ROD, Blocks.IRON_CHAIN)
 		.add(RegistryManager.EMBER_DIAL.get(), RegistryManager.CAMINITE_LEVER.get(), RegistryManager.EMBER_EMITTER.get(), RegistryManager.EMBER_RECEIVER.get(), RegistryManager.EMBER_EJECTOR.get(), RegistryManager.EMBER_FUNNEL.get(), RegistryManager.EMBER_RELAY.get(), RegistryManager.MIRROR_RELAY.get(), RegistryManager.BEAM_SPLITTER.get())
 		.addTags(Tags.Blocks.GLASS_PANES, BlockTags.BUTTONS, Tags.Blocks.FENCES, BlockTags.WALLS, BlockTags.WALL_SIGNS)
 		.addTags(EMITTER_CONNECTION_FLOOR, EMITTER_CONNECTION_CEILING, DIAL);
@@ -263,7 +262,7 @@ public class EmbersBlockTags extends BlockTagsProvider {
 				RegistryManager.ENTROPIC_ENUMERATOR.get(),
 				RegistryManager.HEAT_EXCHANGER.get(),
 				RegistryManager.HEAT_INSULATION.get(),
-				RegistryManager.EXCAVATION_BUCKETS.get()).addOptional(CuriosCompat.EXPLOSION_PEDESTAL.getId());
+				RegistryManager.EXCAVATION_BUCKETS.get()).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.EXPLOSION_PEDESTAL.getId()));
 
 		tag(BlockTags.MINEABLE_WITH_AXE).add(
 				RegistryManager.SEALED_PLANKS.get(),
@@ -317,7 +316,7 @@ public class EmbersBlockTags extends BlockTagsProvider {
 				RegistryManager.COMBUSTION_CHAMBER.get(),
 				RegistryManager.CATALYSIS_CHAMBER.get(),
 				RegistryManager.INFERNO_FORGE.get())
-		.addTag(CRYSTAL_SEEDS).addOptional(CuriosCompat.EXPLOSION_PEDESTAL.getId());
+		.addTag(CRYSTAL_SEEDS).add(net.minecraft.tags.TagEntry.optionalElement(CuriosCompat.EXPLOSION_PEDESTAL.getId()));
 
 		tag(MECH_CORE_PROXYABLE).add(
 				RegistryManager.EMBER_ACTIVATOR.get(),
@@ -458,7 +457,7 @@ public class EmbersBlockTags extends BlockTagsProvider {
 		}
 	}
 
-	public IntrinsicTagAppender<Block> upgradeTag(Block upgrade) {
+	public net.minecraft.data.tags.TagAppender<Block, Block> upgradeTag(Block upgrade) {
 		Identifier upgradeLoc = BuiltInRegistries.BLOCK.getKey(upgrade);
 		return tag(BlockTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "upgradeable_with/" + upgradeLoc.getNamespace() + "/" + upgradeLoc.getPath())));
 	}

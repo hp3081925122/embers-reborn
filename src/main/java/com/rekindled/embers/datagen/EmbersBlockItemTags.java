@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 /** Tags that exist as both a block tag and an item tag with the same contents (was ItemTagsProvider#copy). */
 public abstract class EmbersBlockItemTags extends net.minecraft.data.tags.BlockItemTagsProvider {

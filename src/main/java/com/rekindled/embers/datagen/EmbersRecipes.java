@@ -259,7 +259,7 @@ public class EmbersRecipes extends RecipeProvider {
 		.inputs(Tags.Items.STORAGE_BLOCKS_COAL, Tags.Items.OBSIDIANS, EmbersItemTags.LEAD_INGOT, EmbersItemTags.LEAD_INGOT)
 		.aspects(EmbersItemTags.LEAD_ASPECTUS, EmbersItemTags.SILVER_ASPECTUS).save(consumer);
 		AlchemyRecipeBuilder.create(new ItemStack(RegistryManager.ISOLATED_MATERIA.get(), 4)).tablet(Tags.Items.INGOTS_IRON).folder(alchemyFolder)
-		.inputs(Ingredient.of(net.minecraft.tags.ItemTags.create(net.minecraft.resources.Identifier.parse("c:gems/quartz"))), Ingredient.of(Items.CLAY_BALL), tag(Tags.Items.GEMS_LAPIS))
+		.inputs(tag(net.minecraft.tags.ItemTags.create(net.minecraft.resources.Identifier.parse("c:gems/quartz"))), Ingredient.of(Items.CLAY_BALL), tag(Tags.Items.GEMS_LAPIS))
 		.aspects(EmbersItemTags.COPPER_ASPECTUS, EmbersItemTags.IRON_ASPECTUS, EmbersItemTags.LEAD_ASPECTUS, EmbersItemTags.SILVER_ASPECTUS).save(consumer);
 		AlchemyRecipeBuilder.create(RegistryManager.CATALYTIC_PLUG.get()).tablet(EmbersItemTags.SILVER_INGOT).folder(alchemyFolder)
 		.inputs(Ingredient.of(RegistryManager.FLUID_PIPE.get()), tag(Tags.Items.GLASS_BLOCKS_COLORLESS), Ingredient.of(RegistryManager.FLUID_PIPE.get()))
@@ -439,7 +439,7 @@ public class EmbersRecipes extends RecipeProvider {
 		.pattern("X X")
 		.define('X', RegistryManager.CAMINITE_BLEND.get())
 		.unlockedBy("has_caminite", has(RegistryManager.CAMINITE_BLEND.get()))
-		.save(ConsumerWrapperBuilder.wrap().addCondition(tagReal(itemTag("c", "gears"))).build(consumer), getResource("raw_gear_stamp"));
+		.save(ConsumerWrapperBuilder.wrap().addCondition(tagReal(itemTag("c", "gears"))).build(consumer), recipeKey("raw_gear_stamp"));
 
 		shaped(RecipeCategory.BUILDING_BLOCKS, RegistryManager.CAMINITE_BRICKS.get())
 		.pattern("XX")
@@ -478,7 +478,7 @@ public class EmbersRecipes extends RecipeProvider {
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryManager.RAW_PLATE_STAMP.get()), RecipeCategory.MISC, net.minecraft.world.item.crafting.CookingBookCategory.MISC, RegistryManager.PLATE_STAMP.get(), 0.1F, 200)
 		.unlockedBy("has_raw_plate_stamp", has(RegistryManager.RAW_PLATE_STAMP.get())).save(consumer, recipeKey("plate_stamp"));
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(RegistryManager.RAW_GEAR_STAMP.get()), RecipeCategory.MISC, net.minecraft.world.item.crafting.CookingBookCategory.MISC, RegistryManager.GEAR_STAMP.get(), 0.1F, 200)
-		.unlockedBy("has_raw_gear_stamp", has(RegistryManager.RAW_GEAR_STAMP.get())).save(ConsumerWrapperBuilder.wrap().addCondition(tagReal(itemTag("c", "gears"))).build(consumer), getResource("gear_stamp"));
+		.unlockedBy("has_raw_gear_stamp", has(RegistryManager.RAW_GEAR_STAMP.get())).save(ConsumerWrapperBuilder.wrap().addCondition(tagReal(itemTag("c", "gears"))).build(consumer), recipeKey("gear_stamp"));
 
 		shaped(RecipeCategory.BUILDING_BLOCKS, RegistryManager.RAW_CAMINITE_BLOCK.get(), 3)
 		.pattern("XXX")

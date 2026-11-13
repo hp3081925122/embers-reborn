@@ -14,7 +14,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class EmbersFluidTags extends FluidTagsProvider {
 
@@ -98,7 +97,7 @@ public class EmbersFluidTags extends FluidTagsProvider {
 		.addTag(MOLTEN_BRASS)
 		.addTag(MOLTEN_CONSTANTAN)
 		.addTag(MOLTEN_INVAR)
-		.addOptionalTag(METAL_TOOLTIPS.location());
+		.addOptionalTag(METAL_TOOLTIPS);
 		tag(METAL_TOOLTIPS).addTag(INGOT_TOOLTIP);
 	}
 }

@@ -21,7 +21,8 @@ import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.util.random.WeightedRandomList;
+import net.minecraft.util.random.WeightedList;
+import net.minecraft.util.random.Weighted;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -80,7 +81,7 @@ public class EmbersStructures {
 		HolderSet<Biome> ruinSpawns = new AndHolderSet<Biome>(List.of(overworldBiomes, new NotHolderSetWrapper<Biome>(new OrHolderSet<Biome>(biomeBlackList))));
 
 		bootstrap.register(SMALL_RUIN, new CaveStructure(new Structure.StructureSettings(ruinSpawns, Map.of(MobCategory.MONSTER,
-				new StructureSpawnOverride(BoundingBoxType.STRUCTURE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(RegistryManager.ANCIENT_GOLEM.get(), 20, 1, 1)))),
+				new StructureSpawnOverride(BoundingBoxType.STRUCTURE, WeightedList.of(new Weighted<>(new MobSpawnSettings.SpawnerData(RegistryManager.ANCIENT_GOLEM.get(), 1, 1), 20)))),
 				Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE),
 				templatePool.getOrThrow(SMALL_RUIN_POOL), 2, ConstantHeight.of(VerticalAnchor.absolute(-10)), ConstantHeight.of(VerticalAnchor.aboveBottom(128)), false, Heightmap.Types.OCEAN_FLOOR_WG));
 	}
