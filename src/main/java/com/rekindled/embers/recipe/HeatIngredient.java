@@ -31,8 +31,6 @@ public class HeatIngredient implements ICustomIngredient {
 			(base, inverted) -> new HeatIngredient(base, inverted));
 
 	private final Ingredient base;
-	private ItemStack[] heatedMatchingStacks;
-	private IntList packedMatchingStacks;
 	private boolean inverted;
 
 	public HeatIngredient(Ingredient base, boolean inverted) {
@@ -56,26 +54,28 @@ public class HeatIngredient implements ICustomIngredient {
 	}
 
 	@Override
-	public java.util.stream.Stream<net.minecraft.world.item.ItemStack> getItems() {
-		if (!inverted) {
-			if (this.heatedMatchingStacks == null) {
-				ItemStack[] items = base.getItems();
-				this.heatedMatchingStacks = new ItemStack[items.length];
-				for (int i = 0; i < items.length; i ++) {
-					ItemStack stack = items[i].copy();
-					AugmentUtil.setHeat(stack, 0);
-					this.heatedMatchingStacks[i] = stack;
-				}
-			}
-			return java.util.Arrays.stream(heatedMatchingStacks);
-		}
-		return java.util.Arrays.stream(base.getItems());
+	public java.util.stream.Stream<net.minecraft.core.Holder<net.minecraft.world.item.Item>> items() {
+		return base.items();
 	}
 
+	/** JEI/recipe-book display: show the base items with heat applied (unless inverted), like 1.20.1 getItems(). */
+	@Override
+	public net.minecraft.world.item.crafting.display.SlotDisplay display() {
+		if (inverted)
+			return base.display();
+		java.util.List<net.minecraft.world.item.crafting.display.SlotDisplay> list = new java.util.ArrayList<>();
+		base.items().forEach(h -> {
+			ItemStack stack = new ItemStack(h);
+			AugmentUtil.setHeat(stack, 0);
+			list.add(new net.minecraft.world.item.crafting.display.SlotDisplay.ItemStackSlotDisplay(net.minecraft.world.item.ItemStackTemplate.fromNonEmptyStack(stack)));
+		});
+		return new net.minecraft.world.item.crafting.display.SlotDisplay.Composite(list);
+	}
 
+	/** Matching depends on heat data components, so vanilla must call test(); never simple. */
 	@Override
 	public boolean isSimple() {
-		return base.isSimple();
+		return false;
 	}
 
 

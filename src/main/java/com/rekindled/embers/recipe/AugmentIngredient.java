@@ -40,8 +40,6 @@ public class AugmentIngredient implements ICustomIngredient {
 	private final Ingredient base;
 	private final IAugment augment;
 	private final int level;
-	private ItemStack[] augmentedMatchingStacks;
-	private IntList packedMatchingStacks;
 	private boolean inverted;
 
 	public AugmentIngredient(Ingredient base, IAugment augment, int level, boolean inverted) {
@@ -75,30 +73,32 @@ public class AugmentIngredient implements ICustomIngredient {
 	}
 
 	@Override
-	public java.util.stream.Stream<net.minecraft.world.item.ItemStack> getItems() {
-		if (this.augmentedMatchingStacks == null) {
-			ItemStack[] items = base.getItems();
-			this.augmentedMatchingStacks = new ItemStack[items.length];
-			for (int i = 0; i < items.length; i ++) {
-				ItemStack stack = items[i].copy();
-				if (inverted)
-					AugmentUtil.setHeat(stack, 0);
-				else {
-					AugmentUtil.setLevel(stack, AugmentUtil.getLevel(stack) + level);
-					AugmentUtil.addAugment(stack, ItemStack.EMPTY, augment);
-					AugmentUtil.setAugmentLevel(stack, augment, level);
-				}
-				this.augmentedMatchingStacks[i] = stack;
-			}
-		}
-		return java.util.Arrays.stream(augmentedMatchingStacks);
+	public java.util.stream.Stream<net.minecraft.core.Holder<net.minecraft.world.item.Item>> items() {
+		return base.items();
 	}
 
+	/** JEI/recipe-book display: base items with the augment applied (or heat cleared if inverted), like 1.20.1 getItems(). */
+	@Override
+	public net.minecraft.world.item.crafting.display.SlotDisplay display() {
+		java.util.List<net.minecraft.world.item.crafting.display.SlotDisplay> list = new java.util.ArrayList<>();
+		base.items().forEach(h -> {
+			ItemStack stack = new ItemStack(h);
+			if (inverted)
+				AugmentUtil.setHeat(stack, 0);
+			else {
+				AugmentUtil.setLevel(stack, AugmentUtil.getLevel(stack) + level);
+				AugmentUtil.addAugment(stack, ItemStack.EMPTY, augment);
+				AugmentUtil.setAugmentLevel(stack, augment, level);
+			}
+			list.add(new net.minecraft.world.item.crafting.display.SlotDisplay.ItemStackSlotDisplay(net.minecraft.world.item.ItemStackTemplate.fromNonEmptyStack(stack)));
+		});
+		return new net.minecraft.world.item.crafting.display.SlotDisplay.Composite(list);
+	}
 
-
+	/** Matching depends on augment data components, so vanilla must call test(); never simple. */
 	@Override
 	public boolean isSimple() {
-		return base.isSimple();
+		return false;
 	}
 
 
