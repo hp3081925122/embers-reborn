@@ -12,7 +12,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -91,7 +90,7 @@ public class ClockworkAxeItem extends ClockworkToolItem {
 	}
 
 	@Override
-	public boolean canPerformAction(ItemStack stack, net.neoforged.neoforge.common.ItemAbility ability) {
-		return hasEmber(stack) && net.neoforged.neoforge.common.ItemAbilities.DEFAULT_AXE_ACTIONS.contains(ability);
+	public boolean canPerformAction(net.minecraft.world.item.ItemInstance stack, net.neoforged.neoforge.common.ItemAbility ability) {
+		return stack instanceof ItemStack itemStack && hasEmber(itemStack) && net.neoforged.neoforge.common.ItemAbilities.DEFAULT_AXE_ACTIONS.contains(ability);
 	}
 }

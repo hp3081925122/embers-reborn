@@ -30,7 +30,7 @@ public class GlimmerCrystalItem extends Item {
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel world, Entity entity, @org.jspecify.annotations.Nullable net.minecraft.world.entity.EquipmentSlot slot) {
+	public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel world, Entity entity, net.minecraft.world.entity.@org.jspecify.annotations.Nullable EquipmentSlot slot) {
 		if (world.getGameTime() % 10 == 0 && world.getBrightness(LightLayer.SKY, entity.blockPosition()) - world.getSkyDarken() > 12) {
 			stack.setDamageValue(stack.getDamageValue() -1);
 		}

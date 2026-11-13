@@ -11,10 +11,10 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DiggerItem;
+import net.minecraft.util.Unit;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.component.Unbreakable;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -44,7 +44,8 @@ public class ClockworkToolItem extends Item implements IEmberChargedTool {
 
 	public ClockworkToolItem(net.minecraft.world.item.ToolMaterial tier, TagKey<Block> blocks, float attackDamage, float attackSpeed, Properties properties) {
 		// 等级耐久是 -1，表示不损坏。1.21 会把它写成最大耐久 -1，第一下就会碎
-		super(properties.tool(tier, blocks, attackDamage, attackSpeed, 0.0F).component(DataComponents.UNBREAKABLE, new Unbreakable(false)));
+		super(properties.tool(tier, blocks, attackDamage, attackSpeed, 0.0F).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)
+				.component(DataComponents.TOOLTIP_DISPLAY, TooltipDisplay.DEFAULT.withHidden(DataComponents.UNBREAKABLE, true)));
 	}
 
 	@Override
@@ -65,12 +66,12 @@ public class ClockworkToolItem extends Item implements IEmberChargedTool {
 	}
 
 	@Override
-	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+	public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		putBoolean(stack, "didUse", true);
 		if (target.level() instanceof ServerLevel serverLevel) {
 			serverLevel.sendParticles(GlowParticleOptions.EMBER, target.getX(), target.getY() + target.getEyeHeight() / 1.5, target.getZ(), 70, 0.15, 0.15, 0.15, 0.6);
 		}
-		return super.hurtEnemy(stack, target, attacker);
+		super.hurtEnemy(stack, target, attacker);
 	}
 
 	@Override
@@ -79,15 +80,10 @@ public class ClockworkToolItem extends Item implements IEmberChargedTool {
 		return super.mineBlock(stack, level, state, pos, entityLiving);
 	}
 
-	@Override
-	public boolean isEnchantable(ItemStack pStack) {
-		return true;
-	}
-
 	// 1.20.1 canApplyAtEnchantingTable: only WEAPON/DIGGER enchantments, never BREAKABLE (unbreaking/mending) or sweeping edge.
 	// 1.21 enchantments are data-driven, so the old categories are matched by their supported_items tag.
 	private static final java.util.Set<TagKey<net.minecraft.world.item.Item>> WEAPON_TAGS = java.util.Set.of(
-			net.minecraft.tags.ItemTags.SWORD_ENCHANTABLE, net.minecraft.tags.ItemTags.SHARP_WEAPON_ENCHANTABLE,
+			net.minecraft.tags.ItemTags.MELEE_WEAPON_ENCHANTABLE, net.minecraft.tags.ItemTags.SHARP_WEAPON_ENCHANTABLE,
 			net.minecraft.tags.ItemTags.WEAPON_ENCHANTABLE, net.minecraft.tags.ItemTags.FIRE_ASPECT_ENCHANTABLE);
 	private static final java.util.Set<TagKey<net.minecraft.world.item.Item>> DIGGER_TAGS = java.util.Set.of(
 			net.minecraft.tags.ItemTags.MINING_ENCHANTABLE, net.minecraft.tags.ItemTags.MINING_LOOT_ENCHANTABLE);
@@ -133,9 +129,9 @@ public class ClockworkToolItem extends Item implements IEmberChargedTool {
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel world, Entity entity, @org.jspecify.annotations.Nullable net.minecraft.world.entity.EquipmentSlot slot) {
+	public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel world, Entity entity, net.minecraft.world.entity.@org.jspecify.annotations.Nullable EquipmentSlot slot) {
 		if (!stack.has(DataComponents.UNBREAKABLE)) {
-			stack.set(DataComponents.UNBREAKABLE, new Unbreakable(false));
+			stack.set(DataComponents.UNBREAKABLE, Unit.INSTANCE);
 			stack.set(DataComponents.DAMAGE, 0);
 		}
 		// 26.1 only ticks inventories on the server; 'selected' became the main-hand slot
