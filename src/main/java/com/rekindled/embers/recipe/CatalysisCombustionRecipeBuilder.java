@@ -30,13 +30,13 @@ public class CatalysisCombustionRecipeBuilder {
 	}
 
 	public static CatalysisCombustionRecipeBuilder create(TagKey<Item> tag) {
-		CatalysisCombustionRecipeBuilder builder = create(Ingredient.of(tag));
+		CatalysisCombustionRecipeBuilder builder = create(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
 		builder.id = tag.location();
 		return builder;
 	}
 
 	public static CatalysisCombustionRecipeBuilder create(ItemStack itemStack) {
-		CatalysisCombustionRecipeBuilder builder = create(Ingredient.of(itemStack));
+		CatalysisCombustionRecipeBuilder builder = create(Ingredient.of(itemStack.getItem()));
 		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
 		return builder;
 	}
@@ -85,7 +85,7 @@ public class CatalysisCombustionRecipeBuilder {
 	}
 
 	public void save(RecipeOutput consumer) {
-		consumer.accept(build().getId(), build(), null);
+		consumer.accept(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.RECIPE, build().getId()), build(), null);
 	}
 
 	// Finished inner class removed - RecipeOutput.accept(RL, Recipe, Advancement) in 1.21.1

@@ -540,7 +540,7 @@ public class Misc {
 	@SuppressWarnings("resource")
 	public static void sendToTrackingPlayers(Level level, BlockPos pos, Packet<?> packet) {
 		if (level instanceof ServerLevel && packet != null) {
-			for (ServerPlayer serverplayer : ((ServerChunkCache) level.getChunkSource()).chunkMap.getPlayers(new ChunkPos(pos), false)) {
+			for (ServerPlayer serverplayer : ((ServerChunkCache) level.getChunkSource()).chunkMap.getPlayers(ChunkPos.containing(pos), false)) {
 				serverplayer.connection.send(packet);
 			}
 		}
@@ -576,9 +576,9 @@ public class Misc {
 					(0.9 - weight) * motion.z + (0.1 + weight) * targetVector.z);
 			newPos = oldPos.add(motion);
 			oldPos = newPos;
-			trajectoryChunks.add(new ChunkPos(BlockPos.containing(newPos)));
+			trajectoryChunks.add(ChunkPos.containing(BlockPos.containing(newPos)));
 		}
-		trajectoryChunks.add(new ChunkPos(target));
+		trajectoryChunks.add(ChunkPos.containing(target));
 	}
 
 	public static VoxelShape rotateVoxelShape(Direction to, VoxelShape shape) {

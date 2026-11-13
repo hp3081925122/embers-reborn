@@ -108,7 +108,7 @@ public class BlastingExplosion extends Explosion {
 						d0 /= d3;
 						d1 /= d3;
 						d2 /= d3;
-						float f = myRadius * (0.7F + myLevel.random.nextFloat() * 0.6F);
+						float f = myRadius * (0.7F + myLevel.getRandom().nextFloat() * 0.6F);
 						double d4 = myX;
 						double d6 = myY;
 						double d8 = myZ;

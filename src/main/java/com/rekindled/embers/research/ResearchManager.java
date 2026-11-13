@@ -219,7 +219,7 @@ public class ResearchManager {
 		crystals = new ResearchBase(loc("crystals"), new ItemStack(RegistryManager.EMBER_CRYSTAL.get()), 12, 3).addAncestor(bore).setLookupIngredient(Ingredient.of(RegistryManager.EMBER_CRYSTAL.get(), RegistryManager.EMBER_SHARD.get()));
 		tinker_lens = new ResearchBase(loc("tinker_lens"), new ItemStack(RegistryManager.TINKER_LENS.get()), 9, 4).addAncestor(bore);
 		activator = new ResearchBase(loc("activator"), new ItemStack(RegistryManager.EMBER_ACTIVATOR_ITEM.get()), 10, 6).addAncestor(crystals).addAncestor(tinker_lens);
-		dials = new ResearchBase(loc("dials"), new ItemStack(RegistryManager.EMBER_DIAL_ITEM.get()), 3, 6).addAncestor(hammer).setLookupIngredient(Ingredient.of(EmbersItemTags.DIALS));
+		dials = new ResearchBase(loc("dials"), new ItemStack(RegistryManager.EMBER_DIAL_ITEM.get()), 3, 6).addAncestor(hammer).setLookupIngredient(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.DIALS)));
 		//reaction_chamber = new ResearchBase(loc("reaction_chamber"), new ItemStack(RegistryManager.reaction_chamber), 12, 5).addAncestor(mini_boiler);
 		heat_exchanger = new ResearchBase(loc("heat_exchanger"), new ItemStack(RegistryManager.HEAT_EXCHANGER_ITEM.get()), 12, 7).addAncestor(activator);
 
@@ -277,7 +277,7 @@ public class ResearchManager {
 		splitter = new ResearchBase(loc("splitter"), new ItemStack(RegistryManager.BEAM_SPLITTER_ITEM.get()), 0, 6).addAncestor(pulser);
 		cinder_staff = new ResearchBase(loc("cinder_staff"), new ItemStack(RegistryManager.CINDER_STAFF.get()), 4, 4).addAncestor(jars);
 		blazing_ray = new ResearchBase(loc("blazing_ray"), new ItemStack(RegistryManager.BLAZING_RAY.get()), 6, 5).addAncestor(jars);
-		aspecti = new ResearchBase(loc("aspecti"), new ItemStack(RegistryManager.DAWNSTONE_ASPECTUS.get()), 12, 1).setLookupIngredient(Ingredient.of(EmbersItemTags.ASPECTUS));
+		aspecti = new ResearchBase(loc("aspecti"), new ItemStack(RegistryManager.DAWNSTONE_ASPECTUS.get()), 12, 1).setLookupIngredient(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.ASPECTUS)));
 		cinder_plinth = new ResearchBase(loc("cinder_plinth"), new ItemStack(RegistryManager.CINDER_PLINTH_ITEM.get()), 9, 0).setLookupIngredient(Ingredient.fromValues(Stream.of(new TagValue(EmbersItemTags.ASH_DUST), new ItemValue(new ItemStack(RegistryManager.CINDER_PLINTH_ITEM.get())))));
 		beam_cannon = new ResearchBase(loc("beam_cannon"), new ItemStack(RegistryManager.BEAM_CANNON_ITEM.get()), 9, 7);
 		alchemy = new ResearchBase(loc("alchemy"), new ItemStack(RegistryManager.ALCHEMY_TABLET_ITEM.get()), 9, 4).setLookupIngredient(Ingredient.of(RegistryManager.ALCHEMY_TABLET_ITEM.get(), RegistryManager.ALCHEMY_PEDESTAL_ITEM.get()))

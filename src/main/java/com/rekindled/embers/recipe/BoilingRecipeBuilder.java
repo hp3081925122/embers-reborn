@@ -99,7 +99,7 @@ public class BoilingRecipeBuilder {
 	}
 
 	public void save(RecipeOutput consumer) {
-		consumer.accept(build().getId(), build(), null);
+		consumer.accept(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.RECIPE, build().getId()), build(), null);
 	}
 
 	// Finished inner class removed - RecipeOutput.accept(RL, Recipe, Advancement) in 1.21.1

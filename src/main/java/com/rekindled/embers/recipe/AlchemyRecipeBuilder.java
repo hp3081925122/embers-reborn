@@ -65,7 +65,7 @@ public class AlchemyRecipeBuilder {
 	}
 
 	public AlchemyRecipeBuilder tablet(TagKey<Item> tag) {
-		tablet(Ingredient.of(tag));
+		tablet(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
 		return this;
 	}
 
@@ -126,14 +126,14 @@ public class AlchemyRecipeBuilder {
 	@SafeVarargs
 	public final AlchemyRecipeBuilder aspects(TagKey<Item>... aspects) {
 		for (TagKey<Item> aspect : aspects)
-			this.aspects.add(Ingredient.of(aspect));
+			this.aspects.add(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(aspect)));
 		return this;
 	}
 
 	@SafeVarargs
 	public final AlchemyRecipeBuilder inputs(TagKey<Item>... inputs) {
 		for (TagKey<Item> input : inputs)
-			this.inputs.add(Ingredient.of(input));
+			this.inputs.add(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(input)));
 		return this;
 	}
 
@@ -149,7 +149,7 @@ public class AlchemyRecipeBuilder {
 	}
 
 	public void save(RecipeOutput consumer) {
-		consumer.accept(build().getId(), build(), null);
+		consumer.accept(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.RECIPE, build().getId()), build(), null);
 	}
 
 	// Finished inner class removed — RecipeOutput.accept(RL, Recipe, Advancement) in 1.21.1

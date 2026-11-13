@@ -126,7 +126,7 @@ public class EmbersEvents {
 			int l2 = Math.min(event.getLeft().getDamageValue(), event.getLeft().getMaxDamage() / 4);
 			if (l2 <= 0) {
 				event.setOutput(ItemStack.EMPTY);
-				event.setCost(0);
+				event.setXpCost(0);
 				return;
 			}
 			int i3;
@@ -150,14 +150,14 @@ public class EmbersEvents {
 				i += k;
 				copy.remove(net.minecraft.core.component.DataComponents.CUSTOM_NAME);
 			}
-			event.setCost(j + i);
+			event.setXpCost(j + i);
 			if (i <= 0) {
 				copy = ItemStack.EMPTY;
 			}
-			if (k == i && k > 0 && event.getCost() >= 40) {
-				event.setCost(39);
+			if (k == i && k > 0 && event.getXpCost() >= 40) {
+				event.setXpCost(39);
 			}
-			if (event.getCost() >= 40 && !event.getPlayer().getAbilities().instabuild) {
+			if (event.getXpCost() >= 40 && !event.getPlayer().getAbilities().instabuild) {
 				copy = ItemStack.EMPTY;
 			}
 			if (!copy.isEmpty()) {

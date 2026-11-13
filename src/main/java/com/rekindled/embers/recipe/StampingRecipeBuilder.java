@@ -76,7 +76,7 @@ public class StampingRecipeBuilder {
 	}
 
 	public StampingRecipeBuilder stamp(TagKey<Item> tag) {
-		stamp(Ingredient.of(tag));
+		stamp(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
 		return this;
 	}
 
@@ -91,7 +91,7 @@ public class StampingRecipeBuilder {
 	}
 
 	public StampingRecipeBuilder input(TagKey<Item> tag) {
-		input(Ingredient.of(tag));
+		input(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
 		return this;
 	}
 
@@ -125,7 +125,7 @@ public class StampingRecipeBuilder {
 	}
 
 	public void save(RecipeOutput consumer) {
-		consumer.accept(build().getId(), build(), null);
+		consumer.accept(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.RECIPE, build().getId()), build(), null);
 	}
 
 	// Finished inner class removed - RecipeOutput.accept(RL, Recipe, Advancement) in 1.21.1

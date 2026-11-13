@@ -354,10 +354,10 @@ public class EmbersRecipes extends RecipeProvider {
 		CatalysisCombustionRecipeBuilder.create(Items.BLAZE_POWDER).combustion().domain(Embers.MODID).folder(combustionFolder).multiplier(4.0).burnTime(400).save(consumer);
 
 		//dawnstone anvil
-		GenericRecipeBuilder.create(new AnvilRepairRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_repair"))).save(consumer);
-		GenericRecipeBuilder.create(new AnvilRepairMateriaRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_materia_repair"))).save(consumer);
-		GenericRecipeBuilder.create(new AnvilBreakdownRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_breakdown"))).save(consumer);
-		GenericRecipeBuilder.create(new AnvilAugmentRemoveRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_augment_remove"))).save(consumer);
+		GenericRecipeBuilder.create(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_repair"), new AnvilRepairRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_repair"))).save(consumer);
+		GenericRecipeBuilder.create(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_materia_repair"), new AnvilRepairMateriaRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_materia_repair"))).save(consumer);
+		GenericRecipeBuilder.create(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_breakdown"), new AnvilBreakdownRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_breakdown"))).save(consumer);
+		GenericRecipeBuilder.create(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_augment_remove"), new AnvilAugmentRemoveRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, anvilFolder + "/tool_augment_remove"))).save(consumer);
 
 		AnvilAugmentRecipeBuilder.create(RegistryManager.CORE_AUGMENT).folder(anvilFolder).tool(HeatIngredient.of(tag(EmbersItemTags.AUGMENTABLE), true).toVanilla()).input(RegistryManager.ANCIENT_MOTIVE_CORE.get()).save(consumer);
 		AnvilAugmentRecipeBuilder.create(RegistryManager.TINKER_LENS_AUGMENT).folder(anvilFolder).tool(AugmentIngredient.of(DifferenceIngredient.of(tag(EmbersItemTags.AUGMENTABLE_HELMETS), tag(EmbersItemTags.TINKER_LENS_HELMETS)), RegistryManager.TINKER_LENS_AUGMENT, true).toVanilla()).input(RegistryManager.TINKER_LENS.get()).save(consumer);
@@ -378,7 +378,7 @@ public class EmbersRecipes extends RecipeProvider {
 
 		//special recipes
 		GemSocketRecipeBuilder.create(Tags.Items.STRINGS).id(Identifier.fromNamespaceAndPath(Embers.MODID, "gem_socketing")).save(consumer);
-		GenericRecipeBuilder.create(new GemUnsocketRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, "gem_unsocketing"))).save(consumer);
+		GenericRecipeBuilder.create(Identifier.fromNamespaceAndPath(Embers.MODID, "gem_unsocketing"), new GemUnsocketRecipe(Identifier.fromNamespaceAndPath(Embers.MODID, "gem_unsocketing"))).save(consumer);
 
 		//crafting
 		shaped(RecipeCategory.MISC, RegistryManager.EMBER_CRYSTAL.get())

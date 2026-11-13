@@ -108,7 +108,7 @@ public class TinkerHammerItem extends Item {
 						}
 						((IEmberPacketReceiver) tile).setIncomingDirection(motion);
 					}
-					world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ANVIL_LAND, SoundSource.BLOCKS, 0.5f, 1.5f + world.random.nextFloat() * 0.1f, false);
+					world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ANVIL_LAND, SoundSource.BLOCKS, 0.5f, 1.5f + world.getRandom().nextFloat() * 0.1f, false);
 					nbt.remove("targetWorld");
 					_setTag(stack, nbt);
 					return InteractionResult.SUCCESS;
@@ -126,7 +126,7 @@ public class TinkerHammerItem extends Item {
 			nbt.putInt("targetY", pos.getY());
 			nbt.putInt("targetZ", pos.getZ());
 			_setTag(stack, nbt);
-			world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ANVIL_LAND, SoundSource.BLOCKS, 0.5f, 1.95f + world.random.nextFloat() * 0.2f, false);
+			world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.ANVIL_LAND, SoundSource.BLOCKS, 0.5f, 1.95f + world.getRandom().nextFloat() * 0.2f, false);
 			if (world.isClientSide())
 				EmbersClientEvents.lastTarget = null;
 			return InteractionResult.SUCCESS;

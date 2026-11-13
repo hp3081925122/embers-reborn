@@ -16,17 +16,17 @@ public class ExplosionCharmWorldInfo { //basicly a k-d tree
 	public ExplosionCharmWorldInfo() {}
 
 	public void put(BlockPos pos) {
-		ChunkPos chunkPos = new ChunkPos(pos);
+		ChunkPos chunkPos = ChunkPos.containing(pos);
 		data.put(chunkPos, pos);
 	}
 
 	public BlockPos getClosestExplosionCharm(Level world, BlockPos pos, int radius) {
 		BlockPos chosen = null;
 		double minDistance = Double.POSITIVE_INFINITY;
-		ChunkPos chunkPosA = new ChunkPos(pos.offset(-radius, 0, -radius));
-		ChunkPos chunkPosB = new ChunkPos(pos.offset(radius, 0, radius));
-		for (int x = chunkPosA.x; x <= chunkPosB.x; x++)
-			for (int z = chunkPosA.z; z <= chunkPosB.z; z++) {
+		ChunkPos chunkPosA = ChunkPos.containing(pos.offset(-radius, 0, -radius));
+		ChunkPos chunkPosB = ChunkPos.containing(pos.offset(radius, 0, radius));
+		for (int x = chunkPosA.x(); x <= chunkPosB.x(); x++)
+			for (int z = chunkPosA.z(); z <= chunkPosB.z(); z++) {
 				ChunkPos chunkPos = new ChunkPos(x, z);
 				Iterator<BlockPos> iterator = data.get(chunkPos).iterator();
 				while (iterator.hasNext()) {

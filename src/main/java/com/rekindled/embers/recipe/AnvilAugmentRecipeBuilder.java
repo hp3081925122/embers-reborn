@@ -55,7 +55,7 @@ public class AnvilAugmentRecipeBuilder {
 	}
 
 	public AnvilAugmentRecipeBuilder tool(TagKey<Item> tag) {
-		tool(Ingredient.of(tag));
+		tool(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
 		return this;
 	}
 
@@ -70,7 +70,7 @@ public class AnvilAugmentRecipeBuilder {
 	}
 
 	public AnvilAugmentRecipeBuilder input(TagKey<Item> tag) {
-		input(Ingredient.of(tag));
+		input(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
 		return this;
 	}
 
@@ -79,7 +79,7 @@ public class AnvilAugmentRecipeBuilder {
 	}
 
 	public void save(RecipeOutput consumer) {
-		consumer.accept(build().getId(), build(), null);
+		consumer.accept(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.RECIPE, build().getId()), build(), null);
 	}
 
 	// Finished inner class removed

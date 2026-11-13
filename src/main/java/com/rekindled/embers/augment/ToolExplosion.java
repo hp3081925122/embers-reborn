@@ -92,7 +92,7 @@ public class ToolExplosion extends Explosion {
 	@Override
 	public void finalizeExplosion(boolean pSpawnParticles) {
 		if (myLevel.isClientSide()) {
-			myLevel.playLocalSound(myX, myY, myZ, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 4.0F, (1.0F + (myLevel.random.nextFloat() - myLevel.random.nextFloat()) * 0.2F) * 0.7F, false);
+			myLevel.playLocalSound(myX, myY, myZ, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 4.0F, (1.0F + (myLevel.getRandom().nextFloat() - myLevel.getRandom().nextFloat()) * 0.2F) * 0.7F, false);
 		}
 
 		boolean flag = this.interactsWithBlocks();
@@ -107,7 +107,7 @@ public class ToolExplosion extends Explosion {
 		if (flag) {
 			ObjectArrayList<Pair<ItemStack, BlockPos>> objectarraylist = new ObjectArrayList<>();
 			boolean flag1 = this.getIndirectSourceEntity() instanceof Player;
-			Util.shuffle(this.getToBlow(), myLevel.random);
+			Util.shuffle(this.getToBlow(), myLevel.getRandom());
 
 			for(BlockPos blockpos : this.getToBlow()) {
 				BlockState blockstate = myLevel.getBlockState(blockpos);
@@ -148,7 +148,7 @@ public class ToolExplosion extends Explosion {
 
 		if (myFire) {
 			for(BlockPos blockpos2 : this.getToBlow()) {
-				if (myLevel.random.nextInt(3) == 0 && myLevel.getBlockState(blockpos2).isAir() && myLevel.getBlockState(blockpos2.below()).isSolidRender(myLevel, blockpos2.below())) {
+				if (myLevel.getRandom().nextInt(3) == 0 && myLevel.getBlockState(blockpos2).isAir() && myLevel.getBlockState(blockpos2.below()).isSolidRender(myLevel, blockpos2.below())) {
 					myLevel.setBlockAndUpdate(blockpos2, BaseFireBlock.getState(myLevel, blockpos2));
 				}
 			}

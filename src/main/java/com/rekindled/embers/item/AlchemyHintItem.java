@@ -120,17 +120,17 @@ public class AlchemyHintItem extends Item {
 		String white = whitePins == 1 ? I18n.get(Embers.MODID + ".alchemy_hint.white.one") : I18n.get(Embers.MODID + ".alchemy_hint.white", whitePins);
 		if (blackPins != 0) {
 			if (whitePins != 0) {
-				player.displayClientMessage(Component.translatable(Embers.MODID + ".alchemy_hint", I18n.get(Embers.MODID + ".alchemy_hint.and", black, white)), false);
+				player.sendSystemMessage(Component.translatable(Embers.MODID + ".alchemy_hint", I18n.get(Embers.MODID + ".alchemy_hint.and", black, white)));
 				return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 			}
-			player.displayClientMessage(Component.translatable(Embers.MODID + ".alchemy_hint", black), false);
+			player.sendSystemMessage(Component.translatable(Embers.MODID + ".alchemy_hint", black));
 			return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 		}
 		if (whitePins != 0) {
-			player.displayClientMessage(Component.translatable(Embers.MODID + ".alchemy_hint", white), false);
+			player.sendSystemMessage(Component.translatable(Embers.MODID + ".alchemy_hint", white));
 			return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 		}
-		player.displayClientMessage(Component.translatable(Embers.MODID + ".alchemy_hint", I18n.get(Embers.MODID + ".alchemy_hint.none")), false);
+		player.sendSystemMessage(Component.translatable(Embers.MODID + ".alchemy_hint", I18n.get(Embers.MODID + ".alchemy_hint.none")));
 		return InteractionResult.CONSUME.heldItemTransformedTo(stack);
 	}
 }

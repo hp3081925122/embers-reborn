@@ -32,13 +32,13 @@ public class MeltingRecipeBuilder {
 	}
 
 	public static MeltingRecipeBuilder create(TagKey<Item> tag) {
-		MeltingRecipeBuilder builder = create(Ingredient.of(tag));
+		MeltingRecipeBuilder builder = create(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(tag)));
 		builder.id = tag.location();
 		return builder;
 	}
 
 	public static MeltingRecipeBuilder create(ItemStack itemStack) {
-		MeltingRecipeBuilder builder = create(Ingredient.of(itemStack));
+		MeltingRecipeBuilder builder = create(Ingredient.of(itemStack.getItem()));
 		builder.id = BuiltInRegistries.ITEM.getKey(itemStack.getItem());
 		return builder;
 	}
@@ -102,7 +102,7 @@ public class MeltingRecipeBuilder {
 	}
 
 	public void save(RecipeOutput consumer) {
-		consumer.accept(build().getId(), build(), null);
+		consumer.accept(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.RECIPE, build().getId()), build(), null);
 	}
 
 	// Finished inner class removed - RecipeOutput.accept(RL, Recipe, Advancement) in 1.21.1
