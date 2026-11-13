@@ -144,7 +144,7 @@ public class BoringRecipe implements IBoringRecipe {
 				com.mojang.serialization.Codec.INT.optionalFieldOf("max_height", Integer.MAX_VALUE).forGetter((BoringRecipe r) -> r.maxHeight),
 				net.minecraft.resources.Identifier.CODEC.listOf().xmap(java.util.HashSet::new, java.util.ArrayList::new).optionalFieldOf("dimensions", new java.util.HashSet<>()).forGetter((BoringRecipe r) -> r.dimensions),
 				net.minecraft.resources.Identifier.CODEC.listOf().xmap(java.util.HashSet::new, java.util.ArrayList::new).optionalFieldOf("biomes", new java.util.HashSet<>()).forGetter((BoringRecipe r) -> r.biomes),
-				net.minecraft.resources.Identifier.CODEC.optionalFieldOf("block_tag", net.minecraft.resources.Identifier.parse("minecraft:air")).forGetter((BoringRecipe r) -> r.requiredBlock != null ? r.requiredBlock.identifier() : net.minecraft.resources.Identifier.parse("minecraft:air")),
+				net.minecraft.resources.Identifier.CODEC.optionalFieldOf("block_tag", net.minecraft.resources.Identifier.parse("minecraft:air")).forGetter((BoringRecipe r) -> r.requiredBlock != null ? r.requiredBlock.location() : net.minecraft.resources.Identifier.parse("minecraft:air")),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("amount_required", 0).forGetter((BoringRecipe r) -> r.amountRequired),
 				com.mojang.serialization.Codec.DOUBLE.optionalFieldOf("chance", -1.0).forGetter((BoringRecipe r) -> r.chance)
 			).apply(inst, (stack, weight, minH, maxH, dims, biomes2, blockTag, amt, chance2) ->
@@ -160,7 +160,7 @@ public class BoringRecipe implements IBoringRecipe {
 					buf.writeVarInt(r.maxHeight);
 					buf.writeCollection(r.dimensions, net.minecraft.network.FriendlyByteBuf::writeResourceLocation);
 					buf.writeCollection(r.biomes, net.minecraft.network.FriendlyByteBuf::writeResourceLocation);
-					buf.writeIdentifier(r.requiredBlock != null ? r.requiredBlock.identifier() : net.minecraft.resources.Identifier.parse("minecraft:air"));
+					buf.writeIdentifier(r.requiredBlock != null ? r.requiredBlock.location() : net.minecraft.resources.Identifier.parse("minecraft:air"));
 					buf.writeVarInt(r.amountRequired);
 					buf.writeDouble(r.chance);
 				},

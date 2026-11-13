@@ -25,8 +25,8 @@ public class MetalCoefficientRecipeBuilder {
 	}
 
 	public static MetalCoefficientRecipeBuilder create(TagKey<Block> tag) {
-		MetalCoefficientRecipeBuilder builder = create(tag.identifier());
-		builder.id = tag.identifier();
+		MetalCoefficientRecipeBuilder builder = create(tag.location());
+		builder.id = tag.location();
 		return builder;
 	}
 

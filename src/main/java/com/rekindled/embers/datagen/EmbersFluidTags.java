@@ -98,7 +98,7 @@ public class EmbersFluidTags extends FluidTagsProvider {
 		.addTag(MOLTEN_BRASS)
 		.addTag(MOLTEN_CONSTANTAN)
 		.addTag(MOLTEN_INVAR)
-		.addOptionalTag(METAL_TOOLTIPS.identifier());
+		.addOptionalTag(METAL_TOOLTIPS.location());
 		tag(METAL_TOOLTIPS).addTag(INGOT_TOOLTIP);
 	}
 }

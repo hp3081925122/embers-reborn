@@ -42,7 +42,7 @@ public class StampingRecipeBuilder {
 	public static StampingRecipeBuilder create(TagKey<Item> tag, int amount) {
 		StampingRecipeBuilder builder = new StampingRecipeBuilder();
 		builder.output = Either.right(new TagAmount(tag, amount));
-		builder.id = tag.identifier();
+		builder.id = tag.location();
 		return builder;
 	}
 

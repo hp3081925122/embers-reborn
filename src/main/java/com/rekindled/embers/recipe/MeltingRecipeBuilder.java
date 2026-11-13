@@ -33,7 +33,7 @@ public class MeltingRecipeBuilder {
 
 	public static MeltingRecipeBuilder create(TagKey<Item> tag) {
 		MeltingRecipeBuilder builder = create(Ingredient.of(tag));
-		builder.id = tag.identifier();
+		builder.id = tag.location();
 		return builder;
 	}
 

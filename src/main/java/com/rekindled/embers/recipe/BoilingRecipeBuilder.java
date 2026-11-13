@@ -35,7 +35,7 @@ public class BoilingRecipeBuilder {
 	public static BoilingRecipeBuilder create(TagKey<Fluid> tag, int amount) {
 		BoilingRecipeBuilder builder = new BoilingRecipeBuilder();
 		builder.output = new FluidOutput(tag, amount);
-		builder.id = tag.identifier();
+		builder.id = tag.location();
 		return builder;
 	}
 

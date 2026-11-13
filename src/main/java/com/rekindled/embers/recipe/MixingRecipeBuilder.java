@@ -37,7 +37,7 @@ public class MixingRecipeBuilder {
 	public static MixingRecipeBuilder create(TagKey<Fluid> tag, int amount) {
 		MixingRecipeBuilder builder = new MixingRecipeBuilder();
 		builder.output = new FluidOutput(tag, amount);
-		builder.id = tag.identifier();
+		builder.id = tag.location();
 		return builder;
 	}
 

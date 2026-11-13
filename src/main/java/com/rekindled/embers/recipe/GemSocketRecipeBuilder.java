@@ -28,7 +28,7 @@ public class GemSocketRecipeBuilder {
 
 	public static GemSocketRecipeBuilder create(TagKey<Item> tag) {
 		GemSocketRecipeBuilder builder = create(Ingredient.of(tag));
-		builder.id = tag.identifier();
+		builder.id = tag.location();
 		return builder;
 	}
 

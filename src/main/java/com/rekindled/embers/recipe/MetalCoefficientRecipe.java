@@ -73,14 +73,14 @@ public class MetalCoefficientRecipe implements IMetalCoefficientRecipe {
 		@Override
 		public com.mojang.serialization.MapCodec<MetalCoefficientRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-				net.minecraft.resources.Identifier.CODEC.fieldOf("block_tag").forGetter(r -> r.blockTag.identifier()),
+				net.minecraft.resources.Identifier.CODEC.fieldOf("block_tag").forGetter(r -> r.blockTag.location()),
 				com.mojang.serialization.Codec.DOUBLE.fieldOf("coefficient").forGetter(r -> r.coefficient)
 			).apply(inst, (tag, coeff) -> new MetalCoefficientRecipe(null, net.minecraft.tags.BlockTags.create(tag), coeff)));
 		}
 		@Override
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, MetalCoefficientRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
-				net.minecraft.network.codec.ByteBufCodecs.fromCodec(net.minecraft.resources.Identifier.CODEC), r -> r.blockTag.identifier(),
+				net.minecraft.network.codec.ByteBufCodecs.fromCodec(net.minecraft.resources.Identifier.CODEC), r -> r.blockTag.location(),
 				net.minecraft.network.codec.ByteBufCodecs.DOUBLE, r -> r.coefficient,
 				(tag, coeff) -> new MetalCoefficientRecipe(null, net.minecraft.tags.BlockTags.create(tag), coeff));
 		}

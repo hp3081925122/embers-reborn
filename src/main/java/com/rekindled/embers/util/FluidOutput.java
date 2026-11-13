@@ -16,7 +16,7 @@ public class FluidOutput {
 		com.mojang.serialization.Codec.either(
 			// tag + amount form
 			com.mojang.serialization.codecs.RecordCodecBuilder.<FluidOutput>create(inst -> inst.group(
-				net.minecraft.resources.Identifier.CODEC.fieldOf("tag").forGetter(o -> o.tag.identifier()),
+				net.minecraft.resources.Identifier.CODEC.fieldOf("tag").forGetter(o -> o.tag.location()),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("amount", 1).forGetter(o -> o.amount)
 			).apply(inst, (tag, amt) -> new FluidOutput(net.minecraft.tags.FluidTags.create(tag), amt))),
 			// fluid + amount form (FluidStack-like)
@@ -65,7 +65,7 @@ public class FluidOutput {
 	public JsonObject toJson() {
 		if (tag != null) {
 			JsonObject json = new JsonObject();
-			json.addProperty("tag", tag.identifier().toString());
+			json.addProperty("tag", tag.location().toString());
 			json.addProperty("amount", amount);
 			return json;
 		}
@@ -82,7 +82,7 @@ public class FluidOutput {
 	public void toNetwork(net.minecraft.network.RegistryFriendlyByteBuf buffer) {
 		if (tag != null) {
 			buffer.writeBoolean(true);
-			buffer.writeIdentifier(tag.identifier());
+			buffer.writeIdentifier(tag.location());
 			buffer.writeInt(amount);
 		} else {
 			buffer.writeBoolean(false);

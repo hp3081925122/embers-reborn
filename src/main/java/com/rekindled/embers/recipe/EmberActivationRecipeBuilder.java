@@ -29,7 +29,7 @@ public class EmberActivationRecipeBuilder {
 
 	public static EmberActivationRecipeBuilder create(TagKey<Item> tag) {
 		EmberActivationRecipeBuilder builder = create(Ingredient.of(tag));
-		builder.id = tag.identifier();
+		builder.id = tag.location();
 		return builder;
 	}
 

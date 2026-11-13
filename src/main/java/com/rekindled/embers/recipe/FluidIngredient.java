@@ -372,7 +372,7 @@ public abstract class FluidIngredient {
 		@Override
 		public JsonElement serialize() {
 			JsonObject object = new JsonObject();
-			object.addProperty("tag", this.tag.identifier().toString());
+			object.addProperty("tag", this.tag.location().toString());
 			object.addProperty("amount", amount);
 			return object;
 		}

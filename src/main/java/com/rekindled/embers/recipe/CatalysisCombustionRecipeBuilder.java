@@ -31,7 +31,7 @@ public class CatalysisCombustionRecipeBuilder {
 
 	public static CatalysisCombustionRecipeBuilder create(TagKey<Item> tag) {
 		CatalysisCombustionRecipeBuilder builder = create(Ingredient.of(tag));
-		builder.id = tag.identifier();
+		builder.id = tag.location();
 		return builder;
 	}
 

@@ -129,7 +129,7 @@ public class StampingRecipe implements IStampingRecipe {
 		com.mojang.serialization.Codec.either(
 			net.minecraft.world.item.ItemStack.CODEC,
 			com.mojang.serialization.codecs.RecordCodecBuilder.<TagAmount>create(inst -> inst.group(
-				net.minecraft.resources.Identifier.CODEC.fieldOf("tag").forGetter(ta -> ta.tag.identifier()),
+				net.minecraft.resources.Identifier.CODEC.fieldOf("tag").forGetter(ta -> ta.tag.location()),
 				com.mojang.serialization.Codec.INT.optionalFieldOf("count", 1).forGetter(ta -> ta.amount)
 			).apply(inst, (tag, count) -> new TagAmount(ItemTags.create(tag), count))));
 
@@ -137,7 +137,7 @@ public class StampingRecipe implements IStampingRecipe {
 		net.minecraft.network.codec.ByteBufCodecs.<net.minecraft.network.RegistryFriendlyByteBuf, ItemStack, TagAmount>either(
 			net.minecraft.world.item.ItemStack.OPTIONAL_STREAM_CODEC,
 			net.minecraft.network.codec.StreamCodec.composite(
-				net.minecraft.network.codec.ByteBufCodecs.fromCodec(net.minecraft.resources.Identifier.CODEC), ta -> ta.tag.identifier(),
+				net.minecraft.network.codec.ByteBufCodecs.fromCodec(net.minecraft.resources.Identifier.CODEC), ta -> ta.tag.location(),
 				net.minecraft.network.codec.ByteBufCodecs.VAR_INT, ta -> ta.amount,
 				(tag, count) -> new TagAmount(ItemTags.create(tag), count)));
 

@@ -248,8 +248,8 @@ public class Misc {
 	public static ConcurrentHashMap<Identifier, Fluid> tagFluids = new ConcurrentHashMap<Identifier, Fluid>();
 
 	public static Item getTaggedItem(TagKey<Item> tag) {
-		if (tagItems.containsKey(tag.identifier()))
-			return tagItems.get(tag.identifier());
+		if (tagItems.containsKey(tag.location()))
+			return tagItems.get(tag.location());
 
 		Item output = Items.AIR;
 		int index = Integer.MAX_VALUE;
@@ -265,13 +265,13 @@ public class Misc {
 				output = holder.value();
 		}
 		if (output != Items.AIR)
-			tagItems.put(tag.identifier(), output);
+			tagItems.put(tag.location(), output);
 		return output;
 	}
 
 	public static Fluid getTaggedFluid(TagKey<Fluid> tag) {
-		if (tagFluids.containsKey(tag.identifier()))
-			return tagFluids.get(tag.identifier());
+		if (tagFluids.containsKey(tag.location()))
+			return tagFluids.get(tag.location());
 
 		Fluid output = Fluids.EMPTY;
 		int index = Integer.MAX_VALUE;
@@ -287,7 +287,7 @@ public class Misc {
 				output = holder.value();
 		}
 		if (output != Fluids.EMPTY)
-			tagFluids.put(tag.identifier(), output);
+			tagFluids.put(tag.location(), output);
 		return output;
 	}
 
