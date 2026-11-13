@@ -72,7 +72,7 @@ public class FluidVesselBlock extends AbstractCauldronBlock implements EntityBlo
 		if (level.getBlockEntity(pos) instanceof FluidVesselBlockEntity vesselEntity && !heldItem.isEmpty()) {
 			IFluidHandler cap = LegacyCaps.fluid(level, vesselEntity.getBlockPos(), hit.getDirection());
 			if (cap != null && FluidUtil.interactWithFluidHandler(player, hand, cap)) {
-				return net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide());
+				return net.minecraft.world.InteractionResult.SUCCESS;
 			}
 			//prevent buckets from placing their fluid in the world when clicking on the vessel
 			if (FluidUtil.getFluidHandler(heldItem).isPresent()) {

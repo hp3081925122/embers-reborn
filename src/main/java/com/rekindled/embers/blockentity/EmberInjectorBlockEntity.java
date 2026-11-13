@@ -112,9 +112,9 @@ public class EmberInjectorBlockEntity extends BlockEntity implements ISoundContr
 			Direction facing = state.getValue(BlockStateProperties.FACING);
 			for (int i = 0; i < 6 * blockEntity.distance; i++) {
 				level.addParticle(new GlowParticleOptions(EmbersColors.EMBER_ID, 4.0F),
-						pos.getX()+0.5f+random.nextFloat()*blockEntity.distance*facing.getNormal().getX(),
-						pos.getY()+0.5f+random.nextFloat()*blockEntity.distance*facing.getNormal().getY(),
-						pos.getZ()+0.5f+random.nextFloat()*blockEntity.distance*facing.getNormal().getZ(), 0, 0, 0);
+						pos.getX()+0.5f+random.nextFloat()*blockEntity.distance*facing.getUnitVec3i().getX(),
+						pos.getY()+0.5f+random.nextFloat()*blockEntity.distance*facing.getUnitVec3i().getY(),
+						pos.getZ()+0.5f+random.nextFloat()*blockEntity.distance*facing.getUnitVec3i().getZ(), 0, 0, 0);
 			}
 		}
 	}

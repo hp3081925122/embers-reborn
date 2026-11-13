@@ -67,7 +67,7 @@ public class CaminiteValveEdgeBlock extends MechEdgeBlockBase implements EntityB
 				}
 				//prevent buckets from placing their fluid in the world when clicking on the vessel
 				if (net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(heldItem).isPresent()) {
-					return InteractionResult.CONSUME_PARTIAL;
+					return InteractionResult.CONSUME;
 				}
 			}
 		}

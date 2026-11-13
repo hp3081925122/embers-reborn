@@ -37,7 +37,7 @@ public class RenderUtil {
 			//double thickCoeff = 1.0+0.25*Math.sin(coeff*Math.PI*2.0f);
 			double tx = x1*(1.0f-coeff) + x2*coeff;
 			double ty = NoiseGenUtil.interpolate((float)y1, (float)y2, coeff);
-			float tick = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false) + EmbersClientEvents.ticks;
+			float tick = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false) + EmbersClientEvents.ticks;
 			int offX = (int)(6f*tick);
 			int offZ = (int)(6f*tick);
 			float sine = (float)Math.sin(coeff*Math.PI*2.0f + 0.25f*(tick)) + 0.25f*(float)Math.sin(coeff*Math.PI*3.47f + 0.25f*(tick));
@@ -64,7 +64,7 @@ public class RenderUtil {
 			float coeff2 = (float)(i2) / 40f;
 			double angle = Math.PI * 2.0 * coeff;
 			double angle2 = Math.PI * 2.0 * coeff2;
-			float tick = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false) + EmbersClientEvents.ticks;
+			float tick = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false) + EmbersClientEvents.ticks;
 			double calcAngle2 = angle2;
 			float density1 = EmberGenUtil.getEmberDensity(4, (int)x1+(int)(480.0*angle), (int)y1+4*(int)tick + (int)(4.0f*thickness));
 			float density2 = EmberGenUtil.getEmberDensity(4, (int)x1+(int)(480.0*calcAngle2), (int)y1+4*(int)tick + (int)(4.0f*thickness));

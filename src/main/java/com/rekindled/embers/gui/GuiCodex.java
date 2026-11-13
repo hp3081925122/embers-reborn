@@ -335,7 +335,7 @@ public class GuiCodex extends Screen {
 		graphics.text(font, s, x+1, y-1, shadowColor2, false);
 		graphics.text(font, s, x-1, y-1, shadowColor2, false);
 		graphics.text(font, s, x+1, y+1, shadowColor2, false);
-		graphics.text(font, s, x, y, Misc.intColor(1.0f, Misc.multColor(EmbersColors.EMBER, 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f))), false);
+		graphics.text(font, s, x, y, Misc.intColor(1.0f, Misc.multColor(EmbersColors.EMBER, 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false))))+1.0f))), false);
 	}
 
 	public void drawModalRectGlowing(GuiGraphicsExtractor graphics, Identifier texture, int x, int y, int textureX, int textureY, int width, int height) {
@@ -353,13 +353,13 @@ public class GuiCodex extends Screen {
 		blit(graphics, texture, x+1, y-1,textureX,textureY,width,height);
 		blit(graphics, texture, x-1, y-1,textureX,textureY,width,height);
 		blit(graphics, texture, x+1, y+1,textureX,textureY,width,height);
-		Vector3f color = Misc.multColor(EmbersColors.EMBER, 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f));
+		Vector3f color = Misc.multColor(EmbersColors.EMBER, 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false))))+1.0f));
 		RenderSystem.setShaderColor(color.x, color.y, color.z, 1.0f);
 		blit(graphics, texture, x, y,textureX,textureY,width,height);
 	}
 
 	public static void drawTextGlowingAura(Font font, GuiGraphicsExtractor graphics, FormattedCharSequence s, int x, int y) {
-		float sine = 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f);
+		float sine = 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false))))+1.0f);
 		drawTextGlowingAura(font, graphics, s, x, y, sine);
 	}
 
@@ -489,7 +489,7 @@ public class GuiCodex extends Screen {
 			blit(graphics, PARTS, basePosX+160, basePosY+64, 0, 48, 48, 48);
 
 			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-			float sine = 0.5f + 0.25f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false))))+1.0f);
+			float sine = 0.5f + 0.25f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false))))+1.0f);
 			RenderSystem.setShaderColor(EmbersColors.EMBER.x, EmbersColors.EMBER.y, EmbersColors.EMBER.z, sine);
 			for (float i = 0; i < 4; i ++){
 				blit(graphics, PARTS, basePosX-16, basePosY+208, 192, 0, 48, 48);
@@ -779,7 +779,7 @@ public class GuiCodex extends Screen {
 	}*/
 
 	public float getVert(float i, float f1, float f2) {
-		float coeff = Math.abs(i) + EmbersClientEvents.ticks + Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
+		float coeff = Math.abs(i) + EmbersClientEvents.ticks + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
 		float vert = Math.abs(10.0f*((1.0f-(Math.abs(i/80.0f))) * (float)(Math.sin(coeff*f1) + 0.4f*Math.sin(coeff*f2))));
 		return vert;
 	}

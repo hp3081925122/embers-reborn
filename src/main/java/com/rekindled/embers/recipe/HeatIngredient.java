@@ -20,7 +20,7 @@ public class HeatIngredient implements ICustomIngredient {
 	/** MapCodec: {"base":<ingredient>,"inverted":<bool>} */
 	public static final com.mojang.serialization.MapCodec<HeatIngredient> CODEC =
 		com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-			net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("base").forGetter((HeatIngredient h) -> h.base),
+			net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("base").forGetter((HeatIngredient h) -> h.base),
 			com.mojang.serialization.Codec.BOOL.optionalFieldOf("inverted", false).forGetter((HeatIngredient h) -> h.inverted)
 		).apply(inst, (base, inverted) -> new HeatIngredient(base, inverted)));
 

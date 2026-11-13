@@ -98,8 +98,8 @@ public class AnvilAugmentRecipe implements IDawnstoneAnvilRecipe, IVisuallySplit
 		
 		public com.mojang.serialization.MapCodec<AnvilAugmentRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("tool").forGetter(r -> r.tool),
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(r -> r.input),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("tool").forGetter(r -> r.tool),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("input").forGetter(r -> r.input),
 				net.minecraft.resources.Identifier.CODEC.fieldOf("augment").forGetter(r -> r.augment.getName())
 			).apply(inst, (tool, input, augRL) -> new AnvilAugmentRecipe(null, tool, input, com.rekindled.embers.api.augment.AugmentUtil.getAugment(augRL))));
 		}

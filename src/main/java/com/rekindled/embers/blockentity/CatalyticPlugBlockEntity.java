@@ -136,7 +136,7 @@ public class CatalyticPlugBlockEntity extends BlockEntity implements ISoundContr
 			Direction facing = state.getValue(BlockStateProperties.FACING);
 			float yoffset = 0.38f;
 			float wideoffset = 0.45f;
-			Vec3 baseOffset = new Vec3(0.5 - facing.getNormal().getX() * yoffset, 0.5 - facing.getNormal().getY() * yoffset, 0.5 - facing.getNormal().getZ() * yoffset);
+			Vec3 baseOffset = new Vec3(0.5 - facing.getUnitVec3i().getX() * yoffset, 0.5 - facing.getUnitVec3i().getY() * yoffset, 0.5 - facing.getUnitVec3i().getZ() * yoffset);
 			Direction[] planars;
 			switch (facing.getAxis()) {
 			case X:
@@ -154,12 +154,12 @@ public class CatalyticPlugBlockEntity extends BlockEntity implements ISoundContr
 				BlockState sideState = level.getBlockState(pos.relative(planar));
 				if (!sideState.getFaceOcclusionShape(level, pos.relative(planar), planar.getOpposite()).isEmpty())
 					continue;
-				float x = pos.getX() + (float) baseOffset.x + planar.getNormal().getX() * wideoffset;
-				float y = pos.getY() + (float) baseOffset.y + planar.getNormal().getY() * wideoffset;
-				float z = pos.getZ() + (float) baseOffset.z + planar.getNormal().getZ() * wideoffset;
-				float motionx = planar.getNormal().getX() * 0.053f - facing.getNormal().getX() * 0.015f - 0.01f + random.nextFloat() * 0.02f;
-				float motiony = planar.getNormal().getY() * 0.053f - facing.getNormal().getY() * 0.015f - 0.01f + random.nextFloat() * 0.02f;
-				float motionz = planar.getNormal().getZ() * 0.053f - facing.getNormal().getZ() * 0.015f - 0.01f + random.nextFloat() * 0.02f;
+				float x = pos.getX() + (float) baseOffset.x + planar.getUnitVec3i().getX() * wideoffset;
+				float y = pos.getY() + (float) baseOffset.y + planar.getUnitVec3i().getY() * wideoffset;
+				float z = pos.getZ() + (float) baseOffset.z + planar.getUnitVec3i().getZ() * wideoffset;
+				float motionx = planar.getUnitVec3i().getX() * 0.053f - facing.getUnitVec3i().getX() * 0.015f - 0.01f + random.nextFloat() * 0.02f;
+				float motiony = planar.getUnitVec3i().getY() * 0.053f - facing.getUnitVec3i().getY() * 0.015f - 0.01f + random.nextFloat() * 0.02f;
+				float motionz = planar.getUnitVec3i().getZ() * 0.053f - facing.getUnitVec3i().getZ() * 0.015f - 0.01f + random.nextFloat() * 0.02f;
 
 				level.addParticle(new VaporParticleOptions(color, new Vec3(motionx, motiony, motionz), 1.25f), x, y, z, 0, 0, 0);
 			}

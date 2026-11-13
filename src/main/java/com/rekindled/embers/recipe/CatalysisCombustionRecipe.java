@@ -98,8 +98,8 @@ public class CatalysisCombustionRecipe implements ICatalysisCombustionRecipe {
 		
 		public com.mojang.serialization.MapCodec<CatalysisCombustionRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(r -> r.ingredient),
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("machine").forGetter(r -> r.machine),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("input").forGetter(r -> r.ingredient),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("machine").forGetter(r -> r.machine),
 				com.mojang.serialization.Codec.INT.fieldOf("burn_time").forGetter(r -> r.burnTime),
 				com.mojang.serialization.Codec.DOUBLE.fieldOf("multiplier").forGetter(r -> r.multiplier)
 			).apply(inst, (ing, mach, bt, mul) -> new CatalysisCombustionRecipe(null, ing, mach, bt, mul)));

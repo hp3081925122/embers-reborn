@@ -86,7 +86,7 @@ public class AshenArmorModel extends HumanoidModel<HumanoidRenderState> {
 	public void setup(LivingEntity entity, ItemStack itemStack) {
 		if (cape != null) {
 			if (entity instanceof AbstractClientPlayer player) {
-				float partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
+				float partialTicks = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
 				double d0 = Mth.lerp((double)partialTicks, player.xCloakO, player.xCloak) - Mth.lerp((double)partialTicks, entity.xo, entity.getX());
 				double d1 = Mth.lerp((double)partialTicks, player.yCloakO, player.yCloak) - Mth.lerp((double)partialTicks, entity.yo, entity.getY());
 				double d2 = Mth.lerp((double)partialTicks, player.zCloakO, player.zCloak) - Mth.lerp((double)partialTicks, entity.zo, entity.getZ());

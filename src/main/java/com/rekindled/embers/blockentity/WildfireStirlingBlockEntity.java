@@ -123,8 +123,8 @@ public class WildfireStirlingBlockEntity extends BlockEntity implements ISoundCo
 			float yoffset = 0.2f;
 			float wideoffset = 0.5f;
 			float breadthoffset = 0.4f;
-			Vec3 frontOffset = new Vec3(0.5 - facing.getNormal().getX() * frontoffset, 0.5 - facing.getNormal().getY() * frontoffset, 0.5 - facing.getNormal().getZ() * frontoffset);
-			Vec3 baseOffset = new Vec3(0.5 - facing.getNormal().getX() * yoffset, 0.5 - facing.getNormal().getY() * yoffset, 0.5 - facing.getNormal().getZ() * yoffset);
+			Vec3 frontOffset = new Vec3(0.5 - facing.getUnitVec3i().getX() * frontoffset, 0.5 - facing.getUnitVec3i().getY() * frontoffset, 0.5 - facing.getUnitVec3i().getZ() * frontoffset);
+			Vec3 baseOffset = new Vec3(0.5 - facing.getUnitVec3i().getX() * yoffset, 0.5 - facing.getUnitVec3i().getY() * yoffset, 0.5 - facing.getUnitVec3i().getZ() * yoffset);
 			Direction[] planars;
 			switch (facing.getAxis()) {
 			case X:
@@ -141,16 +141,16 @@ public class WildfireStirlingBlockEntity extends BlockEntity implements ISoundCo
 				if (!sideState.getFaceOcclusionShape(level, pos.relative(planar), planar.getOpposite()).isEmpty())
 					continue;
 				Direction cross = facing.getClockWise(planar.getAxis());
-				float x1 = pos.getX() + (float) baseOffset.x + planar.getNormal().getX() * wideoffset;
-				float y1 = pos.getY() + (float) baseOffset.y + planar.getNormal().getY() * wideoffset;
-				float z1 = pos.getZ() + (float) baseOffset.z + planar.getNormal().getZ() * wideoffset;
-				float x2 = pos.getX() + (float) frontOffset.x + planar.getNormal().getX() * wideoffset + cross.getNormal().getX() * (random.nextFloat()-0.5f) * 2 * breadthoffset;
-				float y2 = pos.getY() + (float) frontOffset.y + planar.getNormal().getY() * wideoffset + cross.getNormal().getY() * (random.nextFloat()-0.5f) * 2 * breadthoffset;
-				float z2 = pos.getZ() + (float) frontOffset.z + planar.getNormal().getZ() * wideoffset + cross.getNormal().getZ() * (random.nextFloat()-0.5f) * 2 * breadthoffset;
+				float x1 = pos.getX() + (float) baseOffset.x + planar.getUnitVec3i().getX() * wideoffset;
+				float y1 = pos.getY() + (float) baseOffset.y + planar.getUnitVec3i().getY() * wideoffset;
+				float z1 = pos.getZ() + (float) baseOffset.z + planar.getUnitVec3i().getZ() * wideoffset;
+				float x2 = pos.getX() + (float) frontOffset.x + planar.getUnitVec3i().getX() * wideoffset + cross.getUnitVec3i().getX() * (random.nextFloat()-0.5f) * 2 * breadthoffset;
+				float y2 = pos.getY() + (float) frontOffset.y + planar.getUnitVec3i().getY() * wideoffset + cross.getUnitVec3i().getY() * (random.nextFloat()-0.5f) * 2 * breadthoffset;
+				float z2 = pos.getZ() + (float) frontOffset.z + planar.getUnitVec3i().getZ() * wideoffset + cross.getUnitVec3i().getZ() * (random.nextFloat()-0.5f) * 2 * breadthoffset;
 				int lifetime = 24 + random.nextInt(8);
-				//float motionx = facing.getNormal().getX() * (1.0f/lifetime) - 0.01f + random.nextFloat() * 0.02f;
-				//float motiony = facing.getNormal().getY() * (1.0f/lifetime) - 0.01f + random.nextFloat() * 0.02f;
-				//float motionz = facing.getNormal().getZ() * (1.0f/lifetime) - 0.01f + random.nextFloat() * 0.02f;
+				//float motionx = facing.getUnitVec3i().getX() * (1.0f/lifetime) - 0.01f + random.nextFloat() * 0.02f;
+				//float motiony = facing.getUnitVec3i().getY() * (1.0f/lifetime) - 0.01f + random.nextFloat() * 0.02f;
+				//float motionz = facing.getUnitVec3i().getZ() * (1.0f/lifetime) - 0.01f + random.nextFloat() * 0.02f;
 				float motionx = (x2 - x1) / lifetime;
 				float motiony = (y2 - y1) / lifetime;
 				float motionz = (z2 - z1) / lifetime;
@@ -161,9 +161,9 @@ public class WildfireStirlingBlockEntity extends BlockEntity implements ISoundCo
 			float y = pos.getY() + (float) frontOffset.y;
 			float z = pos.getZ() + (float) frontOffset.z;
 			int lifetime = 16 + random.nextInt(16);
-			float motionx = (Math.abs(facing.getNormal().getX()) - 1) * (random.nextFloat()-0.5f) * 2 * wideoffset / lifetime;
-			float motiony = (Math.abs(facing.getNormal().getY()) - 1) * (random.nextFloat()-0.5f) * 2 * wideoffset / lifetime;
-			float motionz = (Math.abs(facing.getNormal().getZ()) - 1) * (random.nextFloat()-0.5f) * 2 * wideoffset / lifetime;
+			float motionx = (Math.abs(facing.getUnitVec3i().getX()) - 1) * (random.nextFloat()-0.5f) * 2 * wideoffset / lifetime;
+			float motiony = (Math.abs(facing.getUnitVec3i().getY()) - 1) * (random.nextFloat()-0.5f) * 2 * wideoffset / lifetime;
+			float motionz = (Math.abs(facing.getUnitVec3i().getZ()) - 1) * (random.nextFloat()-0.5f) * 2 * wideoffset / lifetime;
 
 			level.addParticle(new VaporParticleOptions(EmbersColors.EMBER_ID, new Vec3(motionx, motiony, motionz), lifetime / 16.0f), x, y, z, 0, 0, 0);
 		}

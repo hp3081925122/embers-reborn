@@ -520,7 +520,7 @@ public class EmbersClientEvents {
 					if (tickStartedHoldingCtrl == Integer.MAX_VALUE) {
 						tickStartedHoldingCtrl = ticks;
 					}
-					openProgress = (Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false) + ticks - tickStartedHoldingCtrl);
+					openProgress = (Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false) + ticks - tickStartedHoldingCtrl);
 				} else {
 					tickStartedHoldingCtrl = Integer.MAX_VALUE;
 				}

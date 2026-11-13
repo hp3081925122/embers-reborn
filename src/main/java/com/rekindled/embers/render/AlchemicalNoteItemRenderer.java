@@ -49,9 +49,9 @@ public class AlchemicalNoteItemRenderer extends BlockEntityWithoutLevelRenderer 
 			boolean flag = (displayContext == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND) == (minecraft.player.getMainArm() == HumanoidArm.RIGHT);
 			HumanoidArm humanoidarm = flag ? minecraft.player.getMainArm() : minecraft.player.getMainArm().getOpposite();
 			InteractionHand interactionhand = MoreObjects.firstNonNull(minecraft.player.swingingArm, InteractionHand.MAIN_HAND);
-			float pitch = Mth.lerp(minecraft.getTimer().getGameTimeDeltaPartialTick(false), minecraft.player.xRotO, minecraft.player.getXRot());
-			float swingProgress = interactionhand == InteractionHand.MAIN_HAND ? minecraft.player.getAttackAnim(minecraft.getTimer().getGameTimeDeltaPartialTick(false)) : 0.0F;
-			float equippedProgress = interactionhand == InteractionHand.MAIN_HAND ? 1.0F - Mth.lerp(minecraft.getTimer().getGameTimeDeltaPartialTick(false), itemInHandRenderer.oMainHandHeight, itemInHandRenderer.mainHandHeight) : 0.0F;
+			float pitch = Mth.lerp(minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(false), minecraft.player.xRotO, minecraft.player.getXRot());
+			float swingProgress = interactionhand == InteractionHand.MAIN_HAND ? minecraft.player.getAttackAnim(minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(false)) : 0.0F;
+			float equippedProgress = interactionhand == InteractionHand.MAIN_HAND ? 1.0F - Mth.lerp(minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(false), itemInHandRenderer.oMainHandHeight, itemInHandRenderer.mainHandHeight) : 0.0F;
 
 			poseStack.pushPose();
 			poseStack.scale(64.0F, 64.0F, 64.0F);

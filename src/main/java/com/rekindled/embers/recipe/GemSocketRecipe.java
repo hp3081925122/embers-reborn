@@ -123,7 +123,7 @@ public class GemSocketRecipe implements CraftingRecipe {
 		
 		public com.mojang.serialization.MapCodec<GemSocketRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(r -> r.ingredient)
+				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("ingredient").forGetter(r -> r.ingredient)
 			).apply(inst, ing -> new GemSocketRecipe(null, ing)));
 		}
 		

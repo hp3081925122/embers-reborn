@@ -32,7 +32,7 @@ public class CaminiteRingBlockItem extends BlockItem{
 		}
 		if (!interactionresult.consumesAction() && context.getItemInHand().has(net.minecraft.core.component.DataComponents.FOOD)) {
 			InteractionResult interactionresult1 = this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult();
-			return interactionresult1 == InteractionResult.CONSUME ? InteractionResult.CONSUME_PARTIAL : interactionresult1;
+			return interactionresult1 == InteractionResult.CONSUME ? InteractionResult.CONSUME : interactionresult1;
 		} else {
 			return interactionresult;
 		}

@@ -75,7 +75,7 @@ public class GeologicSeparatorBlock extends BaseEntityBlock implements SimpleWat
 				}
 				//prevent buckets from placing their fluid in the world when clicking
 				if (net.neoforged.neoforge.fluids.FluidUtil.getFluidHandler(heldItem).isPresent()) {
-					return InteractionResult.CONSUME_PARTIAL;
+					return InteractionResult.CONSUME;
 				}
 			}
 		}

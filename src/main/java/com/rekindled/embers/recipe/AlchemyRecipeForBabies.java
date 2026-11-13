@@ -59,9 +59,9 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 		
 		public com.mojang.serialization.MapCodec<AlchemyRecipeForBabies> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-				Ingredient.CODEC_NONEMPTY.fieldOf("tablet").forGetter(r -> r.tablet),
-				Ingredient.CODEC_NONEMPTY.listOf().fieldOf("aspects").forGetter(r -> r.aspects),
-				Ingredient.CODEC_NONEMPTY.listOf().fieldOf("inputs").forGetter(r -> r.inputs),
+				Ingredient.CODEC.fieldOf("tablet").forGetter(r -> r.tablet),
+				Ingredient.CODEC.listOf().fieldOf("aspects").forGetter(r -> r.aspects),
+				Ingredient.CODEC.listOf().fieldOf("inputs").forGetter(r -> r.inputs),
 				ItemStack.CODEC.fieldOf("output").forGetter(r -> r.output),
 				ItemStack.CODEC.optionalFieldOf("failure", new ItemStack(RegistryManager.ALCHEMICAL_WASTE.get())).forGetter(r -> r.failure)
 			).apply(inst, (tablet, aspects, inputs, output, failure) -> new AlchemyRecipeForBabies(null, tablet, new ArrayList<>(aspects), new ArrayList<>(inputs), output, failure)));

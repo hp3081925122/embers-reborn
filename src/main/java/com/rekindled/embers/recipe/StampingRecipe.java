@@ -149,8 +149,8 @@ public class StampingRecipe implements IStampingRecipe {
 		
 		public com.mojang.serialization.MapCodec<StampingRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("stamp").forGetter(r -> r.stamp),
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.optionalFieldOf("input", net.minecraft.world.item.crafting.Ingredient.EMPTY).forGetter(r -> r.input),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("stamp").forGetter(r -> r.stamp),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.optionalFieldOf("input", net.minecraft.world.item.crafting.Ingredient.EMPTY).forGetter(r -> r.input),
 				FluidIngredient.CODEC.optionalFieldOf("fluid", FluidIngredient.EMPTY).forGetter(r -> r.fluid),
 				StampingRecipe.OUTPUT_CODEC.fieldOf("output").forGetter(r -> r.output)
 			).apply(inst, (s, i, f, o) -> new StampingRecipe(null, s, i, f, o)));

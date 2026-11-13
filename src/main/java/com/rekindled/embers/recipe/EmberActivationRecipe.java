@@ -77,7 +77,7 @@ public class EmberActivationRecipe implements IEmberActivationRecipe {
 		
 		public com.mojang.serialization.MapCodec<EmberActivationRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(r -> r.ingredient),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("input").forGetter(r -> r.ingredient),
 				com.mojang.serialization.Codec.INT.fieldOf("ember").forGetter(r -> r.ember)
 			).apply(inst, (ing, ember) -> new EmberActivationRecipe(null, ing, ember)));
 		}

@@ -610,8 +610,8 @@ public class Misc {
 			return shape;
 		rotated = Shapes.empty();
 
-		Vec3i vecF = from.getNormal();
-		Vec3i vecT = to.getNormal();
+		Vec3i vecF = from.getUnitVec3i();
+		Vec3i vecT = to.getUnitVec3i();
 
 		shape = shape.move(-0.5, -0.5, -0.5);
 

@@ -142,7 +142,7 @@ public class BeamCannonBlockEntity extends BlockEntity implements IUpgradeable, 
 	}
 
 	public void fire(Direction facing) {
-		Vec3 ray = new Vec3(facing.getNormal().getX(), facing.getNormal().getY(), facing.getNormal().getZ());
+		Vec3 ray = new Vec3(facing.getUnitVec3i().getX(), facing.getUnitVec3i().getY(), facing.getUnitVec3i().getZ());
 		double damage = UpgradeUtil.getOtherParameter(this, "damage", DAMAGE, upgrades);
 		boolean doContinue = true;
 		int maxDist = UpgradeUtil.getOtherParameter(this, "distance", MAX_DISTANCE, upgrades);
@@ -203,7 +203,7 @@ public class BeamCannonBlockEntity extends BlockEntity implements IUpgradeable, 
 		BlockState state = level.getBlockState(worldPosition);
 		if (state.hasProperty(BlockStateProperties.FACING)) {
 			Direction facing = state.getValue(BlockStateProperties.FACING);
-			return new Vec3(facing.getNormal().getX(), facing.getNormal().getY(), facing.getNormal().getZ());
+			return new Vec3(facing.getUnitVec3i().getX(), facing.getUnitVec3i().getY(), facing.getUnitVec3i().getZ());
 		}
 		return null;
 	}

@@ -57,7 +57,7 @@ public class AlchemyTabletBlock extends BaseEntityBlock implements SimpleWaterlo
 	public net.minecraft.world.InteractionResult useItemOn(net.minecraft.world.item.ItemStack heldItem, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (!heldItem.isEmpty() && level.getBlockEntity(pos) instanceof AlchemyTabletBlockEntity tabletEntity) {
 			if (Misc.useItemOnInventory(tabletEntity.inventory, level, player, hand) == InteractionResult.SUCCESS)
-				return net.minecraft.world.InteractionResult.sidedSuccess(level.isClientSide());
+				return net.minecraft.world.InteractionResult.SUCCESS;
 		}
 		return net.minecraft.world.InteractionResult.TRY_WITH_EMPTY_HAND;
 	}

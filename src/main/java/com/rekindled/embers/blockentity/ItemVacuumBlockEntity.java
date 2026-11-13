@@ -46,7 +46,7 @@ public class ItemVacuumBlockEntity extends BlockEntity implements IExtraCapabili
 		if (level.hasNeighborSignal(pos) && tile != null) {
 			IItemHandler inventory = LegacyCaps.item(level, tile.getBlockPos(), null);
 			if (inventory != null) {
-				Vec3i vec = facing.getNormal();
+				Vec3i vec = facing.getUnitVec3i();
 				AABB suckBB = new AABB(pos.getX() - 6 + vec.getX() * 7, pos.getY() - 6 + vec.getY() * 7, pos.getZ() - 6 + vec.getZ() * 7, pos.getX() + 7 + vec.getX() * 7, pos.getY() + 7 + vec.getY() * 7, pos.getZ() + 7 + vec.getZ() * 7);
 				List<ItemEntity> items = level.getEntitiesOfClass(ItemEntity.class, suckBB, entity -> getInsertedSlot(entity.getItem(), inventory) != -1);
 				if (items.size() > 0) {

@@ -38,9 +38,9 @@ public class AlchemyRecipe extends AlchemyRecipeBase {
 		
 		public com.mojang.serialization.MapCodec<AlchemyRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("tablet").forGetter(r -> r.tablet),
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.listOf().fieldOf("aspects").forGetter(r -> r.aspects),
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.listOf().fieldOf("inputs").forGetter(r -> r.inputs),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("tablet").forGetter(r -> r.tablet),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.listOf().fieldOf("aspects").forGetter(r -> r.aspects),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.listOf().fieldOf("inputs").forGetter(r -> r.inputs),
 				net.minecraft.world.item.ItemStack.CODEC.fieldOf("output").forGetter(r -> r.output),
 				net.minecraft.world.item.ItemStack.CODEC.optionalFieldOf("failure", new net.minecraft.world.item.ItemStack(com.rekindled.embers.RegistryManager.ALCHEMICAL_WASTE.get())).forGetter(r -> r.failure)
 			).apply(inst, (tablet, aspects, inputs, output, failure) -> new AlchemyRecipe(null, tablet, new java.util.ArrayList<>(aspects), new java.util.ArrayList<>(inputs), output, failure)));

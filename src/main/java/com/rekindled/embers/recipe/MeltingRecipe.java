@@ -90,7 +90,7 @@ public class MeltingRecipe implements IMeltingRecipe {
 		
 		public com.mojang.serialization.MapCodec<MeltingRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-				net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(r -> r.ingredient),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("input").forGetter(r -> r.ingredient),
 				com.rekindled.embers.util.FluidOutput.CODEC.fieldOf("output").forGetter(r -> r.output),
 				com.rekindled.embers.util.FluidOutput.CODEC.optionalFieldOf("bonus", com.rekindled.embers.util.FluidOutput.EMPTY).forGetter(r -> r.bonus)
 			).apply(inst, (ingredient, output, bonus) -> new MeltingRecipe(null, ingredient, output, bonus)));

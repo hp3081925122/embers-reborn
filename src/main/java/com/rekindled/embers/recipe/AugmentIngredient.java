@@ -22,7 +22,7 @@ public class AugmentIngredient implements ICustomIngredient {
 	/** MapCodec: {"base":<ingredient>,"augment":<RL>,"level":<int>,"inverted":<bool>} */
 	public static final com.mojang.serialization.MapCodec<AugmentIngredient> CODEC =
 		com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
-			net.minecraft.world.item.crafting.Ingredient.CODEC_NONEMPTY.fieldOf("base").forGetter((AugmentIngredient a) -> a.base),
+			net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("base").forGetter((AugmentIngredient a) -> a.base),
 			net.minecraft.resources.Identifier.CODEC.fieldOf("augment").forGetter((AugmentIngredient a) -> a.augment.getName()),
 			com.mojang.serialization.Codec.INT.optionalFieldOf("level", 1).forGetter((AugmentIngredient a) -> a.level),
 			com.mojang.serialization.Codec.BOOL.optionalFieldOf("inverted", false).forGetter((AugmentIngredient a) -> a.inverted)
