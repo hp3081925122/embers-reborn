@@ -65,7 +65,7 @@ public class AlchemyHintItem extends Item {
 		if (_hasTag(stack) && _getTag(stack).contains("aspects")) {
 			ListTag list = _getTag(stack).getList("aspects", Tag.TAG_COMPOUND);
 			for (Tag nbt : list) {
-				ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, (CompoundTag) nbt).ifPresent(items::add);
+				ItemStack.parse(com.rekindled.embers.util.RegistryHelper.registries(), (CompoundTag) nbt).ifPresent(items::add);
 			}
 		}
 		return items;
@@ -76,7 +76,7 @@ public class AlchemyHintItem extends Item {
 		if (_hasTag(stack) && _getTag(stack).contains("inputs")) {
 			ListTag list = _getTag(stack).getList("inputs", Tag.TAG_COMPOUND);
 			for (Tag nbt : list) {
-				ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, (CompoundTag) nbt).ifPresent(items::add);
+				ItemStack.parse(com.rekindled.embers.util.RegistryHelper.registries(), (CompoundTag) nbt).ifPresent(items::add);
 			}
 		}
 		return items;
@@ -91,7 +91,7 @@ public class AlchemyHintItem extends Item {
 
 	public static ItemStack getResult(ItemStack stack) {
 		if (_hasTag(stack) && _getTag(stack).contains("result")) {
-			return ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, _getTag(stack).getCompound("result")).orElse(ItemStack.EMPTY);
+			return ItemStack.parse(com.rekindled.embers.util.RegistryHelper.registries(), _getTag(stack).getCompound("result")).orElse(ItemStack.EMPTY);
 		}
 		return ItemStack.EMPTY;
 	}

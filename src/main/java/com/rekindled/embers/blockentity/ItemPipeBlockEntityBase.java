@@ -158,7 +158,7 @@ public abstract class ItemPipeBlockEntityBase extends PipeBlockEntityBase implem
 	}
 
 	public void writeInventory(CompoundTag nbt) /* no provider */  {
-		nbt.put("inventory", inventory.serializeNBT(net.minecraft.core.RegistryAccess.EMPTY));
+		nbt.put("inventory", inventory.serializeNBT(com.rekindled.embers.util.RegistryHelper.registries()));
 	}
 
 	@Deprecated @SuppressWarnings("deprecation")

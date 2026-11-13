@@ -143,7 +143,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 			ListTag items = new ListTag();
 			augmentCompound.put("items", items);
 			if (!augmentStack.isEmpty()) {
-				items.add(augmentStack.save(net.minecraft.core.RegistryAccess.EMPTY));
+				items.add(augmentStack.save(com.rekindled.embers.util.RegistryHelper.registries()));
 			}
 			augmentCompound.putInt("level", 1);
 			list.add(augmentCompound);
@@ -154,7 +154,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 					if (augmentCompound.getString("name").equals(augment.getName().toString())) {
 						ListTag items = augmentCompound.getList("items", Tag.TAG_COMPOUND);
 						if (!augmentStack.isEmpty()) {
-							items.add(augmentStack.save(net.minecraft.core.RegistryAccess.EMPTY));
+							items.add(augmentStack.save(com.rekindled.embers.util.RegistryHelper.registries()));
 						}
 						augmentCompound.putInt("level", level + 1);
 					}
@@ -188,7 +188,7 @@ public class AugmentUtilImpl implements IAugmentUtil {
 							if (tagAugment.contains("items")) {
 								ListTag items = tagAugment.getList("items", Tag.TAG_COMPOUND);
 								for (int j = 0; j < items.size(); j++) {
-									ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, items.getCompound(j))
+									ItemStack.parse(com.rekindled.embers.util.RegistryHelper.registries(), items.getCompound(j))
 											.ifPresent(results::add);
 								}
 							}

@@ -38,13 +38,13 @@ public class FilterItem implements IFilter {
 	@Override
 	public CompoundTag writeToNBT(CompoundTag tag) {
 		tag.putString("type",getType().toString());
-		tag.put("filterStack",filterItem.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
+		tag.put("filterStack",filterItem.saveOptional(com.rekindled.embers.util.RegistryHelper.registries()));
 		return tag;
 	}
 
 	@Override
 	public void readFromNBT(CompoundTag tag) {
-		filterItem = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, tag.getCompound("filterStack")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+		filterItem = ItemStack.parse(com.rekindled.embers.util.RegistryHelper.registries(), tag.getCompound("filterStack")).orElse(net.minecraft.world.item.ItemStack.EMPTY);
 	}
 
 	@Override

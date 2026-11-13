@@ -57,14 +57,14 @@ public class AshenArmorGemItem extends AshenArmorItem implements IInflictorGemHo
 	@Override
 	public void attachGem(ItemStack holder, ItemStack gem, int slot) {
 		net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(holder);
-		tag.put("gem" + slot, gem.saveOptional(net.minecraft.core.RegistryAccess.EMPTY));
+		tag.put("gem" + slot, gem.saveOptional(com.rekindled.embers.util.RegistryHelper.registries()));
 		_setTag(holder, tag);
 	}
 
 	@Override
 	public ItemStack detachGem(ItemStack holder, int slot) {
 		if (_getOrCreateTag(holder).contains("gem" + slot)) {
-			ItemStack gem = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, _getOrCreateTag(holder).getCompound("gem" + slot)).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+			ItemStack gem = ItemStack.parse(com.rekindled.embers.util.RegistryHelper.registries(), _getOrCreateTag(holder).getCompound("gem" + slot)).orElse(net.minecraft.world.item.ItemStack.EMPTY);
 			net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(holder);
 			tag.remove("gem" + slot);
 			_setTag(holder, tag);
@@ -90,7 +90,7 @@ public class AshenArmorGemItem extends AshenArmorItem implements IInflictorGemHo
 		ItemStack[] stacks = new ItemStack[getGemSlots(holder)];
 		for (int i = 0; i < stacks.length; i++) {
 			if(_getOrCreateTag(holder).contains("gem" + i))
-				stacks[i] = ItemStack.parse(net.minecraft.core.RegistryAccess.EMPTY, _getOrCreateTag(holder).getCompound("gem" + i)).orElse(ItemStack.EMPTY);
+				stacks[i] = ItemStack.parse(com.rekindled.embers.util.RegistryHelper.registries(), _getOrCreateTag(holder).getCompound("gem" + i)).orElse(ItemStack.EMPTY);
 			else
 				stacks[i] = ItemStack.EMPTY;
 		}
