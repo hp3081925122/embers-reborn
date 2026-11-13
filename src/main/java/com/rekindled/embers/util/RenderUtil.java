@@ -25,11 +25,11 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class RenderUtil {
 
-	public static void renderWavyEmberLine(BufferBuilder b, double x1, double y1, double x2, double y2, double thickness) {
+	public static void renderWavyEmberLine(GlowMesh b, double x1, double y1, double x2, double y2, double thickness) {
 		renderWavyEmberLine(b, x1, y1, x2, y2, thickness, 1.0, EmbersColors.EMBER);
 	}
 
-	public static void renderWavyEmberLine(BufferBuilder b, double x1, double y1, double x2, double y2, double thickness, double density, Vector3f color) {
+	public static void renderWavyEmberLine(GlowMesh b, double x1, double y1, double x2, double y2, double thickness, double density, Vector3f color) {
 		double dx = x2-x1;
 		double dy = y2-y1;
 		double angleRads = Math.atan2(y2-y1, x2-x1);
@@ -57,11 +57,11 @@ public class RenderUtil {
 		}
 	}
 
-	public static void renderHighlightCircle(BufferBuilder b, double x1, double y1, double thickness) {
+	public static void renderHighlightCircle(GlowMesh b, double x1, double y1, double thickness) {
 		renderHighlightCircle(b, x1, y1, thickness, 0, EmbersColors.EMBER);
 	}
 
-	public static void renderHighlightCircle(BufferBuilder b, double x1, double y1, double thickness, double z, Vector3f color) {
+	public static void renderHighlightCircle(GlowMesh b, double x1, double y1, double thickness, double z, Vector3f color) {
 		for (int i = 0; i < 40; i ++) {
 			float coeff = (float)i / 40f;
 			int i2 = i+1;

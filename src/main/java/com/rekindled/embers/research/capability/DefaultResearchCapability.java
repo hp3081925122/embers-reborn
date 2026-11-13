@@ -44,7 +44,7 @@ public class DefaultResearchCapability implements IResearchCapability, com.rekin
 	public void readFromNBT(CompoundTag tag) {
 		CompoundTag checkmarksTag = tag.getCompoundOrEmpty("checkmarks");
 		checkmarks.clear();
-		for (String key : checkmarksTag.getAllKeys()) {
+		for (String key : checkmarksTag.keySet()) {
 			if (key.contains(":")) {
 				checkmarks.put(Identifier.parse(key), checkmarksTag.getBooleanOr(key, false));
 			} else {

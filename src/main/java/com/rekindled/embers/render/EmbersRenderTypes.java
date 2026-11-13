@@ -69,6 +69,12 @@ public final class EmbersRenderTypes {
 			.withDepthStencilState(new DepthStencilState(CompareOp.LESS_THAN_OR_EQUAL, true))
 			.build();
 
+	/** Textured GUI quads with additive blend: the Codex ember glow on the index page. */
+	public static final RenderPipeline GLOW_GUI_TEXTURED_PIPELINE = RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
+			.withLocation(id("pipeline/glow_gui_textured"))
+			.withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
+			.build();
+
 	/** Opaque textured GUI quads: the heat bar end caps. Use with GuiGraphicsExtractor. */
 	public static final RenderPipeline HEAT_BAR_ENDS_PIPELINE = RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
 			.withLocation(id("pipeline/heat_bar_ends"))
@@ -91,6 +97,7 @@ public final class EmbersRenderTypes {
 		event.registerPipeline(ADDITIVE_TEXTURED_PIPELINE);
 		event.registerPipeline(ENTITY_SOLID_TRIANGLES_PIPELINE);
 		event.registerPipeline(GLOW_GUI_PIPELINE);
+		event.registerPipeline(GLOW_GUI_TEXTURED_PIPELINE);
 		event.registerPipeline(HEAT_BAR_ENDS_PIPELINE);
 		event.registerPipeline(GLOW_TEXT_PIPELINE);
 	}

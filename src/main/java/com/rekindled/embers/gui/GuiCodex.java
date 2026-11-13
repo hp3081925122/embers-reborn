@@ -10,13 +10,8 @@ import java.util.Map;
 
 import org.joml.Vector3f;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
 import com.rekindled.embers.Embers;
@@ -41,8 +36,6 @@ import net.minecraft.client.input.CharacterEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -57,12 +50,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class GuiCodex extends Screen {
-	private static void drawIfNotEmpty(BufferBuilder b) {
-		com.mojang.blaze3d.vertex.MeshData mesh = b.build();
-		if (mesh != null)
-			com.mojang.blaze3d.vertex.BufferUploader.drawWithShader(mesh);
-	}
-
 	public double mouseX = 0;
 	public double mouseY = 0; 
 	public double smoothMouseX = 0;
@@ -171,7 +158,6 @@ public class GuiCodex extends Screen {
 		if (!stack.isEmpty()) {
 			graphics.item(stack, x, y);
 			//rendering an item disables this
-			RenderSystem.enableBlend();
 			//this.itemRenderer.renderGuiItemDecorations(font, stack, x, y, stack.getCount() != 1 ? Integer.toString(stack.getCount()) : "");
 		}
 	}
@@ -194,11 +180,11 @@ public class GuiCodex extends Screen {
 			}
 		}
 		if (researchPage != null && researchPage.hasMultiplePages()) {
-			if (Minecraft.getInstance().options.keyLeft.matches(keyCode, scanCode)) {
+			if (Minecraft.getInstance().options.keyLeft.matches(event)) {
 				switchPreviousPage();
 				return false;
 			}
-			if (Minecraft.getInstance().options.keyRight.matches(keyCode, scanCode)) {
+			if (Minecraft.getInstance().options.keyRight.matches(event)) {
 				switchNextPage();
 				return false;
 			}
@@ -339,23 +325,27 @@ public class GuiCodex extends Screen {
 	}
 
 	public void drawModalRectGlowing(GuiGraphicsExtractor graphics, Identifier texture, int x, int y, int textureX, int textureY, int width, int height) {
-		RenderSystem.setShaderColor(0,0,0,64f/255);
-		blit(graphics, texture, x-1, y,textureX,textureY,width,height);
-		blit(graphics, texture, x+1, y,textureX,textureY,width,height);
-		blit(graphics, texture, x, y-1,textureX,textureY,width,height);
-		blit(graphics, texture, x, y+1,textureX,textureY,width,height);
-		RenderSystem.setShaderColor(0,0,0,40f/255);
-		blit(graphics, texture, x-2, y,textureX,textureY,width,height);
-		blit(graphics, texture, x+2, y,textureX,textureY,width,height);
-		blit(graphics, texture, x, y-2,textureX,textureY,width,height);
-		blit(graphics, texture, x, y+2,textureX,textureY,width,height);
-		blit(graphics, texture, x-1, y+1,textureX,textureY,width,height);
-		blit(graphics, texture, x+1, y-1,textureX,textureY,width,height);
-		blit(graphics, texture, x-1, y-1,textureX,textureY,width,height);
-		blit(graphics, texture, x+1, y+1,textureX,textureY,width,height);
+		int tint = net.minecraft.util.ARGB.colorFromFloat(64f/255, 0, 0, 0);
+		blitTinted(graphics, texture, x-1, y, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x+1, y, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x, y-1, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x, y+1, textureX, textureY, width, height, tint);
+		tint = net.minecraft.util.ARGB.colorFromFloat(40f/255, 0, 0, 0);
+		blitTinted(graphics, texture, x-2, y, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x+2, y, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x, y-2, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x, y+2, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x-1, y+1, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x+1, y-1, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x-1, y-1, textureX, textureY, width, height, tint);
+		blitTinted(graphics, texture, x+1, y+1, textureX, textureY, width, height, tint);
 		Vector3f color = Misc.multColor(EmbersColors.EMBER, 0.5f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false))))+1.0f));
-		RenderSystem.setShaderColor(color.x, color.y, color.z, 1.0f);
-		blit(graphics, texture, x, y,textureX,textureY,width,height);
+		tint = net.minecraft.util.ARGB.colorFromFloat(1.0f, color.x, color.y, color.z);
+		blitTinted(graphics, texture, x, y, textureX, textureY, width, height, tint);
+	}
+
+	private static void blitTinted(GuiGraphicsExtractor graphics, Identifier texture, int x, int y, int u, int v, int width, int height, int tint) {
+		graphics.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, u, v, width, height, width, height, 256, 256, tint);
 	}
 
 	public static void drawTextGlowingAura(Font font, GuiGraphicsExtractor graphics, FormattedCharSequence s, int x, int y) {
@@ -461,8 +451,6 @@ public class GuiCodex extends Screen {
 			}
 		}
 
-		this.renderBackground(graphics, 0, 0, 0);
-		RenderSystem.enableBlend();
 
 		int basePosX = (int)((float)width/2.0f)-96;
 		int basePosY = (int)((float)height/2.0f)-128;
@@ -488,14 +476,11 @@ public class GuiCodex extends Screen {
 			blit(graphics, PARTS, basePosX-16, basePosY+64, 0, 48, 48, 48);
 			blit(graphics, PARTS, basePosX+160, basePosY+64, 0, 48, 48, 48);
 
-			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
 			float sine = 0.5f + 0.25f*((float)Math.sin(Math.toRadians(4.0f*((float)EmbersClientEvents.ticks + Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false))))+1.0f);
-			RenderSystem.setShaderColor(EmbersColors.EMBER.x, EmbersColors.EMBER.y, EmbersColors.EMBER.z, sine);
+			int emberTint = net.minecraft.util.ARGB.colorFromFloat(sine, EmbersColors.EMBER.x, EmbersColors.EMBER.y, EmbersColors.EMBER.z);
 			for (float i = 0; i < 4; i ++){
-				blit(graphics, PARTS, basePosX-16, basePosY+208, 192, 0, 48, 48);
+				graphics.blit(com.rekindled.embers.render.EmbersRenderTypes.GLOW_GUI_TEXTURED_PIPELINE, PARTS, basePosX-16, basePosY+208, 192, 0, 48, 48, 48, 48, 256, 256, emberTint);
 			}
-			RenderSystem.defaultBlendFunc();
-			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
 			for (float i = 0; i < numResearches; i ++) {
 				float mouseDir = (float)Math.toDegrees(Math.atan2(mouseY-(basePosY+88), mouseX-(basePosX+96)))+90f;
@@ -601,41 +586,32 @@ public class GuiCodex extends Screen {
 					}
 					//Highlight search results
 					if (isShown && (searchResult.contains(r) || ResearchManager.isPathToLock(r) && searchResult.isEmpty())) {
-						Tesselator tess = Tesselator.getInstance();
 						float x = r.x;
 						float y = (r.y + 8) * categorySpacingY;
-						RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-						RenderSystem.setShader(GameRenderer::getPositionColorShader);
 						int index = searchResult.indexOf(r);
 						float amt = Mth.clamp(-searchDelay,0,10) / 10.0f;
 						amt *= Mth.clampedLerp(0.5,1.0,(float)(searchResult.size()-index) / searchResult.size());
 						for (float j = 0; j < 3; j ++){
 							float coeff = (j+1.0f) / 3.0f;
-							BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.TRIANGLES, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
+							com.rekindled.embers.util.GlowMesh b = com.rekindled.embers.util.GlowMesh.triangles();
 							RenderUtil.renderHighlightCircle(b,basePosX+x,basePosY+y,(25.0f+20.0f*coeff*coeff)* amt);
-							drawIfNotEmpty(b);
+							b.submit(graphics);
 						}
-						RenderSystem.defaultBlendFunc();
 					}
 					//Highlight selection
 					if (isShown && r.selectedAmount > 0.1f) {
-						Tesselator tess = Tesselator.getInstance();
 						float x = r.x;
 						float y = (r.y + 8) * categorySpacingY;
-						RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-						RenderSystem.setShader(GameRenderer::getPositionColorShader);
 						float amt = r.selectedAmount;
 						for (float j = 0; j < 8; j ++){
 							float coeff = (j+1.0f) /8.0f;
-							BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.TRIANGLES, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
+							com.rekindled.embers.util.GlowMesh b = com.rekindled.embers.util.GlowMesh.triangles();
 							RenderUtil.renderHighlightCircle(b,basePosX+x,basePosY+y,(25.0f+20.0f*coeff*coeff)* amt);
-							drawIfNotEmpty(b);
+							b.submit(graphics);
 						}
-						RenderSystem.defaultBlendFunc();
 					}
 					if (r.ancestors.size() > 0) {
 						for (int l = 0; l < r.ancestors.size(); l ++){
-							Tesselator tess = Tesselator.getInstance();
 							ResearchBase ancestor = r.ancestors.get(l);
 							float x1 = r.x;
 							float y1 = r.y;
@@ -643,17 +619,14 @@ public class GuiCodex extends Screen {
 							float y2 = ancestor.y;
 							//float dx = Math.abs(x1-x2);
 							//float dy = Math.abs(y1-y2);
-							RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-							RenderSystem.setShader(GameRenderer::getPositionColorShader);
 							for (float j = 0; j < 8; j ++){
 								float coeff = (float)Math.pow((j+1.0f)/8.0f,1.5f);
 								float appearCoeff = Math.min(r.shownAmount,ancestor.shownAmount);
 
-								BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.TRIANGLE_STRIP, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
+								com.rekindled.embers.util.GlowMesh b = com.rekindled.embers.util.GlowMesh.strip();
 								RenderUtil.renderWavyEmberLine(b, basePosX+x1, basePosY+y1, basePosX+x2, basePosY+y2, 4.0f*coeff, appearCoeff, EmbersColors.EMBER);
-								drawIfNotEmpty(b);
+								b.submit(graphics);
 							}
-							RenderSystem.defaultBlendFunc();
 						}
 					}
 				}
@@ -662,12 +635,10 @@ public class GuiCodex extends Screen {
 					if (r.isHidden())
 						continue;
 					if (r.shownAmount > 0.5) {
-						RenderSystem.setShaderTexture(0, r.getIconBackground());
 						int u = (int) r.getIconBackgroundU();
 						int v = (int) r.getIconBackgroundV();
 						blit(graphics, r.getIconBackground(), basePosX + r.x - 24, basePosY  + (int)((r.y - 16) * categorySpacingY), 0, u, v, 48, 48, 512, 512);
 						if (!r.isChecked()) { //TODO: cleanup
-							RenderSystem.setShaderTexture(0, ResearchManager.PAGE_ICONS);
 							int uOverlay = 5 * 48;
 							int vOverlay = 0 * 48;
 							blit(graphics, r.getIconBackground(), basePosX + r.x - 24, basePosY + (int)((r.y - 16) * categorySpacingY), 0, uOverlay, vOverlay, 48, 48, 512, 512);
@@ -690,20 +661,15 @@ public class GuiCodex extends Screen {
 						continue;
 					//Appearance effect
 					if (r.shownAmount > 0.0 && r.shownAmount < 1.0f){
-						Tesselator tess = Tesselator.getInstance();
 						float x = r.x;
 						float y = (r.y + 8) * categorySpacingY;
-						RenderSystem.enableBlend();
-						RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-						RenderSystem.setShader(GameRenderer::getPositionColorShader);
 						float amt = (float)Math.sin(r.shownAmount*Math.PI);
 						for (float j = 0; j < 8; j ++){
 							float coeff = (j+1.0f) /8.0f;
-							BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.TRIANGLES, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
+							com.rekindled.embers.util.GlowMesh b = com.rekindled.embers.util.GlowMesh.triangles();
 							RenderUtil.renderHighlightCircle(b,basePosX+x,basePosY+y,(25.0f+20.0f*coeff*coeff)* amt);
-							drawIfNotEmpty(b);
+							b.submit(graphics);
 						}
-						RenderSystem.defaultBlendFunc();
 					}
 				}
 
@@ -732,7 +698,6 @@ public class GuiCodex extends Screen {
 					nextPageSelected = false;
 					previousPageSelected = false;
 					int arrowY = basePosY + pageHeight - 13;
-					RenderSystem.enableBlend();
 					if(researchPage.getNextPage() != researchPage) {
 						int rightArrowX = basePosX + pageWidth - 9 - 8;
 						drawModalRectGlowing(graphics, researchPage.getBackground(), rightArrowX, arrowY, pageWidth, 24, 18, 13);
@@ -743,13 +708,11 @@ public class GuiCodex extends Screen {
 						drawModalRectGlowing(graphics, researchPage.getBackground(), leftArrowX, arrowY, pageWidth, 24 + 13, 18, 13);
 						previousPageSelected = mouseX >= leftArrowX-3 && mouseY >= arrowY-3 && mouseX <= leftArrowX+3 + 18 && mouseY <= arrowY+3 + 13;
 					}
-					RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 				}
 			}
 		}
 		doRenderTooltip(graphics);
 
-		RenderSystem.disableBlend();
 	}
 
 	private String getSearchStringPrint() {
@@ -769,8 +732,7 @@ public class GuiCodex extends Screen {
 	}
 
 	/*public void renderAura(float x, float y) {
-		//Tesselator tess = Tesselator.getInstance();
-		//BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
+		//		//BufferBuilder b = tess.begin(com.mojang.blaze3d.vertex.VertexFormat.Mode.QUADS, com.mojang.blaze3d.vertex.DefaultVertexFormat.POSITION_COLOR);
 		//b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
 		//for (float i = -80; i < 80; i += 10f){
 		//	RenderUtil.drawQuadGuiExt(b, x-10, y-10, x+10, y-10, x+10, y+10, x-10, y+10, 0, 0, 1, 1, 1, 1, 0.25f, 0.25f, 0.25f, 255f);

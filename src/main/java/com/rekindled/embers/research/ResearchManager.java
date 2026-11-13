@@ -36,8 +36,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Ingredient.ItemValue;
-import net.minecraft.world.item.crafting.Ingredient.TagValue;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -208,7 +206,7 @@ public class ResearchManager {
 		subCategoryWildfire = new ResearchCategory(loc("wildfire"), 0);
 
 		//WORLD
-		ores = new ResearchBase(loc("ores"), new ItemStack(RegistryManager.RAW_LEAD.get()), 0, 7).setLookupIngredient(Ingredient.fromValues(Stream.of(new TagValue(EmbersItemTags.RAW_LEAD), new TagValue(EmbersItemTags.RAW_SILVER), new TagValue(Tags.Items.RAW_MATERIALS_COPPER), new TagValue(EmbersItemTags.LEAD_ORE), new TagValue(EmbersItemTags.SILVER_ORE), new TagValue(Tags.Items.ORES_COPPER))));
+		ores = new ResearchBase(loc("ores"), new ItemStack(RegistryManager.RAW_LEAD.get()), 0, 7).setLookupIngredient(net.neoforged.neoforge.common.crafting.CompoundIngredient.of(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.RAW_LEAD)), Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.RAW_SILVER)), Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(Tags.Items.RAW_MATERIALS_COPPER)), Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.LEAD_ORE)), Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.SILVER_ORE)), Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(Tags.Items.ORES_COPPER))));
 		hammer = new ResearchBase(loc("hammer"), new ItemStack(RegistryManager.TINKER_HAMMER.get()), 0, 3).addAncestor(ores);
 		ancient_golem = new ResearchBase(loc("ancient_golem"), ItemStack.EMPTY, 0, 0).setIconBackground(PAGE_ICONS, PAGE_ICON_SIZE *1, PAGE_ICON_SIZE *0).setLookupIngredient(Ingredient.of(RegistryManager.ANCIENT_MOTIVE_CORE.get()));
 		gauge = new ResearchBase(loc("gauge"), new ItemStack(RegistryManager.ATMOSPHERIC_GAUGE_ITEM.get()), 4, 3).addAncestor(ores);
@@ -248,10 +246,10 @@ public class ResearchManager {
 				.addPage(new ResearchShowItem(loc("mirror_relay"), new ItemStack(RegistryManager.MIRROR_RELAY_ITEM.get()), 0, 0).addItem(new DisplayItem(new ItemStack(RegistryManager.MIRROR_RELAY_ITEM.get()))));
 		melter = new ResearchBase(loc("melter"), new ItemStack(RegistryManager.MELTER_ITEM.get()), 2, 0).addAncestor(emitters);
 		geo_separator = new ResearchBase(loc("geo_separator"), new ItemStack(RegistryManager.GEOLOGIC_SEPARATOR_ITEM.get()), 0, 0).addAncestor(melter);
-		stamper = new ResearchBase(loc("stamper"), new ItemStack(RegistryManager.STAMPER_ITEM.get()), 3, 4).addAncestor(melter).addAncestor(emitters).setLookupIngredient(Ingredient.fromValues(Stream.of(new TagValue(EmbersItemTags.STAMPS), new ItemValue(new ItemStack(RegistryManager.STAMPER_ITEM.get())), new ItemValue(new ItemStack(RegistryManager.STAMP_BASE_ITEM.get())))));
+		stamper = new ResearchBase(loc("stamper"), new ItemStack(RegistryManager.STAMPER_ITEM.get()), 3, 4).addAncestor(melter).addAncestor(emitters).setLookupIngredient(net.neoforged.neoforge.common.crafting.CompoundIngredient.of(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.STAMPS)), Ingredient.of(RegistryManager.STAMPER_ITEM.get()), Ingredient.of(RegistryManager.STAMP_BASE_ITEM.get())));
 		mixer = new ResearchBase(loc("mixer"), new ItemStack(RegistryManager.MIXER_CENTRIFUGE_ITEM.get()), 5, 2).addAncestor(stamper).addAncestor(melter);
 		//breaker = new ResearchBase(loc("breaker"), new ItemStack(RegistryManager.breaker), 4, 7).addAncestor(stamper);
-		dawnstone = new ResearchBase(loc("dawnstone"), new ItemStack(RegistryManager.DAWNSTONE_INGOT.get()), 11, 4).addAncestor(mixer).setLookupIngredient(Ingredient.fromValues(Stream.of(new TagValue(EmbersItemTags.DAWNSTONE_INGOT), new TagValue(EmbersItemTags.DAWNSTONE_NUGGET), new TagValue(EmbersItemTags.DAWNSTONE_PLATE), new TagValue(EmbersItemTags.DAWNSTONE_BLOCK))));
+		dawnstone = new ResearchBase(loc("dawnstone"), new ItemStack(RegistryManager.DAWNSTONE_INGOT.get()), 11, 4).addAncestor(mixer).setLookupIngredient(net.neoforged.neoforge.common.crafting.CompoundIngredient.of(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.DAWNSTONE_INGOT)), Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.DAWNSTONE_NUGGET)), Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.DAWNSTONE_PLATE)), Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.DAWNSTONE_BLOCK))));
 		pressureRefinery = new ResearchBase(loc("pressure_refinery"), new ItemStack(RegistryManager.PRESSURE_REFINERY_ITEM.get()), 10, 0).addAncestor(dawnstone);
 		pump = new ResearchBase(loc("pump"), new ItemStack(RegistryManager.MECHANICAL_PUMP_ITEM.get()), 7, 0).addAncestor(pressureRefinery);
 		mini_boiler = new ResearchBase(loc("mini_boiler"), new ItemStack(RegistryManager.MINI_BOILER_ITEM.get()), 8, 5).addAncestor(pump);
@@ -278,7 +276,7 @@ public class ResearchManager {
 		cinder_staff = new ResearchBase(loc("cinder_staff"), new ItemStack(RegistryManager.CINDER_STAFF.get()), 4, 4).addAncestor(jars);
 		blazing_ray = new ResearchBase(loc("blazing_ray"), new ItemStack(RegistryManager.BLAZING_RAY.get()), 6, 5).addAncestor(jars);
 		aspecti = new ResearchBase(loc("aspecti"), new ItemStack(RegistryManager.DAWNSTONE_ASPECTUS.get()), 12, 1).setLookupIngredient(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.ASPECTUS)));
-		cinder_plinth = new ResearchBase(loc("cinder_plinth"), new ItemStack(RegistryManager.CINDER_PLINTH_ITEM.get()), 9, 0).setLookupIngredient(Ingredient.fromValues(Stream.of(new TagValue(EmbersItemTags.ASH_DUST), new ItemValue(new ItemStack(RegistryManager.CINDER_PLINTH_ITEM.get())))));
+		cinder_plinth = new ResearchBase(loc("cinder_plinth"), new ItemStack(RegistryManager.CINDER_PLINTH_ITEM.get()), 9, 0).setLookupIngredient(net.neoforged.neoforge.common.crafting.CompoundIngredient.of(Ingredient.of(net.minecraft.core.registries.BuiltInRegistries.ITEM.getOrThrow(EmbersItemTags.ASH_DUST)), Ingredient.of(RegistryManager.CINDER_PLINTH_ITEM.get())));
 		beam_cannon = new ResearchBase(loc("beam_cannon"), new ItemStack(RegistryManager.BEAM_CANNON_ITEM.get()), 9, 7);
 		alchemy = new ResearchBase(loc("alchemy"), new ItemStack(RegistryManager.ALCHEMY_TABLET_ITEM.get()), 9, 4).setLookupIngredient(Ingredient.of(RegistryManager.ALCHEMY_TABLET_ITEM.get(), RegistryManager.ALCHEMY_PEDESTAL_ITEM.get()))
 				.addPage(new ResearchBase(loc("alchemy_page_2"), ItemStack.EMPTY, 0, 0)).addAncestor(aspecti).addAncestor(beam_cannon);
