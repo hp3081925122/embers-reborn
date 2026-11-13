@@ -9,7 +9,10 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_tin\",\"amount\":90}",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_tin"
+  },
   "output": {
     "tag": "c:plates/tin"
   },

@@ -1,6 +1,9 @@
 {
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_dawnstone\",\"amount\":90}",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_dawnstone"
+  },
   "input": {
     "item": "embers_reborn:ember_shard"
   },

@@ -1,6 +1,9 @@
 {
   "type": "embers_reborn:boiling",
-  "input": "{\"fluid\":\"embers_reborn:dwarven_oil\",\"amount\":1}",
+  "input": {
+    "amount": 1,
+    "fluid": "embers_reborn:dwarven_oil"
+  },
   "output": {
     "amount": 1,
     "id": "embers_reborn:dwarven_gas"

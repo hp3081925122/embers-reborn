@@ -1,8 +1,14 @@
 {
   "type": "embers_reborn:mixing",
   "inputs": [
-    "{\"fluid\":\"embers_reborn:soul_crude\",\"amount\":10}",
-    "{\"fluid\":\"embers_reborn:dwarven_gas\",\"amount\":5}"
+    {
+      "amount": 10,
+      "fluid": "embers_reborn:soul_crude"
+    },
+    {
+      "amount": 5,
+      "fluid": "embers_reborn:dwarven_gas"
+    }
   ],
   "output": {
     "amount": 30,

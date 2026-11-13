@@ -9,7 +9,10 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_iron\",\"amount\":10}",
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_iron"
+  },
   "output": {
     "tag": "c:nuggets/iron"
   },

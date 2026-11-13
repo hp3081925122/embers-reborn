@@ -9,7 +9,10 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_lead\",\"amount\":90}",
+  "fluid": {
+    "amount": 90,
+    "tag": "c:molten_lead"
+  },
   "output": {
     "tag": "c:plates/lead"
   },

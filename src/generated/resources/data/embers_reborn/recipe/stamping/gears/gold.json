@@ -9,7 +9,10 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_gold\",\"amount\":180}",
+  "fluid": {
+    "amount": 180,
+    "tag": "c:molten_gold"
+  },
   "output": {
     "tag": "c:gears/gold"
   },

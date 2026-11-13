@@ -9,7 +9,10 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_aluminum\",\"amount\":180}",
+  "fluid": {
+    "amount": 180,
+    "tag": "c:molten_aluminum"
+  },
   "output": {
     "tag": "c:gears/aluminum"
   },

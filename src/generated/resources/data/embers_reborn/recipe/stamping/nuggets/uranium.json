@@ -9,7 +9,10 @@
     }
   ],
   "type": "embers_reborn:stamping",
-  "fluid": "{\"tag\":\"c:molten_uranium\",\"amount\":10}",
+  "fluid": {
+    "amount": 10,
+    "tag": "c:molten_uranium"
+  },
   "output": {
     "tag": "c:nuggets/uranium"
   },
