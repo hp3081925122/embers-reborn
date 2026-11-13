@@ -141,7 +141,7 @@ public abstract class AlchemyRecipeBase implements IAlchemyRecipe {
 			}
 			nbt.put("aspects", aspectNBT);
 			nbt.put("inputs", inputNBT);
-
+			waste.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.of(nbt));
 			return waste;
 		}
 		return output;
