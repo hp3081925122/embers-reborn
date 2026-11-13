@@ -1,406 +1,153 @@
 package com.rekindled.embers.render;
 
-import java.util.OptionalDouble;
 import java.util.function.Function;
 
-import org.joml.Matrix4f;
-
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.pipeline.BlendFunction;
+import com.mojang.blaze3d.pipeline.ColorTargetState;
+import com.mojang.blaze3d.pipeline.DepthStencilState;
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+import com.mojang.blaze3d.platform.CompareOp;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
-import com.rekindled.embers.ConfigManager;
 import com.rekindled.embers.Embers;
-import com.rekindled.embers.EmbersClientEvents;
 
-import net.minecraft.Util;
-import net.minecraft.client.GraphicsStatus;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.RenderStateShard;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.rendertype.LayeringTransform;
+import net.minecraft.client.renderer.rendertype.OutputTarget;
+import net.minecraft.client.renderer.rendertype.RenderSetup;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.util.Util;
+import net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent;
 
-public class EmbersRenderTypes extends RenderType {
+/**
+ * World render types for block entity renderers and the emitter highlight, rebuilt on 26.1's RenderPipeline + RenderSetup.
+ * Blend, cull and depth match the 1.21.1 RenderType definitions. Particle layers live in EmbersParticleLayers.
+ *
+ * Not portable to 26.1 and dropped on purpose:
+ *  - the mithril block reflection shader: 26.1 chunk rendering only has fixed section layers (no named render types),
+ *    so mithril blocks render as plain solid blocks;
+ *  - the *_FALLBACK variants: the custom additive shader was vanilla position_tex_color plus additive blend, which a
+ *    pipeline expresses directly, so the fallback and the normal type are now the same object;
+ *  - BEAM: had no shader (PTLC_SHADER returned null) and its only caller was commented out.
+ */
+public final class EmbersRenderTypes {
 
-	public static ShaderInstance additiveShader;
-	public static final ShaderStateShard ADDITIVE_SHADER = new ShaderStateShard(() -> additiveShader);
-	public static ShaderInstance emberParticleShader;
-	public static final ShaderStateShard EMBER_PARTICLE_SHADER = new ShaderStateShard(() -> emberParticleShader);
-	public static ShaderInstance emberParticleFabShader;
-	public static final ShaderStateShard EMBER_PARTICLE_FAB_SHADER = new ShaderStateShard(() -> emberParticleFabShader);
-	public static ShaderInstance translucentParticleShader;
-	public static final ShaderStateShard TRANSLUCENT_PARTICLE_SHADER = new ShaderStateShard(() -> translucentParticleShader);
-	public static ShaderInstance mithrilShader;
-	public static final ShaderStateShard MITHRIL_SHADER = new ShaderStateShard(() -> mithrilShader);
+	private EmbersRenderTypes() {}
 
-	public EmbersRenderTypes(String pName, VertexFormat pFormat, Mode pMode, int pBufferSize, boolean pAffectsCrumbling, boolean pSortOnUpload, Runnable pSetupState, Runnable pClearState) {
-		super(pName, pFormat, pMode, pBufferSize, pAffectsCrumbling, pSortOnUpload, pSetupState, pClearState);
+	private static Identifier id(String path) {
+		return Identifier.fromNamespaceAndPath(Embers.MODID, path);
 	}
 
-	public static void applyParticleUniforms(ShaderInstance shader, float offset, float fade, float alphaCutoff) {
-		RenderSystem.getShader().setSampler("DepthBuffer", EmbersClientEvents.depthBuffer.getDepthTextureId());
-		RenderSystem.getShader().safeGetUniform("ProjMatInv").set(new Matrix4f(RenderSystem.getProjectionMatrix()).invert());
-		RenderSystem.getShader().safeGetUniform("Offset").set(offset);
-		RenderSystem.getShader().safeGetUniform("Fade").set(fade);
-		RenderSystem.getShader().safeGetUniform("AlphaCutoff").set(alphaCutoff);
+	// --- pipelines ---
+
+	/** position_tex_color, additive (SRC_ALPHA, ONE), no culling, depth test and write: crystal cell and field chart. */
+	public static final RenderPipeline ADDITIVE_TEXTURED_PIPELINE = RenderPipeline.builder(RenderPipelines.MATRICES_PROJECTION_SNIPPET)
+			.withLocation(id("pipeline/additive_textured"))
+			.withVertexShader("core/position_tex_color")
+			.withFragmentShader("core/position_tex_color")
+			.withSampler("Sampler0")
+			.withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
+			.withCull(false)
+			.withVertexFormat(DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS)
+			.withDepthStencilState(DepthStencilState.DEFAULT)
+			.build();
+
+	/** entity_solid drawn as triangles: crystal seeds. */
+	public static final RenderPipeline ENTITY_SOLID_TRIANGLES_PIPELINE = RenderPipeline.builder(RenderPipelines.ENTITY_SNIPPET)
+			.withLocation(id("pipeline/entity_solid_triangles"))
+			.withSampler("Sampler1")
+			.withVertexFormat(DefaultVertexFormat.ENTITY, VertexFormat.Mode.TRIANGLES)
+			.build();
+
+	/** GUI quads with additive blend: the glowing part of the heat bar in tooltips. Use with GuiGraphicsExtractor. */
+	public static final RenderPipeline GLOW_GUI_PIPELINE = RenderPipeline.builder(RenderPipelines.GUI_SNIPPET)
+			.withLocation(id("pipeline/glow_gui"))
+			.withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
+			.withDepthStencilState(new DepthStencilState(CompareOp.LESS_THAN_OR_EQUAL, true))
+			.build();
+
+	/** Opaque textured GUI quads: the heat bar end caps. Use with GuiGraphicsExtractor. */
+	public static final RenderPipeline HEAT_BAR_ENDS_PIPELINE = RenderPipeline.builder(RenderPipelines.GUI_TEXTURED_SNIPPET)
+			.withLocation(id("pipeline/heat_bar_ends"))
+			.withColorTargetState(ColorTargetState.DEFAULT)
+			.build();
+
+	/** World text with additive blend: glowing text on the codex and tooltips. */
+	public static final RenderPipeline GLOW_TEXT_PIPELINE = RenderPipeline.builder(RenderPipelines.TEXT_SNIPPET, RenderPipelines.FOG_SNIPPET)
+			.withLocation(id("pipeline/glow_text"))
+			.withVertexShader("core/rendertype_text")
+			.withFragmentShader("core/rendertype_text")
+			.withSampler("Sampler0")
+			.withSampler("Sampler2")
+			.withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
+			.build();
+
+	public static final Identifier HEAT_BAR_TEXTURE = id("textures/gui/heat_bar.png");
+
+	public static void registerPipelines(RegisterRenderPipelinesEvent event) {
+		event.registerPipeline(ADDITIVE_TEXTURED_PIPELINE);
+		event.registerPipeline(ENTITY_SOLID_TRIANGLES_PIPELINE);
+		event.registerPipeline(GLOW_GUI_PIPELINE);
+		event.registerPipeline(HEAT_BAR_ENDS_PIPELINE);
+		event.registerPipeline(GLOW_TEXT_PIPELINE);
 	}
 
-	//render type used for additive particles
-	public static ParticleRenderType PARTICLE_SHEET_ADDITIVE = new ParticleRenderType() {
-		@SuppressWarnings("resource")
-		public com.mojang.blaze3d.vertex.BufferBuilder begin(com.mojang.blaze3d.vertex.Tesselator p_107455_, TextureManager p_107456_) {
-			RenderSystem.enableDepthTest();
-			Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
-			RenderSystem.depthMask(false);
-			if (!ConfigManager.RENDER_FALLBACK.get()) {
-				int fancyness = Minecraft.getInstance().options.graphicsMode().get().getId();
-				if (fancyness >= GraphicsStatus.FANCY.getId()) {
-					EMBER_PARTICLE_SHADER.setupRenderState();
-					applyParticleUniforms(emberParticleShader, 0.0f, 3.0f / 16.0f, 0.0f);
-				}
-			}
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-			RenderSystem.enableBlend();
-			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-			return p_107455_.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+	// --- render types ---
 
-		}
+	/** Fluids drawn by FluidRenderer: entity translucent with culling on the block atlas, lightmap and overlay. */
+	public static final RenderType FLUID = RenderType.create(Embers.MODID + ":fluid",
+			RenderSetup.builder(RenderPipelines.ENTITY_TRANSLUCENT_CULL)
+			.withTexture("Sampler0", TextureAtlas.LOCATION_BLOCKS)
+			.useLightmap()
+			.useOverlay()
+			.affectsCrumbling()
+			.sortOnUpload()
+			.createRenderSetup());
 
+	public static final RenderType CRYSTAL = RenderType.create(Embers.MODID + ":crystal",
+			RenderSetup.builder(ADDITIVE_TEXTURED_PIPELINE)
+			.withTexture("Sampler0", id("textures/block/crystal_material.png"))
+			.affectsCrumbling()
+			.createRenderSetup());
+	public static final RenderType CRYSTAL_FALLBACK = CRYSTAL;
 
-		public String toString() {
-			return "PARTICLE_SHEET_ADDITIVE";
-		}
-	};
+	public static final RenderType FIELD_CHART = RenderType.create(Embers.MODID + ":field_chart",
+			RenderSetup.builder(ADDITIVE_TEXTURED_PIPELINE)
+			.withTexture("Sampler0", id("textures/block/field_square.png"))
+			.sortOnUpload()
+			.createRenderSetup());
+	public static final RenderType FIELD_CHART_FALLBACK = FIELD_CHART;
 
-	//render type used for ember particles
-	public static ParticleRenderType PARTICLE_SHEET_EMBER_ROUGH = new ParticleRenderType() {
-		@SuppressWarnings("resource")
-		public com.mojang.blaze3d.vertex.BufferBuilder begin(com.mojang.blaze3d.vertex.Tesselator p_107455_, TextureManager p_107456_) {
-			RenderSystem.enableDepthTest();
-			Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
-			RenderSystem.depthMask(false);
-			if (!ConfigManager.RENDER_FALLBACK.get()) {
-				int fancyness = Minecraft.getInstance().options.graphicsMode().get().getId();
-				if (fancyness >= GraphicsStatus.FANCY.getId()) {
-					if (fancyness >= GraphicsStatus.FABULOUS.getId())
-						EMBER_PARTICLE_FAB_SHADER.setupRenderState();
-					else
-						EMBER_PARTICLE_SHADER.setupRenderState();
-					applyParticleUniforms(RenderSystem.getShader(), 1.0f / 16.0f, 2.0f / 16.0f, 0.1f);
-					RenderSystem.disableDepthTest();
-				}
-			}
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-			RenderSystem.enableBlend();
-			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-			return p_107455_.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+	public static final Function<Identifier, RenderType> CRYSTAL_SEED = Util.memoize(texture -> RenderType.create(Embers.MODID + ":crystal_seed",
+			RenderSetup.builder(ENTITY_SOLID_TRIANGLES_PIPELINE)
+			.withTexture("Sampler0", texture)
+			.useLightmap()
+			.useOverlay()
+			.affectsCrumbling()
+			.createRenderSetup()));
 
-		}
+	/** Emitter/receiver highlight lines. 26.1 lines carry their width per vertex: callers set it with setLineWidth(GLOW_LINE_WIDTH). */
+	public static final float GLOW_LINE_WIDTH = 6.0F;
+	public static final RenderType GLOW_LINES = RenderType.create(Embers.MODID + ":glow_lines",
+			RenderSetup.builder(RenderPipelines.LINES)
+			.setLayeringTransform(LayeringTransform.VIEW_OFFSET_Z_LAYERING)
+			.setOutputTarget(OutputTarget.ITEM_ENTITY_TARGET)
+			.createRenderSetup());
 
+	public static final Function<Identifier, RenderType> GLOW_TEXT = Util.memoize(texture -> RenderType.create(Embers.MODID + ":glow_text",
+			RenderSetup.builder(GLOW_TEXT_PIPELINE)
+			.withTexture("Sampler0", texture)
+			.useLightmap()
+			.createRenderSetup()));
 
-		public String toString() {
-			return "PARTICLE_SHEET_EMBER_ROUGH";
-		}
-	};
+	public static final RenderType NOTE_BACKGROUND = getNote(id("textures/gui/alchemical_note.png"));
+	public static final RenderType NOTE_PEDESTAL = getNote(id("textures/gui/alchemical_note_pedestal.png"));
 
-	//render type used for ember particles
-	public static ParticleRenderType PARTICLE_SHEET_EMBER = new ParticleRenderType() {
-		@SuppressWarnings("resource")
-		public com.mojang.blaze3d.vertex.BufferBuilder begin(com.mojang.blaze3d.vertex.Tesselator p_107455_, TextureManager p_107456_) {
-			RenderSystem.enableDepthTest();
-			Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
-			RenderSystem.depthMask(false);
-			if (!ConfigManager.RENDER_FALLBACK.get()) {
-				int fancyness = Minecraft.getInstance().options.graphicsMode().get().getId();
-				if (fancyness >= GraphicsStatus.FANCY.getId()) {
-					if (fancyness >= GraphicsStatus.FABULOUS.getId())
-						EMBER_PARTICLE_FAB_SHADER.setupRenderState();
-					else
-						EMBER_PARTICLE_SHADER.setupRenderState();
-					applyParticleUniforms(RenderSystem.getShader(), 3.0f / 16.0f, 5.0f / 16.0f, 0.0f);
-					RenderSystem.disableDepthTest();
-				}
-			}
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-			RenderSystem.enableBlend();
-			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-			return p_107455_.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-
-		}
-
-
-		public String toString() {
-			return "PARTICLE_SHEET_EMBER";
-		}
-	};
-
-	//render type used for the alchemy circle
-	public static ParticleRenderType PARTICLE_SHEET_EMBER_HARD = new ParticleRenderType() {
-		@SuppressWarnings("resource")
-		public com.mojang.blaze3d.vertex.BufferBuilder begin(com.mojang.blaze3d.vertex.Tesselator p_107455_, TextureManager p_107456_) {
-			RenderSystem.enableDepthTest();
-			Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
-			RenderSystem.depthMask(false);
-			if (!ConfigManager.RENDER_FALLBACK.get()) {
-				int fancyness = Minecraft.getInstance().options.graphicsMode().get().getId();
-				if (fancyness >= GraphicsStatus.FABULOUS.getId()) {
-					EMBER_PARTICLE_FAB_SHADER.setupRenderState();
-					applyParticleUniforms(emberParticleFabShader, 0.0f, 0.0f, 0.0f);
-				}
-			}
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-			RenderSystem.enableBlend();
-			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-			return p_107455_.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-
-		}
-
-
-		public String toString() {
-			return "PARTICLE_SHEET_EMBER_HARD";
-		}
-	};
-
-	//render type used for x ray ember particles
-	public static ParticleRenderType PARTICLE_SHEET_ADDITIVE_XRAY = new ParticleRenderType() {
-		@SuppressWarnings("resource")
-		public com.mojang.blaze3d.vertex.BufferBuilder begin(com.mojang.blaze3d.vertex.Tesselator p_107455_, TextureManager p_107456_) {
-			RenderSystem.enableDepthTest();
-			Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
-			RenderSystem.depthMask(false);
-			if (!ConfigManager.RENDER_FALLBACK.get()) {
-				int fancyness = Minecraft.getInstance().options.graphicsMode().get().getId();
-				if (fancyness >= GraphicsStatus.FANCY.getId()) {
-					if (fancyness >= GraphicsStatus.FABULOUS.getId())
-						EMBER_PARTICLE_FAB_SHADER.setupRenderState();
-					else
-						EMBER_PARTICLE_SHADER.setupRenderState();
-					applyParticleUniforms(RenderSystem.getShader(), 50.0f, 40.0f, 0.0f);
-				}
-			}
-			RenderSystem.disableDepthTest();
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-			RenderSystem.enableBlend();
-			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-			return p_107455_.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-		}
-
-
-		public String toString() {
-			return "PARTICLE_SHEET_ADDITIVE_XRAY";
-		}
-	};
-
-	//render type used for smoke particles
-	public static ParticleRenderType PARTICLE_SHEET_TRANSLUCENT_NODEPTH = new ParticleRenderType() {
-		@SuppressWarnings("resource")
-		public com.mojang.blaze3d.vertex.BufferBuilder begin(com.mojang.blaze3d.vertex.Tesselator p_107455_, TextureManager p_107456_) {
-			RenderSystem.enableDepthTest();
-			Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
-			RenderSystem.depthMask(false);
-			if (!ConfigManager.RENDER_FALLBACK.get()) {
-				int fancyness = Minecraft.getInstance().options.graphicsMode().get().getId();
-				if (fancyness >= GraphicsStatus.FANCY.getId()) {
-					TRANSLUCENT_PARTICLE_SHADER.setupRenderState();
-					applyParticleUniforms(translucentParticleShader, 0.0f, 3.0f / 16.0f, 0.0f);
-				}
-			}
-			RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-			RenderSystem.enableBlend();
-			RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-			return p_107455_.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-		}
-
-
-		public String toString() {
-			return "PARTICLE_SHEET_TRANSLUCENT_NODEPTH";
-		}
-	};
-
-	//render type used for the fluid renderer
-	public static final RenderType FLUID = create(
-			Embers.MODID + ":fluid_render_type",
-			DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, true,
-			RenderType.CompositeState.builder()
-			.setLightmapState(LIGHTMAP)
-			.setShaderState(RENDERTYPE_ENTITY_TRANSLUCENT_CULL_SHADER)
-			.setTextureState(BLOCK_SHEET_MIPPED)
-			.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-			.setCullState(CULL)
-			.setOverlayState(OVERLAY)
-			//.setOutputState(TRANSLUCENT_TARGET)
-			.createCompositeState(true));
-
-	public static final RenderStateShard.ShaderStateShard PTLC_SHADER = new RenderStateShard.ShaderStateShard(() -> null); // BEAM is commented out; no active caller
-	public static final RenderStateShard.ShaderStateShard PTCN_SHADER = new RenderStateShard.ShaderStateShard(() -> null); // unused
-	public static final RenderStateShard.ShaderStateShard PTC_SHADER = new RenderStateShard.ShaderStateShard(GameRenderer::getPositionTexColorShader);
-
-	//render type used for the crystal cell
-	public static final RenderType CRYSTAL = create(
-			Embers.MODID + ":crystal_render_type",
-			DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, true, false,
-			RenderType.CompositeState.builder()
-			.setShaderState(ADDITIVE_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/block/crystal_material.png"), false, false))
-			.setTransparencyState(LIGHTNING_TRANSPARENCY)
-			.setCullState(NO_CULL)
-			//.setOutputState(TRANSLUCENT_TARGET)
-			.setLightmapState(NO_LIGHTMAP)
-			.setOverlayState(NO_OVERLAY)
-			.createCompositeState(false));
-	public static final RenderType CRYSTAL_FALLBACK = create(
-			Embers.MODID + ":crystal_render_type",
-			DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, true, false,
-			RenderType.CompositeState.builder()
-			.setShaderState(PTC_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/block/crystal_material.png"), false, false))
-			.setTransparencyState(LIGHTNING_TRANSPARENCY)
-			.setCullState(NO_CULL)
-			//.setOutputState(TRANSLUCENT_TARGET)
-			.setLightmapState(NO_LIGHTMAP)
-			.setOverlayState(NO_OVERLAY)
-			.createCompositeState(false));
-
-	//render type used for the field chart
-	public static final RenderType FIELD_CHART = create(
-			Embers.MODID + ":field_chart_render_type",
-			DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, false, true,
-			RenderType.CompositeState.builder()
-			.setShaderState(ADDITIVE_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/block/field_square.png"), false, false))
-			.setTransparencyState(LIGHTNING_TRANSPARENCY)
-			.setCullState(NO_CULL)
-			//.setOutputState(TRANSLUCENT_TARGET)
-			.createCompositeState(false));
-	public static final RenderType FIELD_CHART_FALLBACK = create(
-			Embers.MODID + ":field_chart_render_type",
-			DefaultVertexFormat.POSITION_TEX_COLOR, VertexFormat.Mode.QUADS, 256, false, true,
-			RenderType.CompositeState.builder()
-			.setShaderState(PTC_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/block/field_square.png"), false, false))
-			.setTransparencyState(LIGHTNING_TRANSPARENCY)
-			.setCullState(NO_CULL)
-			//.setOutputState(TRANSLUCENT_TARGET)
-			.createCompositeState(false));
-
-	//unused render type for the crystal seeds
-	public static Function<Identifier, RenderType> CRYSTAL_SEED = Util.memoize(EmbersRenderTypes::getSeed);
-	private static RenderType getSeed(Identifier texture) {
-		return create(
-				Embers.MODID + ":crystal_seed_render_type",
-				DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.TRIANGLES, 256, true, false,
-				RenderType.CompositeState.builder()
-				.setShaderState(RENDERTYPE_ENTITY_SOLID_SHADER)
-				.setTextureState(new RenderStateShard.TextureStateShard(texture, false, false))
-				.setOverlayState(OVERLAY)
-				.setLightmapState(LIGHTMAP)
-				.createCompositeState(true));
-	}
-
-	//render type used for the alchemy circle
-	public static final RenderType BEAM = create(
-			Embers.MODID + ":beam_render_type",
-			DefaultVertexFormat.POSITION_TEX_LIGHTMAP_COLOR, VertexFormat.Mode.QUADS, 256, false, true,
-			RenderType.CompositeState.builder()
-			.setShaderState(PTLC_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.parse(Embers.MODID + ":textures/entity/alchemy_circle.png"), false, false))
-			.setTransparencyState(LIGHTNING_TRANSPARENCY)
-			.setCullState(NO_CULL)
-			//.setDepthTestState(NO_DEPTH_TEST)
-			.setLayeringState(VIEW_OFFSET_Z_LAYERING)
-			.setWriteMaskState(COLOR_DEPTH_WRITE)
-			.setOutputState(TRANSLUCENT_TARGET)
-			.createCompositeState(false));
-
-	//render type used for highlighting the emitter being aimed
-	public static final RenderType GLOW_LINES = create(
-			Embers.MODID + ":glow_lines",
-			DefaultVertexFormat.POSITION_COLOR_NORMAL, VertexFormat.Mode.LINES, 256, false, false,
-			RenderType.CompositeState.builder()
-			.setShaderState(RENDERTYPE_LINES_SHADER)
-			.setLightmapState(NO_LIGHTMAP)
-			.setLineState(new RenderStateShard.LineStateShard(OptionalDouble.of(6.0D)))
-			.setLayeringState(VIEW_OFFSET_Z_LAYERING)
-			.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-			.setOutputState(ITEM_ENTITY_TARGET)
-			.setWriteMaskState(COLOR_DEPTH_WRITE)
-			.setCullState(NO_CULL)
-			.createCompositeState(false));
-
-	//render type used for the heat bar in tooltips
-	public static final RenderType GLOW_GUI = create(
-			Embers.MODID + ":glow_gui",
-			DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256, false, false,
-			RenderType.CompositeState.builder()
-			.setShaderState(RENDERTYPE_GUI_SHADER)
-			.setTransparencyState(LIGHTNING_TRANSPARENCY)
-			.setDepthTestState(LEQUAL_DEPTH_TEST)
-			.createCompositeState(false));
-
-	//render type used for the heat bar in tooltips
-	public static final RenderType HEAT_BAR_ENDS = create(
-			Embers.MODID + ":heat_bar_ends",
-			DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.QUADS, 256, false, false,
-			RenderType.CompositeState.builder()
-			.setShaderState(POSITION_TEX_SHADER)
-			.setTextureState(new RenderStateShard.TextureStateShard(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/heat_bar.png"), false, false))
-			.setTransparencyState(NO_TRANSPARENCY)
-			.setDepthTestState(LEQUAL_DEPTH_TEST)
-			.createCompositeState(false));
-
-	//render type used for additive blended text
-	public static Function<RenderStateShard.EmptyTextureStateShard, RenderType> GLOW_TEXT = Util.memoize(EmbersRenderTypes::getText);
-	private static RenderType getText(RenderStateShard.EmptyTextureStateShard state) {
-		RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
-				.setShaderState(RENDERTYPE_TEXT_SHADER)
-				.setTextureState(state)
-				.setTransparencyState(LIGHTNING_TRANSPARENCY)
-				.setLightmapState(LIGHTMAP)
-				.createCompositeState(false);
-		return create(Embers.MODID + ":glow_text", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, VertexFormat.Mode.QUADS, 256, false, true, rendertype$state);
-	}
-
-	//render types used for alchemical note
-	public static final RenderType NOTE_BACKGROUND = getNote(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/alchemical_note.png"));
-	public static final RenderType NOTE_PEDESTAL = getNote(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/gui/alchemical_note_pedestal.png"));
+	/** Alchemical note item: translucent entity quads without culling, like the 1.21.1 type. */
 	public static RenderType getNote(Identifier location) {
-		RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
-				.setShaderState(RENDERTYPE_ENTITY_TRANSLUCENT_CULL_SHADER)
-				.setTextureState(new RenderStateShard.TextureStateShard(location, false, false))
-				.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-				.setLightmapState(LIGHTMAP)
-				.setCullState(NO_CULL)
-				.setOverlayState(OVERLAY)
-				.createCompositeState(false);
-		return create("alchemical_note", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, rendertype$state);
+		return RenderTypes.entityTranslucent(location);
 	}
-
-	//render type used for mithril
-	public static Identifier MITHRIL_REFLECTION = Identifier.parse(Embers.MODID + ":textures/misc/mithril_reflection.png");
-	@SuppressWarnings("resource")
-	public static RenderType MITHRIL = create(
-			Embers.MODID + ":mithril_render_type",
-			DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, true, false,
-			RenderType.CompositeState.builder()
-			.setShaderState(MITHRIL_SHADER)
-			.setTextureState(new RenderStateShard.EmptyTextureStateShard(() -> {
-				TextureManager texturemanager = Minecraft.getInstance().getTextureManager();
-				texturemanager.getTexture(InventoryMenu.BLOCK_ATLAS).setFilter(false, false);
-				RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
-				texturemanager.getTexture(MITHRIL_REFLECTION).setFilter(true, false);
-				RenderSystem.setShaderTexture(3, MITHRIL_REFLECTION);
-				mithrilShader.safeGetUniform("PlayerPos").set(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f());
-			}, () -> {}))
-			.setOverlayState(OVERLAY)
-			.setLightmapState(LIGHTMAP)
-			.createCompositeState(true));
 }

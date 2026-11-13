@@ -1,18 +1,15 @@
-$s = "E:\模组\mc源码\2612sources\net\minecraft"
-"--TagEntry optional"
-Select-String "$s\tags\TagEntry.java" -Pattern 'public static TagEntry \w+\(' | ForEach-Object { $_.Line.Trim() }
-"--TagsProvider appender methods"
-Select-String "$s\data\tags\TagsProvider.java" -Pattern 'protected .*\(TagKey<T>' | ForEach-Object { $_.Line.Trim() }
-"--ItemPredicate package"
-Get-ChildItem "$s\advancements" -Recurse -Filter ItemPredicate.java | ForEach-Object { $_.FullName.Substring($s.Length) }
-"--SpawnerData"
-Get-ChildItem "$s\world\level\biome" -Filter MobSpawnSettings.java | Select-String 'record SpawnerData|public SpawnerData\(' | ForEach-Object { $_.Line.Trim() }
-"--WeightedList"
-Get-ChildItem "$s\util\random" -Filter *.java | ForEach-Object Name
-Select-String "$s\util\random\WeightedList.java" -Pattern 'public static <E> WeightedList<E> (of|create)\(|public static <E> Builder<E> builder' | ForEach-Object { $_.Line.Trim() }
-"--AddSpawnsBiomeModifier"
-Get-ChildItem "E:\模组\mc源码\2612neoforge-sources" -Recurse -Filter BiomeModifiers.java | Select-String 'record AddSpawnsBiomeModifier|public AddSpawnsBiomeModifier\(' | ForEach-Object { $_.Line.Trim() }
-"--StructureSpawnOverride"
-Get-ChildItem "$s\world\level\levelgen\structure" -Filter StructureSpawnOverride.java | Select-String 'record' | ForEach-Object { $_.Line.Trim() }
-"--chain blocks"
-Select-String "$s\world\level\block\Blocks.java" -Pattern 'public static final Block \w*CHAIN\b' | ForEach-Object { $_.Line.Trim() }
+$w = Split-Path $PSScriptRoot -Parent
+$j = "$w\src\main\java\com\rekindled\embers"
+"--shader/mithril/depthBuffer usages"
+Get-ChildItem $j -Recurse -Filter *.java | Select-String -Pattern 'RegisterShadersEvent|ShaderInstance|mithrilShader|additiveShader|emberParticle\w*Shader|translucentParticleShader|EmbersRenderTypes\.MITHRIL\b|depthBuffer|applyParticleUniforms' | ForEach-Object { $_.Filename + ':' + $_.LineNumber + ': ' + $_.Line.Trim() }
+"--SamplerCache"
+$sc = Get-ChildItem "E:\模组\mc源码\2612sources\com\mojang\blaze3d" -Recurse -Filter 'SamplerCache.java' | Select-Object -First 1
+$sc.FullName
+Select-String $sc.FullName -Pattern 'public GpuSampler \w+\(' | ForEach-Object { $_.Line.Trim() -replace '\s*\{.*', '' }
+Get-ChildItem "E:\模组\mc源码\2612sources\com\mojang\blaze3d" -Recurse -Filter 'FilterMode.java' | ForEach-Object { (Select-String $_.FullName -Pattern '^package').Line }
+"--RenderSystem.getSamplerCache"
+Select-String "E:\模组\mc源码\2612sources\com\mojang\blaze3d\systems\RenderSystem.java" -Pattern 'getSamplerCache' | ForEach-Object { $_.Line.Trim() }
+"--TextureAtlas locations"
+Select-String "E:\模组\mc源码\2612sources\net\minecraft\client\renderer\texture\TextureAtlas.java" -Pattern 'public static final Identifier' | ForEach-Object { $_.Line.Trim() }
+"--vanilla particle layer pipelines in SingleQuadParticle"
+Select-String "E:\模组\mc源码\2612sources\net\minecraft\client\particle\SingleQuadParticle.java" -Pattern 'Layer\(' | ForEach-Object { $_.Line.Trim() }

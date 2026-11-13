@@ -100,7 +100,6 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -120,9 +119,7 @@ import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterNamedRenderTypesEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -539,6 +536,7 @@ public class Embers {
 		@SubscribeEvent
 		static void registerRenderPipelines(net.neoforged.neoforge.client.event.RegisterRenderPipelinesEvent event) {
 			com.rekindled.embers.render.EmbersParticleLayers.registerPipelines(event);
+			com.rekindled.embers.render.EmbersRenderTypes.registerPipelines(event);
 		}
 
 		@OnlyIn(Dist.CLIENT)
@@ -642,32 +640,6 @@ public class Embers {
 		static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
 			event.register(GlowingTextTooltip.class, GlowingTextClientTooltip::new);
 			event.register(HeatBarTooltip.class, HeatBarClientTooltip::new);
-		}
-
-		@OnlyIn(Dist.CLIENT)
-		@SubscribeEvent
-		public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "position_tex_color_additive"), DefaultVertexFormat.POSITION_TEX_COLOR), shaderInstance -> {
-				EmbersRenderTypes.additiveShader = shaderInstance;
-			});
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "particle_ember"), DefaultVertexFormat.PARTICLE), shaderInstance -> {
-				EmbersRenderTypes.emberParticleShader = shaderInstance;
-			});
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "particle_ember_fab"), DefaultVertexFormat.PARTICLE), shaderInstance -> {
-				EmbersRenderTypes.emberParticleFabShader = shaderInstance;
-			});
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "particle_translucent"), DefaultVertexFormat.PARTICLE), shaderInstance -> {
-				EmbersRenderTypes.translucentParticleShader = shaderInstance;
-			});
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), Identifier.fromNamespaceAndPath(MODID, "rendertype_entity_solid_mithril"), DefaultVertexFormat.NEW_ENTITY), shaderInstance -> {
-				EmbersRenderTypes.mithrilShader = shaderInstance;
-			});
-		}
-
-		@OnlyIn(Dist.CLIENT)
-		@SubscribeEvent
-		public static void renderTypeRegistry(RegisterNamedRenderTypesEvent event) {
-			event.register(Identifier.parse(Embers.MODID + ":mithril"), RenderType.solid(), EmbersRenderTypes.MITHRIL);
 		}
 	}
 }
