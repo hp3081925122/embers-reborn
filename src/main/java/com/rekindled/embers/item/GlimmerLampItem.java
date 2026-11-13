@@ -19,8 +19,8 @@ public class GlimmerLampItem extends Item {
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
-		if (!world.isClientSide() && world.getGameTime() % 10 == 0 && world.getBrightness(LightLayer.SKY, entity.blockPosition()) - world.getSkyDarken() > 12) {
+	public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel world, Entity entity, @org.jspecify.annotations.Nullable net.minecraft.world.entity.EquipmentSlot slot) {
+		if (world.getGameTime() % 10 == 0 && world.getBrightness(LightLayer.SKY, entity.blockPosition()) - world.getSkyDarken() > 12) {
 			stack.setDamageValue(stack.getDamageValue() -1);
 		}
 	}

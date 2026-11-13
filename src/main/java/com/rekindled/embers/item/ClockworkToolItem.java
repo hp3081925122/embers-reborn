@@ -133,12 +133,13 @@ public class ClockworkToolItem extends Item implements IEmberChargedTool {
 	}
 
 	@Override
-	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
+	public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel world, Entity entity, @org.jspecify.annotations.Nullable net.minecraft.world.entity.EquipmentSlot slot) {
 		if (!stack.has(DataComponents.UNBREAKABLE)) {
 			stack.set(DataComponents.UNBREAKABLE, new Unbreakable(false));
 			stack.set(DataComponents.DAMAGE, 0);
 		}
-		if (!selected || world.isClientSide())
+		// 26.1 only ticks inventories on the server; 'selected' became the main-hand slot
+		if (slot != net.minecraft.world.entity.EquipmentSlot.MAINHAND)
 			return;
 		net.minecraft.nbt.CompoundTag tag = _getOrCreateTag(stack);
 		if (!_hasTag(stack)) {
