@@ -1751,7 +1751,7 @@ public class EmbersRecipes extends RecipeProvider implements IConditionBuilder {
 
 	protected static void oreCooking(RecipeOutput pFinishedRecipeConsumer, RecipeSerializer<? extends AbstractCookingRecipe> pCookingSerializer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup, String pRecipeName) {
 		for (ItemLike itemlike : pIngredients) {
-			SimpleCookingRecipeBuilder.smelting(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime).group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike)).save(pFinishedRecipeConsumer, getResource(getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike)));
+			(pCookingSerializer == RecipeSerializer.BLASTING_RECIPE ? SimpleCookingRecipeBuilder.blasting(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime) : SimpleCookingRecipeBuilder.smelting(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime)).group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike)).save(pFinishedRecipeConsumer, getResource(getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike)));
 		}
 	}
 
