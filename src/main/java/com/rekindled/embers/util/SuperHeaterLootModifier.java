@@ -28,8 +28,8 @@ public class SuperHeaterLootModifier extends LootModifier {
 
 	public SmeltingRecipe cachedRecipe = null;
 
-	public SuperHeaterLootModifier(LootItemCondition[] conditionsIn) {
-		super(conditionsIn);
+	public SuperHeaterLootModifier(LootItemCondition[] conditionsIn, int priority) {
+		super(conditionsIn, priority);
 	}
 
 	@Override
@@ -40,10 +40,10 @@ public class SuperHeaterLootModifier extends LootModifier {
 	@Override
 	public ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
 		Entity user = null;
-		if (context.hasParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.DIRECT_ATTACKING_ENTITY))
-			user = context.getParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.DIRECT_ATTACKING_ENTITY);
-		else if (context.hasParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY))
-			user = context.getParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY);
+		if (context.hasParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.ATTACKING_ENTITY))
+			user = context.getParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.ATTACKING_ENTITY);
+		else if (context.hasParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY))
+			user = context.getParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY);
 
 		if (user instanceof Player player && EmberInventoryUtil.getEmberTotal(player) >= RegistryManager.SUPERHEATER_AUGMENT.getCost()) {
 			boolean smelted = false;
@@ -52,14 +52,14 @@ public class SuperHeaterLootModifier extends LootModifier {
 				net.minecraft.world.item.crafting.SingleRecipeInput wrapper = new net.minecraft.world.item.crafting.SingleRecipeInput(generatedLoot.get(i));
 				cachedRecipe = Misc.getRecipe(cachedRecipe, RecipeType.SMELTING, wrapper, context.getLevel());
 				if (cachedRecipe != null) {
-					ItemStack stack = cachedRecipe.assemble(wrapper, context.getLevel().registryAccess());
+					ItemStack stack = cachedRecipe.assemble(wrapper);
 					generatedLoot.add(stack);
 					generatedLoot.set(i, ItemStack.EMPTY);
 					smelted = true;
 				}
 			}
 			if (smelted) {
-				Vec3 pos = context.getParam(LootContextParams.ORIGIN);
+				Vec3 pos = context.getParameter(LootContextParams.ORIGIN);
 				context.getLevel().playSound(null, pos.x, pos.y, pos.z, EmbersSounds.FIREBALL_HIT.get(), SoundSource.PLAYERS, 0.5f, Misc.random.nextFloat()*0.5f + 0.2f);
 				EmberInventoryUtil.removeEmber(player, RegistryManager.SUPERHEATER_AUGMENT.getCost());
 

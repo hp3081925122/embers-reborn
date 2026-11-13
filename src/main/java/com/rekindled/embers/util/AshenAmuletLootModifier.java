@@ -20,8 +20,8 @@ public class AshenAmuletLootModifier extends LootModifier {
 
 	public static final MapCodec<AshenAmuletLootModifier> CODEC = RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst, AshenAmuletLootModifier::new));
 
-	public AshenAmuletLootModifier(LootItemCondition[] conditionsIn) {
-		super(conditionsIn);
+	public AshenAmuletLootModifier(LootItemCondition[] conditionsIn, int priority) {
+		super(conditionsIn, priority);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class AshenAmuletLootModifier extends LootModifier {
 		if (amount > 0) {
 			generatedLoot.add(new ItemStack(RegistryManager.ASH.get(), amount));
 
-			Vec3 pos = context.getParam(LootContextParams.ORIGIN);
+			Vec3 pos = context.getParameter(LootContextParams.ORIGIN);
 			context.getLevel().playSound(null, pos.x, pos.y, pos.z, EmbersSounds.ASHEN_AMULET_BURN.get(), SoundSource.PLAYERS, 0.5f, Misc.random.nextFloat()*0.5f + 0.2f);
 			context.getLevel().sendParticles(SmokeParticleOptions.SMOKE, pos.x, pos.y, pos.z, 20, 0.25, 0.25, 0.25, 0.1);
 		}

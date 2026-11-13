@@ -14,8 +14,8 @@ public class GrandhammerLootModifier extends LootModifier {
 
 	public static final MapCodec<GrandhammerLootModifier> CODEC = RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst, GrandhammerLootModifier::new));
 
-	public GrandhammerLootModifier(LootItemCondition[] conditionsIn) {
-		super(conditionsIn);
+	public GrandhammerLootModifier(LootItemCondition[] conditionsIn, int priority) {
+		super(conditionsIn, priority);
 	}
 
 	@Override

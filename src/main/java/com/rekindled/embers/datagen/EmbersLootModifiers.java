@@ -22,8 +22,8 @@ public class EmbersLootModifiers extends GlobalLootModifierProvider {
 
 	@Override
 	protected void start() {
-		add("grandhammer", new GrandhammerLootModifier(new LootItemCondition[]{MatchTool.toolMatches(ItemPredicate.Builder.item()).build()}));
-		add("superheater", new SuperHeaterLootModifier(new LootItemCondition[]{MatchTool.toolMatches(ItemPredicate.Builder.item()).build()}));
-		add("ashenamulet", new AshenAmuletLootModifier(new LootItemCondition[]{MatchCurioLootCondition.curioMatches(ItemPredicate.Builder.item()).build()}));
+		add("grandhammer", new GrandhammerLootModifier(new LootItemCondition[]{MatchTool.toolMatches(ItemPredicate.Builder.item()).build()}, net.neoforged.neoforge.common.loot.IGlobalLootModifier.DEFAULT_PRIORITY));
+		add("superheater", new SuperHeaterLootModifier(new LootItemCondition[]{MatchTool.toolMatches(ItemPredicate.Builder.item()).build()}, net.neoforged.neoforge.common.loot.IGlobalLootModifier.DEFAULT_PRIORITY));
+		add("ashenamulet", new AshenAmuletLootModifier(new LootItemCondition[]{MatchCurioLootCondition.curioMatches(ItemPredicate.Builder.item()).build()}, net.neoforged.neoforge.common.loot.IGlobalLootModifier.DEFAULT_PRIORITY));
 	}
 }

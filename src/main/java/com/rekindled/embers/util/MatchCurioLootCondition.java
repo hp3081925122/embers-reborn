@@ -7,14 +7,13 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.rekindled.embers.compat.curios.CuriosCompat;
 
-import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.neoforged.fml.ModList;
 
 /**
@@ -26,15 +25,13 @@ public record MatchCurioLootCondition(ItemPredicate predicate) implements LootIt
 			ItemPredicate.CODEC.fieldOf("predicate").forGetter(MatchCurioLootCondition::predicate)
 	).apply(inst, MatchCurioLootCondition::new));
 
-	public static final LootItemConditionType LOOT_CONDITION_TYPE = new LootItemConditionType(CODEC);
-
 	@Override
-	public LootItemConditionType getType() {
-		return LOOT_CONDITION_TYPE;
+	public MapCodec<MatchCurioLootCondition> codec() {
+		return CODEC;
 	}
 
 	@Override
-	public Set<LootContextParam<?>> getReferencedContextParams() {
+	public Set<ContextKey<?>> getReferencedContextParams() {
 		return ImmutableSet.of(LootContextParams.ATTACKING_ENTITY, LootContextParams.THIS_ENTITY);
 	}
 
@@ -44,10 +41,10 @@ public record MatchCurioLootCondition(ItemPredicate predicate) implements LootIt
 			return false;
 
 		Entity user = null;
-		if (context.hasParam(LootContextParams.ATTACKING_ENTITY))
-			user = context.getParam(LootContextParams.ATTACKING_ENTITY);
-		else if (context.hasParam(LootContextParams.THIS_ENTITY))
-			user = context.getParam(LootContextParams.THIS_ENTITY);
+		if (context.hasParameter(LootContextParams.ATTACKING_ENTITY))
+			user = context.getParameter(LootContextParams.ATTACKING_ENTITY);
+		else if (context.hasParameter(LootContextParams.THIS_ENTITY))
+			user = context.getParameter(LootContextParams.THIS_ENTITY);
 
 		if (user instanceof LivingEntity living)
 			return CuriosCompat.checkForCurios(living, predicate::test);

@@ -460,11 +460,11 @@ public class Embers {
 
 		}
 		if (event.getRegistryKey().equals(Registries.LOOT_CONDITION_TYPE)) {
-			event.register(Registries.LOOT_CONDITION_TYPE, Identifier.fromNamespaceAndPath(MODID, "match_curio"), () -> MatchCurioLootCondition.LOOT_CONDITION_TYPE);
+			event.register(Registries.LOOT_CONDITION_TYPE, Identifier.fromNamespaceAndPath(MODID, "match_curio"), () -> MatchCurioLootCondition.CODEC);
 		}
 	}
 
-	@net.neoforged.fml.common.EventBusSubscriber(modid = Embers.MODID, bus = net.neoforged.fml.common.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+	@net.neoforged.fml.common.EventBusSubscriber(modid = Embers.MODID, value = Dist.CLIENT)
 	public static class ClientModEvents {
 
 		@OnlyIn(Dist.CLIENT)
