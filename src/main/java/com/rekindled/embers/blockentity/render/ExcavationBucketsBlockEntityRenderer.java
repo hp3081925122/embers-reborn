@@ -7,19 +7,14 @@ import com.rekindled.embers.blockentity.ExcavationBucketsBlockEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.client.model.data.ModelData;
 
-public class ExcavationBucketsBlockEntityRenderer implements BlockEntityRenderer<ExcavationBucketsBlockEntity> {
+public class ExcavationBucketsBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<ExcavationBucketsBlockEntity> {
 
-	public static BakedModel wheel;
+	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart wheel;
 
 	public ExcavationBucketsBlockEntityRenderer(BlockEntityRendererProvider.Context pContext) {
 
@@ -30,7 +25,6 @@ public class ExcavationBucketsBlockEntityRenderer implements BlockEntityRenderer
 		if (blockEntity != null && blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).hasProperty(BlockStateProperties.FACING)) {
 			BlockState blockState = blockEntity.getLevel().getBlockState(blockEntity.getBlockPos());
 			Direction facing = blockState.getValue(BlockStateProperties.FACING);
-			BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 			float angle = blockEntity.angle;
 			float lastAngle = blockEntity.lastAngle;
 			RenderSystem.enableCull();
@@ -43,7 +37,7 @@ public class ExcavationBucketsBlockEntityRenderer implements BlockEntityRenderer
 
 			poseStack.translate(-0.5D, -0.5D, -0.5D);
 			if (wheel != null)
-				blockrendererdispatcher.getModelRenderer().renderModel(poseStack.last(), bufferSource.getBuffer(Sheets.solidBlockSheet()), blockState, wheel, 0.0f, 0.0f, 0.0f, packedLight, packedOverlay, ModelData.EMPTY, Sheets.solidBlockSheet());
+				model(poseStack, wheel, packedLight, packedOverlay);
 
 			poseStack.popPose();
 		}

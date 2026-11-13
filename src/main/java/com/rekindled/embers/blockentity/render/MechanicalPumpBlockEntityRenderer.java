@@ -7,21 +7,16 @@ import com.rekindled.embers.blockentity.MechanicalPumpBottomBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
 
-public class MechanicalPumpBlockEntityRenderer implements BlockEntityRenderer<MechanicalPumpBottomBlockEntity> {
+public class MechanicalPumpBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<MechanicalPumpBottomBlockEntity> {
 
-	public static BakedModel pistonBottom;
-	public static BakedModel pistonTop;
+	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart pistonBottom;
+	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart pistonTop;
 
 	public MechanicalPumpBlockEntityRenderer(BlockEntityRendererProvider.Context pContext) {
 
@@ -29,7 +24,6 @@ public class MechanicalPumpBlockEntityRenderer implements BlockEntityRenderer<Me
 
 	@Override
 	public void render(MechanicalPumpBottomBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-		BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 		BlockPos pos = blockEntity.getBlockPos().below();
 		Level level = blockEntity.getLevel();
 
@@ -45,11 +39,11 @@ public class MechanicalPumpBlockEntityRenderer implements BlockEntityRenderer<Me
 			poseStack.translate(0.0D, 1.0D + amountUp * 0.25D, 0.0D);
 
 			if (pistonBottom != null)
-				blockrendererdispatcher.getModelRenderer().renderModel(poseStack.last(), bufferSource.getBuffer(Sheets.solidBlockSheet()), blockState, pistonBottom, 0.0f, 0.0f, 0.0f, packedLight, packedOverlay, ModelData.EMPTY, Sheets.solidBlockSheet());
+				model(poseStack, pistonBottom, packedLight, packedOverlay);
 
 			poseStack.translate(0.0D, amountUp * 0.25D, 0.0D);
 			if (pistonTop != null)
-				blockrendererdispatcher.getModelRenderer().renderModel(poseStack.last(), bufferSource.getBuffer(Sheets.solidBlockSheet()), blockState, pistonTop, 0.0f, 0.0f, 0.0f, packedLight, packedOverlay, ModelData.EMPTY, Sheets.solidBlockSheet());
+				model(poseStack, pistonTop, packedLight, packedOverlay);
 			poseStack.popPose();
 		}
 	}

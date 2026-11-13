@@ -6,20 +6,15 @@ import com.rekindled.embers.blockentity.AutomaticHammerBlockEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.client.model.data.ModelData;
 
-public class AutomaticHammerBlockEntityRenderer implements BlockEntityRenderer<AutomaticHammerBlockEntity> {
+public class AutomaticHammerBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<AutomaticHammerBlockEntity> {
 
-	public static BakedModel hammer;
+	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart hammer;
 
 	public AutomaticHammerBlockEntityRenderer(BlockEntityRendererProvider.Context pContext) {
 
@@ -27,7 +22,6 @@ public class AutomaticHammerBlockEntityRenderer implements BlockEntityRenderer<A
 
 	@Override
 	public void render(AutomaticHammerBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-		BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 		Level level = blockEntity.getLevel();
 		BlockState blockState = level.getBlockState(blockEntity.getBlockPos());
 		if (blockState.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
@@ -51,7 +45,7 @@ public class AutomaticHammerBlockEntityRenderer implements BlockEntityRenderer<A
 			poseStack.mulPose(Axis.XP.rotationDegrees(hammerAngle));
 			poseStack.translate(-0.5D, -0.5D, -0.5D);
 			if (hammer != null)
-				blockrendererdispatcher.getModelRenderer().renderModel(poseStack.last(), bufferSource.getBuffer(Sheets.solidBlockSheet()), blockState, hammer, 0.0f, 0.0f, 0.0f, packedLight, packedOverlay, ModelData.EMPTY, Sheets.solidBlockSheet());
+				model(poseStack, hammer, packedLight, packedOverlay);
 			poseStack.popPose();
 		}
 	}

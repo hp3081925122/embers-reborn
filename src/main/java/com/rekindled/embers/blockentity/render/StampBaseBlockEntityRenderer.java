@@ -8,24 +8,19 @@ import com.rekindled.embers.render.FluidCuboid;
 import com.rekindled.embers.render.FluidRenderer;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
 
-public class StampBaseBlockEntityRenderer implements BlockEntityRenderer<StampBaseBlockEntity> {
+public class StampBaseBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<StampBaseBlockEntity> {
 
-	private final ItemRenderer itemRenderer;
 
 	FluidCuboid cube = new FluidCuboid(new Vector3f(4, 12, 4), new Vector3f(12, 15, 12), FluidCuboid.DEFAULT_FACES);
 
 	public StampBaseBlockEntityRenderer(BlockEntityRendererProvider.Context pContext) {
-		this.itemRenderer = pContext.getItemRenderer();
 	}
 
 	@Override
@@ -36,10 +31,9 @@ public class StampBaseBlockEntityRenderer implements BlockEntityRenderer<StampBa
 				poseStack.pushPose();
 				ItemStack stack = blockEntity.inventory.getStackInSlot(0);
 				int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
-				BakedModel bakedmodel = this.itemRenderer.getModel(stack, blockEntity.getLevel(), null, seed);
 				float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
 				poseStack.translate(0.5D, (double)(0.25F * f2) + 0.75D, 0.5D);
-				this.itemRenderer.render(stack, ItemDisplayContext.GROUND, false, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+				item(stack, ItemDisplayContext.GROUND, poseStack, packedLight, OverlayTexture.NO_OVERLAY, blockEntity.getLevel(), seed);
 				poseStack.popPose();
 			}
 

@@ -9,18 +9,13 @@ import com.rekindled.embers.blockentity.EntropicEnumeratorBlockEntity.Cubie;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.data.ModelData;
 
-public class EntropicEnumeratorBlockEntityRenderer implements BlockEntityRenderer<EntropicEnumeratorBlockEntity> {
+public class EntropicEnumeratorBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<EntropicEnumeratorBlockEntity> {
 
-	public static BakedModel[][][] cubies = new BakedModel[2][2][2];
+	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart[][][] cubies = new net.minecraft.client.renderer.block.dispatch.BlockStateModelPart[2][2][2];
 	public static Quaternionf quat = new Quaternionf();
 
 	public EntropicEnumeratorBlockEntityRenderer(BlockEntityRendererProvider.Context pContext) {
@@ -28,7 +23,6 @@ public class EntropicEnumeratorBlockEntityRenderer implements BlockEntityRendere
 
 	@Override
 	public void render(EntropicEnumeratorBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
-		BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
 		Level level = blockEntity.getLevel();
 		BlockState blockState = level.getBlockState(blockEntity.getBlockPos());
 
@@ -80,7 +74,7 @@ public class EntropicEnumeratorBlockEntityRenderer implements BlockEntityRendere
 						poseStack.mulPose(blockEntity.moveQueue[currentMove].makePartialMove(quat.set(blockEntity.visualCube[x][y][z].rotation), blockEntity.visualCube[x][y][z].getPos(), turnAmount));
 						poseStack.translate(-0.5,- 0.5, -0.5);
 						if (cubies[x][y][z] != null)
-							blockrendererdispatcher.getModelRenderer().renderModel(poseStack.last(), bufferSource.getBuffer(Sheets.solidBlockSheet()), blockState, cubies[x][y][z], 0.0f, 0.0f, 0.0f, packedLight, packedOverlay, ModelData.EMPTY, Sheets.solidBlockSheet());
+							model(poseStack, cubies[x][y][z], packedLight, packedOverlay);
 						poseStack.popPose();
 					}
 				}
@@ -93,7 +87,7 @@ public class EntropicEnumeratorBlockEntityRenderer implements BlockEntityRendere
 						poseStack.mulPose(quat.set(blockEntity.cube[x][y][z].rotation));
 						poseStack.translate(-0.5,- 0.5, -0.5);
 						if (cubies[x][y][z] != null)
-							blockrendererdispatcher.getModelRenderer().renderModel(poseStack.last(), bufferSource.getBuffer(Sheets.solidBlockSheet()), blockState, cubies[x][y][z], 0.0f, 0.0f, 0.0f, packedLight, packedOverlay, ModelData.EMPTY, Sheets.solidBlockSheet());
+							model(poseStack, cubies[x][y][z], packedLight, packedOverlay);
 						poseStack.popPose();
 					}
 				}

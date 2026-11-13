@@ -539,6 +539,12 @@ public class Embers {
 
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
+		static void registerStandaloneModels(net.neoforged.neoforge.client.event.ModelEvent.RegisterStandalone event) {
+			com.rekindled.embers.render.EmbersStandaloneModels.register(event);
+		}
+
+		@OnlyIn(Dist.CLIENT)
+		@SubscribeEvent
 		static void onModelsBaked(net.neoforged.neoforge.client.event.ModelEvent.BakingCompleted event) {
 			EmbersClientEvents.afterModelBake(event);
 		}

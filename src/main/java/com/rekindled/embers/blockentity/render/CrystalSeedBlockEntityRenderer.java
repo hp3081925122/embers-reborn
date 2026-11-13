@@ -13,10 +13,9 @@ import com.rekindled.embers.blockentity.CrystalSeedBlockEntity;
 import com.rekindled.embers.render.EmbersRenderTypes;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 
-public class CrystalSeedBlockEntityRenderer implements BlockEntityRenderer<CrystalSeedBlockEntity> {
+public class CrystalSeedBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<CrystalSeedBlockEntity> {
 
 	public CrystalSeedBlockEntityRenderer(BlockEntityRendererProvider.Context pContext) {
 

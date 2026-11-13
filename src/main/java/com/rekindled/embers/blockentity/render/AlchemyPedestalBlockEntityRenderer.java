@@ -5,22 +5,17 @@ import com.mojang.math.Axis;
 import com.rekindled.embers.blockentity.AlchemyPedestalBlockEntity;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-public class AlchemyPedestalBlockEntityRenderer implements BlockEntityRenderer<AlchemyPedestalBlockEntity> {
+public class AlchemyPedestalBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<AlchemyPedestalBlockEntity> {
 
-	private final ItemRenderer itemRenderer;
 	public static double dist = 0.171875D;
 
 	public AlchemyPedestalBlockEntityRenderer(BlockEntityRendererProvider.Context pContext) {
-		this.itemRenderer = pContext.getItemRenderer();
 	}
 
 	@Override
@@ -31,17 +26,16 @@ public class AlchemyPedestalBlockEntityRenderer implements BlockEntityRenderer<A
 				poseStack.pushPose();
 				ItemStack stack = blockEntity.inventory.getStackInSlot(0);
 				int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
-				BakedModel bakedmodel = this.itemRenderer.getModel(stack, blockEntity.getLevel(), null, seed);
 				poseStack.translate(0.5D, 0.5D, dist);
-				this.itemRenderer.render(stack, ItemDisplayContext.GROUND, false, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+				item(stack, ItemDisplayContext.GROUND, poseStack, packedLight, OverlayTexture.NO_OVERLAY, blockEntity.getLevel(), seed);
 				poseStack.translate(0.0D, 0.0D, 1.0D - 2 * dist);
-				this.itemRenderer.render(stack, ItemDisplayContext.GROUND, false, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+				item(stack, ItemDisplayContext.GROUND, poseStack, packedLight, OverlayTexture.NO_OVERLAY, blockEntity.getLevel(), seed);
 
 				poseStack.translate(dist - 0.5D, 0.0D, dist - 0.5D);
 				poseStack.mulPose(Axis.YP.rotationDegrees(90));
-				this.itemRenderer.render(stack, ItemDisplayContext.GROUND, false, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+				item(stack, ItemDisplayContext.GROUND, poseStack, packedLight, OverlayTexture.NO_OVERLAY, blockEntity.getLevel(), seed);
 				poseStack.translate(0.0D, 0.0D, 1.0D - 2 * dist);
-				this.itemRenderer.render(stack, ItemDisplayContext.GROUND, false, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+				item(stack, ItemDisplayContext.GROUND, poseStack, packedLight, OverlayTexture.NO_OVERLAY, blockEntity.getLevel(), seed);
 				poseStack.popPose();
 			}
 		}

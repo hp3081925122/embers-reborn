@@ -14,11 +14,10 @@ import com.rekindled.embers.blockentity.CrystalCellBlockEntity;
 import com.rekindled.embers.render.EmbersRenderTypes;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.Identifier;
 
-public class CrystalCellBlockEntityRenderer implements BlockEntityRenderer<CrystalCellBlockEntity> {
+public class CrystalCellBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<CrystalCellBlockEntity> {
 
 	public Identifier texture = Identifier.parse(Embers.MODID + ":textures/block/crystal_material.png");
 	Random random = new Random();

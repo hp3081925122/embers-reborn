@@ -8,10 +8,9 @@ import com.rekindled.embers.render.FluidCuboid;
 import com.rekindled.embers.render.FluidRenderer;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 
-public class FluidTransferBlockEntityRenderer implements BlockEntityRenderer<FluidTransferBlockEntity> {
+public class FluidTransferBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<FluidTransferBlockEntity> {
 
 	FluidCuboid cube = new FluidCuboid(new Vector3f(4, 4, 4), new Vector3f(12, 12, 12), FluidCuboid.DEFAULT_FACES);
 

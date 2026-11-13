@@ -16,13 +16,12 @@ import com.rekindled.embers.util.EmbersColors;
 import com.rekindled.embers.util.Misc;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class FieldChartBlockEntityRenderer implements BlockEntityRenderer<FieldChartBlockEntity> {
+public class FieldChartBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<FieldChartBlockEntity> {
 
 	public static float baseHeight = 0.375f;
 	public static float height = 0.55f;

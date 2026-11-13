@@ -14,8 +14,6 @@ import com.rekindled.embers.recipe.BoringContext;
 import com.rekindled.embers.recipe.IBoringRecipe;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.biome.Biome;
@@ -23,12 +21,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.model.data.ModelData;
 
 public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
 
 	@OnlyIn(Dist.CLIENT)
-	public static BakedModel buckets;
+	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart buckets;
 
 	public ExcavationBucketsUpgrade(BlockEntity tile) {
 		super(Identifier.fromNamespaceAndPath(Embers.MODID, "excavation_buckets"), tile);
@@ -75,7 +72,7 @@ public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
 
 		public static void throwEvent(BlockEntity tile, List<UpgradeContext> upgrades, UpgradeEvent event, int distance, int count) {
 			if (buckets != null && event instanceof EmberBoreBladeRenderEvent renderEvent) {
-				Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(renderEvent.getPose().last(), renderEvent.getBuffer().getBuffer(Sheets.solidBlockSheet()), renderEvent.getBlockState(), buckets, 0.0f, 0.0f, 0.0f, renderEvent.getLight(), renderEvent.getOverlay(), ModelData.EMPTY, Sheets.solidBlockSheet());
+				com.rekindled.embers.render.LegacyBlockEntityRenderer.model(renderEvent.getPose(), buckets, renderEvent.getLight(), renderEvent.getOverlay());
 			}
 		}
 	}

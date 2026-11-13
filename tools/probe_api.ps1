@@ -1,16 +1,18 @@
+$s = "E:\模组\mc源码\2612sources\net\minecraft\client"
 $n = "E:\模组\mc源码\2612neoforge-sources\net\neoforged\neoforge"
-$s = "E:\模组\mc源码\2612sources\net\minecraft"
-"--FluidType.initializeClient?"
-Select-String "$n\fluids\FluidType.java" -Pattern 'initializeClient' | ForEach-Object { $_.Line.Trim() }
-"--RegisterClientExtensionsEvent"
-Select-String "$n\client\extensions\common\RegisterClientExtensionsEvent.java" -Pattern 'public void register\w*\(' | ForEach-Object { $_.Line.Trim() }
-"--FogData"
-Get-ChildItem "$s\client\renderer\fog" -Filter FogData.java | ForEach-Object { Get-Content $_.FullName | Select-String 'public \w+ \w+;|class' | ForEach-Object { '  ' + $_.Line.Trim() } }
-"--Material.Baked"
-$m = Get-ChildItem "$s\client\resources\model\sprite" -Filter Material.java | Select-Object -First 1
-Select-String $m.FullName -Pattern 'record|public Material\(|TextureAtlasSprite sprite' | ForEach-Object { '  ' + $_.Line.Trim() }
-"--FluidModel accessors"
-$fm = Get-ChildItem "$s\client\renderer\block" -Recurse -Filter FluidModel.java | Select-Object -First 1
-Get-Content $fm.FullName | Select-Object -First 30 | Select-String 'Material|layer|Tint' | ForEach-Object { '  ' + $_.Line.Trim() }
-"--IClientItemExtensions armor model hook"
-Select-String "$n\client\extensions\common\IClientItemExtensions.java" -Pattern 'default \S+ \w+\(' | ForEach-Object { '  ' + ($_.Line.Trim() -replace '\s*\{.*$', '') }
+"--Sheets"
+Select-String "$s\renderer\Sheets.java" -Pattern 'public static RenderType \w+\(' | ForEach-Object { '  ' + ($_.Line.Trim() -replace '\s*\{.*', '') }
+"--QuadInstance"
+$q = Get-ChildItem "$s" -Recurse -Filter 'QuadInstance.java' | Select-Object -First 1
+$q.FullName
+Get-Content $q.FullName | Select-String 'public (QuadInstance|void|static|\S+ set\w*)\b' | ForEach-Object { '  ' + ($_.Line.Trim() -replace '\s*\{.*', '') }
+"--CustomGeometryRenderer"
+Select-String "$s\renderer\SubmitNodeCollector.java" -Pattern 'interface \w+|void \w+\(' | ForEach-Object { '  ' + $_.Line.Trim() }
+"--submitBlockModel"
+Select-String "$s\renderer\OrderedSubmitNodeCollector.java" -Pattern 'void submitBlockModel\(' -Context 0,10 | ForEach-Object { '  ' + (($_.Line + ' ' + ($_.Context.PostContext -join ' ')) -replace '\s+', ' ') }
+"--BER provider context"
+Select-String "$s\renderer\blockentity\BlockEntityRendererProvider.java" -Pattern 'record Context|public \S+ \w+\(\)' -Context 0,12 | Select-Object -First 1 | ForEach-Object { $_.Line.Trim(); $_.Context.PostContext | ForEach-Object { '  ' + $_.Trim() } }
+"--registerBlockEntityRenderer"
+Select-String "$n\client\event\EntityRenderersEvent.java" -Pattern 'void registerBlockEntityRenderer\(' -Context 0,3 | ForEach-Object { '  ' + (($_.Line + ' ' + ($_.Context.PostContext -join ' ')) -replace '\s+', ' ') }
+"--ModelState identity"
+Get-ChildItem "$s\resources\model" -Recurse -Filter 'BlockModelRotation.java' | ForEach-Object { $_.FullName.Substring(40); Select-String $_.FullName -Pattern 'IDENTITY|X0_Y0|public static' | Select-Object -First 4 | ForEach-Object { '  ' + $_.Line.Trim() } }

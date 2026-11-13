@@ -10,13 +10,12 @@ import com.rekindled.embers.render.FluidCuboid;
 import com.rekindled.embers.render.FluidRenderer;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.fluids.FluidStack;
 
-public class CatalyticPlugBlockEntityRenderer implements BlockEntityRenderer<CatalyticPlugBlockEntity> {
+public class CatalyticPlugBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<CatalyticPlugBlockEntity> {
 
 	FluidCuboid cube = new FluidCuboid(new Vector3f(0, 0.499f, 0), new Vector3f(3, 6, 3), FluidCuboid.FLOWING_DOWN_FACES);
 

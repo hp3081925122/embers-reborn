@@ -9,7 +9,6 @@ import com.rekindled.embers.render.EmbersRenderTypes;
 import com.rekindled.embers.render.FluidRenderer;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
@@ -17,7 +16,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
 
-public class ReservoirBlockEntityRenderer implements BlockEntityRenderer<ReservoirBlockEntity> {
+public class ReservoirBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<ReservoirBlockEntity> {
 
 	float[] bounds = getBlockBounds(2, 0, 1);
 

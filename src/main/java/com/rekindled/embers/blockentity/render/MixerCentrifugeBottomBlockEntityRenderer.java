@@ -10,10 +10,9 @@ import com.rekindled.embers.render.FluidCuboid;
 import com.rekindled.embers.render.FluidRenderer;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 
-public class MixerCentrifugeBottomBlockEntityRenderer implements BlockEntityRenderer<MixerCentrifugeBottomBlockEntity> {
+public class MixerCentrifugeBottomBlockEntityRenderer extends com.rekindled.embers.render.LegacyBlockEntityRenderer<MixerCentrifugeBottomBlockEntity> {
 
 	FluidCuboid cubeNorth = new FluidCuboid(new Vector3f(7, 12, 3), new Vector3f(9, 15, 4), FluidCuboid.DEFAULT_FACES);
 	FluidCuboid cubeSouth = new FluidCuboid(new Vector3f(7, 12, 12), new Vector3f(9, 15, 13), FluidCuboid.DEFAULT_FACES);

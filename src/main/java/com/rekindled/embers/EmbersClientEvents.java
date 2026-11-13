@@ -99,7 +99,6 @@ import net.neoforged.neoforge.items.IItemHandler;
 public class EmbersClientEvents {
 
 	public static final net.minecraft.client.gui.LayeredDraw.Layer INGAME_OVERLAY = EmbersClientEvents::renderIngameOverlay;
-	public static java.util.Map<ModelResourceLocation, BakedModel> bakedModels = null;
 	public static int ticks = 0;
 	public static double gaugeAngle = 0;
 	public static long seed = 0;
@@ -475,32 +474,28 @@ public class EmbersClientEvents {
 	}
 
 	public static void afterModelBake(ModelEvent.BakingCompleted event) {
-		bakedModels = event.getModels();
-		ModelBakery bakery = event.getModelBakery();
-		EmberBoreBlockEntityRenderer.blades = getModel(bakery, "ember_bore_blades");
-		MechanicalPumpBlockEntityRenderer.pistonBottom = getModel(bakery, "mechanical_pump_piston_bottom");
-		MechanicalPumpBlockEntityRenderer.pistonTop = getModel(bakery, "mechanical_pump_piston_top");
-		StamperBlockEntityRenderer.arm = getModel(bakery, "stamper_arm");
-		AutomaticHammerBlockEntityRenderer.hammer = getModel(bakery, "automatic_hammer_end");
-		InfernoForgeTopBlockEntityRenderer.hatch = getModel(bakery, "inferno_forge_hatch");
-		AtmosphericBellowsBlockEntityRenderer.top = getModel(bakery, "atmospheric_bellows_top");
-		AtmosphericBellowsBlockEntityRenderer.leather = getModel(bakery, "atmospheric_bellows_leather");
-		EntropicEnumeratorBlockEntityRenderer.cubies[0][0][0] = getModel(bakery, "entropic_enumerator_drf");
-		EntropicEnumeratorBlockEntityRenderer.cubies[1][0][0] = getModel(bakery, "entropic_enumerator_dlf");
-		EntropicEnumeratorBlockEntityRenderer.cubies[0][1][0] = getModel(bakery, "entropic_enumerator_urf");
-		EntropicEnumeratorBlockEntityRenderer.cubies[1][1][0] = getModel(bakery, "entropic_enumerator_ulf");
-		EntropicEnumeratorBlockEntityRenderer.cubies[0][0][1] = getModel(bakery, "entropic_enumerator_drb");
-		EntropicEnumeratorBlockEntityRenderer.cubies[1][0][1] = getModel(bakery, "entropic_enumerator_dlb");
-		EntropicEnumeratorBlockEntityRenderer.cubies[0][1][1] = getModel(bakery, "entropic_enumerator_urb");
-		EntropicEnumeratorBlockEntityRenderer.cubies[1][1][1] = getModel(bakery, "entropic_enumerator_ulb");
-		ExcavationBucketsBlockEntityRenderer.wheel = getModel(bakery, "excavation_buckets_wheel");
-		ExcavationBucketsUpgrade.buckets = getModel(bakery, "ember_bore_excavation_buckets");
+		EmberBoreBlockEntityRenderer.blades = getModel("ember_bore_blades");
+		MechanicalPumpBlockEntityRenderer.pistonBottom = getModel("mechanical_pump_piston_bottom");
+		MechanicalPumpBlockEntityRenderer.pistonTop = getModel("mechanical_pump_piston_top");
+		StamperBlockEntityRenderer.arm = getModel("stamper_arm");
+		AutomaticHammerBlockEntityRenderer.hammer = getModel("automatic_hammer_end");
+		InfernoForgeTopBlockEntityRenderer.hatch = getModel("inferno_forge_hatch");
+		AtmosphericBellowsBlockEntityRenderer.top = getModel("atmospheric_bellows_top");
+		AtmosphericBellowsBlockEntityRenderer.leather = getModel("atmospheric_bellows_leather");
+		EntropicEnumeratorBlockEntityRenderer.cubies[0][0][0] = getModel("entropic_enumerator_drf");
+		EntropicEnumeratorBlockEntityRenderer.cubies[1][0][0] = getModel("entropic_enumerator_dlf");
+		EntropicEnumeratorBlockEntityRenderer.cubies[0][1][0] = getModel("entropic_enumerator_urf");
+		EntropicEnumeratorBlockEntityRenderer.cubies[1][1][0] = getModel("entropic_enumerator_ulf");
+		EntropicEnumeratorBlockEntityRenderer.cubies[0][0][1] = getModel("entropic_enumerator_drb");
+		EntropicEnumeratorBlockEntityRenderer.cubies[1][0][1] = getModel("entropic_enumerator_dlb");
+		EntropicEnumeratorBlockEntityRenderer.cubies[0][1][1] = getModel("entropic_enumerator_urb");
+		EntropicEnumeratorBlockEntityRenderer.cubies[1][1][1] = getModel("entropic_enumerator_ulb");
+		ExcavationBucketsBlockEntityRenderer.wheel = getModel("excavation_buckets_wheel");
+		ExcavationBucketsUpgrade.buckets = getModel("ember_bore_excavation_buckets");
 	}
 
-	public static BakedModel getModel(ModelBakery bakery, String name) {
-		if (bakedModels == null) return null;
-		return bakedModels.get(ModelResourceLocation.standalone(
-				Identifier.fromNamespaceAndPath(Embers.MODID, name)));
+	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart getModel(String name) {
+		return com.rekindled.embers.render.EmbersStandaloneModels.get(name);
 	}
 
 	public static ItemStack lastHoveredItem = ItemStack.EMPTY;
