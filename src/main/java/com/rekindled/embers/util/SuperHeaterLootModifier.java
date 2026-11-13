@@ -40,8 +40,8 @@ public class SuperHeaterLootModifier extends LootModifier {
 	@Override
 	public ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
 		Entity user = null;
-		if (context.hasParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.DIRECT_ATTACKING_ENTITY))
-			user = context.getParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.DIRECT_ATTACKING_ENTITY);
+		if (context.hasParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.ATTACKING_ENTITY))
+			user = context.getParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.ATTACKING_ENTITY);
 		else if (context.hasParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY))
 			user = context.getParam(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY);
 
