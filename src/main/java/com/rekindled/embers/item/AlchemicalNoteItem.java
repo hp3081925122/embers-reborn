@@ -5,11 +5,9 @@ import java.util.function.Consumer;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.rekindled.embers.render.AlchemicalNoteItemRenderer;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,26 +23,13 @@ public class AlchemicalNoteItem extends Item {
 		super(pProperties);
 	}
 
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new AlchemicalNoteItemExtensions());
-	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, net.minecraft.world.item.Item.TooltipContext context, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> tooltipAdder, TooltipFlag isAdvanced) {
 		List<Component> tooltip = new com.rekindled.embers.util.TooltipList(tooltipAdder);
 		ItemStack result = AlchemyHintItem.getResult(stack);
 		if (!result.isEmpty())
-			tooltip.add(Component.translatable(result.getDescriptionId()).withStyle(ChatFormatting.GRAY));
+			tooltip.add(result.getItemName().copy().withStyle(ChatFormatting.GRAY));
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	public static class AlchemicalNoteItemExtensions implements IClientItemExtensions {
-		@Override
-		public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-			Minecraft minecraft = Minecraft.getInstance();
-			return new AlchemicalNoteItemRenderer(minecraft.getBlockEntityRenderDispatcher(), minecraft.getEntityModels());
-		}
-	}
 }

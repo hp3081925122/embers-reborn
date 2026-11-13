@@ -1,6 +1,65 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "embers_reborn:item/alchemical_note"
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": "firstperson_righthand",
+        "model": {
+          "type": "minecraft:special",
+          "base": "embers_reborn:item/alchemical_note_special",
+          "model": {
+            "type": "embers_reborn:alchemical_note",
+            "mode": "first_person_right"
+          }
+        }
+      },
+      {
+        "when": "firstperson_lefthand",
+        "model": {
+          "type": "minecraft:special",
+          "base": "embers_reborn:item/alchemical_note_special",
+          "model": {
+            "type": "embers_reborn:alchemical_note",
+            "mode": "first_person_left"
+          }
+        }
+      },
+      {
+        "when": "fixed",
+        "model": {
+          "type": "minecraft:special",
+          "base": "embers_reborn:item/alchemical_note_special",
+          "model": {
+            "type": "embers_reborn:alchemical_note",
+            "mode": "fixed"
+          }
+        }
+      },
+      {
+        "when": "gui",
+        "model": {
+          "type": "minecraft:composite",
+          "models": [
+            {
+              "type": "minecraft:model",
+              "model": "embers_reborn:item/alchemical_note_item"
+            },
+            {
+              "type": "minecraft:special",
+              "base": "embers_reborn:item/alchemical_note_special",
+              "model": {
+                "type": "embers_reborn:alchemical_note",
+                "mode": "gui"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "embers_reborn:item/alchemical_note_item"
+    }
   }
 }

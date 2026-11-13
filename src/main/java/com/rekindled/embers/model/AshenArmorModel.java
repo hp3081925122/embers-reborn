@@ -83,39 +83,15 @@ public class AshenArmorModel extends HumanoidModel<HumanoidRenderState> {
 		}
 	}
 
-	public void setup(LivingEntity entity, ItemStack itemStack) {
+	@Override
+	public void setupAnim(HumanoidRenderState state) {
+		super.setupAnim(state);
 		if (cape != null) {
-			if (entity instanceof AbstractClientPlayer player) {
-				float partialTicks = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
-				double d0 = Mth.lerp((double)partialTicks, player.xCloakO, player.xCloak) - Mth.lerp((double)partialTicks, entity.xo, entity.getX());
-				double d1 = Mth.lerp((double)partialTicks, player.yCloakO, player.yCloak) - Mth.lerp((double)partialTicks, entity.yo, entity.getY());
-				double d2 = Mth.lerp((double)partialTicks, player.zCloakO, player.zCloak) - Mth.lerp((double)partialTicks, entity.zo, entity.getZ());
-				float f = Mth.rotLerp(partialTicks, entity.yBodyRotO, entity.yBodyRot);
-				double d3 = (double)Mth.sin(f * ((float)Math.PI / 180F));
-				double d4 = (double)(-Mth.cos(f * ((float)Math.PI / 180F)));
-				float f1 = (float)d1 * 10.0F;
-				f1 = Mth.clamp(f1, -6.0F, 32.0F);
-				float f2 = (float)(d0 * d3 + d2 * d4) * 100.0F;
-				f2 = Mth.clamp(f2, 0.0F, 150.0F);
-				if (f2 < 0.0F) {
-					f2 = 0.0F;
-				}
-				float f4 = Mth.lerp(partialTicks, player.oBob, player.bob);
-				f1 += Mth.sin(Mth.lerp(partialTicks, entity.walkDistO, entity.walkDist) * 6.0F) * 32.0F * f4;
-
-				this.cape.xRot = (6.0F + f2 / 2.0F + f1) * ((float)Math.PI / 180F);
-			} else {
+			// same formula as 1.20.1: capeLean and capeFlap are the vanilla cape values the old code computed by hand
+			if (state instanceof net.minecraft.client.renderer.entity.state.AvatarRenderState avatar)
+				this.cape.xRot = (6.0F + avatar.capeLean / 2.0F + avatar.capeFlap) * ((float)Math.PI / 180F);
+			else
 				this.cape.xRot = 0;
-			}
-			if (itemStack.getItem() == RegistryManager.ASHEN_CLOAK.get()) {
-				for (int i = 0; i < gems.length; i++) {
-					gems[i].visible = com.rekindled.embers.util.ItemNbtHelper.hasTagElement(itemStack, "gem" + i);;
-				}
-			} else {
-				for (int i = 0; i < gems.length; i++) {
-					gems[i].visible = false;
-				}
-			}
 		}
 	}
 

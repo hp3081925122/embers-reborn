@@ -618,6 +618,13 @@ public class Embers {
 		@SubscribeEvent
 		static void registerClientExtensions(net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent event) {
 			com.rekindled.embers.fluidtypes.EmbersFluidClient.registerClientExtensions(event);
+			event.registerItem(com.rekindled.embers.model.AshenArmorModel.ARMOR_MODEL_GETTER, RegistryManager.ASHEN_GOGGLES.get(), RegistryManager.ASHEN_CLOAK.get(), RegistryManager.ASHEN_LEGGINGS.get(), RegistryManager.ASHEN_BOOTS.get());
+		}
+
+		@OnlyIn(Dist.CLIENT)
+		@SubscribeEvent
+		static void registerSpecialModels(net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent event) {
+			event.register(Identifier.fromNamespaceAndPath(MODID, "alchemical_note"), com.rekindled.embers.render.AlchemicalNoteItemRenderer.Unbaked.MAP_CODEC);
 		}
 
 		@OnlyIn(Dist.CLIENT)
