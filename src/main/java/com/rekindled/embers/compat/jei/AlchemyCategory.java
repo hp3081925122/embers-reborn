@@ -45,8 +45,13 @@ public class AlchemyCategory implements IRecipeCategory<IAlchemyRecipe> {
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -74,10 +79,15 @@ public class AlchemyCategory implements IRecipeCategory<IAlchemyRecipe> {
 			Vec3 rotated = center.zRot((float) (i * 2.0 * Math.PI / recipe.getInputs().size()));
 			builder.addSlot(RecipeIngredientRole.INPUT, (int) (32 + rotated.x()), (int) (29 + rotated.y())).addIngredients(recipe.getInputs().get(i));
 
-			builder.addSlot(RecipeIngredientRole.CATALYST, (int) (32 + rotated.x()), (int) (45 + rotated.y())).addIngredients(CompoundIngredient.of(aspectusCombinations[i])).setBackground(pillar, 0, 0);
+			builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, (int) (32 + rotated.x()), (int) (45 + rotated.y())).addIngredients(CompoundIngredient.of(aspectusCombinations[i])).setBackground(pillar, 0, 0);
 		}
 		for (int i = 0; i < aspecti; i++) {
-			builder.addSlot(RecipeIngredientRole.CATALYST, 63 - 8 * recipe.getAspects().size() + 16 * i, 90).addIngredients(recipe.getAspects().get(i));
+			builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 63 - 8 * recipe.getAspects().size() + 16 * i, 90).addIngredients(recipe.getAspects().get(i));
 		}
+	}
+
+	@Override
+	public void draw(IAlchemyRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 	}
 }

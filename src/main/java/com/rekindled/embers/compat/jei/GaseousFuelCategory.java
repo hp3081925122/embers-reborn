@@ -47,8 +47,13 @@ public class GaseousFuelCategory implements IRecipeCategory<IGaseousFuelRecipe> 
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -59,7 +64,7 @@ public class GaseousFuelCategory implements IRecipeCategory<IGaseousFuelRecipe> 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, IGaseousFuelRecipe recipe, IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.INPUT, 6, 7)
-		.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+		.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 		.setFluidRenderer(recipe.getDisplayInput().getFluids().get(0).getAmount(), false, 16, 16)
 		.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.getDisplayInput().getFluids());
 	}
@@ -67,6 +72,7 @@ public class GaseousFuelCategory implements IRecipeCategory<IGaseousFuelRecipe> 
 	@SuppressWarnings("resource")
 	@Override
 	public void draw(IGaseousFuelRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 		DecimalFormat multiplierFormat = DecimalFormats.getDecimalFormat(Embers.MODID + ".decimal_format.ember_multiplier");
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 5, Component.translatable(Embers.MODID + ".jei.recipe.gaseous_fuel.burn_time", recipe.getDisplayBurnTime()));
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 17, Component.translatable(Embers.MODID + ".jei.recipe.gaseous_fuel.power_multiplier", multiplierFormat.format(recipe.getDisplayMultiplier())));

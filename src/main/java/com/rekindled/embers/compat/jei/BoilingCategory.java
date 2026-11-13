@@ -40,8 +40,13 @@ public class BoilingCategory implements IRecipeCategory<IBoilingRecipe> {
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -52,13 +57,18 @@ public class BoilingCategory implements IRecipeCategory<IBoilingRecipe> {
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, IBoilingRecipe recipe, IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.INPUT, 26, 6)
-		.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+		.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 		.setFluidRenderer(recipe.getDisplayInput().getFluids().get(0).getAmount(), false, 16, 16)
 		.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.getDisplayInput().getFluids());
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 84, 6)
-		.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+		.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 		.setFluidRenderer(recipe.getDisplayOutput().getAmount(), false, 16, 16)
 		.addIngredient(NeoForgeTypes.FLUID_STACK, recipe.getDisplayOutput());
+	}
+
+	@Override
+	public void draw(IBoilingRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 	}
 }

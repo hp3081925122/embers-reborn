@@ -73,6 +73,11 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 	public double speedMod;
 
 	public EmberBoreInventory inventory = new EmberBoreInventory(9);
+
+	/** 26.1 fuel values live on the level; 0 before the level is set, like an unfueled item. */
+	public int burnTime(ItemStack stack) {
+		return level == null ? 0 : stack.getBurnTime(RegistryManager.BORING.get(), level.fuelValues());
+	}
 	// holder field removed (LazyOptional not used in NeoForge 1.21.1)
 
 	public EmberBoreBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -191,12 +196,12 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 				ItemStack fuel = blockEntity.inventory.getStackInSlot(SLOT_FUEL);
 				if (!fuel.isEmpty()) {
 					ItemStack fuelCopy = fuel.copy();
-					int burnTime = fuelCopy.getBurnTime(RegistryManager.BORING.get());
+					int burnTime = blockEntity.burnTime(fuelCopy);
 					if (burnTime > 0) {
 						blockEntity.ticksFueled = burnTime;
 						fuel.shrink(1);
 						if (fuel.isEmpty())
-							blockEntity.inventory.setStackInSlot(SLOT_FUEL, fuelCopy.getItem().getCraftingRemainingItem(fuelCopy));
+							blockEntity.inventory.setStackInSlot(SLOT_FUEL, fuelCopy.getCraftingRemainder() != null ? fuelCopy.getCraftingRemainder().create() : ItemStack.EMPTY);
 						blockEntity.setChanged();
 					}
 				}
@@ -418,7 +423,7 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 			ItemStack currentFuel = this.getStackInSlot(SLOT_FUEL);
 			if (currentFuel.isEmpty()) {
-				int burnTime = stack.getBurnTime(RegistryManager.BORING.get());
+				int burnTime = burnTime(stack);
 				if (burnTime != 0)
 					return super.insertItem(SLOT_FUEL, stack, simulate);
 				else
@@ -438,7 +443,7 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 			//disallow extraction from fuel slot if it's a stacked item or it doesn't have burn time
 			if (slot == SLOT_FUEL) {
 				ItemStack fuelStack = getStackInSlot(SLOT_FUEL);
-				if (fuelStack.getCount() > 1 || fuelStack.getBurnTime(RegistryManager.BORING.get()) != 0)
+				if (fuelStack.getCount() > 1 || burnTime(fuelStack) != 0)
 					return ItemStack.EMPTY;
 			}
 			return super.extractItem(slot, amount, simulate);

@@ -43,8 +43,13 @@ public class DawnstoneAnvilCategory implements IRecipeCategory<IDawnstoneAnvilRe
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -58,11 +63,11 @@ public class DawnstoneAnvilCategory implements IRecipeCategory<IDawnstoneAnvilRe
 		List<ItemStack> bottom = recipe.getDisplayInputBottom();
 		var second = builder.addSlot(RecipeIngredientRole.INPUT, 22, 19).addItemStacks(top);
 		if (hasItems(top))
-			second.addTooltipCallback((view, tooltip) -> tooltip.add(Component.translatable(Embers.MODID + ".jei.recipe.dawnstone_anvil.second").withStyle(ChatFormatting.YELLOW)));
+			second.addRichTooltipCallback((view, tooltip) -> tooltip.add(Component.translatable(Embers.MODID + ".jei.recipe.dawnstone_anvil.second").withStyle(ChatFormatting.YELLOW)));
 		var first = builder.addSlot(RecipeIngredientRole.INPUT, 22, 37).addItemStacks(bottom);
 		if (hasItems(bottom))
-			first.addTooltipCallback((view, tooltip) -> tooltip.add(Component.translatable(Embers.MODID + ".jei.recipe.dawnstone_anvil.first").withStyle(ChatFormatting.YELLOW)));
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 77, 28).addItemStacks(recipe.getDisplayOutput()).addTooltipCallback((view, tooltip) -> {
+			first.addRichTooltipCallback((view, tooltip) -> tooltip.add(Component.translatable(Embers.MODID + ".jei.recipe.dawnstone_anvil.first").withStyle(ChatFormatting.YELLOW)));
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 77, 28).addItemStacks(recipe.getDisplayOutput()).addRichTooltipCallback((view, tooltip) -> {
 			if (hasItems(bottom))
 				tooltip.add(Component.translatable(Embers.MODID + ".jei.recipe.dawnstone_anvil.output_first", names(bottom)).withStyle(ChatFormatting.YELLOW));
 			if (hasItems(top))
@@ -90,5 +95,10 @@ public class DawnstoneAnvilCategory implements IRecipeCategory<IDawnstoneAnvilRe
 			any = true;
 		}
 		return name;
+	}
+
+	@Override
+	public void draw(IDawnstoneAnvilRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 	}
 }

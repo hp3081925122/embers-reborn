@@ -43,8 +43,13 @@ public class MixingCategory implements IRecipeCategory<IMixingRecipe> {
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -62,22 +67,22 @@ public class MixingCategory implements IRecipeCategory<IMixingRecipe> {
 				break;
 			if (count == 2) {
 				builder.addSlot(RecipeIngredientRole.INPUT, 9, 7)
-				.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+				.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 				.setFluidRenderer((int) (capacity * scale + ingredient.getFluids().get(0).getAmount() * (1.0 - scale)), false, 16, 32)
 				.addIngredients(NeoForgeTypes.FLUID_STACK, ingredient.getFluids());
 			} else if (count == 0) {
 				builder.addSlot(RecipeIngredientRole.INPUT, 34, 7)
-				.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+				.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 				.setFluidRenderer((int) (capacity * scale + ingredient.getFluids().get(0).getAmount() * (1.0 - scale)), false, 16, 32)
 				.addIngredients(NeoForgeTypes.FLUID_STACK, ingredient.getFluids());
 			} else if (count == 1) {
 				builder.addSlot(RecipeIngredientRole.INPUT, 59, 7)
-				.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+				.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 				.setFluidRenderer((int) (capacity * scale + ingredient.getFluids().get(0).getAmount() * (1.0 - scale)), false, 16, 32)
 				.addIngredients(NeoForgeTypes.FLUID_STACK, ingredient.getFluids());
 			} else if (count == 3) {
 				builder.addSlot(RecipeIngredientRole.INPUT, 83, 7)
-				.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+				.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 				.setFluidRenderer((int) (capacity * scale + ingredient.getFluids().get(0).getAmount() * (1.0 - scale)), false, 16, 32)
 				.addIngredients(NeoForgeTypes.FLUID_STACK, ingredient.getFluids());
 			}
@@ -85,8 +90,13 @@ public class MixingCategory implements IRecipeCategory<IMixingRecipe> {
 		}
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 46, 84)
-		.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+		.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 		.setFluidRenderer((int) (capacity * scale + recipe.getDisplayOutput().getAmount() * (1.0 - scale)), false, 16, 32)
 		.addIngredient(NeoForgeTypes.FLUID_STACK, recipe.getDisplayOutput());
+	}
+
+	@Override
+	public void draw(IMixingRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 	}
 }

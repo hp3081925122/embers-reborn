@@ -46,8 +46,13 @@ public class CatalysisCombustionCategory implements IRecipeCategory<ICatalysisCo
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -57,13 +62,14 @@ public class CatalysisCombustionCategory implements IRecipeCategory<ICatalysisCo
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, ICatalysisCombustionRecipe recipe, IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.CATALYST, 6, 6).addIngredients(recipe.getDisplayMachine());
+		builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 6, 6).addIngredients(recipe.getDisplayMachine());
 		builder.addSlot(RecipeIngredientRole.INPUT, 6, 24).addIngredients(recipe.getDisplayInput());
 	}
 
 	@SuppressWarnings("resource")
 	@Override
 	public void draw(ICatalysisCombustionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 		DecimalFormat multiplierFormat = DecimalFormats.getDecimalFormat(Embers.MODID + ".decimal_format.ember_multiplier");
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 10, Component.translatable(Embers.MODID + ".jei.recipe.catalysis_combustion.multiplier", multiplierFormat.format(recipe.getDisplayMultiplier())));
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 28, Component.translatable(Embers.MODID + ".jei.recipe.catalysis_combustion.burn_time", recipe.getDisplayTime()));

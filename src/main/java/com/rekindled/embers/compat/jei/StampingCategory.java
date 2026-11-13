@@ -42,8 +42,13 @@ public class StampingCategory implements IRecipeCategory<IStampingRecipe> {
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -61,13 +66,18 @@ public class StampingCategory implements IRecipeCategory<IStampingRecipe> {
 
 		builder.addSlot(RecipeIngredientRole.INPUT, 8, 28).addIngredients(recipe.getDisplayInput());
 
-		builder.addSlot(RecipeIngredientRole.CATALYST, 47, 7).addIngredients(recipe.getDisplayStamp());
+		builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 47, 7).addIngredients(recipe.getDisplayStamp());
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 84, 28).addItemStack(recipe.getResultItem());
 
 		builder.addSlot(RecipeIngredientRole.INPUT, 47, 48)
-		.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+		.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 		.setFluidRenderer((int) (1500 * scale + amount * (1.0 - scale)), false, 16, 32)
 		.addIngredients(NeoForgeTypes.FLUID_STACK, recipe.getDisplayInputFluid().getFluids());
+	}
+
+	@Override
+	public void draw(IStampingRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 	}
 }

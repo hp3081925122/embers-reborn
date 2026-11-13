@@ -49,8 +49,13 @@ public class BoringCategory implements IRecipeCategory<IBoringRecipe> {
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -61,11 +66,11 @@ public class BoringCategory implements IRecipeCategory<IBoringRecipe> {
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, IBoringRecipe recipe, IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 6, 6).addItemStack(recipe.getDisplayOutput().getStack());
-		builder.addSlot(RecipeIngredientRole.CATALYST, 6, 26).addItemStacks(recipe.getDisplayInput());
+		builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 6, 26).addItemStacks(recipe.getDisplayInput());
 	}
 
 	@Override
-	public List<Component> getTooltipStrings(IBoringRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+	public void getTooltip(mezz.jei.api.gui.builder.ITooltipBuilder tooltip, IBoringRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
 		int height = 48;
 		List<Component> text = new ArrayList<Component>();
 
@@ -90,12 +95,13 @@ public class BoringCategory implements IRecipeCategory<IBoringRecipe> {
 			height += 11;
 		}
 
-		return text;
+		tooltip.addAll(text);
 	}
 
 	@SuppressWarnings("resource")
 	@Override
 	public void draw(IBoringRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 		Font fontRenderer = Minecraft.getInstance().font;
 		Misc.drawComponents(fontRenderer, guiGraphics, 28, 10, Component.translatable(Embers.MODID + ".jei.recipe.boring.weight", recipe.getDisplayOutput().weight()));
 		Misc.drawComponents(fontRenderer, guiGraphics, 28, 30, Component.translatable(Embers.MODID + ".jei.recipe.boring.required_blocks"));

@@ -42,8 +42,13 @@ public class MeltingCategory implements IRecipeCategory<IMeltingRecipe> {
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -58,8 +63,13 @@ public class MeltingCategory implements IRecipeCategory<IMeltingRecipe> {
 		builder.addSlot(RecipeIngredientRole.INPUT, 8, 14).addIngredients(recipe.getDisplayInput());
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 84, 6)
-		.addTooltipCallback(IngotTooltipCallback.INSTANCE)
+		.addRichTooltipCallback(IngotTooltipCallback.INSTANCE)
 		.setFluidRenderer((int) (capacity * scale + recipe.getDisplayOutput().getAmount() * (1.0 - scale)), false, 16, 32)
 		.addIngredient(NeoForgeTypes.FLUID_STACK, recipe.getDisplayOutput());
+	}
+
+	@Override
+	public void draw(IMeltingRecipe recipe, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, net.minecraft.client.gui.GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 	}
 }

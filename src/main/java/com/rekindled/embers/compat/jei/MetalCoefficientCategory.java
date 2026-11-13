@@ -46,8 +46,13 @@ public class MetalCoefficientCategory implements IRecipeCategory<IMetalCoefficie
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -57,12 +62,13 @@ public class MetalCoefficientCategory implements IRecipeCategory<IMetalCoefficie
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, IMetalCoefficientRecipe recipe, IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.CATALYST, 6, 6).addItemStacks(recipe.getDisplayInput());
+		builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 6, 6).addItemStacks(recipe.getDisplayInput());
 	}
 
 	@SuppressWarnings("resource")
 	@Override
 	public void draw(IMetalCoefficientRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+		background.draw(guiGraphics);
 		DecimalFormat multiplierFormat = DecimalFormats.getDecimalFormat(Embers.MODID + ".decimal_format.ember_multiplier");
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 10, Component.literal(multiplierFormat.format(recipe.getDisplayCoefficient())));
 	}

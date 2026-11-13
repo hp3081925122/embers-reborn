@@ -43,8 +43,13 @@ public class EmberActivationCategory implements IRecipeCategory<IEmberActivation
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
 	}
 
 	@Override
@@ -60,6 +65,7 @@ public class EmberActivationCategory implements IRecipeCategory<IEmberActivation
 	@SuppressWarnings("resource")
 	@Override
 	public void draw(IEmberActivationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) { 
+		background.draw(guiGraphics);
 		Misc.drawComponents(Minecraft.getInstance().font, guiGraphics, 28, 10, Component.translatable(Embers.MODID + ".jei.recipe.ember_activation.ember", recipe.getDisplayOutput()));
 	}
 }
