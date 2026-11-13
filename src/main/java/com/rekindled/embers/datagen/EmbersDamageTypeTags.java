@@ -21,8 +21,8 @@ public class EmbersDamageTypeTags extends TagsProvider<DamageType> {
 	public static final TagKey<DamageType> INFLICTOR_GEM_BLACKLIST = TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath(Embers.MODID, "inflictor_gem_blacklist"));
 	public static final TagKey<DamageType> HOLY_DAMAGE = TagKey.create(Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath("consecration", "holy"));
 
-	public EmbersDamageTypeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-		super(output, Registries.DAMAGE_TYPE, lookupProvider, Embers.MODID, existingFileHelper);
+	public EmbersDamageTypeTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(output, Registries.DAMAGE_TYPE, lookupProvider, Embers.MODID);
 	}
 
 	@Override

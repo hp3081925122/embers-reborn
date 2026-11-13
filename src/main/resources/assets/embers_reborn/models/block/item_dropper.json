@@ -1,0 +1,7 @@
+{
+  "parent": "embers_reborn:block/dropper",
+  "textures": {
+    "dropper": "embers_reborn:block/plates_lead",
+    "particle": "embers_reborn:block/plates_lead"
+  }
+}

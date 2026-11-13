@@ -149,13 +149,20 @@ public class EmbersItemTags extends ItemTagsProvider {
 	//other compat
 	public static final TagKey<Item> ANVIL_METAL = ItemTags.create(Identifier.fromNamespaceAndPath("tconstruct", "anvil_metal"));
 
-	public EmbersItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, blockTagProvider, Embers.MODID, existingFileHelper);
+	public EmbersItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(output, lookupProvider, Embers.MODID);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
+		new EmbersBlockItemTags() {
+			@Override
+			protected net.minecraft.data.tags.TagAppender<net.minecraft.world.level.block.Block, net.minecraft.world.level.block.Block> tag(TagKey<net.minecraft.world.level.block.Block> blockTag, TagKey<Item> itemTag) {
+				return new BlockToItemTagAppender(EmbersItemTags.this.tag(itemTag));
+			}
+		}.run();
+
 		tag(PIPE_UNCLOGGER).addTag(Tags.Items.RODS);
 		tag(TINKER_HAMMER).add(RegistryManager.TINKER_HAMMER.get());
 		tag(INSCRIBABLE_PAPER).add(Items.PAPER);
@@ -263,30 +270,9 @@ public class EmbersItemTags extends ItemTagsProvider {
 		tag(DIALS).add(RegistryManager.EMBER_DIAL_ITEM.get(), RegistryManager.ITEM_DIAL_ITEM.get(), RegistryManager.FLUID_DIAL_ITEM.get());
 
 		//tags shared by blocks
-		copy(EmbersBlockTags.WORLD_BOTTOM, WORLD_BOTTOM);
-		copy(EmbersBlockTags.SNOW, SNOW);
 
-		copy(EmbersBlockTags.PRISTINE_COPPER, PRISTINE_COPPER);
-		copy(EmbersBlockTags.EXPOSED_COPPER, EXPOSED_COPPER);
-		copy(EmbersBlockTags.WEATHERED_COPPER, WEATHERED_COPPER);
-		copy(EmbersBlockTags.OXIDIZED_COPPER, OXIDIZED_COPPER);
 
-		copy(EmbersBlockTags.CRYSTAL_SEEDS, CRYSTAL_SEEDS);
-		copy(EmbersBlockTags.COPPER_SEED, COPPER_SEED);
-		copy(EmbersBlockTags.IRON_SEED, IRON_SEED);
-		copy(EmbersBlockTags.GOLD_SEED, GOLD_SEED);
-		copy(EmbersBlockTags.LEAD_SEED, LEAD_SEED);
-		copy(EmbersBlockTags.SILVER_SEED, SILVER_SEED);
-		copy(EmbersBlockTags.NICKEL_SEED, NICKEL_SEED);
-		copy(EmbersBlockTags.TIN_SEED, TIN_SEED);
-		copy(EmbersBlockTags.ALUMINUM_SEED, ALUMINUM_SEED);
-		copy(EmbersBlockTags.ZINC_SEED, ZINC_SEED);
-		copy(EmbersBlockTags.PLATINUM_SEED, PLATINUM_SEED);
-		copy(EmbersBlockTags.URANIUM_SEED, URANIUM_SEED);
-		copy(EmbersBlockTags.DAWNSTONE_SEED, DAWNSTONE_SEED);
-		copy(EmbersBlockTags.MITHRIL_SEED, MITHRIL_SEED);
 
-		copy(EmbersBlockTags.ANVIL_METAL, ANVIL_METAL);
 
 		//compat stuff
 		tag(AUGMENTABLE_TOOLS)

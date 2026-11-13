@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "embers_reborn:block/archaic_large_bricks_slab"
+    },
+    "type=double": {
+      "model": "embers_reborn:block/archaic_large_bricks"
+    },
+    "type=top": {
+      "model": "embers_reborn:block/archaic_large_bricks_slab_top"
+    }
+  }
+}

@@ -109,13 +109,20 @@ public class EmbersBlockTags extends BlockTagsProvider {
 	//compat
 	public static final TagKey<Block> ANVIL_METAL = BlockTags.create(Identifier.fromNamespaceAndPath("tconstruct", "anvil_metal"));
 
-	public EmbersBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, Embers.MODID, existingFileHelper);
+	public EmbersBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(output, lookupProvider, Embers.MODID);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
+		new EmbersBlockItemTags() {
+			@Override
+			protected net.minecraft.data.tags.TagAppender<net.minecraft.world.level.block.Block, net.minecraft.world.level.block.Block> tag(TagKey<net.minecraft.world.level.block.Block> blockTag, TagKey<net.minecraft.world.item.Item> itemTag) {
+				return EmbersBlockTags.this.tag(blockTag);
+			}
+		}.run();
+
 		tag(EMITTER_CONNECTION).add(Blocks.LEVER, Blocks.LADDER, Blocks.IRON_BARS, Blocks.TRIPWIRE_HOOK, Blocks.WALL_TORCH, Blocks.SOUL_WALL_TORCH, Blocks.REDSTONE_WALL_TORCH, Blocks.BELL, Blocks.LANTERN, Blocks.SOUL_LANTERN, Blocks.END_ROD, Blocks.LIGHTNING_ROD, Blocks.CHAIN)
 		.add(RegistryManager.EMBER_DIAL.get(), RegistryManager.CAMINITE_LEVER.get(), RegistryManager.EMBER_EMITTER.get(), RegistryManager.EMBER_RECEIVER.get(), RegistryManager.EMBER_EJECTOR.get(), RegistryManager.EMBER_FUNNEL.get(), RegistryManager.EMBER_RELAY.get(), RegistryManager.MIRROR_RELAY.get(), RegistryManager.BEAM_SPLITTER.get())
 		.addTags(Tags.Blocks.GLASS_PANES, BlockTags.BUTTONS, Tags.Blocks.FENCES, BlockTags.WALLS, BlockTags.WALL_SIGNS)
@@ -392,13 +399,7 @@ public class EmbersBlockTags extends BlockTagsProvider {
 		upgradeTag(RegistryManager.EXCAVATION_BUCKETS.get()).add(RegistryManager.EMBER_BORE.get());
 
 		//tags shared with items
-		tag(WORLD_BOTTOM).add(Blocks.BEDROCK);
-		tag(SNOW).add(Blocks.SNOW_BLOCK);
 
-		tag(PRISTINE_COPPER).addTag(Tags.Blocks.STORAGE_BLOCKS_COPPER).add(Blocks.CUT_COPPER);
-		tag(EXPOSED_COPPER).add(Blocks.EXPOSED_COPPER).add(Blocks.EXPOSED_CUT_COPPER);
-		tag(WEATHERED_COPPER).add(Blocks.WEATHERED_COPPER).add(Blocks.WEATHERED_CUT_COPPER);
-		tag(OXIDIZED_COPPER).add(Blocks.OXIDIZED_COPPER).add(Blocks.OXIDIZED_CUT_COPPER);
 
 		tag(Tags.Blocks.ORES).addTags(LEAD_ORE);
 		tag(LEAD_ORE).add(RegistryManager.LEAD_ORE.get()).add(RegistryManager.DEEPSLATE_LEAD_ORE.get());
@@ -424,22 +425,7 @@ public class EmbersBlockTags extends BlockTagsProvider {
 		tag(DAWNSTONE_BLOCK).add(RegistryManager.DAWNSTONE_BLOCK.get());
 		tag(MITHRIL_BLOCK).add(RegistryManager.MITHRIL_BLOCK.get());
 
-		tag(CRYSTAL_SEEDS).addTags(COPPER_SEED, IRON_SEED, GOLD_SEED, LEAD_SEED, SILVER_SEED, NICKEL_SEED, TIN_SEED, ALUMINUM_SEED, ZINC_SEED, PLATINUM_SEED, URANIUM_SEED, DAWNSTONE_SEED, MITHRIL_SEED);
-		tag(COPPER_SEED).add(RegistryManager.COPPER_CRYSTAL_SEED.BLOCK.get());
-		tag(IRON_SEED).add(RegistryManager.IRON_CRYSTAL_SEED.BLOCK.get());
-		tag(GOLD_SEED).add(RegistryManager.GOLD_CRYSTAL_SEED.BLOCK.get());
-		tag(LEAD_SEED).add(RegistryManager.LEAD_CRYSTAL_SEED.BLOCK.get());
-		tag(SILVER_SEED).add(RegistryManager.SILVER_CRYSTAL_SEED.BLOCK.get());
-		tag(NICKEL_SEED).add(RegistryManager.NICKEL_CRYSTAL_SEED.BLOCK.get());
-		tag(TIN_SEED).add(RegistryManager.TIN_CRYSTAL_SEED.BLOCK.get());
-		tag(ALUMINUM_SEED).add(RegistryManager.ALUMINUM_CRYSTAL_SEED.BLOCK.get());
-		tag(ZINC_SEED).add(RegistryManager.ZINC_CRYSTAL_SEED.BLOCK.get());
-		tag(PLATINUM_SEED).add(RegistryManager.PLATINUM_CRYSTAL_SEED.BLOCK.get());
-		tag(URANIUM_SEED).add(RegistryManager.URANIUM_CRYSTAL_SEED.BLOCK.get());
-		tag(DAWNSTONE_SEED).add(RegistryManager.DAWNSTONE_CRYSTAL_SEED.BLOCK.get());
-		tag(MITHRIL_SEED).add(RegistryManager.MITHRIL_CRYSTAL_SEED.BLOCK.get());
 
-		tag(ANVIL_METAL).addTags(DAWNSTONE_BLOCK, MITHRIL_BLOCK);
 	}
 
 	public void decoTags(StoneDecoBlocks deco) {

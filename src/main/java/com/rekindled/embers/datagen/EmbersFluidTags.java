@@ -47,8 +47,8 @@ public class EmbersFluidTags extends FluidTagsProvider {
 	public static final TagKey<Fluid> INGOT_TOOLTIP = FluidTags.create(Identifier.fromNamespaceAndPath(Embers.MODID, "ingot_tooltip"));
 	public static final TagKey<Fluid> METAL_TOOLTIPS = FluidTags.create(Identifier.fromNamespaceAndPath("tconstruct", "tooltips/metal"));
 
-	public EmbersFluidTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, Embers.MODID, existingFileHelper);
+	public EmbersFluidTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(output, lookupProvider, Embers.MODID);
 	}
 
 	@Override

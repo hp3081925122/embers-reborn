@@ -1,0 +1,7 @@
+{
+  "parent": "embers_reborn:block/pipe_center",
+  "textures": {
+    "particle": "embers_reborn:block/fluid_pipe_tex",
+    "pipe": "embers_reborn:block/fluid_pipe_tex"
+  }
+}

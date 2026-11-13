@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "embers_reborn:block/caminite_large_bricks"
+  }
+}

@@ -216,8 +216,8 @@ public class EmbersSounds extends SoundDefinitionsProvider {
 	public static final SoundType ARCHAIC_MULTIBLOCK_EXTRA = new MultiblockSoundType(SoundType.NETHER_BRICKS);
 
 
-	public EmbersSounds(PackOutput generator, ExistingFileHelper helper) {
-		super(generator, Embers.MODID, helper);
+	public EmbersSounds(PackOutput generator) {
+		super(generator, Embers.MODID);
 	}
 
 	public static DeferredHolder<SoundEvent, SoundEvent> registerSound(String name) {

@@ -1,0 +1,13 @@
+{
+  "model": {
+    "type": "neoforge:fluid_container",
+    "textures": {
+      "base": "embers_reborn:item/bucket_base",
+      "cover": "embers_reborn:item/bucket_cover",
+      "fluid": "embers_reborn:item/bucket_fluid"
+    },
+    "fluid": "embers_reborn:molten_tin",
+    "flip_gas": true,
+    "cover_is_mask": false
+  }
+}

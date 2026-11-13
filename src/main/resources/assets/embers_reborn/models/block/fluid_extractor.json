@@ -1,0 +1,19 @@
+{
+  "parent": "minecraft:block/block",
+  "center": {
+    "parent": "embers_reborn:block/fluid_extractor_center"
+  },
+  "connection": {
+    "parent": "embers_reborn:block/fluid_pipe_connection"
+  },
+  "connection2": {
+    "parent": "embers_reborn:block/fluid_pipe_connection_2"
+  },
+  "end": {
+    "parent": "embers_reborn:block/fluid_pipe_end"
+  },
+  "end2": {
+    "parent": "embers_reborn:block/fluid_pipe_end_2"
+  },
+  "loader": "embers_reborn:pipe"
+}

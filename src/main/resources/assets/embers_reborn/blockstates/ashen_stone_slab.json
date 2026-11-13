@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "embers_reborn:block/ashen_stone_slab"
+    },
+    "type=double": {
+      "model": "embers_reborn:block/ashen_stone"
+    },
+    "type=top": {
+      "model": "embers_reborn:block/ashen_stone_slab_top"
+    }
+  }
+}

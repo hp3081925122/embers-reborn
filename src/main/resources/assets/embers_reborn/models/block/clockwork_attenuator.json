@@ -1,0 +1,7 @@
+{
+  "parent": "embers_reborn:block/dial",
+  "textures": {
+    "dial": "embers_reborn:block/clockwork_attenuator",
+    "particle": "embers_reborn:block/clockwork_attenuator"
+  }
+}

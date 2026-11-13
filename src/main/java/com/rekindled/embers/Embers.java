@@ -46,13 +46,11 @@ import com.rekindled.embers.blockentity.render.StampBaseBlockEntityRenderer;
 import com.rekindled.embers.blockentity.render.StamperBlockEntityRenderer;
 import com.rekindled.embers.compat.curios.CuriosCompat;
 import com.rekindled.embers.datagen.EmbersBiomeModifiers;
-import com.rekindled.embers.datagen.EmbersBlockStates;
 import com.rekindled.embers.datagen.EmbersBlockTags;
 import com.rekindled.embers.datagen.EmbersConfiguredFeatures;
 import com.rekindled.embers.datagen.EmbersDamageTypeTags;
 import com.rekindled.embers.datagen.EmbersDamageTypes;
 import com.rekindled.embers.datagen.EmbersFluidTags;
-import com.rekindled.embers.datagen.EmbersItemModels;
 import com.rekindled.embers.datagen.EmbersItemTags;
 import com.rekindled.embers.datagen.EmbersLang;
 import com.rekindled.embers.datagen.EmbersLootModifiers;
@@ -441,38 +439,31 @@ public class Embers {
 		event.register(RegistryManager.ANCIENT_GOLEM.get(), net.minecraft.world.entity.SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.AND);
 	}
 
-	public void gatherData(GatherDataEvent event) {
+	public void gatherData(GatherDataEvent.Client event) {
 		DataGenerator gen = event.getGenerator();
 		PackOutput output = gen.getPackOutput();
-		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-		if (event.includeClient()) {
-			gen.addProvider(true, new EmbersLang(output));
-			ItemModelProvider itemModels = new EmbersItemModels(output, existingFileHelper);
-			gen.addProvider(true, itemModels);
-			gen.addProvider(true, new EmbersBlockStates(output, existingFileHelper));
-			gen.addProvider(true, new EmbersSounds(output, existingFileHelper));
-		} if (event.includeServer()) {
-			gen.addProvider(true, new EmbersLootTables(output, event.getLookupProvider()));
-			gen.addProvider(true, new EmbersRecipes(output, event.getLookupProvider()));
-			BlockTagsProvider blockTags = new EmbersBlockTags(output, lookupProvider, existingFileHelper);
-			gen.addProvider(true, blockTags);
-			gen.addProvider(true, new EmbersItemTags(output, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
-			gen.addProvider(true, new EmbersFluidTags(output, lookupProvider, existingFileHelper));
-			gen.addProvider(true, new DatapackBuiltinEntriesProvider(output, lookupProvider, new RegistrySetBuilder()
-					.add(Registries.CONFIGURED_FEATURE, bootstrap -> EmbersConfiguredFeatures.generate(bootstrap)) //it doesn't like this one for some reason
-					.add(Registries.PLACED_FEATURE, EmbersPlacedFeatures::generate)
-					.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, EmbersBiomeModifiers::generate)
-					.add(Registries.DAMAGE_TYPE, EmbersDamageTypes::generate)
-					.add(Registries.PROCESSOR_LIST, EmbersStructures::generateProcessors)
-					.add(Registries.TEMPLATE_POOL, EmbersStructures::generatePools)
-					.add(Registries.STRUCTURE, EmbersStructures::generateStructures)
-					.add(Registries.STRUCTURE_SET, EmbersStructures::generateSets),
-					Set.of(MODID)));
-			gen.addProvider(true, new EmbersDamageTypeTags(output, lookupProvider, existingFileHelper));
-			gen.addProvider(true, new EmbersLootModifiers(output, event.getLookupProvider()));
-		}
+		// blockstates, block/item models and client item definitions are static resources since 26.1 (tools/convert_assets_2612.py)
+		gen.addProvider(true, new EmbersLang(output));
+		gen.addProvider(true, new EmbersSounds(output));
+		gen.addProvider(true, new EmbersLootTables(output, lookupProvider));
+		gen.addProvider(true, new EmbersRecipes.Runner(output, lookupProvider));
+		EmbersBlockTags blockTags = gen.addProvider(true, new EmbersBlockTags(output, lookupProvider));
+		gen.addProvider(true, new EmbersItemTags(output, lookupProvider, blockTags.contentsGetter()));
+		gen.addProvider(true, new EmbersFluidTags(output, lookupProvider));
+		event.createDatapackRegistryObjects(new RegistrySetBuilder()
+				.add(Registries.CONFIGURED_FEATURE, EmbersConfiguredFeatures::generate)
+				.add(Registries.PLACED_FEATURE, EmbersPlacedFeatures::generate)
+				.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, EmbersBiomeModifiers::generate)
+				.add(Registries.DAMAGE_TYPE, EmbersDamageTypes::generate)
+				.add(Registries.PROCESSOR_LIST, EmbersStructures::generateProcessors)
+				.add(Registries.TEMPLATE_POOL, EmbersStructures::generatePools)
+				.add(Registries.STRUCTURE, EmbersStructures::generateStructures)
+				.add(Registries.STRUCTURE_SET, EmbersStructures::generateSets),
+				Set.of(MODID));
+		gen.addProvider(true, new EmbersDamageTypeTags(output, lookupProvider));
+		gen.addProvider(true, new EmbersLootModifiers(output, lookupProvider));
 	}
 
 	public void registerRecipeSerializers(RegisterEvent event) {

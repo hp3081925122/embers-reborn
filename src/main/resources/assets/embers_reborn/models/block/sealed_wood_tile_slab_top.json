@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "embers_reborn:block/sealed_wood_tile",
+    "side": "embers_reborn:block/sealed_wood_tile",
+    "top": "embers_reborn:block/sealed_wood_tile"
+  }
+}
