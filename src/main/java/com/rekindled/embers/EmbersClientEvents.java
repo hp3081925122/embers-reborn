@@ -11,11 +11,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import org.joml.Vector3f;
-import org.lwjgl.opengl.GL30C;
 
-import com.mojang.blaze3d.pipeline.RenderTarget;
-import com.mojang.blaze3d.pipeline.TextureTarget;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Either;
@@ -60,11 +56,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.BlockModelRotation;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.core.BlockPos;
@@ -86,7 +78,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
-import net.neoforged.neoforge.client.event.RenderHighlightEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -98,7 +89,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 @OnlyIn(Dist.CLIENT)
 public class EmbersClientEvents {
 
-	public static final net.minecraft.client.gui.LayeredDraw.Layer INGAME_OVERLAY = EmbersClientEvents::renderIngameOverlay;
+	public static final net.neoforged.neoforge.client.gui.GuiLayer INGAME_OVERLAY = EmbersClientEvents::renderIngameOverlay;
 	public static int ticks = 0;
 	public static double gaugeAngle = 0;
 	public static long seed = 0;
@@ -134,26 +125,25 @@ public class EmbersClientEvents {
 
 	public static void onMovementInput(MovementInputUpdateEvent event) {
 		if (event.getEntity().isUsingItem() && !event.getEntity().isPassenger() && event.getEntity().getItemInHand(event.getEntity().getUsedItemHand()).is(EmbersItemTags.NORMAL_WALK_SPEED_TOOL)) {
-			event.getInput().forwardImpulse /= 0.2f;
-			event.getInput().leftImpulse /= 0.2f;
+			event.getInput().moveVector = event.getInput().moveVector.scale(1.0f / 0.2f);
 			if (event.getEntity().isSprinting())
 				event.getEntity().setSprinting(false);
 		}
 	}
 
 	//do not render the normal block highlight when the glowing highlight is drawn
-	public static void onBlockHighlight(RenderHighlightEvent.Block event) {
+	public static void onBlockHighlight(net.neoforged.neoforge.client.event.ExtractBlockOutlineRenderStateEvent event) {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.options.hideGui)
 			return;
 		HammerTarget target = Misc.getHammerTarget(mc.player);
-		if (target != null && event.getTarget().getBlockPos().equals(target.pos)) {
+		if (target != null && event.getBlockPos().equals(target.pos)) {
 			event.setCanceled(true);
 		}
 	}
 
-	public static void onLevelRender(RenderLevelStageEvent event) {
-		if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
+	public static void onLevelRender(RenderLevelStageEvent.AfterTranslucentBlocks event) {
+		{
 			Minecraft mc = Minecraft.getInstance();
 			if (mc.options.hideGui)
 				return;
@@ -166,9 +156,9 @@ public class EmbersClientEvents {
 				if (state.isAir())
 					return;
 				Direction targetDir = target.face;
-				Vec3 camPos = event.getCamera().getPosition();
+				Vec3 camPos = event.getLevelRenderState().cameraRenderState.pos;
 				VertexConsumer consumer = mc.renderBuffers().bufferSource().getBuffer(EmbersRenderTypes.GLOW_LINES);
-				Vector3f color = Misc.multColor(EmbersColors.EMBER, (float) (Math.sin(Math.toRadians(4.0f*((event.getPartialTick().getGameTimeDeltaPartialTick(false)))))+1.0f) / 2.0f);
+				Vector3f color = Misc.multColor(EmbersColors.EMBER, (float) (Math.sin(Math.toRadians(4.0f*((Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false)))))+1.0f) / 2.0f);
 				float alpha = 0.8F;
 				double x = targetPos.getX() - camPos.x;
 				double y = targetPos.getY() - camPos.y;
@@ -236,9 +226,9 @@ public class EmbersClientEvents {
 				if (mc.hitResult instanceof BlockHitResult result && result != null && result.getType() == BlockHitResult.Type.BLOCK && mc.level.getBlockEntity(result.getBlockPos()) instanceof IEmberPacketProducer) {
 					lastEmitter = result.getBlockPos();
 				}
-				Vec3 camPos = event.getCamera().getPosition();
+				Vec3 camPos = event.getLevelRenderState().cameraRenderState.pos;
 				VertexConsumer consumer = mc.renderBuffers().bufferSource().getBuffer(EmbersRenderTypes.GLOW_LINES);
-				Vector3f color = Misc.multColor(EmbersColors.EMBER, (float) (Math.sin(Math.toRadians(4.0f*((event.getPartialTick().getGameTimeDeltaPartialTick(false)))))+1.0f) / 2.0f);
+				Vector3f color = Misc.multColor(EmbersColors.EMBER, (float) (Math.sin(Math.toRadians(4.0f*((Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false)))))+1.0f) / 2.0f);
 				float alpha = 0.6F;
 				double x = -camPos.x;
 				double y = -camPos.y;
@@ -279,6 +269,7 @@ public class EmbersClientEvents {
 			} else {
 				lastEmitter = null;
 			}
+			mc.renderBuffers().bufferSource().endBatch(EmbersRenderTypes.GLOW_LINES);
 		}
 	}
 
@@ -528,7 +519,7 @@ public class EmbersClientEvents {
 				event.getTooltipElements().add(1, Either.right(new GlowingTextTooltip(Component.translatable(Embers.MODID + ".tooltip.research").withStyle(ChatFormatting.DARK_GRAY), intensity)));
 				if (openProgress >= ConfigManager.TICKS_TO_OPEN_CODEX.get()) {
 					if (ConfigManager.CODEX_REQUIRED_FOR_LOOKUP.get())
-						mc.player.getInventory().selected = codexIndex;
+						mc.player.getInventory().setSelectedSlot(codexIndex);
 					GuiCodex.instance.previousScreen = mc.screen;
 					GuiCodex.instance.researchPage = research;
 					mc.setScreen(GuiCodex.instance);
@@ -570,24 +561,4 @@ public class EmbersClientEvents {
 			return Embers.MODID + ".tooltip.numstop";
 	}
 
-	public static RenderTarget depthBuffer;
-
-	public static void onWorldRender(RenderLevelStageEvent event) {
-		if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS) && Minecraft.useFancyGraphics()) {
-
-			Minecraft mc = Minecraft.getInstance();
-
-			if (depthBuffer == null) {
-				depthBuffer = new TextureTarget(mc.getMainRenderTarget().width, mc.getMainRenderTarget().height, true, Minecraft.ON_OSX);
-			}
-
-			if (mc.getMainRenderTarget().isStencilEnabled()) {
-				depthBuffer.enableStencil();
-			}
-
-			RenderTarget mainRenderTarget = mc.getMainRenderTarget();
-			depthBuffer.copyDepthFrom(mainRenderTarget);
-			GlStateManager._glBindFramebuffer(GL30C.GL_DRAW_FRAMEBUFFER, mainRenderTarget.frameBufferId);
-		}
-	}
 }

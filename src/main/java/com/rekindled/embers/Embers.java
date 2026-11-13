@@ -478,7 +478,6 @@ public class Embers {
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onBlockHighlight);
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onLevelRender);
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onTooltip);
-			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onWorldRender);
 		}
 
 		@OnlyIn(Dist.CLIENT)
