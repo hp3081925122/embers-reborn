@@ -61,6 +61,23 @@ public final class EmbersFluidClient {
 		return Minecraft.getInstance().getModelManager().getFluidStateModelSet().get(fluid.defaultFluidState());
 	}
 
+	/** Still sprite of the fluid's world model; the missing texture when the fluid has no model. */
+	public static net.minecraft.client.renderer.texture.TextureAtlasSprite stillSprite(FluidStack stack) {
+		FluidModel model = model(stack.getFluid());
+		return model != null ? model.stillMaterial().sprite() : missingSprite();
+	}
+
+	/** Flowing sprite of the fluid's world model; the missing texture when the fluid has no model. */
+	public static net.minecraft.client.renderer.texture.TextureAtlasSprite flowingSprite(FluidStack stack) {
+		FluidModel model = model(stack.getFluid());
+		return model != null ? model.flowingMaterial().sprite() : missingSprite();
+	}
+
+	private static net.minecraft.client.renderer.texture.TextureAtlasSprite missingSprite() {
+		return Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(net.minecraft.data.AtlasIds.BLOCKS)
+				.getSprite(net.minecraft.client.renderer.texture.MissingTextureAtlasSprite.getLocation());
+	}
+
 	/** Tint for a fluid stack as the world fluid model applies it; -1 (no tint) when the model has none. */
 	public static int tint(FluidStack stack) {
 		FluidModel model = model(stack.getFluid());

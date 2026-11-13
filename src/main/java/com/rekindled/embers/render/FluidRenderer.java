@@ -261,11 +261,11 @@ public class FluidRenderer {
 		// fluid type, fetch once for all fluids to save effort
 		FluidType type = fluid.getFluid().getFluidType();
 		IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
-		TextureAtlasSprite still = getBlockSprite(clientType.getStillTexture(fluid));
-		TextureAtlasSprite flowing = getBlockSprite(clientType.getFlowingTexture(fluid));
+		TextureAtlasSprite still = com.rekindled.embers.fluidtypes.EmbersFluidClient.stillSprite(fluid);
+		TextureAtlasSprite flowing = com.rekindled.embers.fluidtypes.EmbersFluidClient.flowingSprite(fluid);
 		boolean isGas = type.isLighterThanAir();
 		light = withBlockLight(light, type.getLightLevel(fluid));
-		int color = clientType.getTintColor(fluid);
+		int color = com.rekindled.embers.fluidtypes.EmbersFluidClient.tint(fluid);
 
 		// render all given cuboids
 		for (FluidCuboid cube : cubes) {
@@ -316,8 +316,8 @@ public class FluidRenderer {
 		// fluid type
 		FluidType type = fluid.getFluid().getFluidType();
 		IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
-		TextureAtlasSprite still = getBlockSprite(clientType.getStillTexture(fluid));
-		TextureAtlasSprite flowing = getBlockSprite(clientType.getFlowingTexture(fluid));
+		TextureAtlasSprite still = com.rekindled.embers.fluidtypes.EmbersFluidClient.stillSprite(fluid);
+		TextureAtlasSprite flowing = com.rekindled.embers.fluidtypes.EmbersFluidClient.flowingSprite(fluid);
 		boolean isGas = type.isLighterThanAir();
 		light = withBlockLight(light, type.getLightLevel(fluid));
 
@@ -337,6 +337,6 @@ public class FluidRenderer {
 		}
 
 		// draw cuboid
-		renderCuboid(matrices, buffer.getBuffer(EmbersRenderTypes.FLUID), cube, still, flowing, from, to, clientType.getTintColor(fluid), light, packedOverlay, isGas && flipGas);
+		renderCuboid(matrices, buffer.getBuffer(EmbersRenderTypes.FLUID), cube, still, flowing, from, to, com.rekindled.embers.fluidtypes.EmbersFluidClient.tint(fluid), light, packedOverlay, isGas && flipGas);
 	}
 }

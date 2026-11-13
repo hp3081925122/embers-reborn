@@ -69,8 +69,8 @@ public class ReservoirBlockEntityRenderer extends com.rekindled.embers.render.Le
 		// fluid attributes
 		FluidType type = fluid.getFluid().getFluidType();
 		IClientFluidTypeExtensions clientType = IClientFluidTypeExtensions.of(type);
-		TextureAtlasSprite still = FluidRenderer.getBlockSprite(clientType.getStillTexture(fluid));
-		int color = clientType.getTintColor(fluid);
+		TextureAtlasSprite still = com.rekindled.embers.fluidtypes.EmbersFluidClient.stillSprite(fluid);
+		int color = com.rekindled.embers.fluidtypes.EmbersFluidClient.tint(fluid);
 		brightness = FluidRenderer.withBlockLight(brightness, type.getLightLevel(fluid));
 
 		// the liquid can stretch over more blocks than the subtracted height is if yMin's decimal is bigger than yMax's decimal (causing UV over 1)
