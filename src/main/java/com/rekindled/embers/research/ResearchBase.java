@@ -28,7 +28,7 @@ public class ResearchBase {
 	public double u = 0.0;
 	public double v = 0.0;
 	public ItemStack icon = ItemStack.EMPTY;
-	public Ingredient lookupIngredient = Ingredient.EMPTY;
+	public Ingredient lookupIngredient = null;
 	public int x = 0;
 	public int y = 0;
 	public List<ResearchBase> ancestors = new ArrayList<>();
@@ -52,7 +52,7 @@ public class ResearchBase {
 	public ResearchBase(Identifier location, ItemStack icon, double x, double y) {
 		this.id = location;
 		this.icon = icon;
-		this.lookupIngredient = Ingredient.of(icon);
+		this.lookupIngredient = icon.isEmpty() ? null : Ingredient.of(icon.getItem());
 		this.x = 48+(int)(x*24);
 		this.y = 48+(int)(y*24);
 	}

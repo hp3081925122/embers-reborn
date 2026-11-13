@@ -50,7 +50,7 @@ public class StampingRecipe implements IStampingRecipe {
 	@Override
 	public boolean matches(StampingContext context, Level pLevel) {
 		for (int i = 0; i < context.size(); i++) {
-			if (input.test(context.getItem(i))) {
+			if (com.rekindled.embers.util.Ingredients.test(input, context.getItem(i))) {
 				if (stamp.test(context.stamp)) {
 					if (fluid.test(context.fluids.getFluidInTank(0)))
 						return true;
@@ -69,7 +69,7 @@ public class StampingRecipe implements IStampingRecipe {
 	@Override
 	public ItemStack assemble(StampingContext context, net.minecraft.core.HolderLookup.Provider registry) {
 		for (int i = 0; i < context.size(); i++) {
-			if (input.test(context.getItem(i))) {
+			if (com.rekindled.embers.util.Ingredients.test(input, context.getItem(i))) {
 				context.getItem(i).shrink(1);
 				break;
 			}
@@ -150,20 +150,20 @@ public class StampingRecipe implements IStampingRecipe {
 		public com.mojang.serialization.MapCodec<StampingRecipe> codec() {
 			return com.mojang.serialization.codecs.RecordCodecBuilder.mapCodec(inst -> inst.group(
 				net.minecraft.world.item.crafting.Ingredient.CODEC.fieldOf("stamp").forGetter(r -> r.stamp),
-				net.minecraft.world.item.crafting.Ingredient.CODEC.optionalFieldOf("input", net.minecraft.world.item.crafting.Ingredient.EMPTY).forGetter(r -> r.input),
+				net.minecraft.world.item.crafting.Ingredient.CODEC.optionalFieldOf("input").forGetter(r -> com.rekindled.embers.util.Ingredients.optional(r.input)),
 				FluidIngredient.CODEC.optionalFieldOf("fluid", FluidIngredient.EMPTY).forGetter(r -> r.fluid),
 				StampingRecipe.OUTPUT_CODEC.fieldOf("output").forGetter(r -> r.output)
-			).apply(inst, (s, i, f, o) -> new StampingRecipe(null, s, i, f, o)));
+			).apply(inst, (s, i, f, o) -> new StampingRecipe(null, s, i.orElse(null), f, o)));
 		}
 
 		
 		public net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, StampingRecipe> streamCodec() {
 			return net.minecraft.network.codec.StreamCodec.composite(
 				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC, r -> r.stamp,
-				net.minecraft.world.item.crafting.Ingredient.CONTENTS_STREAM_CODEC, r -> r.input,
+				net.minecraft.world.item.crafting.Ingredient.OPTIONAL_CONTENTS_STREAM_CODEC, r -> com.rekindled.embers.util.Ingredients.optional(r.input),
 				FluidIngredient.STREAM_CODEC.cast(), r -> r.fluid,
 				StampingRecipe.OUTPUT_STREAM_CODEC, r -> r.output,
-				(s, i, f, o) -> new StampingRecipe(null, s, i, f, o));
+				(s, i, f, o) -> new StampingRecipe(null, s, i.orElse(null), f, o));
 		}
 	}
 }

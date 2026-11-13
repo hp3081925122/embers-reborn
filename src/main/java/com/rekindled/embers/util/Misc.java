@@ -47,11 +47,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -489,27 +487,11 @@ public class Misc {
 	}
 
 	public static Ingredient getRepairIngredient(Item item) {
-		if (item instanceof TieredItem tool) {
-			try {
-				Ingredient ingredient = tool.getTier().getRepairIngredient();
-				if (ingredient != null)
-					return ingredient;
-				Embers.LOGGER.error("Item: \"" + BuiltInRegistries.ITEM.getKey(item) + "\" has no proper repair ingredient, this is a bug and should be reported to " + BuiltInRegistries.ITEM.getKey(item).getNamespace());
-			} catch (Exception e) {
-				Embers.LOGGER.error("Item: \"" + BuiltInRegistries.ITEM.getKey(item) + "\" has no proper tool tier, this is a bug and should be reported to " + BuiltInRegistries.ITEM.getKey(item).getNamespace(), e);
-			}
-		}
-		if (item instanceof ArmorItem armor) {
-			try {
-				Ingredient ingredient = armor.getMaterial().value().repairIngredient().get();
-				if (ingredient != null)
-					return ingredient;
-				Embers.LOGGER.error("Item: \"" + BuiltInRegistries.ITEM.getKey(item) + "\" of material: \"" + armor.getMaterial().unwrapKey().map(k -> k.identifier().toString()).orElse("unknown") + "\" has no proper repair ingredient, this is a bug and should be reported to " + BuiltInRegistries.ITEM.getKey(item).getNamespace());
-			} catch (Exception e) {
-				Embers.LOGGER.error("Item: \"" + BuiltInRegistries.ITEM.getKey(item) + "\" has no proper armor material, this is a bug and should be reported to " + BuiltInRegistries.ITEM.getKey(item).getNamespace(), e);
-			}
-		}
-		return Ingredient.EMPTY;
+		// 26.1: tool tiers and armor materials are gone; repair items live in the REPAIRABLE component
+		net.minecraft.world.item.enchantment.Repairable repairable = new ItemStack(item).get(net.minecraft.core.component.DataComponents.REPAIRABLE);
+		if (repairable == null || repairable.items().size() == 0)
+			return null;
+		return Ingredient.of(repairable.items());
 	}
 
 	public static InteractionResult useItemOnInventory(IItemHandlerModifiable inventory, Level level, Player player, InteractionHand hand) {

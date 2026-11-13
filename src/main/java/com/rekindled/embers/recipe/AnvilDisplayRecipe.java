@@ -40,7 +40,7 @@ public class AnvilDisplayRecipe implements IDawnstoneAnvilRecipe {
 
 	@Override
 	public List<ItemStack> getDisplayInputTop() {
-		return List.of(ingredient.getItems());
+		return List.of(com.rekindled.embers.util.Ingredients.stacks(ingredient));
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class StampingRecipeBuilder {
 
 	public Identifier id;
 	public Ingredient stamp;
-	public Ingredient input = Ingredient.EMPTY;
+	public Ingredient input = null;
 	public FluidIngredient fluid = FluidIngredient.EMPTY;
 	public Either<ItemStack, TagAmount> output;
 

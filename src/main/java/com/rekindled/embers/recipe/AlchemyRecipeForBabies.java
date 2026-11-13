@@ -72,20 +72,20 @@ public class AlchemyRecipeForBabies extends AlchemyRecipeBase {
 		}
 
 				public AlchemyRecipeForBabies fromJson(Identifier recipeId, JsonObject json) {
-			Ingredient tablet = Ingredient.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, json.get("tablet")).result().orElse(Ingredient.EMPTY);
+			Ingredient tablet = Ingredient.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, json.get("tablet")).result().orElse(null);
 
 			ArrayList<Ingredient> inputs = new ArrayList<>();
 			JsonArray inputJson = GsonHelper.getAsJsonArray(json, "inputs", null);
 			if (inputJson != null) {
 				for (JsonElement element : inputJson) {
-					inputs.add(Ingredient.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, element).result().orElse(Ingredient.EMPTY));
+					inputs.add(Ingredient.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, element).result().orElse(null));
 				}
 			}
 			ArrayList<Ingredient> aspects = new ArrayList<>();
 			JsonArray aspectJson = GsonHelper.getAsJsonArray(json, "aspects", null);
 			if (aspectJson != null) {
 				for (JsonElement element : aspectJson) {
-					aspects.add(Ingredient.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, element).result().orElse(Ingredient.EMPTY));
+					aspects.add(Ingredient.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, element).result().orElse(null));
 				}
 			}
 			ItemStack output = net.minecraft.world.item.ItemStack.CODEC.parse(com.mojang.serialization.JsonOps.INSTANCE, GsonHelper.getAsJsonObject(json, "output")).result().orElse(net.minecraft.world.item.ItemStack.EMPTY);

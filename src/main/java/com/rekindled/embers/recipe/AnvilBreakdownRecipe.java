@@ -37,14 +37,14 @@ public class AnvilBreakdownRecipe implements IDawnstoneAnvilRecipe, IVisuallySpl
 	@Override
 	public boolean matches(net.minecraft.world.item.crafting.RecipeInput context, Level pLevel) {
 		ItemStack tool = context.getItem(0);
-		return tool.isRepairable() && !blacklist.test(tool) && context.getItem(1).isEmpty() && !AugmentUtil.hasHeat(tool) && !Misc.getRepairIngredient(tool.getItem()).isEmpty();
+		return tool.isRepairable() && !blacklist.test(tool) && context.getItem(1).isEmpty() && !AugmentUtil.hasHeat(tool) && !com.rekindled.embers.util.Ingredients.isEmpty(Misc.getRepairIngredient(tool.getItem()));
 	}
 
 	@Override
 	public List<ItemStack> getOutput(net.minecraft.world.item.crafting.RecipeInput context) {
 		Ingredient repairMaterial = Misc.getRepairIngredient(context.getItem(0).getItem());
-		if (!repairMaterial.isEmpty())
-			return List.of(Misc.getPreferredItem(repairMaterial.getItems()));
+		if (!com.rekindled.embers.util.Ingredients.isEmpty(repairMaterial))
+			return List.of(Misc.getPreferredItem(com.rekindled.embers.util.Ingredients.stacks(repairMaterial)));
 		return List.of();
 	}
 
@@ -54,10 +54,10 @@ public class AnvilBreakdownRecipe implements IDawnstoneAnvilRecipe, IVisuallySpl
 		for (Holder<Item> holder : BuiltInRegistries.ITEM.asHolderIdMap()) {
 			Ingredient repairMaterial = Misc.getRepairIngredient(holder.value());
 			ItemStack toolStack = new ItemStack(holder.value());
-			if (!repairMaterial.isEmpty() && !repairMaterial.isEmpty() && toolStack.isRepairable() && !blacklist.test(toolStack)) {
+			if (!com.rekindled.embers.util.Ingredients.isEmpty(repairMaterial) && toolStack.isRepairable() && !blacklist.test(toolStack)) {
 				ItemStack brokenTool = toolStack.copy();
 				brokenTool.setDamageValue(brokenTool.getMaxDamage() / 2);
-				visualRecipes.add(new AnvilDisplayRecipe(id, List.of(Misc.getPreferredItem(repairMaterial.getItems())), List.of(brokenTool), Ingredient.EMPTY));
+				visualRecipes.add(new AnvilDisplayRecipe(id, List.of(Misc.getPreferredItem(com.rekindled.embers.util.Ingredients.stacks(repairMaterial))), List.of(brokenTool), null));
 			}
 		}
 		return visualRecipes;

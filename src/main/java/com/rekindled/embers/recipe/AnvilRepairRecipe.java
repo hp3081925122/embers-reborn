@@ -52,7 +52,7 @@ public class AnvilRepairRecipe implements IDawnstoneAnvilRecipe, IVisuallySplitR
 		for (Holder<Item> holder : BuiltInRegistries.ITEM.asHolderIdMap()) {
 			Ingredient repairMaterial = Misc.getRepairIngredient(holder.value());
 			ItemStack toolStack = new ItemStack(holder.value());
-			if (!repairMaterial.isEmpty() && !repairMaterial.isEmpty() && toolStack.isRepairable() && !blacklist.test(toolStack)) {
+			if (!com.rekindled.embers.util.Ingredients.isEmpty(repairMaterial) && toolStack.isRepairable() && !blacklist.test(toolStack)) {
 				ItemStack brokenTool = toolStack.copy();
 				brokenTool.setDamageValue(brokenTool.getMaxDamage() / 2);
 				visualRecipes.add(new AnvilDisplayRecipe(id, List.of(toolStack), List.of(brokenTool), repairMaterial));
