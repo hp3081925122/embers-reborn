@@ -635,8 +635,8 @@ public class Embers {
 
 		@OnlyIn(Dist.CLIENT)
 		@SubscribeEvent
-		static void registerGeometryLoaders(ModelEvent.RegisterLoaders event) {
-			event.register(Identifier.parse(Embers.MODID + ":pipe"), PipeModel.Loader.INSTANCE);
+		static void registerBlockStateModels(net.neoforged.neoforge.client.event.RegisterBlockStateModels event) {
+			event.registerModel(Identifier.parse(Embers.MODID + ":pipe"), PipeModel.CODEC);
 		}
 
 		@OnlyIn(Dist.CLIENT)

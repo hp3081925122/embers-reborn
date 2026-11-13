@@ -1,7 +1,14 @@
 {
   "variants": {
     "": {
-      "model": "embers_reborn:block/item_pipe"
+      "type": "embers_reborn:pipe",
+      "center": {
+        "model": "embers_reborn:block/item_pipe_center"
+      },
+      "connection": "embers_reborn:block/item_pipe_connection",
+      "connection2": "embers_reborn:block/item_pipe_connection_2",
+      "end": "embers_reborn:block/item_pipe_end",
+      "end2": "embers_reborn:block/item_pipe_end_2"
     }
   }
 }

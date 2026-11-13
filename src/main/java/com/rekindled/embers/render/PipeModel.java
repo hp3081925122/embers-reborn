@@ -1,83 +1,66 @@
 package com.rekindled.embers.render;
 
-import java.util.function.Function;
+import com.mojang.math.Quadrant;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
-
-import net.minecraft.client.renderer.block.model.BlockModel;
-import net.minecraft.client.renderer.block.model.ItemOverrides;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.BlockModelRotation;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
+import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.resources.model.ModelBaker;
-import net.minecraft.client.resources.model.ModelState;
-import net.minecraft.client.resources.model.UnbakedModel;
+import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.GsonHelper;
-import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
-import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
-import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
+import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 
-public class PipeModel implements IUnbakedGeometry<PipeModel> {
+/**
+ * Unbaked pipe block state model. 26.1 has no block-model geometry loaders that can produce a
+ * per-position model, so this is a custom block state model referenced directly from the blockstate file:
+ * <pre>{"type": "embers_reborn:pipe", "center": {"model": "...", "y": 90}, "connection": "...", "connection2": "...", "end": "...", "end2": "..."}</pre>
+ * The center keeps the variant rotation (1.20.1 baked it with the variant's ModelState);
+ * connections and ends always use the six fixed world rotations, one per direction (D, U, N, S, W, E).
+ */
+public record PipeModel(Variant center, Identifier connection, Identifier connection2, Identifier end, Identifier end2) implements CustomUnbakedBlockStateModel {
 
-	BlockModel centerModel;
-	BlockModel connectionModel;
-	BlockModel connectionModel2;
-	BlockModel endModel;
-	BlockModel endModel2;
+	public static final MapCodec<PipeModel> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
+			Variant.MAP_CODEC.codec().fieldOf("center").forGetter(PipeModel::center),
+			Identifier.CODEC.fieldOf("connection").forGetter(PipeModel::connection),
+			Identifier.CODEC.fieldOf("connection2").forGetter(PipeModel::connection2),
+			Identifier.CODEC.fieldOf("end").forGetter(PipeModel::end),
+			Identifier.CODEC.fieldOf("end2").forGetter(PipeModel::end2)
+	).apply(inst, PipeModel::new));
 
-	public PipeModel(BlockModel centerModel, BlockModel connectionModel, BlockModel connectionModel2, BlockModel endModel, BlockModel endModel2) {
-		this.centerModel = centerModel;
-		this.connectionModel = connectionModel;
-		this.connectionModel2 = connectionModel2;
-		this.endModel = endModel;
-		this.endModel2 = endModel2;
+	@Override
+	public MapCodec<PipeModel> codec() {
+		return CODEC;
 	}
 
 	@Override
-	public net.minecraft.client.resources.model.BakedModel bake(net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext context, net.minecraft.client.resources.model.ModelBaker baker, java.util.function.Function<net.minecraft.client.resources.model.Material, net.minecraft.client.renderer.texture.TextureAtlasSprite> spriteGetter, net.minecraft.client.resources.model.ModelState state, net.minecraft.client.renderer.block.model.ItemOverrides overrides) {
-		BakedModel[] connectionModels = getRotatedModels(context, baker, spriteGetter, state, connectionModel, connectionModel2);
-		BakedModel[] endModels = getRotatedModels(context, baker, spriteGetter, state, endModel, endModel2);
-
-		return new BakedPipeModel(centerModel.bake(baker, centerModel, spriteGetter, state, context.useBlockLight()), connectionModels, endModels);
+	public BlockStateModel bake(ModelBaker baker) {
+		return new BakedPipeModel(center.bake(baker), getRotatedModels(baker, connection, connection2), getRotatedModels(baker, end, end2));
 	}
 
-	public static BakedModel[] getRotatedModels(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, net.minecraft.client.resources.model.ModelState modelState, BlockModel model, BlockModel model2) {
-		BakedModel[] models = {
-				model.bake(baker, model, spriteGetter, BlockModelRotation.X0_Y0, context.useBlockLight()),
-				model2.bake(baker, model2, spriteGetter, BlockModelRotation.X180_Y0, context.useBlockLight()),
-				model.bake(baker, model, spriteGetter, BlockModelRotation.X90_Y180, context.useBlockLight()),
-				model2.bake(baker, model2, spriteGetter, BlockModelRotation.X90_Y0, context.useBlockLight()),
-				model.bake(baker, model, spriteGetter, BlockModelRotation.X90_Y90, context.useBlockLight()),
-				model2.bake(baker, model2, spriteGetter, BlockModelRotation.X90_Y270, context.useBlockLight())
+	/** Same six rotations as 1.20.1: X0_Y0, X180_Y0, X90_Y180, X90_Y0, X90_Y90, X90_Y270 */
+	public static BlockStateModelPart[] getRotatedModels(ModelBaker baker, Identifier model, Identifier model2) {
+		return new BlockStateModelPart[] {
+				rotated(model, Quadrant.R0, Quadrant.R0).bake(baker),
+				rotated(model2, Quadrant.R180, Quadrant.R0).bake(baker),
+				rotated(model, Quadrant.R90, Quadrant.R180).bake(baker),
+				rotated(model2, Quadrant.R90, Quadrant.R0).bake(baker),
+				rotated(model, Quadrant.R90, Quadrant.R90).bake(baker),
+				rotated(model2, Quadrant.R90, Quadrant.R270).bake(baker)
 		};
-		return models;
+	}
+
+	private static Variant rotated(Identifier model, Quadrant x, Quadrant y) {
+		return new Variant(model).withXRot(x).withYRot(y);
 	}
 
 	@Override
-	public void resolveParents(Function<Identifier, UnbakedModel> modelGetter, IGeometryBakingContext context) {
-		centerModel.resolveParents(modelGetter);
-		connectionModel.resolveParents(modelGetter);
-		connectionModel2.resolveParents(modelGetter);
-		endModel.resolveParents(modelGetter);
-		endModel2.resolveParents(modelGetter);
-	}
-
-	public static final class Loader implements IGeometryLoader<PipeModel> {
-
-		public static final Loader INSTANCE = new Loader();
-
-		@Override
-		public PipeModel read(JsonObject jsonObject, JsonDeserializationContext deserializationContext) {
-			BlockModel centerModel = deserializationContext.deserialize(GsonHelper.getAsJsonObject(jsonObject, "center"), BlockModel.class);
-			BlockModel connectionModel = deserializationContext.deserialize(GsonHelper.getAsJsonObject(jsonObject, "connection"), BlockModel.class);
-			BlockModel connectionModel2 = deserializationContext.deserialize(GsonHelper.getAsJsonObject(jsonObject, "connection2"), BlockModel.class);
-			BlockModel endModel = deserializationContext.deserialize(GsonHelper.getAsJsonObject(jsonObject, "end"), BlockModel.class);
-			BlockModel endModel2 = deserializationContext.deserialize(GsonHelper.getAsJsonObject(jsonObject, "end2"), BlockModel.class);
-
-			return new PipeModel(centerModel, connectionModel, connectionModel2, endModel, endModel2);
-		}
+	public void resolveDependencies(ResolvableModel.Resolver resolver) {
+		center.resolveDependencies(resolver);
+		resolver.markDependency(connection);
+		resolver.markDependency(connection2);
+		resolver.markDependency(end);
+		resolver.markDependency(end2);
 	}
 }

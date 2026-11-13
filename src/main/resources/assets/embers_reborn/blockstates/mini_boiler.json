@@ -1,34 +1,90 @@
 {
   "variants": {
     "facing=east,waterlogged=false": {
-      "model": "embers_reborn:block/mini_boiler_pipes",
-      "y": 90
+      "type": "embers_reborn:pipe",
+      "center": {
+        "model": "embers_reborn:block/mini_boiler",
+        "y": 90
+      },
+      "connection": "embers_reborn:block/fluid_pipe_connection",
+      "connection2": "embers_reborn:block/fluid_pipe_connection_2",
+      "end": "embers_reborn:block/fluid_pipe_end",
+      "end2": "embers_reborn:block/fluid_pipe_end_2"
     },
     "facing=east,waterlogged=true": {
-      "model": "embers_reborn:block/mini_boiler_pipes",
-      "y": 90
+      "type": "embers_reborn:pipe",
+      "center": {
+        "model": "embers_reborn:block/mini_boiler",
+        "y": 90
+      },
+      "connection": "embers_reborn:block/fluid_pipe_connection",
+      "connection2": "embers_reborn:block/fluid_pipe_connection_2",
+      "end": "embers_reborn:block/fluid_pipe_end",
+      "end2": "embers_reborn:block/fluid_pipe_end_2"
     },
     "facing=north,waterlogged=false": {
-      "model": "embers_reborn:block/mini_boiler_pipes"
+      "type": "embers_reborn:pipe",
+      "center": {
+        "model": "embers_reborn:block/mini_boiler"
+      },
+      "connection": "embers_reborn:block/fluid_pipe_connection",
+      "connection2": "embers_reborn:block/fluid_pipe_connection_2",
+      "end": "embers_reborn:block/fluid_pipe_end",
+      "end2": "embers_reborn:block/fluid_pipe_end_2"
     },
     "facing=north,waterlogged=true": {
-      "model": "embers_reborn:block/mini_boiler_pipes"
+      "type": "embers_reborn:pipe",
+      "center": {
+        "model": "embers_reborn:block/mini_boiler"
+      },
+      "connection": "embers_reborn:block/fluid_pipe_connection",
+      "connection2": "embers_reborn:block/fluid_pipe_connection_2",
+      "end": "embers_reborn:block/fluid_pipe_end",
+      "end2": "embers_reborn:block/fluid_pipe_end_2"
     },
     "facing=south,waterlogged=false": {
-      "model": "embers_reborn:block/mini_boiler_pipes",
-      "y": 180
+      "type": "embers_reborn:pipe",
+      "center": {
+        "model": "embers_reborn:block/mini_boiler",
+        "y": 180
+      },
+      "connection": "embers_reborn:block/fluid_pipe_connection",
+      "connection2": "embers_reborn:block/fluid_pipe_connection_2",
+      "end": "embers_reborn:block/fluid_pipe_end",
+      "end2": "embers_reborn:block/fluid_pipe_end_2"
     },
     "facing=south,waterlogged=true": {
-      "model": "embers_reborn:block/mini_boiler_pipes",
-      "y": 180
+      "type": "embers_reborn:pipe",
+      "center": {
+        "model": "embers_reborn:block/mini_boiler",
+        "y": 180
+      },
+      "connection": "embers_reborn:block/fluid_pipe_connection",
+      "connection2": "embers_reborn:block/fluid_pipe_connection_2",
+      "end": "embers_reborn:block/fluid_pipe_end",
+      "end2": "embers_reborn:block/fluid_pipe_end_2"
     },
     "facing=west,waterlogged=false": {
-      "model": "embers_reborn:block/mini_boiler_pipes",
-      "y": 270
+      "type": "embers_reborn:pipe",
+      "center": {
+        "model": "embers_reborn:block/mini_boiler",
+        "y": 270
+      },
+      "connection": "embers_reborn:block/fluid_pipe_connection",
+      "connection2": "embers_reborn:block/fluid_pipe_connection_2",
+      "end": "embers_reborn:block/fluid_pipe_end",
+      "end2": "embers_reborn:block/fluid_pipe_end_2"
     },
     "facing=west,waterlogged=true": {
-      "model": "embers_reborn:block/mini_boiler_pipes",
-      "y": 270
+      "type": "embers_reborn:pipe",
+      "center": {
+        "model": "embers_reborn:block/mini_boiler",
+        "y": 270
+      },
+      "connection": "embers_reborn:block/fluid_pipe_connection",
+      "connection2": "embers_reborn:block/fluid_pipe_connection_2",
+      "end": "embers_reborn:block/fluid_pipe_end",
+      "end2": "embers_reborn:block/fluid_pipe_end_2"
     }
   }
 }
