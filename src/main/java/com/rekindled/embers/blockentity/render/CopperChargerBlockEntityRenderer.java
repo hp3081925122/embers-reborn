@@ -25,7 +25,7 @@ public class CopperChargerBlockEntityRenderer extends com.rekindled.embers.rende
 				poseStack.pushPose();
 				ItemStack stack = blockEntity.inventory.getStackInSlot(0);
 				int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
-				float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
+				float f2 = groundScaleY(stack, blockEntity.getLevel());
 				poseStack.translate(0.5D, 0.4F * f2 + 0.13D, 0.5D);
 				if (f2 > 0.4f)
 					poseStack.scale(0.75f, 0.75f, 0.75f);

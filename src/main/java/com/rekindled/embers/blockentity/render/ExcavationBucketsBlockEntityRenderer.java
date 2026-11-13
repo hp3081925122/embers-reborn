@@ -27,7 +27,6 @@ public class ExcavationBucketsBlockEntityRenderer extends com.rekindled.embers.r
 			Direction facing = blockState.getValue(BlockStateProperties.FACING);
 			float angle = blockEntity.angle;
 			float lastAngle = blockEntity.lastAngle;
-			RenderSystem.enableCull();
 			poseStack.pushPose();
 			poseStack.translate(0.5D, 0.5D, 0.5D);
 			poseStack.mulPose(facing.getRotation());

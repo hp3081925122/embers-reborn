@@ -29,7 +29,7 @@ public class DawnstoneAnvilBlockEntityRenderer extends com.rekindled.embers.rend
 				poseStack.pushPose();
 				ItemStack stack = blockEntity.inventory.getStackInSlot(0);
 				int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
-				float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
+				float f2 = groundScaleY(stack, blockEntity.getLevel());
 				poseStack.translate(0.5D, (double)(0.25F * f2) + 0.8937D, 0.5D);
 				poseStack.mulPose(Axis.YP.rotation(random.nextFloat((float) (Math.PI * 2.0f))));
 				poseStack.mulPose(Axis.XP.rotationDegrees(90));
@@ -40,7 +40,7 @@ public class DawnstoneAnvilBlockEntityRenderer extends com.rekindled.embers.rend
 				poseStack.pushPose();
 				ItemStack stack = blockEntity.inventory.getStackInSlot(1);
 				int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
-				float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
+				float f2 = groundScaleY(stack, blockEntity.getLevel());
 				poseStack.translate(0.5D, (double)(0.25F * f2) + 0.9245D, 0.5D);
 				poseStack.mulPose(Axis.YP.rotation(random.nextFloat((float) (Math.PI * 2.0f))));
 				poseStack.mulPose(Axis.XP.rotationDegrees(90));

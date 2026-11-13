@@ -29,7 +29,7 @@ public class BinBlockEntityRenderer extends com.rekindled.embers.render.LegacyBl
 				random.setSeed(seed);
 				int itemCount = (int)Math.ceil((stack.getCount())/4.0);
 				for (int i = 0; i < itemCount; i ++) {
-					float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
+					float f2 = groundScaleY(stack, blockEntity.getLevel());
 					poseStack.pushPose();
 					poseStack.translate(0.5, 0.1525+(i*0.05), 0.5);
 					poseStack.mulPose(Axis.YP.rotationDegrees(random.nextFloat()*360.0f));

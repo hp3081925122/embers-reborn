@@ -55,8 +55,6 @@ public class CrystalCellBlockEntityRenderer extends com.rekindled.embers.render.
 			}
 		}
 
-		RenderSystem.setShaderTexture(0, texture);
-		RenderSystem.disableCull();
 		//RenderSystem.enableTexture();
 		VertexConsumer buffer = bufferSource.getBuffer(ConfigManager.RENDER_FALLBACK.get() ? EmbersRenderTypes.CRYSTAL_FALLBACK : EmbersRenderTypes.CRYSTAL);
 
@@ -100,7 +98,6 @@ public class CrystalCellBlockEntityRenderer extends com.rekindled.embers.render.
 			poseStack.popPose();
 		}
 
-		RenderSystem.enableCull();
 	}
 
 	private float getGrowthFactor(float capacityFactor, double emberCapacity) {

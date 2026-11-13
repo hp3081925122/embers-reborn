@@ -31,7 +31,7 @@ public class StampBaseBlockEntityRenderer extends com.rekindled.embers.render.Le
 				poseStack.pushPose();
 				ItemStack stack = blockEntity.inventory.getStackInSlot(0);
 				int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
-				float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
+				float f2 = groundScaleY(stack, blockEntity.getLevel());
 				poseStack.translate(0.5D, (double)(0.25F * f2) + 0.75D, 0.5D);
 				item(stack, ItemDisplayContext.GROUND, poseStack, packedLight, OverlayTexture.NO_OVERLAY, blockEntity.getLevel(), seed);
 				poseStack.popPose();

@@ -79,6 +79,23 @@ public abstract class LegacyBlockEntityRenderer<T extends BlockEntity> implement
 	}
 
 	/** Replacement for ItemRenderer#render inside render(). */
+	/**
+	 * 26.1 has no BakedModel to ask; 3D (block-lit) item models are what 1.20.1 called gui3d.
+	 */
+	public static boolean isGui3d(ItemStack stack, @Nullable Level level) {
+		net.minecraft.client.renderer.item.ItemStackRenderState state = new net.minecraft.client.renderer.item.ItemStackRenderState();
+		net.minecraft.client.Minecraft.getInstance().getItemModelResolver().updateForTopItem(state, stack, ItemDisplayContext.GROUND, level, null, 0);
+		return state.usesBlockLight();
+	}
+
+	/**
+	 * Y scale of the GROUND display transform: 0.25 for block/block models, 0.5 for item/generated,
+	 * the two vanilla parents nearly every item uses. The transform itself is private in 26.1.
+	 */
+	public static float groundScaleY(ItemStack stack, @Nullable Level level) {
+		return isGui3d(stack, level) ? 0.25F : 0.5F;
+	}
+
 	public static void item(ItemStack stack, ItemDisplayContext context, PoseStack poseStack, int light, int overlay, @Nullable Level level, int seed) {
 		if (current == null || stack.isEmpty())
 			return;

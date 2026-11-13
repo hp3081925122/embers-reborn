@@ -25,7 +25,7 @@ public class AlchemyTabletBlockEntityRenderer extends com.rekindled.embers.rende
 				poseStack.pushPose();
 				ItemStack stack = blockEntity.inventory.getStackInSlot(0);
 				int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
-				float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
+				float f2 = groundScaleY(stack, blockEntity.getLevel());
 				poseStack.translate(0.5D, (double)(0.25F * f2) + 0.8D, 0.5D);
 				item(stack, ItemDisplayContext.GROUND, poseStack, packedLight, OverlayTexture.NO_OVERLAY, blockEntity.getLevel(), seed);
 				poseStack.popPose();
@@ -39,15 +39,12 @@ public class AlchemyTabletBlockEntityRenderer extends com.rekindled.embers.rende
 					processSign = 0;
 				}
 
-				RenderSystem.setShaderTexture(0, texture);
 				RenderSystem.setShader(GameRenderer::getPositionTexColorNormalShader);
-				RenderSystem.disableCull();
 				//RenderSystem.enableTexture();
 
 
 				RenderSystem.depthMask(false);
-				//RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
-				RenderSystem.enableBlend();
+				//				RenderSystem.enableBlend();
 				RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
 
 
@@ -90,7 +87,6 @@ public class AlchemyTabletBlockEntityRenderer extends com.rekindled.embers.rende
 				}
 				RenderSystem.depthMask(true);
 				BufferUploader.drawWithShader(bufferbuilder.end());
-				RenderSystem.enableCull();
 			}*/
 		}
 	}

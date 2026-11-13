@@ -36,9 +36,9 @@ public class MelterTopBlockEntityRenderer extends com.rekindled.embers.render.Le
 					ItemStack stack = blockEntity.inventory.getStackInSlot(i);
 					int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
 					this.random.setSeed((long)seed);
-					boolean flag = bakedmodel.isGui3d();
+					boolean flag = isGui3d(stack, blockEntity.getLevel());
 					int j = this.getRenderAmount(stack);
-					float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
+					float f2 = groundScaleY(stack, blockEntity.getLevel());
 					poseStack.translate(0.5D, (double)(0.25F * f2), 0.5D);
 					float f3 = ((float)blockEntity.angle + partialTick) / 20.0F;
 					poseStack.mulPose(Axis.YP.rotation(f3));

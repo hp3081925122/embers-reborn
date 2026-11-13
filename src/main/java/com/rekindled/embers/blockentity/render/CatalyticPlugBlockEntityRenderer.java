@@ -38,7 +38,6 @@ public class CatalyticPlugBlockEntityRenderer extends com.rekindled.embers.rende
 					blockEntity.renderOffset = 0;
 				}
 				Direction facing = blockEntity.getLevel().getBlockState(blockEntity.getBlockPos()).getValue(BlockStateProperties.FACING);
-				RenderSystem.enableCull();
 				poseStack.pushPose();
 				poseStack.translate(0.5D, 0.5D, 0.5D);
 				poseStack.mulPose(facing.getRotation());

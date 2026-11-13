@@ -25,7 +25,7 @@ public class ItemTransferBlockEntityRenderer extends com.rekindled.embers.render
 				poseStack.pushPose();
 				ItemStack stack = blockEntity.filterItem;
 				int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
-				float f2 = bakedmodel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
+				float f2 = groundScaleY(stack, blockEntity.getLevel());
 				poseStack.translate(0.5D, 0.4F * f2 + 0.21D, 0.5D);
 				if (f2 > 0.4f)
 					poseStack.scale(0.75f, 0.75f, 0.75f);

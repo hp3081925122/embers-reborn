@@ -38,8 +38,6 @@ public class FieldChartBlockEntityRenderer extends com.rekindled.embers.render.L
 	public void render(FieldChartBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
 		if (blockEntity != null) {
 			VertexConsumer buffer = bufferSource.getBuffer(ConfigManager.RENDER_FALLBACK.get() ? EmbersRenderTypes.FIELD_CHART_FALLBACK : EmbersRenderTypes.FIELD_CHART);
-			RenderSystem.enableDepthTest();
-			RenderSystem.disableCull();
 
 			BlockState state = blockEntity.getLevel().getBlockState(blockEntity.getBlockPos());
 
@@ -48,7 +46,6 @@ public class FieldChartBlockEntityRenderer extends com.rekindled.embers.render.L
 			} else {
 				renderChart(blockEntity.getLevel(), blockEntity.getBlockPos(), 0, 0, 0, buffer, poseStack.last().pose(), (cx, cz) -> EmberGenUtil.getEmberDensity(EmbersClientEvents.seed, cx, cz), EmbersColors.EMBER, Misc.multColor(EmbersColors.EMBER, 1.5f), Misc.multColor(EmbersColors.EMBER, 2.0f));
 			}
-			RenderSystem.enableCull();
 		}
 	}
 
