@@ -55,7 +55,7 @@ public class CuriosCompat {
 
 	public static final DeferredHolder<Item, Item> EXPLOSION_PEDESTAL_ITEM = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "explosion_pedestal", () -> new BlockItem(EXPLOSION_PEDESTAL.get(), new Item.Properties()));
 
-	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ExplosionPedestalBlockEntity>> EXPLOSION_PEDESTAL_ENTITY = RegistryManager.BLOCK_ENTITY_TYPES.register("explosion_pedestal", () -> BlockEntityType.Builder.of(ExplosionPedestalBlockEntity::new, EXPLOSION_PEDESTAL.get()).build(null));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ExplosionPedestalBlockEntity>> EXPLOSION_PEDESTAL_ENTITY = RegistryManager.BLOCK_ENTITY_TYPES.register("explosion_pedestal", () -> new BlockEntityType<>(ExplosionPedestalBlockEntity::new, EXPLOSION_PEDESTAL.get()));
 
 	public static void init() {}
 

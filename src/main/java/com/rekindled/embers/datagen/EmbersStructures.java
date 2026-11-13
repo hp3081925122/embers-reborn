@@ -81,7 +81,7 @@ public class EmbersStructures {
 		HolderSet<Biome> ruinSpawns = new AndHolderSet<Biome>(List.of(overworldBiomes, new NotHolderSetWrapper<Biome>(new OrHolderSet<Biome>(biomeBlackList))));
 
 		bootstrap.register(SMALL_RUIN, new CaveStructure(new Structure.StructureSettings(ruinSpawns, Map.of(MobCategory.MONSTER,
-				new StructureSpawnOverride(BoundingBoxType.STRUCTURE, WeightedList.of(new Weighted<>(new MobSpawnSettings.SpawnerData(RegistryManager.ANCIENT_GOLEM.get(), 1, 1), 20)))),
+				new StructureSpawnOverride(BoundingBoxType.STRUCTURE, WeightedList.<MobSpawnSettings.SpawnerData>of(new Weighted<MobSpawnSettings.SpawnerData>(new MobSpawnSettings.SpawnerData(RegistryManager.ANCIENT_GOLEM.get(), 1, 1), 20)))),
 				Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE),
 				templatePool.getOrThrow(SMALL_RUIN_POOL), 2, ConstantHeight.of(VerticalAnchor.absolute(-10)), ConstantHeight.of(VerticalAnchor.aboveBottom(128)), false, Heightmap.Types.OCEAN_FLOOR_WG));
 	}

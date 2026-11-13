@@ -219,8 +219,8 @@ public class Embers {
 		// Item / fluid handlers (ported from the 1.20.1 getCapability overrides)
 		com.rekindled.embers.blockentity.BlockEntityCapabilities.register(event);
 		// Fluid Vessel item keeps its fluid (1.20.1 initCapabilities -> FluidHandlerItemStack)
-		event.registerItem(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.ITEM,
-			(stack, ctx) -> new net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack(RegistryManager.FLUID_CONTENT, stack, ConfigManager.FLUID_VESSEL_CAPACITY.get()),
+		event.registerItem(net.neoforged.neoforge.capabilities.Capabilities.Fluid.ITEM,
+			(stack, access) -> new net.neoforged.neoforge.transfer.fluid.ItemAccessFluidHandler(access, RegistryManager.FLUID_CONTENT.get(), ConfigManager.FLUID_VESSEL_CAPACITY.get()),
 			RegistryManager.FLUID_VESSEL_ITEM.get());
 
 		// --- Item ember capabilities (Batch4) ---
@@ -438,7 +438,7 @@ public class Embers {
 		gen.addProvider(true, new EmbersLootTables(output, lookupProvider));
 		gen.addProvider(true, new EmbersRecipes.Runner(output, lookupProvider));
 		EmbersBlockTags blockTags = gen.addProvider(true, new EmbersBlockTags(output, lookupProvider));
-		gen.addProvider(true, new EmbersItemTags(output, lookupProvider, blockTags.contentsGetter()));
+		gen.addProvider(true, new EmbersItemTags(output, lookupProvider));
 		gen.addProvider(true, new EmbersFluidTags(output, lookupProvider));
 		event.createDatapackRegistryObjects(new RegistrySetBuilder()
 				.add(Registries.CONFIGURED_FEATURE, EmbersConfiguredFeatures::generate)
