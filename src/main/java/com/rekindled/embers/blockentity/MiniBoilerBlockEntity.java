@@ -218,9 +218,9 @@ public class MiniBoilerBlockEntity extends PipeBlockEntityBase implements ISound
 		double posY = worldPosition.getY() + 0.5;
 		double posZ = worldPosition.getZ() + 0.5;
 		level.playSound(null, worldPosition, EmbersSounds.MINI_BOILER_RUPTURE.get(), SoundSource.BLOCKS, 0.6f, 1.0f); //TODO: Random pitch
-		Explosion explosion = level.explode(null, posX, posY, posZ, 3f, ExplosionInteraction.NONE);
+		level.explode(null, posX, posY, posZ, 3f, ExplosionInteraction.NONE);
 		level.removeBlock(worldPosition, false);
-		EffectDamage effect = new EffectDamage(4.0f, preset -> level.damageSources().explosion(explosion), 10, 0.0f);
+		EffectDamage effect = new EffectDamage(4.0f, preset -> level.damageSources().explosion(null, null), 10, 0.0f);
 		for(int i = 0; i < 12; i++) {
 			EmberProjectileEntity proj = RegistryManager.EMBER_PROJECTILE.get().create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
 			proj.shoot(random.nextDouble()-0.5, random.nextDouble()-0.5, random.nextDouble()-0.5, 0.5f, 0.0f, 10.0f);

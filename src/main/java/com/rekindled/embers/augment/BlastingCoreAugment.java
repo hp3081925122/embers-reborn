@@ -11,7 +11,13 @@ import com.rekindled.embers.util.Misc;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import java.util.Optional;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundExplodePacket;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.random.WeightedList;
+import net.minecraft.world.level.ServerExplosion;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.server.level.ServerLevel;
@@ -49,7 +55,7 @@ public class BlastingCoreAugment extends AugmentBase {
 	public void onBreak(BreakBlockEvent event) {
 		LevelAccessor world = event.getLevel();
 		BlockPos pos = event.getPos();
-		if (event.getPlayer() != null) {
+		if (event.getPlayer() != null && event.getPlayer().level() instanceof ServerLevel serverLevel) {
 			if (!event.getPlayer().getMainHandItem().isEmpty()) {
 				ItemStack s = event.getPlayer().getMainHandItem();
 				int blastingLevel = AugmentUtil.getAugmentLevel(s, this);
@@ -60,8 +66,8 @@ public class BlastingCoreAugment extends AugmentBase {
 					double y = pos.getY()+0.5;
 					double z = pos.getZ()+0.5;
 
-					ToolExplosion explosion = new ToolExplosion(s, event.getPlayer().level(), event.getPlayer(), x, y, z, 0.5f, false, BlockInteraction.DESTROY, getBlastCube(world, pos, event.getPlayer(), chance));
-					spawnExplosion(event.getPlayer().level(), explosion, x, y, z, 0.5f);
+					ToolExplosion explosion = new ToolExplosion(s, serverLevel, event.getPlayer(), x, y, z, 0.5f, false, BlockInteraction.DESTROY, getBlastCube(world, pos, event.getPlayer(), chance));
+					spawnExplosion(serverLevel, explosion, x, y, z, 0.5f);
 					EmberInventoryUtil.removeEmber(event.getPlayer(), cost);
 				}
 			}
@@ -133,8 +139,8 @@ public class BlastingCoreAugment extends AugmentBase {
 							double z = event.getEntity().getZ();
 							blastedEntities.addAll(entities);
 
-							BlastingExplosion explosion = new BlastingExplosion((List<Entity>) entities, event.getNewDamage() * strength, damager.level(), damager, x, y, z, strength * 5f, false, BlockInteraction.KEEP);
-							spawnExplosion(damager.level(), explosion, x, y, z, strength * 1.5f);
+							BlastingExplosion explosion = new BlastingExplosion((List<Entity>) entities, event.getNewDamage() * strength, (ServerLevel) damager.level(), damager, x, y, z, strength * 5f, false, BlockInteraction.KEEP);
+							spawnExplosion((ServerLevel) damager.level(), explosion, x, y, z, strength * 1.5f);
 						}
 					}
 				}
@@ -152,8 +158,8 @@ public class BlastingCoreAugment extends AugmentBase {
 						double z = event.getEntity().getZ();
 						blastedEntities.addAll(entities);
 
-						BlastingExplosion explosion = new BlastingExplosion((List<Entity>) entities, event.getNewDamage() * strength * 0.25f, damager.level(), damager, x, y, z, strength * 5f, false, BlockInteraction.KEEP);
-						spawnExplosion(damager.level(), explosion, x, y, z, strength * 1.5f);
+						BlastingExplosion explosion = new BlastingExplosion((List<Entity>) entities, event.getNewDamage() * strength * 0.25f, (ServerLevel) damager.level(), damager, x, y, z, strength * 5f, false, BlockInteraction.KEEP);
+						spawnExplosion((ServerLevel) damager.level(), explosion, x, y, z, strength * 1.5f);
 					}
 				}
 			} finally {
@@ -162,22 +168,17 @@ public class BlastingCoreAugment extends AugmentBase {
 		}
 	}
 
-	public static void spawnExplosion(Level level, Explosion explosion, double x, double y, double z, float radius) {
+	public static void spawnExplosion(ServerLevel level, ServerExplosion explosion, double x, double y, double z, float radius) {
 		if (!EventHooks.onExplosionStart(level, explosion)) {
-			explosion.explode();
-			explosion.finalizeExplosion(true);
-
-			if (level instanceof ServerLevel server) {
-				if (!explosion.interactsWithBlocks()) {
-					explosion.clearToBlow();
-				}
-				for (ServerPlayer serverplayer : server.players()) {
-					if (serverplayer.distanceToSqr(x, y, z) < 4096.0D) {
-						Vec3 knockback = explosion.getHitPlayers().get(serverplayer);
-						if (knockback == null) knockback = Vec3.ZERO;
-						serverplayer.connection.send(new ClientboundExplodePacket(x, y, z, radius, explosion.getToBlow(), knockback,
-							explosion.getBlockInteraction(), explosion.getSmallExplosionParticles(), explosion.getLargeExplosionParticles(), explosion.getExplosionSound()));
-					}
+			int blockCount = explosion.explode();
+			Vec3 center = new Vec3(x, y, z);
+			// 1.20.1 finalizeExplosion(true): emitter for big block-breaking blasts, small puff otherwise
+			ParticleOptions particle = explosion.isSmall() ? ParticleTypes.EXPLOSION : ParticleTypes.EXPLOSION_EMITTER;
+			for (ServerPlayer serverplayer : level.players()) {
+				if (serverplayer.distanceToSqr(x, y, z) < 4096.0D) {
+					Optional<Vec3> knockback = Optional.ofNullable(explosion.getHitPlayers().get(serverplayer));
+					serverplayer.connection.send(new ClientboundExplodePacket(center, radius, blockCount, knockback,
+							particle, SoundEvents.GENERIC_EXPLODE, WeightedList.of()));
 				}
 			}
 		}
