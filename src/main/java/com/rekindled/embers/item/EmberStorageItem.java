@@ -79,7 +79,4 @@ public abstract class EmberStorageItem extends Item {
 			tooltip.add(Component.translatable(Embers.MODID + ".tooltip.item.ember", emberFormat.format(cap.getEmber()),  emberFormat.format(cap.getEmberCapacity())).withStyle(ChatFormatting.GRAY));
 		}
 	}
-
-	@OnlyIn(Dist.CLIENT)
-
 }

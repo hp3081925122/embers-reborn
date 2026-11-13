@@ -42,7 +42,4 @@ public class TyrfingItem extends Item implements ITyrfingWeapon {
 			event.setAmount((event.getAmount() / 4.0f) * (4.0f + (float) armor * 1.0f));
 		}
 	}
-
-	@OnlyIn(Dist.CLIENT)
-
 }
