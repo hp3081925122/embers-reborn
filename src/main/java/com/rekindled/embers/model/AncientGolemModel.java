@@ -1,17 +1,16 @@
 package com.rekindled.embers.model;
 
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
-public class AncientGolemModel<T extends Entity> extends HierarchicalModel<T> {
+public class AncientGolemModel extends EntityModel<LivingEntityRenderState> {
 
-	ModelPart root;
 	ModelPart legL;
 	ModelPart legR;
 	ModelPart body1;
@@ -23,7 +22,7 @@ public class AncientGolemModel<T extends Entity> extends HierarchicalModel<T> {
 	ModelPart head;
 
 	public AncientGolemModel(ModelPart root) {
-		this.root = root;
+		super(root);
 		this.legL = root.getChild("legL");
 		this.legR = root.getChild("legR");
 		this.body1 = root.getChild("body1");
@@ -52,7 +51,12 @@ public class AncientGolemModel<T extends Entity> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(LivingEntityRenderState state) {
+		super.setupAnim(state);
+		float limbSwing = state.walkAnimationPos;
+		float limbSwingAmount = state.walkAnimationSpeed;
+		float netHeadYaw = state.yRot;
+		float headPitch = state.xRot;
 		head.xRot = headPitch * ((float)Math.PI / 180F);
 		head.yRot = netHeadYaw * ((float)Math.PI / 180F);
 		legR.xRot = (float)Math.toRadians(180f*(float) Math.sin(limbSwing*0.5)*limbSwingAmount*0.5);
@@ -61,10 +65,5 @@ public class AncientGolemModel<T extends Entity> extends HierarchicalModel<T> {
 		armR.xRot = -(float)Math.toRadians(180f*(float) Math.sin(limbSwing*0.5)*limbSwingAmount*0.5);
 		fistL.xRot = (float)Math.toRadians(180f*(float) Math.sin(limbSwing*0.5)*limbSwingAmount*0.5);
 		fistR.xRot = -(float)Math.toRadians(180f*(float) Math.sin(limbSwing*0.5)*limbSwingAmount*0.5);
-	}
-
-	@Override
-	public ModelPart root() {
-		return this.root;
 	}
 }

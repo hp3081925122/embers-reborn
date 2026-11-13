@@ -3,19 +3,19 @@ package com.rekindled.embers.entity.render;
 import com.rekindled.embers.Embers;
 import com.rekindled.embers.model.AncientGolemModel;
 
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class AncientGolemEyeLayer<T extends Entity, M extends AncientGolemModel<T>> extends EyesLayer<T, M> {
-	private static final RenderType GOLEM_EYE = RenderType.eyes(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/entity/golem_overlay.png"));
+public class AncientGolemEyeLayer extends EyesLayer<LivingEntityRenderState, AncientGolemModel> {
+	private static final RenderType GOLEM_EYE = net.minecraft.client.renderer.rendertype.RenderTypes.eyes(Identifier.fromNamespaceAndPath(Embers.MODID, "textures/entity/golem_overlay.png"));
 
-	public AncientGolemEyeLayer(RenderLayerParent<T, M> p_117507_) {
+	public AncientGolemEyeLayer(RenderLayerParent<LivingEntityRenderState, AncientGolemModel> p_117507_) {
 		super(p_117507_);
 	}
 

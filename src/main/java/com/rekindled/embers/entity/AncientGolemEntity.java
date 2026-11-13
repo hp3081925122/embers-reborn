@@ -76,8 +76,9 @@ public class AncientGolemEntity extends Monster {
 		}
 	}
 
-	public boolean doHurtTarget(Entity pEntity) {
-		if (super.doHurtTarget(pEntity)) {
+	@Override
+	public boolean doHurtTarget(net.minecraft.server.level.ServerLevel level, Entity pEntity) {
+		if (super.doHurtTarget(level, pEntity)) {
 			this.playSound(EmbersSounds.ANCIENT_GOLEM_PUNCH.get());
 			return true;
 		}
