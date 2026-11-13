@@ -78,8 +78,8 @@ public class JEIPlugin implements IModPlugin {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <C extends net.minecraft.world.item.crafting.RecipeInput, T extends net.minecraft.world.item.crafting.Recipe<C>> void addRecipes(IRecipeRegistration register, RecipeManager manager, RecipeType<T> jeiType, net.minecraft.world.item.crafting.RecipeType<T> type) {
-		List<T> recipes = manager.getAllRecipesFor(type).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
+	public static <C extends net.minecraft.world.item.crafting.RecipeInput, T extends net.minecraft.world.item.crafting.Recipe<C>> void addRecipes(IRecipeRegistration register, net.minecraft.world.item.crafting.RecipeMap manager, RecipeType<T> jeiType, net.minecraft.world.item.crafting.RecipeType<T> type) {
+		List<T> recipes = manager.byType(type).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
 		List<T> visualRecipes = new ArrayList<T>();
 		for (T recipe : recipes) {
 			if (recipe instanceof IVisuallySplitRecipe) {
@@ -95,7 +95,7 @@ public class JEIPlugin implements IModPlugin {
 	@Override
 	public void registerRecipes(IRecipeRegistration register) {
 		assert Minecraft.getInstance().level != null;
-		RecipeManager manager = Minecraft.getInstance().level.getRecipeManager();
+		net.minecraft.world.item.crafting.RecipeMap manager = com.rekindled.embers.util.EmbersRecipes.recipeMap(Minecraft.getInstance().level);
 
 		addRecipes(register, manager, BORING, RegistryManager.BORING.get());
 
@@ -103,7 +103,7 @@ public class JEIPlugin implements IModPlugin {
 
 		addRecipes(register, manager, EMBER_ACTIVATION, RegistryManager.EMBER_ACTIVATION.get());
 
-		List<IMeltingRecipe> meltingRecipes = manager.getAllRecipesFor(RegistryManager.MELTING.get()).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
+		List<IMeltingRecipe> meltingRecipes = manager.byType(RegistryManager.MELTING.get()).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
 		register.addRecipes(MELTING, meltingRecipes);
 
 		List<IMeltingRecipe> meltingBonusRecipes = new ArrayList<IMeltingRecipe>();

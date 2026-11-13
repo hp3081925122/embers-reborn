@@ -59,7 +59,7 @@ public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
 
 			ResourceKey<Biome> biome = tile.getLevel().getBiome(tile.getBlockPos()).unwrapKey().get();
 			BoringContext context = new BoringContext(tile.getLevel().dimension().identifier(), biome.identifier(), tile.getBlockPos().getY(), tile.getLevel().getBlockStatesIfLoaded(bore.getBladeBoundingBox()).collect(java.util.stream.Collectors.toList()));
-			List<IBoringRecipe> newRecipes = tile.getLevel().getRecipeManager().getRecipesFor(RegistryManager.EXCAVATION.get(), context, tile.getLevel()).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
+			List<IBoringRecipe> newRecipes = com.rekindled.embers.util.EmbersRecipes.getRecipesFor(RegistryManager.EXCAVATION.get(), context, tile.getLevel()).map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
 
 			recipes.addAll(newRecipes);
 		}

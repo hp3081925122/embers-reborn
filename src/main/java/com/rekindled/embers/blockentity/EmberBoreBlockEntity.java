@@ -134,7 +134,7 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 			ResourceKey<Biome> biome = level.getBiome(worldPosition).unwrapKey().get();
 			if (biome != null) {
 				BoringContext context = new BoringContext(level.dimension().identifier(), biome.identifier(), worldPosition.getY(), level.getBlockStatesIfLoaded(getBladeBoundingBox()).collect(java.util.stream.Collectors.toList()));
-				List<IBoringRecipe> recipes = level.getRecipeManager().getRecipesFor(RegistryManager.BORING.get(), context, level).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
+				List<IBoringRecipe> recipes = com.rekindled.embers.util.EmbersRecipes.getRecipesFor(RegistryManager.BORING.get(), context, level).map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
 				UpgradeUtil.throwEvent(this, new MachineRecipeEvent<List<IBoringRecipe>>(this, recipes), this.upgrades);
 				canMine = !recipes.isEmpty();
 			} else {
@@ -207,7 +207,7 @@ public class EmberBoreBlockEntity extends BlockEntity implements ISoundControlle
 					ResourceKey<Biome> biome = level.getBiome(pos).unwrapKey().get();
 					if (biome != null) {
 						BoringContext context = new BoringContext(level.dimension().identifier(), biome.identifier(), pos.getY(), level.getBlockStatesIfLoaded(blockEntity.getBladeBoundingBox()).collect(java.util.stream.Collectors.toList()));
-						List<IBoringRecipe> recipes = level.getRecipeManager().getRecipesFor(RegistryManager.BORING.get(), context, level).stream().map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
+						List<IBoringRecipe> recipes = com.rekindled.embers.util.EmbersRecipes.getRecipesFor(RegistryManager.BORING.get(), context, level).map(net.minecraft.world.item.crafting.RecipeHolder::value).collect(java.util.stream.Collectors.toList());
 						UpgradeUtil.throwEvent(blockEntity, new MachineRecipeEvent<List<IBoringRecipe>>(blockEntity, recipes), blockEntity.upgrades);
 						ArrayList<WeightedItemStack> stacks = new ArrayList<>();
 						float rand = blockEntity.random.nextFloat();

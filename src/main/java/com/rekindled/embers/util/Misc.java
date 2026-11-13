@@ -232,10 +232,9 @@ public class Misc {
 	public static <C extends net.minecraft.world.item.crafting.RecipeInput, T extends net.minecraft.world.item.crafting.Recipe<C>> T getRecipe(T cache, RecipeType<?> type, C container, Level level) {
 		if (cache != null && cache.matches(container, level) )
 			return cache;
-		List<net.minecraft.world.item.crafting.RecipeHolder<T>> holders = level.getRecipeManager().getRecipesFor((RecipeType<T>) type, container, level);
-		if (holders.isEmpty())
+		net.minecraft.world.item.crafting.RecipeHolder<T> holder = com.rekindled.embers.util.EmbersRecipes.getRecipesFor((RecipeType<T>) type, container, level).findFirst().orElse(null);
+		if (holder == null)
 			return null;
-		net.minecraft.world.item.crafting.RecipeHolder<T> holder = holders.get(0);
 		T recipe = holder.value();
 		if (recipe instanceof com.rekindled.embers.recipe.AlchemyRecipeBase alchemy)
 			alchemy.bindId(holder.id());

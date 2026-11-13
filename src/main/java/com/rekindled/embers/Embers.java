@@ -216,6 +216,7 @@ public class Embers {
 		NeoForge.EVENT_BUS.addListener(EmbersEvents::onServerTick);
 		NeoForge.EVENT_BUS.addListener(EmbersEvents::onExplosion);
 		NeoForge.EVENT_BUS.addListener(EmbersEvents::onTagsReload);
+		NeoForge.EVENT_BUS.addListener(com.rekindled.embers.util.EmbersRecipes::onDatapackSync);
 	}
 
 	public void registerCaps(RegisterCapabilitiesEvent event) {
@@ -474,6 +475,8 @@ public class Embers {
 		public static void clientSetup(FMLClientSetupEvent event) {
 
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onLevelLoad);
+			NeoForge.EVENT_BUS.addListener(com.rekindled.embers.util.EmbersRecipes.Client::onRecipesReceived);
+			NeoForge.EVENT_BUS.addListener(com.rekindled.embers.util.EmbersRecipes.Client::onLogout);
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onClientTick);
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onMovementInput);
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onBlockHighlight);
