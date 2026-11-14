@@ -1,0 +1,18 @@
+{
+  "projectId": 1800622,
+  "slug": "embers-reborn",
+  "url": "https://www.curseforge.com/minecraft/mc-mods/embers-reborn",
+  "fileId": 9606682,
+  "fileUrl": "https://www.curseforge.com/minecraft/mc-mods/embers-reborn/files/9606682",
+  "minecraft": "1.21.1",
+  "loader": "NeoForge",
+  "java": 21,
+  "version": "1.21.1-1.1.0",
+  "displayName": "1.21.1-NeoForge-Embers Reborn-1.1.0",
+  "artifact": "embers_reborn-1.21.1-neoforge-1.21.1-1.1.0.jar",
+  "sha256": "e5607af56392e0678071f332f01a0db1782e72e18560780e780ca2863962f61a",
+  "releaseType": "release",
+  "gameVersions": [11779, 10150, 11135, 9638, 9639],
+  "status": "upload accepted; public API returned data=null, pending review",
+  "sourceCommit": "e3f2625"
+}
