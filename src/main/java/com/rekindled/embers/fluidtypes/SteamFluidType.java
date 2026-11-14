@@ -1,16 +1,15 @@
 package com.rekindled.embers.fluidtypes;
 
-
-import org.joml.Vector3f;
-
-
-import net.minecraft.resources.Identifier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.entity.InsideBlockEffectType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-// ForgeHooks removed in NeoForge 1.21.1; use EventHooks
 import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class SteamFluidType extends EmbersFluidType {
@@ -20,11 +19,21 @@ public class SteamFluidType extends EmbersFluidType {
 	}
 
 	@Override
-	public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
-		entity.hurt(entity.level().damageSources().inFire(), 1.0F);
+	public void entityInside(Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier) {
+		effectApplier.runAfter(InsideBlockEffectType.FIRE_IGNITE, target -> {
+			if (target instanceof LivingEntity && target.level() instanceof ServerLevel serverLevel) {
+				target.hurtServer(serverLevel, serverLevel.damageSources().inFire(), 1.0F);
+			}
+		});
+	}
+
+	@Override
+	public boolean move(LivingEntity entity, Vec3 movementVector, double gravity) {
+		if (entity.level() instanceof ServerLevel serverLevel) {
+			entity.hurtServer(serverLevel, serverLevel.damageSources().inFire(), 1.0F);
+		}
 
 		net.minecraft.util.profiling.Profiler.get().push("jump");
-		// jumping / noJumpDelay are made public by accesstransformer.cfg
 		if (entity.jumping) {
 			boolean flag = entity.isInWater();
 			if (!flag || entity.onGround()) {
@@ -49,10 +58,10 @@ public class SteamFluidType extends EmbersFluidType {
 		Vec3 vec35 = entity.handleRelativeFrictionAndCalculateMovement(movementVector, f2);
 		double d2 = vec35.y;
 		if (entity.hasEffect(MobEffects.LEVITATION)) {
-			d2 += (0.05D * (double)(entity.getEffect(MobEffects.LEVITATION).getAmplifier() + 1) - vec35.y) * 0.2D;
+			d2 += (0.05D * (double) (entity.getEffect(MobEffects.LEVITATION).getAmplifier() + 1) - vec35.y) * 0.2D;
 			entity.resetFallDistance();
 		} else if (entity.level().isClientSide() && !entity.level().hasChunkAt(entity.blockPosition())) {
-			if (entity.getY() > (double)entity.level().getMinY()) {
+			if (entity.getY() > (double) entity.level().getMinY()) {
 				d2 = -0.1D;
 			} else {
 				d2 = 0.0D;
@@ -64,7 +73,7 @@ public class SteamFluidType extends EmbersFluidType {
 		if (entity.shouldDiscardFriction()) {
 			vec35 = new Vec3(vec35.x, d2, vec35.z);
 		} else {
-			vec35 = new Vec3(vec35.x * (double)f3, d2 * (double)0.98F, vec35.z * (double)f3);
+			vec35 = new Vec3(vec35.x * (double) f3, d2 * (double) 0.98F, vec35.z * (double) f3);
 		}
 
 		entity.setDeltaMovement(vec35);
@@ -76,12 +85,11 @@ public class SteamFluidType extends EmbersFluidType {
 		Vec3 vec3 = entity.getDeltaMovement();
 		entity.setDeltaMovement(vec3.x, 0.42F + entity.getJumpBoostPower(), vec3.z);
 		if (entity.isSprinting()) {
-			float f = entity.getYRot() * ((float)Math.PI / 180F);
-			entity.setDeltaMovement(entity.getDeltaMovement().add((double)(-Mth.sin(f) * 0.2F), 0.0D, (double)(Mth.cos(f) * 0.2F)));
+			float f = entity.getYRot() * ((float) Math.PI / 180F);
+			entity.setDeltaMovement(entity.getDeltaMovement().add((double) (-Mth.sin(f) * 0.2F), 0.0D, (double) (Mth.cos(f) * 0.2F)));
 		}
 
 		entity.needsSync = true;
 		net.neoforged.neoforge.common.CommonHooks.onLivingJump(entity);
 	}
-
 }

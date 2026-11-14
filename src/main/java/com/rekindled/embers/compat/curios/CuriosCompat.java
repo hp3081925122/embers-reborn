@@ -51,7 +51,7 @@ public class CuriosCompat {
 	public static final DeferredHolder<Item, Item> NONBELEIVER_AMULET = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "nonbeliever_amulet", () -> new NonbeleiverAmuletItem(new Item.Properties().stacksTo(1)));
 	public static final DeferredHolder<Item, Item> EXPLOSION_CHARM = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "explosion_charm", () -> new ExplosionCharmItem(new Item.Properties().stacksTo(1)));
 
-	public static final DeferredHolder<Item, Item> EXPLOSION_PEDESTAL_ITEM = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "explosion_pedestal", () -> new BlockItem(EXPLOSION_PEDESTAL.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> EXPLOSION_PEDESTAL_ITEM = com.rekindled.embers.util.RegCtx.item(RegistryManager.ITEMS, "explosion_pedestal", () -> new BlockItem(EXPLOSION_PEDESTAL.get(), new Item.Properties().useBlockDescriptionPrefix()));
 
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ExplosionPedestalBlockEntity>> EXPLOSION_PEDESTAL_ENTITY = RegistryManager.BLOCK_ENTITY_TYPES.register("explosion_pedestal", () -> new BlockEntityType<>(ExplosionPedestalBlockEntity::new, EXPLOSION_PEDESTAL.get()));
 
@@ -63,7 +63,8 @@ public class CuriosCompat {
 			Map<String, ICurioStacksHandler> curios = inv.orElseThrow().getCurios();
 			for (ICurioStacksHandler curio : curios.values()) {
 				for (int i = 0; i < curio.getStacks().getSlots(); i++) {
-					if (predicate.test(curio.getStacks().getStackInSlot(i))) {
+					ItemStack stack = curio.getStacks().getStackInSlot(i);
+					if (!stack.isEmpty() && predicate.test(stack)) {
 						return true;
 					}
 				}

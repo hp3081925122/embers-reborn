@@ -14,7 +14,7 @@ logoFile="embers_logo.png"
 authors="${mod_authors}"
 description='''${mod_description}
 
-Ported to 1.21.1 NeoForge from Embers Rekindled (1.20.1 Forge) by RCXcrafter.
+Ported to 26.1.2 NeoForge from Embers Rekindled (1.20.1 Forge) by RCXcrafter.
 Original mod: https://github.com/RCXcrafter/EmbersRekindled
 '''
 
@@ -29,22 +29,6 @@ side="BOTH"
 modId="minecraft"
 type="required"
 versionRange="${minecraft_version_range}"
-ordering="NONE"
-side="BOTH"
-
-# JEI — optional
-[[dependencies.${mod_id}]]
-modId="jei"
-type="optional"
-versionRange="[19,)"
-ordering="NONE"
-side="BOTH"
-
-# Curios — optional
-[[dependencies.${mod_id}]]
-modId="curios"
-type="optional"
-versionRange="[9,)"
 ordering="NONE"
 side="BOTH"
 

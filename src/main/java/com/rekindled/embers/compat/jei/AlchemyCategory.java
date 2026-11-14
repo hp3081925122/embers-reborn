@@ -61,7 +61,10 @@ public class AlchemyCategory implements IRecipeCategory<IAlchemyRecipe> {
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, IAlchemyRecipe recipe, IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 32, 37).addIngredients(recipe.getCenterInput());
+		var centerSlot = builder.addSlot(RecipeIngredientRole.INPUT, 32, 37);
+		if (recipe.getCenterInput() != null) {
+			centerSlot.addIngredients(recipe.getCenterInput());
+		}
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 101, 37).addItemStack(recipe.getResultItem());
 		Vec3 center = new Vec3(0, 30, 0);
 

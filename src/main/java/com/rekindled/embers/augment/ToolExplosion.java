@@ -21,11 +21,8 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.EventHooks;
 
-/**
- * Blasting core block-break explosion. Breaks a fixed list of blocks and drops them as if mined with {@link #tool}.
- * 26.1: Explosion is an interface; this extends ServerExplosion and replaces explode() (1.20.1 overrode finalizeExplosion).
- */
 public class ToolExplosion extends ServerExplosion {
 
 	public ItemStack tool = ItemStack.EMPTY;
@@ -44,14 +41,18 @@ public class ToolExplosion extends ServerExplosion {
 		if (getBlockInteraction() == Explosion.BlockInteraction.KEEP)
 			return 0;
 
+		EventHooks.onExplosionDetonate(level, this, new ArrayList<>(), positions);
+
 		List<Pair<ItemStack, BlockPos>> drops = new ArrayList<>();
 		boolean dropExperience = getIndirectSourceEntity() instanceof Player;
 		net.minecraft.util.Util.shuffle(positions, level.getRandom());
+		int brokenCount = 0;
 
 		for (BlockPos pos : positions) {
 			BlockState state = level.getBlockState(pos);
-			if (state.isAir())
+			if (state.isAir() || state.getDestroySpeed(level, pos) < 0)
 				continue;
+			brokenCount++;
 			BlockPos immutable = pos.immutable();
 			if (state.canDropFromExplosion(level, pos, this)) {
 				BlockEntity blockEntity = state.hasBlockEntity() ? level.getBlockEntity(pos) : null;
@@ -70,6 +71,6 @@ public class ToolExplosion extends ServerExplosion {
 
 		for (Pair<ItemStack, BlockPos> pair : drops)
 			Block.popResource(level, pair.getSecond(), pair.getFirst());
-		return positions.size();
+		return brokenCount;
 	}
 }

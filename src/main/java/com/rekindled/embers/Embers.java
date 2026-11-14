@@ -187,6 +187,7 @@ public class Embers {
 		RegistryManager.DATA_COMPONENTS.register(modEventBus);
 		RegistryManager.MENU_TYPES.register(modEventBus);
 		RegistryManager.STRUCTURE_TYPES.register(modEventBus);
+		RegistryManager.STRUCTURE_PIECE_TYPES.register(modEventBus);
 		RegistryManager.STRUCTURE_PROCESSOR_TYPES.register(modEventBus);
 		EmbersSounds.init();
 
@@ -263,6 +264,8 @@ public class Embers {
 		event.registerBlockEntity(com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_CAPABILITY,
 			RegistryManager.EMBER_RECEIVER_ENTITY.get(), (be, side) -> be.capability);
 		event.registerBlockEntity(com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_CAPABILITY,
+			RegistryManager.EMBER_FUNNEL_ENTITY.get(), (be, side) -> be.capability);
+		event.registerBlockEntity(com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_CAPABILITY,
 			RegistryManager.AUTOMATIC_HAMMER_ENTITY.get(), (be, side) -> be.capability);
 		event.registerBlockEntity(com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_CAPABILITY,
 			RegistryManager.IGNEM_REACTOR_ENTITY.get(), (be, side) -> be.capability);
@@ -290,6 +293,13 @@ public class Embers {
 		// Directional ember — not from FACING direction (EmberEmitter, BeamCannon)
 		event.registerBlockEntity(com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_CAPABILITY,
 			RegistryManager.EMBER_EMITTER_ENTITY.get(), (be, side) -> {
+				if (be.getLevel() == null) return null;
+				net.minecraft.world.level.block.state.BlockState state = be.getLevel().getBlockState(be.getBlockPos());
+				if (!state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING)) return be.capability;
+				return state.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING) != side ? be.capability : null;
+			});
+		event.registerBlockEntity(com.rekindled.embers.api.capabilities.EmbersCapabilities.EMBER_CAPABILITY,
+			RegistryManager.EMBER_EJECTOR_ENTITY.get(), (be, side) -> {
 				if (be.getLevel() == null) return null;
 				net.minecraft.world.level.block.state.BlockState state = be.getLevel().getBlockState(be.getBlockPos());
 				if (!state.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING)) return be.capability;
@@ -459,6 +469,9 @@ public class Embers {
 		}
 		if (event.getRegistryKey().equals(Registries.LOOT_CONDITION_TYPE)) {
 			event.register(Registries.LOOT_CONDITION_TYPE, Identifier.fromNamespaceAndPath(MODID, "match_curio"), () -> MatchCurioLootCondition.CODEC);
+		}
+		if (event.getRegistryKey().equals(Registries.DATA_COMPONENT_PREDICATE_TYPE)) {
+			event.register(Registries.DATA_COMPONENT_PREDICATE_TYPE, AugmentPredicate.ID, () -> AugmentPredicate.TYPE);
 		}
 	}
 

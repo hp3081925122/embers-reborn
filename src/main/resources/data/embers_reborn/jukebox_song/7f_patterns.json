@@ -1,0 +1,8 @@
+{
+  "comparator_output": 7,
+  "description": {
+    "translate": "item.embers_reborn.music_disc_7f_patterns.desc"
+  },
+  "length_in_seconds": 222.2,
+  "sound_event": "embers_reborn:music_disc.7f_patterns"
+}

@@ -98,6 +98,7 @@ public class PressureRefineryBottomBlockEntity extends net.minecraft.world.level
 	}
 
 	public void loadAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		com.rekindled.embers.util.NbtBridge.load(tank, provider, nbt.getCompoundOrEmpty("tank"));
 		com.rekindled.embers.util.NbtBridge.load(inventory, provider, nbt.getCompoundOrEmpty("inventory"));
 		progress = nbt.getIntOr("progress", 0);
 	}
@@ -111,6 +112,7 @@ public class PressureRefineryBottomBlockEntity extends net.minecraft.world.level
 	}
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		nbt.put("tank", com.rekindled.embers.util.NbtBridge.writeTank(tank, provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.put("inventory", com.rekindled.embers.util.NbtBridge.save(inventory, provider));
 		nbt.putInt("progress", progress);
 	}

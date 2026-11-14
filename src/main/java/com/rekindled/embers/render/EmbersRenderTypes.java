@@ -91,6 +91,19 @@ public final class EmbersRenderTypes {
 			.withColorTargetState(new ColorTargetState(BlendFunction.LIGHTNING))
 			.build();
 
+	public static final RenderPipeline ADDITIVE_EYES_PIPELINE = RenderPipeline.builder(RenderPipelines.MATRICES_FOG_SNIPPET)
+			.withLocation(id("pipeline/additive_eyes"))
+			.withVertexShader("core/entity")
+			.withFragmentShader("core/entity")
+			.withShaderDefine("EMISSIVE")
+			.withShaderDefine("NO_OVERLAY")
+			.withShaderDefine("NO_CARDINAL_LIGHTING")
+			.withSampler("Sampler0")
+			.withColorTargetState(new ColorTargetState(BlendFunction.ADDITIVE))
+			.withVertexFormat(DefaultVertexFormat.ENTITY, VertexFormat.Mode.QUADS)
+			.withDepthStencilState(new DepthStencilState(CompareOp.LESS_THAN_OR_EQUAL, false))
+			.build();
+
 	public static final Identifier HEAT_BAR_TEXTURE = id("textures/gui/heat_bar.png");
 
 	public static void registerPipelines(RegisterRenderPipelinesEvent event) {
@@ -100,6 +113,7 @@ public final class EmbersRenderTypes {
 		event.registerPipeline(GLOW_GUI_TEXTURED_PIPELINE);
 		event.registerPipeline(HEAT_BAR_ENDS_PIPELINE);
 		event.registerPipeline(GLOW_TEXT_PIPELINE);
+		event.registerPipeline(ADDITIVE_EYES_PIPELINE);
 	}
 
 	// --- render types ---
@@ -156,5 +170,15 @@ public final class EmbersRenderTypes {
 	/** Alchemical note item: translucent entity quads without culling, like the 1.21.1 type. */
 	public static RenderType getNote(Identifier location) {
 		return RenderTypes.entityTranslucent(location);
+	}
+
+	private static final Function<Identifier, RenderType> ADDITIVE_EYES = Util.memoize(texture -> RenderType.create(Embers.MODID + ":additive_eyes",
+			RenderSetup.builder(ADDITIVE_EYES_PIPELINE)
+			.withTexture("Sampler0", texture)
+			.sortOnUpload()
+			.createRenderSetup()));
+
+	public static RenderType eyes(Identifier location) {
+		return ADDITIVE_EYES.apply(location);
 	}
 }

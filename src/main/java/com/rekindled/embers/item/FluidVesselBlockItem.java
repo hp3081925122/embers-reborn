@@ -26,7 +26,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 public class FluidVesselBlockItem extends BlockItem {
 
 	public FluidVesselBlockItem(Block block, Properties properties) {
-		super(block, properties);
+		super(block, properties.useBlockDescriptionPrefix());
 	}
 
 	@Override

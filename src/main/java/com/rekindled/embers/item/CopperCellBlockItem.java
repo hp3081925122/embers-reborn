@@ -28,7 +28,7 @@ import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 public class CopperCellBlockItem extends BlockItem {
 
 	public CopperCellBlockItem(Block block, Properties properties) {
-		super(block, properties);
+		super(block, properties.useBlockDescriptionPrefix());
 	}
 
 	@Override

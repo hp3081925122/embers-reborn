@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
@@ -16,11 +17,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 
-/**
- * Blasting core hit explosion: deals a fixed damage to a given list of entities, never breaks blocks,
- * and does not knock back living entities (same as 1.20.1).
- * 26.1: Explosion is an interface; this extends ServerExplosion and replaces explode().
- */
 public class BlastingExplosion extends ServerExplosion {
 
 	public List<Entity> entitiesToBlast;
@@ -59,11 +55,13 @@ public class BlastingExplosion extends ServerExplosion {
 			dz /= len;
 			double power = (1.0D - dist) * getSeenPercent(center, entity);
 			entity.hurtServer(level, level.damageSources().explosion(null, getIndirectSourceEntity()), damage);
-			double knockback = 0.0D;
-			if (entity instanceof LivingEntity living)
+			double knockback;
+			if (entity instanceof LivingEntity living) {
 				living.hurtTime = 0;
-			else
+				knockback = power * (1.0D - living.getAttributeValue(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE));
+			} else {
 				knockback = power;
+			}
 			Vec3 push = new Vec3(dx * knockback, dy * knockback, dz * knockback);
 			entity.setDeltaMovement(entity.getDeltaMovement().add(push));
 			if (entity instanceof Player player && !player.isSpectator() && (!player.isCreative() || !player.getAbilities().flying))

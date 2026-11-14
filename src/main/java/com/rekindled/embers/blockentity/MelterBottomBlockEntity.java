@@ -120,7 +120,7 @@ public class MelterBottomBlockEntity extends BlockEntity implements ISoundContro
 	}
 
 	public static void serverTick(Level level, BlockPos pos, BlockState state, MelterBottomBlockEntity blockEntity) {
-		MelterTopBlockEntity top = (MelterTopBlockEntity) level.getBlockEntity(pos.above());
+		MelterTopBlockEntity top = level.getBlockEntity(pos.above()) instanceof MelterTopBlockEntity t ? t : null;
 		blockEntity.upgrades = UpgradeUtil.getUpgrades(level, pos, Misc.horizontals);
 		UpgradeUtil.verifyUpgrades(blockEntity, blockEntity.upgrades);
 		if (UpgradeUtil.doTick(blockEntity, blockEntity.upgrades))

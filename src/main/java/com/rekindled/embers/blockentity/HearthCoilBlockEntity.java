@@ -33,7 +33,7 @@ import com.rekindled.embers.datagen.EmbersSounds;
 import com.rekindled.embers.particle.GlowParticleOptions;
 import com.rekindled.embers.particle.SmokeParticleOptions;
 import com.rekindled.embers.power.DefaultEmberCapability;
-import com.rekindled.embers.recipe.SingleRecipeInput /* use embers one */;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import com.rekindled.embers.util.DecimalFormats;
 import com.rekindled.embers.util.EmbersColors;
 import com.rekindled.embers.util.Misc;
@@ -210,17 +210,15 @@ public class HearthCoilBlockEntity extends BlockEntity implements ISoundControll
 				if (items.size() > 0) {
 					int i = random.nextInt(items.size());
 					ItemEntity entityItem = items.get(i);
-					com.rekindled.embers.recipe.SingleRecipeInput wrapper = new com.rekindled.embers.recipe.SingleRecipeInput(entityItem.getItem());
-					RecipeType<?> type = UpgradeUtil.getOtherParameter(blockEntity, "recipe_type", (RecipeType<?>) RecipeType.SMELTING, blockEntity.upgrades);
+					SingleRecipeInput wrapper = new SingleRecipeInput(entityItem.getItem());
+					@SuppressWarnings("unchecked")
+					RecipeType<AbstractCookingRecipe> cookingType = (RecipeType<AbstractCookingRecipe>) UpgradeUtil.getOtherParameter(blockEntity, "recipe_type", (RecipeType<?>) RecipeType.SMELTING, blockEntity.upgrades);
 
-					if (blockEntity.cachedRecipes.containsKey(type)) {
-						blockEntity.cachedRecipes.put(type, (net.minecraft.world.item.crafting.AbstractCookingRecipe)(net.minecraft.world.item.crafting.Recipe<?>) Misc.getRecipe(null, type, wrapper, level));
-					}
+					blockEntity.cachedRecipes.put(cookingType, Misc.getRecipe(blockEntity.cachedRecipes.get(cookingType), cookingType, wrapper, level));
 
-					if (blockEntity.cachedRecipes.get(type) != null) {
-						ArrayList<ItemStack> returns = Lists.newArrayList(((net.minecraft.world.item.crafting.Recipe) blockEntity.cachedRecipes.get(type)).assemble(wrapper));
-						//int inputCount = recipe.getInputConsumed();
-						UpgradeUtil.throwEvent(blockEntity, new MachineRecipeEvent.Success<>(blockEntity, blockEntity.cachedRecipes.get(type)), blockEntity.upgrades);
+					if (blockEntity.cachedRecipes.get(cookingType) != null) {
+						ArrayList<ItemStack> returns = Lists.newArrayList(blockEntity.cachedRecipes.get(cookingType).assemble(wrapper));
+						UpgradeUtil.throwEvent(blockEntity, new MachineRecipeEvent.Success<>(blockEntity, blockEntity.cachedRecipes.get(cookingType)), blockEntity.upgrades);
 						UpgradeUtil.transformOutput(blockEntity, returns, blockEntity.upgrades);
 						depleteItem(entityItem, 1);
 						for(ItemStack stack : returns) {

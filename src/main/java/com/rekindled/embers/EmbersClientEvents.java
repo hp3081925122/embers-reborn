@@ -170,8 +170,8 @@ public class EmbersClientEvents {
 					f /= f3;
 					f1 /= f3;
 					f2 /= f3;
-					consumer.addVertex(pose.pose(), (float)(fromX + x), (float)(fromY + y), (float)(fromZ + z)).setColor(color.x, color.y, color.z, alpha).setNormal(f, f1, f2);
-					consumer.addVertex(pose.pose(), (float)(toX+ x), (float)(toY + y), (float)(toZ + z)).setColor(color.x, color.y, color.z, alpha).setNormal(f, f1, f2);
+					consumer.addVertex(pose.pose(), (float)(fromX + x), (float)(fromY + y), (float)(fromZ + z)).setColor(color.x, color.y, color.z, alpha).setNormal(f, f1, f2).setLineWidth(EmbersRenderTypes.GLOW_LINE_WIDTH);
+					consumer.addVertex(pose.pose(), (float)(toX+ x), (float)(toY + y), (float)(toZ + z)).setColor(color.x, color.y, color.z, alpha).setNormal(f, f1, f2).setLineWidth(EmbersRenderTypes.GLOW_LINE_WIDTH);
 				};
 
 				Vec3 motion = null;
@@ -240,8 +240,8 @@ public class EmbersClientEvents {
 					f /= f3;
 					f1 /= f3;
 					f2 /= f3;
-					consumer.addVertex(pose.pose(), (float)(fromX + x), (float)(fromY + y), (float)(fromZ + z)).setColor(color.x, color.y, color.z, alpha).setNormal(f, f1, f2);
-					consumer.addVertex(pose.pose(), (float)(toX+ x), (float)(toY + y), (float)(toZ + z)).setColor(color.x, color.y, color.z, alpha).setNormal(f, f1, f2);
+					consumer.addVertex(pose.pose(), (float)(fromX + x), (float)(fromY + y), (float)(fromZ + z)).setColor(color.x, color.y, color.z, alpha).setNormal(f, f1, f2).setLineWidth(EmbersRenderTypes.GLOW_LINE_WIDTH);
+					consumer.addVertex(pose.pose(), (float)(toX+ x), (float)(toY + y), (float)(toZ + z)).setColor(color.x, color.y, color.z, alpha).setNormal(f, f1, f2).setLineWidth(EmbersRenderTypes.GLOW_LINE_WIDTH);
 				};
 
 				HashSet<BlockPos> drawnLines = new HashSet<BlockPos>();
@@ -479,7 +479,7 @@ public class EmbersClientEvents {
 		EntropicEnumeratorBlockEntityRenderer.cubies[0][1][1] = getModel("entropic_enumerator_urb");
 		EntropicEnumeratorBlockEntityRenderer.cubies[1][1][1] = getModel("entropic_enumerator_ulb");
 		ExcavationBucketsBlockEntityRenderer.wheel = getModel("excavation_buckets_wheel");
-		ExcavationBucketsUpgrade.buckets = getModel("ember_bore_excavation_buckets");
+		ExcavationBucketsUpgrade.CLientStuff.buckets = getModel("ember_bore_excavation_buckets");
 	}
 
 	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart getModel(String name) {

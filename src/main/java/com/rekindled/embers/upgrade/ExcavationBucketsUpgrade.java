@@ -13,7 +13,6 @@ import com.rekindled.embers.blockentity.ExcavationBucketsBlockEntity;
 import com.rekindled.embers.recipe.BoringContext;
 import com.rekindled.embers.recipe.IBoringRecipe;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.biome.Biome;
@@ -21,8 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
-
-	public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart buckets;
 
 	public ExcavationBucketsUpgrade(BlockEntity tile) {
 		super(Identifier.fromNamespaceAndPath(Embers.MODID, "excavation_buckets"), tile);
@@ -42,9 +39,11 @@ public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
 
 	@Override
 	public boolean doTick(BlockEntity tile, List<UpgradeContext> upgrades, int distance, int count) {
-		((ExcavationBucketsBlockEntity) this.tile).lastAngle = ((ExcavationBucketsBlockEntity) this.tile).angle;
-		if (tile instanceof EmberBoreBlockEntity bore && bore.isRunning)
-			((ExcavationBucketsBlockEntity) this.tile).angle += 14.0f * bore.speedMod;
+		if (this.tile instanceof ExcavationBucketsBlockEntity bucketTile) {
+			bucketTile.lastAngle = bucketTile.angle;
+			if (tile instanceof EmberBoreBlockEntity bore && bore.isRunning)
+				bucketTile.angle += 14.0f * bore.speedMod;
+		}
 		return false;
 	}
 
@@ -66,6 +65,8 @@ public class ExcavationBucketsUpgrade extends DefaultUpgradeProvider {
 	}
 
 	public static class CLientStuff {
+
+		public static net.minecraft.client.renderer.block.dispatch.BlockStateModelPart buckets;
 
 		public static void throwEvent(BlockEntity tile, List<UpgradeContext> upgrades, UpgradeEvent event, int distance, int count) {
 			if (buckets != null && event instanceof EmberBoreBladeRenderEvent renderEvent) {

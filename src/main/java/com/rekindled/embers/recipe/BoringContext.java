@@ -24,7 +24,14 @@ public class BoringContext implements net.minecraft.world.item.crafting.RecipeIn
 	}
 
 	@Override
-	public int size() { return 0; }
+	public int size() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
 
 	@Override
 	public ItemStack getItem(int pSlot) {

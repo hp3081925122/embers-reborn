@@ -12,7 +12,14 @@ public class BlockStateContext implements net.minecraft.world.item.crafting.Reci
 	}
 
 	@Override
-	public int size() { return 0; }
+	public int size() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
 
 	@Override
 	public ItemStack getItem(int pSlot) {

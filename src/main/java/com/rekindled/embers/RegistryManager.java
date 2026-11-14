@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-// /* TODO: BlockSource removed */ net.minecraft.world.level.block.entity.DispenseEvent.DispensedItem removed in 1.21.1 (dispenser uses different API)
+import com.rekindled.embers.fluidtypes.EmbersFluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 
@@ -373,6 +373,7 @@ public class RegistryManager {
 		ATTACHMENT_TYPES.register("scales", () -> com.rekindled.embers.util.NbtBridge.attachment(com.rekindled.embers.augment.ShiftingScalesAugment.DefaultScalesCapability::new).build());
 	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(Registries.MENU, Embers.MODID);
 	public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES = DeferredRegister.create(Registries.STRUCTURE_TYPE, Embers.MODID);
+	public static final DeferredRegister<net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType> STRUCTURE_PIECE_TYPES = DeferredRegister.create(Registries.STRUCTURE_PIECE, Embers.MODID);
 	public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSOR_TYPES = DeferredRegister.create(Registries.STRUCTURE_PROCESSOR, Embers.MODID);
 
 	public static Map<Identifier, IAugment> augmentRegistry = new HashMap<Identifier, IAugment>();
@@ -386,7 +387,7 @@ public class RegistryManager {
 	}
 
 	public static FluidStuff addFluid(String localizedName, FluidInfo info, BiFunction<FluidType.Properties, FluidInfo, FluidType> type, BiFunction<Supplier<? extends FlowingFluid>, BlockBehaviour.Properties, LiquidBlock> block, @Nullable Consumer<BaseFlowingFluid.Properties> fluidProperties, FluidType.Properties prop) {
-		return addFluid(localizedName, info, type, block, BaseFlowingFluid.Source::new, BaseFlowingFluid.Flowing::new, fluidProperties, prop);
+		return addFluid(localizedName, info, type, block, EmbersFluidType.Source::new, EmbersFluidType.Flowing::new, fluidProperties, prop);
 	}
 
 	public static FluidType.Properties moltenMetalProps() {
@@ -581,7 +582,7 @@ public class RegistryManager {
 	public static final DeferredHolder<Item, Item> TINKER_LENS = com.rekindled.embers.util.RegCtx.item(ITEMS, "tinker_lens", () -> new Item(new Item.Properties().stacksTo(1)));
 	public static final DeferredHolder<Item, Item> SMOKY_TINKER_LENS = com.rekindled.embers.util.RegCtx.item(ITEMS, "smoky_tinker_lens", () -> new Item(new Item.Properties().stacksTo(1)));
 	public static final DeferredHolder<Item, Item> ANCIENT_CODEX = com.rekindled.embers.util.RegCtx.item(ITEMS, "ancient_codex", () -> new AncientCodexItem(new Item.Properties().stacksTo(1)));
-	public static final DeferredHolder<Item, Item> ATMOSPHERIC_GAUGE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "atmospheric_gauge", () -> new BlockItem(ATMOSPHERIC_GAUGE.get(), new Item.Properties().stacksTo(1)));
+	public static final DeferredHolder<Item, Item> ATMOSPHERIC_GAUGE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "atmospheric_gauge", () -> new BlockItem(ATMOSPHERIC_GAUGE.get(), new Item.Properties().stacksTo(1).useBlockDescriptionPrefix()));
 	public static final DeferredHolder<Item, Item> EMBER_JAR = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_jar", () -> new EmberJarItem(new Item.Properties().stacksTo(1)));
 	public static final DeferredHolder<Item, Item> EMBER_CARTRIDGE = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_cartridge", () -> new EmberCartridgeItem(new Item.Properties().stacksTo(1)));
 	public static final DeferredHolder<Item, Item> CLOCKWORK_PICKAXE = com.rekindled.embers.util.RegCtx.item(ITEMS, "clockwork_pickaxe", () -> new ClockworkPickaxeItem(new Item.Properties().stacksTo(1)));
@@ -602,63 +603,63 @@ public class RegistryManager {
 	public static final DeferredHolder<Item, Item> GLIMMER_LAMP = com.rekindled.embers.util.RegCtx.item(ITEMS, "glimmer_lamp", () -> new GlimmerLampItem(new Item.Properties().durability(1200)));
 
 	public static final DeferredHolder<Item, Item> COPPER_CELL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "copper_cell", () -> new CopperCellBlockItem(COPPER_CELL.get(), new Item.Properties().stacksTo(1)));
-	public static final DeferredHolder<Item, Item> CREATIVE_EMBER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "creative_ember_source", () -> new BlockItem(CREATIVE_EMBER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> EMBER_DIAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_dial", () -> new BlockItem(EMBER_DIAL.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ITEM_DIAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_dial", () -> new BlockItem(ITEM_DIAL.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> FLUID_DIAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "fluid_dial", () -> new BlockItem(FLUID_DIAL.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> EMBER_EMITTER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_emitter", () -> new BlockItem(EMBER_EMITTER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> EMBER_RECEIVER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_receiver", () -> new BlockItem(EMBER_RECEIVER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> CAMINITE_LEVER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_lever", () -> new BlockItem(CAMINITE_LEVER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> CAMINITE_BUTTON_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_button", () -> new BlockItem(CAMINITE_BUTTON.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ITEM_PIPE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_pipe", () -> new BlockItem(ITEM_PIPE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ITEM_EXTRACTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_extractor", () -> new BlockItem(ITEM_EXTRACTOR.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> EMBER_BORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_bore", () -> new BlockItem(EMBER_BORE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> MECHANICAL_CORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mechanical_core", () -> new BlockItem(MECHANICAL_CORE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> EMBER_ACTIVATOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_activator", () -> new BlockItem(EMBER_ACTIVATOR.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> MELTER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "melter", () -> new BlockItem(MELTER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> FLUID_PIPE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "fluid_pipe", () -> new BlockItem(FLUID_PIPE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> FLUID_EXTRACTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "fluid_extractor", () -> new BlockItem(FLUID_EXTRACTOR.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> CREATIVE_EMBER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "creative_ember_source", () -> new BlockItem(CREATIVE_EMBER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> EMBER_DIAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_dial", () -> new BlockItem(EMBER_DIAL.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> ITEM_DIAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_dial", () -> new BlockItem(ITEM_DIAL.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> FLUID_DIAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "fluid_dial", () -> new BlockItem(FLUID_DIAL.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> EMBER_EMITTER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_emitter", () -> new BlockItem(EMBER_EMITTER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> EMBER_RECEIVER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_receiver", () -> new BlockItem(EMBER_RECEIVER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> CAMINITE_LEVER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_lever", () -> new BlockItem(CAMINITE_LEVER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> CAMINITE_BUTTON_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_button", () -> new BlockItem(CAMINITE_BUTTON.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> ITEM_PIPE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_pipe", () -> new BlockItem(ITEM_PIPE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> ITEM_EXTRACTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_extractor", () -> new BlockItem(ITEM_EXTRACTOR.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> EMBER_BORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_bore", () -> new BlockItem(EMBER_BORE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> MECHANICAL_CORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mechanical_core", () -> new BlockItem(MECHANICAL_CORE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> EMBER_ACTIVATOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_activator", () -> new BlockItem(EMBER_ACTIVATOR.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> MELTER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "melter", () -> new BlockItem(MELTER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> FLUID_PIPE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "fluid_pipe", () -> new BlockItem(FLUID_PIPE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> FLUID_EXTRACTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "fluid_extractor", () -> new BlockItem(FLUID_EXTRACTOR.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	public static final DeferredHolder<Item, Item> FLUID_VESSEL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "fluid_vessel", () -> new FluidVesselBlockItem(FLUID_VESSEL.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> STAMPER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "stamper", () -> new BlockItem(STAMPER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> STAMP_BASE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "stamp_base", () -> new BlockItem(STAMP_BASE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> BIN_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "bin", () -> new BlockItem(BIN.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> MIXER_CENTRIFUGE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mixer_centrifuge", () -> new BlockItem(MIXER_CENTRIFUGE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ITEM_DROPPER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_dropper", () -> new BlockItem(ITEM_DROPPER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> PRESSURE_REFINERY_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "pressure_refinery", () -> new BlockItem(PRESSURE_REFINERY.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> EMBER_EJECTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_ejector", () -> new BlockItem(EMBER_EJECTOR.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> EMBER_FUNNEL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_funnel", () -> new BlockItem(EMBER_FUNNEL.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> EMBER_RELAY_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_relay", () -> new BlockItem(EMBER_RELAY.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> MIRROR_RELAY_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mirror_relay", () -> new BlockItem(MIRROR_RELAY.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> BEAM_SPLITTER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "beam_splitter", () -> new BlockItem(BEAM_SPLITTER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ITEM_VACUUM_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_vacuum", () -> new BlockItem(ITEM_VACUUM.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> HEARTH_COIL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "hearth_coil", () -> new BlockItem(HEARTH_COIL.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> RESERVOIR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "reservoir", () -> new BlockItem(RESERVOIR.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> STAMPER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "stamper", () -> new BlockItem(STAMPER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> STAMP_BASE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "stamp_base", () -> new BlockItem(STAMP_BASE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> BIN_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "bin", () -> new BlockItem(BIN.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> MIXER_CENTRIFUGE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mixer_centrifuge", () -> new BlockItem(MIXER_CENTRIFUGE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> ITEM_DROPPER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_dropper", () -> new BlockItem(ITEM_DROPPER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> PRESSURE_REFINERY_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "pressure_refinery", () -> new BlockItem(PRESSURE_REFINERY.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> EMBER_EJECTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_ejector", () -> new BlockItem(EMBER_EJECTOR.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> EMBER_FUNNEL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_funnel", () -> new BlockItem(EMBER_FUNNEL.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> EMBER_RELAY_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_relay", () -> new BlockItem(EMBER_RELAY.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> MIRROR_RELAY_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mirror_relay", () -> new BlockItem(MIRROR_RELAY.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> BEAM_SPLITTER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "beam_splitter", () -> new BlockItem(BEAM_SPLITTER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> ITEM_VACUUM_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_vacuum", () -> new BlockItem(ITEM_VACUUM.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> HEARTH_COIL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "hearth_coil", () -> new BlockItem(HEARTH_COIL.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> RESERVOIR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "reservoir", () -> new BlockItem(RESERVOIR.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	public static final DeferredHolder<Item, Item> CAMINITE_RING_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_ring", () -> new CaminiteRingBlockItem(CAMINITE_RING.get(), new Item.Properties()));
 	public static final DeferredHolder<Item, Item> CAMINITE_GAUGE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_gauge", () -> new CaminiteRingBlockItem(CAMINITE_GAUGE.get(), new Item.Properties()));
 	public static final DeferredHolder<Item, Item> CAMINITE_VALVE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_valve", () -> new CaminiteRingBlockItem(CAMINITE_VALVE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> CRYSTAL_CELL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "crystal_cell", () -> new BlockItem(CRYSTAL_CELL.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> CRYSTAL_CELL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "crystal_cell", () -> new BlockItem(CRYSTAL_CELL.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	public static final DeferredHolder<Item, Item> CLOCKWORK_ATTENUATOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "clockwork_attenuator", () -> new UpgradeItem(CLOCKWORK_ATTENUATOR.get(), new Item.Properties()));
 	public static final DeferredHolder<Item, Item> GEOLOGIC_SEPARATOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "geologic_separator", () -> new UpgradeItem(GEOLOGIC_SEPARATOR.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> COPPER_CHARGER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "copper_charger", () -> new BlockItem(COPPER_CHARGER.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> COPPER_CHARGER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "copper_charger", () -> new BlockItem(COPPER_CHARGER.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	public static final DeferredHolder<Item, Item> EMBER_SIPHON_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_siphon", () -> new UpgradeItem(EMBER_SIPHON.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ITEM_TRANSFER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_transfer", () -> new BlockItem(ITEM_TRANSFER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> FLUID_TRANSFER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "fluid_transfer", () -> new BlockItem(FLUID_TRANSFER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ALCHEMY_PEDESTAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "alchemy_pedestal", () -> new BlockItem(ALCHEMY_PEDESTAL.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ALCHEMY_TABLET_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "alchemy_tablet", () -> new BlockItem(ALCHEMY_TABLET.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> BEAM_CANNON_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "beam_cannon", () -> new BlockItem(BEAM_CANNON.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> MECHANICAL_PUMP_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mechanical_pump", () -> new BlockItem(MECHANICAL_PUMP.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> ITEM_TRANSFER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "item_transfer", () -> new BlockItem(ITEM_TRANSFER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> FLUID_TRANSFER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "fluid_transfer", () -> new BlockItem(FLUID_TRANSFER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> ALCHEMY_PEDESTAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "alchemy_pedestal", () -> new BlockItem(ALCHEMY_PEDESTAL.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> ALCHEMY_TABLET_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "alchemy_tablet", () -> new BlockItem(ALCHEMY_TABLET.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> BEAM_CANNON_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "beam_cannon", () -> new BlockItem(BEAM_CANNON.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> MECHANICAL_PUMP_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mechanical_pump", () -> new BlockItem(MECHANICAL_PUMP.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	public static final DeferredHolder<Item, Item> MINI_BOILER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mini_boiler", () -> new UpgradeItem(MINI_BOILER.get(), new Item.Properties()));
 	public static final DeferredHolder<Item, Item> CATALYTIC_PLUG_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "catalytic_plug", () -> new UpgradeItem(CATALYTIC_PLUG.get(), new Item.Properties()));
 	public static final DeferredHolder<Item, Item> WILDFIRE_STIRLING_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "wildfire_stirling", () -> new UpgradeItem(WILDFIRE_STIRLING.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> EMBER_INJECTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_injector", () -> new BlockItem(EMBER_INJECTOR.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> FIELD_CHART_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "field_chart", () -> new BlockItem(FIELD_CHART.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> IGNEM_REACTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ignem_reactor", () -> new BlockItem(IGNEM_REACTOR.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> CATALYSIS_CHAMBER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "catalysis_chamber", () -> new BlockItem(CATALYSIS_CHAMBER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> COMBUSTION_CHAMBER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "combustion_chamber", () -> new BlockItem(COMBUSTION_CHAMBER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> CINDER_PLINTH_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "cinder_plinth", () -> new BlockItem(CINDER_PLINTH.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> DAWNSTONE_ANVIL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "dawnstone_anvil", () -> new BlockItem(DAWNSTONE_ANVIL.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> AUTOMATIC_HAMMER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "automatic_hammer", () -> new BlockItem(AUTOMATIC_HAMMER.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> INFERNO_FORGE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "inferno_forge", () -> new BlockItem(INFERNO_FORGE.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> EMBER_INJECTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_injector", () -> new BlockItem(EMBER_INJECTOR.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> FIELD_CHART_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "field_chart", () -> new BlockItem(FIELD_CHART.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> IGNEM_REACTOR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ignem_reactor", () -> new BlockItem(IGNEM_REACTOR.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> CATALYSIS_CHAMBER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "catalysis_chamber", () -> new BlockItem(CATALYSIS_CHAMBER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> COMBUSTION_CHAMBER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "combustion_chamber", () -> new BlockItem(COMBUSTION_CHAMBER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> CINDER_PLINTH_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "cinder_plinth", () -> new BlockItem(CINDER_PLINTH.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> DAWNSTONE_ANVIL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "dawnstone_anvil", () -> new BlockItem(DAWNSTONE_ANVIL.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> AUTOMATIC_HAMMER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "automatic_hammer", () -> new BlockItem(AUTOMATIC_HAMMER.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> INFERNO_FORGE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "inferno_forge", () -> new BlockItem(INFERNO_FORGE.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	public static final DeferredHolder<Item, Item> MNEMONIC_INSCRIBER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mnemonic_inscriber", () -> new UpgradeItem(MNEMONIC_INSCRIBER.get(), new Item.Properties()));
 	public static final DeferredHolder<Item, Item> CHAR_INSTILLER_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "char_instiller", () -> new UpgradeItem(CHAR_INSTILLER.get(), new Item.Properties()));
 	public static final DeferredHolder<Item, Item> ATMOSPHERIC_BELLOWS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "atmospheric_bellows", () -> new UpgradeItem(ATMOSPHERIC_BELLOWS.get(), new Item.Properties()));
@@ -741,20 +742,20 @@ public class RegistryManager {
 	public static final DeferredHolder<Item, Item> LEAD_NUGGET = com.rekindled.embers.util.RegCtx.item(ITEMS, "lead_nugget", () -> new Item(new Item.Properties()));
 	public static final DeferredHolder<Item, Item> LEAD_PLATE = com.rekindled.embers.util.RegCtx.item(ITEMS, "lead_plate", () -> new Item(new Item.Properties()));
 
-	public static final DeferredHolder<Item, Item> LEAD_ORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "lead_ore", () -> new BlockItem(LEAD_ORE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> DEEPSLATE_LEAD_ORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "deepslate_lead_ore", () -> new BlockItem(DEEPSLATE_LEAD_ORE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> RAW_LEAD_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "raw_lead_block", () -> new BlockItem(RAW_LEAD_BLOCK.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> LEAD_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "lead_block", () -> new BlockItem(LEAD_BLOCK.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> LEAD_ORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "lead_ore", () -> new BlockItem(LEAD_ORE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> DEEPSLATE_LEAD_ORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "deepslate_lead_ore", () -> new BlockItem(DEEPSLATE_LEAD_ORE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> RAW_LEAD_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "raw_lead_block", () -> new BlockItem(RAW_LEAD_BLOCK.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> LEAD_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "lead_block", () -> new BlockItem(LEAD_BLOCK.get(), new Item.Properties().useBlockDescriptionPrefix()));
 
 	public static final DeferredHolder<Item, Item> RAW_SILVER = com.rekindled.embers.util.RegCtx.item(ITEMS, "raw_silver", () -> new Item(new Item.Properties()));
 	public static final DeferredHolder<Item, Item> SILVER_INGOT = com.rekindled.embers.util.RegCtx.item(ITEMS, "silver_ingot", () -> new Item(new Item.Properties()));
 	public static final DeferredHolder<Item, Item> SILVER_NUGGET = com.rekindled.embers.util.RegCtx.item(ITEMS, "silver_nugget", () -> new Item(new Item.Properties()));
 	public static final DeferredHolder<Item, Item> SILVER_PLATE = com.rekindled.embers.util.RegCtx.item(ITEMS, "silver_plate", () -> new Item(new Item.Properties()));
 
-	public static final DeferredHolder<Item, Item> SILVER_ORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "silver_ore", () -> new BlockItem(SILVER_ORE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> DEEPSLATE_SILVER_ORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "deepslate_silver_ore", () -> new BlockItem(DEEPSLATE_SILVER_ORE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> RAW_SILVER_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "raw_silver_block", () -> new BlockItem(RAW_SILVER_BLOCK.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> SILVER_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "silver_block", () -> new BlockItem(SILVER_BLOCK.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> SILVER_ORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "silver_ore", () -> new BlockItem(SILVER_ORE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> DEEPSLATE_SILVER_ORE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "deepslate_silver_ore", () -> new BlockItem(DEEPSLATE_SILVER_ORE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> RAW_SILVER_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "raw_silver_block", () -> new BlockItem(RAW_SILVER_BLOCK.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> SILVER_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "silver_block", () -> new BlockItem(SILVER_BLOCK.get(), new Item.Properties().useBlockDescriptionPrefix()));
 
 	public static final DeferredHolder<Item, Item> DAWNSTONE_INGOT = com.rekindled.embers.util.RegCtx.item(ITEMS, "dawnstone_ingot", () -> new Item(new Item.Properties()));
 	public static final DeferredHolder<Item, Item> DAWNSTONE_NUGGET = com.rekindled.embers.util.RegCtx.item(ITEMS, "dawnstone_nugget", () -> new Item(new Item.Properties()));
@@ -764,47 +765,47 @@ public class RegistryManager {
 	public static final DeferredHolder<Item, Item> MITHRIL_NUGGET = com.rekindled.embers.util.RegCtx.item(ITEMS, "mithril_nugget", () -> new Item(new Item.Properties()));
 	public static final DeferredHolder<Item, Item> MITHRIL_PLATE = com.rekindled.embers.util.RegCtx.item(ITEMS, "mithril_plate", () -> new Item(new Item.Properties()));
 
-	public static final DeferredHolder<Item, Item> DAWNSTONE_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "dawnstone_block", () -> new BlockItem(DAWNSTONE_BLOCK.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> MITHRIL_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mithril_block", () -> new BlockItem(MITHRIL_BLOCK.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> DAWNSTONE_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "dawnstone_block", () -> new BlockItem(DAWNSTONE_BLOCK.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> MITHRIL_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "mithril_block", () -> new BlockItem(MITHRIL_BLOCK.get(), new Item.Properties().useBlockDescriptionPrefix()));
 
 	public static final ToolSet LEAD_TOOLS = new ToolSet("lead", EmbersTiers.LEAD);
 	public static final ToolSet SILVER_TOOLS = new ToolSet("silver", EmbersTiers.SILVER);
 	public static final ToolSet DAWNSTONE_TOOLS = new ToolSet("dawnstone", EmbersTiers.DAWNSTONE);
 
-	public static final DeferredHolder<Item, Item> CAMINITE_BRICKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_bricks", () -> new BlockItem(CAMINITE_BRICKS.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> CAMINITE_BRICKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_bricks", () -> new BlockItem(CAMINITE_BRICKS.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { CAMINITE_BRICKS_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> CAMINITE_LARGE_BRICKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_large_bricks", () -> new BlockItem(CAMINITE_LARGE_BRICKS.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> CAMINITE_LARGE_BRICKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_large_bricks", () -> new BlockItem(CAMINITE_LARGE_BRICKS.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { CAMINITE_LARGE_BRICKS_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> RAW_CAMINITE_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "raw_caminite_block", () -> new BlockItem(RAW_CAMINITE_BLOCK.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> CAMINITE_LARGE_TILE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_large_tile", () -> new BlockItem(CAMINITE_LARGE_TILE.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> RAW_CAMINITE_BLOCK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "raw_caminite_block", () -> new BlockItem(RAW_CAMINITE_BLOCK.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> CAMINITE_LARGE_TILE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_large_tile", () -> new BlockItem(CAMINITE_LARGE_TILE.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { CAMINITE_LARGE_TILE_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> CAMINITE_TILES_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_tiles", () -> new BlockItem(CAMINITE_TILES.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> CAMINITE_TILES_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "caminite_tiles", () -> new BlockItem(CAMINITE_TILES.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { CAMINITE_TILES_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> ARCHAIC_BRICKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_bricks", () -> new BlockItem(ARCHAIC_BRICKS.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> ARCHAIC_BRICKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_bricks", () -> new BlockItem(ARCHAIC_BRICKS.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { ARCHAIC_BRICKS_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> ARCHAIC_EDGE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_edge", () -> new BlockItem(ARCHAIC_EDGE.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ARCHAIC_TILE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_tile", () -> new BlockItem(ARCHAIC_TILE.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> ARCHAIC_EDGE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_edge", () -> new BlockItem(ARCHAIC_EDGE.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> ARCHAIC_TILE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_tile", () -> new BlockItem(ARCHAIC_TILE.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { ARCHAIC_TILE_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> ARCHAIC_LARGE_BRICKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_large_bricks", () -> new BlockItem(ARCHAIC_LARGE_BRICKS.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> ARCHAIC_LARGE_BRICKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_large_bricks", () -> new BlockItem(ARCHAIC_LARGE_BRICKS.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { ARCHAIC_LARGE_BRICKS_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> ARCHAIC_LIGHT_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_light", () -> new BlockItem(ARCHAIC_LIGHT.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> ASHEN_STONE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ashen_stone", () -> new BlockItem(ASHEN_STONE.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> ARCHAIC_LIGHT_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "archaic_light", () -> new BlockItem(ARCHAIC_LIGHT.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> ASHEN_STONE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ashen_stone", () -> new BlockItem(ASHEN_STONE.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { ASHEN_STONE_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> ASHEN_BRICK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ashen_brick", () -> new BlockItem(ASHEN_BRICK.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> ASHEN_BRICK_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ashen_brick", () -> new BlockItem(ASHEN_BRICK.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { ASHEN_BRICK_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> ASHEN_TILE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ashen_tile", () -> new BlockItem(ASHEN_TILE.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> ASHEN_TILE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ashen_tile", () -> new BlockItem(ASHEN_TILE.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { ASHEN_TILE_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> SEALED_PLANKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "sealed_planks", () -> new BlockItem(SEALED_PLANKS.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> SEALED_PLANKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "sealed_planks", () -> new BlockItem(SEALED_PLANKS.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { SEALED_PLANKS_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> REINFORCED_SEALED_PLANKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "reinforced_sealed_planks", () -> new BlockItem(REINFORCED_SEALED_PLANKS.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> SEALED_WOOD_TILE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "sealed_wood_tile", () -> new BlockItem(SEALED_WOOD_TILE.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> REINFORCED_SEALED_PLANKS_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "reinforced_sealed_planks", () -> new BlockItem(REINFORCED_SEALED_PLANKS.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> SEALED_WOOD_TILE_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "sealed_wood_tile", () -> new BlockItem(SEALED_WOOD_TILE.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { SEALED_WOOD_TILE_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> SEALED_WOOD_PILLAR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "sealed_wood_pillar", () -> new BlockItem(SEALED_WOOD_PILLAR.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> SEALED_WOOD_KEG_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "sealed_wood_keg", () -> new BlockItem(SEALED_WOOD_KEG.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> SOLIDIFIED_METAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "solidified_metal", () -> new BlockItem(SOLIDIFIED_METAL.get(), new Item.Properties()));
-	public static final DeferredHolder<Item, Item> METAL_PLATFORM_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "metal_platform", () -> new BlockItem(METAL_PLATFORM.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> SEALED_WOOD_PILLAR_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "sealed_wood_pillar", () -> new BlockItem(SEALED_WOOD_PILLAR.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> SEALED_WOOD_KEG_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "sealed_wood_keg", () -> new BlockItem(SEALED_WOOD_KEG.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> SOLIDIFIED_METAL_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "solidified_metal", () -> new BlockItem(SOLIDIFIED_METAL.get(), new Item.Properties().useBlockDescriptionPrefix()));
+	public static final DeferredHolder<Item, Item> METAL_PLATFORM_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "metal_platform", () -> new BlockItem(METAL_PLATFORM.get(), new Item.Properties().useBlockDescriptionPrefix()));
 	static { METAL_PLATFORM_DECO.makeItems(); }
-	public static final DeferredHolder<Item, Item> EMBER_LANTERN_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_lantern", () -> new BlockItem(EMBER_LANTERN.get(), new Item.Properties()));
+	public static final DeferredHolder<Item, Item> EMBER_LANTERN_ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, "ember_lantern", () -> new BlockItem(EMBER_LANTERN.get(), new Item.Properties().useBlockDescriptionPrefix()));
 
 	//fluids
 	public static final FluidStuff MOLTEN_IRON = addFluid("Molten Iron", new FluidInfo("molten_iron", 0xC72913, 0.1F, 1.5F), MoltenMetalFluidType::new, (supplier, props) -> new net.minecraft.world.level.block.LiquidBlock(supplier.get(), props),
@@ -1106,6 +1107,7 @@ public class RegistryManager {
 
 	//structure types
 	public static final DeferredHolder<StructureType<?>, StructureType<CaveStructure>> CAVE_STRUCTURE = STRUCTURE_TYPES.<StructureType<CaveStructure>>register("cave_structure", () -> new StructureType<CaveStructure>() { @Override public com.mojang.serialization.MapCodec<CaveStructure> codec() { return CaveStructure.CODEC; } });
+	public static final DeferredHolder<net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType, net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType> CAVE_STRUCTURE_PIECE = STRUCTURE_PIECE_TYPES.register("cave_structure_piece", () -> com.rekindled.embers.worldgen.CaveStructurePiece::new);
 
 	//structure processor types
 	public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<CrystalSeedStructureProcessor>> CRYSTAL_SEED_PROCESSOR = STRUCTURE_PROCESSOR_TYPES.<StructureProcessorType<CrystalSeedStructureProcessor>>register("crystal_seed_processor", () -> new StructureProcessorType<CrystalSeedStructureProcessor>() { @Override public com.mojang.serialization.MapCodec<CrystalSeedStructureProcessor> codec() { return CrystalSeedStructureProcessor.CODEC; } });
@@ -1234,13 +1236,13 @@ public class RegistryManager {
 
 		public void makeItems() {
 			if (stairs != null) {
-				this.stairsItem = com.rekindled.embers.util.RegCtx.item(ITEMS, name + "_stairs", () -> new BlockItem(this.stairs.get(), new Item.Properties()));
+				this.stairsItem = com.rekindled.embers.util.RegCtx.item(ITEMS, name + "_stairs", () -> new BlockItem(this.stairs.get(), new Item.Properties().useBlockDescriptionPrefix()));
 			}
 			if (slab != null) {
-				this.slabItem = com.rekindled.embers.util.RegCtx.item(ITEMS, name + "_slab", () -> new BlockItem(this.slab.get(), new Item.Properties()));
+				this.slabItem = com.rekindled.embers.util.RegCtx.item(ITEMS, name + "_slab", () -> new BlockItem(this.slab.get(), new Item.Properties().useBlockDescriptionPrefix()));
 			}
 			if (wall != null) {
-				this.wallItem = com.rekindled.embers.util.RegCtx.item(ITEMS, name + "_wall", () -> new BlockItem(this.wall.get(), new Item.Properties()));
+				this.wallItem = com.rekindled.embers.util.RegCtx.item(ITEMS, name + "_wall", () -> new BlockItem(this.wall.get(), new Item.Properties().useBlockDescriptionPrefix()));
 			}
 		}
 
@@ -1289,7 +1291,7 @@ public class RegistryManager {
 		}
 
 		public void makeItem() {
-			ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, name + "_crystal_seed", () -> new BlockItem(BLOCK.get(), new Item.Properties()));
+			ITEM = com.rekindled.embers.util.RegCtx.item(ITEMS, name + "_crystal_seed", () -> new BlockItem(BLOCK.get(), new Item.Properties().useBlockDescriptionPrefix()));
 		}
 	}
 }

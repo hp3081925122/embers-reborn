@@ -122,3 +122,4 @@ gradle/
 build_*.txt
 docs/migration.md
 
+docs/TEST-2612.md

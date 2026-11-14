@@ -151,8 +151,7 @@ public class MechanicalPumpBottomBlockEntity extends BlockEntity implements IMec
 		BlockState state = level.getBlockState(pos);
 		if (state.getBlock() instanceof BucketPickup && !state.getFluidState().isEmpty() && state.getFluidState().isSource()) {
 			FluidStack stack = new FluidStack(state.getFluidState().getType(), FluidType.BUCKET_VOLUME);
-			if (stack != null) {
-				MechanicalPumpTopBlockEntity t = (MechanicalPumpTopBlockEntity)level.getBlockEntity(worldPosition.above());
+			if (stack != null && level.getBlockEntity(worldPosition.above()) instanceof MechanicalPumpTopBlockEntity t) {
 				int filled = t.getTank().fill(stack, IFluidHandler.FluidAction.SIMULATE);
 				if (filled == stack.getAmount()) {
 					t.getTank().fill(stack, IFluidHandler.FluidAction.EXECUTE);

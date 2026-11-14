@@ -126,11 +126,10 @@ public class WindingGearsAugment extends AugmentBase {
 	public static void setCharge(Level world, ItemStack stack, double charge) {
 		if (world.isClientSide())
 			return;
-		CompoundTag tagCompound = _getTag(stack);
-		if (tagCompound != null) {
-			tagCompound.putDouble(TAG_CHARGE, charge);
-			tagCompound.putLong(TAG_CHARGE_TIME, world.getGameTime());
-		}
+		CompoundTag tagCompound = _getOrCreateTag(stack);
+		tagCompound.putDouble(TAG_CHARGE, charge);
+		tagCompound.putLong(TAG_CHARGE_TIME, world.getGameTime());
+		_setTag(stack, tagCompound);
 	}
 
 	public static void depleteCharge(Level world, ItemStack stack, double charge) {
@@ -141,9 +140,6 @@ public class WindingGearsAugment extends AugmentBase {
 		if (world.isClientSide())
 			return;
 		setCharge(world, stack, Math.min(getMaxCharge(world, stack), getCharge(world, stack) + charge));
-		CompoundTag tagCompound = _getTag(stack);
-		if (tagCompound != null)
-			tagCompound.putLong(TAG_CHARGE_TIME, world.getGameTime());
 	}
 
 	public static float getSpeedBonus(Level world,ItemStack stack) {

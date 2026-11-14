@@ -18,9 +18,15 @@ public class AlchemyContext implements net.minecraft.world.item.crafting.RecipeI
 		this.seed = seed;
 	}
 
-	// RecipeInput interface
 	@Override
-	public int size() { return 0; }
+	public int size() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
 
 	@Override
 	public ItemStack getItem(int pSlot) {

@@ -3,7 +3,10 @@
   "conditions": [
     {
       "condition": "minecraft:match_tool",
-      "predicate": {}
+      "predicate": {
+        "items": "embers_reborn:grandhammer"
+      }
     }
-  ]
+  ],
+  "priority": 20
 }

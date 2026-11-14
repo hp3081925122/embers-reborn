@@ -64,9 +64,17 @@ public class StampingCategory implements IRecipeCategory<IStampingRecipe> {
 			amount = fluid.getAmount();
 		}
 
-		builder.addSlot(RecipeIngredientRole.INPUT, 8, 28).addIngredients(recipe.getDisplayInput());
+		var inputSlot = builder.addSlot(RecipeIngredientRole.INPUT, 8, 28);
+		if (recipe.getDisplayInput() != null) {
+			inputSlot.addIngredients(recipe.getDisplayInput());
+		} else {
+			Embers.LOGGER.debug("Skipping null display input ingredient in JEI StampingCategory for output {}", recipe.getResultItem());
+		}
 
-		builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 47, 7).addIngredients(recipe.getDisplayStamp());
+		var stampSlot = builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 47, 7);
+		if (recipe.getDisplayStamp() != null) {
+			stampSlot.addIngredients(recipe.getDisplayStamp());
+		}
 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 84, 28).addItemStack(recipe.getResultItem());
 

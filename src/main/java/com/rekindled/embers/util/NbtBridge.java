@@ -62,6 +62,8 @@ public final class NbtBridge {
 
 	/** 1.21.1 ItemStack.save: stack must not be empty. */
 	public static Tag save(ItemStack stack, HolderLookup.Provider provider) {
+		if (stack.isEmpty())
+			return new CompoundTag();
 		return ItemStack.CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), stack).getOrThrow();
 	}
 

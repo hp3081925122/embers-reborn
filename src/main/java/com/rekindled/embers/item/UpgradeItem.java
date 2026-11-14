@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.Block;
 public class UpgradeItem extends BlockItem {
 
 	public UpgradeItem(Block block, Properties properties) {
-		super(block, properties);
+		super(block, properties.useBlockDescriptionPrefix());
 	}
 
 	@Override

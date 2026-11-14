@@ -78,6 +78,7 @@ public class MixerCentrifugeTopBlockEntity extends net.minecraft.world.level.blo
 	}
 
 	public void saveAdditionalNbt(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
+		nbt.put("tank", com.rekindled.embers.util.NbtBridge.writeTank(tank, provider, new net.minecraft.nbt.CompoundTag()));
 		nbt.put("ember", capability.serializeNBT(provider));
 	}
 

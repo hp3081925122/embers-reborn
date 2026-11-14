@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class CaminiteRingBlockItem extends BlockItem{
 
 	public CaminiteRingBlockItem(Block block, Properties properties) {
-		super(block, properties);
+		super(block, properties.useBlockDescriptionPrefix());
 	}
 
 	@Override

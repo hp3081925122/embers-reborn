@@ -130,7 +130,7 @@ public class CaveStructure extends Structure {
 	static final Logger LOGGER = LogUtils.getLogger();
 
 	public static Optional<Structure.GenerationStub> addPieces(Structure.GenerationContext pContext, Holder<StructureTemplatePool> pStartPool, Optional<Identifier> pStartJigsawName, int pMaxDepth, BlockPos pPos, int maxHeight, boolean pUseExpansionHack, Optional<Heightmap.Types> pProjectStartToHeightmap, int pMaxDistanceFromCenter) {
-		net.minecraft.core.HolderLookup.Provider registryaccess = pContext.registryAccess();
+		net.minecraft.core.RegistryAccess registryaccess = pContext.registryAccess();
 		ChunkGenerator chunkgenerator = pContext.chunkGenerator();
 		StructureTemplateManager structuretemplatemanager = pContext.structureTemplateManager();
 		LevelHeightAccessor levelheightaccessor = pContext.heightAccessor();
@@ -177,8 +177,12 @@ public class CaveStructure extends Structure {
 				List<PoolElementStructurePiece> list = Lists.newArrayList();
 				list.add(poolelementstructurepiece);
 				if (pMaxDepth > 0) {
+					Registry<StructureTemplatePool> registry = registryaccess.lookupOrThrow(Registries.TEMPLATE_POOL);
 					AABB aabb = new AABB((double)(i - pMaxDistanceFromCenter), (double)(i1 - pMaxDistanceFromCenter), (double)(j - pMaxDistanceFromCenter), (double)(i + pMaxDistanceFromCenter + 1), (double)(i1 + pMaxDistanceFromCenter + 1), (double)(j + pMaxDistanceFromCenter + 1));
 					VoxelShape voxelshape = Shapes.join(Shapes.create(aabb), Shapes.create(AABB.of(boundingbox)), BooleanOp.ONLY_FIRST);
+					JigsawPlacement.addPieces(pContext.randomState(), pMaxDepth, pUseExpansionHack, chunkgenerator, structuretemplatemanager, levelheightaccessor, worldgenrandom, registry, poolelementstructurepiece, list, voxelshape, net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup.EMPTY, JigsawStructure.DEFAULT_LIQUID_SETTINGS);
+					list.forEach(p_227237_::addPiece);
+				} else {
 					list.forEach(p_227237_::addPiece);
 				}
 			}));
