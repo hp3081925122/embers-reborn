@@ -28,4 +28,9 @@ public class StampingContext implements net.minecraft.world.item.crafting.Recipe
 		return items != null ? items.getSlots() : 0;
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
 }

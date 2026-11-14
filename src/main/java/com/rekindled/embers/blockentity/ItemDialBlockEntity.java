@@ -34,7 +34,7 @@ public class ItemDialBlockEntity extends BlockEntity implements IDialEntity {
 		itemStacks = new ItemStack[items.size()];
 		if (items.size() > 0) {
 			for (int i = 0; i < items.size(); i++) {
-				itemStacks[i] = ItemStack.parse(provider, items.getCompound(i)).orElse(net.minecraft.world.item.ItemStack.EMPTY);
+				itemStacks[i] = ItemStack.parseOptional(provider, items.getCompound(i));
 			}
 		}
 		if (nbt.contains("more_lines"))
@@ -61,7 +61,7 @@ public class ItemDialBlockEntity extends BlockEntity implements IDialEntity {
 					ListTag items = new ListTag();
 					for (int i = 0; i < cap.getSlots() && i < maxLines; i++) {
 						ItemStack stack = cap.getStackInSlot(i);
-						items.add(stack.save(provider));
+						items.add(stack.saveOptional(provider));
 					}
 					nbt.put("items", items);
 

@@ -16,6 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
@@ -111,7 +112,7 @@ public class ToolExplosion extends Explosion {
 
 			for(BlockPos blockpos : this.getToBlow()) {
 				BlockState blockstate = myLevel.getBlockState(blockpos);
-				if (!blockstate.isAir()) {
+				if (!blockstate.isAir() && blockstate.getDestroySpeed(myLevel, blockpos) >= 0) {
 					BlockPos blockpos1 = blockpos.immutable();
 					myLevel.getProfiler().push("explosion_blocks");
 					if (blockstate.canDropFromExplosion(myLevel, blockpos, this)) {
@@ -130,8 +131,7 @@ public class ToolExplosion extends Explosion {
 
 							blockstate.spawnAfterBreak(serverlevel, blockpos, ItemStack.EMPTY, flag1);
 							blockstate.getDrops(lootparams$builder).forEach((p_46074_) -> {
-								// addBlockDrops equivalent: collect drops
-								objectarraylist.add(Pair.of(p_46074_, blockpos1));
+								addOrAppendStack(objectarraylist, p_46074_, blockpos1);
 							});
 						}
 					}
@@ -153,5 +153,19 @@ public class ToolExplosion extends Explosion {
 				}
 			}
 		}
+	}
+
+	private static void addOrAppendStack(List<Pair<ItemStack, BlockPos>> list, ItemStack stack, BlockPos pos) {
+		for (int i = 0; i < list.size(); ++i) {
+			Pair<ItemStack, BlockPos> pair = list.get(i);
+			ItemStack existing = pair.getFirst();
+			if (ItemEntity.areMergable(existing, stack)) {
+				list.set(i, Pair.of(ItemEntity.merge(existing, stack, 16), pair.getSecond()));
+				if (stack.isEmpty()) {
+					return;
+				}
+			}
+		}
+		list.add(Pair.of(stack, pos));
 	}
 }

@@ -83,6 +83,7 @@ public class AshenArmorGemItem extends AshenArmorItem implements IInflictorGemHo
 				tagCompound.remove("gem" + i);
 			}
 		}
+		_setTag(holder, tagCompound);
 	}
 
 	@Override
@@ -104,7 +105,7 @@ public class AshenArmorGemItem extends AshenArmorItem implements IInflictorGemHo
 		if (!isBroken(holder)) {
 			for (ItemStack stack : getAttachedGems(holder)) {
 				Item item = stack.getItem();
-				if (item instanceof IInflictorGem gem && gem.getAttunedSource(stack).equals(source.type().msgId())) {
+				if (item instanceof IInflictorGem gem && java.util.Objects.equals(gem.getAttunedSource(stack), source.type().msgId())) {
 					reduction += gem.getDamageResistance(stack, reduction);
 				}
 			}

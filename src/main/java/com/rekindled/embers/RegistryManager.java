@@ -378,6 +378,7 @@ public class RegistryManager {
 		ATTACHMENT_TYPES.register("scales", () -> net.neoforged.neoforge.attachment.AttachmentType.serializable(com.rekindled.embers.augment.ShiftingScalesAugment.DefaultScalesCapability::new).build());
 	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(Registries.MENU, Embers.MODID);
 	public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES = DeferredRegister.create(Registries.STRUCTURE_TYPE, Embers.MODID);
+	public static final DeferredRegister<net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType> STRUCTURE_PIECE_TYPES = DeferredRegister.create(Registries.STRUCTURE_PIECE, Embers.MODID);
 	public static final DeferredRegister<StructureProcessorType<?>> STRUCTURE_PROCESSOR_TYPES = DeferredRegister.create(Registries.STRUCTURE_PROCESSOR, Embers.MODID);
 
 	public static Map<ResourceLocation, IAugment> augmentRegistry = new HashMap<ResourceLocation, IAugment>();
@@ -1111,6 +1112,7 @@ public class RegistryManager {
 
 	//structure types
 	public static final DeferredHolder<StructureType<?>, StructureType<CaveStructure>> CAVE_STRUCTURE = STRUCTURE_TYPES.<StructureType<CaveStructure>>register("cave_structure", () -> new StructureType<CaveStructure>() { @Override public com.mojang.serialization.MapCodec<CaveStructure> codec() { return CaveStructure.CODEC; } });
+	public static final DeferredHolder<net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType, net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType> CAVE_STRUCTURE_PIECE = STRUCTURE_PIECE_TYPES.register("cave_structure_piece", () -> com.rekindled.embers.worldgen.CaveStructurePiece::new);
 
 	//structure processor types
 	public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<CrystalSeedStructureProcessor>> CRYSTAL_SEED_PROCESSOR = STRUCTURE_PROCESSOR_TYPES.<StructureProcessorType<CrystalSeedStructureProcessor>>register("crystal_seed_processor", () -> new StructureProcessorType<CrystalSeedStructureProcessor>() { @Override public com.mojang.serialization.MapCodec<CrystalSeedStructureProcessor> codec() { return CrystalSeedStructureProcessor.CODEC; } });

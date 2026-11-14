@@ -10,7 +10,8 @@ public class CatalysisCombustionContext implements net.minecraft.world.item.craf
 	public ItemStack machine;
 
 	public CatalysisCombustionContext(IItemHandlerModifiable inv, ItemStack machine) {
-				this.machine = machine;
+		this.items = inv;
+		this.machine = machine;
 	}
 	public net.neoforged.neoforge.items.IItemHandlerModifiable items;
 

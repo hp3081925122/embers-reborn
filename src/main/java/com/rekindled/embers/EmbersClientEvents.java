@@ -499,7 +499,7 @@ public class EmbersClientEvents {
 		EntropicEnumeratorBlockEntityRenderer.cubies[0][1][1] = getModel(bakery, "entropic_enumerator_urb");
 		EntropicEnumeratorBlockEntityRenderer.cubies[1][1][1] = getModel(bakery, "entropic_enumerator_ulb");
 		ExcavationBucketsBlockEntityRenderer.wheel = getModel(bakery, "excavation_buckets_wheel");
-		ExcavationBucketsUpgrade.buckets = getModel(bakery, "ember_bore_excavation_buckets");
+		ExcavationBucketsUpgrade.CLientStuff.buckets = getModel(bakery, "ember_bore_excavation_buckets");
 	}
 
 	public static BakedModel getModel(ModelBakery bakery, String name) {

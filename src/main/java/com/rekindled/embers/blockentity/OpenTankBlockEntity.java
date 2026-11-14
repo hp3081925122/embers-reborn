@@ -51,8 +51,8 @@ public abstract class OpenTankBlockEntity extends net.minecraft.world.level.bloc
 	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.saveAdditional(nbt, provider);
 		tank.writeToNBT(provider, nbt);
-		if (lastEscaped != null) {
-			nbt.put("lastEscaped", (net.minecraft.nbt.CompoundTag) lastEscaped.save(provider, new net.minecraft.nbt.CompoundTag()));
+		if (lastEscaped != null && !lastEscaped.isEmpty()) {
+			nbt.put("lastEscaped", (CompoundTag) lastEscaped.saveOptional(provider));
 			nbt.putLong("lastEscapedTick", lastEscapedTickServer);
 		}
 	}
@@ -61,8 +61,8 @@ public abstract class OpenTankBlockEntity extends net.minecraft.world.level.bloc
 	public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider provider) {
 		CompoundTag nbt = super.getUpdateTag(provider);
 		tank.writeToNBT(provider, nbt);
-		if (lastEscaped != null) {
-			nbt.put("lastEscaped", (net.minecraft.nbt.CompoundTag) lastEscaped.save(provider, new net.minecraft.nbt.CompoundTag()));
+		if (lastEscaped != null && !lastEscaped.isEmpty()) {
+			nbt.put("lastEscaped", (CompoundTag) lastEscaped.saveOptional(provider));
 			nbt.putLong("lastEscapedTick", lastEscapedTickServer);
 		}
 		return nbt;

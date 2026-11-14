@@ -11,9 +11,13 @@ public class FluidHandlerContext implements net.minecraft.world.item.crafting.Re
 		this.fluid = fluid;
 	}
 
-	// RecipeInput interface
 	@Override
 	public int size() { return 0; }
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
 
 	@Override
 	public ItemStack getItem(int pSlot) {

@@ -1,6 +1,7 @@
 {
 	"parent": "block/block",
 	"textures": {
+		"particle": "#bore",
 		"bore": "embers_reborn:block/bore_blade"
 	},
 	"elements": [

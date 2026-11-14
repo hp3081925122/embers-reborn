@@ -163,9 +163,8 @@ public class BlastingExplosion extends Explosion {
 						if (entity instanceof LivingEntity living)
 							living.hurtTime = 0;
 						double d11;
-						if (entity instanceof LivingEntity) {
-							LivingEntity livingentity = (LivingEntity)entity;
-							d11 = 0.0f;
+						if (entity instanceof LivingEntity livingentity) {
+							d11 = d10 * (1.0D - livingentity.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.EXPLOSION_KNOCKBACK_RESISTANCE));
 						} else {
 							d11 = d10;
 						}

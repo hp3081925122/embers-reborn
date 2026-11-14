@@ -72,7 +72,8 @@ public class CuriosCompat {
 			Map<String, ICurioStacksHandler> curios = inv.orElseThrow().getCurios();
 			for (ICurioStacksHandler curio : curios.values()) {
 				for (int i = 0; i < curio.getStacks().getSlots(); i++) {
-					if (predicate.test(curio.getStacks().getStackInSlot(i))) {
+					ItemStack stack = curio.getStacks().getStackInSlot(i);
+					if (!stack.isEmpty() && predicate.test(stack)) {
 						return true;
 					}
 				}

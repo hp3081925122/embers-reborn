@@ -41,8 +41,8 @@ public class EntropicEnumeratorUpgrade extends DefaultUpgradeProvider {
 					if (upgrade.upgrade() instanceof EntropicEnumeratorUpgrade firstEnumerator) {
 						if (firstEnumerator == this) {
 							first = true;
-						} else {
-							willFail = ((EntropicEnumeratorBlockEntity) firstEnumerator.tile).willFail;
+						} else if (firstEnumerator.tile instanceof EntropicEnumeratorBlockEntity firstTile) {
+							willFail = firstTile.willFail;
 						}
 						break;
 					}

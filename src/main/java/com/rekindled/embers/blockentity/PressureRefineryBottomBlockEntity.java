@@ -92,6 +92,7 @@ public class PressureRefineryBottomBlockEntity extends net.minecraft.world.level
 	@Override
 	public void loadAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.loadAdditional(nbt, provider);
+		tank.readFromNBT(provider, nbt.getCompound("tank"));
 		inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
 		progress = nbt.getInt("progress");
 	}
@@ -99,6 +100,7 @@ public class PressureRefineryBottomBlockEntity extends net.minecraft.world.level
 	@Override
 	public void saveAdditional(CompoundTag nbt, net.minecraft.core.HolderLookup.Provider provider) {
 		super.saveAdditional(nbt, provider);
+		nbt.put("tank", tank.writeToNBT(provider, new CompoundTag()));
 		nbt.put("inventory", inventory.serializeNBT(provider));
 		nbt.putInt("progress", progress);
 	}

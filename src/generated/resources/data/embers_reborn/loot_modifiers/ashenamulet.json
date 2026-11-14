@@ -3,7 +3,9 @@
   "conditions": [
     {
       "condition": "embers_reborn:match_curio",
-      "predicate": {}
+      "predicate": {
+        "items": "embers_reborn:ashen_amulet"
+      }
     }
   ]
 }

@@ -1,22 +1,25 @@
 package com.rekindled.embers.util;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.rekindled.embers.Embers;
 import com.rekindled.embers.api.augment.AugmentUtil;
 import com.rekindled.embers.api.augment.IAugment;
 
+import net.minecraft.advancements.critereon.ItemSubPredicate;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 
-/**
- * In 1.21.1 ItemPredicate is a final record (cannot be extended).
- * Implement Predicate<ItemStack> directly instead.
- */
-public class AugmentPredicate implements java.util.function.Predicate<ItemStack> {
+public class AugmentPredicate implements ItemSubPredicate {
 
 	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(Embers.MODID, "augment");
+
+	public static final Codec<AugmentPredicate> CODEC = RecordCodecBuilder.create(inst -> inst.group(
+			ResourceLocation.CODEC.fieldOf("augment").forGetter(p -> p.augment.getName()),
+			Codec.INT.optionalFieldOf("level", 1).forGetter(p -> p.level)
+	).apply(inst, (augmentId, level) -> new AugmentPredicate(AugmentUtil.getAugment(augmentId), level)));
+
+	public static final ItemSubPredicate.Type<AugmentPredicate> TYPE = new ItemSubPredicate.Type<>(CODEC);
 
 	protected final IAugment augment;
 	protected final int level;
@@ -27,26 +30,9 @@ public class AugmentPredicate implements java.util.function.Predicate<ItemStack>
 	}
 
 	@Override
-	public boolean test(ItemStack stack) {
-		if (stack == null || stack.isEmpty())
+	public boolean matches(ItemStack stack) {
+		if (stack == null || stack.isEmpty() || augment == null)
 			return false;
 		return AugmentUtil.hasHeat(stack) && AugmentUtil.getAugmentLevel(stack, augment) >= level;
-	}
-
-	public JsonElement serializeToJson() {
-		JsonObject json = new JsonObject();
-		json.addProperty("type", ID.toString());
-		json.addProperty("augment", augment.getName().toString());
-		if (level != 1)
-			json.addProperty("level", level);
-		return json;
-	}
-
-	public static AugmentPredicate deserialize(JsonObject json) {
-		IAugment augment = AugmentUtil.getAugment(ResourceLocation.parse(GsonHelper.getAsString(json, "augment")));
-		int level = 1;
-		if (json.has("level"))
-			level = GsonHelper.getAsInt(json, "level");
-		return new AugmentPredicate(augment, level);
 	}
 }

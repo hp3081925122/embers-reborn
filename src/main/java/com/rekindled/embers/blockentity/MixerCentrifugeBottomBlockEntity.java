@@ -129,7 +129,7 @@ public class MixerCentrifugeBottomBlockEntity extends BlockEntity implements IMe
 	}
 
 	public static void serverTick(Level level, BlockPos pos, BlockState state, MixerCentrifugeBottomBlockEntity blockEntity) {
-		MixerCentrifugeTopBlockEntity top = (MixerCentrifugeTopBlockEntity) level.getBlockEntity(pos.above());
+		MixerCentrifugeTopBlockEntity top = level.getBlockEntity(pos.above()) instanceof MixerCentrifugeTopBlockEntity t ? t : null;
 		boolean wasWorking = blockEntity.isWorking;
 		blockEntity.isWorking = false;
 		if (top != null) {

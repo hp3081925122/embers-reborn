@@ -2,6 +2,7 @@
     "gui_light": "front",
     "parent":"embers_reborn:item/handheld_model_base",
     "textures": {
+        "particle": "embers_reborn:item/tool_parts_one",
         "0": "embers_reborn:item/tool_parts_one",
         "1": "embers_reborn:item/tool_parts_three",
         "2": "embers_reborn:item/tool_parts_four",

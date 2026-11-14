@@ -3,7 +3,13 @@
   "conditions": [
     {
       "condition": "minecraft:match_tool",
-      "predicate": {}
+      "predicate": {
+        "predicates": {
+          "embers_reborn:augment": {
+            "augment": "embers_reborn:superheater"
+          }
+        }
+      }
     }
   ]
 }

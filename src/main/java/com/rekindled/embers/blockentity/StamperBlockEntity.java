@@ -138,7 +138,8 @@ public class StamperBlockEntity extends BlockEntity implements IMechanicallyPowe
 			if (UpgradeUtil.doTick(blockEntity, blockEntity.upgrades))
 				return;
 
-			StampBaseBlockEntity stamp = (StampBaseBlockEntity) level.getBlockEntity(pos.below(2));
+			if (!(level.getBlockEntity(pos.below(2)) instanceof StampBaseBlockEntity stamp))
+				return;
 			IFluidHandler handler = stamp.getTank();
 
 			StampingContext context = new StampingContext(stamp.inventory, handler, blockEntity.stamp.getStackInSlot(0));

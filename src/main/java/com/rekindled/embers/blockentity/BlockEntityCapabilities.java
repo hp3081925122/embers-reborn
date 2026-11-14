@@ -27,6 +27,7 @@ public class BlockEntityCapabilities {
 	public static void register(RegisterCapabilitiesEvent event) {
 		// --- item handlers, all sides ---
 		event.registerBlockEntity(ITEM, RegistryManager.ALCHEMY_PEDESTAL_ENTITY.get(), (be, side) -> be.inventory);
+		event.registerBlockEntity(ITEM, RegistryManager.ALCHEMY_PEDESTAL_TOP_ENTITY.get(), (be, side) -> be.inventory);
 		event.registerBlockEntity(ITEM, RegistryManager.BIN_ENTITY.get(), (be, side) -> be.inventory);
 		event.registerBlockEntity(ITEM, RegistryManager.CATALYSIS_CHAMBER_ENTITY.get(), (be, side) -> be.inventory);
 		event.registerBlockEntity(ITEM, RegistryManager.COMBUSTION_CHAMBER_ENTITY.get(), (be, side) -> be.inventory);
@@ -113,6 +114,7 @@ public class BlockEntityCapabilities {
 		event.registerBlockEntity(FLUID, RegistryManager.MELTER_TOP_ENTITY.get(), (be, side) -> be);
 		event.registerBlockEntity(FLUID, RegistryManager.STAMP_BASE_ENTITY.get(), (be, side) -> be);
 		event.registerBlockEntity(FLUID, RegistryManager.MIXER_CENTRIFUGE_TOP_ENTITY.get(), (be, side) -> be);
+		event.registerBlockEntity(FLUID, RegistryManager.MECHANICAL_PUMP_TOP_ENTITY.get(), (be, side) -> be);
 		event.registerBlockEntity(FLUID, RegistryManager.PRESSURE_REFINERY_BOTTOM_ENTITY.get(), (be, side) -> be);
 		event.registerBlockEntity(FLUID, RegistryManager.RESERVOIR_ENTITY.get(),
 				(be, side) -> (side == null || side == Direction.DOWN) ? be : null);
