@@ -1,12 +1,9 @@
 package com.rekindled.embers.item;
 
 import com.rekindled.embers.datagen.EmbersSounds;
-import com.rekindled.embers.gui.GuiCodex;
 import com.rekindled.embers.research.ResearchBase;
 import com.rekindled.embers.research.ResearchManager;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -24,12 +21,11 @@ public class AncientCodexItem extends Item {
 
 	@Override
 	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-		if (context.getLevel().isClientSide() && net.minecraft.client.Minecraft.getInstance().hasControlDown() && context.getPlayer() != null) {
+		if (context.getLevel().isClientSide() && com.rekindled.embers.client.ClientAccess.hasControlDown() && context.getPlayer() != null) {
 			ResearchBase research = ResearchManager.researchByItem.get(context.getLevel().getBlockState(context.getClickedPos()).getBlock().asItem());
 			if (research != null) {
-				GuiCodex.instance.researchPage = research;
 				ResearchManager.markCheckedOnOpen(research);
-				Minecraft.getInstance().setScreen(GuiCodex.instance);
+				com.rekindled.embers.client.ClientAccess.openCodex(research);
 				context.getLevel().playSound(context.getPlayer(), context.getPlayer(), EmbersSounds.CODEX_OPEN.get(), SoundSource.MASTER, 0.75f, 1.0f);
 				return InteractionResult.SUCCESS;
 			}
@@ -40,7 +36,7 @@ public class AncientCodexItem extends Item {
 	@Override
 	public InteractionResult use(Level level, Player player, InteractionHand hand) {
 		if (level.isClientSide()) {
-			Minecraft.getInstance().setScreen(GuiCodex.instance);
+			com.rekindled.embers.client.ClientAccess.openCodex();
 			level.playSound(player, player, EmbersSounds.CODEX_OPEN.get(), SoundSource.MASTER, 0.75f, 1.0f);
 		}
 		return InteractionResult.SUCCESS.heldItemTransformedTo(player.getItemInHand(hand));

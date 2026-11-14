@@ -5,11 +5,8 @@ import com.rekindled.embers.RegistryManager;
 import com.rekindled.embers.network.PacketHandler;
 import com.rekindled.embers.network.message.MessageItemSound;
 import com.rekindled.embers.util.MultiblockSoundType;
-import com.rekindled.embers.util.sound.ItemUseSound;
-import com.rekindled.embers.util.sound.MachineSound;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
@@ -222,11 +219,11 @@ public class EmbersSounds extends SoundDefinitionsProvider {
 	}
 
 	public static void playMachineSound(BlockEntity tile, int id, SoundEvent soundIn, SoundSource categoryIn, boolean repeat, float volume, float pitch, float xIn, float yIn, float zIn) {
-		Minecraft.getInstance().getSoundManager().play(new MachineSound(tile, id, soundIn, categoryIn, repeat, volume, pitch, xIn, yIn, zIn));
+		com.rekindled.embers.client.ClientAccess.playMachineSound(tile, id, soundIn, categoryIn, repeat, volume, pitch, xIn, yIn, zIn);
 	}
 
 	public static void playItemSoundClient(LivingEntity entity, Item item, SoundEvent soundIn, SoundSource categoryIn, boolean repeat, float volume, float pitch) {
-		Minecraft.getInstance().getSoundManager().play(new ItemUseSound(entity, item, soundIn, categoryIn, repeat, volume, pitch));
+		com.rekindled.embers.client.ClientAccess.playItemSound(entity, item, soundIn, categoryIn, repeat, volume, pitch);
 	}
 
 	public static void playItemSound(LivingEntity entity, Item item, SoundEvent soundIn, SoundSource categoryIn, boolean repeat, float volume, float pitch) {

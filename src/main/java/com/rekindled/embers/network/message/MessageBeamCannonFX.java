@@ -6,7 +6,6 @@ import com.rekindled.embers.particle.GlowParticleOptions;
 import com.rekindled.embers.particle.StarParticleOptions;
 import com.rekindled.embers.util.EmbersColors;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -64,7 +63,7 @@ public class MessageBeamCannonFX implements CustomPacketPayload {
 
 	@SuppressWarnings("resource")
 	public static void spawnParticles(MessageBeamCannonFX msg) {
-		Level world = Minecraft.getInstance().level;
+		Level world = com.rekindled.embers.client.ClientAccess.level();
 		double distance = Math.sqrt(msg.dX * msg.dX + msg.dY * msg.dY + msg.dZ * msg.dZ);
 		double segments = distance * 4;
 		GlowParticleOptions options = new GlowParticleOptions(EmbersColors.EMBER_ID, 5.0F);

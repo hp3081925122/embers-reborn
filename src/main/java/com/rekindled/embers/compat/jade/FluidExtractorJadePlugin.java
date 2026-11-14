@@ -18,36 +18,49 @@ import snownee.jade.api.WailaPlugin;
 import snownee.jade.api.config.IPluginConfig;
 
 @WailaPlugin(Embers.MODID)
-public class FluidExtractorJadePlugin implements IWailaPlugin, IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
+public class FluidExtractorJadePlugin implements IWailaPlugin {
 
 	private static final Identifier UID = Identifier.fromNamespaceAndPath(Embers.MODID, "fluid_extractor_stuck");
 	private static final String STUCK = "Stuck";
 
 	@Override
 	public void register(snownee.jade.api.IWailaCommonRegistration registration) {
-		registration.registerBlockDataProvider(this, FluidExtractorBlock.class);
+		registration.registerBlockDataProvider(Server.INSTANCE, FluidExtractorBlock.class);
 	}
 
 	@Override
 	public void registerClient(snownee.jade.api.IWailaClientRegistration registration) {
-		registration.registerBlockComponent(this, FluidExtractorBlock.class);
+		registration.registerBlockComponent(Client.INSTANCE, FluidExtractorBlock.class);
 	}
 
-	@Override
-	public Identifier getUid() {
-		return UID;
+	public enum Server implements IServerDataProvider<BlockAccessor> {
+		INSTANCE;
+
+		@Override
+		public Identifier getUid() {
+			return UID;
+		}
+
+		@Override
+		public void appendServerData(CompoundTag data, BlockAccessor accessor) {
+			if (accessor.getBlockEntity() instanceof FluidExtractorBlockEntity extractor && stuck(extractor))
+				data.putBoolean(STUCK, true);
+		}
 	}
 
-	@Override
-	public void appendServerData(CompoundTag data, BlockAccessor accessor) {
-		if (accessor.getBlockEntity() instanceof FluidExtractorBlockEntity extractor && stuck(extractor))
-			data.putBoolean(STUCK, true);
-	}
+	public enum Client implements IBlockComponentProvider {
+		INSTANCE;
 
-	@Override
-	public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
-		if (accessor.getServerData().getBooleanOr(STUCK, false))
-			tooltip.add(Component.translatable(Embers.MODID + ".tooltip.fluid_extractor.stuck").withStyle(ChatFormatting.GRAY));
+		@Override
+		public Identifier getUid() {
+			return UID;
+		}
+
+		@Override
+		public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
+			if (accessor.getServerData().getBooleanOr(STUCK, false))
+				tooltip.add(Component.translatable(Embers.MODID + ".tooltip.fluid_extractor.stuck").withStyle(ChatFormatting.GRAY));
+		}
 	}
 
 	private static boolean stuck(FluidExtractorBlockEntity extractor) {

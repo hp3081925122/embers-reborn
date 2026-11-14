@@ -10,7 +10,6 @@ import com.rekindled.embers.datagen.EmbersSounds;
 import com.rekindled.embers.particle.SmokeParticleOptions;
 import com.rekindled.embers.util.EmberInventoryUtil;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -40,7 +39,7 @@ public class CinderJetAugment extends AugmentBase {
 	@SubscribeEvent
 	public void onLivingTick(net.neoforged.neoforge.event.tick.EntityTickEvent.Pre event) {
 		if (!(event.getEntity() instanceof LivingEntity entity)) return;
-		if (entity instanceof Player player && (!entity.level().isClientSide() || entity == Minecraft.getInstance().player)) {
+		if (entity instanceof Player player && (!entity.level().isClientSide() || entity == com.rekindled.embers.client.ClientAccess.player())) {
 			UUID id = entity.getUUID();
 			if (getSprinting(entity.level()).containsKey(id)) {
 				if (entity.isSprinting() && !getSprinting(entity.level()).get(id)) {

@@ -4,7 +4,6 @@ import org.apache.commons.lang3.Validate;
 
 import com.rekindled.embers.datagen.EmbersSounds;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -73,7 +72,7 @@ public class MessageItemSound implements CustomPacketPayload {
 	public static void handle(MessageItemSound msg, IPayloadContext ctx) {
 		if (ctx.flow().isClientbound()) {
 			ctx.enqueueWork(() -> {
-				if (Minecraft.getInstance().level.getEntity(msg.id) instanceof LivingEntity entity)
+				if (com.rekindled.embers.client.ClientAccess.level().getEntity(msg.id) instanceof LivingEntity entity)
 					EmbersSounds.playItemSoundClient(entity, msg.item, msg.sound, msg.source, msg.repeat, msg.volume, msg.pitch);
 			});
 		}

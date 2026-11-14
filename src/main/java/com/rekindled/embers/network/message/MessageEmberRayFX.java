@@ -6,7 +6,6 @@ import com.rekindled.embers.api.EmbersAPI;
 import com.rekindled.embers.particle.GlowParticleOptions;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -73,7 +72,7 @@ public class MessageEmberRayFX implements CustomPacketPayload {
 
 	@SuppressWarnings("resource")
 	public static void spawnParticles(MessageEmberRayFX msg) {
-		Level world = Minecraft.getInstance().level;
+		Level world = com.rekindled.embers.client.ClientAccess.level();
 		double distance = Math.sqrt(msg.dX * msg.dX + msg.dY * msg.dY + msg.dZ * msg.dZ);
 		double segments = distance * 4;
 		GlowParticleOptions options = new GlowParticleOptions(EmbersAPI.getColor(msg.colorId, Misc.colorFromInt(msg.packedColor)), 2.0F);

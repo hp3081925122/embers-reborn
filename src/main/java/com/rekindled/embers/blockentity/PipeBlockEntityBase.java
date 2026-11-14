@@ -8,7 +8,6 @@ import com.rekindled.embers.particle.GlowParticleOptions;
 import com.rekindled.embers.util.EmbersColors;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -159,7 +158,7 @@ public class PipeBlockEntityBase extends BlockEntity {
 	}
 
 	public static void clientTick(Level level, BlockPos pos, BlockState state, PipeBlockEntityBase blockEntity) {
-		if (blockEntity.lastTransfer != null && Misc.isWearingLens(Minecraft.getInstance().player)) {
+		if (blockEntity.lastTransfer != null && Misc.isWearingLens(com.rekindled.embers.client.ClientAccess.player())) {
 			float vx = blockEntity.lastTransfer.getStepX() / 1;
 			float vy = blockEntity.lastTransfer.getStepY() / 1;
 			float vz = blockEntity.lastTransfer.getStepZ() / 1;

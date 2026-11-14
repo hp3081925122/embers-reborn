@@ -3,12 +3,9 @@ package com.rekindled.embers.augment;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
 import java.util.UUID;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 // net.neoforged.neoforge.event.entity.living.LivingEvent removed in 1.21.1
 
 import javax.annotation.Nonnull;
@@ -24,8 +21,6 @@ import com.rekindled.embers.datagen.EmbersSounds;
 import com.rekindled.embers.network.PacketHandler;
 import com.rekindled.embers.network.message.MessageScalesData;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
@@ -167,89 +162,6 @@ public class ShiftingScalesAugment extends AugmentBase {
 			EmbersAPI.setScales(entity, scales);
 			event.setNewDamage((float) ((damage == 0 ? 0 : damage / multiplier) + extraDamage));
 		}
-	}
-
-	public static void renderHeartsOverlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
-		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-		if (mc.player.isCreative() || mc.player.isSpectator())
-			return;
-		int x = getBarX(width);
-		int y = getBarY(height);
-
-		int segs = scales / 3;
-		int last = scales % 3;
-		if (last > 0)
-			segs++;
-		int u = 18;
-		int v = 0;
-
-		for (int i = 0; i < segs; i++) {
-			if (i == segs - 1)
-				u = ((last + 2) % 3) * 9;
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + 8 * (i % 10),  y - 10 * (i / 10),  u,  v,  9,  9, 256, 256);
-		}
-	}
-
-	private static int getBarY(int height) {
-		return height - 39;
-	}
-
-	private static int getBarX(int width) {
-		return width / 2 - 11 - 8 * 10;
-	}
-
-	@SubscribeEvent
-	public void onClientTick(ClientTickEvent.Pre event) {
-		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
-			Iterator<ShardParticle> iterator = shards.iterator();
-			while (iterator.hasNext()) {
-				ShardParticle particle = iterator.next();
-				particle.update();
-			}
-		}
-	}
-
-	public static void renderIngameOverlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
-		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-		if (mc.player.isCreative() || mc.player.isSpectator())
-			return;
-		Iterator<ShardParticle> iterator = shards.iterator();
-		while (iterator.hasNext()) {
-			ShardParticle particle = iterator.next();
-			if (particle.getY() > height)
-				iterator.remove();
-			int u = particle.getFrame() % 8 > 4 ? 5 : 0;
-			int v = 9;
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD, (int) particle.getX() - 2, (int) particle.getY() - 2, u, v, 5, 5, 256, 256);
-		}
-		Random random = new Random();
-		if (scales < scalesLast) {
-			int x = getBarX(width);
-			int y = getBarY(height);
-
-			int segsLast = scalesLast / 3;
-			int lastLast = scalesLast % 3;
-			if (lastLast > 0)
-				segsLast++;
-			int segs = scales / 3;
-			int last = scales % 3;
-			if (last > 0)
-				segs++;
-
-			for (int i = 0; i < Math.max(segs, segsLast); i++) {
-				int currentScale = i * 3 + last;
-				if (currentScale < scales)
-					continue;
-				int xHeart = x + 8 * (i % 10) + 4;
-				int yHeart = y - 10 * (i / 10) + 4;
-				int pieces = 2;
-				if (lastLast == 1 && i == Math.max(segs, segsLast) - 1)
-					pieces = 1;
-				for (int e = 0; e < pieces; e++)
-					shards.add(new ShardParticle(xHeart, yHeart, random.nextInt(8), (random.nextDouble() - 0.5) * 10, (random.nextDouble() - 0.5) * 10, 0.5));
-			}
-		}
-		scalesLast = scales;
 	}
 
 	public static class ShardParticle {

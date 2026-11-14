@@ -3,14 +3,11 @@ package com.rekindled.embers.augment;
 import java.util.HashMap;
 import java.util.UUID;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-
 import com.rekindled.embers.api.augment.AugmentUtil;
 import com.rekindled.embers.network.PacketHandler;
 import com.rekindled.embers.network.message.MessageCasterOrb;
 import com.rekindled.embers.util.EmberInventoryUtil;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -44,19 +41,6 @@ public class CasterOrbAugment extends AugmentBase {
 			for (UUID uuid : cooldownTicksServer.keySet()) {
 				Float ticks = cooldownTicksServer.get(uuid) - 1;
 				cooldownTicksServer.put(uuid, ticks);
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public void onClientTick(ClientTickEvent.Pre event) {
-		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
-			Minecraft mc = Minecraft.getInstance();
-			if (mc.player != null) {
-				prevCooledStrength = mc.player.getAttackStrengthScale(0);
-			}
-			if (cooldownTicks > 0) {
-				cooldownTicks--;
 			}
 		}
 	}

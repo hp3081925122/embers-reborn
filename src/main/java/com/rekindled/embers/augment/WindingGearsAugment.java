@@ -2,7 +2,6 @@ package com.rekindled.embers.augment;
 
 import java.util.Map;
 import java.util.WeakHashMap;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 // net.neoforged.neoforge.event.entity.living.LivingEvent removed in 1.21.1
 
 import com.rekindled.embers.RegistryManager;
@@ -10,9 +9,6 @@ import com.rekindled.embers.api.EmbersAPI;
 import com.rekindled.embers.api.augment.AugmentUtil;
 import com.rekindled.embers.datagen.EmbersSounds;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -24,7 +20,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -68,22 +63,14 @@ public class WindingGearsAugment extends AugmentBase {
 	public static final int CHARGE_DECAY_DELAY = 20;
 	public static final double CHARGE_DECAY = 0.25;
 
-	static int ticks;
-	static double angle, angleLast;
-	static int spool, spoolLast;
+	public static int ticks;
+	public static double angle, angleLast;
+	public static int spool, spoolLast;
 	static ThreadLocal<Map<Entity, Double>> bounceLocal = ThreadLocal.withInitial(WeakHashMap::new);
 
 	public WindingGearsAugment(Identifier id) {
 		super(id, 0.0);
 		NeoForge.EVENT_BUS.register(this);
-	}
-
-	private static int getBarY(int height) {
-		return height - 31;
-	}
-
-	private static int getBarX(int width) {
-		return width / 2 - 11 - 81;
 	}
 
 	public static ItemStack getHeldClockworkTool(LivingEntity entity) {
@@ -299,99 +286,7 @@ public class WindingGearsAugment extends AugmentBase {
 		}
 	}
 
-	@SubscribeEvent
-	public void onClientUpdate(ClientTickEvent.Post event) {
-		if (true) { // NeoForge 1.21.1: tick events fire once, no phase
-			ticks++;
-			Minecraft mc = Minecraft.getInstance();
-			LocalPlayer player = mc.player;
-
-			if (player != null) {
-				ItemStack stack = getHeldClockworkTool(player);
-				if (!stack.isEmpty()) {
-					spoolLast = spool;
-					spool = (int) (BAR_WIDTH * 4 * getCharge(player.level(), stack) / MAX_CHARGE);
-					angleLast = angle;
-					angle += getRotationSpeed(player.level(), stack);
-					//Auto-Attack
-					if(mc.options.keyAttack.isDown() && mc.hitResult instanceof EntityHitResult entityHit && canAutoAttack(player, stack, entityHit))
-						mc.gameMode.attack(player, entityHit.getEntity());
-				}
-			}
-		}
-	}
-
-	private boolean canAutoAttack(LocalPlayer player, ItemStack stack, EntityHitResult objectMouseOver) {
-		return player.getAttackStrengthScale(0) >= 1.0f && getCharge(player.level(), stack) > 0 /* && !isInvulnerable(objectMouseOver.entityHit)*/;
-	}
-
 	private boolean isInvulnerable(Entity entity) {
 		return entity.isInvulnerable() || (entity instanceof LivingEntity && entity.invulnerableTime > 0);
-	}
-
-	public static void renderSpringUnderlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
-		int fill = (int) (spoolLast * (1 - partialTicks) + spool * partialTicks);
-		fill += 16;
-		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-		Player player = mc.player;
-		if (player == null)
-			return;
-		ItemStack stack = getHeldClockworkTool(player);
-		if (!stack.isEmpty()) {
-			int x = getBarX(width);
-			int y = getBarY(height);
-
-			int segs = fill / 32;
-			int last = fill % 32;
-			int u = BAR_U;
-			int v = BAR_V + 8;
-
-			int evenWidth = (segs) * 8;
-			int oddWidth = (segs) * 8 - 4;
-			int evenFillBack = Mth.clamp(last - 16, 0, 8);
-			int oddFillBack = Mth.clamp(last - 0, 0, 8);
-
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x,  y,  u,  v,  evenWidth,  BAR_HEIGHT, 256, 256);
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + evenWidth,  y + 8 - evenFillBack,  u + evenWidth,  v + 8 - evenFillBack,  8,  evenFillBack, 256, 256);
-			v += 16;
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x,  y,  u,  v,  oddWidth,  BAR_HEIGHT, 256, 256);
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + oddWidth,  y + 8 - oddFillBack,  u + oddWidth,  v + 8 - oddFillBack,  8,  oddFillBack, 256, 256);
-		}
-	}
-
-	public static void renderSpringOverlay(GuiGraphicsExtractor graphics, float partialTicks, int width, int height) {
-		int fill = (int) (spoolLast * (1 - partialTicks) + spool * partialTicks);
-		double currentAngle = angleLast * (1 - partialTicks) + angle * partialTicks;
-		int gearFrame = (int) (currentAngle * 4f / 360f);
-		int uGear = (gearFrame % 4) * 10;
-		int vGear = 16;
-		fill += 16;
-		Minecraft mc = net.minecraft.client.Minecraft.getInstance();
-		Player player = mc.player;
-		if (player == null)
-			return;
-		ItemStack stack = getHeldClockworkTool(player);
-		if (!stack.isEmpty()) {
-			int x = getBarX(width);
-			int y = getBarY(height);
-
-			int segs = fill / 32;
-			int last = fill % 32;
-			int u = BAR_U;
-			int v = BAR_V;
-
-			int evenWidth = (segs) * 8;
-			int oddWidth = (segs) * 8 - 4;
-			int evenFillFront = Mth.clamp(last - 24, 0, 8);
-			int oddFillFront = Mth.clamp(last - 8, 0, 8);
-
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x - 9,  y - 1,  uGear,  vGear,  10,  10, 256, 256);
-
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x,  y,  u,  v,  evenWidth,  BAR_HEIGHT, 256, 256);
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + evenWidth,  y,  u + evenWidth,  v,  8,  evenFillFront, 256, 256);
-			v += 16;
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x,  y,  u,  v,  oddWidth,  BAR_HEIGHT, 256, 256);
-			graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, TEXTURE_HUD,  x + oddWidth,  y,  u + oddWidth,  v,  8,  oddFillFront, 256, 256);
-		}
 	}
 }

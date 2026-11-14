@@ -476,6 +476,8 @@ public class Embers {
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onBlockHighlight);
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onLevelRender);
 			NeoForge.EVENT_BUS.addListener(EmbersClientEvents::onTooltip);
+			NeoForge.EVENT_BUS.addListener(com.rekindled.embers.client.AugmentClient::onClientTickPre);
+			NeoForge.EVENT_BUS.addListener(com.rekindled.embers.client.AugmentClient::onClientTickPost);
 		}
 
 		@SubscribeEvent
@@ -488,19 +490,19 @@ public class Embers {
 			event.registerAboveAll(Identifier.parse(Embers.MODID + ":embers_ingame_overlay"), EmbersClientEvents.INGAME_OVERLAY);
 			event.registerAboveAll(Identifier.parse(Embers.MODID + ":shifting_scales_particles"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
-				com.rekindled.embers.augment.ShiftingScalesAugment.renderIngameOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
+				com.rekindled.embers.client.AugmentClient.renderScalesIngameOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
 			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.PLAYER_HEALTH, Identifier.parse(Embers.MODID + ":shifting_scales_hearts"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
-				com.rekindled.embers.augment.ShiftingScalesAugment.renderHeartsOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
+				com.rekindled.embers.client.AugmentClient.renderScalesHeartsOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
 			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.CONTEXTUAL_INFO_BAR_BACKGROUND, Identifier.parse(Embers.MODID + ":winding_gears_spring_bottom"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
-				com.rekindled.embers.augment.WindingGearsAugment.renderSpringUnderlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
+				com.rekindled.embers.client.AugmentClient.renderSpringUnderlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
 			event.registerAbove(net.neoforged.neoforge.client.gui.VanillaGuiLayers.CONTEXTUAL_INFO_BAR, Identifier.parse(Embers.MODID + ":winding_gears_spring_top"), (graphics, deltaTracker) -> {
 				net.minecraft.client.Minecraft mc2 = net.minecraft.client.Minecraft.getInstance();
-				com.rekindled.embers.augment.WindingGearsAugment.renderSpringOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
+				com.rekindled.embers.client.AugmentClient.renderSpringOverlay(graphics, deltaTracker.getGameTimeDeltaPartialTick(false), mc2.getWindow().getGuiScaledWidth(), mc2.getWindow().getGuiScaledHeight());
 			});
 		}
 

@@ -5,7 +5,6 @@ import java.util.Random;
 import com.rekindled.embers.datagen.EmbersSounds;
 import com.rekindled.embers.particle.GlowParticleOptions;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -57,7 +56,7 @@ public class MessageCrystalCellGrowFX implements CustomPacketPayload {
 
 	@SuppressWarnings("resource")
 	public static void spawnParticles(MessageCrystalCellGrowFX msg) {
-		Level level = Minecraft.getInstance().level;
+		Level level = com.rekindled.embers.client.ClientAccess.level();
 		double angle = random.nextDouble() * 2.0 * Math.PI;
 		double x = msg.pos.getX() + 0.5 + 0.5 * Math.sin(angle);
 		double z = msg.pos.getZ() + 0.5 + 0.5 * Math.cos(angle);

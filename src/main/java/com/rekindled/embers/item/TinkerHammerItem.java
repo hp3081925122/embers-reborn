@@ -136,9 +136,9 @@ public class TinkerHammerItem extends Item {
 			CompoundTag nbt = _getTag(stack);
 			if (nbt.contains("targetWorld")) {
 				String dimension = nbt.getStringOr("targetWorld", "");
-				net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance(); if (mc.level != null && mc.level.dimension().identifier().toString().equals(dimension)) {
+				Level clientLevel = com.rekindled.embers.client.ClientAccess.level(); if (clientLevel != null && clientLevel.dimension().identifier().toString().equals(dimension)) {
 					BlockPos pos = new BlockPos(nbt.getIntOr("targetX", 0), nbt.getIntOr("targetY", 0), nbt.getIntOr("targetZ", 0));
-					BlockState blockState = mc.level.getBlockState(pos);
+					BlockState blockState = clientLevel.getBlockState(pos);
 					tooltip.add(Component.translatable(Embers.MODID + ".tooltip.aiming_block", blockState.getBlock().getName()).withStyle(ChatFormatting.GRAY));
 					tooltip.add(Component.translatable(" X=" + pos.getX()).withStyle(ChatFormatting.GRAY));
 					tooltip.add(Component.translatable(" Y=" + pos.getY()).withStyle(ChatFormatting.GRAY));

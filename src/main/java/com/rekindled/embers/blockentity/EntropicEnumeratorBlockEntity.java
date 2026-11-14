@@ -16,7 +16,6 @@ import com.rekindled.embers.datagen.EmbersSounds;
 import com.rekindled.embers.upgrade.EntropicEnumeratorUpgrade;
 import com.rekindled.embers.util.Misc;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -974,7 +973,7 @@ public class EntropicEnumeratorBlockEntity extends BlockEntity implements IExtra
 			long turnTicks = level.getGameTime() - blockEntity.nextMoveTime;
 			for (int i = 0; i < blockEntity.moveQueue.length; i++) {
 				if (turnTicks == blockEntity.offsetQueue[i]) {
-					level.playSound(Minecraft.getInstance().player, pos, EmbersSounds.ENTROPIC_ENUMERATOR_TURN.get(), SoundSource.BLOCKS, blockEntity.solving ? 0.7f : 0.5f, blockEntity.solving ? 1.2f : 0.8f);
+					level.playSound(com.rekindled.embers.client.ClientAccess.player(), pos, EmbersSounds.ENTROPIC_ENUMERATOR_TURN.get(), SoundSource.BLOCKS, blockEntity.solving ? 0.7f : 0.5f, blockEntity.solving ? 1.2f : 0.8f);
 					break;
 				}
 				if (turnTicks < blockEntity.offsetQueue[i])
